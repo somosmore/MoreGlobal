@@ -347,8 +347,8 @@ export default function Quiz() {
                             </a>
                           </Button>
                           <Button
-                            variant="secondary"
-                            className="text-white border-white/20 hover:bg-white/10"
+                            variant="outline"
+                            className="bg-white border-2 border-[#2A3A4A] text-[#2A3A4A] hover:bg-[#2A3A4A] hover:text-white"
                             onClick={resetQuiz}
                           >
                             Reiniciar Quiz
@@ -376,7 +376,7 @@ export default function Quiz() {
                               Ver Programa Unsung
                             </a>
                           </Button>
-                          <Button variant="ghost" onClick={resetQuiz}>
+                          <Button variant="outline" onClick={resetQuiz}>
                             Reiniciar Quiz
                           </Button>
                         </div>
