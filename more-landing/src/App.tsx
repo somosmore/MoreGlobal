@@ -1,0 +1,23 @@
+import Navbar from "@/components/sections/Navbar";
+import Hero from "@/components/sections/Hero";
+import PainPoints from "@/components/sections/PainPoints";
+import Quiz from "@/components/sections/Quiz";
+import Pricing from "@/components/sections/Pricing";
+import Success from "@/components/sections/Success";
+import Footer from "@/components/sections/Footer";
+
+function App() {
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <Hero />
+      <PainPoints />
+      <Quiz />
+      <Pricing />
+      <Success />
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
