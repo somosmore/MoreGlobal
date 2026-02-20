@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
@@ -12,15 +12,20 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+const ivonSummary =
+  "Abogada colombiana radicada en EE. UU., especializada en identificar y potenciar talento latinoamericano. Ayuda a profesionales y emprendedores a lograr su residencia permanente mediante Planes de Alto Impacto de Interés Nacional.";
+
+const ivonSlides = [
+  ivonSummary,
+  "Abogada colombiana, migró a EE. UU. hace cinco años con grandes sueños. Allí, descubrió su talento para identificar profesionales latinoamericanos excepcionales y se especializó en la gestión de proyectos sociales.",
+  "Su misión es ayudar a estos profesionales a ser reconocidos como de Interés Nacional en EE. UU. mediante un Plan de Alto Impacto. Con un enfoque personalizado, ha logrado numerosos casos de éxito, facilitando el establecimiento significativo de familias de diversas naciones.",
+  "La pasión de Ivon por empoderar a profesionales y emprendedores sigue creciendo. Su dedicación y trabajo en equipo han sido esenciales para descubrir y potenciar el talento latinoamericano, permitiendo que puedan alcanzar nuevas oportunidades en EE.UU. y expandirse con propósito en el país.",
+];
+
 const ivonData = {
   name: "Ivon MORE",
   title: "Abogada & Fundadora",
   expertise: "Experta en Gestión de Proyectos Sociales",
-  description: [
-    "Abogada colombiana, migró a EE. UU. hace cinco años con grandes sueños. Allí, descubrió su talento para identificar profesionales latinoamericanos excepcionales y se especializó en la gestión de proyectos sociales.",
-    "Su misión es ayudar a estos profesionales a ser reconocidos como de Interés Nacional en EE. UU. mediante un Plan de Alto Impacto. Con un enfoque personalizado, ha logrado numerosos casos de éxito, facilitando el establecimiento significativo de familias de diversas naciones.",
-    "La pasión de Ivon por empoderar a profesionales y emprendedores sigue creciendo. Su dedicación y trabajo en equipo han sido esenciales para descubrir y potenciar el talento latinoamericano, permitiendo que puedan alcanzar nuevas oportunidades en EE.UU. y expandirse con propósito en el país.",
-  ],
   stats: [
     { value: "200+", label: "Casos Aprobados" },
     { value: "98%", label: "Tasa de Éxito" },
@@ -89,8 +94,20 @@ const successCases: SuccessCase[] = [
   },
 ];
 
+const IVON_AUTO_PLAY_INTERVAL = 5500;
+
 export default function Success() {
   const [activeCase, setActiveCase] = useState(0);
+  const [activeIvonSlide, setActiveIvonSlide] = useState(0);
+  const [ivonPaused, setIvonPaused] = useState(false);
+
+  useEffect(() => {
+    if (ivonPaused) return;
+    const timer = setInterval(() => {
+      setActiveIvonSlide((prev) => (prev + 1) % ivonSlides.length);
+    }, IVON_AUTO_PLAY_INTERVAL);
+    return () => clearInterval(timer);
+  }, [ivonPaused]);
 
   const nextCase = () => {
     setActiveCase((prev) => (prev + 1) % successCases.length);
@@ -153,15 +170,49 @@ export default function Success() {
                   <p className="text-[#F37021] text-sm font-medium mb-5">
                     {ivonData.expertise}
                   </p>
-                  <div className="space-y-4 mb-6">
-                    {ivonData.description.map((paragraph, i) => (
-                      <p
-                        key={i}
-                        className="text-white/75 text-[14px] sm:text-[15px] leading-[1.65]"
+
+                  {/* Carousel automático */}
+                  <div
+                    className="min-h-[140px] sm:min-h-[160px] mb-6 flex flex-col justify-center"
+                    onMouseEnter={() => setIvonPaused(true)}
+                    onMouseLeave={() => setIvonPaused(false)}
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeIvonSlide}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.4 }}
+                        className="flex flex-col justify-center"
                       >
-                        {paragraph}
-                      </p>
-                    ))}
+                        <p
+                          className={`text-white/75 leading-[1.65] ${
+                            activeIvonSlide === 0
+                              ? "text-[15px] sm:text-base font-medium"
+                              : "text-[14px] sm:text-[15px]"
+                          }`}
+                        >
+                          {ivonSlides[activeIvonSlide]}
+                        </p>
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Indicadores */}
+                    <div className="flex justify-center gap-2 mt-4">
+                      {ivonSlides.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setActiveIvonSlide(i)}
+                          className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                            i === activeIvonSlide
+                              ? "w-6 bg-[#F37021]"
+                              : "w-1.5 bg-white/30 hover:bg-white/50"
+                          }`}
+                          aria-label={`Ir al slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
                   </div>
 
                   {/* Stats */}
@@ -179,18 +230,38 @@ export default function Success() {
                   </div>
                 </div>
 
-                {/* Right: Visual */}
-                <div className="relative bg-gradient-to-br from-[#F37021]/10 to-[#2A3A4A] flex items-center justify-center p-12 min-h-[300px]">
-                  <div className="text-center">
+                {/* Right: Foto de Ivon */}
+                <div className="flex flex-col h-full min-h-0">
+                  {/* Foto: ocupa todo el div contenedor */}
+                  <div className="relative w-full flex-1 min-h-[320px] aspect-[4/5] sm:aspect-[16/10] lg:aspect-auto lg:min-h-0 lg:h-full overflow-hidden">
+                    <img
+                      src="/ivon.png"
+                      alt="Ivon MORE - Abogada y Fundadora"
+                      className="absolute inset-0 w-full h-full object-cover object-[center_67%]"
+                    />
+                    {/* Overlay solo en desktop */}
+                    <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#2A3A4A]/95 via-[#2A3A4A]/40 to-transparent" />
+                    <div className="hidden lg:block absolute bottom-0 left-0 right-0 pl-8 pr-8 pt-6 pb-0 sm:pl-10 sm:pr-10 sm:pt-6 lg:pl-12 lg:pr-12 lg:pt-8 text-left">
+                      <p className="text-white/95 text-sm sm:text-base italic leading-relaxed max-w-xl h-0">
+                        &ldquo;Cada profesional tiene una historia extraordinaria. Nosotros la hacemos visible.&rdquo;
+                      </p>
+                      <img
+                        src="/logo_more_dark.png"
+                        alt="MORE"
+                        className="h-40 mt-2 opacity-90 w-auto"
+                      />
+                    </div>
+                  </div>
+                  {/* Móvil: cita y logo debajo de la foto, sin tapar el rostro */}
+                  <div className="lg:hidden bg-[#2A3A4A] px-6 py-5 sm:px-8 sm:py-6">
+                    <p className="text-white/95 text-sm sm:text-base italic leading-relaxed mb-4">
+                      &ldquo;Cada profesional tiene una historia extraordinaria. Nosotros la hacemos visible.&rdquo;
+                    </p>
                     <img
                       src="/logo_more_dark.png"
-                      alt="MORE Logo"
-                      className="w-50 mx-auto mb-6 opacity-80"
+                      alt="MORE"
+                      className="h-12 sm:h-14 w-auto opacity-90"
                     />
-                    <p className="text-white/40 text-sm italic">
-                      "Cada profesional tiene una historia extraordinaria. <br />
-                      Nosotros la hacemos visible."
-                    </p>
                   </div>
                 </div>
               </div>
