@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, MapPin } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -151,7 +151,7 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="gold" size="lg" className="gap-2" asChild>
                 <a
-                  href="https://wa.me/1234567890?text=Hola%20MORE,%20quiero%20evaluar%20mi%20perfil%20para%20la%20EB-2%20NIW."
+                  href="https://wa.me/15483122105?text=Hola%20MORE,%20quiero%20evaluar%20mi%20perfil%20para%20la%20EB-2%20NIW."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -174,7 +174,7 @@ export default function Footer() {
                 <img
                   src="/logo_more_dark.png"
                   alt="MORE Logo"
-                  className="h-20 w-20"
+                  className="h-40 w-40"
                 />
               </div>
               <p className="text-white/40 text-sm leading-relaxed">
@@ -217,15 +217,26 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-white/40 text-sm">
                   <Mail className="w-4 h-4 text-[#F37021]" />
-                  info@moreconsulting.com
+                  soporte@justmore.net
                 </li>
                 <li className="flex items-center gap-3 text-white/40 text-sm">
                   <MessageCircle className="w-4 h-4 text-[#F37021]" />
-                  +1 (234) 567-890
+                  +1 (548) 312-2105
                 </li>
                 <li className="flex items-start gap-3 text-white/40 text-sm">
                   <MapPin className="w-4 h-4 text-[#F37021] mt-0.5" />
-                  Miami, FL — Estados Unidos
+                  4538 Bagley Garden Ct, Katy TX 77449, United States
+                </li>
+                <li className="flex items-center gap-3 text-white/40 text-sm">
+                  <Instagram className="w-4 h-4 text-[#F37021]" />
+                  <a
+                    href="https://instagram.com/somos.more"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#F37021] transition-colors"
+                  >
+                    @somos.more
+                  </a>
                 </li>
               </ul>
             </div>

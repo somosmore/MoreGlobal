@@ -218,7 +218,7 @@ export default function Pricing() {
                 {plan.popular ? (
                   <Button variant="gold" className="w-full gap-2" size="lg" asChild>
                     <a
-                      href="https://wa.me/1234567890?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
+                      href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -234,7 +234,7 @@ export default function Pricing() {
                     asChild
                   >
                     <a
-                      href="https://wa.me/1234567890?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
+                      href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
                       target="_blank"
                       rel="noopener noreferrer"
                     >

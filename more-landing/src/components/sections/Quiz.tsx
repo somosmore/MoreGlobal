@@ -338,7 +338,7 @@ export default function Quiz() {
                         <div className="flex flex-col sm:flex-row gap-3">
                           <Button variant="gold" className="gap-2" asChild>
                             <a
-                              href="https://wa.me/1234567890?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20más%20información."
+                              href="https://wa.me/15483122105?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20más%20información."
                               target="_blank"
                               rel="noopener noreferrer"
                             >

@@ -16,8 +16,11 @@ const ivonData = {
   name: "Ivon MORE",
   title: "Abogada & Fundadora",
   expertise: "Experta en Gestión de Proyectos Sociales",
-  description:
-    "Con más de una década de experiencia en inmigración estratégica, Ivon ha guiado a cientos de profesionales latinoamericanos en la obtención de su residencia permanente a través de la visa EB-2 NIW. Su enfoque único combina expertise legal con gestión de proyectos de alto impacto.",
+  description: [
+    "Abogada colombiana, migró a EE. UU. hace cinco años con grandes sueños. Allí, descubrió su talento para identificar profesionales latinoamericanos excepcionales y se especializó en la gestión de proyectos sociales.",
+    "Su misión es ayudar a estos profesionales a ser reconocidos como de Interés Nacional en EE. UU. mediante un Plan de Alto Impacto. Con un enfoque personalizado, ha logrado numerosos casos de éxito, facilitando el establecimiento significativo de familias de diversas naciones.",
+    "La pasión de Ivon por empoderar a profesionales y emprendedores sigue creciendo. Su dedicación y trabajo en equipo han sido esenciales para descubrir y potenciar el talento latinoamericano, permitiendo que puedan alcanzar nuevas oportunidades en EE.UU. y expandirse con propósito en el país.",
+  ],
   stats: [
     { value: "200+", label: "Casos Aprobados" },
     { value: "98%", label: "Tasa de Éxito" },
@@ -134,25 +137,32 @@ export default function Success() {
             <CardContent className="p-0">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Left: Info */}
-                <div className="p-8 sm:p-12 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-3">
                     <Scale className="w-5 h-5 text-[#F37021]" />
                     <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#F37021]">
                       Liderazgo
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">
                     {ivonData.name}
                   </h3>
                   <p className="text-white/50 text-sm font-medium mb-1">
                     {ivonData.title}
                   </p>
-                  <p className="text-[#F37021] text-sm font-medium mb-6">
+                  <p className="text-[#F37021] text-sm font-medium mb-5">
                     {ivonData.expertise}
                   </p>
-                  <p className="text-white/70 text-[15px] leading-relaxed mb-8">
-                    {ivonData.description}
-                  </p>
+                  <div className="space-y-4 mb-6">
+                    {ivonData.description.map((paragraph, i) => (
+                      <p
+                        key={i}
+                        className="text-white/75 text-[14px] sm:text-[15px] leading-[1.65]"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
 
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-4">
