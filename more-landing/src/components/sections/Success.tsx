@@ -8,6 +8,7 @@ import {
   Stethoscope,
   TrendingUp,
   Scale,
+  User,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -24,14 +25,36 @@ const ivonData = {
   ],
 };
 
-const successCases = [
+type SuccessCase = {
+  name: string;
+  country?: string;
+  role: string;
+  area: string;
+  icon: typeof Briefcase;
+  quote: string;
+  timeline: string;
+  photo?: string;
+};
+
+const successCases: SuccessCase[] = [
+  {
+    name: "Ricardo Ochoa",
+    country: "Colombia",
+    role: "Profesional",
+    area: "Consultoría",
+    icon: User,
+    quote:
+      "La confianza que brinda Ivon y su equipo, además de su experiencia en EB-2 NIW, fue lo que más me impactó. Afiancé que puedo aportar mucho al progreso de EE.UU.",
+    timeline: "Aprobado en 120 días",
+    photo: "/testimonials/ricardo-ochoa.jpg",
+  },
   {
     name: "Carlos M.",
     role: "Ingeniero de Software",
     area: "STEM & Tecnología",
     icon: Briefcase,
     quote:
-      "MORE transformó mi perfil profesional en una narrativa de impacto nacional. En 4 meses tenía mi aprobación. El proceso fue claro y estratégico desde el día uno.",
+      "MORE transformó mi perfil en una narrativa de impacto nacional. En 4 meses tenía mi aprobación. El proceso fue claro y estratégico desde el día uno.",
     timeline: "Aprobado en 120 días",
   },
   {
@@ -40,7 +63,7 @@ const successCases = [
     area: "Salud & Medicina",
     icon: Stethoscope,
     quote:
-      "Tenía miedo de que mis publicaciones no fueran suficientes. El equipo de MORE me ayudó a construir un plan profesional que demostró mi impacto en salud pública de manera contundente.",
+      "El equipo me ayudó a construir un plan profesional que demostró mi impacto en salud pública de manera contundente.",
     timeline: "Aprobada en 95 días",
   },
   {
@@ -49,8 +72,17 @@ const successCases = [
     area: "Negocios & Impacto",
     icon: TrendingUp,
     quote:
-      "Sin oferta de empleo, pensé que era imposible. MORE me demostró que mi trayectoria empresarial y mi impacto en la comunidad eran más que suficientes para la EB-2 NIW.",
+      "Sin oferta de empleo, pensé que era imposible. MORE demostró que mi trayectoria empresarial era suficiente para la EB-2 NIW.",
     timeline: "Aprobado en 140 días",
+  },
+  {
+    name: "Más testimonios próximamente",
+    role: "Perfil adicional",
+    area: "MORE",
+    icon: User,
+    quote:
+      "Continuamos sumando casos de éxito de empresarios, profesionales e inversionistas que lograron su residencia permanente con nosotros.",
+    timeline: "Aprobaciones en curso",
   },
 ];
 
@@ -172,30 +204,42 @@ export default function Success() {
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card className="border-0 shadow-xl">
+                <Card className="border-0 shadow-xl overflow-hidden">
                   <CardContent className="p-8 sm:p-10">
-                    <Quote className="w-10 h-10 text-[#F37021]/20 mb-4" />
-                    <p className="text-gray-600 text-lg leading-relaxed mb-8 italic">
-                      "{successCases[activeCase].quote}"
-                    </p>
-
-                    <div className="flex items-center justify-between flex-wrap gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center">
-                          {(() => {
-                            const IconComp = successCases[activeCase].icon;
-                            return <IconComp className="w-5 h-5 text-[#F37021]" />;
-                          })()}
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-[#2A3A4A]">
-                            {successCases[activeCase].name}
-                          </h4>
-                          <p className="text-sm text-gray-500">
-                            {successCases[activeCase].role}
-                          </p>
-                        </div>
+                    <div className="flex flex-col items-center text-center mb-6">
+                      <div className="relative w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center mb-4 shrink-0">
+                        {successCases[activeCase].photo && (
+                          <img
+                            src={successCases[activeCase].photo}
+                            alt={successCases[activeCase].name}
+                            className="absolute inset-0 w-full h-full object-cover z-10"
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                            }}
+                          />
+                        )}
+                        {(() => {
+                          const IconComp = successCases[activeCase].icon;
+                          return <IconComp className="w-8 h-8 text-[#F37021] relative z-0" />;
+                        })()}
                       </div>
+                      <h4 className="font-bold text-[#2A3A4A] text-lg">
+                        {successCases[activeCase].name}
+                      </h4>
+                      {successCases[activeCase].country && (
+                        <p className="text-sm text-gray-500 mt-1">
+                          {successCases[activeCase].country}
+                        </p>
+                      )}
+                      <p className="text-sm text-gray-500">
+                        {successCases[activeCase].role}
+                      </p>
+                    </div>
+                    <Quote className="w-8 h-8 text-[#F37021]/20 mx-auto mb-4" />
+                    <p className="text-gray-600 text-lg leading-relaxed mb-6 italic">
+                      &ldquo;{successCases[activeCase].quote}&rdquo;
+                    </p>
+                    <div className="flex justify-center">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium">
                         {successCases[activeCase].timeline}
                       </span>

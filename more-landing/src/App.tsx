@@ -1,6 +1,7 @@
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import PainPoints from "@/components/sections/PainPoints";
+import WhoWeHelp from "@/components/sections/WhoWeHelp";
 import Quiz from "@/components/sections/Quiz";
 import Pricing from "@/components/sections/Pricing";
 import Success from "@/components/sections/Success";
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <Hero />
       <PainPoints />
+      <WhoWeHelp />
       <Quiz />
       <Pricing />
       <Success />

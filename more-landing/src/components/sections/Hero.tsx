@@ -22,7 +22,7 @@ export default function Hero() {
           >
             <span className="w-2 h-2 rounded-full bg-[#F37021] animate-pulse" />
             <span className="text-xs font-medium text-[#2A3A4A]/70 tracking-wide uppercase">
-              Especialistas en Visa EB-2 NIW
+              Migración con propósito
             </span>
           </motion.div>
 
@@ -80,8 +80,10 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-gray-400"
+            className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-sm text-gray-400"
           >
+            <span className="font-medium text-[#2A3A4A]/70">Empresarios, profesionales e inversionistas</span>
+            <div className="hidden sm:block w-px h-4 bg-gray-300" />
             <div className="flex items-center gap-2">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (

@@ -10,9 +10,44 @@ import {
 
 const faqs = [
   {
+    question: "¿Qué requisitos debo cumplir para aplicar a la visa EB-2 NIW?",
+    answer:
+      "Debes cumplir los criterios Matter of Dhanasar: (1) Tu propuesta de trabajo tiene mérito sustancial e importancia nacional; (2) Estás bien posicionado para avanzar la propuesta; y (3) Sería beneficioso para EE.UU. eximir el requisito de oferta de empleo. Además, necesitas título de licenciatura o equivalente (maestría o experiencia laboral equivalente).",
+  },
+  {
     question: "¿Necesito una oferta de empleo para la EB-2 NIW?",
     answer:
       "No. La categoría National Interest Waiver (NIW) es precisamente una exención del requisito de oferta de empleo. Debes demostrar que tu trabajo beneficia al interés nacional de EE.UU., lo que elimina la necesidad de un empleador patrocinador. Esto te da libertad para emprender o trabajar donde desees.",
+  },
+  {
+    question: "¿Qué pasa si no tengo maestría?",
+    answer:
+      "Puedes calificar mediante equivalencia de títulos. Si tienes licenciatura más al menos 5 años de experiencia laboral progresiva post-grado, puedes solicitar una evaluación de equivalencia. La equivalencia demuestra que tu formación y experiencia son equivalentes a una maestría estadounidense.",
+  },
+  {
+    question: "¿Soy empresario, ¿qué evidencias puedo usar para certificación laboral?",
+    answer:
+      "Los empresarios pueden usar: facturas, contratos con clientes o proveedores, registros de empleados, certificados de cámara de comercio, licencias, publicidad, cobertura en medios, premios empresariales, declaraciones de impuestos y estados financieros. Si tu empresa ya no existe, aún puedes usar documentación histórica que pruebe tu rol y aporte.",
+  },
+  {
+    question: "¿A quiénes puedo incluir en mi proceso? (cónyuge, hijos)",
+    answer:
+      "Puedes incluir a tu cónyuge legalmente casado y a tus hijos menores de 21 años al momento de la solicitud. Todos recibirán residencia permanente derivada de tu aprobación. Los hijos deben permanecer solteros para mantener el beneficio.",
+  },
+  {
+    question: "¿Cuánto cuesta la equivalencia de títulos?",
+    answer:
+      "Las evaluaciones de equivalencia tienen costos variables según el proveedor. Un proceso completo puede rondar aproximadamente USD 400, mientras que evaluaciones más básicas pueden costar alrededor de USD 85. Te orientamos sobre la opción más adecuada para tu caso.",
+  },
+  {
+    question: "¿Los documentos deben estar apostillados?",
+    answer:
+      "En general, no es requisito apostillar los documentos académicos para la EB-2 NIW. USCIS acepta traducciones certificadas y copias. Te guiamos en la organización correcta de tu expediente según los lineamientos actuales.",
+  },
+  {
+    question: "¿Puedo aplicar si vivo fuera de Estados Unidos?",
+    answer:
+      "Sí, absolutamente. La petición EB-2 NIW se puede presentar desde cualquier país. No necesitas estar físicamente en EE.UU. para iniciar el proceso. Una vez aprobada, puedes completar el proceso consular desde tu país de residencia.",
   },
   {
     question: "¿Cuánto tiempo toma el proceso completo?",
@@ -20,14 +55,19 @@ const faqs = [
       "Con nuestro Plan Plus, el tiempo promedio de preparación es de 120 a 160 días. Para el programa Unsung, el tiempo es de 90 a 120 días. Después de enviar la petición, USCIS tarda entre 6 a 12 meses en dar una respuesta, aunque con Premium Processing se puede reducir a 45 días.",
   },
   {
+    question: "¿Qué documentos académicos necesito?",
+    answer:
+      "Necesitas títulos, diplomas, certificados y transcripciones. Las traducciones deben ser certificadas al inglés. Te guiamos en qué enviar según tu país de estudio y cómo organizar el expediente de forma clara para USCIS.",
+  },
+  {
+    question: "¿Si estoy en unión libre, debo casarme para incluir a mi pareja?",
+    answer:
+      "Sí. Para incluir a tu pareja como beneficiario derivado en la EB-2 NIW necesitas estar legalmente casado. La unión libre no es reconocida por USCIS para este fin. Si planeas incluir a tu pareja, deberás contraer matrimonio legal antes de presentar la solicitud.",
+  },
+  {
     question: "¿Qué pasa si no tengo publicaciones académicas?",
     answer:
       "Las publicaciones son solo uno de los criterios posibles. También se valoran premios, membresías profesionales, liderazgo en organizaciones, contribuciones originales en tu campo, cobertura en medios y salarios altos. Trabajamos contigo para identificar y potenciar tus fortalezas.",
-  },
-  {
-    question: "¿Puedo aplicar si vivo fuera de Estados Unidos?",
-    answer:
-      "Sí, absolutamente. La petición EB-2 NIW se puede presentar desde cualquier país. No necesitas estar físicamente en EE.UU. para iniciar el proceso. Una vez aprobada, puedes completar el proceso consular desde tu país de residencia.",
   },
   {
     question: "¿Qué diferencia hay entre el programa DIY y el Plan Plus?",
@@ -138,8 +178,9 @@ export default function Footer() {
                 />
               </div>
               <p className="text-white/40 text-sm leading-relaxed">
-                Consultora especializada en visas EB-2 NIW. Transformamos
-                trayectorias profesionales en residencias permanentes.
+                Consultora especializada en visas y migración EB-2 NIW. Ayudamos a
+                empresarios, comerciantes, profesionales e inversionistas a lograr
+                su residencia permanente y Green Card en EE.UU.
               </p>
             </div>
 
@@ -151,6 +192,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 {[
                   { label: "Metodología", href: "#metodologia" },
+                  { label: "¿A quién ayudamos?", href: "#quienes-ayudamos" },
                   { label: "Programas", href: "#programas" },
                   { label: "Casos de Éxito", href: "#exito" },
                   { label: "Evaluar mi Perfil", href: "#quiz" },

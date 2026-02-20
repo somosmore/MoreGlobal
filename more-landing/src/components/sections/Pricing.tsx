@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import {
-  Check,
   BookOpen,
   Users,
   FileText,
   Clock,
   Star,
-  Zap,
   Send,
   MessageCircle,
+  Video,
+  Target,
+  Network,
+  Heart,
+  Eye,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -22,11 +25,13 @@ const plans = [
     timeline: "90 – 120 días",
     features: [
       { text: "9 módulos completos", icon: BookOpen },
-      { text: "20 lecciones en video", icon: BookOpen },
-      { text: "4 sesiones de coaching 1-a-1", icon: Users },
-      { text: "Templates de petición", icon: FileText },
+      { text: "4 talleres en vivo prácticos", icon: Video },
+      { text: "4 sesiones de coaching 1 a 1", icon: Users },
+      {
+        text: "Guías para implementar el piloto de tu proyecto de interés nacional en 90 días y lograr evidencias reales",
+        icon: Target,
+      },
       { text: "Acceso a comunidad privada", icon: Users },
-      { text: "Guía de evidencias paso a paso", icon: FileText },
     ],
     cta: "Comenzar Programa",
     ctaVariant: "outline" as const,
@@ -37,15 +42,22 @@ const plans = [
     price: "$8,000",
     badge: "Premium",
     description:
-      "Acompañamiento premium de principio a fin. Nosotros construimos tu caso mientras tú te enfocas en tu carrera.",
+      "Acompañamiento premium de principio a fin. Nosotros armamos tu expediente mientras tú sigues adelante con tu empresa, startup, formación académica o tu trabajo. Pensado para estudiantes, empresarios, emprendedores y trabajadores independientes.",
     timeline: "120 – 160 días",
     features: [
-      { text: "Todo del programa Unsung", icon: Check },
-      { text: "Elaboración de Plan Profesional completo", icon: Zap },
-      { text: "4 cartas testimoniales profesionales", icon: FileText },
-      { text: "Impresión y envío de 600 hojas", icon: Send },
-      { text: "Estrategia legal personalizada", icon: Star },
-      { text: "Seguimiento prioritario", icon: Clock },
+      { text: "Ordenamos, redactamos y diligenciamos documentos de tu expediente", icon: FileText },
+      {
+        text: "Elaboramos el Proyecto o Plan de negocios de interés nacional",
+        icon: Target,
+      },
+      {
+        text: "Guía y Agenda exploratoria de networking en USA para implementar tu proyecto, gestionar cartas y evidencias",
+        icon: Network,
+      },
+      { text: "Consolidación y envío de expediente", icon: Send },
+      { text: "Acceso a comunidad privada", icon: Users },
+      { text: "Coach emocional durante el proceso", icon: Heart },
+      { text: "Seguimiento post envío", icon: Eye },
     ],
     cta: "Solicitar Plan Plus",
     ctaVariant: "gold" as const,

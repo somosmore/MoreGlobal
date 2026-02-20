@@ -17,6 +17,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Metodología", href: "#metodologia" },
+    { label: "¿A quién ayudamos?", href: "#quienes-ayudamos" },
     { label: "Programas", href: "#programas" },
     { label: "Éxito", href: "#exito" },
   ];
