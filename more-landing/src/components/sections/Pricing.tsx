@@ -19,7 +19,7 @@ const plans = [
   {
     name: "Unsung Professional Program",
     price: "$2,500",
-    badge: "DIY",
+    badge: "UPP",
     description:
       "Programa de autogestión para profesionales que quieren preparar su caso EB-2 NIW con guía experta paso a paso.",
     timeline: "90 – 120 días",
@@ -110,7 +110,7 @@ export default function Pricing() {
               )}
 
               <div
-                className={`h-full rounded-3xl p-8 transition-all duration-300 ${
+                className={`h-full rounded-3xl p-8 transition-all duration-300 flex flex-col ${
                   plan.popular
                     ? "bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] text-white shadow-2xl ring-2 ring-[#F37021]/30"
                     : "bg-white/60 backdrop-blur-sm border border-gray-200/80 shadow-lg hover:shadow-xl"
@@ -125,6 +125,7 @@ export default function Pricing() {
                       }
                 }
               >
+                <div className="flex-1 flex flex-col min-h-0 min-w-0">
                 {/* Badge & Name */}
                 <div className="flex items-center gap-3 mb-2">
                   <span
@@ -213,8 +214,10 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
+                </div>
 
                 {/* CTA */}
+                <div className="mt-auto pt-6">
                 {plan.popular ? (
                   <Button variant="gold" className="w-full gap-2" size="lg" asChild>
                     <a
@@ -242,6 +245,7 @@ export default function Pricing() {
                     </a>
                   </Button>
                 )}
+                </div>
               </div>
             </motion.div>
           ))}

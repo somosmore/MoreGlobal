@@ -70,7 +70,7 @@ export default function Hero() {
             <Button size="lg" variant="secondary" className="group" asChild>
               <a href="#programas">
                 <Play className="mr-2 h-4 w-4" />
-                Ver Plan Acelerador
+                Ver Plan Plus
               </a>
             </Button>
           </motion.div>
