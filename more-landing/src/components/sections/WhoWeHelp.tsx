@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const profiles = [
   {
     icon: Briefcase,
-    title: "Profesionales",
+    title: "Profesionales graduados",
     description:
       "Médicos, ingenieros e investigadores: transformen su carrera obteniendo la Green Card a través de su impacto social y de interés nacional.",
   },
@@ -17,7 +17,7 @@ const profiles = [
   },
   {
     icon: GraduationCap,
-    title: "Profesionales con formación académica",
+    title: "Profesionales especializados",
     description:
       "Trabajamos con profesionales y técnicos de todas las áreas que cuenten con habilidades especiales o más de 10 años de experiencia destacada en su sector."
   },
