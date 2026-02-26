@@ -12,11 +12,11 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+      <Quiz />
       <PainPoints />
       <WhoWeHelp />
-      <Quiz />
-      <Pricing />
       <Success />
+      <Pricing />
       <Footer />
     </div>
   );
