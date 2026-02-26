@@ -1,16 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Quote,
-  Briefcase,
-  Stethoscope,
-  TrendingUp,
-  Scale,
-  User,
-} from "lucide-react";
+import { Quote, Scale, User, Volume2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  supabase,
+  CATEGORY_LABELS,
+  type Testimonial,
+} from "@/lib/supabase";
+
+type VideoSource = "youtube" | "vimeo" | "drive" | "other";
+
+function getVideoInfo(url: string): { type: VideoSource; embedUrl: string; videoId?: string } | null {
+  if (!url?.trim()) return null;
+  const u = url.trim();
+  const ytMatch = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  if (ytMatch) {
+    return {
+      type: "youtube",
+      videoId: ytMatch[1],
+      embedUrl: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&mute=1&playsinline=1`,
+    };
+  }
+  const vimeoMatch = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeoMatch) {
+    return {
+      type: "vimeo",
+      videoId: vimeoMatch[1],
+      embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&muted=1`,
+    };
+  }
+  const driveMatch = u.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveMatch) {
+    return {
+      type: "drive",
+      embedUrl: `https://drive.google.com/file/d/${driveMatch[1]}/preview`,
+    };
+  }
+  return null;
+}
 
 const ivonSummary =
   "Abogada colombiana radicada en EE. UU., especializada en identificar y potenciar talento latinoamericano. Ayuda a profesionales y emprendedores a lograr su residencia permanente mediante Planes de Alto Impacto de Interés Nacional.";
@@ -33,73 +60,187 @@ const ivonData = {
   ],
 };
 
-type SuccessCase = {
-  name: string;
-  country?: string;
-  role: string;
-  area: string;
-  icon: typeof Briefcase;
-  quote: string;
-  timeline: string;
-  photo?: string;
-};
-
-const successCases: SuccessCase[] = [
-  {
-    name: "Ricardo Ochoa",
-    country: "Colombia",
-    role: "Profesional",
-    area: "Consultoría",
-    icon: User,
-    quote:
-      "La confianza que brinda Ivon y su equipo, además de su experiencia en EB-2 NIW, fue lo que más me impactó. Afiancé que puedo aportar mucho al progreso de EE.UU.",
-    timeline: "Aprobado en 120 días",
-    photo: "/testimonials/ricardo-ochoa.jpg",
-  },
-  {
-    name: "Carlos M.",
-    role: "Ingeniero de Software",
-    area: "STEM & Tecnología",
-    icon: Briefcase,
-    quote:
-      "MORE transformó mi perfil en una narrativa de impacto nacional. En 4 meses tenía mi aprobación. El proceso fue claro y estratégico desde el día uno.",
-    timeline: "Aprobado en 120 días",
-  },
-  {
-    name: "Dra. María L.",
-    role: "Médica Investigadora",
-    area: "Salud & Medicina",
-    icon: Stethoscope,
-    quote:
-      "El equipo me ayudó a construir un plan profesional que demostró mi impacto en salud pública de manera contundente.",
-    timeline: "Aprobada en 95 días",
-  },
-  {
-    name: "Roberto S.",
-    role: "Emprendedor Social",
-    area: "Negocios & Impacto",
-    icon: TrendingUp,
-    quote:
-      "Sin oferta de empleo, pensé que era imposible. MORE demostró que mi trayectoria empresarial era suficiente para la EB-2 NIW.",
-    timeline: "Aprobado en 140 días",
-  },
-  {
-    name: "Más testimonios próximamente",
-    role: "Perfil adicional",
-    area: "MORE",
-    icon: User,
-    quote:
-      "Continuamos sumando casos de éxito de empresarios, profesionales e inversionistas que lograron su residencia permanente con nosotros.",
-    timeline: "Aprobaciones en curso",
-  },
+const CATEGORY_ORDER: Testimonial["category"][] = [
+  "abogados_in_house",
+  "abogados_preparadora_monica_martinez",
+  "aprobados_abogada_marcela_rodriguez",
+  "en_espera_aprobacion",
 ];
 
 const IVON_AUTO_PLAY_INTERVAL = 5500;
 
+function TestimonialCard({ t }: { t: Testimonial }) {
+  const displayTimeline = t.status_label ?? t.timeline ?? "";
+  const categoryLabel = CATEGORY_LABELS[t.category];
+
+  return (
+    <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+      <CardContent className="p-5 sm:p-6 flex flex-col flex-1">
+        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#2A3A4A]/10 text-[#2A3A4A] text-xs font-medium w-fit mb-3">
+          {categoryLabel}
+        </span>
+        <div className="flex items-center gap-3 mb-3">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center shrink-0">
+            {t.photo_url ? (
+              <img
+                src={t.photo_url}
+                alt={t.name}
+                className="absolute inset-0 w-full h-full object-cover z-10"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+            ) : null}
+            <User className="w-6 h-6 text-[#F37021] relative z-0" />
+          </div>
+          <div className="min-w-0">
+            <h4 className="font-bold text-[#2A3A4A] text-base truncate">{t.name}</h4>
+            {(t.country || t.role) && (
+              <p className="text-xs text-gray-500 truncate">{[t.country, t.role].filter(Boolean).join(" · ")}</p>
+            )}
+          </div>
+        </div>
+        <Quote className="w-6 h-6 text-[#F37021]/20 mb-2" />
+        <p className="text-gray-600 text-sm leading-relaxed italic flex-1 line-clamp-4 whitespace-pre-line">
+          &ldquo;{t.quote}&rdquo;
+        </p>
+        {displayTimeline && (
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium mt-3 w-fit">
+            {displayTimeline}
+          </span>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+declare global {
+  interface Window {
+    YT?: {
+      ready: (fn: () => void) => void;
+      Player: new (
+        el: string | HTMLElement,
+        opts: { videoId: string; playerVars?: Record<string, number | string> }
+      ) => { unMute: () => void; setVolume: (n: number) => void };
+    };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
+function loadYouTubeAPI(): Promise<void> {
+  if (window.YT?.Player) return Promise.resolve();
+  return new Promise((resolve) => {
+    if (window.YT) {
+      window.YT.ready!(resolve);
+      return;
+    }
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScript = document.getElementsByTagName("script")[0];
+    firstScript?.parentNode?.insertBefore(tag, firstScript);
+    window.onYouTubeIframeAPIReady = () => {
+      window.YT?.ready?.(resolve);
+    };
+  });
+}
+
+function VideoTestimonialCard({ videoUrl }: { videoUrl: string }) {
+  const info = getVideoInfo(videoUrl);
+  const [showUnmute, setShowUnmute] = useState(!!info);
+  const playerRef = useRef<{ unMute: () => void; setVolume: (n: number) => void } | null>(null);
+  const containerId = useId().replace(/:/g, "");
+
+  useEffect(() => {
+    if (!info || info.type !== "youtube" || !info.videoId) return;
+    let cancelled = false;
+    loadYouTubeAPI().then(() => {
+      if (cancelled || !window.YT) return;
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      playerRef.current = new window.YT.Player(containerId, {
+        videoId: info.videoId!,
+        playerVars: { autoplay: 1, mute: 1, playsinline: 1 },
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [info?.videoId, containerId]);
+
+  const handleUnmute = useCallback(() => {
+    if (info?.type === "youtube" && playerRef.current) {
+      try {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(100);
+      } catch {
+        // ignore
+      }
+      setShowUnmute(false);
+    } else {
+      window.open(videoUrl, "_blank", "noopener,noreferrer");
+      setShowUnmute(false);
+    }
+  }, [info?.type, videoUrl]);
+
+  if (!info) {
+    return (
+      <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col">
+        <CardContent className="p-0 flex flex-col flex-1">
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative flex aspect-video items-center justify-center bg-[#2A3A4A] text-white hover:bg-[#3A4D5E] transition-colors"
+          >
+            <span className="text-sm font-medium">Ver video</span>
+          </a>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+      <CardContent className="p-0 flex flex-col flex-1">
+        <div className="relative aspect-video bg-[#2A3A4A]">
+          {info.type === "youtube" ? (
+            <div id={containerId} className="absolute inset-0 w-full h-full" />
+          ) : (
+            <iframe
+              src={info.embedUrl}
+              title="Testimonio en video"
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          )}
+          {showUnmute && (
+            <button
+              type="button"
+              onClick={handleUnmute}
+              className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              aria-label="Activar sonido"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/90 text-[#2A3A4A] text-sm font-medium hover:bg-white transition-colors shadow-lg">
+                <Volume2 className="w-5 h-5" />
+                Activar sonido
+              </span>
+            </button>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function Success() {
-  const [activeCase, setActiveCase] = useState(0);
   const [activeIvonSlide, setActiveIvonSlide] = useState(0);
   const [ivonPaused, setIvonPaused] = useState(false);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<
+    Testimonial["category"] | "all"
+  >("all");
 
   useEffect(() => {
     if (ivonPaused) return;
@@ -109,18 +250,42 @@ export default function Success() {
     return () => clearInterval(timer);
   }, [ivonPaused]);
 
-  const nextCase = () => {
-    setActiveCase((prev) => (prev + 1) % successCases.length);
-  };
+  useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+    supabase
+      .from("testimonials")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .order("id")
+      .then(({ data, error }) => {
+        setLoading(false);
+        if (!error && data) setTestimonials(data as Testimonial[]);
+      });
+  }, []);
 
-  const prevCase = () => {
-    setActiveCase(
-      (prev) => (prev - 1 + successCases.length) % successCases.length
-    );
-  };
+  const textPhotoTestimonials = testimonials.filter(
+    (t) => t.media_type === "text_photo"
+  );
+  const videoTestimonials = testimonials.filter(
+    (t) => t.media_type === "video" && t.video_url
+  );
+
+  const byCategory = CATEGORY_ORDER.map((cat) => ({
+    category: cat,
+    label: CATEGORY_LABELS[cat],
+    items: textPhotoTestimonials.filter((t) => t.category === cat),
+  }));
+
+  const currentList =
+    selectedCategory === "all"
+      ? textPhotoTestimonials
+      : byCategory.find((g) => g.category === selectedCategory)?.items ?? [];
 
   return (
-    <section id="exito" className="py-24 sm:py-32 bg-gray-50/50">
+    <section id="exito" className="py-28 sm:py-36 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -128,7 +293,7 @@ export default function Success() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-20"
         >
           <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
             Casos de éxito
@@ -153,7 +318,6 @@ export default function Success() {
           <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E]">
             <CardContent className="p-0">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Left: Info */}
                 <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
                   <div className="flex items-center gap-3 mb-3">
                     <Scale className="w-5 h-5 text-[#F37021]" />
@@ -171,7 +335,6 @@ export default function Success() {
                     {ivonData.expertise}
                   </p>
 
-                  {/* Carousel automático */}
                   <div
                     className="min-h-[140px] sm:min-h-[160px] mb-6 flex flex-col justify-center"
                     onMouseEnter={() => setIvonPaused(true)}
@@ -198,11 +361,11 @@ export default function Success() {
                       </motion.div>
                     </AnimatePresence>
 
-                    {/* Indicadores */}
                     <div className="flex justify-center gap-2 mt-4">
                       {ivonSlides.map((_, i) => (
                         <button
                           key={i}
+                          type="button"
                           onClick={() => setActiveIvonSlide(i)}
                           className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                             i === activeIvonSlide
@@ -215,7 +378,6 @@ export default function Success() {
                     </div>
                   </div>
 
-                  {/* Stats */}
                   <div className="grid grid-cols-3 gap-4">
                     {ivonData.stats.map((stat) => (
                       <div key={stat.label} className="text-center">
@@ -230,16 +392,13 @@ export default function Success() {
                   </div>
                 </div>
 
-                {/* Right: Foto de Ivon */}
                 <div className="flex flex-col h-full min-h-0">
-                  {/* Foto: ocupa todo el div contenedor */}
                   <div className="relative w-full flex-1 min-h-[320px] aspect-[4/5] sm:aspect-[16/10] lg:aspect-auto lg:min-h-0 lg:h-full overflow-hidden">
                     <img
                       src="/ivon.png"
                       alt="Ivon MORE - Abogada y Fundadora"
                       className="absolute inset-0 w-full h-full object-cover object-[center_67%]"
                     />
-                    {/* Overlay solo en desktop */}
                     <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#2A3A4A]/95 via-[#2A3A4A]/40 to-transparent" />
                     <div className="hidden lg:block absolute bottom-0 left-0 right-0 pl-8 pr-8 pt-6 pb-0 sm:pl-10 sm:pr-10 sm:pt-6 lg:pl-12 lg:pr-12 lg:pt-8 text-left">
                       <p className="text-white/95 text-sm sm:text-base italic leading-relaxed max-w-xl h-0">
@@ -252,7 +411,6 @@ export default function Success() {
                       />
                     </div>
                   </div>
-                  {/* Móvil: cita y logo debajo de la foto, sin tapar el rostro */}
                   <div className="lg:hidden bg-[#2A3A4A] px-6 py-5 sm:px-8 sm:py-6">
                     <p className="text-white/95 text-sm sm:text-base italic leading-relaxed mb-4">
                       &ldquo;Cada profesional tiene una historia extraordinaria. Nosotros la hacemos visible.&rdquo;
@@ -269,99 +427,106 @@ export default function Success() {
           </Card>
         </motion.div>
 
-        {/* Success Cases Carousel */}
+        {/* Testimonios texto + foto por categoría */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="relative max-w-3xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCase}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.4 }}
-              >
-                <Card className="border-0 shadow-xl overflow-hidden">
-                  <CardContent className="p-8 sm:p-10">
-                    <div className="flex flex-col items-center text-center mb-6">
-                      <div className="relative w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center mb-4 shrink-0">
-                        {successCases[activeCase].photo && (
-                          <img
-                            src={successCases[activeCase].photo}
-                            alt={successCases[activeCase].name}
-                            className="absolute inset-0 w-full h-full object-cover z-10"
-                            onError={(e) => {
-                              e.currentTarget.style.display = "none";
-                            }}
-                          />
-                        )}
-                        {(() => {
-                          const IconComp = successCases[activeCase].icon;
-                          return <IconComp className="w-8 h-8 text-[#F37021] relative z-0" />;
-                        })()}
-                      </div>
-                      <h4 className="font-bold text-[#2A3A4A] text-lg">
-                        {successCases[activeCase].name}
-                      </h4>
-                      {successCases[activeCase].country && (
-                        <p className="text-sm text-gray-500 mt-1">
-                          {successCases[activeCase].country}
-                        </p>
-                      )}
-                      <p className="text-sm text-gray-500">
-                        {successCases[activeCase].role}
-                      </p>
-                    </div>
-                    <Quote className="w-8 h-8 text-[#F37021]/20 mx-auto mb-4" />
-                    <p className="text-gray-600 text-lg leading-relaxed mb-6 italic">
-                      &ldquo;{successCases[activeCase].quote}&rdquo;
-                    </p>
-                    <div className="flex justify-center">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium">
-                        {successCases[activeCase].timeline}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <button
-                onClick={prevCase}
-                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors cursor-pointer"
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-600" />
-              </button>
-
-              <div className="flex gap-2">
-                {successCases.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveCase(i)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      i === activeCase
-                        ? "w-8 bg-[#F37021]"
-                        : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={nextCase}
-                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors cursor-pointer"
-              >
-                <ChevronRight className="w-5 h-5 text-gray-600" />
-              </button>
+          {loading ? (
+            <div className="text-center py-12 text-gray-500">
+              Cargando testimonios…
             </div>
-          </div>
+          ) : textPhotoTestimonials.length === 0 && videoTestimonials.length === 0 ? (
+            <div className="text-center py-12 text-gray-500 max-w-md mx-auto">
+              Próximamente más casos de éxito. Los testimonios se gestionan desde el panel de administración.
+            </div>
+          ) : (
+            <>
+              {textPhotoTestimonials.length > 0 && (
+                <>
+                  <div className="flex flex-wrap justify-center gap-2 mb-10">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCategory("all")}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                        selectedCategory === "all"
+                          ? "bg-[#F37021] text-white"
+                          : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+                      }`}
+                    >
+                      Todas
+                    </button>
+                    {CATEGORY_ORDER.map((cat) => {
+                      const group = byCategory.find((g) => g.category === cat);
+                      const count = group?.items.length ?? 0;
+                      if (count === 0) return null;
+                      return (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => setSelectedCategory(cat)}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                            selectedCategory === cat
+                              ? "bg-[#F37021] text-white"
+                              : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          {CATEGORY_LABELS[cat]}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <AnimatePresence mode="popLayout">
+                      {currentList.map((t, i) => (
+                        <motion.div
+                          key={t.id}
+                          layout
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3, delay: i * 0.03 }}
+                        >
+                          <TestimonialCard t={t} />
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                </>
+              )}
+
+              {/* Testimonios en video (sección abajo) */}
+              {videoTestimonials.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6 }}
+                  className="mt-24 pt-16 border-t border-gray-200"
+                >
+                 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {videoTestimonials.map((t) => (
+                      <motion.div
+                        key={t.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <VideoTestimonialCard videoUrl={t.video_url!} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </>
+          )}
         </motion.div>
+
       </div>
     </section>
   );

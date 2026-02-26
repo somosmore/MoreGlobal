@@ -7,7 +7,7 @@ const profiles = [
     icon: Briefcase,
     title: "Profesionales",
     description:
-      "Médicos, ingenieros, investigadores y especialistas que buscan la residencia permanente en EE.UU. con base en su contribución al interés nacional.",
+      "Médicos, ingenieros e investigadores: transformen su carrera obteniendo la Green Card a través de su impacto social y de interés nacional.",
   },
   {
     icon: Store,
@@ -19,7 +19,7 @@ const profiles = [
     icon: GraduationCap,
     title: "Profesionales con formación académica",
     description:
-      "Investigadores, académicos y profesionales con publicaciones, premios o membresías que demuestran su mérito extraordinario.",
+      "Trabajamos con profesionales y técnicos de todas las áreas que cuenten con habilidades especiales o más de 10 años de experiencia destacada en su sector."
   },
   {
     icon: TrendingUp,
@@ -66,7 +66,7 @@ export default function WhoWeHelp() {
             <span className="text-[#F37021]">Residencia Permanente</span>
           </h2>
           <p className="mt-4 text-gray-500 text-lg">
-            Trabajamos con empresarios, comerciantes, profesionales e inversionistas que buscan visas y Green Card en EE.UU. También acompañamos procesos de visas para no inmigrante cuando aplica.
+          Asesoramos a empresarios, comerciantes, profesionales e inversionistas que buscan obtener la Green Card en los Estados Unidos. Además, brindamos acompañamiento en procesos de visas de no inmigrante según el caso.
           </p>
         </motion.div>
 

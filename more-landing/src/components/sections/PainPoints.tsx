@@ -15,7 +15,7 @@ const painPoints = [
     icon: FileSearch,
     title: "Falta de Estrategia Técnica",
     description:
-      "Muchos abogados tramitan la visa sin un plan estratégico real. Tu petición necesita una narrativa poderosa que demuestre tu impacto nacional, no solo un formulario bien llenado.",
+      "Muchos asesores tramitan la visa sin un plan estratégico real. Tu petición necesita un método poderoso que demuestre tu impacto nacional, no solo un formulario bien llenado.",
     color: "from-[#F37021]/15 to-[#F37021]/5",
     iconColor: "text-[#F37021]",
   },

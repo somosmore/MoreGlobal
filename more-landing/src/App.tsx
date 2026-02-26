@@ -1,24 +1,29 @@
-import Navbar from "@/components/sections/Navbar";
-import Hero from "@/components/sections/Hero";
-import PainPoints from "@/components/sections/PainPoints";
-import WhoWeHelp from "@/components/sections/WhoWeHelp";
-import Quiz from "@/components/sections/Quiz";
-import Pricing from "@/components/sections/Pricing";
-import Success from "@/components/sections/Success";
-import Footer from "@/components/sections/Footer";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedAdmin from "@/components/ProtectedAdmin";
+import HomePage from "@/pages/HomePage";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminTestimonials from "@/pages/AdminTestimonials";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <Hero />
-      <PainPoints />
-      <WhoWeHelp />
-      <Quiz />
-      <Pricing />
-      <Success />
-      <Footer />
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdmin>
+                <AdminTestimonials />
+              </ProtectedAdmin>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

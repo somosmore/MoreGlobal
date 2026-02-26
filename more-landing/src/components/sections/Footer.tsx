@@ -22,12 +22,12 @@ const faqs = [
   {
     question: "¿Qué pasa si no tengo maestría?",
     answer:
-      "Puedes calificar mediante equivalencia de títulos. Si tienes licenciatura más al menos 5 años de experiencia laboral progresiva post-grado, puedes solicitar una evaluación de equivalencia. La equivalencia demuestra que tu formación y experiencia son equivalentes a una maestría estadounidense.",
+      "Puedes calificar mediante equivalencia de títulos. Si tienes licenciatura más al menos 5 años de experiencia laboral progresiva post-grado, puedes solicitar una evaluación de titulus y experiencia laboral. La equivalencia demuestra que tu formación y experiencia son equivalentes a una maestría estadounidense.",
   },
   {
     question: "¿Soy empresario, ¿qué evidencias puedo usar para certificación laboral?",
     answer:
-      "Los empresarios pueden usar: facturas, contratos con clientes o proveedores, registros de empleados, certificados de cámara de comercio, licencias, publicidad, cobertura en medios, premios empresariales, declaraciones de impuestos y estados financieros. Si tu empresa ya no existe, aún puedes usar documentación histórica que pruebe tu rol y aporte.",
+      "Los empresarios pueden utilizar: facturas de servicios profesionales, contratos con clientes o proveedores, registros de empleados, certificados de cámara de comercio, licencias, publicidad, cobertura en medios, premios empresariales, declaraciones de impuestos y estados financieros. Si tu empresa ya no existe, aún puedes usar documentación histórica que pruebe tu rol y aporte",
   },
   {
     question: "¿A quiénes puedo incluir en mi proceso? (cónyuge, hijos)",
@@ -52,7 +52,7 @@ const faqs = [
   {
     question: "¿Cuánto tiempo toma el proceso completo?",
     answer:
-      "Con nuestro Plan Plus, el tiempo promedio de preparación es de 120 a 160 días. Para el programa Unsung, el tiempo es de 90 a 120 días. Después de enviar la petición, USCIS tarda entre 6 a 12 meses en dar una respuesta, aunque con Premium Processing se puede reducir a 45 días.",
+      "Con nuestro Plan Plus, el tiempo promedio de preparación es de 120 a 160 días. Para el programa Unsung, el tiempo es de 90 a 120 días. Una vez enviada la petición, USCIS tarda entre 13 y 24 meses en dar una respuesta, aunque con el Premium Processing este plazo se puede reducir a 45 días.",
   },
   {
     question: "¿Qué documentos académicos necesito?",
@@ -70,9 +70,9 @@ const faqs = [
       "Las publicaciones son solo uno de los criterios posibles. También se valoran premios, membresías profesionales, liderazgo en organizaciones, contribuciones originales en tu campo, cobertura en medios y salarios altos. Trabajamos contigo para identificar y potenciar tus fortalezas.",
   },
   {
-    question: "¿Qué diferencia hay entre el programa DIY y el Plan Plus?",
+    question: "¿Qué diferencia hay entre el programa UPP y el Plan Plus?",
     answer:
-      "El programa Unsung (DIY) te brinda las herramientas, templates y coaching para preparar tu caso por cuenta propia. El Plan Plus incluye todo eso más la elaboración completa de tu plan profesional, redacción de cartas testimoniales, y gestión integral del caso. Es ideal si prefieres delegarnos el trabajo pesado.",
+      "Con el programa Unsung (UPP), obtienes las herramientas, plantillas y el coaching necesario para gestionar tu propio caso. Si buscas una solución completa, nuestro Plan Plus suma la elaboración de tu plan profesional, redacción de testimonios y gestión integral. Es la alternativa perfecta para quienes prefieren delegar la ejecución técnica y asegurar cada detalle.",
   },
 ];
 
