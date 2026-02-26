@@ -60,13 +60,6 @@ const ivonData = {
   ],
 };
 
-const CATEGORY_ORDER: Testimonial["category"][] = [
-  "abogados_in_house",
-  "abogados_preparadora_monica_martinez",
-  "aprobados_abogada_marcela_rodriguez",
-  "en_espera_aprobacion",
-];
-
 const IVON_AUTO_PLAY_INTERVAL = 5500;
 
 function TestimonialCard({ t }: { t: Testimonial }) {
@@ -238,10 +231,6 @@ export default function Success() {
   const [ivonPaused, setIvonPaused] = useState(false);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<
-    Testimonial["category"] | "all"
-  >("all");
-
   useEffect(() => {
     if (ivonPaused) return;
     const timer = setInterval(() => {
@@ -273,40 +262,9 @@ export default function Success() {
     (t) => t.media_type === "video" && t.video_url
   );
 
-  const byCategory = CATEGORY_ORDER.map((cat) => ({
-    category: cat,
-    label: CATEGORY_LABELS[cat],
-    items: textPhotoTestimonials.filter((t) => t.category === cat),
-  }));
-
-  const currentList =
-    selectedCategory === "all"
-      ? textPhotoTestimonials
-      : byCategory.find((g) => g.category === selectedCategory)?.items ?? [];
-
   return (
     <section id="exito" className="py-28 sm:py-36 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-20"
-        >
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
-            Casos de éxito
-          </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-            Resultados que hablan por sí solos
-          </h2>
-          <p className="mt-4 text-gray-500 text-lg">
-            Profesionales reales, aprobaciones reales. Conoce a quienes ya
-            construyeron su legado en EE.UU.
-          </p>
-        </motion.div>
-
         {/* Ivon Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -427,6 +385,25 @@ export default function Success() {
           </Card>
         </motion.div>
 
+        {/* Bridge header: Casos de éxito — texto con palabras clave */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-2xl mx-auto mb-20"
+        >
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2A3A4A] tracking-tight">
+            <span className="text-[#F37021]">Casos de éxito.</span> Resultados que{" "}
+            <span className="text-[#F37021]">hablan por sí solos</span>
+          </h2>
+          <p className="mt-5 text-base sm:text-lg text-gray-600 leading-relaxed">
+            <span className="font-semibold text-[#2A3A4A]">Profesionales reales</span>,{" "}
+            <span className="font-semibold text-[#2A3A4A]">aprobaciones reales</span>. Conoce a quienes ya construyeron su{" "}
+            <span className="font-semibold text-[#F37021]">legado en EE.UU.</span>
+          </p>
+        </motion.div>
+
         {/* Testimonios texto + foto por categoría */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -445,43 +422,9 @@ export default function Success() {
           ) : (
             <>
               {textPhotoTestimonials.length > 0 && (
-                <>
-                  <div className="flex flex-wrap justify-center gap-2 mb-10">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCategory("all")}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                        selectedCategory === "all"
-                          ? "bg-[#F37021] text-white"
-                          : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
-                      }`}
-                    >
-                      Todas
-                    </button>
-                    {CATEGORY_ORDER.map((cat) => {
-                      const group = byCategory.find((g) => g.category === cat);
-                      const count = group?.items.length ?? 0;
-                      if (count === 0) return null;
-                      return (
-                        <button
-                          key={cat}
-                          type="button"
-                          onClick={() => setSelectedCategory(cat)}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                            selectedCategory === cat
-                              ? "bg-[#F37021] text-white"
-                              : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
-                          }`}
-                        >
-                          {CATEGORY_LABELS[cat]}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <AnimatePresence mode="popLayout">
-                      {currentList.map((t, i) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <AnimatePresence mode="popLayout">
+                    {textPhotoTestimonials.map((t, i) => (
                         <motion.div
                           key={t.id}
                           layout
@@ -490,12 +433,11 @@ export default function Success() {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3, delay: i * 0.03 }}
                         >
-                          <TestimonialCard t={t} />
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
-                  </div>
-                </>
+                        <TestimonialCard t={t} />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
               )}
 
               {/* Testimonios en video (sección abajo) */}

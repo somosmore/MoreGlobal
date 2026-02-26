@@ -20,6 +20,8 @@ const plans = [
     name: "Unsung Professional Program",
     price: "$2,500",
     badge: "UPP",
+    ratingValue: "4.8",
+    ratingText: "Calificacion promedio de 150 profesionales",
     description:
       "Programa de autogestión para profesionales que quieren preparar su caso EB-2 NIW con guía experta paso a paso.",
     timeline: "90 – 120 días",
@@ -33,7 +35,7 @@ const plans = [
       },
       { text: "Acceso a comunidad privada", icon: Users },
     ],
-    cta: "Comenzar Programa",
+    cta: "Si, quiero comenzar mi programa!",
     ctaVariant: "outline" as const,
     popular: false,
   },
@@ -41,6 +43,8 @@ const plans = [
     name: "Plan Plus",
     price: "$8,000",
     badge: "Premium",
+    ratingValue: "4.8",
+    ratingText: "Calificacion promedio de 175 profesionales",
     description:
       "Acompañamiento premium de principio a fin. Nosotros armamos tu expediente mientras tú sigues adelante con tu empresa, startup, formación académica o tu trabajo. Pensado para estudiantes, empresarios, emprendedores y trabajadores independientes.",
     timeline: "120 – 160 días",
@@ -59,7 +63,7 @@ const plans = [
       { text: "Coach emocional durante el proceso", icon: Heart },
       { text: "Seguimiento post envío", icon: Eye },
     ],
-    cta: "Solicitar Plan Plus",
+    cta: "Si, quiero obtener mi Expediente!",
     ctaVariant: "gold" as const,
     popular: true,
   },
@@ -216,35 +220,63 @@ export default function Pricing() {
                 </ul>
                 </div>
 
-                {/* CTA */}
+                {/* CTA + Rating */}
                 <div className="mt-auto pt-6">
-                {plan.popular ? (
-                  <Button variant="gold" className="w-full gap-2" size="lg" asChild>
-                    <a
-                      href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  {plan.ratingValue && plan.ratingText && (
+                    <div className="flex flex-col items-center gap-1 mb-4 text-xs">
+                      <div className="flex items-center gap-1">
+                        <span
+                          className={`font-semibold mr-1 ${
+                            plan.popular ? "text-white" : "text-[#2A3A4A]"
+                          }`}
+                        >
+                          {plan.ratingValue}
+                        </span>
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              plan.popular ? "text-yellow-300" : "text-yellow-400"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span
+                        className={`${
+                          plan.popular ? "text-white/80" : "text-gray-600"
+                        }`}
+                      >
+                        {plan.ratingText}
+                      </span>
+                    </div>
+                  )}
+                  {plan.popular ? (
+                    <Button variant="gold" className="w-full gap-2" size="lg" asChild>
+                      <a
+                        href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        {plan.cta}
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant={plan.ctaVariant}
+                      className="w-full gap-2"
+                      size="lg"
+                      asChild
                     >
-                      <MessageCircle className="w-4 h-4" />
-                      {plan.cta}
-                    </a>
-                  </Button>
-                ) : (
-                  <Button
-                    variant={plan.ctaVariant}
-                    className="w-full gap-2"
-                    size="lg"
-                    asChild
-                  >
-                    <a
-                      href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {plan.cta}
-                    </a>
-                  </Button>
-                )}
+                      <a
+                        href="https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {plan.cta}
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </div>
             </motion.div>
