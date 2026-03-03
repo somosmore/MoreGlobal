@@ -12,6 +12,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Bell,
+  LayoutTemplate,
+  Contact,
+  ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -21,6 +24,8 @@ const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/leads", icon: Users, label: "Leads" },
   { href: "/admin/testimonials", icon: MessageSquare, label: "Testimonios" },
+  { href: "/admin/projects", icon: LayoutTemplate, label: "Proyectos" },
+  { href: "/admin/clients", icon: Contact, label: "Clientes" },
   { href: "/admin/settings", icon: Settings, label: "Configuración" },
 ]
 
@@ -30,6 +35,10 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   leads: "Leads",
   testimonials: "Testimonios",
   settings: "Configuración",
+  projects: "Proyectos",
+  new: "Nuevo proyecto",
+  edit: "Editar",
+  clients: "Clientes",
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -84,7 +93,7 @@ function Breadcrumbs() {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function AdminLayout() {
-  const { user, signOut } = useAuth()
+  const { user, signOut, role } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -203,9 +212,14 @@ export default function AdminLayout() {
           </div>
           {(!collapsed || isMobile) && (
             <div className="min-w-0">
-              <p className="text-xs font-semibold text-white truncate capitalize">
-                {displayName}
-              </p>
+              <div className="flex items-center gap-1.5">
+                <p className="text-xs font-semibold text-white truncate capitalize">
+                  {displayName}
+                </p>
+                {role === "root" && (
+                  <ShieldCheck className="w-3 h-3 text-[#F37021] shrink-0" aria-label="Administrador root" />
+                )}
+              </div>
               <p className="text-[10px] text-white/40 truncate">{email}</p>
             </div>
           )}
