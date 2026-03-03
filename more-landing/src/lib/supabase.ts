@@ -60,12 +60,24 @@ export type Lead = {
   achievements: string[];
   result_type: "alto_impacto" | "unsung";
   status: LeadStatus;
+  followup_at: string | null;
   created_at: string;
 };
 
-export type LeadInsert = Omit<Lead, "id" | "created_at" | "status"> & {
+export type LeadInsert = Omit<Lead, "id" | "created_at" | "status" | "followup_at"> & {
   status?: LeadStatus;
+  followup_at?: string | null;
 };
+
+export type LeadNote = {
+  id: string;
+  lead_id: string;
+  content: string;
+  author: string;
+  created_at: string;
+};
+
+export type LeadNoteInsert = Omit<LeadNote, "id" | "created_at">;
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
   abogados_in_house: "Aprobados In House",

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint MORE - Visa EB2-NIW</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* --- 1. CORE VARIABLES & SETUP --- */
+:root {
+  --bg-color: #0b1120; /* Deep Slate/Navy */
+  --bg-card: #1e293b; /* Slate 800 */
+  --bg-card-hover: #334155; /* Slate 700 */
+  
+  --text-primary: #f8fafc; /* White */
+  --text-secondary: #94a3b8; /* Slate 400 */
+  
+  --accent-primary: #ea580c; /* High-conversion Orange */
+  --accent-secondary: #38bdf8; /* Tech Blue */
+  --accent-success: #22c55e; /* Green */
+  --accent-danger: #ef4444; /* Red */
+  
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #020617; /* Very dark background for the page */
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  padding: 30px 0;
+  place-items: center;
+}
+
+/* --- 2. SLIDE CONTAINER --- */
+.slide-container {
+  align-items: center;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-main);
+  height: 720px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px;
+  position: relative;
+  width: 1280px;
+}
+
+/* Background Effect (Gradient Mesh) */
+.slide-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(234, 88, 12, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.03) 0%, transparent 40%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.slide-container > * {
+  position: relative;
+  z-index: 5;
+}
+
+/* --- 3. BRANDING (DRIVE LOGOS) - TAMAÑOS MAXIMIZADOS --- */
+.logo-img {
+  position: absolute;
+  z-index: 50;
+  object-fit: contain;
+}
+
+.logo-top-left {
+  top: 30px;
+  left: 50px;
+  height: 120px; /* Incremento masivo para mayor autoridad */
+}
+
+.logo-watermark {
+  bottom: 30px;
+  right: 40px;
+  height: 110px; /* Presencia de marca de agua más fuerte */
+  opacity: 0.15;
+}
+
+.logo-center-large {
+  position: relative;
+  height: 260px; /* Protagonismo total en el CTA final */
+  margin-bottom: 30px;
+  object-fit: contain;
+}
+
+/* --- 4. TYPOGRAPHY --- */
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+p, li, .subtitle {
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.highlight-orange { color: var(--accent-primary); }
+.highlight-blue { color: var(--accent-secondary); }
+
+h1 { font-size: 72px; }
+h2.slide-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+  border-left: 6px solid var(--accent-primary);
+  padding-left: 20px;
+}
+h3 { font-size: 32px; margin-bottom: 16px; }
+
+p, li, .subtitle { font-size: 20px; }
+.subtitle { margin-top: 24px; font-size: 24px; max-width: 800px; margin-inline: auto; }
+
+/* Structural Content Area */
+.content-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  justify-content: center;
+}
+
+/* --- 5. LAYOUTS --- */
+
+/* Title Layout */
+.title-layout {
+  text-align: center;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title-layout h1 { margin-bottom: 20px; }
+
+/* Section Title Layout */
+.section-title-layout {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.section-title-layout h2 { font-size: 64px; margin-bottom: 24px; border-left: none; padding-left: 0; }
+.section-title-layout hr {
+  width: 80px;
+  height: 6px;
+  background-color: var(--accent-primary);
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+
+/* Two Column Layout */
+.two-column {
+  display: flex;
+  gap: 60px;
+  width: 100%;
+  align-items: stretch;
+}
+.two-column > div { flex: 1; }
+
+/* CORRECCIÓN DE ALINEACIÓN: Image Right Text Left */
+.two-column.image-right-text-left-layout {
+  align-items: center;
+}
+
+.image-right-text-left-layout .image-wrapper {
+  height: 450px; 
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  background-color: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-right-text-left-layout .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  object-position: center;
+  display: block;
+}
+
+/* Highlighted Numbers Layout */
+.highlight-numbers-layout {
+  align-items: center;
+}
+.highlight-numbers-layout > div:first-child {
+  flex: 0 0 45%;
+  text-align: center;
+}
+.highlight-numbers-layout .number {
+  color: var(--accent-primary);
+  font-size: 180px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-shadow: 0 10px 30px rgba(234, 88, 12, 0.2);
+}
+.highlight-numbers-layout .number-label {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 10px;
+}
+
+/* CORRECCIÓN DE ALINEACIÓN: Bleed Image Right Layout */
+.slide-container.bleed-image-layout {
+  padding: 0;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  background-color: var(--bg-color);
+}
+.slide-container.bleed-image-layout > .content-container {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+.slide-container.bleed-image-layout > .image-container {
+  width: 100%;
+  height: 720px;
+  overflow: hidden;
+  position: relative;
+}
+.bleed-image-layout .image-container::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, var(--bg-color) 0%, transparent 20%);
+}
+.slide-container.bleed-image-layout img.bleed-image-side {
+  width: 100%;
+  height: 720px;
+  object-fit: cover;
+  object-position: center 20%; 
+  display: block;
+}
+
+/* Tiled Text With Icons */
+.tiled-content {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  align-items: stretch;
+}
+.tile {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 40px 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tile .icon {
+  background-color: rgba(234, 88, 12, 0.1);
+  color: var(--accent-primary);
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+/* Two Column Tiled Text (Comparison) */
+.two-column.tiled { gap: 40px; }
+.two-column.tiled > div {
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  padding: 50px 40px;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.two-column.tiled > div.error-tile { border-top: 6px solid var(--accent-danger); }
+.two-column.tiled > div.success-tile { border-top: 6px solid var(--accent-success); }
+.two-column.tiled h3 { font-size: 28px; margin-bottom: 20px; }
+
+/* Styled Bullet Points */
+.bullet-list {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.bullet-list ul { list-style: none; }
+.bullet-list li {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+.bullet-list i {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: var(--accent-primary);
+  font-size: 24px;
+  background-color: rgba(234, 88, 12, 0.1);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quote Layout */
+.quote-layout {
+  width: 85%;
+  margin: 0 auto;
+  text-align: center;
+}
+.quote-layout blockquote {
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  position: relative;
+  padding: 0 40px;
+  margin-bottom: 30px;
+}
+.quote-layout blockquote::before,
+.quote-layout blockquote::after {
+  content: '"';
+  font-size: 80px;
+  color: var(--accent-primary);
+  opacity: 0.5;
+  position: absolute;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+.quote-layout blockquote::before { top: -20px; left: -10px; }
+.quote-layout blockquote::after { bottom: -40px; right: -10px; }
+.quote-layout cite {
+  font-size: 22px;
+  color: var(--accent-secondary);
+  font-style: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* CORRECCIÓN DE ALINEACIÓN: Tiled Images */
+.image-tile {
+  flex: 1;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+}
+.image-tile .image-wrapper {
+  height: 240px;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+.image-tile .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; 
+  display: block;
+}
+.image-tile .text-content { padding: 24px; }
+.image-tile h3 { font-size: 22px; margin-bottom: 12px; color: var(--accent-secondary); }
+.image-tile p { font-size: 16px; }
+
+/* Q&A Layout (CTA) */
+.qa-layout {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.qa-layout h2 {
+  font-size: 72px;
+  margin-bottom: 20px;
+  border: none;
+  padding: 0;
+  text-align: center;
+}
+.qa-layout p {
+  font-size: 28px;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+.cta-button {
+  background-color: var(--accent-primary);
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.4);
+}
+.cta-button:hover {
+  background-color: #c2410a;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 20px -3px rgba(234, 88, 12, 0.5);
+}
+.contact-info {
+  font-family: monospace;
+  font-size: 20px;
+  color: var(--text-secondary);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
+  width: 100%;
+}
+
+.text-left-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.text-left-container h3 {
+  color: var(--accent-primary);
+  margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title_Slide -->
+<div class="slide-container" id="slide1">
+    
+    <!-- Logo MORE -->
+    <img src="https://drive.google.com/uc?export=view&id=1RIZS5dOzAwHTMxhpqF4wcgX3KUu3-b1W" alt="MORE Logo" class="logo-img logo-top-left">
+
+    <div class="title-layout">
+        <h1>El Sueño Americano Evolucionó:<br><span class="highlight-orange">Ahora Tú Eres El Sueño</span></h1>
+        <p class="subtitle">Cómo convertir tu perfil en un producto de exportación High-Ticket y obtener tu Green Card mediante la Visa EB2-NIW.</p>
+    </div>
+</div>
+
+<!-- Slide 2: Highlighted_Numbers (Hook / Myth Busting) -->
+<div class="slide-container" id="slide2">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">El Mito Que Te Mantiene Estancado</h2>
+    <div class="content-area">
+        <div class="two-column highlight-numbers-layout">
+            <div>
+                <div class="number">2%</div>
+                <div class="number-label">Llegan a Postgrado</div>
+            </div>
+            <div class="text-left-container">
+                <h3>El déficit es real y cuantificable</h3>
+                <p>Si crees que migrar a EE.UU. como profesional es imposible porque no tienes un familiar que te pida, o crees que necesitas miles de dólares para "comprar" tu visa, estás cayendo en una trampa.</p>
+                <br>
+                <p>En EE.UU., apenas el 10.4% de los adultos van a la universidad, y <strong>solo el 2% llega a postgrado.</strong> No hay suficientes profesionales altamente preparados. <strong>El mercado laboral norteamericano te necesita.</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Bleed_Image_Right (The Vehicle) -->
+<div class="slide-container bleed-image-layout" id="slide3">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <div class="content-container" style="position: relative;">
+        <h2 class="slide-title" style="border-left:none; padding-left:0;">El Vehículo:<br><span class="highlight-orange">Visa EB2-NIW</span></h2>
+        <div class="content-area">
+            <p style="margin-bottom: 20px;">Diseñada para profesionales con habilidades excepcionales que ofrecen un beneficio real y cuantificable a los Estados Unidos.</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 15px;"><strong><i class="fa-solid fa-check" style="color:var(--accent-success); margin-right:10px;"></i> Cero Patrocinadores:</strong> Tú eres el principal beneficiario.</li>
+                <li style="margin-bottom: 15px;"><strong><i class="fa-solid fa-check" style="color:var(--accent-success); margin-right:10px;"></i> Cero Ofertas Laborales:</strong> Exige la exención del requisito laboral.</li>
+                <li><strong><i class="fa-solid fa-check" style="color:var(--accent-success); margin-right:10px;"></i> Recompensa Real:</strong> Residencia Permanente.</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="https://drive.google.com/uc?export=view&id=1HRVvIFAFLFBQo5IjnPlztNNPRnQ9LYKD" alt="Foto adjunta de la Diapositiva 3">
+    </div>
+</div>
+
+<!-- Slide 4: Tiled_Text_With_Icons (Benefits) -->
+<div class="slide-container" id="slide4">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">Por Qué la EB2-NIW es Superior</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <h3>Independencia Total</h3>
+                <p>Elimina la fricción de depender de una corporación que apruebe tu talento. Tú lideras tu propio proceso migratorio basado en mérito propio.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-id-card"></i></div>
+                <h3>Estatus Inmediato</h3>
+                <p>No es una visa temporal atada a condiciones extremas. Es un camino directo hacia la Residencia Permanente (Green Card) para ti y tu futuro.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-users"></i></div>
+                <h3>Expansión Familiar</h3>
+                <p>Tu éxito escala. Al ser aprobado, este vehículo migratorio permite legalmente que tu cónyuge e hijos menores de 21 años emigren contigo.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Section_Title -->
+<div class="slide-container" id="slide5">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <div class="section-title-layout">
+        <hr>
+        <h2>Los 3 Pilares de Aprobación</h2>
+        <p class="subtitle">El framework estratégico e innegociable para construir un caso irrefutable ante USCIS.</p>
+    </div>
+</div>
+
+<!-- Slide 5b: Desglose Visual de los 3 Pilares -->
+<div class="slide-container" id="slide5b">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">La Arquitectura de tu Proyecto</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h3>1. Declaración Profesional</h3>
+                <p>Tu historia narrada con visión y propósito. Demuestra por qué eres el candidato idóneo por encima del promedio.<br><br><span style="color: var(--accent-danger); font-size: 16px;"><strong><i class="fa-solid fa-xmark"></i> ERROR:</strong> Hacerlo como un CV tradicional.</span></p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>2. Propuesta de Esfuerzo</h3>
+                <p>El <em>para qué</em> quieres vivir en EE.UU. Es tu tesis exacta de qué problema nacional vas a resolver y cómo beneficia al país.<br><br><span style="color: var(--accent-danger); font-size: 16px;"><strong><i class="fa-solid fa-xmark"></i> ERROR:</strong> Hablar de metas personales.</span></p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>3. Plan de Alto Impacto</h3>
+                <p>La hoja de ruta concreta, medible y sostenible. Proyecciones y datos duros de cómo generarás valor socioeconómico.<br><br><span style="color: var(--accent-danger); font-size: 16px;"><strong><i class="fa-solid fa-xmark"></i> ERROR:</strong> Copiar modelos genéricos.</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Two_Column_Tiled_Text (Contrast) -->
+<div class="slide-container" id="slide6">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">La Diferencia entre Rechazo y Aprobación</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div class="error-tile">
+                <h3 style="color:var(--accent-danger);"><i class="fa-solid fa-xmark"></i> El Currículum Amateur</h3>
+                <p>La mayoría falla porque envía un currículum tradicional. Listan trabajos, pegan títulos académicos y cruzan los dedos esperando que el evaluador adivine su valor. USCIS no quiere un CV.</p>
+            </div>
+            <div class="success-tile">
+                <h3 style="color:var(--accent-success);"><i class="fa-solid fa-check-double"></i> El Proyecto de Interés</h3>
+                <p>Los casos de éxito presentan una visión estratégica. Tienen una <strong>Declaración Profesional</strong>, una <strong>Propuesta de Esfuerzo</strong> precisa y un <strong>Plan de Alto Impacto</strong> socioeconómico medible.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Styled_Bullet_Points (Checklist) -->
+<div class="slide-container" id="slide7">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">El Paso Cero: Checklist de Esfuerzo</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-1"></i> <strong>Problema Nacional:</strong> ¿Qué problema urgente existe en EE.UU. que tu profesión puede ayudar a solucionar hoy?</li>
+                <li><i class="fa-solid fa-2"></i> <strong>Evidencia Dura:</strong> ¿Qué estadísticas, reportes y datos del mercado respaldan que este dolor es real?</li>
+                <li><i class="fa-solid fa-3"></i> <strong>Tu Rol Profesional:</strong> ¿Por qué tu background te convierte en la pieza fundamental para ejecutar esta solución?</li>
+                <li><i class="fa-solid fa-4"></i> <strong>Solución Propuesta:</strong> ¿Qué vas a implementar exactamente? (Innovación, programa, metodología, startup).</li>
+                <li><i class="fa-solid fa-5"></i> <strong>Impacto y Métrica:</strong> ¿Qué resultados económicos, tecnológicos o sociales exactos vas a generar?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Quote (DIY Template) -->
+<div class="slide-container" id="slide8">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">Tu Plantilla de Ejecución Inmediata</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>Yo, [Nombre], propongo contribuir a Estados Unidos resolviendo el problema de [Dolor Nacional] que afecta a [Población]. A través de mi experiencia en [Área de Expertise], desarrollaré [Solución] que generará un impacto medible en [Métrica Económica/Social].</blockquote>
+            <cite>— Estructura Base de una Propuesta de Esfuerzo (EB2-NIW)</cite>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Image_Right_Text_Left (The Friction / Reality Check) -->
+<div class="slide-container" id="slide9">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">El Costo Real del "Do It Yourself"</h2>
+    <div class="content-area">
+        <div class="two-column image-right-text-left-layout">
+            <div class="text-left-container">
+                <p style="margin-bottom: 20px;">Tienes el mapa y la plantilla. Podrías intentar estructurar esto por tu cuenta.</p>
+                <p style="margin-bottom: 20px;">Pero seamos analíticos: <strong>el proceso es sumamente complejo y técnico.</strong> Dejar tu futuro en EE.UU. al azar o fallar en la redacción de tu propuesta tiene un costo de oportunidad inmenso.</p>
+                <p>Un error semántico o falta de evidencia irrefutable significa un rechazo de USCIS, miles de dólares perdidos y tu plan estancado por años. La estrategia migratoria requiere ingeniería, no improvisación.</p>
+            </div>
+            <div>
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Planificación estratégica y documentos complejos">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Tiled_Images (The MORE Method / Authority) -->
+<div class="slide-container" id="slide10">
+    <!-- Marca de agua Logo -->
+    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+
+    <h2 class="slide-title">El Método MORE: Aceleración Estratégica</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Experto en políticas públicas analizando datos">
+                </div>
+                <div class="text-content">
+                    <h3>Policy Experts</h3>
+                    <p>No somos simples tramitadores. Alineamos tu historial con las necesidades geopolíticas e industriales críticas de EE.UU.</p>
+                </div>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Analista económico revisando proyecciones">
+                </div>
+                <div class="text-content">
+                    <h3>Economic Analysts</h3>
+                    <p>Cuantificamos tu propuesta. Transformamos tu "experiencia" en proyecciones de impacto económico y creación de valor.</p>
+                </div>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Estratega legal en sala de juntas corporativa">
+                </div>
+                <div class="text-content">
+                    <h3>Legal Strategists</h3>
+                    <p>Blindamos tu caso. Construimos el argumento legal inquebrantable que obliga al evaluador a ver tu beneficio nacional.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Q&A (High Ticket CTA) -->
+<div class="slide-container" id="slide11">
+    
+    <div class="qa-layout">
+        <!-- Logo MORE Principal para el Cierre -->
+        <img src="https://drive.google.com/uc?export=view&id=1RIZS5dOzAwHTMxhpqF4wcgX3KUu3-b1W" alt="MORE Logo" class="logo-center-large logo-img">
+
+        <h2>Deja de Esperar Aprobación.</h2>
+        <p>Es hora de construir tu impacto nacional en EE.UU.</p>
+        <div class="cta-button">Agenda tu Asesoría VIP (90 Min)</div>
+        <div class="contact-info">
+            WWW.JUSTMORE.NET &nbsp;|&nbsp; +1 (832) 941-6026
+        </div>
+    </div>
+</div>
+
+<script>
+    // 🛠️ PARCHE TÉCNICO PARA IMÁGENES DE GOOGLE DRIVE 🛠️
+    // Vector de respaldo por si el enlace original de Drive se rompe o bloquea
+    const logoSVG = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Ctext x='0' y='70' font-family='system-ui, -apple-system, sans-serif' font-size='80' font-weight='800' fill='%23ea580c' letter-spacing='-4'%3Emore%3C/text%3E%3Ctext x='5' y='100' font-family='system-ui, -apple-system, sans-serif' font-size='14' font-weight='700' fill='%23f8fafc' letter-spacing='2.5'%3EMIGRACIÓN CON PROPÓSITO%3C/text%3E%3C/svg%3E";
+    
+    document.querySelectorAll('img').forEach(img => {
+        // 1. Google Drive bloquea 'uc?export=view' en sitios web (Error CORS).
+        // Lo forzamos al formato de miniatura ('thumbnail') que es público y rápido.
+        if(img.src.includes('drive.google.com/uc')) {
+            const url = new URL(img.src);
+            const id = url.searchParams.get('id');
+            if(id) {
+                // Usamos w1200 para garantizar alta calidad tanto en logos como en fotos grandes
+                img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
+            }
+        }
+        
+        // 2. Si el Thumbnail también falla, inyecta el logo en vectores instantáneamente (Solo para logos)
+        if (img.classList.contains('logo-img')) {
+            img.onerror = function() {
+                this.onerror = null; // Prevenir bucles infinitos
+                this.src = logoSVG;
+            };
+        }
+    });
+</script>
+
+</body>
+</html>

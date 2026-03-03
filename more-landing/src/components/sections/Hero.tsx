@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
@@ -68,10 +69,10 @@ export default function Hero() {
               </a>
             </Button>
             <Button size="lg" variant="secondary" className="group" asChild>
-              <a href="#programas">
+              <Link to="/blueprint">
                 <Play className="mr-2 h-4 w-4" />
                 Conocer mi camino sin patrocinador
-              </a>
+              </Link>
             </Button>
           </motion.div>
 

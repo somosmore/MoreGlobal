@@ -14,6 +14,7 @@ import {
   MessageCircle,
   ExternalLink,
   BarChart3,
+  Bell,
 } from "lucide-react"
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -153,6 +154,16 @@ export default function AdminDashboard() {
 
   const recentLeads = leads.slice(0, 8)
 
+  const todayStart = new Date()
+  todayStart.setHours(0, 0, 0, 0)
+  const followupDue = useMemo(
+    () =>
+      leads.filter(
+        (l) => l.followup_at && new Date(l.followup_at) <= new Date(todayStart.getTime() + 86400000)
+      ),
+    [leads]
+  )
+
   const funnelSteps: FunnelStep[] = [
     { label: "Nuevos", value: stats.nuevos, color: "bg-blue-400" },
     { label: "Contactados", value: stats.contactados, color: "bg-yellow-400" },
@@ -270,6 +281,69 @@ export default function AdminDashboard() {
           </Link>
         ))}
       </div>
+
+      {/* Follow-up alert block */}
+      {followupDue.length > 0 && (
+        <Card className="border-0 shadow-sm border-l-4 border-l-yellow-400 bg-yellow-50/50">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Bell className="w-4 h-4 text-yellow-600" />
+              <h2 className="text-sm font-semibold text-yellow-800">
+                Requieren seguimiento hoy ({followupDue.length})
+              </h2>
+              <Link
+                to="/admin/leads"
+                className="ml-auto flex items-center gap-1 text-xs text-yellow-700 hover:text-yellow-900 font-medium transition-colors"
+              >
+                Ver leads <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+            <ul className="space-y-1.5">
+              {followupDue.slice(0, 5).map((lead) => {
+                const sm = STATUS_META[lead.status ?? "nuevo"] ?? STATUS_META["nuevo"]
+                const num = (lead.whatsapp ?? "").replace(/\D/g, "")
+                const waUrl = num
+                  ? `https://wa.me/${num}?text=Hola%20${encodeURIComponent(lead.nombre)},%20te%20contactamos%20desde%20MORE%20Immigration%20Consulting.`
+                  : null
+                return (
+                  <li key={lead.id} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white border border-yellow-100">
+                    <div className="w-7 h-7 rounded-lg bg-yellow-100 flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-yellow-700">
+                        {lead.nombre.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-[#2A3A4A] truncate">{lead.nombre}</p>
+                      <p className="text-xs text-gray-400 truncate">{lead.email}</p>
+                    </div>
+                    <span className={`hidden sm:inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full ${sm.color}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${sm.dot}`} />
+                      {sm.label}
+                    </span>
+                    {waUrl && (
+                      <a href={waUrl} target="_blank" rel="noopener noreferrer"
+                        className="p-1.5 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors shrink-0"
+                        title="WhatsApp">
+                        <MessageCircle className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    <a href={`mailto:${lead.email}`}
+                      className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors shrink-0"
+                      title="Email">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </li>
+                )
+              })}
+              {followupDue.length > 5 && (
+                <li className="text-xs text-yellow-700 text-center py-1">
+                  +{followupDue.length - 5} más — <Link to="/admin/leads" className="underline hover:no-underline">ver todos</Link>
+                </li>
+              )}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Main grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

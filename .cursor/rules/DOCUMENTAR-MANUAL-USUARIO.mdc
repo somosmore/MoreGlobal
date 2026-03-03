@@ -1,0 +1,45 @@
+---
+description: Documenta nuevas funcionalidades en el manual de usuario
+globs: 
+  - "more-landing/src/pages/**"
+  - "more-landing/src/components/**"
+  - "more-landing/supabase/migrations/**"
+alwaysApply: true
+---
+
+# Regla: Actualizar manual de usuario
+
+Cuando agregues, modifiques o elimines **cualquier funcionalidad visible por el usuario** — ya sea una página, sección, flujo, campo de formulario, tabla de base de datos o comportamiento del CRM — debes actualizar el archivo:
+
+```
+Documentacion/manual_de_usuario.md
+```
+
+## Qué documenta el manual
+
+El manual cubre dos grandes áreas:
+
+1. **Sitio público** (`/`): Navbar, Hero, Quiz, secciones de contenido, Testimonios, Precios, Footer, página de éxito.
+2. **Panel de administración (CRM)** (`/admin`): Dashboard, Módulo de Leads (incluyendo pipeline, notas, seguimiento), Módulo de Testimonios.
+
+## Cuándo actualizar
+
+| Tipo de cambio | Acción requerida |
+|----------------|-----------------|
+| Nueva página o ruta | Agregar sección nueva en el índice y en la sección correspondiente |
+| Nueva funcionalidad en página existente | Agregar subsección o párrafo describiendo la funcionalidad |
+| Nuevo campo en formulario | Documentar el campo, su tipo y su propósito |
+| Nueva tabla o columna en BD | Actualizar la sección "Tablas de base de datos" al final del manual |
+| Cambio de comportamiento existente | Actualizar la descripción existente |
+| Eliminación de funcionalidad | Remover o marcar como obsoleto en el manual |
+
+## Formato esperado
+
+- Usa encabezados `##` y `###` para organizar secciones y subsecciones.
+- Las tablas de campos deben tener columnas: `Campo`, `Tipo`, `Descripción`.
+- Actualiza la fecha de "Última actualización" al inicio del archivo.
+- Mantén el índice sincronizado con las secciones del documento.
+
+## Ejemplo de respuesta correcta
+
+> El campo `followup_at` fue documentado en `Documentacion/manual_de_usuario.md` bajo la sección **2.3 → Próximo seguimiento**.

@@ -7,6 +7,7 @@ import AdminLogin from "@/pages/AdminLogin"
 import AdminDashboard from "@/pages/AdminDashboard"
 import AdminTestimonials from "@/pages/AdminTestimonials"
 import AdminLeads from "@/pages/AdminLeads"
+import BlueprintPage from "@/pages/BlueprintPage"
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="testimonials" element={<AdminTestimonials />} />
           </Route>
+
+          <Route path="/blueprint" element={<BlueprintPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
