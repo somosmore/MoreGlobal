@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-03 (Blueprint EB2-NIW agregado)
+> Última actualización: 2026-03-03 (Pricing: risk reversal, costo de no actuar, fix typos)
 
 ---
 
@@ -22,6 +22,7 @@
    - 2.2 [Dashboard](#22-dashboard)
    - 2.3 [Módulo de Leads](#23-módulo-de-leads)
    - 2.4 [Módulo de Testimonios](#24-módulo-de-testimonios)
+   - 2.5 [Módulo de Configuración](#25-módulo-de-configuración)
 
 ---
 
@@ -85,8 +86,11 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 
 ### 1.7 Sección: Precios
 
-- Presenta los planes o servicios disponibles.
-- Incluye comparación de valor y llamada a la acción hacia el quiz.
+- Presenta los dos planes disponibles: **Unsung Professional Program (UPP)** y **Plan Plus**.
+- Encabezado seguido de una línea de "costo de no actuar" en itálica que recuerda al usuario el costo de la inacción.
+- Cada plan incluye un **badge de risk reversal** (icono de escudo verde) con el mensaje: *"Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."*
+- CTAs en primera persona: "Sí, quiero comenzar mi programa" y "Sí, quiero obtener mi Expediente".
+- Ambos CTAs abren WhatsApp directamente con mensaje pre-cargado.
 
 ### 1.8 Footer
 
@@ -274,7 +278,7 @@ Botones pill para cambiar el estado del lead:
 
 **Ruta:** `/admin/testimonials`
 
-CRUD completo para los testimonios que se muestran en el sitio público.
+CRUD completo para los testimonios que se muestran en el sitio público. Incluye tarjetas con vista detallada y reordenamiento por arrastrar y soltar.
 
 #### Filtro por categoría
 Permite ver solo los testimonios de una categoría específica:
@@ -283,8 +287,23 @@ Permite ver solo los testimonios de una categoría específica:
 - Aprobados para abogada Marcela Rodríguez
 - En espera de aprobación
 
-#### Lista de testimonios
-Muestra todos los testimonios con ícono según tipo (texto/video), nombre o URL, categoría y botones de editar/eliminar.
+#### Tarjetas de testimonios (vista detallada)
+Cada testimonio se muestra como una tarjeta expandida con:
+- **Foto de perfil** (si existe URL) o avatar con inicial del nombre
+- **Nombre** completo y **badge de categoría** con color diferenciado
+- **Etiqueta de estado** (ej. "APROBADO INHOUSE") en verde si está configurada
+- **Chips de metadata:** país, rol, área, programa y timeline con íconos
+- **Fragmento de la cita** (primeras 2 líneas) para testimonios de texto
+- **Enlace al video** con ícono de apertura para testimonios de video
+- **Badge de orden numérico** en la esquina superior derecha
+- **Botones de editar y eliminar**
+- **Handle de arrastre** (ícono de grip) en el borde izquierdo
+
+#### Reordenamiento por arrastrar y soltar (Drag & Drop)
+- Arrastra cualquier tarjeta por el **handle izquierdo** (ícono de grip vertical) para cambiar su posición.
+- El nuevo orden se guarda automáticamente en Supabase (actualiza el campo `sort_order` de cada testimonio afectado).
+- Mientras se guarda aparece un indicador "Guardando orden…" en la barra de herramientas.
+- El reordenamiento opera sobre la vista filtrada actual (si hay filtro activo, solo reordena dentro de esa categoría).
 
 #### Formulario de creación/edición
 
@@ -296,6 +315,27 @@ Muestra todos los testimonios con ícono según tipo (texto/video), nombre o URL
 Los testimonios con tipo `video` se muestran en la sección de videos del sitio público. Los de `texto + foto` en la grilla de testimonios escritos.
 
 **Campo `sort_order`:** Número entero que controla el orden de aparición dentro de cada categoría. Menor número = aparece primero.
+
+### 2.5 Módulo de Configuración
+
+**Ruta:** `/admin/settings`
+
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Actualmente contiene la configuración del calendario de asesorías.
+
+#### URL del Calendario de Asesorías
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `calendar_url` | URL (texto) | URL del calendario de Google (Appointment Scheduling) u otro proveedor (Calendly, etc.) que se abre al hacer clic en el botón "Agenda tu Asesoría VIP" en la página Blueprint (`/blueprint`) |
+
+**Cómo configurar:**
+
+1. Ir a `/admin/settings` (enlace "Configuración" en el sidebar del panel admin).
+2. Pegar la URL de tu página de citas de Google Calendar o Calendly en el campo "URL del calendario".
+3. Usar el enlace "Probar enlace" para verificar que abre correctamente.
+4. Hacer clic en "Guardar cambios".
+
+A partir de ese momento, el botón CTA del Blueprint abrirá el calendario configurado en una pestaña nueva. Si no hay URL configurada, el botón redirige a la página de inicio.
 
 ---
 
@@ -324,6 +364,25 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 | `content` | text | Contenido de la nota |
 | `author` | text | Email del usuario que creó la nota |
 | `created_at` | timestamptz | Fecha de creación |
+
+### `site_settings`
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `key` | text (PK) | Identificador único de la configuración |
+| `value` | text | Valor de la configuración |
+| `updated_at` | timestamptz | Última actualización (automático) |
+
+**Claves registradas:**
+
+| key | Descripción |
+|-----|-------------|
+| `calendar_url` | URL del calendario de asesorías (Google Calendar, Calendly, etc.) |
+| `whatsapp_number` | Número de WhatsApp de contacto |
+| `contact_email` | Email de contacto |
+
+**RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
+
+---
 
 ### `testimonials`
 | Campo | Tipo | Descripción |

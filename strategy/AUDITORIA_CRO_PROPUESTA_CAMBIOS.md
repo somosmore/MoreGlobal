@@ -266,11 +266,11 @@ export default function HomePage() {
 
 ## 5. CHECKLIST DE IMPLEMENTACIÓN
 
-- [ ] **Hero:** Cambiar CTAs + añadir línea de dolor
-- [ ] **Quiz:** Cambiar copy de botones y CTAs de resultado; opción "Otros" (opcional)
-- [ ] **Pricing:** Fix typos; añadir risk reversal; añadir costo de no actuar
-- [ ] **HomePage:** Reordenar secciones (Quiz arriba, Success antes de Pricing)
-- [ ] **Futuro:** Implementar captura de lead en Quiz (email/WhatsApp) + entrega de Blueprint
+- [x] **Hero:** Cambiar CTAs + añadir línea de dolor
+- [x] **Quiz:** Cambiar copy de botones y CTAs de resultado; opción "Otros"
+- [x] **Quiz:** Captura de lead (nombre, email, WhatsApp) tras resultado
+- [x] **Pricing:** Fix typos; añadir risk reversal; añadir costo de no actuar
+- [x] **HomePage:** Reordenar secciones (Quiz arriba, Success antes de Pricing)
 - [ ] **Futuro:** Definir si "Blueprint 2026" será PDF descargable y conectar con Quiz
 
 ---
