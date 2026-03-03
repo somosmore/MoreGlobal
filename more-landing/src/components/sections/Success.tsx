@@ -469,6 +469,16 @@ export default function Success() {
           )}
         </motion.div>
 
+        {/* Bridge → Pricing */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center text-base font-semibold text-[#2A3A4A] mt-16"
+        >
+          Ahora que sabes lo que es posible — elige cómo llegar ahí.
+        </motion.p>
       </div>
     </section>
   );
