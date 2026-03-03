@@ -275,7 +275,7 @@ Botones pill para cambiar el estado del lead:
 
 **Ruta:** `/admin/testimonials`
 
-CRUD completo para los testimonios que se muestran en el sitio público.
+CRUD completo para los testimonios que se muestran en el sitio público. Incluye tarjetas con vista detallada y reordenamiento por arrastrar y soltar.
 
 #### Filtro por categoría
 Permite ver solo los testimonios de una categoría específica:
@@ -284,8 +284,23 @@ Permite ver solo los testimonios de una categoría específica:
 - Aprobados para abogada Marcela Rodríguez
 - En espera de aprobación
 
-#### Lista de testimonios
-Muestra todos los testimonios con ícono según tipo (texto/video), nombre o URL, categoría y botones de editar/eliminar.
+#### Tarjetas de testimonios (vista detallada)
+Cada testimonio se muestra como una tarjeta expandida con:
+- **Foto de perfil** (si existe URL) o avatar con inicial del nombre
+- **Nombre** completo y **badge de categoría** con color diferenciado
+- **Etiqueta de estado** (ej. "APROBADO INHOUSE") en verde si está configurada
+- **Chips de metadata:** país, rol, área, programa y timeline con íconos
+- **Fragmento de la cita** (primeras 2 líneas) para testimonios de texto
+- **Enlace al video** con ícono de apertura para testimonios de video
+- **Badge de orden numérico** en la esquina superior derecha
+- **Botones de editar y eliminar**
+- **Handle de arrastre** (ícono de grip) en el borde izquierdo
+
+#### Reordenamiento por arrastrar y soltar (Drag & Drop)
+- Arrastra cualquier tarjeta por el **handle izquierdo** (ícono de grip vertical) para cambiar su posición.
+- El nuevo orden se guarda automáticamente en Supabase (actualiza el campo `sort_order` de cada testimonio afectado).
+- Mientras se guarda aparece un indicador "Guardando orden…" en la barra de herramientas.
+- El reordenamiento opera sobre la vista filtrada actual (si hay filtro activo, solo reordena dentro de esa categoría).
 
 #### Formulario de creación/edición
 

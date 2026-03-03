@@ -113,7 +113,7 @@ export default function AdminSettings() {
                   <li>
                     Entra a{" "}
                     <a
-                      href="https://calendar.google.com/calendar/r/appointments"
+                      href="https://calendar.google.com/calendar/u/0/r"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline font-medium inline-flex items-center gap-1"
