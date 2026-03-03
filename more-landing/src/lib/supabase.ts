@@ -79,6 +79,18 @@ export type LeadNote = {
 
 export type LeadNoteInsert = Omit<LeadNote, "id" | "created_at">;
 
+export type SiteSetting = {
+  key: string
+  value: string | null
+  updated_at: string
+}
+
+export type SiteSettingsMap = {
+  calendar_url: string
+  whatsapp_number: string
+  contact_email: string
+}
+
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
   abogados_in_house: "Aprobados In House",
   abogados_preparadora_monica_martinez:

@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft, Download } from "lucide-react"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
 
 const WATERMARK_ID = "1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj"
 const LOGO_MAIN_ID = "1RIZS5dOzAwHTMxhpqF4wcgX3KUu3-b1W"
@@ -21,6 +22,9 @@ const handleLogoError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 const handlePrint = () => window.print()
 
 export default function BlueprintPage() {
+  const { settings } = useSiteSettings()
+  const calendarUrl = settings.calendar_url || "/"
+
   useEffect(() => {
     document.title = "Blueprint EB2-NIW | MORE — Migración con Propósito"
     return () => {
@@ -550,7 +554,12 @@ export default function BlueprintPage() {
             <img src={driveThumb(LOGO_MAIN_ID)} alt="MORE Logo" className="logo-center-large logo-img" onError={handleLogoError} />
             <h2>Deja de Esperar Aprobación.</h2>
             <p>Es hora de construir tu impacto nacional en EE.UU.</p>
-            <a href="https://www.justmore.net" className="cta-btn">
+            <a
+              href={calendarUrl}
+              target={calendarUrl !== "/" ? "_blank" : undefined}
+              rel={calendarUrl !== "/" ? "noopener noreferrer" : undefined}
+              className="cta-btn"
+            >
               Agenda tu Asesoría VIP (90 Min)
             </a>
             <div className="contact-info">

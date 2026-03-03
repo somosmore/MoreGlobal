@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   Users,
   MessageSquare,
+  Settings,
   LogOut,
   Menu,
   X,
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/leads", icon: Users, label: "Leads" },
   { href: "/admin/testimonials", icon: MessageSquare, label: "Testimonios" },
+  { href: "/admin/settings", icon: Settings, label: "Configuración" },
 ]
 
 const BREADCRUMB_LABELS: Record<string, string> = {
@@ -27,6 +29,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   dashboard: "Dashboard",
   leads: "Leads",
   testimonials: "Testimonios",
+  settings: "Configuración",
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

@@ -22,6 +22,7 @@
    - 2.2 [Dashboard](#22-dashboard)
    - 2.3 [Módulo de Leads](#23-módulo-de-leads)
    - 2.4 [Módulo de Testimonios](#24-módulo-de-testimonios)
+   - 2.5 [Módulo de Configuración](#25-módulo-de-configuración)
 
 ---
 
@@ -297,6 +298,27 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 
 **Campo `sort_order`:** Número entero que controla el orden de aparición dentro de cada categoría. Menor número = aparece primero.
 
+### 2.5 Módulo de Configuración
+
+**Ruta:** `/admin/settings`
+
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Actualmente contiene la configuración del calendario de asesorías.
+
+#### URL del Calendario de Asesorías
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `calendar_url` | URL (texto) | URL del calendario de Google (Appointment Scheduling) u otro proveedor (Calendly, etc.) que se abre al hacer clic en el botón "Agenda tu Asesoría VIP" en la página Blueprint (`/blueprint`) |
+
+**Cómo configurar:**
+
+1. Ir a `/admin/settings` (enlace "Configuración" en el sidebar del panel admin).
+2. Pegar la URL de tu página de citas de Google Calendar o Calendly en el campo "URL del calendario".
+3. Usar el enlace "Probar enlace" para verificar que abre correctamente.
+4. Hacer clic en "Guardar cambios".
+
+A partir de ese momento, el botón CTA del Blueprint abrirá el calendario configurado en una pestaña nueva. Si no hay URL configurada, el botón redirige a la página de inicio.
+
 ---
 
 ## Tablas de base de datos (Supabase)
@@ -324,6 +346,25 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 | `content` | text | Contenido de la nota |
 | `author` | text | Email del usuario que creó la nota |
 | `created_at` | timestamptz | Fecha de creación |
+
+### `site_settings`
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `key` | text (PK) | Identificador único de la configuración |
+| `value` | text | Valor de la configuración |
+| `updated_at` | timestamptz | Última actualización (automático) |
+
+**Claves registradas:**
+
+| key | Descripción |
+|-----|-------------|
+| `calendar_url` | URL del calendario de asesorías (Google Calendar, Calendly, etc.) |
+| `whatsapp_number` | Número de WhatsApp de contacto |
+| `contact_email` | Email de contacto |
+
+**RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
+
+---
 
 ### `testimonials`
 | Campo | Tipo | Descripción |
