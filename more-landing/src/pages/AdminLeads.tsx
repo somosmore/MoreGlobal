@@ -1,15 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase, type Lead, type LeadStatus } from "@/lib/supabase";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect, useMemo } from "react"
+import { useAuth } from "@/contexts/AuthContext"
+import { supabase, type Lead, type LeadStatus, type LeadNote } from "@/lib/supabase"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import {
-  LogOut,
   Trash2,
   Users,
-  FileText,
   Download,
   MessageCircle,
   Copy,
@@ -23,7 +20,11 @@ import {
   CalendarDays,
   ExternalLink,
   CheckCheck,
-} from "lucide-react";
+  Bell,
+  StickyNote,
+  Send,
+  Clock4,
+} from "lucide-react"
 
 // ─── Labels ──────────────────────────────────────────────────────────────────
 
@@ -85,53 +86,124 @@ function timeAgo(dateStr: string): string {
 }
 
 function waLink(lead: Lead): string {
-  const num = (lead.whatsapp ?? "").replace(/\D/g, "");
-  const name = encodeURIComponent(lead.nombre);
-  return `https://wa.me/${num}?text=Hola%20${name},%20te%20contactamos%20desde%20MORE%20Immigration%20Consulting.`;
+  const num = (lead.whatsapp ?? "").replace(/\D/g, "")
+  const name = encodeURIComponent(lead.nombre)
+  return `https://wa.me/${num}?text=Hola%20${name},%20te%20contactamos%20desde%20MORE%20Immigration%20Consulting.`
 }
 
-type SortField = "created_at" | "nombre" | "result_type" | "status";
-type SortDir = "asc" | "desc";
+type FollowupState = "overdue" | "today" | "soon" | null
+
+function followupState(followup_at: string | null | undefined): FollowupState {
+  if (!followup_at) return null
+  const now = new Date()
+  const fu = new Date(followup_at)
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const todayEnd = new Date(todayStart.getTime() + 86400000)
+  if (fu < todayStart) return "overdue"
+  if (fu < todayEnd) return "today"
+  const diff = fu.getTime() - todayEnd.getTime()
+  if (diff < 3 * 86400000) return "soon"
+  return null
+}
+
+function FollowupBadge({ followup_at }: { followup_at: string | null | undefined }) {
+  const state = followupState(followup_at)
+  if (!state) return null
+  const map = {
+    overdue: { cls: "text-red-500 bg-red-50", title: "Seguimiento vencido" },
+    today:   { cls: "text-yellow-600 bg-yellow-50", title: "Seguimiento hoy" },
+    soon:    { cls: "text-blue-500 bg-blue-50", title: "Seguimiento próximo" },
+  }
+  const { cls, title } = map[state]
+  return (
+    <span className={`inline-flex items-center rounded-full p-1 ${cls}`} title={title}>
+      <Bell className="w-3 h-3" />
+    </span>
+  )
+}
+
+type SortField = "created_at" | "nombre" | "result_type" | "status"
+type SortDir = "asc" | "desc"
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function AdminLeads() {
-  const { signOut } = useAuth();
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth()
+  const [leads, setLeads] = useState<Lead[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   // Filters
-  const [search, setSearch] = useState("");
-  const [filterResult, setFilterResult] = useState("");
-  const [filterStatus, setFilterStatus] = useState("");
+  const [search, setSearch] = useState("")
+  const [filterResult, setFilterResult] = useState("")
+  const [filterStatus, setFilterStatus] = useState("")
 
   // Sort
-  const [sortField, setSortField] = useState<SortField>("created_at");
-  const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [sortField, setSortField] = useState<SortField>("created_at")
+  const [sortDir, setSortDir] = useState<SortDir>("desc")
 
   // Detail panel
-  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null)
 
   // Actions
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
-  const hasSupabase = supabase !== null;
+  // Notes
+  const [notes, setNotes] = useState<LeadNote[]>([])
+  const [notesLoading, setNotesLoading] = useState(false)
+  const [newNote, setNewNote] = useState("")
+  const [savingNote, setSavingNote] = useState(false)
+  const [deletingNoteId, setDeletingNoteId] = useState<string | null>(null)
+
+  // Follow-up
+  const [followupDate, setFollowupDate] = useState("")
+  const [savingFollowup, setSavingFollowup] = useState(false)
+  const [followupSaved, setFollowupSaved] = useState(false)
+
+  const hasSupabase = supabase !== null
 
   async function load() {
-    if (!supabase) { setLoading(false); setError("Supabase no configurado."); return; }
-    setLoading(true);
+    if (!supabase) { setLoading(false); setError("Supabase no configurado."); return }
+    setLoading(true)
     const { data, error: err } = await supabase
       .from("leads")
       .select("*")
-      .order("created_at", { ascending: false });
-    setLoading(false);
-    if (err) { setError(err.message); } else { setLeads((data ?? []) as Lead[]); }
+      .order("created_at", { ascending: false })
+    setLoading(false)
+    if (err) { setError(err.message) } else { setLeads((data ?? []) as Lead[]) }
   }
 
-  useEffect(() => { load(); }, []);
+  async function loadNotes(leadId: string) {
+    if (!supabase) return
+    setNotesLoading(true)
+    const { data } = await supabase
+      .from("lead_notes")
+      .select("*")
+      .eq("lead_id", leadId)
+      .order("created_at", { ascending: false })
+    setNotesLoading(false)
+    setNotes((data ?? []) as LeadNote[])
+  }
+
+  useEffect(() => { load() }, [])
+
+  useEffect(() => {
+    if (selectedLead) {
+      loadNotes(selectedLead.id)
+      setFollowupDate(
+        selectedLead.followup_at
+          ? new Date(selectedLead.followup_at).toISOString().slice(0, 10)
+          : ""
+      )
+      setNewNote("")
+      setFollowupSaved(false)
+    } else {
+      setNotes([])
+      setFollowupDate("")
+    }
+  }, [selectedLead?.id])
 
   // ── Derived data ────────────────────────────────────────────────────────────
 
@@ -188,28 +260,84 @@ export default function AdminLeads() {
   }
 
   async function handleStatusChange(id: string, status: LeadStatus) {
-    if (!supabase) return;
-    setUpdatingStatusId(id);
-    const { error: err } = await supabase.from("leads").update({ status }).eq("id", id);
-    setUpdatingStatusId(null);
+    if (!supabase) return
+    setUpdatingStatusId(id)
+    const { error: err } = await supabase.from("leads").update({ status }).eq("id", id)
+    setUpdatingStatusId(null)
     if (!err) {
-      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
-      if (selectedLead?.id === id) setSelectedLead((prev) => prev ? { ...prev, status } : prev);
+      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)))
+      if (selectedLead?.id === id) setSelectedLead((prev) => prev ? { ...prev, status } : prev)
     }
   }
 
   async function handleDelete(id: string) {
-    if (!supabase) return;
-    if (!window.confirm("¿Eliminar este lead?")) return;
-    setDeletingId(id);
-    const { error: err } = await supabase.from("leads").delete().eq("id", id);
-    setDeletingId(null);
+    if (!supabase) return
+    if (!window.confirm("¿Eliminar este lead?")) return
+    setDeletingId(id)
+    const { error: err } = await supabase.from("leads").delete().eq("id", id)
+    setDeletingId(null)
     if (!err) {
-      setLeads((prev) => prev.filter((l) => l.id !== id));
-      if (selectedLead?.id === id) setSelectedLead(null);
+      setLeads((prev) => prev.filter((l) => l.id !== id))
+      if (selectedLead?.id === id) setSelectedLead(null)
     } else {
-      alert("Error al eliminar: " + err.message);
+      alert("Error al eliminar: " + err.message)
     }
+  }
+
+  async function handleAddNote() {
+    if (!supabase || !selectedLead || !newNote.trim()) return
+    setSavingNote(true)
+    const { data, error: err } = await supabase
+      .from("lead_notes")
+      .insert({
+        lead_id: selectedLead.id,
+        content: newNote.trim(),
+        author: user?.email ?? "admin",
+      })
+      .select()
+      .single()
+    setSavingNote(false)
+    if (!err && data) {
+      setNotes((prev) => [data as LeadNote, ...prev])
+      setNewNote("")
+    }
+  }
+
+  async function handleDeleteNote(noteId: string) {
+    if (!supabase) return
+    setDeletingNoteId(noteId)
+    await supabase.from("lead_notes").delete().eq("id", noteId)
+    setDeletingNoteId(null)
+    setNotes((prev) => prev.filter((n) => n.id !== noteId))
+  }
+
+  async function handleSaveFollowup() {
+    if (!supabase || !selectedLead) return
+    setSavingFollowup(true)
+    const followup_at = followupDate ? new Date(followupDate).toISOString() : null
+    const { error: err } = await supabase
+      .from("leads")
+      .update({ followup_at })
+      .eq("id", selectedLead.id)
+    setSavingFollowup(false)
+    if (!err) {
+      setLeads((prev) =>
+        prev.map((l) => (l.id === selectedLead.id ? { ...l, followup_at } : l))
+      )
+      setSelectedLead((prev) => (prev ? { ...prev, followup_at } : prev))
+      setFollowupSaved(true)
+      setTimeout(() => setFollowupSaved(false), 2000)
+    }
+  }
+
+  async function handleClearFollowup() {
+    setFollowupDate("")
+    if (!supabase || !selectedLead) return
+    await supabase.from("leads").update({ followup_at: null }).eq("id", selectedLead.id)
+    setLeads((prev) =>
+      prev.map((l) => (l.id === selectedLead.id ? { ...l, followup_at: null } : l))
+    )
+    setSelectedLead((prev) => (prev ? { ...prev, followup_at: null } : prev))
   }
 
   function copyEmail(lead: Lead) {
@@ -245,30 +373,12 @@ export default function AdminLeads() {
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src="/logo_more_light.png" alt="MORE" className="h-8 w-auto" />
-            <span className="text-sm font-semibold text-gray-700 hidden sm:block">Panel Admin</span>
-          </div>
-          <nav className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
-            <Link to="/admin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gray-600 hover:bg-white hover:text-[#2A3A4A] transition-all">
-              <FileText className="w-3.5 h-3.5" /> Testimonios
-            </Link>
-            <Link to="/admin/leads" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white text-[#2A3A4A] shadow-sm">
-              <Users className="w-3.5 h-3.5" /> Leads
-            </Link>
-          </nav>
-          <Button variant="ghost" size="sm" onClick={signOut} className="gap-2 text-gray-500">
-            <LogOut className="w-4 h-4" />
-            <span className="hidden sm:inline">Salir</span>
-          </Button>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="p-6 sm:p-8">
+      {/* Page title */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-[#2A3A4A]">Leads</h1>
+        <p className="text-sm text-gray-400 mt-0.5">Gestiona y da seguimiento a los leads del quiz</p>
+      </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
@@ -460,6 +570,7 @@ export default function AdminLeads() {
                       {/* Acciones */}
                       <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center gap-1 justify-end">
+                          <FollowupBadge followup_at={lead.followup_at} />
                           {lead.whatsapp && (
                             <a href={waLink(lead)} target="_blank" rel="noopener noreferrer"
                               title="Abrir WhatsApp"
@@ -487,7 +598,6 @@ export default function AdminLeads() {
             </table>
           </div>
         )}
-      </main>
 
       {/* Detail Panel */}
       {selectedLead && (
@@ -618,6 +728,135 @@ export default function AdminLeads() {
                   })}
                 </p>
               </div>
+
+              {/* ── Seguimiento ───────────────────────────────────────── */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Clock4 className="w-3.5 h-3.5 text-gray-400" />
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    Próximo seguimiento
+                  </p>
+                </div>
+
+                {/* Current badge */}
+                {selectedLead.followup_at && (() => {
+                  const state = followupState(selectedLead.followup_at)
+                  const stateMap = {
+                    overdue: { cls: "bg-red-50 text-red-700 border-red-200", label: "Vencido" },
+                    today:   { cls: "bg-yellow-50 text-yellow-700 border-yellow-200", label: "Hoy" },
+                    soon:    { cls: "bg-blue-50 text-blue-700 border-blue-200", label: "Próximo" },
+                  }
+                  const meta = state ? stateMap[state] : { cls: "bg-gray-50 text-gray-600 border-gray-200", label: "Programado" }
+                  return (
+                    <div className={`flex items-center justify-between px-3 py-2 rounded-xl border mb-3 ${meta.cls}`}>
+                      <div className="flex items-center gap-2">
+                        <Bell className="w-3.5 h-3.5" />
+                        <span className="text-xs font-semibold">{meta.label}</span>
+                        <span className="text-xs">
+                          {new Date(selectedLead.followup_at).toLocaleDateString("es-CO", {
+                            day: "2-digit", month: "short", year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <button
+                        onClick={handleClearFollowup}
+                        className="p-0.5 rounded opacity-60 hover:opacity-100 transition-opacity"
+                        title="Quitar recordatorio"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )
+                })()}
+
+                <div className="flex gap-2">
+                  <input
+                    type="date"
+                    value={followupDate}
+                    onChange={(e) => setFollowupDate(e.target.value)}
+                    className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 bg-white text-gray-700"
+                  />
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={handleSaveFollowup}
+                    disabled={savingFollowup || !followupDate}
+                    className="shrink-0 gap-1.5"
+                  >
+                    {followupSaved ? (
+                      <CheckCheck className="w-4 h-4 text-green-500" />
+                    ) : savingFollowup ? (
+                      <span className="text-xs">...</span>
+                    ) : (
+                      <span className="text-xs">Guardar</span>
+                    )}
+                  </Button>
+                </div>
+              </div>
+
+              {/* ── Notas ─────────────────────────────────────────────── */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <StickyNote className="w-3.5 h-3.5 text-gray-400" />
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    Notas {notes.length > 0 && `(${notes.length})`}
+                  </p>
+                </div>
+
+                {/* New note input */}
+                <div className="flex gap-2 mb-4">
+                  <textarea
+                    value={newNote}
+                    onChange={(e) => setNewNote(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) handleAddNote()
+                    }}
+                    placeholder="Escribe una nota… (Ctrl+Enter para guardar)"
+                    rows={2}
+                    className="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 bg-white text-gray-700 placeholder:text-gray-300"
+                  />
+                  <button
+                    onClick={handleAddNote}
+                    disabled={savingNote || !newNote.trim()}
+                    className="p-2 self-end rounded-xl bg-[#2A3A4A] text-white hover:bg-[#3A4D5E] disabled:opacity-40 transition-colors"
+                    title="Agregar nota"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Notes list */}
+                {notesLoading ? (
+                  <p className="text-xs text-gray-400 text-center py-2">Cargando notas…</p>
+                ) : notes.length === 0 ? (
+                  <p className="text-xs text-gray-400 text-center py-3">
+                    Sin notas aún. Registra el resultado de cada contacto.
+                  </p>
+                ) : (
+                  <ul className="space-y-2">
+                    {notes.map((note) => (
+                      <li key={note.id} className="group relative bg-gray-50 border border-gray-100 rounded-xl px-4 py-3">
+                        <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap pr-6">
+                          {note.content}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className="text-[10px] text-gray-400">{note.author}</span>
+                          <span className="text-[10px] text-gray-300">·</span>
+                          <span className="text-[10px] text-gray-400">{timeAgo(note.created_at)}</span>
+                        </div>
+                        <button
+                          onClick={() => handleDeleteNote(note.id)}
+                          disabled={deletingNoteId === note.id}
+                          className="absolute top-2 right-2 p-1 text-gray-300 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all rounded-lg hover:bg-red-50"
+                          title="Eliminar nota"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
 
             {/* Panel footer actions */}
@@ -646,5 +885,5 @@ export default function AdminLeads() {
         </>
       )}
     </div>
-  );
+  )
 }

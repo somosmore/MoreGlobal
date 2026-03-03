@@ -1,10 +1,13 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "@/contexts/AuthContext";
-import ProtectedAdmin from "@/components/ProtectedAdmin";
-import HomePage from "@/pages/HomePage";
-import AdminLogin from "@/pages/AdminLogin";
-import AdminTestimonials from "@/pages/AdminTestimonials";
-import AdminLeads from "@/pages/AdminLeads";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { AuthProvider } from "@/contexts/AuthContext"
+import ProtectedAdmin from "@/components/ProtectedAdmin"
+import AdminLayout from "@/components/admin/AdminLayout"
+import HomePage from "@/pages/HomePage"
+import AdminLogin from "@/pages/AdminLogin"
+import AdminDashboard from "@/pages/AdminDashboard"
+import AdminTestimonials from "@/pages/AdminTestimonials"
+import AdminLeads from "@/pages/AdminLeads"
+import BlueprintPage from "@/pages/BlueprintPage"
 
 function App() {
   return (
@@ -13,27 +16,29 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+
+          {/* Protected admin area with shared layout */}
           <Route
             path="/admin"
             element={
               <ProtectedAdmin>
-                <AdminTestimonials />
+                <AdminLayout />
               </ProtectedAdmin>
             }
-          />
-          <Route
-            path="/admin/leads"
-            element={
-              <ProtectedAdmin>
-                <AdminLeads />
-              </ProtectedAdmin>
-            }
-          />
+          >
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="leads" element={<AdminLeads />} />
+            <Route path="testimonials" element={<AdminTestimonials />} />
+          </Route>
+
+          <Route path="/blueprint" element={<BlueprintPage />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App

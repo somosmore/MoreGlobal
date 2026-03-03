@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useState, useEffect } from "react"
 import {
   supabase,
   CATEGORY_LABELS,
   type Testimonial,
   type TestimonialInsert,
-} from "@/lib/supabase";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { LogOut, Plus, Pencil, Trash2, Video, FileText, Users } from "lucide-react";
+} from "@/lib/supabase"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent } from "@/components/ui/card"
+import { Plus, Pencil, Trash2, Video, FileText } from "lucide-react"
 
 const CATEGORY_OPTIONS = [
   "abogados_in_house",
@@ -41,7 +39,6 @@ const emptyForm: TestimonialInsert = {
 };
 
 export default function AdminTestimonials() {
-  const { signOut } = useAuth();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState<string>("");
@@ -178,42 +175,12 @@ export default function AdminTestimonials() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src="/logo_more_light.png" alt="MORE" className="h-8 w-auto" />
-            <span className="text-sm font-semibold text-gray-700 hidden sm:block">
-              Panel Admin
-            </span>
-          </div>
-
-          {/* Nav tabs */}
-          <nav className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
-            <Link
-              to="/admin"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white text-[#2A3A4A] shadow-sm"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              Testimonios
-            </Link>
-            <Link
-              to="/admin/leads"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gray-600 hover:bg-white hover:text-[#2A3A4A] transition-all"
-            >
-              <Users className="w-3.5 h-3.5" />
-              Leads
-            </Link>
-          </nav>
-
-          <Button variant="ghost" size="sm" onClick={() => signOut()} className="gap-2 text-gray-500">
-            <LogOut className="w-4 h-4" />
-            <span className="hidden sm:inline">Salir</span>
-          </Button>
-        </div>
-      </header>
-
-      <main className="max-w-5xl mx-auto p-4">
+    <div className="p-6 sm:p-8">
+      {/* Page title */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-[#2A3A4A]">Testimonios</h1>
+        <p className="text-sm text-gray-400 mt-0.5">Administra los testimonios que se muestran en el sitio</p>
+      </div>
         {!hasSupabase && (
           <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm">
             Supabase no está configurado. Crea un archivo <code className="bg-amber-100 px-1 rounded">.env</code> en la raíz de <code className="bg-amber-100 px-1 rounded">more-landing</code> con <code className="bg-amber-100 px-1 rounded">VITE_SUPABASE_URL</code> y <code className="bg-amber-100 px-1 rounded">VITE_SUPABASE_ANON_KEY</code> (ver <code className="bg-amber-100 px-1 rounded">.env.example</code>).
@@ -595,7 +562,6 @@ export default function AdminTestimonials() {
             ))}
           </ul>
         )}
-      </main>
     </div>
-  );
+  )
 }
