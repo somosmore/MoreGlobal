@@ -98,6 +98,17 @@ export default function PainPoints() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Bridge → WhoWeHelp */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center text-sm text-gray-500 mt-14 font-medium"
+        >
+          Si te identificaste con alguno de estos problemas, probablemente eres exactamente el perfil que transformamos.
+        </motion.p>
       </div>
     </section>
   );

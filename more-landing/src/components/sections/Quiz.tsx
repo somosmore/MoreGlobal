@@ -568,6 +568,17 @@ export default function Quiz() {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* Bridge → PainPoints */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center text-sm text-gray-400 mt-10 italic"
+        >
+          Tener el perfil es solo la mitad. La mayoría falla por algo que nunca le dijeron.
+        </motion.p>
       </div>
     </section>
   );

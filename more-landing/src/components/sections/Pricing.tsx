@@ -309,6 +309,17 @@ export default function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        {/* Bridge → FAQ */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center text-sm text-gray-400 mt-14 italic"
+        >
+          ¿Algo te detiene? Las respuestas más comunes están justo abajo.
+        </motion.p>
       </div>
     </section>
   );
