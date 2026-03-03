@@ -1,0 +1,58 @@
+---
+description: Auto-commit when changes exceed 5 files in agent mode
+alwaysApply: true
+---
+
+# Auto-Commit en Cambios Grandes
+
+Cuando en modo agente hayas modificado, creado o eliminado **más de 5 archivos** en una misma tarea o sesión de trabajo:
+
+## Regla obligatoria
+
+1. **Detecta el umbral:** Antes de terminar tu respuesta, cuenta los archivos que tocaste en esa interacción.
+2. **Si son más de 5 archivos** → ejecuta un commit automático con el Shell tool.
+3. **Nunca saltes este paso** si el umbral se supera.
+
+## Protocolo de commit automático
+
+```bash
+# 1. Ver estado actual
+git status
+
+# 2. Agregar todos los cambios
+git add .
+
+# 3. Commit con mensaje descriptivo del contexto de la tarea
+git commit -m "$(cat <<'EOF'
+<type>(<scope>): <descripción breve de los cambios realizados>
+
+Auto-commit: se superaron 5 archivos modificados en una sola sesión.
+EOF
+)"
+```
+
+## Formato del mensaje de commit
+
+- Usa el tipo correcto: `feat`, `fix`, `refactor`, `style`, `chore`, etc.
+- El scope debe reflejar el área del proyecto (ej: `hero`, `leads`, `ui`, `migrations`).
+- La descripción debe resumir el propósito real de los cambios, no listarlos.
+
+## Ejemplo de mensaje válido
+
+```
+feat(hero): rediseño completo de sección hero con CRO optimizado
+
+Auto-commit: se superaron 5 archivos modificados en una sola sesión.
+```
+
+## Aviso al usuario
+
+Después del commit, informa:
+> "Se realizó un commit automático porque se modificaron más de 5 archivos en esta sesión."
+> Incluye el hash corto del commit y la lista de archivos incluidos.
+
+## Importante
+
+- **No hacer push** automáticamente — solo commit local.
+- Compilar antes de hacer commit si el proyecto tiene build (Next.js, etc.).
+- Si la compilación falla, NO hacer commit y reportar el error al usuario.

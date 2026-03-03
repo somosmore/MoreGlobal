@@ -1,15 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase, type Lead, type LeadStatus } from "@/lib/supabase";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect, useMemo } from "react"
+import { useAuth } from "@/contexts/AuthContext"
+import { supabase, type Lead, type LeadStatus } from "@/lib/supabase"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import {
-  LogOut,
   Trash2,
   Users,
-  FileText,
   Download,
   MessageCircle,
   Copy,
@@ -23,7 +20,7 @@ import {
   CalendarDays,
   ExternalLink,
   CheckCheck,
-} from "lucide-react";
+} from "lucide-react"
 
 // ─── Labels ──────────────────────────────────────────────────────────────────
 
@@ -96,7 +93,7 @@ type SortDir = "asc" | "desc";
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function AdminLeads() {
-  const { signOut } = useAuth();
+  const { } = useAuth()
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -245,30 +242,12 @@ export default function AdminLeads() {
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src="/logo_more_light.png" alt="MORE" className="h-8 w-auto" />
-            <span className="text-sm font-semibold text-gray-700 hidden sm:block">Panel Admin</span>
-          </div>
-          <nav className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
-            <Link to="/admin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gray-600 hover:bg-white hover:text-[#2A3A4A] transition-all">
-              <FileText className="w-3.5 h-3.5" /> Testimonios
-            </Link>
-            <Link to="/admin/leads" className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white text-[#2A3A4A] shadow-sm">
-              <Users className="w-3.5 h-3.5" /> Leads
-            </Link>
-          </nav>
-          <Button variant="ghost" size="sm" onClick={signOut} className="gap-2 text-gray-500">
-            <LogOut className="w-4 h-4" />
-            <span className="hidden sm:inline">Salir</span>
-          </Button>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="p-6 sm:p-8">
+      {/* Page title */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-[#2A3A4A]">Leads</h1>
+        <p className="text-sm text-gray-400 mt-0.5">Gestiona y da seguimiento a los leads del quiz</p>
+      </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
@@ -487,7 +466,6 @@ export default function AdminLeads() {
             </table>
           </div>
         )}
-      </main>
 
       {/* Detail Panel */}
       {selectedLead && (
@@ -646,5 +624,5 @@ export default function AdminLeads() {
         </>
       )}
     </div>
-  );
+  )
 }
