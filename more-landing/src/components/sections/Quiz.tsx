@@ -10,10 +10,14 @@ import {
   MessageCircle,
   BookOpen,
   Sparkles,
+  Send,
+  CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { supabase, type LeadInsert } from "@/lib/supabase";
 
 type AcademicLevel =
   | "maestria"
@@ -31,11 +35,19 @@ interface QuizState {
   achievements: string[];
 }
 
+interface LeadForm {
+  nombre: string;
+  email: string;
+  whatsapp: string;
+}
+
+const TOTAL_STEPS = 3;
+
 const academicOptions = [
-  { id: "maestria", label: "Maestría", icon: GraduationCap },
-  { id: "doctorado", label: "Doctorado / PhD", icon: GraduationCap },
-  { id: "grado5", label: "Grado + 5 años experiencia", icon: Briefcase },
-  { id: "otros", label: "Otros", icon: BookOpen },
+  { id: "maestria", label: "Maestría", sublabel: null, icon: GraduationCap },
+  { id: "doctorado", label: "Doctorado / PhD", sublabel: null, icon: GraduationCap },
+  { id: "grado5", label: "Grado + 5 años experiencia", sublabel: null, icon: Briefcase },
+  { id: "otros", label: "En proceso / Otra formación", sublabel: "Te evaluamos en consulta", icon: BookOpen },
 ];
 
 const impactAreas = [
@@ -61,8 +73,17 @@ export default function Quiz() {
     achievements: [],
   });
 
-  const totalSteps = 3;
-  const progressValue = (quiz.step / totalSteps) * 100;
+  const [leadForm, setLeadForm] = useState<LeadForm>({
+    nombre: "",
+    email: "",
+    whatsapp: "",
+  });
+  const [showLeadCapture, setShowLeadCapture] = useState(false);
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadError, setLeadError] = useState<string | null>(null);
+
+  const progressValue = (quiz.step / TOTAL_STEPS) * 100;
 
   const isHighImpact =
     quiz.academicLevel === "maestria" ||
@@ -86,7 +107,7 @@ export default function Quiz() {
   };
 
   const nextStep = () => {
-    if (quiz.step < totalSteps) {
+    if (quiz.step < TOTAL_STEPS) {
       setQuiz((prev) => ({ ...prev, step: prev.step + 1 }));
     }
   };
@@ -99,9 +120,47 @@ export default function Quiz() {
 
   const resetQuiz = () => {
     setQuiz({ step: 1, academicLevel: null, impactArea: null, achievements: [] });
+    setLeadForm({ nombre: "", email: "", whatsapp: "" });
+    setShowLeadCapture(false);
+    setLeadSubmitted(false);
+    setLeadError(null);
   };
 
   const showResult = quiz.step === 3 && quiz.achievements.length > 0;
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadForm.nombre.trim() || !leadForm.email.trim()) return;
+
+    setLeadSubmitting(true);
+    setLeadError(null);
+
+    const lead: LeadInsert = {
+      nombre: leadForm.nombre.trim(),
+      email: leadForm.email.trim(),
+      whatsapp: leadForm.whatsapp.trim() || null,
+      academic_level: quiz.academicLevel ?? "",
+      impact_area: quiz.impactArea ?? "",
+      achievements: quiz.achievements,
+      result_type: isHighImpact ? "alto_impacto" : "unsung",
+    };
+
+    try {
+      if (supabase) {
+        const { error } = await supabase.from("leads").insert([lead]);
+        if (error) throw error;
+      }
+      setLeadSubmitted(true);
+    } catch {
+      setLeadError("No pudimos guardar tu perfil. Por favor escríbenos por WhatsApp.");
+    } finally {
+      setLeadSubmitting(false);
+    }
+  };
+
+  const whatsappBase = isHighImpact
+    ? "https://wa.me/15483122105?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20agendar%20mi%20evaluación%20gratuita."
+    : "https://wa.me/15483122105?text=Hola%20MORE,%20completé%20el%20quiz%20y%20quiero%20conocer%20el%20programa%20Unsung.";
 
   return (
     <section id="quiz" className="py-24 sm:py-32 bg-gray-50/50">
@@ -138,13 +197,13 @@ export default function Quiz() {
             <div className="px-6 pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-gray-400">
-                  Paso {quiz.step} de {totalSteps}
+                  Paso {Math.min(quiz.step, TOTAL_STEPS)} de {TOTAL_STEPS}
                 </span>
                 <span className="text-xs font-medium text-[#F37021]">
-                  {Math.round(progressValue)}%
+                  {Math.round(Math.min(progressValue, 100))}%
                 </span>
               </div>
-              <Progress value={progressValue} />
+              <Progress value={Math.min(progressValue, 100)} />
             </div>
 
             <CardHeader className="pb-2">
@@ -189,15 +248,22 @@ export default function Quiz() {
                               : "text-gray-400"
                           }`}
                         />
-                        <span
-                          className={`text-sm font-medium ${
-                            quiz.academicLevel === option.id
-                              ? "text-[#2A3A4A]"
-                              : "text-gray-600"
-                          }`}
-                        >
-                          {option.label}
-                        </span>
+                        <div className="flex flex-col">
+                          <span
+                            className={`text-sm font-medium ${
+                              quiz.academicLevel === option.id
+                                ? "text-[#2A3A4A]"
+                                : "text-gray-600"
+                            }`}
+                          >
+                            {option.label}
+                          </span>
+                          {option.sublabel && (
+                            <span className="text-xs text-gray-400 mt-0.5">
+                              {option.sublabel}
+                            </span>
+                          )}
+                        </div>
                       </button>
                     ))}
                   </motion.div>
@@ -297,13 +363,13 @@ export default function Quiz() {
                   Atrás
                 </Button>
 
-                {quiz.step < totalSteps ? (
+                {quiz.step < TOTAL_STEPS ? (
                   <Button
                     onClick={nextStep}
                     disabled={!canProceed()}
                     className="gap-2"
                   >
-                    Siguiente
+                    {quiz.step === 2 ? "Ver mi resultado" : "Continuar"}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 ) : (
@@ -335,25 +401,25 @@ export default function Quiz() {
                           fuerte para la EB-2 NIW. Agenda una consulta
                           personalizada.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-3">
-                          <Button variant="gold" className="gap-2" asChild>
-                            <a
-                              href="https://wa.me/15483122105?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20más%20información."
-                              target="_blank"
-                              rel="noopener noreferrer"
+                        {!showLeadCapture ? (
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <Button
+                              variant="gold"
+                              className="gap-2"
+                              onClick={() => setShowLeadCapture(true)}
                             >
-                              <MessageCircle className="w-4 h-4" />
-                              Contactar por WhatsApp
-                            </a>
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="bg-white border-2 border-[#2A3A4A] text-[#2A3A4A] hover:bg-[#2A3A4A] hover:text-white"
-                            onClick={resetQuiz}
-                          >
-                            Reiniciar Quiz
-                          </Button>
-                        </div>
+                              <Send className="w-4 h-4" />
+                              Sí, quiero agendar mi evaluación gratuita
+                            </Button>
+                            <Button
+                              variant="outline"
+                              className="bg-white border-2 border-[#2A3A4A] text-[#2A3A4A] hover:bg-[#2A3A4A] hover:text-white"
+                              onClick={resetQuiz}
+                            >
+                              Reiniciar Quiz
+                            </Button>
+                          </div>
+                        ) : null}
                       </div>
                     ) : (
                       <div className="p-6 rounded-2xl bg-gradient-to-r from-orange-50 to-[#F37021]/10 border border-[#F37021]/20">
@@ -369,19 +435,133 @@ export default function Quiz() {
                           <strong>Unsung Professional</strong> te ayudará a
                           posicionarte estratégicamente.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-3">
-                          <Button variant="gold" className="gap-2" asChild>
-                            <a href="#programas">
+                        {!showLeadCapture ? (
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <Button
+                              variant="gold"
+                              className="gap-2"
+                              onClick={() => setShowLeadCapture(true)}
+                            >
                               <BookOpen className="w-4 h-4" />
-                              Ver Programa Unsung
-                            </a>
-                          </Button>
-                          <Button variant="outline" onClick={resetQuiz}>
-                            Reiniciar Quiz
-                          </Button>
-                        </div>
+                              Sí, quiero conocer el programa Unsung
+                            </Button>
+                            <Button variant="outline" onClick={resetQuiz}>
+                              Reiniciar Quiz
+                            </Button>
+                          </div>
+                        ) : null}
                       </div>
                     )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Lead Capture — Paso 4 */}
+              <AnimatePresence>
+                {showLeadCapture && !leadSubmitted && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-6"
+                  >
+                    <div className="p-6 rounded-2xl border-2 border-[#F37021]/30 bg-white">
+                      <p className="text-sm font-semibold text-[#2A3A4A] mb-1">
+                        Un paso más — recibe tu evaluación personalizada
+                      </p>
+                      <p className="text-xs text-gray-500 mb-4">
+                        Déjanos tus datos y uno de nuestros asesores se pondrá en contacto contigo.
+                      </p>
+                      <form onSubmit={handleLeadSubmit} className="space-y-3">
+                        <Input
+                          placeholder="Nombre completo *"
+                          value={leadForm.nombre}
+                          onChange={(e) =>
+                            setLeadForm((p) => ({ ...p, nombre: e.target.value }))
+                          }
+                          required
+                          disabled={leadSubmitting}
+                        />
+                        <Input
+                          type="email"
+                          placeholder="Correo electrónico *"
+                          value={leadForm.email}
+                          onChange={(e) =>
+                            setLeadForm((p) => ({ ...p, email: e.target.value }))
+                          }
+                          required
+                          disabled={leadSubmitting}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="WhatsApp (opcional)"
+                          value={leadForm.whatsapp}
+                          onChange={(e) =>
+                            setLeadForm((p) => ({ ...p, whatsapp: e.target.value }))
+                          }
+                          disabled={leadSubmitting}
+                        />
+                        {leadError && (
+                          <p className="text-xs text-red-500">{leadError}</p>
+                        )}
+                        <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                          <Button
+                            type="submit"
+                            variant="gold"
+                            className="gap-2 flex-1"
+                            disabled={leadSubmitting}
+                          >
+                            <Send className="w-4 h-4" />
+                            {leadSubmitting ? "Enviando..." : "Enviar mi perfil"}
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={resetQuiz}
+                            disabled={leadSubmitting}
+                          >
+                            Cancelar
+                          </Button>
+                        </div>
+                      </form>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Confirmación post-envío */}
+              <AnimatePresence>
+                {leadSubmitted && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-6 p-6 rounded-2xl bg-green-50 border border-green-200 text-center"
+                  >
+                    <CheckCircle className="w-10 h-10 text-green-500 mx-auto mb-3" />
+                    <h3 className="text-base font-semibold text-[#2A3A4A] mb-1">
+                      ¡Perfil enviado con éxito!
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-5">
+                      Uno de nuestros asesores revisará tu caso y se pondrá en contacto contigo pronto.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <Button variant="gold" className="gap-2" asChild>
+                        <a
+                          href={whatsappBase}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          Hablar por WhatsApp ahora
+                        </a>
+                      </Button>
+                      <Button variant="outline" onClick={resetQuiz}>
+                        Reiniciar Quiz
+                      </Button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>

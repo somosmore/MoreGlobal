@@ -42,6 +42,31 @@ export type TestimonialInsert = Omit<
 
 export type TestimonialUpdate = Partial<TestimonialInsert>;
 
+export type LeadStatus =
+  | "nuevo"
+  | "contactado"
+  | "en_consulta"
+  | "calificado"
+  | "cerrado"
+  | "perdido";
+
+export type Lead = {
+  id: string;
+  nombre: string;
+  email: string;
+  whatsapp: string | null;
+  academic_level: string;
+  impact_area: string;
+  achievements: string[];
+  result_type: "alto_impacto" | "unsung";
+  status: LeadStatus;
+  created_at: string;
+};
+
+export type LeadInsert = Omit<Lead, "id" | "created_at" | "status"> & {
+  status?: LeadStatus;
+};
+
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
   abogados_in_house: "Aprobados In House",
   abogados_preparadora_monica_martinez:

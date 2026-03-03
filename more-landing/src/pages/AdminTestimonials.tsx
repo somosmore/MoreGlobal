@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { LogOut, Plus, Pencil, Trash2, Video, FileText } from "lucide-react";
+import { LogOut, Plus, Pencil, Trash2, Video, FileText, Users } from "lucide-react";
 
 const CATEGORY_OPTIONS = [
   "abogados_in_house",
@@ -179,18 +179,38 @@ export default function AdminTestimonials() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="text-[#2A3A4A] font-semibold hover:underline">
-            Ver web
-          </Link>
-          <span className="text-gray-400">|</span>
-          <h1 className="text-lg font-bold text-[#2A3A4A]">Admin Testimonios</h1>
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <img src="/logo_more_light.png" alt="MORE" className="h-8 w-auto" />
+            <span className="text-sm font-semibold text-gray-700 hidden sm:block">
+              Panel Admin
+            </span>
+          </div>
+
+          {/* Nav tabs */}
+          <nav className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+            <Link
+              to="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white text-[#2A3A4A] shadow-sm"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              Testimonios
+            </Link>
+            <Link
+              to="/admin/leads"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gray-600 hover:bg-white hover:text-[#2A3A4A] transition-all"
+            >
+              <Users className="w-3.5 h-3.5" />
+              Leads
+            </Link>
+          </nav>
+
+          <Button variant="ghost" size="sm" onClick={() => signOut()} className="gap-2 text-gray-500">
+            <LogOut className="w-4 h-4" />
+            <span className="hidden sm:inline">Salir</span>
+          </Button>
         </div>
-        <Button variant="ghost" size="sm" onClick={() => signOut()}>
-          <LogOut className="w-4 h-4 mr-1" />
-          Cerrar sesión
-        </Button>
       </header>
 
       <main className="max-w-5xl mx-auto p-4">

@@ -63,17 +63,27 @@ export default function Hero() {
           >
             <Button size="lg" variant="gold" className="group" asChild>
               <a href="#quiz">
-                Descargar Blueprint 2026
+                Evaluar si mi perfil califica
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
             <Button size="lg" variant="secondary" className="group" asChild>
               <a href="#programas">
                 <Play className="mr-2 h-4 w-4" />
-                Ver Plan Plus
+                Conocer mi camino sin patrocinador
               </a>
             </Button>
           </motion.div>
+
+          {/* Línea de dolor */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="mt-6 text-sm text-gray-500 max-w-xl mx-auto italic"
+          >
+            Cada año que esperas, miles de casos se aprueban. ¿El tuyo está listo?
+          </motion.p>
 
           {/* Trust indicators */}
           <motion.div

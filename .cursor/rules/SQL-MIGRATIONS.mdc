@@ -1,0 +1,29 @@
+---
+description: Toda sentencia SQL que deba ejecutarse en Supabase debe guardarse como archivo de migración numerado en more-landing/supabase/migrations/
+alwaysApply: true
+---
+
+# Regla: SQL siempre va en migrations
+
+Cuando generes, modifiques o menciones SQL que el usuario deba ejecutar en Supabase:
+
+1. **Crea siempre el archivo** en `more-landing/supabase/migrations/` antes de darle instrucciones al usuario.
+2. **Nombre del archivo:** formato `NNN_descripcion.sql` donde `NNN` es el número siguiente al último archivo existente (ej: `003_leads_status.sql`).
+3. **Nunca** le pidas al usuario que copie SQL manualmente sin haber creado primero el archivo de migración.
+4. **Al terminar**, informa al usuario que el script está en `supabase/migrations/NNN_nombre.sql` y que debe ejecutarlo en el SQL Editor de Supabase.
+
+## Estructura del archivo
+
+```sql
+-- Descripción breve de qué hace esta migración
+-- Fecha: YYYY-MM-DD
+
+ALTER TABLE ...;
+CREATE TABLE ...;
+CREATE POLICY ...;
+```
+
+## Ejemplo de respuesta correcta
+
+> El script fue guardado en `more-landing/supabase/migrations/004_ejemplo.sql`.
+> Ejecútalo en **Supabase → SQL Editor → Run**.
