@@ -12,6 +12,7 @@ import {
   Network,
   Heart,
   Eye,
+  Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -21,7 +22,7 @@ const plans = [
     price: "$2,500",
     badge: "UPP",
     ratingValue: "4.8",
-    ratingText: "Calificacion promedio de 150 profesionales",
+    ratingText: "Calificación promedio de 150 profesionales",
     description:
       "Programa de autogestión para profesionales que quieren preparar su caso EB-2 NIW con guía experta paso a paso.",
     timeline: "90 – 120 días",
@@ -35,7 +36,7 @@ const plans = [
       },
       { text: "Acceso a comunidad privada", icon: Users },
     ],
-    cta: "Si, quiero comenzar mi programa!",
+    cta: "Sí, quiero comenzar mi programa",
     ctaVariant: "outline" as const,
     popular: false,
   },
@@ -44,7 +45,7 @@ const plans = [
     price: "$8,000",
     badge: "Premium",
     ratingValue: "4.8",
-    ratingText: "Calificacion promedio de 175 profesionales",
+    ratingText: "Calificación promedio de 175 profesionales",
     description:
       "Acompañamiento premium de principio a fin. Nosotros armamos tu expediente mientras tú sigues adelante con tu empresa, startup, formación académica o tu trabajo. Pensado para estudiantes, empresarios, emprendedores y trabajadores independientes.",
     timeline: "120 – 160 días",
@@ -63,11 +64,14 @@ const plans = [
       { text: "Coach emocional durante el proceso", icon: Heart },
       { text: "Seguimiento post envío", icon: Eye },
     ],
-    cta: "Si, quiero obtener mi Expediente!",
+    cta: "Sí, quiero obtener mi Expediente",
     ctaVariant: "gold" as const,
     popular: true,
   },
 ];
+
+const RISK_REVERSAL = "Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."
+const COST_OF_INACTION = "Cada año sin Green Card son años de incertidumbre y oportunidades perdidas."
 
 export default function Pricing() {
   return (
@@ -79,7 +83,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-8"
         >
           <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
             Programas
@@ -92,6 +96,17 @@ export default function Pricing() {
             con la misma meta: tu aprobación.
           </p>
         </motion.div>
+
+        {/* Costo de no actuar */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center text-gray-500 text-sm max-w-xl mx-auto mb-14 italic"
+        >
+          {COST_OF_INACTION}
+        </motion.p>
 
         {/* Plans */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -196,6 +211,18 @@ export default function Pricing() {
                     }`}
                   >
                     {plan.timeline}
+                  </span>
+                </div>
+
+                {/* Risk Reversal */}
+                <div className={`flex items-center gap-2 mb-6 p-3 rounded-xl ${
+                  plan.popular
+                    ? "bg-white/10 border border-white/20"
+                    : "bg-green-50 border border-green-100"
+                }`}>
+                  <Shield className={`w-4 h-4 shrink-0 ${plan.popular ? "text-green-300" : "text-green-600"}`} />
+                  <span className={`text-xs font-medium ${plan.popular ? "text-green-200" : "text-green-800"}`}>
+                    {RISK_REVERSAL}
                   </span>
                 </div>
 

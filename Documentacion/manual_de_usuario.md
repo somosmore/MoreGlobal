@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-03 (Blueprint EB2-NIW agregado)
+> Última actualización: 2026-03-03 (Pricing: risk reversal, costo de no actuar, fix typos)
 
 ---
 
@@ -86,8 +86,11 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 
 ### 1.7 Sección: Precios
 
-- Presenta los planes o servicios disponibles.
-- Incluye comparación de valor y llamada a la acción hacia el quiz.
+- Presenta los dos planes disponibles: **Unsung Professional Program (UPP)** y **Plan Plus**.
+- Encabezado seguido de una línea de "costo de no actuar" en itálica que recuerda al usuario el costo de la inacción.
+- Cada plan incluye un **badge de risk reversal** (icono de escudo verde) con el mensaje: *"Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."*
+- CTAs en primera persona: "Sí, quiero comenzar mi programa" y "Sí, quiero obtener mi Expediente".
+- Ambos CTAs abren WhatsApp directamente con mensaje pre-cargado.
 
 ### 1.8 Footer
 
