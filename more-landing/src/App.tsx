@@ -4,6 +4,7 @@ import ProtectedAdmin from "@/components/ProtectedAdmin";
 import HomePage from "@/pages/HomePage";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminTestimonials from "@/pages/AdminTestimonials";
+import AdminLeads from "@/pages/AdminLeads";
 
 function App() {
   return (
@@ -17,6 +18,14 @@ function App() {
             element={
               <ProtectedAdmin>
                 <AdminTestimonials />
+              </ProtectedAdmin>
+            }
+          />
+          <Route
+            path="/admin/leads"
+            element={
+              <ProtectedAdmin>
+                <AdminLeads />
               </ProtectedAdmin>
             }
           />
