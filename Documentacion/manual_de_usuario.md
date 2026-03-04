@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-03 (Pricing: risk reversal, costo de no actuar, fix typos)
+> Última actualización: 2026-03-03 (feat: Wizard de Landing con Gemini — Proyectos, Clientes, sistema de roles)
 
 ---
 
@@ -23,6 +23,9 @@
    - 2.3 [Módulo de Leads](#23-módulo-de-leads)
    - 2.4 [Módulo de Testimonios](#24-módulo-de-testimonios)
    - 2.5 [Módulo de Configuración](#25-módulo-de-configuración)
+   - 2.6 [Sistema de Roles](#26-sistema-de-roles)
+   - 2.7 [Módulo de Clientes](#27-módulo-de-clientes)
+   - 2.8 [Módulo de Proyectos de Landing (Wizard + Gemini)](#28-módulo-de-proyectos-de-landing-wizard--gemini)
 
 ---
 
@@ -403,3 +406,137 @@ A partir de ese momento, el botón CTA del Blueprint abrirá el calendario confi
 | `sort_order` | int | Orden de aparición |
 | `created_at` | timestamptz | Fecha de creación |
 | `updated_at` | timestamptz | Última actualización (automático) |
+
+---
+
+## 2.6 Sistema de Roles
+
+El panel de administración soporta dos niveles de usuario:
+
+| Rol | Descripción | Acceso |
+|-----|-------------|--------|
+| `standard` | Usuario estándar — conoce el negocio | Todos los módulos excepto el Bloque Técnico del wizard |
+| `root` | Administrador raíz | Acceso completo, incluyendo configuración técnica de proyectos |
+
+**Cómo asignar el rol `root` a un usuario:**
+1. Ir a Supabase Dashboard → Table Editor → tabla `profiles`
+2. Buscar el registro por `user_id` del usuario
+3. Cambiar el campo `role` de `standard` a `root`
+
+El rol se muestra con un ícono de escudo junto al nombre del usuario en la sidebar del panel admin.
+
+---
+
+## 2.7 Módulo de Clientes
+
+**Ruta:** `/admin/clients`
+
+Gestión de contactos/clientes que se vinculan a proyectos de landing.
+
+### Funcionalidades
+- Listar todos los clientes con búsqueda por nombre, empresa o email
+- Crear nuevo cliente con formulario inline
+- Editar datos de un cliente existente (también inline)
+- Eliminar cliente (los proyectos vinculados quedan sin cliente asignado)
+
+### Campos del cliente
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `name` | text | Nombre completo (obligatorio) |
+| `email` | text | Email de contacto (opcional) |
+| `phone` | text | Teléfono o WhatsApp (opcional) |
+| `company` | text | Empresa o marca (opcional) |
+| `notes` | text | Notas internas (opcional) |
+
+### Tabla de base de datos: `clients`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | uuid | Clave primaria |
+| `name` | text | Nombre del cliente |
+| `email` | text | Email (opcional) |
+| `phone` | text | Teléfono (opcional) |
+| `company` | text | Empresa (opcional) |
+| `notes` | text | Notas internas (opcional) |
+| `created_at` | timestamptz | Fecha de creación |
+| `updated_at` | timestamptz | Última actualización |
+
+---
+
+## 2.8 Módulo de Proyectos de Landing (Wizard + Gemini)
+
+**Ruta:** `/admin/projects`
+
+Sistema para crear proyectos de landing page mediante una entrevista guiada de 14 preguntas en 5 partes. Al finalizar, Gemini genera el contenido estructurado y un prompt de código listo para usar en Cursor/ChatGPT.
+
+### Flujo completo
+
+1. Ir a `/admin/projects` → botón **"Nuevo proyecto"**
+2. Completar las 5 partes de la entrevista (+ bloque técnico si eres root)
+3. Presionar **"Generar landing con Gemini"**
+4. Ver el resultado en la página de proyecto: contenido JSON + prompt de código
+5. Copiar el prompt y pegarlo en Cursor para generar el código
+
+### Las 5 partes del wizard
+
+| Parte | Preguntas | Contenido |
+|-------|-----------|-----------|
+| Paso 0 | — | Vincular o crear cliente |
+| Parte 1 | 1-4 | Identidad: nombre, one-liner, industria, colores |
+| Parte 2 | 5-7 | Problema y solución: dolor, final feliz, diferenciador |
+| Parte 3 | 8-9 | Cliente ideal: perfil principal, segmentos |
+| Parte 4 | 10-12 | Oferta: servicios, acción deseada, métricas |
+| Parte 5 | 13-14 | Confianza: testimonios, garantía |
+| Bloque técnico | — | Stack, DB, dominio, tracking (solo root) |
+
+### Funcionalidades del wizard
+
+- **Autosave:** guarda automáticamente cada 1.5 segundos tras cualquier cambio
+- **Navegación libre:** podés ir a cualquier parte ya completada
+- **Omitir preguntas:** botón "No tengo esta info" en campos opcionales — el campo queda en `null` y Gemini lo completa
+- **Bloque técnico bloqueado:** visible para usuarios `standard` pero no editable
+
+### Página de resultado (`/admin/projects/:id`)
+
+Tiene dos pestañas:
+- **Contenido generado:** muestra el JSON de Gemini organizado por sección (Hero, Pain Points, Pricing, Testimonios, FAQ, etc.)
+- **Prompt de código:** texto listo para copiar o descargar como `.md`
+
+Acciones disponibles:
+- **Regenerar:** vuelve a llamar a Gemini con las mismas respuestas
+- **Editar respuestas:** vuelve al wizard para modificar
+- **Copiar / Descargar:** el prompt de código
+
+### Variable de entorno requerida
+
+Para que Gemini funcione, se debe agregar al archivo `.env`:
+```
+VITE_GEMINI_API_KEY=tu_api_key_de_google_ai_studio
+```
+
+Obtener la key en: https://aistudio.google.com/app/apikey
+
+### Tabla de base de datos: `landing_projects`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | uuid | Clave primaria |
+| `client_id` | uuid | FK a `clients.id` (opcional) |
+| `created_by` | uuid | FK a `auth.users.id` |
+| `name` | text | Nombre del proyecto |
+| `status` | text | `draft` / `complete` / `generated` |
+| `answers` | jsonb | Respuestas de las 5 partes del wizard |
+| `tech_config` | jsonb | Configuración técnica (solo root) |
+| `generated_json` | jsonb | Contenido generado por Gemini |
+| `generated_prompt` | text | Prompt de código generado por Gemini |
+| `created_at` | timestamptz | Fecha de creación |
+| `updated_at` | timestamptz | Última actualización |
+
+### Tabla de base de datos: `profiles`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `user_id` | uuid | FK a `auth.users.id` (PK) |
+| `role` | text | `standard` o `root` |
+| `created_at` | timestamptz | Fecha de creación |
