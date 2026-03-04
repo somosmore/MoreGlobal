@@ -41,7 +41,7 @@ interface LeadForm {
   whatsapp: string;
 }
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 4;
 
 const academicOptions = [
   { id: "maestria", label: "Maestría", sublabel: null, icon: GraduationCap },
@@ -78,12 +78,19 @@ export default function Quiz() {
     email: "",
     whatsapp: "",
   });
+  const [showResult, setShowResult] = useState(false);
   const [showLeadCapture, setShowLeadCapture] = useState(false);
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leadError, setLeadError] = useState<string | null>(null);
 
-  const progressValue = (quiz.step / TOTAL_STEPS) * 100;
+  const progressValue = leadSubmitted
+    ? 100
+    : showLeadCapture
+    ? 87.5
+    : showResult
+    ? 75
+    : ((quiz.step - 1) / (TOTAL_STEPS - 1)) * 75;
 
   const isHighImpact =
     quiz.academicLevel === "maestria" ||
@@ -91,11 +98,11 @@ export default function Quiz() {
     quiz.academicLevel === "grado5";
 
   const canProceed = () => {
-    if (quiz.step === 1) return quiz.academicLevel !== null;
-    if (quiz.step === 2) return quiz.impactArea !== null;
-    if (quiz.step === 3) return quiz.achievements.length > 0;
-    return false;
-  };
+    if (quiz.step === 1) return quiz.academicLevel !== null
+    if (quiz.step === 2) return quiz.impactArea !== null
+    if (quiz.step === 3) return quiz.achievements.length > 0
+    return false
+  }
 
   const toggleAchievement = (id: string) => {
     setQuiz((prev) => ({
@@ -119,14 +126,13 @@ export default function Quiz() {
   };
 
   const resetQuiz = () => {
-    setQuiz({ step: 1, academicLevel: null, impactArea: null, achievements: [] });
-    setLeadForm({ nombre: "", email: "", whatsapp: "" });
-    setShowLeadCapture(false);
-    setLeadSubmitted(false);
-    setLeadError(null);
-  };
-
-  const showResult = quiz.step === 3 && quiz.achievements.length > 0;
+    setQuiz({ step: 1, academicLevel: null, impactArea: null, achievements: [] })
+    setLeadForm({ nombre: "", email: "", whatsapp: "" })
+    setShowResult(false)
+    setShowLeadCapture(false)
+    setLeadSubmitted(false)
+    setLeadError(null)
+  }
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,15 +152,18 @@ export default function Quiz() {
     };
 
     try {
-      if (supabase) {
-        const { error } = await supabase.from("leads").insert([lead]);
-        if (error) throw error;
-      }
-      setLeadSubmitted(true);
-    } catch {
-      setLeadError("No pudimos guardar tu perfil. Por favor escríbenos por WhatsApp.");
+      if (!supabase) throw new Error("Servicio no disponible. Por favor escríbenos por WhatsApp.")
+      const { error } = await supabase.from("leads").insert([lead])
+      if (error) throw error
+      setLeadSubmitted(true)
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error inesperado"
+      setLeadError(msg.includes("duplicate") || msg.includes("already")
+        ? "Ya registramos tu perfil con ese email. ¡Pronto te contactamos!"
+        : "No pudimos guardar tu perfil. Por favor escríbenos por WhatsApp."
+      )
     } finally {
-      setLeadSubmitting(false);
+      setLeadSubmitting(false)
     }
   };
 
@@ -197,27 +206,35 @@ export default function Quiz() {
             <div className="px-6 pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-gray-400">
-                  Paso {Math.min(quiz.step, TOTAL_STEPS)} de {TOTAL_STEPS}
+                  {leadSubmitted
+                    ? "Completado"
+                    : showLeadCapture
+                    ? "Paso 4 de 4 — Tus datos"
+                    : showResult
+                    ? "Paso 4 de 4 — Tu resultado"
+                    : `Paso ${quiz.step} de 3`}
                 </span>
                 <span className="text-xs font-medium text-[#F37021]">
-                  {Math.round(Math.min(progressValue, 100))}%
+                  {Math.round(progressValue)}%
                 </span>
               </div>
-              <Progress value={Math.min(progressValue, 100)} />
+              <Progress value={progressValue} />
             </div>
 
             <CardHeader className="pb-2">
               <CardTitle className="text-lg text-[#2A3A4A]">
-                {quiz.step === 1 && "¿Cuál es tu nivel académico más alto?"}
-                {quiz.step === 2 && "¿Cuál es tu área de impacto principal?"}
-                {quiz.step === 3 && "¿Cuáles de estos logros aplican a tu perfil?"}
+                {leadSubmitted && "¡Perfil registrado!"}
+                {!leadSubmitted && showResult && "Tu evaluación de elegibilidad"}
+                {!leadSubmitted && !showResult && quiz.step === 1 && "¿Cuál es tu nivel académico más alto?"}
+                {!leadSubmitted && !showResult && quiz.step === 2 && "¿Cuál es tu área de impacto principal?"}
+                {!leadSubmitted && !showResult && quiz.step === 3 && "¿Cuáles de estos logros aplican a tu perfil?"}
               </CardTitle>
             </CardHeader>
 
             <CardContent className="pb-8">
               <AnimatePresence mode="wait">
                 {/* Step 1: Academic Level */}
-                {quiz.step === 1 && (
+                {quiz.step === 1 && !showResult && (
                   <motion.div
                     key="step1"
                     initial={{ opacity: 0, x: 20 }}
@@ -270,7 +287,7 @@ export default function Quiz() {
                 )}
 
                 {/* Step 2: Impact Area */}
-                {quiz.step === 2 && (
+                {quiz.step === 2 && !showResult && (
                   <motion.div
                     key="step2"
                     initial={{ opacity: 0, x: 20 }}
@@ -306,7 +323,7 @@ export default function Quiz() {
                 )}
 
                 {/* Step 3: Achievements */}
-                {quiz.step === 3 && (
+                {quiz.step === 3 && !showResult && (
                   <motion.div
                     key="step3"
                     initial={{ opacity: 0, x: 20 }}
@@ -352,34 +369,44 @@ export default function Quiz() {
               </AnimatePresence>
 
               {/* Navigation Buttons */}
-              <div className="flex items-center justify-between mt-8">
-                <Button
-                  variant="ghost"
-                  onClick={prevStep}
-                  disabled={quiz.step === 1}
-                  className="gap-2"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Atrás
-                </Button>
-
-                {quiz.step < TOTAL_STEPS ? (
+              {!showResult && !showLeadCapture && !leadSubmitted && (
+                <div className="flex items-center justify-between mt-8">
                   <Button
-                    onClick={nextStep}
-                    disabled={!canProceed()}
+                    variant="ghost"
+                    onClick={prevStep}
+                    disabled={quiz.step === 1}
                     className="gap-2"
                   >
-                    {quiz.step === 2 ? "Ver mi resultado" : "Continuar"}
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowLeft className="w-4 h-4" />
+                    Atrás
                   </Button>
-                ) : (
-                  showResult && null
-                )}
-              </div>
+
+                  {quiz.step < 3 ? (
+                    <Button
+                      onClick={nextStep}
+                      disabled={!canProceed()}
+                      className="gap-2"
+                    >
+                      Continuar
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => setShowResult(true)}
+                      disabled={!canProceed()}
+                      variant="gold"
+                      className="gap-2"
+                    >
+                      Ver mi evaluación
+                      <Sparkles className="w-4 h-4" />
+                    </Button>
+                  )}
+                </div>
+              )}
 
               {/* Result */}
               <AnimatePresence>
-                {quiz.step === 3 && quiz.achievements.length > 0 && (
+                {showResult && !leadSubmitted && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
