@@ -417,7 +417,7 @@ export default function Success() {
             </div>
           ) : textPhotoTestimonials.length === 0 && videoTestimonials.length === 0 ? (
             <div className="text-center py-12 text-gray-500 max-w-md mx-auto">
-              Próximamente más casos de éxito. Los testimonios se gestionan desde el panel de administración.
+              Próximamente más casos de éxito.
             </div>
           ) : (
             <>

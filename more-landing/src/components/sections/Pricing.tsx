@@ -71,7 +71,7 @@ const plans = [
 ];
 
 const RISK_REVERSAL = "Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."
-const COST_OF_INACTION = "Cada año sin Green Card son años de incertidumbre y oportunidades perdidas."
+const COST_OF_INACTION = "Cada año que pasa sin actuar, otros profesionales con tu mismo perfil ya están aprobados. El momento es ahora."
 
 export default function Pricing() {
   return (

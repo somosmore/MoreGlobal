@@ -8,24 +8,32 @@ const profiles = [
     title: "Profesionales graduados",
     description:
       "Médicos, ingenieros e investigadores: transformen su carrera obteniendo la Green Card a través de su impacto social y de interés nacional.",
+    color: "from-blue-600/15 to-blue-600/5",
+    iconColor: "text-blue-600",
   },
   {
     icon: Store,
     title: "Comerciantes y Empresarios",
     description:
       "Dueños de negocios, emprendedores y empresarios con trayectoria comprobada que desean migrar a EE.UU. y expandir su impacto.",
+    color: "from-[#F37021]/15 to-[#F37021]/5",
+    iconColor: "text-[#F37021]",
   },
   {
     icon: GraduationCap,
     title: "Profesionales especializados",
     description:
-      "Trabajamos con profesionales y técnicos de todas las áreas que cuenten con habilidades especiales o más de 10 años de experiencia destacada en su sector."
+      "Trabajamos con profesionales y técnicos de todas las áreas que cuenten con habilidades especiales o más de 10 años de experiencia destacada en su sector.",
+    color: "from-violet-600/15 to-violet-600/5",
+    iconColor: "text-violet-600",
   },
   {
     icon: TrendingUp,
     title: "Inversionistas",
     description:
       "Inversionistas y emprendedores que buscan visas para no inmigrante o residencia permanente basada en su aporte económico y profesional.",
+    color: "from-emerald-600/15 to-emerald-600/5",
+    iconColor: "text-emerald-600",
   },
 ];
 
@@ -81,8 +89,8 @@ export default function WhoWeHelp() {
             <motion.div key={profile.title} variants={cardVariants}>
               <Card className="h-full border border-gray-200/80 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
                 <CardContent className="p-6 sm:p-8">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F37021]/15 to-[#F37021]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <profile.icon className="w-6 h-6 text-[#F37021]" />
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${profile.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <profile.icon className={`w-6 h-6 ${profile.iconColor}`} />
                   </div>
                   <h3 className="text-lg font-semibold text-[#2A3A4A] mb-2">
                     {profile.title}
@@ -104,7 +112,7 @@ export default function WhoWeHelp() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-sm text-gray-500 mt-14 font-medium"
         >
-          ¿Te ves reflejado? Mira lo que logramos con perfiles como el tuyo.
+          ¿Te identificas? Descubre en 3 preguntas si tu perfil califica hoy.
         </motion.p>
       </div>
     </section>
