@@ -436,7 +436,7 @@ export default function Quiz() {
                               onClick={() => setShowLeadCapture(true)}
                             >
                               <Send className="w-4 h-4" />
-                              Sí, quiero agendar mi evaluación gratuita
+                              Sí, quiero agendar mi evaluación personalizada
                             </Button>
                             <Button
                               variant="outline"

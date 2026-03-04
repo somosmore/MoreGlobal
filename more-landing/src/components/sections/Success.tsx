@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback, useId } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, Scale, User, Volume2 } from "lucide-react";
+import { Quote, Scale, User, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   supabase,
@@ -107,123 +107,61 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-declare global {
-  interface Window {
-    YT?: {
-      ready: (fn: () => void) => void;
-      Player: new (
-        el: string | HTMLElement,
-        opts: { videoId: string; playerVars?: Record<string, number | string> }
-      ) => { unMute: () => void; setVolume: (n: number) => void };
-    };
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
+function VideoTestimonialCard({ t }: { t: Testimonial }) {
+  const info = getVideoInfo(t.video_url ?? "")
+  const displayTimeline = t.status_label ?? t.timeline ?? ""
 
-function loadYouTubeAPI(): Promise<void> {
-  if (window.YT?.Player) return Promise.resolve();
-  return new Promise((resolve) => {
-    if (window.YT) {
-      window.YT.ready!(resolve);
-      return;
-    }
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScript = document.getElementsByTagName("script")[0];
-    firstScript?.parentNode?.insertBefore(tag, firstScript);
-    window.onYouTubeIframeAPIReady = () => {
-      window.YT?.ready?.(resolve);
-    };
-  });
-}
-
-function VideoTestimonialCard({ videoUrl }: { videoUrl: string }) {
-  const info = getVideoInfo(videoUrl);
-  const [showUnmute, setShowUnmute] = useState(!!info);
-  const playerRef = useRef<{ unMute: () => void; setVolume: (n: number) => void } | null>(null);
-  const containerId = useId().replace(/:/g, "");
-
-  useEffect(() => {
-    if (!info || info.type !== "youtube" || !info.videoId) return;
-    let cancelled = false;
-    loadYouTubeAPI().then(() => {
-      if (cancelled || !window.YT) return;
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      playerRef.current = new window.YT.Player(containerId, {
-        videoId: info.videoId!,
-        playerVars: { autoplay: 1, mute: 1, playsinline: 1 },
-      });
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [info?.videoId, containerId]);
-
-  const handleUnmute = useCallback(() => {
-    if (info?.type === "youtube" && playerRef.current) {
-      try {
-        playerRef.current.unMute();
-        playerRef.current.setVolume(100);
-      } catch {
-        // ignore
-      }
-      setShowUnmute(false);
-    } else {
-      window.open(videoUrl, "_blank", "noopener,noreferrer");
-      setShowUnmute(false);
-    }
-  }, [info?.type, videoUrl]);
-
-  if (!info) {
-    return (
-      <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col">
-        <CardContent className="p-0 flex flex-col flex-1">
-          <a
-            href={videoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex aspect-video items-center justify-center bg-[#2A3A4A] text-white hover:bg-[#3A4D5E] transition-colors"
-          >
-            <span className="text-sm font-medium">Ver video</span>
-          </a>
-        </CardContent>
-      </Card>
-    );
-  }
+  const embedUrl = info
+    ? info.type === "youtube"
+      ? `https://www.youtube.com/embed/${info.videoId}?rel=0&modestbranding=1`
+      : info.embedUrl
+    : null
 
   return (
-    <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+    <Card className="border-0 shadow-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow">
       <CardContent className="p-0 flex flex-col flex-1">
         <div className="relative aspect-video bg-[#2A3A4A]">
-          {info.type === "youtube" ? (
-            <div id={containerId} className="absolute inset-0 w-full h-full" />
-          ) : (
+          {embedUrl ? (
             <iframe
-              src={info.embedUrl}
-              title="Testimonio en video"
+              src={embedUrl}
+              title={`Testimonio de ${t.name}`}
               className="absolute inset-0 w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
-          )}
-          {showUnmute && (
-            <button
-              type="button"
-              onClick={handleUnmute}
-              className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-              aria-label="Activar sonido"
+          ) : t.video_url ? (
+            <a
+              href={t.video_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/90 text-[#2A3A4A] text-sm font-medium hover:bg-white transition-colors shadow-lg">
-                <Volume2 className="w-5 h-5" />
-                Activar sonido
-              </span>
-            </button>
+              <span className="text-sm font-medium">Ver video</span>
+            </a>
+          ) : null}
+        </div>
+
+        <div className="px-4 py-3 flex flex-col gap-1 bg-white">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center shrink-0">
+              <User className="w-3.5 h-3.5 text-[#F37021]" />
+            </div>
+            <div className="min-w-0">
+              <p className="font-bold text-[#2A3A4A] text-sm truncate">{t.name}</p>
+              {(t.country || t.role) && (
+                <p className="text-xs text-gray-400 truncate">{[t.country, t.role].filter(Boolean).join(" · ")}</p>
+              )}
+            </div>
+          </div>
+          {displayTimeline && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-green-50 text-green-700 text-xs font-medium w-fit mt-0.5">
+              {displayTimeline}
+            </span>
           )}
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export default function Success() {
@@ -440,7 +378,6 @@ export default function Success() {
                 </div>
               )}
 
-              {/* Testimonios en video (sección abajo) */}
               {videoTestimonials.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -449,20 +386,50 @@ export default function Success() {
                   transition={{ duration: 0.6 }}
                   className="mt-24 pt-16 border-t border-gray-200"
                 >
-                 
+                  <div className="text-center max-w-xl mx-auto mb-12">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#2A3A4A] tracking-tight">
+                      Escúchalos a ellos.{" "}
+                      <span className="text-[#F37021]">En sus propias palabras.</span>
+                    </h3>
+                    <p className="mt-3 text-base text-gray-500">
+                      No son actores. Son profesionales que tomaron la decisión que tú estás evaluando hoy.
+                    </p>
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {videoTestimonials.map((t) => (
+                    {videoTestimonials.map((t, i) => (
                       <motion.div
                         key={t.id}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3, delay: i * 0.05 }}
                       >
-                        <VideoTestimonialCard videoUrl={t.video_url!} />
+                        <VideoTestimonialCard t={t} />
                       </motion.div>
                     ))}
                   </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="mt-14 flex flex-col items-center gap-3 text-center"
+                  >
+                    <p className="text-sm text-gray-500 font-medium">
+                      ¿Te identificas con alguna de estas historias?
+                    </p>
+                    <a
+                      href="#quiz"
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#F37021] text-white font-semibold text-base hover:bg-[#d95f10] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#F37021]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
+                      tabIndex={0}
+                      aria-label="Evaluar mi perfil"
+                    >
+                      Quiero evaluar si califico mi perfil
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </motion.div>
                 </motion.div>
               )}
             </>
