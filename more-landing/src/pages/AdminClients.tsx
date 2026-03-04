@@ -4,17 +4,25 @@ import {
   Search,
   Edit3,
   Trash2,
-  X,
-  Check,
   User,
   Mail,
   Phone,
   Building2,
+  Loader2,
+  Check,
 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import type { Client, ClientInsert, ClientUpdate } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@/components/ui/sheet"
 
 type ClientFormData = Omit<ClientInsert, "id">
 
@@ -85,7 +93,7 @@ export default function AdminClients() {
         .single()
       if (!error && data) {
         setClients((p) => [data as Client, ...p].sort((a, b) => a.name.localeCompare(b.name)))
-        setEditingId(null)
+        handleCancel()
       }
     } else if (editingId) {
       const update: ClientUpdate = payload
@@ -99,7 +107,7 @@ export default function AdminClients() {
         setClients((p) =>
           p.map((c) => (c.id === editingId ? (data as Client) : c))
         )
-        setEditingId(null)
+        handleCancel()
       }
     }
     setSaving(false)
@@ -125,6 +133,11 @@ export default function AdminClients() {
       c.email?.toLowerCase().includes(search.toLowerCase()) ||
       c.company?.toLowerCase().includes(search.toLowerCase())
   )
+
+  const isEditing = editingId === "new"
+  const editingClient = editingId && editingId !== "new"
+    ? clients.find((c) => c.id === editingId)
+    : null
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
@@ -153,21 +166,10 @@ export default function AdminClients() {
         />
       </div>
 
-      {/* New client form */}
-      {editingId === "new" && (
-        <ClientForm
-          formData={formData}
-          setField={setField}
-          onSave={handleSave}
-          onCancel={handleCancel}
-          saving={saving}
-          isNew
-        />
-      )}
-
       {/* List */}
       {loading ? (
-        <div className="flex items-center justify-center h-48 text-gray-400 text-sm">
+        <div className="flex items-center justify-center h-48 text-gray-400 text-sm gap-2">
+          <Loader2 className="w-4 h-4 animate-spin" />
           Cargando clientes...
         </div>
       ) : filtered.length === 0 ? (
@@ -179,77 +181,65 @@ export default function AdminClients() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm divide-y divide-gray-100">
-          {filtered.map((client) =>
-            editingId === client.id ? (
-              <div key={client.id} className="p-4">
-                <ClientForm
-                  formData={formData}
-                  setField={setField}
-                  onSave={handleSave}
-                  onCancel={handleCancel}
-                  saving={saving}
-                />
+          {filtered.map((client) => (
+            <div
+              key={client.id}
+              className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50/50 transition-colors group"
+            >
+              {/* Avatar */}
+              <div className="w-10 h-10 rounded-full bg-[#2A3A4A]/10 flex items-center justify-center shrink-0">
+                <span className="text-xs font-bold text-[#2A3A4A]/70">
+                  {client.name.slice(0, 2).toUpperCase()}
+                </span>
               </div>
-            ) : (
-              <div
-                key={client.id}
-                className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50/50 transition-colors group"
-              >
-                {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-[#2A3A4A]/10 flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-[#2A3A4A]/70">
-                    {client.name.slice(0, 2).toUpperCase()}
-                  </span>
-                </div>
 
-                {/* Info */}
-                <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-3 gap-0.5 sm:gap-4">
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-[#2A3A4A] truncate">
-                      {client.name}
-                    </p>
-                    {client.company && (
-                      <p className="text-xs text-gray-400 flex items-center gap-1 truncate">
-                        <Building2 className="w-3 h-3 shrink-0" />
-                        {client.company}
-                      </p>
-                    )}
-                  </div>
-                  {client.email && (
-                    <p className="text-xs text-gray-500 flex items-center gap-1 truncate hidden sm:flex">
-                      <Mail className="w-3 h-3 shrink-0 text-gray-400" />
-                      {client.email}
-                    </p>
-                  )}
-                  {client.phone && (
-                    <p className="text-xs text-gray-500 flex items-center gap-1 truncate hidden sm:flex">
-                      <Phone className="w-3 h-3 shrink-0 text-gray-400" />
-                      {client.phone}
+              {/* Info */}
+              <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-3 gap-0.5 sm:gap-4">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-[#2A3A4A] truncate">
+                    {client.name}
+                  </p>
+                  {client.company && (
+                    <p className="text-xs text-gray-400 flex items-center gap-1 truncate">
+                      <Building2 className="w-3 h-3 shrink-0" />
+                      {client.company}
                     </p>
                   )}
                 </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                  <button
-                    onClick={() => handleEdit(client)}
-                    className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
-                    title="Editar"
-                  >
-                    <Edit3 className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(client.id)}
-                    disabled={deleting === client.id}
-                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                    title="Eliminar"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
+                {client.email && (
+                  <p className="text-xs text-gray-500 flex items-center gap-1 truncate hidden sm:flex">
+                    <Mail className="w-3 h-3 shrink-0 text-gray-400" />
+                    {client.email}
+                  </p>
+                )}
+                {client.phone && (
+                  <p className="text-xs text-gray-500 flex items-center gap-1 truncate hidden sm:flex">
+                    <Phone className="w-3 h-3 shrink-0 text-gray-400" />
+                    {client.phone}
+                  </p>
+                )}
               </div>
-            )
-          )}
+
+              {/* Actions */}
+              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                <button
+                  onClick={() => handleEdit(client)}
+                  className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                  title="Editar"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleDelete(client.id)}
+                  disabled={deleting === client.id}
+                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  title="Eliminar"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
@@ -258,79 +248,103 @@ export default function AdminClients() {
           {filtered.length} cliente{filtered.length !== 1 ? "s" : ""}
         </p>
       )}
-    </div>
-  )
-}
 
-// ─── Inline Form ──────────────────────────────────────────────────────────────
+      {/* ── Create / Edit Sheet ────────────────────────────────────────────── */}
+      <Sheet open={editingId !== null} onOpenChange={(open) => { if (!open) handleCancel() }}>
+        <SheetContent side="right" className="w-full sm:max-w-md flex flex-col p-0">
+          <SheetHeader className="pr-12">
+            <SheetTitle>
+              {isEditing ? "Nuevo cliente" : `Editar: ${editingClient?.name ?? ""}`}
+            </SheetTitle>
+            <SheetDescription>
+              {isEditing
+                ? "Completa los datos para registrar un nuevo cliente."
+                : "Modifica los datos del cliente."}
+            </SheetDescription>
+          </SheetHeader>
 
-function ClientForm({
-  formData,
-  setField,
-  onSave,
-  onCancel,
-  saving,
-  isNew = false,
-}: {
-  formData: Omit<ClientInsert, "id">
-  setField: (field: keyof Omit<ClientInsert, "id">, value: string | null) => void
-  onSave: () => void
-  onCancel: () => void
-  saving: boolean
-  isNew?: boolean
-}) {
-  return (
-    <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
-      <p className="text-xs font-semibold text-[#2A3A4A] uppercase tracking-wide">
-        {isNew ? "Nuevo cliente" : "Editar cliente"}
-      </p>
-      <Input
-        placeholder="Nombre completo *"
-        value={formData.name}
-        onChange={(e) => setField("name", e.target.value)}
-        autoFocus
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <Input
-          placeholder="Empresa"
-          value={formData.company ?? ""}
-          onChange={(e) => setField("company", e.target.value)}
-        />
-        <Input
-          type="email"
-          placeholder="Email"
-          value={formData.email ?? ""}
-          onChange={(e) => setField("email", e.target.value)}
-        />
-        <Input
-          type="tel"
-          placeholder="Teléfono / WhatsApp"
-          value={formData.phone ?? ""}
-          onChange={(e) => setField("phone", e.target.value)}
-        />
-      </div>
-      <textarea
-        rows={2}
-        placeholder="Notas internas (opcional)"
-        value={formData.notes ?? ""}
-        onChange={(e) => setField("notes", e.target.value)}
-        className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400 bg-white"
-      />
-      <div className="flex gap-2">
-        <Button
-          size="sm"
-          onClick={onSave}
-          disabled={saving || !formData.name.trim()}
-          className="gap-1.5"
-        >
-          <Check className="w-3.5 h-3.5" />
-          {saving ? "Guardando..." : "Guardar"}
-        </Button>
-        <Button size="sm" variant="ghost" onClick={onCancel}>
-          <X className="w-3.5 h-3.5 mr-1" />
-          Cancelar
-        </Button>
-      </div>
+          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Nombre completo *
+              </label>
+              <Input
+                placeholder="Ej: María García"
+                value={formData.name}
+                onChange={(e) => setField("name", e.target.value)}
+                autoFocus
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
+                <Input
+                  placeholder="Ej: Acme Corp"
+                  value={formData.company ?? ""}
+                  onChange={(e) => setField("company", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <Input
+                  type="email"
+                  placeholder="correo@ejemplo.com"
+                  value={formData.email ?? ""}
+                  onChange={(e) => setField("email", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Teléfono / WhatsApp
+                </label>
+                <Input
+                  type="tel"
+                  placeholder="+57 300 000 0000"
+                  value={formData.phone ?? ""}
+                  onChange={(e) => setField("phone", e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Notas internas
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Referencias, contexto, observaciones..."
+                value={formData.notes ?? ""}
+                onChange={(e) => setField("notes", e.target.value)}
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400 bg-white"
+              />
+            </div>
+          </div>
+
+          <SheetFooter>
+            <Button
+              onClick={handleSave}
+              disabled={saving || !formData.name.trim()}
+              className="gap-2"
+            >
+              {saving ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Guardando…
+                </>
+              ) : (
+                <>
+                  <Check className="w-4 h-4" />
+                  {isEditing ? "Crear cliente" : "Guardar cambios"}
+                </>
+              )}
+            </Button>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancelar
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

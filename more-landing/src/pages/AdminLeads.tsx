@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetFooter,
+} from "@/components/ui/sheet"
+import {
   Trash2,
   Users,
   Download,
@@ -599,29 +606,17 @@ export default function AdminLeads() {
           </div>
         )}
 
-      {/* Detail Panel */}
-      {selectedLead && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/20 z-40 backdrop-blur-[2px]"
-            onClick={() => setSelectedLead(null)}
-          />
-          {/* Panel */}
-          <div className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-2xl z-50 flex flex-col overflow-hidden">
-            {/* Panel header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E]">
-              <div>
-                <h2 className="text-base font-bold text-white">{selectedLead.nombre}</h2>
+      {/* ── Detail Sheet ──────────────────────────────────────────────────── */}
+      <Sheet open={!!selectedLead} onOpenChange={(open) => { if (!open) setSelectedLead(null) }}>
+        <SheetContent side="right" className="w-full sm:max-w-[420px] flex flex-col p-0">
+          {selectedLead && (
+            <>
+              <SheetHeader className="px-6 py-5 pr-14 bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E]">
+                <SheetTitle className="text-white">{selectedLead.nombre}</SheetTitle>
                 <p className="text-xs text-white/60 mt-0.5">{timeAgo(selectedLead.created_at)}</p>
-              </div>
-              <button onClick={() => setSelectedLead(null)}
-                className="p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+              </SheetHeader>
 
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+              <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
               {/* Estado */}
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Estado del pipeline</p>
@@ -859,31 +854,33 @@ export default function AdminLeads() {
               </div>
             </div>
 
-            {/* Panel footer actions */}
-            <div className="px-6 py-4 border-t border-gray-100 bg-gray-50/50 flex gap-3">
-              {selectedLead.whatsapp && (
-                <Button variant="gold" className="flex-1 gap-2" asChild>
-                  <a href={waLink(selectedLead)} target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-4 h-4" />
-                    WhatsApp
+              <SheetFooter className="px-6 py-4 border-t border-gray-100 bg-gray-50/50 flex gap-3 justify-start">
+                {selectedLead.whatsapp && (
+                  <Button variant="gold" className="flex-1 gap-2" asChild>
+                    <a href={waLink(selectedLead)} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="w-4 h-4" />
+                      WhatsApp
+                    </a>
+                  </Button>
+                )}
+                <Button variant="outline" className="flex-1 gap-2" asChild>
+                  <a href={`mailto:${selectedLead.email}`}>
+                    <ExternalLink className="w-4 h-4" />
+                    Email
                   </a>
                 </Button>
-              )}
-              <Button variant="outline" className="flex-1 gap-2" asChild>
-                <a href={`mailto:${selectedLead.email}`}>
-                  <ExternalLink className="w-4 h-4" />
-                  Email
-                </a>
-              </Button>
-              <button onClick={() => handleDelete(selectedLead.id)}
-                disabled={deletingId === selectedLead.id}
-                className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50">
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+                <button
+                  onClick={() => handleDelete(selectedLead.id)}
+                  disabled={deletingId === selectedLead.id}
+                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </SheetFooter>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
