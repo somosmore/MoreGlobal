@@ -55,15 +55,16 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Button size="sm" asChild>
+            <Button size="sm" variant="gold" asChild>
               <a href="#quiz">Evaluar mi Perfil</a>
             </Button>
           </div>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-[#2A3A4A]"
+            className="md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center text-[#2A3A4A]"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

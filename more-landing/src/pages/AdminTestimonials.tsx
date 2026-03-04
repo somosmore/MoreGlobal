@@ -24,6 +24,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@/components/ui/sheet"
+import {
   Plus,
   Pencil,
   Trash2,
@@ -339,7 +347,6 @@ export default function AdminTestimonials() {
 
     const reordered = arrayMove(filtered, activeIndex, overIndex)
 
-    // Optimistic UI: merge reordered items back into full list
     setTestimonials((prev) => {
       const filteredIds = new Set(filtered.map((t) => t.id))
       const rest = prev.filter((t) => !filteredIds.has(t.id))
@@ -374,7 +381,6 @@ export default function AdminTestimonials() {
 
   const openEdit = (t: Testimonial) => {
     setEditingId(t.id)
-    setFormOpen(true)
     setForm({
       name: t.name,
       country: t.country ?? null,
@@ -390,6 +396,7 @@ export default function AdminTestimonials() {
       category: t.category,
       sort_order: t.sort_order,
     })
+    setFormOpen(true)
   }
 
   const closeForm = () => {
@@ -501,211 +508,6 @@ export default function AdminTestimonials() {
         <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>
       )}
 
-      {/* Form */}
-      {formOpen && (
-        <Card className="mb-8 border-0 shadow-lg overflow-hidden">
-          <CardContent className="p-0">
-            <div className="bg-[#2A3A4A] px-6 py-4">
-              <h2 className="text-lg font-semibold text-white">
-                {editingId ? "Editar testimonio" : "Nuevo testimonio"}
-              </h2>
-              <p className="text-white/70 text-sm mt-0.5">
-                {form.media_type === "video"
-                  ? "Solo necesitas el enlace del video."
-                  : "Completa los datos del testimonio."}
-              </p>
-            </div>
-            <form onSubmit={handleSave} className="p-6 space-y-6">
-              {/* Media type selector */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tipo de medio
-                </label>
-                <div className="flex gap-3">
-                  {MEDIA_OPTIONS.map((o) => (
-                    <button
-                      key={o.value}
-                      type="button"
-                      onClick={() => updateField("media_type", o.value as "text_photo" | "video")}
-                      className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors ${
-                        form.media_type === o.value
-                          ? "border-[#F37021] bg-[#F37021]/10 text-[#2A3A4A]"
-                          : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
-                      }`}
-                    >
-                      {o.value === "video" ? <Video className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
-                      {o.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Video fields */}
-              {form.media_type === "video" && (
-                <div className="space-y-4 rounded-xl bg-gray-50 p-4 border border-gray-100">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Enlace del video *
-                    </label>
-                    <Input
-                      value={form.video_url ?? ""}
-                      onChange={(e) => updateField("video_url", e.target.value || null)}
-                      placeholder="YouTube, Vimeo o Google Drive (https://...)"
-                      className="font-mono text-sm"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-                      <select
-                        value={form.category}
-                        onChange={(e) => updateField("category", e.target.value as Testimonial["category"])}
-                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full bg-white"
-                      >
-                        {CATEGORY_OPTIONS.map((c) => (
-                          <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Orden</label>
-                      <Input
-                        type="number"
-                        value={form.sort_order ?? 0}
-                        onChange={(e) => updateField("sort_order", parseInt(e.target.value, 10) || 0)}
-                        className="bg-white"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Text+photo fields */}
-              {form.media_type === "text_photo" && (
-                <>
-                  <div className="border-t border-gray-100 pt-4">
-                    <h3 className="text-sm font-semibold text-gray-800 mb-3">Datos de la persona</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
-                        <Input
-                          value={form.name}
-                          onChange={(e) => updateField("name", e.target.value)}
-                          required={form.media_type === "text_photo"}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">País</label>
-                        <Input
-                          value={form.country ?? ""}
-                          onChange={(e) => updateField("country", e.target.value || null)}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Rol / profesión</label>
-                        <Input
-                          value={form.role ?? ""}
-                          onChange={(e) => updateField("role", e.target.value || null)}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Área</label>
-                        <Input
-                          value={form.area ?? ""}
-                          onChange={(e) => updateField("area", e.target.value || null)}
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Programa</label>
-                      <Input
-                        value={form.program ?? ""}
-                        onChange={(e) => updateField("program", e.target.value || null)}
-                        placeholder="UPP, Plan Acelerador, etc."
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Testimonio (cita) *
-                    </label>
-                    <textarea
-                      value={form.quote}
-                      onChange={(e) => updateField("quote", e.target.value)}
-                      required={form.media_type === "text_photo"}
-                      rows={4}
-                      className="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20"
-                      placeholder="Texto del testimonio..."
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Timeline</label>
-                      <Input
-                        value={form.timeline ?? ""}
-                        onChange={(e) => updateField("timeline", e.target.value || null)}
-                        placeholder="87 días, Aprobado en 120 días"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Etiqueta status</label>
-                      <Input
-                        value={form.status_label ?? ""}
-                        onChange={(e) => updateField("status_label", e.target.value || null)}
-                        placeholder="APROBADO INHOUSE, En espera de aprobación"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">URL foto</label>
-                    <Input
-                      value={form.photo_url ?? ""}
-                      onChange={(e) => updateField("photo_url", e.target.value || null)}
-                      placeholder="https://... (opcional)"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-                      <select
-                        value={form.category}
-                        onChange={(e) => updateField("category", e.target.value as Testimonial["category"])}
-                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
-                      >
-                        {CATEGORY_OPTIONS.map((c) => (
-                          <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Orden</label>
-                      <Input
-                        type="number"
-                        value={form.sort_order ?? 0}
-                        onChange={(e) => updateField("sort_order", parseInt(e.target.value, 10) || 0)}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-
-              <div className="flex flex-wrap gap-3 pt-2 border-t border-gray-100">
-                <Button type="submit" disabled={saving}>
-                  {saving ? "Guardando…" : "Guardar"}
-                </Button>
-                <Button type="button" variant="secondary" onClick={closeForm}>
-                  Cancelar
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-      )}
-
       {/* List */}
       {loading ? (
         <div className="flex items-center justify-center py-16 gap-2 text-gray-400">
@@ -748,6 +550,221 @@ export default function AdminTestimonials() {
           </SortableContext>
         </DndContext>
       )}
+
+      {/* ── Edit / Create Sheet ───────────────────────────────────────────── */}
+      <Sheet open={formOpen} onOpenChange={(open) => { if (!open) closeForm() }}>
+        <SheetContent side="right" className="w-full sm:max-w-xl flex flex-col p-0">
+          <SheetHeader className="pr-12">
+            <SheetTitle>
+              {editingId ? "Editar testimonio" : "Nuevo testimonio"}
+            </SheetTitle>
+            <SheetDescription>
+              {form.media_type === "video"
+                ? "Solo necesitas el enlace del video."
+                : "Completa los datos del testimonio."}
+            </SheetDescription>
+          </SheetHeader>
+
+          <form
+            id="testimonial-form"
+            onSubmit={handleSave}
+            className="flex-1 overflow-y-auto px-6 py-6 space-y-6"
+          >
+            {/* Media type selector */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tipo de medio
+              </label>
+              <div className="flex gap-3">
+                {MEDIA_OPTIONS.map((o) => (
+                  <button
+                    key={o.value}
+                    type="button"
+                    onClick={() => updateField("media_type", o.value as "text_photo" | "video")}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors ${
+                      form.media_type === o.value
+                        ? "border-[#F37021] bg-[#F37021]/10 text-[#2A3A4A]"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    {o.value === "video" ? <Video className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Video fields */}
+            {form.media_type === "video" && (
+              <div className="space-y-4 rounded-xl bg-gray-50 p-4 border border-gray-100">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Enlace del video *
+                  </label>
+                  <Input
+                    value={form.video_url ?? ""}
+                    onChange={(e) => updateField("video_url", e.target.value || null)}
+                    placeholder="YouTube, Vimeo o Google Drive (https://...)"
+                    className="font-mono text-sm"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+                    <select
+                      value={form.category}
+                      onChange={(e) => updateField("category", e.target.value as Testimonial["category"])}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full bg-white"
+                    >
+                      {CATEGORY_OPTIONS.map((c) => (
+                        <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Orden</label>
+                    <Input
+                      type="number"
+                      value={form.sort_order ?? 0}
+                      onChange={(e) => updateField("sort_order", parseInt(e.target.value, 10) || 0)}
+                      className="bg-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Text+photo fields */}
+            {form.media_type === "text_photo" && (
+              <>
+                <div className="border-t border-gray-100 pt-4">
+                  <h3 className="text-sm font-semibold text-gray-800 mb-3">Datos de la persona</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+                      <Input
+                        value={form.name}
+                        onChange={(e) => updateField("name", e.target.value)}
+                        required={form.media_type === "text_photo"}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">País</label>
+                      <Input
+                        value={form.country ?? ""}
+                        onChange={(e) => updateField("country", e.target.value || null)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Rol / profesión</label>
+                      <Input
+                        value={form.role ?? ""}
+                        onChange={(e) => updateField("role", e.target.value || null)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Área</label>
+                      <Input
+                        value={form.area ?? ""}
+                        onChange={(e) => updateField("area", e.target.value || null)}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Programa</label>
+                    <Input
+                      value={form.program ?? ""}
+                      onChange={(e) => updateField("program", e.target.value || null)}
+                      placeholder="UPP, Plan Acelerador, etc."
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Testimonio (cita) *
+                  </label>
+                  <textarea
+                    value={form.quote}
+                    onChange={(e) => updateField("quote", e.target.value)}
+                    required={form.media_type === "text_photo"}
+                    rows={4}
+                    className="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20"
+                    placeholder="Texto del testimonio..."
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Timeline</label>
+                    <Input
+                      value={form.timeline ?? ""}
+                      onChange={(e) => updateField("timeline", e.target.value || null)}
+                      placeholder="87 días, Aprobado en 120 días"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Etiqueta status</label>
+                    <Input
+                      value={form.status_label ?? ""}
+                      onChange={(e) => updateField("status_label", e.target.value || null)}
+                      placeholder="APROBADO INHOUSE, En espera de aprobación"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">URL foto</label>
+                  <Input
+                    value={form.photo_url ?? ""}
+                    onChange={(e) => updateField("photo_url", e.target.value || null)}
+                    placeholder="https://... (opcional)"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+                    <select
+                      value={form.category}
+                      onChange={(e) => updateField("category", e.target.value as Testimonial["category"])}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm w-full"
+                    >
+                      {CATEGORY_OPTIONS.map((c) => (
+                        <option key={c} value={c}>{CATEGORY_LABELS[c]}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Orden</label>
+                    <Input
+                      type="number"
+                      value={form.sort_order ?? 0}
+                      onChange={(e) => updateField("sort_order", parseInt(e.target.value, 10) || 0)}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </form>
+
+          <SheetFooter>
+            <Button type="submit" form="testimonial-form" disabled={saving}>
+              {saving ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Guardando…
+                </>
+              ) : (
+                editingId ? "Guardar cambios" : "Crear testimonio"
+              )}
+            </Button>
+            <Button type="button" variant="secondary" onClick={closeForm}>
+              Cancelar
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

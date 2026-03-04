@@ -8,8 +8,9 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-gray-50/50 to-[#2A3A4A]/[0.03]">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F37021]/[0.04] blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#2A3A4A]/[0.03] blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F37021]/[0.10] blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#2A3A4A]/[0.07] blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#F37021]/[0.03] blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
@@ -97,16 +98,16 @@ export default function Hero() {
             <div className="hidden sm:block w-px h-4 bg-gray-300" />
             <div className="flex items-center gap-2">
               <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
+                {["IM", "CR", "JR", "AP"].map((initials) => (
                   <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] border-2 border-white flex items-center justify-center text-[10px] text-white font-bold"
+                    key={initials}
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F37021] to-[#D4611A] border-2 border-white flex items-center justify-center text-[9px] text-white font-bold"
                   >
-                    {String.fromCharCode(64 + i)}
+                    {initials}
                   </div>
                 ))}
               </div>
-              <span>+200 profesionales aprobados</span>
+              <span>+200 profesionales con Green Card aprobada</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-gray-300" />
             <span>98% tasa de aprobación</span>

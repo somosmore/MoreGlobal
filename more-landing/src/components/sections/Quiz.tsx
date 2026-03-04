@@ -436,7 +436,7 @@ export default function Quiz() {
                               onClick={() => setShowLeadCapture(true)}
                             >
                               <Send className="w-4 h-4" />
-                              Sí, quiero agendar mi evaluación gratuita
+                              Sí, quiero agendar mi evaluación personalizada
                             </Button>
                             <Button
                               variant="outline"
@@ -540,7 +540,7 @@ export default function Quiz() {
                             disabled={leadSubmitting}
                           >
                             <Send className="w-4 h-4" />
-                            {leadSubmitting ? "Enviando..." : "Enviar mi perfil"}
+                            {leadSubmitting ? "Enviando..." : "Quiero recibir mi evaluación"}
                           </Button>
                           <Button
                             type="button"
@@ -596,7 +596,7 @@ export default function Quiz() {
           </Card>
         </motion.div>
 
-        {/* Bridge → PainPoints */}
+        {/* Bridge → Success */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -604,7 +604,7 @@ export default function Quiz() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center text-sm text-gray-400 mt-10 italic"
         >
-          Tener el perfil es solo la mitad. La mayoría falla por algo que nunca le dijeron.
+          Mira lo que pasa cuando el perfil correcto recibe la estrategia correcta.
         </motion.p>
       </div>
     </section>

@@ -8,24 +8,27 @@ const painPoints = [
     title: "Incertidumbre Burocrática",
     description:
       "El proceso migratorio está lleno de regulaciones confusas, tiempos inciertos y cambios de políticas. Sin guía experta, tu caso puede quedar estancado indefinidamente.",
-    color: "from-[#F37021]/15 to-[#F37021]/5",
-    iconColor: "text-[#F37021]",
+    color: "from-red-500/15 to-red-500/5",
+    iconColor: "text-red-500",
+    borderColor: "hover:border-red-200",
   },
   {
     icon: FileSearch,
     title: "Falta de Estrategia Técnica",
     description:
       "Muchos asesores tramitan la visa sin un plan estratégico real. Tu petición necesita un método poderoso que demuestre tu impacto nacional, no solo un formulario bien llenado.",
-    color: "from-[#F37021]/15 to-[#F37021]/5",
-    iconColor: "text-[#F37021]",
+    color: "from-blue-600/15 to-blue-600/5",
+    iconColor: "text-blue-600",
+    borderColor: "hover:border-blue-200",
   },
   {
     icon: UserX,
     title: "El Profesional Olvidado",
     description:
       "Tienes años de experiencia, logros reales y un futuro brillante, pero nadie te ha enseñado a presentar tu perfil como lo que realmente es: extraordinario.",
-    color: "from-[#F37021]/15 to-[#F37021]/5",
-    iconColor: "text-[#F37021]",
+    color: "from-[#2A3A4A]/15 to-[#2A3A4A]/5",
+    iconColor: "text-[#2A3A4A]",
+    borderColor: "hover:border-[#2A3A4A]/20",
   },
 ];
 
@@ -80,7 +83,7 @@ export default function PainPoints() {
         >
           {painPoints.map((point) => (
             <motion.div key={point.title} variants={cardVariants}>
-              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+              <Card className={`h-full border shadow-lg hover:shadow-xl transition-all duration-300 group ${point.borderColor}`}>
                 <CardContent className="p-8">
                   <div
                     className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${point.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
