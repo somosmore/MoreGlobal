@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-03 (feat: Wizard de Landing con Gemini — Proyectos, Clientes, sistema de roles)
+> Última actualización: 2026-03-04 (feat: Asesoría VIP — sección tripwire $97 entre Testimonios y Precios)
 
 ---
 
@@ -13,10 +13,11 @@
    - 1.4 [Sección: A quién ayudamos](#14-sección-a-quién-ayudamos)
    - 1.5 [Sección: Puntos de dolor](#15-sección-puntos-de-dolor)
    - 1.6 [Sección: Testimonios](#16-sección-testimonios)
-   - 1.7 [Sección: Precios](#17-sección-precios)
-   - 1.8 [Footer](#18-footer)
-   - 1.9 [Página de éxito](#19-página-de-éxito)
-   - 1.10 [Blueprint EB2-NIW (descargable)](#110-blueprint-eb2-niw-descargable)
+   - 1.7 [Sección: Asesoría VIP](#17-sección-asesoría-vip)
+   - 1.8 [Sección: Precios](#18-sección-precios)
+   - 1.9 [Footer](#19-footer)
+   - 1.10 [Página de éxito](#110-página-de-éxito)
+   - 1.11 [Blueprint EB2-NIW (descargable)](#111-blueprint-eb2-niw-descargable)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -87,7 +88,46 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
   - **Video:** Embed de video (YouTube, Vimeo o Google Drive).
 - Los testimonios están organizados por categorías de programa.
 
-### 1.7 Sección: Precios
+### 1.7 Sección: Asesoría VIP
+
+**Anchor:** `#asesoria-vip`
+
+**Ubicación en el funnel:** Entre Testimonios (`#exito`) y Precios (`#programas`).
+
+Esta sección es un **tripwire offer** que llena el eslabón faltante de la Value Ladder:
+
+```
+Quiz (gratis) → Asesoría VIP ($97) → UPP ($2,500) → Plan Plus ($8,000)
+```
+
+Su objetivo es monetizar el interés de los visitantes que no están listos para comprometerse con los planes principales, y filtrar leads calificados mediante un primer pago simbólico.
+
+#### Contenido visible
+
+| Elemento | Descripción |
+|----------|-------------|
+| Eyebrow | "Primer paso · Cupos limitados por semana" |
+| Headline | "¿Tu perfil califica para la Green Card? Descúbrelo antes de invertir un solo dólar más." |
+| Subheadline | Descripción de la sesión de 60 minutos 1 a 1 con Ivon |
+| Entregables (4 bullets) | Elegibilidad real, obstáculos del perfil, hoja de ruta 90 días, recomendación de programa |
+| Precio | $97 USD · Sesión 1 a 1 · 60 minutos con Ivon |
+| Garantía | Reembolso si en los primeros 15 minutos no se puede ayudar al usuario |
+| CTA | "Sí, quiero evaluar mi perfil con Ivon — $97 USD" → abre el link de Calendly |
+
+#### Comportamiento del CTA
+
+- El botón utiliza el campo `calendar_url` almacenado en la tabla `site_settings` de Supabase.
+- **Configuración:** Admin → Configuración → pegar el link de Calendly de la Asesoría VIP.
+- Si `calendar_url` está vacío, el botón aparece deshabilitado con el texto "Próximamente disponible".
+- El link se abre en una nueva pestaña (`target="_blank"`).
+
+#### Componente
+
+`more-landing/src/components/sections/VipSession.tsx`
+
+---
+
+### 1.8 Sección: Precios
 
 - Presenta los dos planes disponibles: **Unsung Professional Program (UPP)** y **Plan Plus**.
 - Encabezado seguido de una línea de "costo de no actuar" en itálica que recuerda al usuario el costo de la inacción.
@@ -95,13 +135,13 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 - CTAs en primera persona: "Sí, quiero comenzar mi programa" y "Sí, quiero obtener mi Expediente".
 - Ambos CTAs abren WhatsApp directamente con mensaje pre-cargado.
 
-### 1.8 Footer
+### 1.9 Footer
 
 - Links de navegación secundarios.
 - Información de contacto y redes sociales.
 - Aviso legal / política de privacidad.
 
-### 1.9 Página de éxito
+### 1.10 Página de éxito
 
 **Ruta:** `/success` (redirección automática al completar el quiz)
 
@@ -109,7 +149,7 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 - Confirma que el equipo se pondrá en contacto.
 - Incluye CTA secundario hacia WhatsApp o email.
 
-### 1.10 Blueprint EB2-NIW (descargable)
+### 1.11 Blueprint EB2-NIW (descargable)
 
 **Ruta:** `/blueprint`
 

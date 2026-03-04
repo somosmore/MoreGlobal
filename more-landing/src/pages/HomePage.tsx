@@ -5,6 +5,7 @@ import WhoWeHelp from "@/components/sections/WhoWeHelp";
 import Quiz from "@/components/sections/Quiz";
 import Pricing from "@/components/sections/Pricing";
 import Success from "@/components/sections/Success";
+import VipSession from "@/components/sections/VipSession";
 import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
@@ -16,6 +17,7 @@ export default function HomePage() {
       <PainPoints />
       <WhoWeHelp />
       <Success />
+      <VipSession />
       <Pricing />
       <Footer />
     </div>
