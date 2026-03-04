@@ -272,7 +272,7 @@ p, li, .subtitle { font-size: 20px; }
   width: 100%;
   height: 720px;
   object-fit: cover;
-  object-position: center 20%; 
+  object-position: center top;
   display: block;
 }
 
@@ -498,6 +498,34 @@ p, li, .subtitle { font-size: 20px; }
   margin-top: 14px;
 }
 
+
+/* --- PRINT / PDF EXPORT --- */
+@media print {
+  @page {
+    size: 1280px 720px landscape;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #020617;
+    display: block;
+  }
+
+  .slide-container {
+    width: 1280px !important;
+    height: 720px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    page-break-after: always;
+    break-after: page;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -506,7 +534,7 @@ p, li, .subtitle { font-size: 20px; }
 <div class="slide-container" id="slide1">
     
     <!-- Logo MORE -->
-    <img src="https://drive.google.com/uc?export=view&id=1RIZS5dOzAwHTMxhpqF4wcgX3KUu3-b1W" alt="MORE Logo" class="logo-img logo-top-left">
+    <img src="/logo_more_light.png" alt="MORE Logo" class="logo-img logo-top-left">
 
     <div class="title-layout">
         <h1>El Sueño Americano Evolucionó:<br><span class="highlight-orange">Ahora Tú Eres El Sueño</span></h1>
@@ -517,7 +545,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 2: Highlighted_Numbers (Hook / Myth Busting) -->
 <div class="slide-container" id="slide2">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">El Mito Que Te Mantiene Estancado</h2>
     <div class="content-area">
@@ -539,7 +567,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 3: Bleed_Image_Right (The Vehicle) -->
 <div class="slide-container bleed-image-layout" id="slide3">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <div class="content-container" style="position: relative;">
         <h2 class="slide-title">El Vehículo:<br><span class="highlight-orange">Visa EB2-NIW</span></h2>
@@ -554,14 +582,14 @@ p, li, .subtitle { font-size: 20px; }
 
     </div>
     <div class="image-container">
-        <img class="bleed-image-side" src="https://drive.google.com/uc?export=view&id=1HRVvIFAFLFBQo5IjnPlztNNPRnQ9LYKD" alt="Foto adjunta de la Diapositiva 3">
+        <img class="bleed-image-side" src="/slide3-foto.png" alt="Ivon More - Fundadora MORE">
     </div>
 </div>
 
 <!-- Slide 4: Tiled_Text_With_Icons (Benefits) -->
 <div class="slide-container" id="slide4">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">Por Qué la EB2-NIW es Superior</h2>
     <div class="content-area">
@@ -588,7 +616,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 5: Section_Title -->
 <div class="slide-container" id="slide5">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <div class="section-title-layout">
         <h2>Los 3 Pilares de Aprobación</h2>
@@ -600,7 +628,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 5b: Desglose Visual de los 3 Pilares -->
 <div class="slide-container" id="slide5b">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">La Arquitectura de tu Proyecto</h2>
     <div class="content-area">
@@ -630,7 +658,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 6: Two_Column_Tiled_Text (Contrast) -->
 <div class="slide-container" id="slide6">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">La Diferencia entre Rechazo y Aprobación</h2>
     <div class="content-area">
@@ -650,7 +678,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 7: Styled_Bullet_Points (Checklist) -->
 <div class="slide-container" id="slide7">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">El Paso Cero: Checklist de Esfuerzo</h2>
     <div class="content-area">
@@ -669,7 +697,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 8: Quote (DIY Template) -->
 <div class="slide-container" id="slide8">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">Tu Plantilla de Ejecución Inmediata</h2>
     <div class="content-area">
@@ -683,7 +711,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 9: Image_Right_Text_Left (The Friction / Reality Check) -->
 <div class="slide-container" id="slide9">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">El Costo Real del "Do It Yourself"</h2>
     <div class="content-area">
@@ -705,7 +733,7 @@ p, li, .subtitle { font-size: 20px; }
 <!-- Slide 10: Tiled_Images (The MORE Method / Authority) -->
 <div class="slide-container" id="slide10">
     <!-- Marca de agua Logo -->
-    <img src="https://drive.google.com/uc?export=view&id=1hvDcjFr9RA4LQiDS3muKMxNOZgFgZ0nj" alt="MORE Watermark" class="logo-img logo-watermark">
+    <img src="/logo_more_light.png" alt="MORE Watermark" class="logo-img logo-watermark">
 
     <h2 class="slide-title">El Método MORE: Aceleración Estratégica</h2>
     <div class="content-area">
@@ -746,7 +774,7 @@ p, li, .subtitle { font-size: 20px; }
     
     <div class="qa-layout">
         <!-- Logo MORE Principal para el Cierre -->
-        <img src="https://drive.google.com/uc?export=view&id=1RIZS5dOzAwHTMxhpqF4wcgX3KUu3-b1W" alt="MORE Logo" class="logo-center-large logo-img">
+        <img src="/logo_more_light.png" alt="MORE Logo" class="logo-center-large logo-img">
 
         <h2>Deja de Esperar Aprobación.</h2>
         <p>Es hora de construir tu impacto nacional en EE.UU.</p>
@@ -757,32 +785,6 @@ p, li, .subtitle { font-size: 20px; }
     </div>
 </div>
 
-<script>
-    // 🛠️ PARCHE TÉCNICO PARA IMÁGENES DE GOOGLE DRIVE 🛠️
-    // Vector de respaldo por si el enlace original de Drive se rompe o bloquea
-    const logoSVG = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Ctext x='0' y='70' font-family='system-ui, -apple-system, sans-serif' font-size='80' font-weight='800' fill='%23ea580c' letter-spacing='-4'%3Emore%3C/text%3E%3Ctext x='5' y='100' font-family='system-ui, -apple-system, sans-serif' font-size='14' font-weight='700' fill='%23f8fafc' letter-spacing='2.5'%3EMIGRACIÓN CON PROPÓSITO%3C/text%3E%3C/svg%3E";
-    
-    document.querySelectorAll('img').forEach(img => {
-        // 1. Google Drive bloquea 'uc?export=view' en sitios web (Error CORS).
-        // Lo forzamos al formato de miniatura ('thumbnail') que es público y rápido.
-        if(img.src.includes('drive.google.com/uc')) {
-            const url = new URL(img.src);
-            const id = url.searchParams.get('id');
-            if(id) {
-                // Usamos w1200 para garantizar alta calidad tanto en logos como en fotos grandes
-                img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w1200`;
-            }
-        }
-        
-        // 2. Si el Thumbnail también falla, inyecta el logo en vectores instantáneamente (Solo para logos)
-        if (img.classList.contains('logo-img')) {
-            img.onerror = function() {
-                this.onerror = null; // Prevenir bucles infinitos
-                this.src = logoSVG;
-            };
-        }
-    });
-</script>
 
 </body>
 </html>

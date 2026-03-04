@@ -3,10 +3,10 @@ import { Shield, Clock, CheckCircle, CalendarDays, Star } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 
 const deliverables = [
-  "Evaluación real de tu elegibilidad EB-2 NIW — sin eufemismos",
-  "Los 3 obstáculos específicos de tu perfil y cómo superarlos",
-  "Tu hoja de ruta personalizada para los próximos 90 días",
-  "Recomendación clara: qué programa es el correcto para ti (o si todavía no es el momento)",
+  "Tu situación real: Te decimos si calificas para la EB-2 NIW hoy mismo.",
+  "Tus puntos débiles: Qué te falta y cómo lo solucionamos.",
+  "Tu plan a 3 meses: Los pasos exactos que debes dar.",
+  "La decisión final: Qué programa te conviene (o si es mejor esperar un poco).",
 ]
 
 export default function VipSession() {
@@ -43,17 +43,16 @@ export default function VipSession() {
 
                 {/* Headline */}
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#2A3A4A] leading-tight tracking-tight mb-4">
-                  ¿Tu perfil califica para la Green Card?{" "}
+                  ¿Tu perfil sirve para la Green Card?{" "}
                   <span className="text-[#F37021]">
-                    Descúbrelo antes de invertir un solo dólar más.
+                    Descúbrelo antes de gastar un solo dólar.
                   </span>
                 </h2>
 
                 {/* Subheadline */}
                 <p className="text-gray-600 text-base leading-relaxed mb-8">
-                  En 60 minutos con Ivon analizamos tu caso, identificamos tus fortalezas reales
-                  y te damos la hoja de ruta exacta para los próximos 90 días — sin rodeos,
-                  sin promesas vacías.
+                  En una sesión de 60 minutos con Ivon, analizamos tu caso con total honestidad.
+                  Te llevas una hoja de ruta clara para los próximos 90 días, sin vueltas y con la verdad.
                 </p>
 
                 {/* Deliverables */}

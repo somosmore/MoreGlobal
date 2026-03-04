@@ -1,14 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { ArrowLeft, Download } from "lucide-react"
 
 export default function BlueprintPage() {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
   useEffect(() => {
     document.title = "Blueprint EB2-NIW | MORE — Migración con Propósito"
     return () => {
       document.title = "MORE — Migración con Propósito"
     }
   }, [])
+
+  const handleDownloadPDF = () => {
+    const iframeWindow = iframeRef.current?.contentWindow
+    if (!iframeWindow) return
+    iframeWindow.focus()
+    iframeWindow.print()
+  }
 
   return (
     <div className="flex flex-col h-screen bg-[#020617]">
@@ -21,19 +30,18 @@ export default function BlueprintPage() {
           <ArrowLeft size={16} />
           Volver al sitio
         </Link>
-        <a
-          href="/blueprint.html"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={handleDownloadPDF}
           className="flex items-center gap-2 bg-[#ea580c] hover:bg-[#c2410a] text-white font-bold px-6 py-2.5 rounded-lg text-sm transition-colors shadow-lg"
         >
           <Download size={16} />
           Descargar como PDF
-        </a>
+        </button>
       </div>
 
       {/* Blueprint embebido */}
       <iframe
+        ref={iframeRef}
         src="/blueprint.html"
         title="Blueprint EB2-NIW MORE"
         className="flex-1 w-full border-0"
