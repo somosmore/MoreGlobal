@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-04 (feat: Asesoría VIP — sección tripwire $97 entre Testimonios y Precios)
+> Última actualización: 2026-03-04 (feat: Módulo de Recursos — biblioteca centralizada con Manual de Marca, Blueprint y Landings)
 
 ---
 
@@ -27,6 +27,7 @@
    - 2.6 [Sistema de Roles](#26-sistema-de-roles)
    - 2.7 [Módulo de Clientes](#27-módulo-de-clientes)
    - 2.8 [Módulo de Proyectos de Landing (Wizard + Gemini)](#28-módulo-de-proyectos-de-landing-wizard--gemini)
+   - 2.9 [Módulo de Recursos (Biblioteca)](#29-módulo-de-recursos-biblioteca)
 
 ---
 
@@ -570,6 +571,7 @@ Obtener la key en: https://aistudio.google.com/app/apikey
 | `tech_config` | jsonb | Configuración técnica (solo root) |
 | `generated_json` | jsonb | Contenido generado por Gemini |
 | `generated_prompt` | text | Prompt de código generado por Gemini |
+| `live_url` | text | URL del sitio desplegado (opcional, para preview live) |
 | `created_at` | timestamptz | Fecha de creación |
 | `updated_at` | timestamptz | Última actualización |
 
@@ -580,3 +582,57 @@ Obtener la key en: https://aistudio.google.com/app/apikey
 | `user_id` | uuid | FK a `auth.users.id` (PK) |
 | `role` | text | `standard` o `root` |
 | `created_at` | timestamptz | Fecha de creación |
+
+---
+
+## 2.9 Módulo de Recursos (Biblioteca)
+
+Ruta: `/admin/resources`
+
+Biblioteca centralizada donde se almacenan y consultan todos los activos estratégicos de la operación: manual de marca, documentos de estrategia, playbooks y landings generadas por producto digital.
+
+### Funcionalidades principales
+
+- **Tabs de filtro**: Todos / Marca / Estrategia / Playbooks / Landings
+- **Contador de recursos**: Muestra el total en la pestaña activa
+- **Agregar recurso**: Modal para crear nuevos recursos con título, descripción, tipo, formato y URL
+- **Vista previa embebida**: Modal a pantalla completa con `<iframe>` para PDF y HTML; enlace externo para links
+- **Landings con mock browser**: Las landings generadas muestran una tarjeta con ventana de navegador simulada con el copy del hero (`h1`, `h2`, CTA)
+- **Landings con URL live**: Si el campo `live_url` está cargado en el proyecto, aparece un chip `LIVE` y se puede ver el sitio en un modal iframe
+
+### Tipos de recursos (`type`)
+
+| Valor | Descripción |
+|-------|-------------|
+| `brand` | Recursos de identidad visual (manual de marca, paleta, tipografías) |
+| `strategy` | Documentos estratégicos (blueprint, planes de negocio) |
+| `playbook` | Guías de proceso y operación |
+
+### Formatos de recursos (`format`)
+
+| Valor | Comportamiento en "Ver" |
+|-------|------------------------|
+| `pdf` | Abre modal con iframe del PDF |
+| `html` | Abre modal con iframe de la ruta interna |
+| `link` | Abre en nueva pestaña del navegador |
+
+### Recursos iniciales (seed)
+
+| Recurso | Tipo | Formato | URL |
+|---------|------|---------|-----|
+| Manual de Marca MORE | brand | pdf | `/resources/manual-de-marca.pdf` |
+| Blueprint EB2-NIW 2026 | strategy | html | `/blueprint` |
+
+### Tabla de base de datos: `resources`
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | uuid | Clave primaria |
+| `title` | text | Nombre del recurso |
+| `description` | text | Descripción breve (opcional) |
+| `type` | text | `brand` / `strategy` / `playbook` |
+| `format` | text | `pdf` / `html` / `link` |
+| `url` | text | URL del recurso (relativa o absoluta) |
+| `is_pinned` | boolean | Si aparece destacado con ícono de pin |
+| `created_at` | timestamptz | Fecha de creación |
+| `updated_at` | timestamptz | Última actualización |

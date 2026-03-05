@@ -12,6 +12,7 @@ import AdminProjects from "@/pages/AdminProjects"
 import AdminProjectWizard from "@/pages/AdminProjectWizard"
 import AdminProjectResult from "@/pages/AdminProjectResult"
 import AdminClients from "@/pages/AdminClients"
+import AdminResources from "@/pages/AdminResources"
 import BlueprintPage from "@/pages/BlueprintPage"
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="projects/:id" element={<AdminProjectResult />} />
             <Route path="projects/:id/edit" element={<AdminProjectWizard />} />
             <Route path="clients" element={<AdminClients />} />
+            <Route path="resources" element={<AdminResources />} />
           </Route>
 
           <Route path="/blueprint" element={<BlueprintPage />} />
