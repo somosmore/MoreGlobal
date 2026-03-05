@@ -51,7 +51,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; description: stri
     id: "landings",
     label: "Landings",
     icon: Globe,
-    description: "Páginas de venta generadas por el wizard. Cada tarjeta muestra el copy del hero y el estado del proyecto.",
+    description: "Páginas web de MORE. Cada tarjeta muestra el copy del hero",  
   },
 ]
 
