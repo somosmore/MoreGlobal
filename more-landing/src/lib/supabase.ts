@@ -209,6 +209,7 @@ export type LandingProject = {
   tech_config: TechConfig;
   generated_json: GeneratedLandingJson | null;
   generated_prompt: string | null;
+  live_url: string | null;
   created_at: string;
   updated_at: string;
   clients?: Client | null;
@@ -216,11 +217,35 @@ export type LandingProject = {
 
 export type LandingProjectInsert = Omit<
   LandingProject,
-  "id" | "created_at" | "updated_at" | "clients"
+  "id" | "created_at" | "updated_at" | "clients" | "live_url"
 > & {
   id?: string;
+  live_url?: string | null;
 };
 
 export type LandingProjectUpdate = Partial<
   Omit<LandingProject, "id" | "created_at" | "clients">
 >;
+
+// ─── Resources ────────────────────────────────────────────────────────────────
+
+export type ResourceType = "brand" | "strategy" | "playbook" | "landing";
+export type ResourceFormat = "pdf" | "html" | "link";
+
+export type Resource = {
+  id: string;
+  title: string;
+  description: string | null;
+  type: ResourceType;
+  format: ResourceFormat;
+  url: string;
+  is_pinned: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ResourceInsert = Omit<Resource, "id" | "created_at" | "updated_at"> & {
+  id?: string;
+};
+
+export type ResourceUpdate = Partial<ResourceInsert>;

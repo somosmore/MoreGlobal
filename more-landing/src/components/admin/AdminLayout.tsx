@@ -15,6 +15,7 @@ import {
   LayoutTemplate,
   Contact,
   ShieldCheck,
+  Library,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -26,6 +27,7 @@ const NAV_ITEMS = [
   { href: "/admin/testimonials", icon: MessageSquare, label: "Testimonios" },
   { href: "/admin/projects", icon: LayoutTemplate, label: "Proyectos" },
   { href: "/admin/clients", icon: Contact, label: "Clientes" },
+  { href: "/admin/resources", icon: Library, label: "Recursos" },
   { href: "/admin/settings", icon: Settings, label: "Configuración" },
 ]
 
@@ -39,6 +41,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   new: "Nuevo proyecto",
   edit: "Editar",
   clients: "Clientes",
+  resources: "Recursos",
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
