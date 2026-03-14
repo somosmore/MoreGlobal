@@ -89,6 +89,9 @@ export type SiteSettingsMap = {
   calendar_url: string
   whatsapp_number: string
   contact_email: string
+  instagram_url: string
+  linkedin_url: string
+  facebook_url: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

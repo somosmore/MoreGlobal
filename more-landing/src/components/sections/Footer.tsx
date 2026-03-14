@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, MapPin, Instagram } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Instagram, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const faqs = [
   {
@@ -77,6 +78,14 @@ const faqs = [
 ];
 
 export default function Footer() {
+  const { settings } = useSiteSettings()
+
+  const socialLinks = [
+    { url: settings.instagram_url, Icon: Instagram, label: "Instagram" },
+    { url: settings.linkedin_url, Icon: Linkedin, label: "LinkedIn" },
+    { url: settings.facebook_url, Icon: Facebook, label: "Facebook" },
+  ].filter((s) => s.url.trim())
+
   return (
     <>
       {/* FAQ Section */}
@@ -227,17 +236,20 @@ export default function Footer() {
                   <MapPin className="w-4 h-4 text-[#F37021] mt-0.5" />
                   4538 Bagley Garden Ct, Katy TX 77449, United States
                 </li>
-                <li className="flex items-center gap-3 text-white/40 text-sm">
-                  <Instagram className="w-4 h-4 text-[#F37021]" />
-                  <a
-                    href="https://instagram.com/somos.more"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#F37021] transition-colors"
-                  >
-                    @somos.more
-                  </a>
-                </li>
+                {socialLinks.map(({ url, Icon, label }) => (
+                  <li key={label} className="flex items-center gap-3 text-white/40 text-sm">
+                    <Icon className="w-4 h-4 text-[#F37021] shrink-0" aria-hidden="true" />
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="hover:text-[#F37021] transition-colors"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

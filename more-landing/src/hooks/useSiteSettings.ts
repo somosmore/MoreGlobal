@@ -5,6 +5,9 @@ const DEFAULTS: SiteSettingsMap = {
   calendar_url: "",
   whatsapp_number: "+18329416026",
   contact_email: "info@justmore.net",
+  instagram_url: "https://instagram.com/somos.more",
+  linkedin_url: "",
+  facebook_url: "",
 }
 
 type UseSiteSettingsReturn = {

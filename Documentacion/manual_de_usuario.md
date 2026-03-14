@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-04 (feat: Módulo de Recursos — biblioteca centralizada con Manual de Marca, Blueprint y Landings)
+> Última actualización: 2026-03-14 (feat: Redes sociales configurables desde el panel de administración)
 
 ---
 
@@ -364,7 +364,7 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 
 **Ruta:** `/admin/settings`
 
-Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Actualmente contiene la configuración del calendario de asesorías.
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Contiene dos secciones: calendario de asesorías y redes sociales.
 
 #### URL del Calendario de Asesorías
 
@@ -380,6 +380,24 @@ Página para gestionar parámetros globales del sitio web que se aplican en el f
 4. Hacer clic en "Guardar cambios".
 
 A partir de ese momento, el botón CTA del Blueprint abrirá el calendario configurado en una pestaña nueva. Si no hay URL configurada, el botón redirige a la página de inicio.
+
+#### Redes Sociales
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `instagram_url` | URL (texto) | URL completa del perfil de Instagram (ej: `https://instagram.com/somos.more`) |
+| `linkedin_url` | URL (texto) | URL completa de la página de LinkedIn |
+| `facebook_url` | URL (texto) | URL completa de la página de Facebook |
+
+**Cómo configurar:**
+
+1. Ir a `/admin/settings`.
+2. En la tarjeta "Redes Sociales", pegar la URL completa de cada red.
+3. Dejar en blanco cualquier campo para que esa red social **no aparezca** en el footer del sitio.
+4. Usar el ícono de enlace externo al lado de cada campo para verificar que la URL sea correcta.
+5. Hacer clic en "Guardar redes sociales".
+
+Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de contacto del footer únicamente si tienen URL configurada.
 
 ---
 
@@ -422,6 +440,9 @@ A partir de ese momento, el botón CTA del Blueprint abrirá el calendario confi
 |-----|-------------|
 | `calendar_url` | URL del calendario de asesorías (Google Calendar, Calendly, etc.) |
 | `whatsapp_number` | Número de WhatsApp de contacto |
+| `instagram_url` | URL del perfil de Instagram (aparece en el footer si está configurada) |
+| `linkedin_url` | URL de la página de LinkedIn (aparece en el footer si está configurada) |
+| `facebook_url` | URL de la página de Facebook (aparece en el footer si está configurada) |
 | `contact_email` | Email de contacto |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
