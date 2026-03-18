@@ -8,6 +8,7 @@ const DEFAULTS: SiteSettingsMap = {
   instagram_url: "https://instagram.com/somos.more",
   linkedin_url: "",
   facebook_url: "",
+  youtube_url: "",
 }
 
 type UseSiteSettingsReturn = {

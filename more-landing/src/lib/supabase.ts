@@ -92,6 +92,7 @@ export type SiteSettingsMap = {
   instagram_url: string
   linkedin_url: string
   facebook_url: string
+  youtube_url: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

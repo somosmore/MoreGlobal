@@ -12,6 +12,7 @@ import {
   Instagram,
   Linkedin,
   Facebook,
+  Youtube,
 } from "lucide-react"
 
 type SaveState = "idle" | "saving" | "success" | "error"
@@ -26,6 +27,7 @@ export default function AdminSettings() {
   const [instagramUrl, setInstagramUrl] = useState("")
   const [linkedinUrl, setLinkedinUrl] = useState("")
   const [facebookUrl, setFacebookUrl] = useState("")
+  const [youtubeUrl, setYoutubeUrl] = useState("")
   const [socialSaveState, setSocialSaveState] = useState<SaveState>("idle")
   const [socialSaveError, setSocialSaveError] = useState<string | null>(null)
 
@@ -35,6 +37,7 @@ export default function AdminSettings() {
       setInstagramUrl(settings.instagram_url)
       setLinkedinUrl(settings.linkedin_url)
       setFacebookUrl(settings.facebook_url)
+      setYoutubeUrl(settings.youtube_url)
     }
   }, [loading, settings])
 
@@ -79,6 +82,7 @@ export default function AdminSettings() {
         { key: "instagram_url", value: instagramUrl.trim() },
         { key: "linkedin_url", value: linkedinUrl.trim() },
         { key: "facebook_url", value: facebookUrl.trim() },
+        { key: "youtube_url", value: youtubeUrl.trim() },
       ],
       { onConflict: "key" }
     )
@@ -131,6 +135,14 @@ export default function AdminSettings() {
       setValue: setFacebookUrl,
       Icon: Facebook,
       placeholder: "https://facebook.com/tu-pagina",
+    },
+    {
+      id: "youtube-url",
+      label: "YouTube",
+      value: youtubeUrl,
+      setValue: setYoutubeUrl,
+      Icon: Youtube,
+      placeholder: "https://youtube.com/@tu-canal",
     },
   ]
 

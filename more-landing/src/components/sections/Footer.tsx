@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, MapPin, Instagram, Linkedin, Facebook } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -84,6 +84,7 @@ export default function Footer() {
     { url: settings.instagram_url, Icon: Instagram, label: "Instagram" },
     { url: settings.linkedin_url, Icon: Linkedin, label: "LinkedIn" },
     { url: settings.facebook_url, Icon: Facebook, label: "Facebook" },
+    { url: settings.youtube_url, Icon: Youtube, label: "YouTube" },
   ].filter((s) => s.url.trim())
 
   return (
