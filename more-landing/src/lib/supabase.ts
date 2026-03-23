@@ -21,6 +21,7 @@ export type Testimonial = {
   media_type: "text_photo" | "video";
   photo_url: string | null;
   video_url: string | null;
+  video_thumbnail_url: string | null;
   category:
     | "abogados_in_house"
     | "abogados_preparadora_monica_martinez"

@@ -108,37 +108,81 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 }
 
 function VideoTestimonialCard({ t }: { t: Testimonial }) {
+  const [playing, setPlaying] = useState(false)
   const info = getVideoInfo(t.video_url ?? "")
   const displayTimeline = t.status_label ?? t.timeline ?? ""
 
   const embedUrl = info
     ? info.type === "youtube"
-      ? `https://www.youtube.com/embed/${info.videoId}?rel=0&modestbranding=1`
+      ? `https://www.youtube.com/embed/${info.videoId}?autoplay=1&rel=0&modestbranding=1`
+      : info.type === "vimeo"
+      ? `https://player.vimeo.com/video/${info.videoId}?autoplay=1&muted=1`
       : info.embedUrl
     : null
+
+  const handlePlay = () => {
+    if (embedUrl) setPlaying(true)
+  }
+
+  const handleKeyDownPlay = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") handlePlay()
+  }
 
   return (
     <Card className="border-0 shadow-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow">
       <CardContent className="p-0 flex flex-col flex-1">
         <div className="relative aspect-video bg-[#2A3A4A]">
-          {embedUrl ? (
+          {playing && embedUrl ? (
             <iframe
               src={embedUrl}
               title={`Testimonio de ${t.name}`}
               className="absolute inset-0 w-full h-full"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
-          ) : t.video_url ? (
-            <a
-              href={t.video_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute inset-0 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
-            >
-              <span className="text-sm font-medium">Ver video</span>
-            </a>
-          ) : null}
+          ) : (
+            <>
+              {t.video_thumbnail_url ? (
+                <img
+                  src={t.video_thumbnail_url}
+                  alt={`Portada del testimonio de ${t.name}`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : null}
+
+              {embedUrl ? (
+                <button
+                  type="button"
+                  aria-label={`Reproducir testimonio de ${t.name}`}
+                  tabIndex={0}
+                  onClick={handlePlay}
+                  onKeyDown={handleKeyDownPlay}
+                  className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+                >
+                  <span className="w-16 h-16 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-xl">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-7 h-7 text-[#F37021] translate-x-0.5"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                </button>
+              ) : t.video_url ? (
+                <a
+                  href={t.video_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ver video de ${t.name} en sitio externo`}
+                  className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors text-white"
+                >
+                  <span className="text-sm font-medium">Ver video</span>
+                </a>
+              ) : null}
+            </>
+          )}
         </div>
 
         <div className="px-4 py-3 flex flex-col gap-1 bg-white">

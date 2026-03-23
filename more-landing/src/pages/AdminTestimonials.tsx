@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
+import { ImageUploader } from "@/components/ui/ImageUploader"
 import {
   Sheet,
   SheetContent,
@@ -74,6 +75,7 @@ const emptyForm: TestimonialInsert = {
   media_type: "text_photo",
   photo_url: null,
   video_url: null,
+  video_thumbnail_url: null,
   category: "en_espera_aprobacion",
   sort_order: 0,
 }
@@ -143,9 +145,18 @@ function SortableCard({
               {/* Avatar / Photo */}
               <div className="shrink-0">
                 {isVideo ? (
-                  <div className="w-16 h-16 rounded-xl bg-[#F37021]/10 flex items-center justify-center border border-[#F37021]/20">
-                    <Video className="w-7 h-7 text-[#F37021]" />
-                  </div>
+                  t.video_thumbnail_url ? (
+                    <img
+                      src={t.video_thumbnail_url}
+                      alt={`Portada de ${t.name}`}
+                      className="w-16 h-16 rounded-xl object-cover border border-[#F37021]/20"
+                      onError={(e) => { e.currentTarget.style.display = "none" }}
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-xl bg-[#F37021]/10 flex items-center justify-center border border-[#F37021]/20">
+                      <Video className="w-7 h-7 text-[#F37021]" />
+                    </div>
+                  )
                 ) : t.photo_url ? (
                   <img
                     src={t.photo_url}
@@ -393,6 +404,7 @@ export default function AdminTestimonials() {
       media_type: t.media_type,
       photo_url: t.photo_url ?? null,
       video_url: t.video_url ?? null,
+      video_thumbnail_url: t.video_thumbnail_url ?? null,
       category: t.category,
       sort_order: t.sort_order,
     })
@@ -432,6 +444,7 @@ export default function AdminTestimonials() {
       status_label: isVideo ? null : (form.status_label?.trim() || null),
       photo_url: isVideo ? null : (form.photo_url?.trim() || null),
       video_url: form.video_url?.trim() || null,
+      video_thumbnail_url: isVideo ? (form.video_thumbnail_url?.trim() || null) : null,
       sort_order: form.sort_order ?? 0,
     }
     if (editingId) {
@@ -608,6 +621,14 @@ export default function AdminTestimonials() {
                     className="font-mono text-sm"
                   />
                 </div>
+
+                <ImageUploader
+                  value={form.video_thumbnail_url ?? null}
+                  onUpload={(url) => updateField("video_thumbnail_url", url)}
+                  onRemove={() => updateField("video_thumbnail_url", null)}
+                  label="Foto de portada del video"
+                />
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>

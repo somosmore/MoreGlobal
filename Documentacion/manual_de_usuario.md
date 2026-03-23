@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-14 (feat: Redes sociales configurables desde el panel de administración)
+> Última actualización: 2026-03-18 (feat: Foto de portada para testimonios de video — upload con drag & drop)
 
 ---
 
@@ -86,7 +86,7 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 - Muestra testimonios dinámicos cargados desde la tabla `testimonials` de Supabase.
 - Soporta dos formatos:
   - **Texto + foto:** Nombre, país, rol, cita, timeline y foto de la persona.
-  - **Video:** Embed de video (YouTube, Vimeo o Google Drive).
+  - **Video:** Muestra una **foto de portada** (thumbnail) con un botón de play. Al hacer click, se carga el embed del video (YouTube, Vimeo o Google Drive) con autoplay. Si no hay portada, se muestra un fondo oscuro con el botón de play.
 - Los testimonios están organizados por categorías de programa.
 
 ### 1.7 Sección: Asesoría VIP
@@ -354,7 +354,10 @@ Cada testimonio se muestra como una tarjeta expandida con:
 **Tipo de medio:**
 
 - **Texto + foto:** Requiere nombre, cita del testimonio y opcionalmente: país, rol, área, programa, timeline, etiqueta de estado, URL de foto, categoría y orden.
-- **Video:** Solo requiere URL del video (YouTube, Vimeo o Google Drive), categoría y orden.
+- **Video:** Requiere URL del video (YouTube, Vimeo o Google Drive), categoría y orden. Opcionalmente se puede cargar una **foto de portada** mediante la zona de upload.
+
+**Foto de portada del video:**  
+La zona de upload permite arrastrar una imagen o hacer click para abrir el explorador de archivos. Formatos aceptados: JPG, PNG, WebP, GIF (máx. 5 MB). La imagen se sube automáticamente a Supabase Storage (bucket `video-thumbnails`) y la URL pública queda guardada en el campo `video_thumbnail_url`. Al pasar el cursor sobre la portada cargada aparecen los botones **Cambiar** y **Quitar**.
 
 Los testimonios con tipo `video` se muestran en la sección de videos del sitio público. Los de `texto + foto` en la grilla de testimonios escritos.
 
@@ -464,6 +467,7 @@ Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de cont
 | `media_type` | text | Tipo de medio (text_photo, video) |
 | `photo_url` | text | URL de foto (opcional) |
 | `video_url` | text | URL de video (opcional) |
+| `video_thumbnail_url` | text | URL de la foto de portada del video en Supabase Storage (opcional) |
 | `category` | text | Categoría del testimonio |
 | `sort_order` | int | Orden de aparición |
 | `created_at` | timestamptz | Fecha de creación |
