@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-04 (feat: Módulo de Recursos — biblioteca centralizada con Manual de Marca, Blueprint y Landings)
+> Última actualización: 2026-03-18 (feat: Foto de portada para testimonios de video — upload con drag & drop)
 
 ---
 
@@ -86,7 +86,7 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 - Muestra testimonios dinámicos cargados desde la tabla `testimonials` de Supabase.
 - Soporta dos formatos:
   - **Texto + foto:** Nombre, país, rol, cita, timeline y foto de la persona.
-  - **Video:** Embed de video (YouTube, Vimeo o Google Drive).
+  - **Video:** Muestra una **foto de portada** (thumbnail) con un botón de play. Al hacer click, se carga el embed del video (YouTube, Vimeo o Google Drive) con autoplay. Si no hay portada, se muestra un fondo oscuro con el botón de play.
 - Los testimonios están organizados por categorías de programa.
 
 ### 1.7 Sección: Asesoría VIP
@@ -354,7 +354,10 @@ Cada testimonio se muestra como una tarjeta expandida con:
 **Tipo de medio:**
 
 - **Texto + foto:** Requiere nombre, cita del testimonio y opcionalmente: país, rol, área, programa, timeline, etiqueta de estado, URL de foto, categoría y orden.
-- **Video:** Solo requiere URL del video (YouTube, Vimeo o Google Drive), categoría y orden.
+- **Video:** Requiere URL del video (YouTube, Vimeo o Google Drive), categoría y orden. Opcionalmente se puede cargar una **foto de portada** mediante la zona de upload.
+
+**Foto de portada del video:**  
+La zona de upload permite arrastrar una imagen o hacer click para abrir el explorador de archivos. Formatos aceptados: JPG, PNG, WebP, GIF (máx. 5 MB). La imagen se sube automáticamente a Supabase Storage (bucket `video-thumbnails`) y la URL pública queda guardada en el campo `video_thumbnail_url`. Al pasar el cursor sobre la portada cargada aparecen los botones **Cambiar** y **Quitar**.
 
 Los testimonios con tipo `video` se muestran en la sección de videos del sitio público. Los de `texto + foto` en la grilla de testimonios escritos.
 
@@ -364,7 +367,7 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 
 **Ruta:** `/admin/settings`
 
-Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Actualmente contiene la configuración del calendario de asesorías.
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Contiene dos secciones: calendario de asesorías y redes sociales.
 
 #### URL del Calendario de Asesorías
 
@@ -380,6 +383,24 @@ Página para gestionar parámetros globales del sitio web que se aplican en el f
 4. Hacer clic en "Guardar cambios".
 
 A partir de ese momento, el botón CTA del Blueprint abrirá el calendario configurado en una pestaña nueva. Si no hay URL configurada, el botón redirige a la página de inicio.
+
+#### Redes Sociales
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `instagram_url` | URL (texto) | URL completa del perfil de Instagram (ej: `https://instagram.com/somos.more`) |
+| `linkedin_url` | URL (texto) | URL completa de la página de LinkedIn |
+| `facebook_url` | URL (texto) | URL completa de la página de Facebook |
+
+**Cómo configurar:**
+
+1. Ir a `/admin/settings`.
+2. En la tarjeta "Redes Sociales", pegar la URL completa de cada red.
+3. Dejar en blanco cualquier campo para que esa red social **no aparezca** en el footer del sitio.
+4. Usar el ícono de enlace externo al lado de cada campo para verificar que la URL sea correcta.
+5. Hacer clic en "Guardar redes sociales".
+
+Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de contacto del footer únicamente si tienen URL configurada.
 
 ---
 
@@ -422,6 +443,9 @@ A partir de ese momento, el botón CTA del Blueprint abrirá el calendario confi
 |-----|-------------|
 | `calendar_url` | URL del calendario de asesorías (Google Calendar, Calendly, etc.) |
 | `whatsapp_number` | Número de WhatsApp de contacto |
+| `instagram_url` | URL del perfil de Instagram (aparece en el footer si está configurada) |
+| `linkedin_url` | URL de la página de LinkedIn (aparece en el footer si está configurada) |
+| `facebook_url` | URL de la página de Facebook (aparece en el footer si está configurada) |
 | `contact_email` | Email de contacto |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
@@ -443,6 +467,7 @@ A partir de ese momento, el botón CTA del Blueprint abrirá el calendario confi
 | `media_type` | text | Tipo de medio (text_photo, video) |
 | `photo_url` | text | URL de foto (opcional) |
 | `video_url` | text | URL de video (opcional) |
+| `video_thumbnail_url` | text | URL de la foto de portada del video en Supabase Storage (opcional) |
 | `category` | text | Categoría del testimonio |
 | `sort_order` | int | Orden de aparición |
 | `created_at` | timestamptz | Fecha de creación |

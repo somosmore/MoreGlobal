@@ -21,6 +21,7 @@ export type Testimonial = {
   media_type: "text_photo" | "video";
   photo_url: string | null;
   video_url: string | null;
+  video_thumbnail_url: string | null;
   category:
     | "abogados_in_house"
     | "abogados_preparadora_monica_martinez"
@@ -89,6 +90,10 @@ export type SiteSettingsMap = {
   calendar_url: string
   whatsapp_number: string
   contact_email: string
+  instagram_url: string
+  linkedin_url: string
+  facebook_url: string
+  youtube_url: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
