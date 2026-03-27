@@ -1,0 +1,297 @@
+{
+  "navbar": {
+    "methodology": "Metodología",
+    "whoWeHelp": "¿A quién ayudamos?",
+    "programs": "Programas",
+    "success": "Éxito",
+    "cta": "Evaluar mi Perfil",
+    "logoAlt": "MORE - Migración con Propósito",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "hero": {
+    "badge": "Migración con propósito",
+    "title": "¿Es tu talento suficiente para la",
+    "titleHighlight": "Residencia Permanente",
+    "titleEnd": "en EE.UU.?",
+    "subtitle": "Transformamos tu trayectoria en un Plan de Alto Impacto. No solo tramitamos visas; construimos tu",
+    "subtitleStrong": "legado en Estados Unidos",
+    "cta1": "Evaluar si mi perfil califica",
+    "cta2": "Conocer mi camino sin patrocinador",
+    "urgency": "Cada año que esperas, miles de casos se aprueban. ¿El tuyo está listo?",
+    "audienceLabel": "Empresarios, profesionales e inversionistas",
+    "socialProof": "+200 profesionales con Green Card aprobada",
+    "approvalRate": "98% tasa de aprobación",
+    "noSponsor": "Sin oferta de empleo requerida"
+  },
+  "painPoints": {
+    "eyebrow": "El problema",
+    "title": "¿Por qué tantos profesionales fallan en su proceso?",
+    "subtitle": "Estos son los 3 obstáculos que sabotean tu camino hacia la",
+    "subtitleHighlight": "Green Card",
+    "bridge": "Si te identificaste con alguno de estos problemas, probablemente eres exactamente el perfil que transformamos.",
+    "items": [
+      {
+        "title": "Incertidumbre Burocrática",
+        "description": "El proceso migratorio está lleno de regulaciones confusas, tiempos inciertos y cambios de políticas. Sin guía experta, tu caso puede quedar estancado indefinidamente."
+      },
+      {
+        "title": "Falta de Estrategia Técnica",
+        "description": "Muchos asesores tramitan la visa sin un plan estratégico real. Tu petición necesita un método poderoso que demuestre tu impacto nacional, no solo un formulario bien llenado."
+      },
+      {
+        "title": "El Profesional Olvidado",
+        "description": "Tienes años de experiencia, logros reales y un futuro brillante, pero nadie te ha enseñado a presentar tu perfil como lo que realmente es: extraordinario."
+      }
+    ]
+  },
+  "whoWeHelp": {
+    "eyebrow": "¿A quién ayudamos?",
+    "title": "¿Cuál de estos perfiles",
+    "titleHighlight": "eres tú?",
+    "subtitle": "Si te ves en alguno de estos perfiles, ya tienes más de lo que crees para lograrlo.",
+    "caseLabel": "Caso real →",
+    "selfCta": "Este soy yo — evaluar mi perfil",
+    "ariaLabel": "Evaluar mi perfil como {{profile}}",
+    "bridge": "¿Te identificas? Descubre en 3 preguntas si tu perfil califica hoy.",
+    "profiles": [
+      {
+        "title": "Profesionales Graduados",
+        "tags": ["Médicos", "Ingenieros", "Investigadores", "Abogados"],
+        "description": "Tu título y trayectoria son más poderosos de lo que crees. Con la estrategia correcta, se convierten en tu residencia.",
+        "proof": "Carlos, médico venezolano — EB-2 NIW aprobada en 4 meses sin patrocinador."
+      },
+      {
+        "title": "Empresarios y Comerciantes",
+        "tags": ["Dueños de negocio", "Emprendedores", "Importadores", "Franquiciados"],
+        "description": "Tu empresa y tu impacto económico hablan por ti. Los convertimos en el expediente que necesitas.",
+        "proof": "Ana, empresaria colombiana — Green Card mientras seguía operando su negocio."
+      },
+      {
+        "title": "Profesionales Especializados",
+        "tags": ["Técnicos", "Consultores", "Diseñadores", "+10 años experiencia"],
+        "description": "La experiencia sostenida en tu campo tiene un valor migratorio enorme. Solo hay que saber presentarla.",
+        "proof": "Jorge, diseñador industrial con 12 años de carrera — calificó sin maestría."
+      },
+      {
+        "title": "Inversionistas",
+        "tags": ["Capital privado", "Bienes raíces", "Startups", "Portafolio activo"],
+        "description": "Tu capital activo en EE.UU. abre rutas migratorias directas. Te ayudamos a elegir la correcta.",
+        "proof": "Roberto, inversionista peruano — E-2 aprobada y roadmap hacia Green Card en 18 meses."
+      }
+    ]
+  },
+  "quiz": {
+    "eyebrow": "Evaluación de elegibilidad",
+    "title": "Descubre tu potencial para la EB-2 NIW",
+    "subtitle": "Responde 3 preguntas rápidas y conoce si tu perfil califica.",
+    "completed": "Completado",
+    "step4Data": "Paso 4 de 4 — Tus datos",
+    "step4Result": "Paso 4 de 4 — Tu resultado",
+    "stepOf": "Paso {{step}} de 3",
+    "profileRegistered": "¡Perfil registrado!",
+    "yourEvaluation": "Tu evaluación de elegibilidad",
+    "step1Title": "¿Cuál es tu nivel académico más alto?",
+    "step2Title": "¿Cuál es tu área de impacto principal?",
+    "step3Title": "¿Cuáles de estos logros aplican a tu perfil?",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "seeMyEvaluation": "Ver mi evaluación",
+    "highImpactTitle": "¡Perfil de Alto Impacto!",
+    "highImpactDesc": "Tu combinación de nivel académico, área de impacto y logros profesionales te posiciona como un candidato fuerte para la EB-2 NIW. Agenda una consulta personalizada.",
+    "highImpactCta": "Sí, quiero agendar mi evaluación personalizada",
+    "restartQuiz": "Reiniciar Quiz",
+    "unsungTitle": "¡Tu potencial es enorme!",
+    "unsungDesc": "Tu perfil tiene potencial, pero necesitas construir una narrativa más sólida. Nuestro programa Unsung Professional te ayudará a posicionarte estratégicamente.",
+    "unsungCta": "Sí, quiero conocer el programa Unsung",
+    "leadTitle": "Un paso más — recibe tu evaluación personalizada",
+    "leadDesc": "Déjanos tus datos y uno de nuestros asesores se pondrá en contacto contigo.",
+    "namePlaceholder": "Nombre completo *",
+    "emailPlaceholder": "Correo electrónico *",
+    "whatsappPlaceholder": "WhatsApp (opcional)",
+    "submitting": "Enviando...",
+    "submitCta": "Quiero recibir mi evaluación",
+    "cancel": "Cancelar",
+    "successTitle": "¡Perfil enviado con éxito!",
+    "successDesc": "Uno de nuestros asesores revisará tu caso y se pondrá en contacto contigo pronto.",
+    "whatsappCta": "Hablar por WhatsApp ahora",
+    "bridge": "Mira lo que pasa cuando el perfil correcto recibe la estrategia correcta.",
+    "errorDuplicate": "Ya registramos tu perfil con ese email. ¡Pronto te contactamos!",
+    "errorGeneral": "No pudimos guardar tu perfil. Por favor escríbenos por WhatsApp.",
+    "errorUnavailable": "Servicio no disponible. Por favor escríbenos por WhatsApp.",
+    "academicOptions": [
+      { "id": "maestria", "label": "Maestría", "sublabel": null },
+      { "id": "doctorado", "label": "Doctorado / PhD", "sublabel": null },
+      { "id": "grado5", "label": "Grado + 5 años experiencia", "sublabel": null },
+      { "id": "otros", "label": "En proceso / Otra formación", "sublabel": "Te evaluamos en consulta" }
+    ],
+    "impactAreas": [
+      { "id": "salud", "label": "Salud & Medicina" },
+      { "id": "stem", "label": "STEM & Tecnología" },
+      { "id": "social", "label": "Impacto Social" },
+      { "id": "negocios", "label": "Negocios & Emprendimiento" }
+    ],
+    "achievements": [
+      { "id": "premios", "label": "Premios o reconocimientos profesionales" },
+      { "id": "publicaciones", "label": "Publicaciones académicas o artículos" },
+      { "id": "liderazgo", "label": "Roles de liderazgo en organizaciones" },
+      { "id": "patentes", "label": "Patentes o propiedad intelectual" },
+      { "id": "conferencias", "label": "Ponencias en conferencias internacionales" }
+    ],
+    "whatsappHighImpact": "https://wa.me/15483122105?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20agendar%20mi%20evaluación%20gratuita.",
+    "whatsappUnsung": "https://wa.me/15483122105?text=Hola%20MORE,%20completé%20el%20quiz%20y%20quiero%20conocer%20el%20programa%20Unsung."
+  },
+  "vipSession": {
+    "eyebrow": "Primer paso",
+    "limited": "Cupos limitados por semana",
+    "title": "¿Tu perfil sirve para la Green Card?",
+    "titleHighlight": "Descúbrelo antes de gastar un solo dólar.",
+    "subtitle": "En una sesión de 60 minutos con Ivon, analizamos tu caso con total honestidad. Te llevas una hoja de ruta clara para los próximos 90 días, sin vueltas y con la verdad.",
+    "deliverables": [
+      "Tu situación real: Te decimos si calificas para la EB-2 NIW hoy mismo.",
+      "Tus puntos débiles: Qué te falta y cómo lo solucionamos.",
+      "Tu plan a 3 meses: Los pasos exactos que debes dar.",
+      "La decisión final: Qué programa te conviene (o si es mejor esperar un poco)."
+    ],
+    "currency": "USD",
+    "sessionInfo": "Sesión 1 a 1 · 60 minutos con Ivon",
+    "guarantee": "Si en los primeros 15 min vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas.",
+    "cta": "Sí, quiero evaluar mi perfil con Ivon — $97 USD",
+    "ctaAriaLabel": "Agendar Asesoría VIP con Ivon — $97 USD",
+    "comingSoon": "Próximamente disponible",
+    "valueContrast": "Una hora que puede ahorrarte meses de decisiones equivocadas — y miles de dólares invertidos en el camino equivocado."
+  },
+  "pricing": {
+    "eyebrow": "Programas",
+    "title": "Elige tu camino hacia la",
+    "titleHighlight": "Green Card",
+    "subtitle": "Dos rutas diseñadas para diferentes niveles de acompañamiento. Ambas con la misma meta: tu aprobación.",
+    "costOfInaction": "Cada año que pasa sin actuar, otros profesionales con tu mismo perfil ya están aprobados. El momento es ahora.",
+    "riskReversal": "Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas.",
+    "mostPopular": "Más Popular",
+    "bridge": "¿Algo te detiene? Las respuestas más comunes están justo abajo.",
+    "currency": "USD",
+    "plans": [
+      {
+        "name": "Unsung Professional Program",
+        "badge": "UPP",
+        "ratingValue": "4.8",
+        "ratingText": "Calificación promedio de 150 profesionales",
+        "description": "Programa de autogestión para profesionales que quieren preparar su caso EB-2 NIW con guía experta paso a paso.",
+        "timeline": "90 – 120 días",
+        "features": [
+          "9 módulos completos",
+          "4 talleres en vivo prácticos",
+          "4 sesiones de coaching 1 a 1",
+          "Guías para implementar el piloto de tu proyecto de interés nacional en 90 días y lograr evidencias reales",
+          "Acceso a comunidad privada"
+        ],
+        "cta": "Sí, quiero comenzar mi programa",
+        "whatsapp": "https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
+      },
+      {
+        "name": "Plan Plus",
+        "badge": "Premium",
+        "ratingValue": "4.8",
+        "ratingText": "Calificación promedio de 175 profesionales",
+        "description": "Acompañamiento premium de principio a fin. Nosotros armamos tu expediente mientras tú sigues adelante con tu empresa, startup, formación académica o tu trabajo. Pensado para estudiantes, empresarios, emprendedores y trabajadores independientes.",
+        "timeline": "120 – 160 días",
+        "features": [
+          "Ordenamos, redactamos y diligenciamos documentos de tu expediente",
+          "Elaboramos el Proyecto o Plan de negocios de interés nacional",
+          "Guía y Agenda exploratoria de networking en USA para implementar tu proyecto, gestionar cartas y evidencias",
+          "Consolidación y envío de expediente",
+          "Acceso a comunidad privada",
+          "Coach emocional durante el proceso",
+          "Seguimiento post envío"
+        ],
+        "cta": "Sí, quiero obtener mi Expediente",
+        "whatsapp": "https://wa.me/15483122105?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
+      }
+    ]
+  },
+  "footer": {
+    "faqEyebrow": "Preguntas frecuentes",
+    "faqTitle": "Resolvemos tus dudas",
+    "faqSubtitle": "Las preguntas más comunes sobre el proceso de visa EB-2 NIW.",
+    "ctaTitle": "Tu futuro en EE.UU. comienza hoy",
+    "ctaSubtitle": "Agenda una evaluación gratuita de tu perfil y descubre si calificas para la visa EB-2 NIW.",
+    "ctaButton": "Evaluar mi Perfil Gratis",
+    "ctaWhatsapp": "https://wa.me/15483122105?text=Hola%20MORE,%20quiero%20evaluar%20mi%20perfil%20para%20la%20EB-2%20NIW.",
+    "logoAlt": "MORE Logo",
+    "brandDesc": "Consultora especializada en visas y migración EB-2 NIW. Ayudamos a empresarios, comerciantes, profesionales e inversionistas a lograr su residencia permanente y Green Card en EE.UU.",
+    "quickLinksTitle": "Enlaces Rápidos",
+    "quickLinks": [
+      { "label": "Metodología", "href": "#metodologia" },
+      { "label": "¿A quién ayudamos?", "href": "#quienes-ayudamos" },
+      { "label": "Programas", "href": "#programas" },
+      { "label": "Casos de Éxito", "href": "#exito" },
+      { "label": "Evaluar mi Perfil", "href": "#quiz" }
+    ],
+    "contactTitle": "Contacto",
+    "copyright": "© {{year}} MORE Immigration Consulting. Todos los derechos reservados.",
+    "terms": "Términos & Condiciones",
+    "privacy": "Política de Privacidad",
+    "faqs": [
+      {
+        "question": "¿Qué requisitos debo cumplir para aplicar a la visa EB-2 NIW?",
+        "answer": "Debes cumplir los criterios Matter of Dhanasar: (1) Tu propuesta de trabajo tiene mérito sustancial e importancia nacional; (2) Estás bien posicionado para avanzar la propuesta; y (3) Sería beneficioso para EE.UU. eximir el requisito de oferta de empleo. Además, necesitas título de licenciatura o equivalente (maestría o experiencia laboral equivalente)."
+      },
+      {
+        "question": "¿Necesito una oferta de empleo para la EB-2 NIW?",
+        "answer": "No. La categoría National Interest Waiver (NIW) es precisamente una exención del requisito de oferta de empleo. Debes demostrar que tu trabajo beneficia al interés nacional de EE.UU., lo que elimina la necesidad de un empleador patrocinador. Esto te da libertad para emprender o trabajar donde desees."
+      },
+      {
+        "question": "¿Qué pasa si no tengo maestría?",
+        "answer": "Puedes calificar mediante equivalencia de títulos. Si tienes licenciatura más al menos 5 años de experiencia laboral progresiva post-grado, puedes solicitar una evaluación de titulus y experiencia laboral. La equivalencia demuestra que tu formación y experiencia son equivalentes a una maestría estadounidense."
+      },
+      {
+        "question": "¿Soy empresario, ¿qué evidencias puedo usar para certificación laboral?",
+        "answer": "Los empresarios pueden utilizar: facturas de servicios profesionales, contratos con clientes o proveedores, registros de empleados, certificados de cámara de comercio, licencias, publicidad, cobertura en medios, premios empresariales, declaraciones de impuestos y estados financieros. Si tu empresa ya no existe, aún puedes usar documentación histórica que pruebe tu rol y aporte"
+      },
+      {
+        "question": "¿A quiénes puedo incluir en mi proceso? (cónyuge, hijos)",
+        "answer": "Puedes incluir a tu cónyuge legalmente casado y a tus hijos menores de 21 años al momento de la solicitud. Todos recibirán residencia permanente derivada de tu aprobación. Los hijos deben permanecer solteros para mantener el beneficio."
+      },
+      {
+        "question": "¿Cuánto cuesta la equivalencia de títulos?",
+        "answer": "Las evaluaciones de equivalencia tienen costos variables según el proveedor. Un proceso completo puede rondar aproximadamente USD 400, mientras que evaluaciones más básicas pueden costar alrededor de USD 85. Te orientamos sobre la opción más adecuada para tu caso."
+      },
+      {
+        "question": "¿Los documentos deben estar apostillados?",
+        "answer": "En general, no es requisito apostillar los documentos académicos para la EB-2 NIW. USCIS acepta traducciones certificadas y copias. Te guiamos en la organización correcta de tu expediente según los lineamientos actuales."
+      },
+      {
+        "question": "¿Puedo aplicar si vivo fuera de Estados Unidos?",
+        "answer": "Sí, absolutamente. La petición EB-2 NIW se puede presentar desde cualquier país. No necesitas estar físicamente en EE.UU. para iniciar el proceso. Una vez aprobada, puedes completar el proceso consular desde tu país de residencia."
+      },
+      {
+        "question": "¿Cuánto tiempo toma el proceso completo?",
+        "answer": "Con nuestro Plan Plus, el tiempo promedio de preparación es de 120 a 160 días. Para el programa Unsung, el tiempo es de 90 a 120 días. Una vez enviada la petición, USCIS tarda entre 13 y 24 meses en dar una respuesta, aunque con el Premium Processing este plazo se puede reducir a 45 días."
+      },
+      {
+        "question": "¿Qué documentos académicos necesito?",
+        "answer": "Necesitas títulos, diplomas, certificados y transcripciones. Las traducciones deben ser certificadas al inglés. Te guiamos en qué enviar según tu país de estudio y cómo organizar el expediente de forma clara para USCIS."
+      },
+      {
+        "question": "¿Si estoy en unión libre, debo casarme para incluir a mi pareja?",
+        "answer": "Sí. Para incluir a tu pareja como beneficiario derivado en la EB-2 NIW necesitas estar legalmente casado. La unión libre no es reconocida por USCIS para este fin. Si planeas incluir a tu pareja, deberás contraer matrimonio legal antes de presentar la solicitud."
+      },
+      {
+        "question": "¿Qué pasa si no tengo publicaciones académicas?",
+        "answer": "Las publicaciones son solo uno de los criterios posibles. También se valoran premios, membresías profesionales, liderazgo en organizaciones, contribuciones originales en tu campo, cobertura en medios y salarios altos. Trabajamos contigo para identificar y potenciar tus fortalezas."
+      },
+      {
+        "question": "¿Qué diferencia hay entre el programa UPP y el Plan Plus?",
+        "answer": "Con el programa Unsung (UPP), obtienes las herramientas, plantillas y el coaching necesario para gestionar tu propio caso. Si buscas una solución completa, nuestro Plan Plus suma la elaboración de tu plan profesional, redacción de testimonios y gestión integral. Es la alternativa perfecta para quienes prefieren delegar la ejecución técnica y asegurar cada detalle."
+      }
+    ]
+  },
+  "blueprint": {
+    "back": "Back to site",
+    "download": "Download as PDF",
+    "iframeTitle": "Blueprint EB2-NIW MORE",
+    "pageTitle": "Blueprint EB2-NIW | MORE — Migration with Purpose",
+    "defaultTitle": "MORE — Migration with Purpose"
+  }
+}

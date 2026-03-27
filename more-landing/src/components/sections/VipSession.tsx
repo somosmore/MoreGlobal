@@ -1,17 +1,14 @@
 import { motion } from "framer-motion"
 import { Shield, Clock, CheckCircle, CalendarDays, Star } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-
-const deliverables = [
-  "Tu situación real: Te decimos si calificas para la EB-2 NIW hoy mismo.",
-  "Tus puntos débiles: Qué te falta y cómo lo solucionamos.",
-  "Tu plan a 3 meses: Los pasos exactos que debes dar.",
-  "La decisión final: Qué programa te conviene (o si es mejor esperar un poco).",
-]
+import { useTranslation } from "react-i18next"
 
 export default function VipSession() {
+  const { t } = useTranslation()
   const { settings, loading } = useSiteSettings()
   const calendlyUrl = settings.calendar_url
+
+  const deliverables = t("vipSession.deliverables", { returnObjects: true }) as string[]
 
   return (
     <section id="asesoria-vip" className="py-24 sm:py-32 bg-white">
@@ -23,77 +20,61 @@ export default function VipSession() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            {/* Card */}
             <div className="relative rounded-3xl border-2 border-[#F37021]/30 bg-gradient-to-br from-[#FFF8F4] to-white shadow-2xl overflow-hidden">
-              {/* Top accent bar */}
               <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] to-[#D4611A]" />
 
               <div className="px-8 sm:px-12 py-10 sm:py-12">
-                {/* Eyebrow */}
                 <div className="flex flex-wrap items-center gap-2 mb-6">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F37021]/10 text-[#F37021] text-xs font-semibold uppercase tracking-widest">
                     <Star className="w-3 h-3" />
-                    Primer paso
+                    {t("vipSession.eyebrow")}
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">
                     <Clock className="w-3 h-3" />
-                    Cupos limitados por semana
+                    {t("vipSession.limited")}
                   </span>
                 </div>
 
-                {/* Headline */}
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#2A3A4A] leading-tight tracking-tight mb-4">
-                  ¿Tu perfil sirve para la Green Card?{" "}
-                  <span className="text-[#F37021]">
-                    Descúbrelo antes de gastar un solo dólar.
-                  </span>
+                  {t("vipSession.title")}{" "}
+                  <span className="text-[#F37021]">{t("vipSession.titleHighlight")}</span>
                 </h2>
 
-                {/* Subheadline */}
                 <p className="text-gray-600 text-base leading-relaxed mb-8">
-                  En una sesión de 60 minutos con Ivon, analizamos tu caso con total honestidad.
-                  Te llevas una hoja de ruta clara para los próximos 90 días, sin vueltas y con la verdad.
+                  {t("vipSession.subtitle")}
                 </p>
 
-                {/* Deliverables */}
                 <ul className="space-y-3 mb-8">
-                  {deliverables.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
+                  {deliverables.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-[#F37021] shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-700 leading-snug">{item}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* Divider */}
                 <div className="border-t border-gray-100 my-8" />
 
-                {/* Price + session info */}
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
                   <div>
                     <div className="flex items-baseline gap-2">
                       <span className="text-5xl font-bold text-[#2A3A4A]">$97</span>
-                      <span className="text-gray-400 text-base font-medium">USD</span>
+                      <span className="text-gray-400 text-base font-medium">{t("vipSession.currency")}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-2">
                       <CalendarDays className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-500">
-                        Sesión 1 a 1 · 60 minutos con Ivon
-                      </span>
+                      <span className="text-sm text-gray-500">{t("vipSession.sessionInfo")}</span>
                     </div>
                   </div>
 
-                  {/* Guarantee badge */}
                   <div className="flex items-start gap-2 px-4 py-3 rounded-xl bg-green-50 border border-green-100 sm:max-w-[220px]">
                     <Shield className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                     <p className="text-xs text-green-800 leading-snug font-medium">
-                      Si en los primeros 15 min vemos que no podemos ayudarte, te devolvemos el
-                      dinero. Sin preguntas.
+                      {t("vipSession.guarantee")}
                     </p>
                   </div>
                 </div>
 
-                {/* CTA */}
                 {loading ? (
                   <div className="h-14 w-full rounded-2xl bg-gray-100 animate-pulse" />
                 ) : calendlyUrl ? (
@@ -106,10 +87,10 @@ export default function VipSession() {
                       shadow-lg shadow-[#F37021]/30 hover:shadow-xl hover:shadow-[#F37021]/40
                       hover:from-[#D4611A] hover:to-[#C05010] transition-all duration-200
                       focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
-                    aria-label="Agendar Asesoría VIP con Ivon — $97 USD"
+                    aria-label={t("vipSession.ctaAriaLabel")}
                   >
                     <CalendarDays className="w-5 h-5 shrink-0" />
-                    Sí, quiero evaluar mi perfil con Ivon — $97 USD
+                    {t("vipSession.cta")}
                   </a>
                 ) : (
                   <button
@@ -117,17 +98,15 @@ export default function VipSession() {
                     type="button"
                     className="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-2xl
                       bg-gray-200 text-gray-400 font-bold text-base cursor-not-allowed"
-                    aria-label="Próximamente disponible"
+                    aria-label={t("vipSession.comingSoon")}
                   >
                     <CalendarDays className="w-5 h-5 shrink-0" />
-                    Próximamente disponible
+                    {t("vipSession.comingSoon")}
                   </button>
                 )}
 
-                {/* Value contrast */}
                 <p className="text-center text-xs text-gray-400 mt-4 italic">
-                  Una hora que puede ahorrarte meses de decisiones equivocadas — y miles de
-                  dólares invertidos en el camino equivocado.
+                  {t("vipSession.valueContrast")}
                 </p>
               </div>
             </div>

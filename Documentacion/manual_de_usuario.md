@@ -1,13 +1,13 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-18 (feat: Foto de portada para testimonios de video — upload con drag & drop)
+> Última actualización: 2026-03-27 (feat: Internacionalización ES/EN en sitio público con selector de idioma en Navbar)
 
 ---
 
 ## Índice
 
 1. [Sitio público](#1-sitio-público)
-   - 1.1 [Navbar](#11-navbar)
+   - 1.1 [Navbar y selector de idioma](#11-navbar)
    - 1.2 [Hero](#12-hero)
    - 1.3 [Quiz de calificación](#13-quiz-de-calificación)
    - 1.4 [Sección: A quién ayudamos](#14-sección-a-quién-ayudamos)
@@ -40,6 +40,26 @@ El sitio público está construido en React + Vite y se accede desde la ruta ra�
 - Barra de navegación fija en la parte superior.
 - Contiene el logo de MORE y links de ancla hacia las secciones principales.
 - Se adapta a móvil con menú hamburguesa.
+- **Selector de idioma ES | EN:** aparece a la derecha del menú en desktop y dentro del drawer en móvil. El idioma activo se resalta en naranja (`#F37021`). El idioma elegido se guarda en `localStorage` bajo la clave `more_lang` y persiste entre sesiones. Al primer acceso, el sistema detecta automáticamente el idioma del navegador del usuario.
+
+### 1.1.1 Sistema de internacionalización (i18n)
+
+El sitio público soporta **Español** e **Inglés** de forma dinámica, sin recarga de página.
+
+**Tecnología:** `react-i18next` + `i18next` + `i18next-browser-languagedetector`.
+
+**Archivos de traducción:**
+- `src/locales/es/translation.json` — textos en español (idioma original)
+- `src/locales/en/translation.json` — textos en inglés
+
+**Comportamiento de detección de idioma:**
+1. Si el usuario ya eligió un idioma anteriormente, se usa ese (guardado en `localStorage`).
+2. Si es la primera visita, se detecta el idioma del navegador.
+3. Si el navegador no es inglés, el idioma por defecto es español.
+
+**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession, Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage.
+
+**Panel de administración `/admin`:** no está traducido, permanece siempre en español.
 
 ### 1.2 Hero
 
