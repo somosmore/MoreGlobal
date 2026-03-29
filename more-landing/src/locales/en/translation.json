@@ -287,6 +287,53 @@
       }
     ]
   },
+  "success": {
+    "eyebrow": "Leadership",
+    "ivonName": "Ivon MORE",
+    "ivonTitle": "Attorney & Founder",
+    "ivonExpertise": "Expert in Social Project Management",
+    "statApproved": "Approved Cases",
+    "statSuccessRate": "Success Rate",
+    "statYears": "Years of Experience",
+    "ivonSlides": [
+      "Colombian attorney based in the U.S., specialized in identifying and elevating Latin American talent. She helps professionals and entrepreneurs achieve permanent residency through High-Impact National Interest Plans.",
+      "A Colombian attorney, she moved to the U.S. five years ago with big dreams. There she discovered her gift for spotting exceptional Latin American professionals and specialized in managing social-impact projects.",
+      "Her mission is to help these professionals be recognized as being in the U.S. national interest through a High-Impact Plan. With a personalized approach, she has achieved many success stories, helping families from many countries establish themselves meaningfully.",
+      "Ivon's passion for empowering professionals and entrepreneurs keeps growing. Her dedication and teamwork have been essential to uncovering and elevating Latin American talent so they can seize new opportunities in the U.S. and grow with purpose."
+    ],
+    "ivonQuote": "Every professional has an extraordinary story. We make it visible.",
+    "ivonImageAlt": "Ivon MORE — Attorney and Founder",
+    "logoAlt": "MORE",
+    "slideAriaLabel": "Go to slide {{slide}}",
+    "casesTitleLead": "Success stories.",
+    "casesTitleMid": "Results that",
+    "casesTitleHighlight": "speak for themselves",
+    "casesStrong1": "Real professionals",
+    "casesStrong2": "real approvals",
+    "casesSubBefore": ", ",
+    "casesSubAfter": ". Meet those who have already built their ",
+    "casesSubHighlight": "legacy in the U.S.",
+    "loading": "Loading testimonials…",
+    "empty": "More success stories coming soon.",
+    "videoTitleLead": "Hear them.",
+    "videoTitleHighlight": "In their own words.",
+    "videoSubtitle": "They're not actors. They're professionals who made the decision you're weighing today.",
+    "videoIdentify": "Do you identify with any of these stories?",
+    "videoCta": "I want to see if my profile qualifies",
+    "videoCtaAria": "Evaluate my profile",
+    "videoIframeTitle": "{{name}}'s testimonial",
+    "videoThumbnailAlt": "Cover image for {{name}}'s testimonial",
+    "videoPlayAria": "Play {{name}}'s testimonial",
+    "videoExternalAria": "Watch {{name}}'s video on external site",
+    "watchVideo": "Watch video",
+    "bridgePricing": "Now you know what's possible — choose how to get there.",
+    "categories": {
+      "abogados_in_house": "Approved In House",
+      "abogados_preparadora_monica_martinez": "Approved — preparer Mónica Martínez",
+      "aprobados_abogada_marcela_rodriguez": "Approved — attorney Marcela Rodríguez",
+      "en_espera_aprobacion": "Awaiting approval"
+    }
+  },
   "blueprint": {
     "back": "Back to site",
     "download": "Download as PDF",

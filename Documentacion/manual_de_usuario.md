@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-27 (feat: Internacionalización ES/EN en sitio público con selector de idioma en Navbar)
+> Última actualización: 2026-03-28 (feat: i18n de la sección Éxito / testimonios — marco UI y categorías)
 
 ---
 
@@ -103,11 +103,15 @@ Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje pe
 
 ### 1.6 Sección: Testimonios
 
+**Anchor:** `#exito` (en el menú aparece como “Éxito” / “Success” según el idioma del sitio).
+
 - Muestra testimonios dinámicos cargados desde la tabla `testimonials` de Supabase.
 - Soporta dos formatos:
   - **Texto + foto:** Nombre, país, rol, cita, timeline y foto de la persona.
   - **Video:** Muestra una **foto de portada** (thumbnail) con un botón de play. Al hacer click, se carga el embed del video (YouTube, Vimeo o Google Drive) con autoplay. Si no hay portada, se muestra un fondo oscuro con el botón de play.
 - Los testimonios están organizados por categorías de programa.
+
+**Internacionalización (ES/EN):** El marco de la sección (bloque de liderazgo de Ivon, carrusel de texto, títulos, estados “Cargando…” / vacío, bloque de video, CTA y texto puente hacia precios) y las **etiquetas de categoría** de las tarjetas siguen el idioma seleccionado en el Navbar (`success.*` en `src/locales/es|en/translation.json`). Los campos que vienen del CRM (nombre, cita, país, rol, `status_label`, `timeline`, etc.) se muestran tal como están guardados en la base de datos; si se desea contenido bilingüe en esos campos, habría que modelarlo en el admin o en la BD.
 
 ### 1.7 Sección: Asesoría VIP
 

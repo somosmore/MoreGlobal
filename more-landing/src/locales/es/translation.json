@@ -287,6 +287,53 @@
       }
     ]
   },
+  "success": {
+    "eyebrow": "Liderazgo",
+    "ivonName": "Ivon MORE",
+    "ivonTitle": "Abogada & Fundadora",
+    "ivonExpertise": "Experta en Gestión de Proyectos Sociales",
+    "statApproved": "Casos Aprobados",
+    "statSuccessRate": "Tasa de Éxito",
+    "statYears": "Años de Experiencia",
+    "ivonSlides": [
+      "Abogada colombiana radicada en EE. UU., especializada en identificar y potenciar talento latinoamericano. Ayuda a profesionales y emprendedores a lograr su residencia permanente mediante Planes de Alto Impacto de Interés Nacional.",
+      "Abogada colombiana, migró a EE. UU. hace cinco años con grandes sueños. Allí, descubrió su talento para identificar profesionales latinoamericanos excepcionales y se especializó en la gestión de proyectos sociales.",
+      "Su misión es ayudar a estos profesionales a ser reconocidos como de Interés Nacional en EE. UU. mediante un Plan de Alto Impacto. Con un enfoque personalizado, ha logrado numerosos casos de éxito, facilitando el establecimiento significativo de familias de diversas naciones.",
+      "La pasión de Ivon por empoderar a profesionales y emprendedores sigue creciendo. Su dedicación y trabajo en equipo han sido esenciales para descubrir y potenciar el talento latinoamericano, permitiendo que puedan alcanzar nuevas oportunidades en EE.UU. y expandirse con propósito en el país."
+    ],
+    "ivonQuote": "Cada profesional tiene una historia extraordinaria. Nosotros la hacemos visible.",
+    "ivonImageAlt": "Ivon MORE - Abogada y Fundadora",
+    "logoAlt": "MORE",
+    "slideAriaLabel": "Ir al slide {{slide}}",
+    "casesTitleLead": "Casos de éxito.",
+    "casesTitleMid": "Resultados que",
+    "casesTitleHighlight": "hablan por sí solos",
+    "casesStrong1": "Profesionales reales",
+    "casesStrong2": "aprobaciones reales",
+    "casesSubBefore": ", ",
+    "casesSubAfter": ". Conoce a quienes ya construyeron su ",
+    "casesSubHighlight": "legado en EE.UU.",
+    "loading": "Cargando testimonios…",
+    "empty": "Próximamente más casos de éxito.",
+    "videoTitleLead": "Escúchalos a ellos.",
+    "videoTitleHighlight": "En sus propias palabras.",
+    "videoSubtitle": "No son actores. Son profesionales que tomaron la decisión que tú estás evaluando hoy.",
+    "videoIdentify": "¿Te identificas con alguna de estas historias?",
+    "videoCta": "Quiero evaluar si califico mi perfil",
+    "videoCtaAria": "Evaluar mi perfil",
+    "videoIframeTitle": "Testimonio de {{name}}",
+    "videoThumbnailAlt": "Portada del testimonio de {{name}}",
+    "videoPlayAria": "Reproducir testimonio de {{name}}",
+    "videoExternalAria": "Ver video de {{name}} en sitio externo",
+    "watchVideo": "Ver video",
+    "bridgePricing": "Ahora que sabes lo que es posible — elige cómo llegar ahí.",
+    "categories": {
+      "abogados_in_house": "Aprobados In House",
+      "abogados_preparadora_monica_martinez": "Aprobados para preparadora Mónica Martínez",
+      "aprobados_abogada_marcela_rodriguez": "Aprobados para abogada Marcela Rodríguez",
+      "en_espera_aprobacion": "En espera de aprobación"
+    }
+  },
   "blueprint": {
     "back": "Back to site",
     "download": "Download as PDF",
