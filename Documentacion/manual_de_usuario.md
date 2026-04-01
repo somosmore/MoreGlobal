@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads)
+> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads, landing dedicada Asesoría VIP)
 
 ---
 
@@ -213,6 +213,20 @@ Su objetivo es monetizar el interés de los visitantes que no están listos para
 #### Componente
 
 `more-landing/src/components/sections/VipSession.tsx`
+
+#### Landing dedicada de Asesoría VIP
+
+- Además de la sección dentro de la landing principal, existe una **landing-page independiente** para la Asesoría VIP, pensada para usarse en un subdominio (por ejemplo `vip.somosmore.com`).
+- Esta landing se construye como una entrada separada de Vite:
+  - Archivo de entrada: `more-landing/vite.config.ts` con el entry `vip` apuntando a `vip.html`.
+  - HTML base: `more-landing/vip.html` (monta la app en `#root` con el script `/src/vip/main.tsx`).
+  - Página React: `more-landing/src/vip/pages/VipLanding.tsx` (estructura de secciones en blanco/lista para contenido).
+- En esta fase, la landing se encuentra en **estado borrador** (placeholders); se utilizará en futuras iteraciones para probar mensajes y flujos específicos de esta oferta.
+
+**Acceso recomendado:**
+
+- Desde el navegador, la ruta técnica actual es `/vip.html` en el mismo host donde se sirve la app.
+- Desde el panel de administración, se registra en la **Biblioteca de Recursos** como un recurso de tipo `landing` con formato `html` (ver sección 2.9).
 
 ---
 
