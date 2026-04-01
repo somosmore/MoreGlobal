@@ -62,6 +62,28 @@ const ACHIEVEMENT_LABELS: Record<string, string> = {
   conferencias: "Conferencias",
 };
 
+const SEGMENT_LABELS: Record<string, string> = {
+  listo: "Listo para aplicar",
+  necesita_estructura: "Necesita estructuración",
+  no_califica_aun: "No califica aún",
+};
+
+const ROUTE_LABELS: Record<string, string> = {
+  unsung_program: "Programa Unsung",
+  mentoria_more: "Mentoría / Academia MORE",
+  abogado: "Referido a abogado",
+  contenido: "Contenido educativo",
+};
+
+const VISA_BUCKET_LABELS: Record<string, string> = {
+  eb1: "EB1",
+  eb2: "EB2 / NIW",
+  o1: "O1",
+  e2: "E2",
+  l1: "L1",
+  otra: "Otra ruta",
+};
+
 // ─── Status pipeline ─────────────────────────────────────────────────────────
 
 const STATUS_OPTIONS: { value: LeadStatus; label: string; color: string; dot: string }[] = [
@@ -144,6 +166,8 @@ export default function AdminLeads() {
   const [search, setSearch] = useState("")
   const [filterResult, setFilterResult] = useState("")
   const [filterStatus, setFilterStatus] = useState("")
+  const [filterSegment, setFilterSegment] = useState("")
+  const [filterRoute, setFilterRoute] = useState("")
 
   // Sort
   const [sortField, setSortField] = useState<SortField>("created_at")
@@ -237,6 +261,8 @@ export default function AdminLeads() {
     }
     if (filterResult) list = list.filter((l) => l.result_type === filterResult);
     if (filterStatus) list = list.filter((l) => l.status === filterStatus);
+    if (filterSegment) list = list.filter((l) => (l.eligibility_segment ?? "") === filterSegment);
+    if (filterRoute) list = list.filter((l) => (l.recommended_route ?? "") === filterRoute);
 
     list.sort((a, b) => {
       let av: string = a[sortField] ?? "";
@@ -356,13 +382,35 @@ export default function AdminLeads() {
 
   function exportCSV() {
     const rows = [
-      ["Fecha", "Nombre", "Email", "WhatsApp", "Nivel", "Área", "Logros", "Resultado", "Estado"],
+      [
+        "Fecha",
+        "Nombre",
+        "Email",
+        "WhatsApp",
+        "País residencia",
+        "Nacionalidad",
+        "Nivel",
+        "Área",
+        "Logros",
+        "Segmento",
+        "Ruta recomendada",
+        "Buckets visa",
+        "Resultado",
+        "Estado",
+      ],
       ...displayed.map((l) => [
         new Date(l.created_at).toLocaleDateString("es-CO"),
-        l.nombre, l.email, l.whatsapp ?? "",
+        l.nombre,
+        l.email,
+        l.whatsapp ?? "",
+        l.country_residence ?? "",
+        l.nationality ?? "",
         ACADEMIC_LABELS[l.academic_level] ?? l.academic_level,
         AREA_LABELS[l.impact_area] ?? l.impact_area,
         l.achievements.map((a) => ACHIEVEMENT_LABELS[a] ?? a).join("; "),
+        l.eligibility_segment ? SEGMENT_LABELS[l.eligibility_segment] ?? l.eligibility_segment : "",
+        l.recommended_route ? ROUTE_LABELS[l.recommended_route] ?? l.recommended_route : "",
+        (l.visa_buckets ?? []).map((b) => VISA_BUCKET_LABELS[b] ?? b).join(" / "),
         RESULT_LABELS[l.result_type] ?? l.result_type,
         statusMeta(l.status ?? "nuevo").label,
       ]),
@@ -421,18 +469,45 @@ export default function AdminLeads() {
             />
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <select value={filterResult} onChange={(e) => setFilterResult(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30">
+            <select
+              value={filterResult}
+              onChange={(e) => setFilterResult(e.target.value)}
+              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30"
+            >
               <option value="">Todos los resultados</option>
               <option value="alto_impacto">Alto Impacto</option>
               <option value="unsung">Unsung</option>
             </select>
-            <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30">
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30"
+            >
               <option value="">Todos los estados</option>
               {STATUS_OPTIONS.map((s) => (
                 <option key={s.value} value={s.value}>{s.label}</option>
               ))}
+            </select>
+            <select
+              value={filterSegment}
+              onChange={(e) => setFilterSegment(e.target.value)}
+              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30"
+            >
+              <option value="">Todos los segmentos</option>
+              <option value="listo">Listo para aplicar</option>
+              <option value="necesita_estructura">Necesita estructuración</option>
+              <option value="no_califica_aun">No califica aún</option>
+            </select>
+            <select
+              value={filterRoute}
+              onChange={(e) => setFilterRoute(e.target.value)}
+              className="text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30"
+            >
+              <option value="">Todas las rutas</option>
+              <option value="unsung_program">Programa Unsung</option>
+              <option value="mentoria_more">Mentoría / Academia MORE</option>
+              <option value="abogado">Referido a abogado</option>
+              <option value="contenido">Contenido educativo</option>
             </select>
             <Button variant="outline" size="sm" onClick={exportCSV} className="gap-2 h-9" disabled={displayed.length === 0}>
               <Download className="w-4 h-4" /> CSV
@@ -542,20 +617,40 @@ export default function AdminLeads() {
                         <span className="text-xs text-gray-500 block">
                           {ACADEMIC_LABELS[lead.academic_level] ?? lead.academic_level}
                         </span>
-                        <span className="text-[11px] text-gray-400">
+                        <span className="text-[11px] text-gray-400 block">
                           {AREA_LABELS[lead.impact_area] ?? lead.impact_area}
                         </span>
+                        {(lead.country_residence || lead.nationality) && (
+                          <span className="text-[11px] text-gray-400 block mt-0.5">
+                            {(lead.country_residence ?? lead.nationality) &&
+                              `${lead.country_residence ?? ""}${lead.country_residence && lead.nationality ? " · " : ""}${
+                                lead.nationality ?? ""
+                              }`}
+                          </span>
+                        )}
                       </td>
 
-                      {/* Resultado */}
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
-                          lead.result_type === "alto_impacto"
-                            ? "bg-[#F37021]/10 text-[#F37021]"
-                            : "bg-purple-50 text-purple-700"
-                        }`}>
+                      {/* Resultado + segmento */}
+                      <td className="px-4 py-3 space-y-1">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
+                            lead.result_type === "alto_impacto"
+                              ? "bg-[#F37021]/10 text-[#F37021]"
+                              : "bg-purple-50 text-purple-700"
+                          }`}
+                        >
                           {RESULT_LABELS[lead.result_type] ?? lead.result_type}
                         </span>
+                        {lead.eligibility_segment && (
+                          <span className="block text-[11px] text-gray-400">
+                            {SEGMENT_LABELS[lead.eligibility_segment] ?? lead.eligibility_segment}
+                          </span>
+                        )}
+                        {lead.recommended_route && (
+                          <span className="block text-[11px] text-gray-400">
+                            {ROUTE_LABELS[lead.recommended_route] ?? lead.recommended_route}
+                          </span>
+                        )}
                       </td>
 
                       {/* Estado — dropdown inline */}
@@ -682,6 +777,22 @@ export default function AdminLeads() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-50">
+                    <span className="text-xs text-gray-500">Segmento</span>
+                    <span className="text-xs font-medium text-[#2A3A4A]">
+                      {selectedLead.eligibility_segment
+                        ? SEGMENT_LABELS[selectedLead.eligibility_segment] ?? selectedLead.eligibility_segment
+                        : "—"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-50">
+                    <span className="text-xs text-gray-500">Ruta recomendada</span>
+                    <span className="text-xs font-medium text-[#2A3A4A]">
+                      {selectedLead.recommended_route
+                        ? ROUTE_LABELS[selectedLead.recommended_route] ?? selectedLead.recommended_route
+                        : "—"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-50">
                     <span className="text-xs text-gray-500">Nivel académico</span>
                     <span className="text-xs font-medium text-[#2A3A4A]">
                       {ACADEMIC_LABELS[selectedLead.academic_level] ?? selectedLead.academic_level}
@@ -693,6 +804,38 @@ export default function AdminLeads() {
                       {AREA_LABELS[selectedLead.impact_area] ?? selectedLead.impact_area}
                     </span>
                   </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-50">
+                    <span className="text-xs text-gray-500">País y nacionalidad</span>
+                    <span className="text-xs font-medium text-[#2A3A4A]">
+                      {(selectedLead.country_residence ?? "") ||
+                      (selectedLead.nationality ?? "")
+                        ? `${selectedLead.country_residence ?? ""}${
+                            selectedLead.country_residence && selectedLead.nationality ? " · " : ""
+                          }${selectedLead.nationality ?? ""}`
+                        : "—"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Buckets de visa */}
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                  Posibles rutas de visa
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedLead.visa_buckets && selectedLead.visa_buckets.length > 0 ? (
+                    selectedLead.visa_buckets.map((b) => (
+                      <span
+                        key={b}
+                        className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100"
+                      >
+                        {VISA_BUCKET_LABELS[b] ?? b}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-gray-400">Sin buckets registrados</span>
+                  )}
                 </div>
               </div>
 

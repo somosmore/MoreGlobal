@@ -11,12 +11,12 @@
   },
   "hero": {
     "badge": "Migración con propósito",
-    "title": "¿Es tu talento suficiente para la",
-    "titleHighlight": "Residencia Permanente",
-    "titleEnd": "en EE.UU.?",
-    "subtitle": "Transformamos tu trayectoria en un Plan de Alto Impacto. No solo tramitamos visas; construimos tu",
+    "title": "¿Cuál es tu ruta migratoria ideal hacia",
+    "titleHighlight": "Estados Unidos",
+    "titleEnd": "según tu perfil?",
+    "subtitle": "Transformamos tu trayectoria en un Plan de Alto Impacto. No solo tramitamos visas; diseñamos tu",
     "subtitleStrong": "legado en Estados Unidos",
-    "cta1": "Evaluar si mi perfil califica",
+    "cta1": "Quiero mi diagnóstico de ruta migratoria",
     "cta2": "Conocer mi camino sin patrocinador",
     "urgency": "Cada año que esperas, miles de casos se aprueban. ¿El tuyo está listo?",
     "audienceLabel": "Empresarios, profesionales e inversionistas",
@@ -82,18 +82,22 @@
     ]
   },
   "quiz": {
-    "eyebrow": "Evaluación de elegibilidad",
-    "title": "Descubre tu potencial para la EB-2 NIW",
-    "subtitle": "Responde 3 preguntas rápidas y conoce si tu perfil califica.",
+    "eyebrow": "Diagnóstico migratorio",
+    "title": "¿Cuál es tu ruta migratoria ideal hacia Estados Unidos?",
+    "subtitle": "En menos de 5 minutos sabrás si hoy eres elegible, qué tipo de visa encaja mejor y qué tan preparado está tu expediente.",
     "completed": "Completado",
     "step4Data": "Paso 4 de 4 — Tus datos",
     "step4Result": "Paso 4 de 4 — Tu resultado",
-    "stepOf": "Paso {{step}} de 3",
+    "stepOf": "Paso {{step}} de 7",
     "profileRegistered": "¡Perfil registrado!",
     "yourEvaluation": "Tu evaluación de elegibilidad",
-    "step1Title": "¿Cuál es tu nivel académico más alto?",
-    "step2Title": "¿Cuál es tu área de impacto principal?",
-    "step3Title": "¿Cuáles de estos logros aplican a tu perfil?",
+    "step1Title": "Tu punto de partida geográfico",
+    "step2Title": "Tu contexto actual y objetivo migratorio",
+    "step3Title": "Acceso a visas de tratado (E2/E1)",
+    "step4Title": "Tu perfil profesional y experiencia",
+    "step5Title": "Logros e impacto de tu trabajo",
+    "step6Title": "Negocios, inversión y perfil extraordinario",
+    "step7Title": "Claridad de proyecto y preparación",
     "back": "Atrás",
     "continue": "Continuar",
     "seeMyEvaluation": "Ver mi evaluación",
@@ -139,7 +143,152 @@
       { "id": "conferencias", "label": "Ponencias en conferencias internacionales" }
     ],
     "whatsappHighImpact": "https://wa.me/15483122105?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20agendar%20mi%20evaluación%20gratuita.",
-    "whatsappUnsung": "https://wa.me/15483122105?text=Hola%20MORE,%20completé%20el%20quiz%20y%20quiero%20conocer%20el%20programa%20Unsung."
+    "whatsappUnsung": "https://wa.me/15483122105?text=Hola%20MORE,%20completé%20el%20diagnóstico%20y%20quiero%20conocer%20el%20programa%20Unsung.",
+    "diagnostic": {
+      "basic": {
+        "countries": [
+          { "id": "latam", "label": "Vivo en Latinoamérica" },
+          { "id": "usa", "label": "Vivo en Estados Unidos" },
+          { "id": "europa", "label": "Vivo en Europa" },
+          { "id": "otro", "label": "Vivo en otro país" }
+        ],
+        "goals": [
+          { "id": "crecer_profesionalmente", "label": "Crecer profesionalmente en EE.UU.", "description": "Trabajar en tu campo con mejores oportunidades." },
+          { "id": "crear_o_expandir_negocio", "label": "Crear o expandir un negocio", "description": "Montar o escalar tu empresa en EE.UU." },
+          { "id": "obtener_residencia_permanente", "label": "Obtener residencia permanente", "description": "Construir un plan para la Green Card." },
+          { "id": "trabajar_temporalmente", "label": "Trabajar temporalmente", "description": "Explorar visas temporales primero." },
+          { "id": "explorar_oportunidades", "label": "Explorar oportunidades", "description": "Aún estoy entendiendo mis opciones." }
+        ]
+      },
+      "professional": {
+        "education": [
+          { "id": "tecnico", "label": "Técnico / Tecnólogo" },
+          { "id": "profesional", "label": "Profesional / Licenciatura" },
+          { "id": "maestria", "label": "Maestría" },
+          { "id": "doctorado", "label": "Doctorado / PhD" }
+        ],
+        "achievements": [
+          { "id": "publicaciones", "label": "Publicaciones (artículos, papers, libros)" },
+          { "id": "premios", "label": "Premios o reconocimientos relevantes" },
+          { "id": "liderazgo", "label": "Liderazgo en proyectos u organizaciones" },
+          { "id": "impacto_social", "label": "Impacto social o comunitario demostrado" },
+          { "id": "medios", "label": "Apariciones en medios de comunicación" },
+          { "id": "ninguno", "label": "Ninguno de los anteriores" }
+        ],
+        "sectors": [
+          { "id": "salud", "label": "Salud" },
+          { "id": "energia", "label": "Energía" },
+          { "id": "tecnologia", "label": "Tecnología" },
+          { "id": "educacion", "label": "Educación" },
+          { "id": "medio_ambiente", "label": "Medio ambiente" },
+          { "id": "desarrollo_economico", "label": "Desarrollo económico" },
+          { "id": "otro", "label": "Otro sector" }
+        ]
+      },
+      "business": {
+        "business": [
+          { "id": "tiene_activo", "label": "Sí, tengo un negocio en operación" },
+          { "id": "tuvo", "label": "Tuve un negocio, hoy no está activo" },
+          { "id": "no", "label": "No he tenido negocio propio" }
+        ],
+        "investment": [
+          { "id": "mas_100k", "label": "Sí, puedo invertir más de USD 100K" },
+          { "id": "menos_100k", "label": "Sí, pero menos de USD 100K" },
+          { "id": "no", "label": "No estoy dispuesto a invertir ahora" }
+        ],
+        "expansion": [
+          { "id": "si", "label": "Sí, mi empresa puede expandirse a EE.UU." },
+          { "id": "no", "label": "No, no aplica a mi caso" },
+          { "id": "no_se", "label": "No estoy seguro todavía" }
+        ]
+      },
+      "extraordinary": {
+        "recognition": [
+          { "id": "alto", "label": "Sí, ampliamente reconocido en mi campo" },
+          { "id": "medio", "label": "Moderadamente reconocido" },
+          { "id": "no", "label": "No, todavía no" }
+        ],
+        "connections": [
+          { "id": "empresas", "label": "He trabajado con empresas importantes" },
+          { "id": "gobiernos", "label": "He trabajado con gobiernos" },
+          { "id": "organizaciones", "label": "He trabajado con organizaciones internacionales" },
+          { "id": "ninguno", "label": "Ninguno de los anteriores" }
+        ]
+      },
+      "preparation": {
+        "project": [
+          { "id": "estructurado", "label": "Sí, tengo un proyecto/plan bien definido" },
+          { "id": "idea", "label": "Tengo una idea, pero no está aterrizada" },
+          { "id": "no", "label": "Aún no tengo claro qué haría en EE.UU." }
+        ],
+        "evidence": [
+          { "id": "si", "label": "Sí, tengo evidencias bien organizadas" },
+          { "id": "parcialmente", "label": "Tengo algunas cosas, pero desordenadas" },
+          { "id": "no", "label": "No tengo evidencias agrupadas" }
+        ],
+        "timeframe": [
+          { "id": "0_3", "label": "0–3 meses" },
+          { "id": "3_6", "label": "3–6 meses" },
+          { "id": "6_12", "label": "6–12 meses" },
+          { "id": "explorando", "label": "Solo estoy explorando" }
+        ]
+      },
+      "countryResidenceQuestion": "¿En qué país vives actualmente?",
+      "nationalityQuestion": "¿Cuál es tu nacionalidad?",
+      "nationalityPlaceholder": "Escribe tu nacionalidad (ej. Colombia, México, España…) ",
+      "nationalityHint": "No necesitas ser exacto en la ortografía; usamos esta respuesta para cruzar tratados de visa.",
+      "inUsQuestion": "¿Estás actualmente en Estados Unidos?",
+      "inUsWithStatus": "Sí, con estatus legal",
+      "inUsWithoutStatus": "Sí, sin estatus",
+      "outsideUs": "No, estoy fuera de EE.UU.",
+      "mainGoalQuestion": "¿Cuál es tu objetivo principal al migrar?",
+      "treatyIntro": "Con tu nacionalidad podemos estimar si existen visas de tratado (E2/E1) disponibles para ti.",
+      "treatyYes": "Con tu nacionalidad ({{country}}), las visas de tratado E2/E1 son una ruta potencial de negocio.",
+      "treatyNo": "Con tu nacionalidad ({{country}}), las visas de tratado E2/E1 no aplican como ruta principal.",
+      "treatyUnknown": "Ingresa tu nacionalidad para que podamos evaluar si existen visas de tratado (E2/E1) aplicables.",
+      "treatyNote": "Esta información es una guía inicial. La elegibilidad final siempre se evalúa caso por caso junto con el equipo legal.",
+      "educationQuestion": "¿Cuál es tu nivel educativo más alto?",
+      "yearsExperienceQuestion": "¿Tienes más de 5 años de experiencia en tu campo?",
+      "yes": "Sí",
+      "no": "No",
+      "achievementsQuestion": "¿Has tenido alguno de los siguientes logros? (puedes elegir varios)",
+      "achievementsNoneHint": "Si eliges \"Ninguno\", ignoraremos los demás logros para esta evaluación.",
+      "sectorQuestion": "¿Tu trabajo tiene impacto en alguno de estos sectores?",
+      "businessQuestion": "¿Tienes o has tenido un negocio?",
+      "investmentQuestion": "¿Estarías dispuesto a invertir en EE.UU.?",
+      "expansionQuestion": "¿Tu empresa actual podría expandirse a EE.UU.?",
+      "recognitionQuestion": "¿Eres reconocido como experto en tu campo?",
+      "connectionsQuestion": "¿Has trabajado con alguno de los siguientes actores?",
+      "projectQuestion": "¿Tienes definido un proyecto o plan en EE.UU.?",
+      "evidenceQuestion": "¿Tienes evidencias organizadas de tu experiencia?",
+      "timeframeQuestion": "¿En cuánto tiempo te gustaría aplicar?",
+      "resultTitle": "Tu ruta migratoria más probable",
+      "resultIntro": "Con base en tus respuestas, consolidamos una hipótesis inicial de ruta migratoria para que no sigas adivinando.",
+      "segmentLabel": "Nivel de preparación",
+      "visaBucketsLabel": "Rutas de visa que podrías explorar",
+      "visaBucketsEmpty": "Aún no vemos una ruta clara de visa, pero podemos ayudarte a construirla con contenido y acompañamiento.",
+      "recommendedRouteLabel": "Siguiente paso recomendado",
+      "segment": {
+        "ready": "Estás listo para aplicar — tu perfil y preparación permiten avanzar a una estrategia formal.",
+        "needsStructure": "Tienes potencial, pero necesitas estructurar mejor tu proyecto y evidencias.",
+        "notReady": "Aún estás en fase exploratoria — primero debemos fortalecer tu perfil antes de invertir en un caso."
+      },
+      "bucket": {
+        "eb1": "EB1 — habilidades extraordinarias / logros excepcionales",
+        "eb2": "EB2 / NIW — interés nacional",
+        "o1": "O1 — talento extraordinario",
+        "e2": "E2 — inversionista por tratado",
+        "l1": "L1 — transferencia de ejecutivos / dueños",
+        "otra": "Otras rutas migratorias"
+      },
+      "route": {
+        "unsung": "Por tu nivel de preparación y perfil, el Programa Unsung Professional es la vía más eficiente para convertir tu trayectoria en un expediente aprobado.",
+        "mentoring": "Tu perfil necesita estructura estratégica: la Mentoría / Academia MORE es el espacio ideal para ordenar proyecto, narrativa y evidencias.",
+        "lawyer": "Tu caso requiere desde el inicio una evaluación y acompañamiento legal directo. Te recomendamos avanzar a una revisión con abogado aliado.",
+        "content": "Aún estás en modo exploración. Te recomendamos comenzar con contenido educativo guiado para entender las reglas del juego antes de invertir en un proceso."
+      },
+      "ctaLead": "Sí, quiero que revisen mi diagnóstico y me contacten"
+    }
   },
   "vipSession": {
     "eyebrow": "Primer paso",

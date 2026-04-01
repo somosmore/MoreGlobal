@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-03-28 (feat: i18n de la sección Éxito / testimonios — marco UI y categorías)
+> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads)
 
 ---
 
@@ -67,29 +67,93 @@ El sitio público soporta **Español** e **Inglés** de forma dinámica, sin rec
 - Incluye headline principal (H1), subtítulo (H2) y CTA primario que lleva al quiz.
 - Diseñado bajo principios CRO: gap entre estado doloroso y estado deseado del visitante.
 
-### 1.3 Quiz de calificación
+### 1.3 Diagnóstico de ruta migratoria (quiz)
 
 **Ruta:** La misma página `/`, sección `#quiz`
 
-El quiz es un formulario multi-paso interactivo que califica al visitante. Flujo de pasos:
+El antiguo “quiz de calificación” se reemplazó por un **diagnóstico migratorio estructurado** cuyo objetivo es:
 
-| Paso | Pregunta | Tipo |
-|------|----------|------|
-| 1 | Nivel académico | Selección única |
-| 2 | Área de impacto | Selección única |
-| 3 | Logros | Selección múltiple |
-| 4 | Nombre, email, WhatsApp | Formulario de contacto |
+- Filtrar por **elegibilidad real**.
+- Identificar el **tipo de visa más probable** (EB1 / EB2-NIW / O1 / E2 / L1 / otras).
+- Medir el **nivel de preparación** del perfil y del expediente.
+- Asignar un **segmento de preparación** y una **ruta de acción recomendada**.
 
-**Lógica de calificación:**
+#### Flujo de bloques y preguntas
 
-Al completar el quiz, el sistema evalúa el perfil y asigna uno de dos resultados:
+El diagnóstico se organiza en 6 bloques (7 pantallas de preguntas) antes de mostrar el resultado:
 
-- **Alto Impacto:** Perfil con maestría/doctorado y logros destacados.
-- **Unsung:** Perfil con alto potencial pero sin credenciales formales de nivel superior.
+1. **Bloque 1 — Perfil básico (filtro inicial)**
+   - País de residencia actual.
+   - Nacionalidad.
+   - Situación actual frente a EE.UU.:
+     - En EE.UU. con estatus.
+     - En EE.UU. sin estatus.
+     - Fuera de EE.UU.
+   - Objetivo principal al migrar (crecer profesionalmente, crear/expandir negocio, residencia permanente, trabajo temporal, explorar oportunidades).
 
-Ambos resultados redirigen a la página de éxito (`/success`) con un mensaje personalizado.
+2. **Bloque 2 — Acceso a visas según nacionalidad**
+   - El sistema cruza automáticamente la nacionalidad del usuario con una tabla de países con tratado E1/E2 y determina si las visas de tratado (E2/E1) son una ruta potencial o no.
+   - El usuario ve un mensaje explicativo (no tiene que conocer el tratado de antemano).
 
-**Almacenamiento:** Cada lead completado se guarda en la tabla `leads` de Supabase con todos los campos del quiz.
+3. **Bloque 3 — Perfil profesional (EB2 / EB1 / O1)**
+   - Nivel educativo (Técnico/Tecnólogo, Profesional, Maestría, Doctorado).
+   - Más de 5 años de experiencia en el campo (sí/no).
+   - Logros relevantes (multi selección):
+     - Publicaciones.
+     - Premios o reconocimientos.
+     - Liderazgo en proyectos relevantes.
+     - Impacto social o comunitario.
+     - Apariciones en medios.
+     - Ninguno.
+   - Sectores de impacto:
+     - Salud, Energía, Tecnología, Educación, Medio ambiente, Desarrollo económico u Otro.
+
+4. **Bloque 4 — Negocios e inversión (E2 / L1)**
+   - ¿Tiene o ha tenido negocio? (en operación / no activo / nunca).
+   - Capacidad/disposición de inversión en EE.UU. (más de USD 100K / menos de USD 100K / no).
+   - Posibilidad de expandir la empresa actual a EE.UU. (sí / no / no sabe).
+
+5. **Bloque 5 — Perfil extraordinario (O1 / EB1)**
+   - Grado de reconocimiento como experto en su campo (alto / medio / no).
+   - Si ha trabajado con empresas importantes, gobiernos, organizaciones internacionales o ninguno.
+
+6. **Bloque 6 — Claridad y preparación**
+   - Estado del proyecto o plan en EE.UU. (estructurado / idea / sin proyecto).
+   - Nivel de organización de evidencias (sí / parcialmente / no).
+   - Horizonte de tiempo para aplicar (0–3, 3–6, 6–12 meses, o “solo explorando”).
+
+Al finalizar los bloques, el sistema calcula un **diagnóstico de ruta migratoria** y luego solicita los datos de contacto (Nombre, Email, WhatsApp) para registrar el lead.
+
+#### Lógica de clasificación
+
+A partir de las respuestas, el diagnóstico calcula:
+
+- **Buckets de visa (`visa_buckets`):** familias de visas que el perfil podría explorar:
+  - `eb1`, `eb2`, `o1`, `e2`, `l1`, `otra`.
+- **Segmento de preparación (`eligibility_segment`):**
+  - `listo` — Listo para aplicar (proyecto definido, evidencias organizadas, horizonte claro).
+  - `necesita_estructura` — Tiene potencial pero requiere estructurar proyecto/narrativa/evidencias.
+  - `no_califica_aun` — Aún muy exploratorio; primero debe fortalecer su perfil.
+- **Ruta recomendada (`recommended_route`):**
+  - `unsung_program` — Programa Unsung Professional.
+  - `mentoria_more` — Mentoría / Academia MORE.
+  - `abogado` — Caso que requiere evaluación legal directa (referido a abogado).
+  - `contenido` — Conducir al usuario a contenido educativo y recursos.
+- **Resultado histórico (`result_type`):**
+  - Mantiene la etiqueta `alto_impacto` / `unsung` para compatibilidad con el CRM, derivada ahora de los buckets de visa (si hay EB1/EB2/O1 se considera Alto Impacto).
+
+La pantalla de resultado muestra:
+
+- Un titular con la “ruta migratoria más probable”.
+- El segmento de preparación (badge).
+- Los buckets de visa identificados.
+- Un texto explicativo sobre la ruta recomendada (Unsung, Mentoría, Abogado, Contenido).
+- CTA para dejar datos y ser contactado por el equipo.
+
+**Almacenamiento:** Cada lead completado se guarda en la tabla `leads` de Supabase con:
+
+- Respuestas de perfil básico, profesional, negocios, perfil extraordinario y preparación.
+- Buckets de visa, segmento de preparación, ruta recomendada y resultado histórico.
 
 ### 1.4 Sección: A quién ayudamos
 
@@ -283,12 +347,27 @@ Gestión completa del pipeline de leads provenientes del quiz.
 Igual que el Dashboard pero scoped a la vista actual.
 
 #### Tabla de leads
-Columnas: Fecha, Nombre, Contacto, Perfil académico, Resultado, Estado, Acciones.
+
+Columnas principales:
+
+- Fecha.
+- Nombre.
+- Contacto (email + WhatsApp).
+- Perfil (nivel académico, área de impacto + país de residencia / nacionalidad).
+- Resultado (Alto Impacto / Unsung + segmento y ruta recomendada).
+- Estado del pipeline.
+- Acciones.
+
+Comportamiento:
 
 - **Ordenamiento:** Clic en encabezado de columna ordena ascendente/descendente (fecha, nombre, resultado, estado).
 - **Búsqueda:** Filtra por nombre, email o WhatsApp en tiempo real.
-- **Filtros:** Por tipo de resultado (Alto Impacto / Unsung) y por estado del pipeline.
-- **Export CSV:** Descarga la lista filtrada como archivo CSV.
+- **Filtros:** Por tipo de resultado (Alto Impacto / Unsung), estado del pipeline, segmento de preparación y ruta recomendada.
+- **Export CSV:** Descarga la lista filtrada como CSV incluyendo:
+  - Datos básicos (fecha, nombre, email, WhatsApp, país, nacionalidad).
+  - Nivel académico, área de impacto, logros.
+  - Segmento (`eligibility_segment`), ruta recomendada (`recommended_route`), buckets de visa (`visa_buckets`).
+  - Resultado (`result_type`) y estado del pipeline.
 - **Badge de seguimiento:** Icono de campana en la columna de acciones cuando un lead tiene un recordatorio vencido (rojo), para hoy (amarillo), o próximo (azul).
 
 #### Panel lateral de detalle (slide-over)
@@ -310,18 +389,27 @@ Botones pill para cambiar el estado del lead:
 - Email con botón de copia al portapapeles.
 - WhatsApp con link directo a conversación pre-cargada en WhatsApp Web.
 
-**3. Perfil del quiz**
-- Resultado asignado (Alto Impacto / Unsung).
+**3. Perfil del diagnóstico (quiz)**
+- Resultado histórico (Alto Impacto / Unsung).
+- Segmento de preparación (Listo / Necesita estructuración / No califica aún).
+- Ruta recomendada (Unsung, Mentoría, Abogado, Contenido).
 - Nivel académico.
 - Área de impacto.
+- País de residencia y nacionalidad.
 
-**4. Logros**
+**4. Buckets de visa**
+- Chips con las familias de visas detectadas para ese perfil:
+  - EB1, EB2/NIW, O1, E2, L1, otras.
+
+**5. Logros**
+
+**6. Logros**
 - Lista de logros seleccionados por el lead durante el quiz (premios, publicaciones, liderazgo, patentes, conferencias).
 
-**5. Fecha de registro**
+**7. Fecha de registro**
 - Fecha y hora exacta de cuando el lead completó el quiz.
 
-**6. Próximo seguimiento**
+**8. Próximo seguimiento**
 - Permite asignar una fecha de recordatorio para retomar contacto con el lead.
 - Si hay una fecha guardada, muestra un badge indicando si el seguimiento está:
   - **Vencido** (rojo): La fecha pasó sin haberse atendido.
@@ -330,7 +418,7 @@ Botones pill para cambiar el estado del lead:
 - Se puede borrar la fecha de seguimiento con el botón de X en el badge.
 - Al guardar, la fecha aparece en el badge de la tabla y en el Dashboard.
 
-**7. Notas**
+**9. Notas**
 - Campo de texto para registrar observaciones de cada interacción con el lead.
 - Soporte de `Ctrl+Enter` para enviar rápidamente.
 - Las notas se guardan en la tabla `lead_notes` de Supabase asociadas al lead.
@@ -437,10 +525,26 @@ Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de cont
 | `nombre` | text | Nombre completo |
 | `email` | text | Correo electrónico |
 | `whatsapp` | text | Número de WhatsApp (opcional) |
+| `country_residence` | text | País donde vive actualmente el lead |
+| `nationality` | text | Nacionalidad declarada |
+| `in_us_status` | text | Situación actual frente a EE.UU. (`en_usa_status`, `en_usa_sin_status`, `fuera_usa`) |
+| `migration_goal` | text | Objetivo principal al migrar (crecer_profesionalmente, crear_o_expandir_negocio, etc.) |
 | `academic_level` | text | Nivel académico (maestria, doctorado, grado5, otros) |
-| `impact_area` | text | Área de impacto (salud, stem, social, negocios) |
-| `achievements` | text[] | Logros seleccionados en el quiz |
-| `result_type` | text | Resultado del quiz (alto_impacto, unsung) |
+| `impact_area` | text | Área de impacto (salud, stem, social, negocios, etc.) |
+| `achievements` | text[] | Logros seleccionados en el diagnóstico |
+| `result_type` | text | Resultado histórico (alto_impacto, unsung) usado para KPIs |
+| `treaty_visa_eligible` | boolean | Indica si, por nacionalidad, podría aplicar a visas E2/E1 de tratado |
+| `business_experience` | text | Experiencia en negocios (tiene_activo, tuvo, no) |
+| `investment_capacity` | text | Capacidad de inversión (mas_100k, menos_100k, no) |
+| `company_can_expand` | text | Si la empresa actual puede expandirse a EE.UU. (si, no, no_se) |
+| `extraordinary_profile` | text | Nivel de perfil extraordinario declarado (alto, medio, no) |
+| `high_level_connections` | text[] | Conexiones de alto nivel (empresas, gobiernos, organizaciones, ninguno) |
+| `project_clarity` | text | Claridad de proyecto (estructurado, idea, no) |
+| `evidence_readiness` | text | Estado de evidencias (si, parcialmente, no) |
+| `timeframe` | text | Horizonte de tiempo para aplicar (0_3, 3_6, 6_12, explorando) |
+| `eligibility_segment` | text | Segmento de preparación (listo, necesita_estructura, no_califica_aun) |
+| `recommended_route` | text | Ruta recomendada (unsung_program, mentoria_more, abogado, contenido) |
+| `visa_buckets` | text[] | Buckets de visa detectados (eb1, eb2, o1, e2, l1, otra) |
 | `status` | text | Estado en el pipeline (nuevo, contactado, en_consulta, calificado, cerrado, perdido) |
 | `followup_at` | timestamptz | Fecha de próximo seguimiento (opcional) |
 | `created_at` | timestamptz | Fecha de registro |
