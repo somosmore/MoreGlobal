@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads, landing dedicada Asesoría VIP)
+> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads, landing dedicada Asesoría VIP con diseño y mensaje optimizados)
 
 ---
 
@@ -210,18 +210,29 @@ Su objetivo es monetizar el interés de los visitantes que no están listos para
 - Si `calendar_url` está vacío, el botón aparece deshabilitado con el texto "Próximamente disponible".
 - El link se abre en una nueva pestaña (`target="_blank"`).
 
-#### Componente
-
-`more-landing/src/components/sections/VipSession.tsx`
-
 #### Landing dedicada de Asesoría VIP
 
 - Además de la sección dentro de la landing principal, existe una **landing-page independiente** para la Asesoría VIP, pensada para usarse en un subdominio (por ejemplo `vip.somosmore.com`).
 - Esta landing se construye como una entrada separada de Vite:
   - Archivo de entrada: `more-landing/vite.config.ts` con el entry `vip` apuntando a `vip.html`.
   - HTML base: `more-landing/vip.html` (monta la app en `#root` con el script `/src/vip/main.tsx`).
-  - Página React: `more-landing/src/vip/pages/VipLanding.tsx` (estructura de secciones en blanco/lista para contenido).
-- En esta fase, la landing se encuentra en **estado borrador** (placeholders); se utilizará en futuras iteraciones para probar mensajes y flujos específicos de esta oferta.
+  - Página React: `more-landing/src/vip/pages/VipLanding.tsx` que compone diferentes secciones específicas de la oferta VIP.
+
+#### Estructura y contenido actual de la landing VIP (`/vip.html`)
+
+La landing VIP está pensada como una **página de decisión** para personas que ya entienden el contexto EB2-NIW y quieren una evaluación estratégica antes de comprometerse con programas de mayor ticket.
+
+Secciones principales:
+
+| Sección | Descripción |
+|--------|-------------|
+| Hero VIP (`VipHero`) | Bloque principal con fondo oscuro y gradientes, headline “¿Tu perfil realmente sostiene una Green Card?” y subtítulo orientado a evitar decisiones caras en el camino equivocado. Incluye CTA primario en primera persona (*“Sí, quiero mi diagnóstico estratégico con Ivon — $97 USD”*), badge de “primer paso serio” y micro-métricas de autoridad (perfiles evaluados y enfoque en ruta migratoria). Muestra también un módulo visual con la tarjeta de Ivon, su rol y lo que se resuelve en la sesión. |
+| Qué incluye tu sesión (`VipSessionIncluded`) | Lista de entregables concretos (situación real, puntos débiles, plan a 3 meses, decisión de programa y PDF personalizado). Presentado como cards con íconos y un resaltado especial para el PDF de ruta migratoria. |
+| Valor y costo de no decidir (`VipValueSection`) | Sección comparativa en fondo oscuro que contrasta el costo de avanzar sin diagnóstico (gastos innecesarios, decisiones malas, incertidumbre) vs. el escenario de pasar primero por la asesoría (decisión binaria, ruta a 90 días, claridad sobre costo de inacción y PDF para discutir con familia/socios). |
+| Sobre Ivon y metodología MORE (`VipAboutIvon`) | Bloque que profundiza en la historia personal y profesional de Ivon (migración familiar y de empresa), su rol actual como estratega y la metodología MORE. Incluye una tarjeta visual con badges de rol, cita textual y bullets sobre qué tipo de conversación se tiene en la sesión. |
+| Encaje de la oferta (`VipFitSection`) | Sección de “para quién es / no es” que filtra a los visitantes. Lista condiciones claras de buen encaje (profesionales y empresarios con trayectoria, foco en decisiones estratégicas) y de mal encaje (búsqueda de soluciones mágicas, cero compromiso, expectativa de promesas fáciles). |
+| Inversión y garantía (`VipPricingSection`) | Muestra el precio único de USD 97 para la sesión 1 a 1 de 60 minutos con Ivon, CTA en primera persona y un bloque de garantía fuerte: si en los primeros 15 minutos no se ve encaje real, se devuelve el dinero sin preguntas. |
+| Preguntas frecuentes + CTA final (`VipFaq`) | Aclara dudas típicas (formato de la sesión, qué pasa si no califican, qué es EB2-NIW, cuándo pueden agendar) y cierra con un CTA secundario hacia el mismo calendario configurado en `calendar_url`. |
 
 **Acceso recomendado:**
 

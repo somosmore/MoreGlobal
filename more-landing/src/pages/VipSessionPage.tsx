@@ -1,0 +1,36 @@
+import Navbar from "@/components/sections/Navbar"
+import Footer from "@/components/sections/Footer"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { VipHero } from "@/vip/components/VipHero"
+import { VipSessionIncluded } from "@/vip/components/VipSessionIncluded"
+import { VipValueSection } from "@/vip/components/VipValueSection"
+import { VipAboutIvon } from "@/vip/components/VipAboutIvon"
+import { VipFitSection } from "@/vip/components/VipFitSection"
+import { VipPricingSection } from "@/vip/components/VipPricingSection"
+import { VipFaq } from "@/vip/components/VipFaq"
+
+export default function VipSessionPage() {
+  const { settings, loading } = useSiteSettings()
+  const calendarUrl = settings.calendar_url
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <main className="flex flex-col gap-20 pb-20">
+        <VipHero calendarUrl={calendarUrl} loading={loading} />
+        <section className="bg-white">
+          <div className="mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6 lg:px-8">
+            <VipSessionIncluded />
+            <VipValueSection />
+            <VipAboutIvon />
+            <VipFitSection />
+            <VipPricingSection calendarUrl={calendarUrl} loading={loading} />
+            <VipFaq calendarUrl={calendarUrl} loading={loading} />
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
