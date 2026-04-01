@@ -295,20 +295,21 @@
     "limited": "Cupos limitados por semana",
     "title": "¿Tu perfil sirve para la Green Card?",
     "titleHighlight": "Descúbrelo antes de gastar un solo dólar.",
-    "subtitle": "En una sesión de 60 minutos con Ivon, analizamos tu caso con total honestidad. Te llevas una hoja de ruta clara para los próximos 90 días, sin vueltas y con la verdad.",
+    "subtitle": "En 60 minutos de estrategia migratoria con Ivon, analizamos tu perfil profesional y empresarial con total honestidad. Te llevas una hoja de ruta clara para los próximos 90 días — sin rodeos, sin costos altos, con estrategia real.",
     "deliverables": [
       "Tu situación real: Te decimos si calificas para la EB-2 NIW hoy mismo.",
       "Tus puntos débiles: Qué te falta y cómo lo solucionamos.",
       "Tu plan a 3 meses: Los pasos exactos que debes dar.",
-      "La decisión final: Qué programa te conviene (o si es mejor esperar un poco)."
+      "La decisión final: Qué programa te conviene (o si es mejor esperar un poco).",
+      "Tu PDF personalizado: Tu ruta migratoria documentada, lista al terminar la sesión."
     ],
     "currency": "USD",
     "sessionInfo": "Sesión 1 a 1 · 60 minutos con Ivon",
-    "guarantee": "Si en los primeros 15 min vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas.",
-    "cta": "Sí, quiero evaluar mi perfil con Ivon — $97 USD",
+    "guarantee": "🛡 Si en los primeros 15 minutos vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas. Tu inversión está protegida.",
+    "cta": "Sí, quiero mi estrategia migratoria con Ivon — $97 USD",
     "ctaAriaLabel": "Agendar Asesoría VIP con Ivon — $97 USD",
     "comingSoon": "Próximamente disponible",
-    "valueContrast": "Una hora que puede ahorrarte meses de decisiones equivocadas — y miles de dólares invertidos en el camino equivocado."
+    "valueContrast": "Una hora que puede ahorrarte meses de decisiones equivocadas, gastos innecesarios y el desgaste de migrar sin una ruta clara."
   },
   "pricing": {
     "eyebrow": "Programas",

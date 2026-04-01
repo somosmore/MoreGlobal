@@ -196,12 +196,12 @@ Su objetivo es monetizar el interés de los visitantes que no están listos para
 | Elemento | Descripción |
 |----------|-------------|
 | Eyebrow | "Primer paso · Cupos limitados por semana" |
-| Headline | "¿Tu perfil califica para la Green Card? Descúbrelo antes de invertir un solo dólar más." |
-| Subheadline | Descripción de la sesión de 60 minutos 1 a 1 con Ivon |
-| Entregables (4 bullets) | Elegibilidad real, obstáculos del perfil, hoja de ruta 90 días, recomendación de programa |
+| Headline | "¿Tu perfil sirve para la Green Card? Descúbrelo antes de gastar un solo dólar." (texto dividido en dos líneas en desktop) |
+| Subheadline | "En 60 minutos de estrategia migratoria con Ivon, analizamos tu perfil profesional y empresarial con total honestidad. Te llevas una hoja de ruta clara para los próximos 90 días — sin rodeos, sin costos altos, con estrategia real." |
+| Entregables (5 bullets) | Elegibilidad real, obstáculos del perfil, hoja de ruta 90 días, recomendación de programa y **PDF personalizado con la ruta migratoria documentada al finalizar la sesión** |
 | Precio | $97 USD · Sesión 1 a 1 · 60 minutos con Ivon |
-| Garantía | Reembolso si en los primeros 15 minutos no se puede ayudar al usuario |
-| CTA | "Sí, quiero evaluar mi perfil con Ivon — $97 USD" → abre el link de Calendly |
+| Garantía | Texto mostrado en el bloque verde: "🛡 Si en los primeros 15 minutos vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas. Tu inversión está protegida." |
+| CTA | Botón naranja con ícono de calendario: "Sí, quiero mi estrategia migratoria con Ivon — $97 USD" → abre el link de Calendly configurado en `calendar_url` |
 
 #### Comportamiento del CTA
 
