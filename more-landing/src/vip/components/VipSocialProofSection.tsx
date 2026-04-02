@@ -1,8 +1,15 @@
+import { motion } from "framer-motion"
 import { ShieldCheck, TrendingUp, Clock3 } from "lucide-react"
 
 export const VipSocialProofSection = () => {
   return (
-    <section className="py-20 sm:py-24">
+    <motion.section
+      className="py-32 sm:py-32"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="rounded-3xl bg-navy text-white shadow-xl ring-1 ring-navy/40">
         <div className="border-b border-white/10 px-6 py-8 sm:px-10 sm:py-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-orange/80">
@@ -69,7 +76,7 @@ export const VipSocialProofSection = () => {
           </article>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

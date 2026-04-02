@@ -1,42 +1,54 @@
+import { motion } from "framer-motion"
+
 export const VipValueSection = () => {
   return (
-    <section className="rounded-3xl bg-white/90 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <motion.section
+      className="rounded-3xl bg-white/90 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="space-y-3">
         <h2 className="max-w-xl text-[clamp(1.5rem,2.6vw,1.9rem)] font-semibold leading-snug text-navy">
           No estás pagando una opinión más. Estás comprando una decisión migratoria tomada con datos,
           riesgos y escenarios claros delante tuyo.
         </h2>
-        <p className="max-w-xs text-[11px] leading-relaxed text-gray-600 sm:text-xs">
-          Esta asesoría funciona como un comité estratégico: miramos tu perfil, tus tiempos y
-          tu capacidad de inversión para decidir si tiene sentido avanzar — y cómo.
+        <p className="max-w-xl text-sm text-gray-600 sm:text-base">
+          En vez de sumar opiniones, actuamos como tu comité estratégico para decidir con datos si
+          tiene sentido avanzar ahora o no.
         </p>
       </div>
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <article className="space-y-2 rounded-2xl bg-gray-50 p-4 ring-1 ring-gray-200/70">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-navy">
-            Si decidís avanzar sin este diagnóstico
-          </p>
-          <ul className="mt-1.5 space-y-1.5 text-sm text-gray-700">
-            <li>• Apostar miles de dólares a una estrategia que nadie validó.</li>
-            <li>• Pagar honorarios sin saber exactamente qué te está faltando.</li>
-            <li>• Vivir meses en modo “a ver qué pasa con el caso”.</li>
-            <li>• Arrastrar a tu familia a decisiones tomadas casi a ciegas.</li>
-          </ul>
-        </article>
-        <article className="space-y-2 rounded-2xl bg-orange/5 p-4 ring-1 ring-orange/25">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-orange-dark">
-            Si primero pasás por la Asesoría VIP
-          </p>
-          <ul className="mt-1.5 space-y-1.5 text-sm text-gray-700">
-            <li>• Decisión binaria: sí, no o todavía no para tu Green Card.</li>
-            <li>• Ruta concreta a 90 días alineada a tu realidad, no a un check‑list genérico.</li>
-            <li>• Claridad sobre el costo real de seguir igual vs. avanzar.</li>
-            <li>• Un PDF con tu hoja de ruta para conversar con tu familia o socios.</li>
-          </ul>
-        </article>
+      <div className="mt-6 space-y-4">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-orange-dark">
+          Qué cambia al pasar por la Asesoría VIP
+        </div>
+        <ol className="relative space-y-5 border-l border-orange/30 pl-4 text-sm text-gray-700 sm:text-base">
+          <li className="space-y-1">
+            <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-orange" />
+            <p className="font-semibold text-navy">Antes de la sesión</p>
+            <p className="text-gray-700">
+              Dudas sobre si tu perfil sostiene una Green Card o solo una buena intención costosa.
+            </p>
+          </li>
+          <li className="space-y-1">
+            <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-orange" />
+            <p className="font-semibold text-navy">Durante la sesión (60 minutos)</p>
+            <p className="text-gray-700">
+              Decisión binaria sobre tu ruta migratoria y hoja de ruta clara basada en evidencias.
+            </p>
+          </li>
+          <li className="space-y-1">
+            <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-orange" />
+            <p className="font-semibold text-navy">Después de 90 días</p>
+            <p className="text-gray-700">
+              Ejecutando un plan concreto o ahorrándote un intento caro que no tenía sentido hoy.
+            </p>
+          </li>
+        </ol>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

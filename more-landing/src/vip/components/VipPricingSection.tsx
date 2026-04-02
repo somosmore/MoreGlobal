@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { Shield } from "lucide-react"
 import { VipCtaButton } from "./VipCtaButton"
 
@@ -13,7 +14,13 @@ export const VipPricingSection = ({
   const ctaLabel = "Aplicar ahora"
 
   return (
-    <section className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+    <motion.section
+      className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="flex flex-col items-start justify-between gap-4 border-t-4 border-orange/80 pt-4 sm:flex-row sm:items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">
@@ -52,7 +59,7 @@ export const VipPricingSection = ({
         La única decisión más cara que invertir $97 en claridad es seguir decidiendo a
         ciegas sobre tu migración.
       </p>
-    </section>
+    </motion.section>
   )
 }
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Shield, Sparkles } from "lucide-react"
 import { VipCtaButton } from "./VipCtaButton"
@@ -9,6 +10,40 @@ type VipHeroProps = {
 
 export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
   const ctaLabel = "Aplicar ahora"
+
+  const [remainingTime, setRemainingTime] = useState<string>("")
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date()
+      const endOfWeek = new Date()
+      const day = now.getDay()
+      const diffToSunday = (7 - day) % 7 || 7
+      endOfWeek.setDate(now.getDate() + diffToSunday)
+      endOfWeek.setHours(23, 59, 59, 999)
+
+      const diff = endOfWeek.getTime() - now.getTime()
+      if (diff <= 0) {
+        setRemainingTime("menos de 1 día")
+        return
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+      const minutes = Math.floor((diff / (1000 * 60)) % 60)
+
+      const parts = []
+      if (days > 0) parts.push(`${days}d`)
+      parts.push(`${hours}h`)
+      parts.push(`${minutes}m`)
+
+      setRemainingTime(parts.join(" "))
+    }
+
+    updateCountdown()
+    const interval = setInterval(updateCountdown, 60000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-linear-to-br from-white via-gray-50/50 to-navy/3 py-20 sm:py-24">
@@ -29,7 +64,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             >
               <span className="h-2 w-2 rounded-full bg-orange animate-pulse" />
               <span className="text-xs font-medium uppercase tracking-wide text-navy/70">
-                Asesoría VIP · Acompañamiento de élite
+                Asesoría VIP 1 a 1 · Evaluación de elegibilidad para Green Card
               </span>
             </motion.div>
 
@@ -47,9 +82,8 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                 con el Máximo Estándar de Precisión.
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
-                El acompañamiento de élite para perfiles de alto impacto que no dejan su futuro al
-                azar. En 60 minutos auditamos tu caso con la metodología MORE y salís con una
-                decisión binaria y un plan a 90 días, no con más información suelta.
+                En esta página aplicás a una sesión VIP de 60 minutos donde validamos con datos si
+                hoy tiene sentido apostar por tu Green Card o cuidar tu inversión para más adelante.
               </p>
             </motion.div>
 
@@ -65,13 +99,12 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                     Sesión privada · 60 minutos · $97 USD
                   </p>
                   <p className="max-w-md text-sm leading-relaxed text-gray-600">
-                    No venís a “informarte”. Venís a tomar una decisión estratégica sobre tu ruta
-                    migratoria con números, riesgos y escenarios sobre la mesa.
+                    En esta hora no venís a escuchar teoría, venís a decidir con números, riesgos y
+                    escenarios reales sobre la mesa.
                   </p>
                   <ul className="mt-1.5 space-y-1.5 text-sm text-gray-700">
-                    <li>• Validamos si tu perfil sostiene hoy una EB‑2 NIW u otra ruta viable.</li>
-                    <li>• Priorizamos qué fortalecer primero para no quemar tiempo ni dinero.</li>
-                    <li>• Diseñamos tus próximos 90 días con pasos concretos, no teorías.</li>
+                    <li>• Validamos si tu perfil sostiene hoy una ruta viable (EB‑2 NIW u otra).</li>
+                    <li>• Definimos si avanzar ahora o fortalecer antes tu perfil.</li>
                   </ul>
                 </div>
                 <div className="w-full max-w-xs">
@@ -83,7 +116,16 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                 </div>
               </div>
 
-              <div className="grid gap-3 text-xs text-gray-600 sm:grid-cols-2 sm:text-[13px]">
+              <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                <span className="rounded-full bg-white/80 px-3 py-1 ring-1 ring-gray-200">
+                  Paso 1 · Aplicar a tu Asesoría VIP
+                </span>
+                <span>
+                  Solo para personas dispuestas a tomar una decisión real en los próximos 90 días.
+                </span>
+              </div>
+
+              <div className="grid gap-4 text-xs text-gray-600 sm:grid-cols-2 sm:text-[13px]">
                 <div className="rounded-2xl bg-white/80 p-3 shadow-sm ring-1 ring-gray-200">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-400">
                     Perfiles evaluados
@@ -110,17 +152,13 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                 </div>
               </div>
 
-              <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
                 <div className="flex items-start gap-2 rounded-xl bg-green-50 px-3 py-2 text-[11px] text-green-900 ring-1 ring-green-100 sm:text-xs">
                   <Shield className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
                   <p>
                     Si en los primeros 15 minutos vemos que tu caso no encaja, te devolvemos el dinero.
                     Sin explicaciones ni discusiones: tu inversión está protegida.
                   </p>
-                </div>
-                <div className="text-xs text-gray-400 sm:text-[11px]">
-                  Cupos limitados por semana — Ivon solo toma una cantidad reducida de diagnósticos
-                  para poder profundizar en cada caso.
                 </div>
               </div>
             </motion.div>
@@ -131,7 +169,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex items-stretch justify-center"
-            >
+          >
             <div className="relative w-full max-w-xs sm:max-w-sm">
               <div className="absolute -inset-6 rounded-[32px] bg-[radial-gradient(circle_at_0_0,rgba(243,112,33,0.25),transparent_60%),radial-gradient(circle_at_100%_100%,rgba(42,58,74,0.22),transparent_55%)] opacity-70 blur-2xl" />
               <div className="relative overflow-hidden rounded-[28px] bg-white/90 p-5 shadow-2xl ring-1 ring-gray-200">
@@ -152,24 +190,28 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                     </div>
                   </div>
                   <p className="max-w-60 text-[11px] leading-relaxed">
-                    “No todos los perfiles sostienen una Green Card, y está bien. Mi trabajo en
-                    esta sesión es decirte con honestidad dónde estás y qué sí se puede construir.”
+                    En esta sesión no venís a que “te vendan” nada, sino a obtener una lectura honesta
+                    de dónde estás hoy y qué sí se puede construir.
                   </p>
                 </div>
 
                 <div className="mt-5 space-y-1.5 rounded-2xl bg-gray-50 px-3 py-2.5 text-[11px] text-gray-700 ring-1 ring-gray-200/80">
-                  <p className="font-semibold text-navy">
-                    Qué resolvemos en estos 60 minutos:
-                  </p>
+                  <p className="font-semibold text-navy">En estos 60 minutos recibís:</p>
                   <ul className="space-y-1.5">
-                    <li>• Si tu perfil sostiene hoy una EB-2 NIW u otra ruta viable.</li>
-                    <li>• Qué evidencias o logros deberías fortalecer y en qué orden.</li>
-                    <li>• Qué hacer en los próximos 90 días para avanzar sin improvisar.</li>
+                    <li>• Decisión binaria sobre si tu perfil sostiene una ruta viable.</li>
+                    <li>• Hoja de ruta a 90 días con prioridades claras.</li>
+                    <li>• Recomendación del siguiente paso más inteligente para tu caso.</li>
                   </ul>
                 </div>
               </div>
             </div>
           </motion.div>
+        </div>
+        <div className="mt-6 flex justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-orange/10 px-4 py-1.5 text-xs font-medium text-orange ring-1 ring-orange/40">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-orange" />
+            <span>Cupos VIP de esta semana · quedan {remainingTime}</span>
+          </div>
         </div>
       </div>
     </section>

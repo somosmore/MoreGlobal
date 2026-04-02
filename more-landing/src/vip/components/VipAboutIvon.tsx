@@ -1,6 +1,14 @@
+import { motion } from "framer-motion"
+
 export const VipAboutIvon = () => {
   return (
-    <section className="grid gap-8 rounded-3xl bg-white p-6 text-navy shadow-sm ring-1 ring-gray-100 sm:grid-cols-[minmax(0,1.45fr)_minmax(0,1.1fr)] sm:p-8">
+    <motion.section
+      className="grid gap-8 rounded-3xl bg-white p-6 text-navy shadow-sm ring-1 ring-gray-100 sm:grid-cols-[minmax(0,1.45fr)_minmax(0,1.1fr)] sm:p-8"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="space-y-5">
         <div className="space-y-2">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-orange/80">
@@ -76,7 +84,7 @@ export const VipAboutIvon = () => {
           </div>
         </figure>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
