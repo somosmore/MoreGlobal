@@ -10,7 +10,7 @@ export const VipPricingSection = ({
   calendarUrl,
   loading,
 }: VipPricingSectionProps) => {
-  const ctaLabel = "Sí, quiero evaluar mi perfil con Ivon — $97 USD"
+  const ctaLabel = "Quiero mi evaluación de perfil"
 
   return (
     <section className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
@@ -36,10 +36,10 @@ export const VipPricingSection = ({
         </div>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex items-start gap-2 rounded-xl bg-green-50 px-3 py-2 text-xs text-green-900 sm:max-w-sm">
-          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
+        <div className="flex items-start gap-2 rounded-xl bg-orange/5 px-3 py-2 text-xs text-navy sm:max-w-sm ring-1 ring-orange/25">
+          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
           <p>
-            🛡 Si en los primeros 15 minutos vemos que tu caso no encaja de verdad, te devolvemos
+            Si en los primeros 15 minutos vemos que tu caso no encaja de verdad, te devolvemos
             el dinero. Sin preguntas ni discusiones.
           </p>
         </div>

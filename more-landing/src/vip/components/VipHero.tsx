@@ -8,10 +8,10 @@ type VipHeroProps = {
 }
 
 export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
-  const ctaLabel = "Sí, quiero mi diagnóstico estratégico con Ivon — $97 USD"
+  const ctaLabel = "Aplicar a Asesoría VIP"
 
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-linear-to-br from-white via-gray-50/50 to-navy/3">
+    <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-linear-to-br from-white via-gray-50/50 to-navy/3 py-20 sm:py-24">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-orange/10 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-navy/[0.07] blur-3xl" />
@@ -29,7 +29,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             >
               <span className="h-2 w-2 rounded-full bg-orange animate-pulse" />
               <span className="text-xs font-medium uppercase tracking-wide text-navy/70">
-                Asesoría VIP · Diagnóstico migratorio 1 a 1
+                Asesoría VIP · Acompañamiento de élite
               </span>
             </motion.div>
 
@@ -37,19 +37,15 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="space-y-4"
+              className="space-y-5"
             >
-              <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-6xl">
-                ¿Tu perfil realmente sostiene una{" "}
-                <span className="relative z-10 bg-linear-to-r from-orange to-orange-dark bg-clip-text text-transparent">
-                  Green Card
-                </span>{" "}
-                o solo una buena intención costosa.
+              <h1 className="font-serif text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
+                Asegura tu Residencia en EE.UU. con el Máximo Estándar de Precisión.
               </h1>
-              <p className="max-w-2xl text-lg leading-relaxed text-gray-500">
-                En 60 minutos, Ivon audita tu perfil con la metodología MORE para responder una sola
-                pregunta: ¿vale la pena apostar por tu Green Card ahora mismo?
-                Salís con una decisión clara y un plan a 90 días para no seguir decidiendo a ciegas.
+              <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-600 sm:text-lg">
+                El acompañamiento de élite para perfiles de alto impacto que no dejan su futuro al
+                azar. En 60 minutos auditamos tu caso con la metodología MORE y salís con una
+                decisión binaria y un plan a 90 días, no con más información suelta.
               </p>
             </motion.div>
 
@@ -61,16 +57,16 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-start">
                 <div className="space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">
-                    Asesoría VIP · 60 minutos · $97 USD
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+                    Sesión privada · 60 minutos · $97 USD
                   </p>
-                  <p className="max-w-md text-sm text-gray-600">
-                    En esta hora no venís a “informarte”, venís a tomar una decisión estratégica
-                    sobre tu migración.
+                  <p className="max-w-md font-sans text-sm leading-relaxed text-gray-600">
+                    No venís a “informarte”. Venís a tomar una decisión estratégica sobre tu ruta
+                    migratoria con números, riesgos y escenarios sobre la mesa.
                   </p>
                   <ul className="mt-1.5 space-y-1.5 text-sm text-gray-700">
                     <li>• Validamos si tu perfil sostiene hoy una EB‑2 NIW u otra ruta viable.</li>
-                    <li>• Definimos qué fortalecer primero para no quemar tiempo ni dinero.</li>
+                    <li>• Priorizamos qué fortalecer primero para no quemar tiempo ni dinero.</li>
                     <li>• Diseñamos tus próximos 90 días con pasos concretos, no teorías.</li>
                   </ul>
                 </div>
@@ -131,7 +127,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex items-stretch justify-center"
-          >
+            >
             <div className="relative w-full max-w-xs sm:max-w-sm">
               <div className="absolute -inset-6 rounded-[32px] bg-[radial-gradient(circle_at_0_0,rgba(243,112,33,0.25),transparent_60%),radial-gradient(circle_at_100%_100%,rgba(42,58,74,0.22),transparent_55%)] opacity-70 blur-2xl" />
               <div className="relative overflow-hidden rounded-[28px] bg-white/90 p-5 shadow-2xl ring-1 ring-gray-200">
