@@ -86,7 +86,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
                 En esta página aplicás a una sesión VIP de 60 minutos donde validamos con datos si
-                hoy tiene sentido apostar por tu Green Card o cuidar tu inversión para más adelante.
+                hoy vale la pena invertir en tu Green Card o si es mejor cuidar tu inversión para más adelante.
               </p>
             </motion.div>
 
@@ -134,7 +134,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                     </h2>
 
                     <p className="max-w-xl font-sans text-base leading-relaxed text-gray-600 sm:text-[17px]">
-                      En esta hora no venís a escuchar teoría: decidís con números, riesgos y escenarios
+                      En esta hora no venís a escuchar solo teoría: decidís con números, riesgos y escenarios
                       reales. Atención dedicada, como una consulta de alto nivel, no un webinar
                       grabado.
                     </p>
@@ -208,7 +208,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                         <ul className="mt-3 space-y-2.5 font-sans text-sm text-gray-800 sm:text-[15px]">
                           {[
                             "Análisis de perfil profesional y empresarial.",
-                            "Evaluación de elegibilidad para EB-2 NIW u otros programas.",
+                            "Evaluación de elegibilidad para visas de no inmigrante (E1, E2, O, L) y de inmigrante (EB2 NIW, EB1).",
                             "Identificación de puntos débiles y cómo resolverlos.",
                             "Definición del programa migratorio más conveniente.",
                           ].map((line) => (
@@ -318,7 +318,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                     +200 profesionales y empresarios
                   </p>
                   <p className="mt-1">
-                    Personas que eligieron entender su realidad migratoria antes de apostar su
+                    Personas que eligieron entender su realidad migratoria antes de invertir su
                     tiempo, dinero y familia.
                   </p>
                 </div>
