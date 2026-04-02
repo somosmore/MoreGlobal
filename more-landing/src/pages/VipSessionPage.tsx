@@ -31,7 +31,7 @@ export default function VipSessionPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer hideLandingFaq />
     </div>
   )
 }

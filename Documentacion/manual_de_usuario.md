@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-02 (feat: Refactor landings Asesoría VIP con Método MORE, social proof y CTAs de identidad)
+> Última actualización: 2026-04-02 (feat: Asesoría VIP sin FAQ genérica de footer en `/asesoria-vip`)
 
 ---
 
@@ -252,9 +252,12 @@ Secciones principales:
 
 ### 1.9 Footer
 
-- Links de navegación secundarios.
-- Información de contacto y redes sociales.
+- Bloque superior opcional: **Preguntas frecuentes** genéricas del sitio (EB-2 NIW, requisitos, etc.), con acordeón.
+- Bloque CTA oscuro con botón a WhatsApp.
+- Links de navegación secundarios, información de contacto y redes sociales.
 - Aviso legal / política de privacidad.
+
+**Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página.
 
 ### 1.10 Página de éxito
 

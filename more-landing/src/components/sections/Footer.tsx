@@ -10,11 +10,17 @@ import {
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useTranslation } from "react-i18next"
 
-export default function Footer() {
+type FooterProps = {
+  hideLandingFaq?: boolean
+}
+
+export default function Footer({ hideLandingFaq = false }: FooterProps) {
   const { t } = useTranslation()
   const { settings } = useSiteSettings()
 
-  const faqs = t("footer.faqs", { returnObjects: true }) as Array<{ question: string; answer: string }>
+  const faqs = hideLandingFaq
+    ? []
+    : (t("footer.faqs", { returnObjects: true }) as Array<{ question: string; answer: string }>)
   const quickLinks = t("footer.quickLinks", { returnObjects: true }) as Array<{ label: string; href: string }>
 
   const socialLinks = [
@@ -26,50 +32,52 @@ export default function Footer() {
 
   return (
     <>
-      <section className="py-24 sm:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
-              {t("footer.faqEyebrow")}
-            </span>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-              {t("footer.faqTitle")}
-            </h2>
-            <p className="mt-4 text-gray-500 text-lg">{t("footer.faqSubtitle")}</p>
-          </motion.div>
+      {!hideLandingFaq && (
+        <section className="py-24 sm:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-2xl mx-auto mb-16"
+            >
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
+                {t("footer.faqEyebrow")}
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
+                {t("footer.faqTitle")}
+              </h2>
+              <p className="mt-4 text-gray-500 text-lg">{t("footer.faqSubtitle")}</p>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto"
-          >
-            <Accordion type="single" collapsible className="space-y-2">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border border-gray-200 rounded-xl px-6 data-[state=open]:shadow-lg transition-shadow duration-300"
-                >
-                  <AccordionTrigger className="text-left text-[#2A3A4A] font-medium text-[15px] py-5">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-500 text-[15px] leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </motion.div>
-        </div>
-      </section>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-3xl mx-auto"
+            >
+              <Accordion type="single" collapsible className="space-y-2">
+                {faqs.map((faq, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="border border-gray-200 rounded-xl px-6 data-[state=open]:shadow-lg transition-shadow duration-300"
+                  >
+                    <AccordionTrigger className="text-left text-[#2A3A4A] font-medium text-[15px] py-5">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-500 text-[15px] leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       <section className="py-20 bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E] relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">

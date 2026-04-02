@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Shield, Sparkles } from "lucide-react"
+import { Sparkles } from "lucide-react"
 import { VipCtaButton } from "./VipCtaButton"
 
 type VipHeroProps = {
@@ -148,16 +148,6 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                   <p className="mt-1">
                     Trabajamos sobre tu proyecto, evidencias y tiempos reales, no sobre checklists
                     genéricos.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-                <div className="flex items-start gap-2 rounded-xl bg-green-50 px-3 py-2 text-[11px] text-green-900 ring-1 ring-green-100 sm:text-xs">
-                  <Shield className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
-                  <p>
-                    Si en los primeros 15 minutos vemos que tu caso no encaja, te devolvemos el dinero.
-                    Sin explicaciones ni discusiones: tu inversión está protegida.
                   </p>
                 </div>
               </div>
