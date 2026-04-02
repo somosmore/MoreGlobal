@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-01 (feat: Diagnóstico migratorio completo en quiz + nuevos campos de leads, landing dedicada Asesoría VIP con diseño y mensaje optimizados)
+> Última actualización: 2026-04-02 (refactor: `VipAboutIvon` layout editorial foto + contenido)
 
 ---
 
@@ -220,19 +220,20 @@ Su objetivo es monetizar el interés de los visitantes que no están listos para
 
 #### Estructura y contenido actual de la landing VIP (`/vip.html`)
 
-La landing VIP está pensada como una **página de decisión** para personas que ya entienden el contexto EB2-NIW y quieren una evaluación estratégica antes de comprometerse con programas de mayor ticket.
+La landing VIP está pensada como una **página de decisión High-Ticket** para personas que ya entienden el contexto EB2-NIW y quieren una evaluación estratégica antes de comprometerse con programas de mayor ticket. Toda la página está optimizada para llevar al usuario a aplicar a la Asesoría VIP.
 
 Secciones principales:
 
 | Sección | Descripción |
 |--------|-------------|
-| Hero VIP (`VipHero`) | Bloque principal con fondo oscuro y gradientes, headline “¿Tu perfil realmente sostiene una Green Card?” y subtítulo orientado a evitar decisiones caras en el camino equivocado. Incluye CTA primario en primera persona (*“Sí, quiero mi diagnóstico estratégico con Ivon — $97 USD”*), badge de “primer paso serio” y micro-métricas de autoridad (perfiles evaluados y enfoque en ruta migratoria). Muestra también un módulo visual con la tarjeta de Ivon, su rol y lo que se resuelve en la sesión. |
-| Qué incluye tu sesión (`VipSessionIncluded`) | Lista de entregables concretos (situación real, puntos débiles, plan a 3 meses, decisión de programa y PDF personalizado). Presentado como cards con íconos y un resaltado especial para el PDF de ruta migratoria. |
-| Valor y costo de no decidir (`VipValueSection`) | Sección comparativa en fondo oscuro que contrasta el costo de avanzar sin diagnóstico (gastos innecesarios, decisiones malas, incertidumbre) vs. el escenario de pasar primero por la asesoría (decisión binaria, ruta a 90 días, claridad sobre costo de inacción y PDF para discutir con familia/socios). |
-| Sobre Ivon y metodología MORE (`VipAboutIvon`) | Bloque que profundiza en la historia personal y profesional de Ivon (migración familiar y de empresa), su rol actual como estratega y la metodología MORE. Incluye una tarjeta visual con badges de rol, cita textual y bullets sobre qué tipo de conversación se tiene en la sesión. |
-| Encaje de la oferta (`VipFitSection`) | Sección de “para quién es / no es” que filtra a los visitantes. Lista condiciones claras de buen encaje (profesionales y empresarios con trayectoria, foco en decisiones estratégicas) y de mal encaje (búsqueda de soluciones mágicas, cero compromiso, expectativa de promesas fáciles). |
-| Inversión y garantía (`VipPricingSection`) | Muestra el precio único de USD 97 para la sesión 1 a 1 de 60 minutos con Ivon, CTA en primera persona y un bloque de garantía fuerte: si en los primeros 15 minutos no se ve encaje real, se devuelve el dinero sin preguntas. |
-| Preguntas frecuentes + CTA final (`VipFaq`) | Aclara dudas típicas (formato de la sesión, qué pasa si no califican, qué es EB2-NIW, cuándo pueden agendar) y cierra con un CTA secundario hacia el mismo calendario configurado en `calendar_url`. |
+| Hero VIP (`VipHero`) | Bloque principal con fondo claro y gradientes suaves, en una columna centrada. Sin eyebrow superior duplicado: entra directo al H1. **Tarjeta de oferta** (badges, H2, chips, bloque **“Lo que recibís — Asesoría VIP $97”**). **Panel naranja $97** clicable (= **“Aplicar ahora”** / `calendar_url`) con **una sola** barra de brillo animada. CTA debajo. Filtro “90 días”. Pie: bloque grande **“Actividad en vivo”** con **N** en tipografía muy destacada + “personas están viendo esta sesión ahora” + línea de apoyo sobre cupos (N aleatorio 87–500 por carga; revisar política de marcas). Dos métricas. Foto de Ivon en `VipAboutIvon`. |
+| Método MORE VIP — 5 pilares (`VipSessionIncluded`) | Sección que reemplaza la antigua lista de “qué incluye” por los **5 Pilares Estratégicos**: Blindaje Documental, Estrategia de Autoridad, Optimización de Tiempos, Soporte de Élite y Simulación de Escenarios. Cada pilar se muestra como card con ícono premium, título y descripción breve, con `hover` sutil y diseño mobile-first. |
+| Aprobaciones recientes / Social Proof (`VipSocialProofSection`) | Bloque oscuro de prueba social con métricas agregadas tipo: tasa de aprobación aproximada, cantidad de perfiles evaluados y tiempo promedio de decisión (90 días). No usa nombres individuales sino indicadores numéricos que refuerzan autoridad y probabilidad de éxito de perfiles bien calificados. |
+| Valor y costo de no decidir (`VipValueSection`) | Sección comparativa que contrasta el costo de avanzar sin diagnóstico (gastos innecesarios, decisiones malas, incertidumbre) vs. el escenario de pasar primero por la asesoría (decisión binaria, ruta a 90 días, claridad sobre costo de inacción y PDF para discutir con familia/socios). Se usa tipografía serif para los titulares y una paleta premium centrada en blanco, navy y acentos naranja/dorado. |
+| Sobre Ivon y metodología MORE (`VipAboutIvon`) | Sección **de dos columnas**: foto **a pantalla completa** en una banda (en móvil va arriba) con degradado navy y bloque inferior (nombre, rol, cita). Columna de texto: encabezado, historia breve, **tres tarjetas** (“Tu historia real”, “Riesgos y tiempos”, “La decisión de hoy”), **cuatro** puntos de credibilidad con check naranja y caja **“Cómo trabajamos en MORE”** siempre visible (sin acordeón). En móvil la cita se repite al final en recuadro naranja suave. |
+| Encaje de la oferta (`VipFitSection`) | Sección de “para quién es / no es” que filtra a los visitantes. Lista condiciones claras de buen encaje (profesionales y empresarios con trayectoria, foco en decisiones estratégicas) y de mal encaje (búsqueda de soluciones mágicas, cero compromiso, expectativa de promesas fáciles). Se refuerza el tono de “aplicación” más que de “compra genérica”. |
+| Inversión y garantía (`VipPricingSection`) | Muestra el precio único de USD 97 para la sesión 1 a 1 de 60 minutos con Ivon, CTA de identidad **“Quiero mi evaluación de perfil”** y un bloque de garantía fuerte con diseño alineado a la paleta premium (sin verdes): si en los primeros 15 minutos no se ve encaje real, se devuelve el dinero sin preguntas. |
+| Preguntas frecuentes + CTA final (`VipFaq`) | Aclara dudas típicas (formato de la sesión, qué pasa si no califican, qué es EB2-NIW, cuándo pueden agendar) y cierra con un CTA secundario, también de identidad, **“Quiero mi evaluación de perfil”** apuntando al mismo calendario configurado en `calendar_url`. |
 
 **Acceso recomendado:**
 
@@ -251,9 +252,12 @@ Secciones principales:
 
 ### 1.9 Footer
 
-- Links de navegación secundarios.
-- Información de contacto y redes sociales.
+- Bloque superior opcional: **Preguntas frecuentes** genéricas del sitio (EB-2 NIW, requisitos, etc.), con acordeón.
+- Bloque CTA oscuro con botón a WhatsApp.
+- Links de navegación secundarios, información de contacto y redes sociales.
 - Aviso legal / política de privacidad.
+
+**Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página.
 
 ### 1.10 Página de éxito
 

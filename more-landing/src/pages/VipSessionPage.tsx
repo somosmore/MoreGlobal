@@ -6,6 +6,7 @@ import { VipSessionIncluded } from "@/vip/components/VipSessionIncluded"
 import { VipValueSection } from "@/vip/components/VipValueSection"
 import { VipAboutIvon } from "@/vip/components/VipAboutIvon"
 import { VipFitSection } from "@/vip/components/VipFitSection"
+import { VipSocialProofSection } from "@/vip/components/VipSocialProofSection"
 import { VipPricingSection } from "@/vip/components/VipPricingSection"
 import { VipFaq } from "@/vip/components/VipFaq"
 
@@ -16,11 +17,12 @@ export default function VipSessionPage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="flex flex-col gap-20 pb-20">
+      <main className="flex flex-col gap-0">
         <VipHero calendarUrl={calendarUrl} loading={loading} />
-        <section className="bg-white">
-          <div className="mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6 lg:px-8">
+        <section className="bg-white py-32 sm:py-32">
+          <div className="mx-auto flex max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8">
             <VipSessionIncluded />
+            <VipSocialProofSection />
             <VipValueSection />
             <VipAboutIvon />
             <VipFitSection />
@@ -29,7 +31,7 @@ export default function VipSessionPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer hideLandingFaq />
     </div>
   )
 }

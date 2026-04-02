@@ -1,64 +1,65 @@
-import { CheckCircle2 } from "lucide-react"
+import { Sparkles } from "lucide-react"
 
-const benefits: {
+const pillars: {
   title: string
   description: string
   highlight?: boolean
 }[] = [
   {
-    title: "Tu foto migratoria actual",
-    description: "Entendés con claridad dónde estás parado hoy frente a la Green Card.",
+    title: "Ingeniería de Perfil",
+    description:
+      "Reconstruimos tu trayectoria para cumplir con los estándares de \"Interés Nacional\" de USCIS.",
   },
   {
-    title: "Tus puntos débiles priorizados",
-    description: "Identificamos qué frena tu caso y qué mover primero.",
+    title: "Blindaje de Evidencia",
+    description:
+      "Auditamos cada prueba para eliminar riesgos de RFE (Solicitud de Evidencia Adicional).",
   },
   {
-    title: "Plan accionable a 90 días",
-    description: "Te llevas pasos concretos, con orden y foco.",
+    title: "Construcción de Autoridad",
+    description:
+      "Elevamos tu prestigio profesional ante los ojos de las autoridades migratorias.",
   },
   {
-    title: "Decisión binaria sobre tu ruta",
-    description: "Sí, no o todavía no para EB‑2 NIW u otra vía.",
+    title: "Aceleración Estratégica",
+    description:
+      "Gestión optimizada para evitar los cuellos de botella de la burocracia tradicional.",
   },
   {
-    title: "PDF con tu hoja de ruta",
-    description: "Resumen de tu diagnóstico y próximos pasos en un documento descargable.",
-    highlight: true,
+    title: "Soporte de Élite 1-a-1",
+    description:
+      "Acceso directo a expertos para decisiones críticas. Tu éxito es nuestra prioridad.",
   },
 ] as const
 
 export const VipSessionIncluded = () => {
   return (
-    <section className="py-4">
-      <div className="relative overflow-hidden rounded-3xl border-2 border-orange/30 bg-linear-to-br from-[#FFF8F4] to-white shadow-2xl">
+    <section className="py-32 sm:py-32">
+      <div className="relative overflow-hidden rounded-3xl border border-orange/25 bg-linear-to-br from-[#FFF8F4] via-white to-[#FFF3E6] shadow-xl">
         <div className="h-1.5 w-full bg-linear-to-r from-orange to-orange-dark" />
 
-        <div className="px-6 py-8 sm:px-10 sm:py-10">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-orange">
-            En 60 minutos resolvemos:
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm text-gray-600">
-            No venís a escuchar teoría migratoria. Venís a tomar decisiones concretas sobre
-            tu caso con números, riesgos y escenarios sobre la mesa.
-          </p>
+        <div className="px-6 py-10 sm:px-10 sm:py-12">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-orange">
+                <Sparkles className="h-3 w-3 text-orange" />
+                Método MORE VIP
+              </p>
+              <h2 className="mt-3 max-w-xl text-2xl font-semibold leading-snug text-navy sm:text-3xl">
+                Los 5 pilares estratégicos que sostienen tu decisión migratoria.
+              </h2>
+            </div>
+          </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {benefits.map((item) => (
+          <div className="mt-8 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            {pillars.map((item) => (
               <article
                 key={item.title}
-                className={
-                  item.highlight
-                    ? "flex gap-3 rounded-2xl border border-orange/25 bg-orange/5 p-3.5 shadow-sm"
-                    : "flex gap-3 rounded-2xl bg-white/80 p-3.5 shadow-sm ring-1 ring-gray-100"
-                }
+                className="group flex flex-col gap-2 rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-orange/10">
-                  <CheckCircle2 className="h-4 w-4 text-orange" />
-                </div>
-                <div className="text-sm text-gray-700">
-                  <p className="font-semibold">{item.title}</p>
-                  <p className="text-xs text-gray-600">{item.description}</p>
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-navy">{item.title}</p>
+                  <p className="text-xs leading-relaxed text-slate-500">{item.description}</p>
                 </div>
               </article>
             ))}

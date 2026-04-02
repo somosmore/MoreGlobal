@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { VipCtaButton } from "./VipCtaButton"
 
 const faqs = [
@@ -53,10 +54,16 @@ const FaqItem = ({
 }
 
 export const VipFaq = ({ calendarUrl, loading }: VipFaqProps) => {
-  const ctaLabel = "Sí, quiero evaluar mi perfil con Ivon — $97 USD"
+  const ctaLabel = "Aplicar ahora"
 
   return (
-    <section className="mb-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+    <motion.section
+      className="mb-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-orange">
         Preguntas frecuentes
       </h2>
@@ -82,7 +89,7 @@ export const VipFaq = ({ calendarUrl, loading }: VipFaqProps) => {
           variant="secondary"
         />
       </div>
-    </section>
+    </motion.section>
   )
 }
 

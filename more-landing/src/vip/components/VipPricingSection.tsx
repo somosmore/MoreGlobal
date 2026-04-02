@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { Shield } from "lucide-react"
 import { VipCtaButton } from "./VipCtaButton"
 
@@ -10,10 +11,16 @@ export const VipPricingSection = ({
   calendarUrl,
   loading,
 }: VipPricingSectionProps) => {
-  const ctaLabel = "Sí, quiero evaluar mi perfil con Ivon — $97 USD"
+  const ctaLabel = "Aplicar ahora"
 
   return (
-    <section className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+    <motion.section
+      className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="flex flex-col items-start justify-between gap-4 border-t-4 border-orange/80 pt-4 sm:flex-row sm:items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">
@@ -36,10 +43,10 @@ export const VipPricingSection = ({
         </div>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex items-start gap-2 rounded-xl bg-green-50 px-3 py-2 text-xs text-green-900 sm:max-w-sm">
-          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
+        <div className="flex items-start gap-2 rounded-xl bg-orange/5 px-3 py-2 text-xs text-navy sm:max-w-sm ring-1 ring-orange/25">
+          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
           <p>
-            🛡 Si en los primeros 15 minutos vemos que tu caso no encaja de verdad, te devolvemos
+            Si en los primeros 15 minutos vemos que tu caso no encaja de verdad, te devolvemos
             el dinero. Sin preguntas ni discusiones.
           </p>
         </div>
@@ -52,7 +59,7 @@ export const VipPricingSection = ({
         La única decisión más cara que invertir $97 en claridad es seguir decidiendo a
         ciegas sobre tu migración.
       </p>
-    </section>
+    </motion.section>
   )
 }
 
