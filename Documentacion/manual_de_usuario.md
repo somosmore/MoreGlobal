@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-02 (feat: Asesoría VIP sin FAQ genérica de footer en `/asesoria-vip`)
+> Última actualización: 2026-04-02 (feat: hero VIP panel $97 clicable + brillo + aviso de visualizaciones)
 
 ---
 
@@ -226,7 +226,7 @@ Secciones principales:
 
 | Sección | Descripción |
 |--------|-------------|
-| Hero VIP (`VipHero`) | Bloque principal con fondo claro y gradientes suaves. Headline: **“Asegura tu Residencia en EE.UU. con el Máximo Estándar de Precisión.”** y subheadline: *“El acompañamiento de élite para perfiles de alto impacto que no dejan su futuro al azar. Cupos limitados por mes.”*. CTA principal de identidad: **“Aplicar a Asesoría VIP”** (abre `calendar_url`). Incluye métricas de autoridad y un módulo visual con la tarjeta de Ivon, su rol y qué se resuelve en la sesión. |
+| Hero VIP (`VipHero`) | Bloque principal con fondo claro y gradientes suaves, en una columna centrada. Headline editorial y **tarjeta de oferta** con badges, H2, chips (1 a 1, 60 min, confidencial) y bloque **“Lo que recibís — Asesoría VIP $97”** (durante y después de la sesión). El **panel naranja $97** es clicable (mismo destino que **“Aplicar ahora”** / `calendar_url`) y lleva animación tipo brillo espejado; CTA duplicado debajo. Texto de filtro para perfiles decididos en 90 días con espacio amplio. Pie del hero: contador social **“N personas están viendo esta sesión”** (N aleatorio entre 87 y 500 por carga). Dos métricas auxiliares. Foto de Ivon en `VipAboutIvon`. |
 | Método MORE VIP — 5 pilares (`VipSessionIncluded`) | Sección que reemplaza la antigua lista de “qué incluye” por los **5 Pilares Estratégicos**: Blindaje Documental, Estrategia de Autoridad, Optimización de Tiempos, Soporte de Élite y Simulación de Escenarios. Cada pilar se muestra como card con ícono premium, título y descripción breve, con `hover` sutil y diseño mobile-first. |
 | Aprobaciones recientes / Social Proof (`VipSocialProofSection`) | Bloque oscuro de prueba social con métricas agregadas tipo: tasa de aprobación aproximada, cantidad de perfiles evaluados y tiempo promedio de decisión (90 días). No usa nombres individuales sino indicadores numéricos que refuerzan autoridad y probabilidad de éxito de perfiles bien calificados. |
 | Valor y costo de no decidir (`VipValueSection`) | Sección comparativa que contrasta el costo de avanzar sin diagnóstico (gastos innecesarios, decisiones malas, incertidumbre) vs. el escenario de pasar primero por la asesoría (decisión binaria, ruta a 90 días, claridad sobre costo de inacción y PDF para discutir con familia/socios). Se usa tipografía serif para los titulares y una paleta premium centrada en blanco, navy y acentos naranja/dorado. |

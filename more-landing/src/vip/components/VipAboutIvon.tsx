@@ -58,11 +58,15 @@ export const VipAboutIvon = () => {
                 </span>
               </div>
 
-              <div className="flex flex-1 flex-col items-center justify-center text-center text-xs text-gray-500">
-                <div className="mb-3 h-20 w-20 rounded-3xl bg-gray-200 text-[10px] uppercase tracking-[0.18em] text-gray-500">
-                  <div className="flex h-full w-full items-center justify-center">
-                    Foto de Ivon
-                  </div>
+              <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 text-center text-xs text-gray-500">
+                <div className="relative w-full max-w-[220px] shrink-0 overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-gray-200/80 aspect-3/4">
+                  <img
+                    src="/ivon.png"
+                    alt="Ivon More, fundadora y estratega migratoria MORE"
+                    className="absolute inset-0 h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <p className="max-w-60 text-[11px] leading-relaxed text-gray-700">
                   “No todos los perfiles sostienen una Green Card, y está bien. Mi trabajo en esta
