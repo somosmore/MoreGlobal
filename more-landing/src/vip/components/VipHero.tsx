@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import {
   Check,
   Clock,
+  Eye,
   FileText,
   Lock,
   MessageCircle,
@@ -71,21 +72,9 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
         <div className="mx-auto max-w-3xl lg:max-w-4xl">
           <div className="space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-navy/10 bg-navy/5 px-4 py-2"
-            >
-              <span className="h-2 w-2 rounded-full bg-orange animate-pulse" />
-              <span className="text-xs font-medium uppercase tracking-wide text-navy/70">
-                Asesoría VIP 1 a 1 · Evaluación de elegibilidad para Green Card
-              </span>
-            </motion.div>
-
-            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.05 }}
               className="space-y-5"
             >
               <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
@@ -349,12 +338,25 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
             </motion.div>
           </div>
         </div>
-        <div className="mt-6 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-orange/10 px-4 py-1.5 text-xs font-medium text-orange ring-1 ring-orange/40">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-orange" />
-            <span>
-              {viewersCount} personas están viendo esta sesión
-            </span>
+        <div className="mt-8 flex justify-center px-2 sm:mt-10">
+          <div className="flex w-full max-w-xl flex-col items-center gap-3 rounded-2xl border-2 border-orange/45 bg-linear-to-b from-orange/15 to-orange/8 px-5 py-6 text-center shadow-lg shadow-orange/15 sm:px-8 sm:py-8">
+            <div className="flex items-center gap-2 text-orange-dark">
+              <Eye className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" aria-hidden />
+              <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-navy/70">
+                Actividad en vivo
+              </span>
+            </div>
+            <p className="font-sans text-navy">
+              <span className="block text-3xl font-black tabular-nums tracking-tight text-orange-dark sm:text-4xl md:text-5xl">
+                {viewersCount}
+              </span>
+              <span className="mt-2 block text-base font-extrabold uppercase leading-snug tracking-tight sm:text-lg md:text-xl">
+                personas están viendo esta sesión ahora
+              </span>
+            </p>
+            <p className="max-w-md font-sans text-xs font-medium text-navy/75 sm:text-sm">
+              Cupos limitados: mucha gente está evaluando el mismo tipo de asesoría en este momento.
+            </p>
           </div>
         </div>
       </div>

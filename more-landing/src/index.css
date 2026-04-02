@@ -62,20 +62,12 @@
   pointer-events: none;
 }
 
-@keyframes vip-shine-mirror {
-  0% {
-    transform: translateX(110%) skewX(14deg);
-  }
-  100% {
-    transform: translateX(-190%) skewX(14deg);
-  }
-}
-
 .vip-price-card-shine {
   position: relative;
   overflow: hidden;
 }
 
+/* Una sola barra de brillo que atraviesa la tarjeta */
 .vip-price-card-shine::after {
   content: "";
   position: absolute;
@@ -84,35 +76,15 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0) 32%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 68%,
+    rgba(255, 255, 255, 0) 36%,
+    rgba(255, 255, 255, 0.52) 50%,
+    rgba(255, 255, 255, 0) 64%,
     transparent 100%
   );
-  width: 55%;
+  width: 45%;
   transform: translateX(-100%) skewX(-12deg);
-  animation: shine-sweep 2.8s ease-in-out infinite;
-  animation-delay: 0.2s;
-  pointer-events: none;
-}
-
-.vip-price-card-shine::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    270deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0) 32%,
-    rgba(255, 255, 255, 0.28) 50%,
-    rgba(255, 255, 255, 0) 68%,
-    transparent 100%
-  );
-  width: 48%;
-  transform: translateX(100%) skewX(12deg);
-  animation: vip-shine-mirror 3.5s ease-in-out infinite;
-  animation-delay: 1.3s;
+  animation: shine-sweep 3.2s ease-in-out infinite;
+  animation-delay: 0.4s;
   pointer-events: none;
 }
 
