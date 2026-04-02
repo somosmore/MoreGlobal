@@ -9,10 +9,10 @@ export const VipSocialProofSection = () => {
             Aprobaciones recientes · Casos reales
           </p>
           <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="max-w-xl font-serif text-2xl font-semibold leading-snug sm:text-3xl">
+            <h2 className="max-w-xl text-2xl font-semibold leading-snug sm:text-3xl">
               Prueba concreta de lo que pasa cuando se decide con estrategia y no con intuición.
             </h2>
-            <p className="max-w-sm font-sans text-xs leading-relaxed text-slate-200/90">
+            <p className="max-w-sm text-xs leading-relaxed text-slate-200/90">
               Métricas agregadas de procesos EB2-NIW y otras rutas estratégicas trabajadas con el
               equipo MORE en los últimos meses.
             </p>

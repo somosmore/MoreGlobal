@@ -1,4 +1,4 @@
-import { CheckCircle2, ShieldCheck, Clock3, LineChart, Headphones, Sparkles } from "lucide-react"
+import { Sparkles } from "lucide-react"
 
 const pillars: {
   title: string
@@ -6,36 +6,35 @@ const pillars: {
   highlight?: boolean
 }[] = [
   {
-    title: "Blindaje Documental",
+    title: "Ingeniería de Perfil",
     description:
-      "Eliminamos los errores y vacíos que explican la mayoría de los rechazos. Tu caso se presenta con rigor quirúrgico.",
-    highlight: true,
+      "Reconstruimos tu trayectoria para cumplir con los estándares de \"Interés Nacional\" de USCIS.",
   },
   {
-    title: "Estrategia de Autoridad",
+    title: "Blindaje de Evidencia",
     description:
-      "Elevamos cómo se ve tu perfil ante los ojos de USCIS para que no parezca “un buen currículum más”, sino un caso estratégico.",
+      "Auditamos cada prueba para eliminar riesgos de RFE (Solicitud de Evidencia Adicional).",
   },
   {
-    title: "Optimización de Tiempos",
+    title: "Construcción de Autoridad",
     description:
-      "Ordenamos tu ruta para que avances sin cuellos de botella ni meses perdidos en burocracia o pasos irrelevantes.",
+      "Elevamos tu prestigio profesional ante los ojos de las autoridades migratorias.",
   },
   {
-    title: "Soporte de Élite",
+    title: "Aceleración Estratégica",
     description:
-      "Acceso directo a expertos que ya han visto cientos de perfiles como el tuyo para decidir con criterio, no con intuición.",
+      "Gestión optimizada para evitar los cuellos de botella de la burocracia tradicional.",
   },
   {
-    title: "Simulación de Escenarios",
+    title: "Soporte de Élite 1-a-1",
     description:
-      "Probamos distintos caminos posibles antes de cualquier interacción oficial, para que sepas qué implica cada decisión.",
+      "Acceso directo a expertos para decisiones críticas. Tu éxito es nuestra prioridad.",
   },
 ] as const
 
 export const VipSessionIncluded = () => {
   return (
-    <section className="py-20 sm:py-24">
+    <section className="py-32 sm:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-orange/25 bg-linear-to-br from-[#FFF8F4] via-white to-[#FFF3E6] shadow-xl">
         <div className="h-1.5 w-full bg-linear-to-r from-orange to-orange-dark" />
 
@@ -46,53 +45,21 @@ export const VipSessionIncluded = () => {
                 <Sparkles className="h-3 w-3 text-orange" />
                 Método MORE VIP
               </p>
-              <h2 className="mt-3 max-w-xl font-serif text-2xl font-semibold leading-snug text-navy sm:text-3xl">
+              <h2 className="mt-3 max-w-xl text-2xl font-semibold leading-snug text-navy sm:text-3xl">
                 Los 5 pilares estratégicos que sostienen tu decisión migratoria.
               </h2>
             </div>
-            <p className="max-w-md font-sans text-sm leading-relaxed text-gray-600">
-              En vez de una lista infinita de servicios, estructuramos la sesión en cinco pilares
-              claros para que entiendas exactamente qué se está fortaleciendo de tu caso.
-            </p>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {pillars.map((item) => (
               <article
                 key={item.title}
-                className={
-                  item.highlight
-                    ? "group flex flex-col gap-3 rounded-2xl border border-orange/40 bg-white/90 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                    : "group flex flex-col gap-3 rounded-2xl bg-white/80 p-4 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                }
+                className="group flex flex-col gap-2 rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-orange/10">
-                    {item.title === "Blindaje Documental" && (
-                      <ShieldCheck className="h-4 w-4 text-orange" />
-                    )}
-                    {item.title === "Estrategia de Autoridad" && (
-                      <LineChart className="h-4 w-4 text-orange" />
-                    )}
-                    {item.title === "Optimización de Tiempos" && (
-                      <Clock3 className="h-4 w-4 text-orange" />
-                    )}
-                    {item.title === "Soporte de Élite" && (
-                      <Headphones className="h-4 w-4 text-orange" />
-                    )}
-                    {item.title === "Simulación de Escenarios" && (
-                      <CheckCircle2 className="h-4 w-4 text-orange" />
-                    )}
-                  </div>
-                  {item.highlight && (
-                    <span className="rounded-full bg-orange/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-orange">
-                      Núcleo del diagnóstico
-                    </span>
-                  )}
-                </div>
                 <div className="space-y-1">
                   <p className="text-sm font-semibold text-navy">{item.title}</p>
-                  <p className="text-xs leading-relaxed text-gray-600">{item.description}</p>
+                  <p className="text-xs leading-relaxed text-slate-500">{item.description}</p>
                 </div>
               </article>
             ))}

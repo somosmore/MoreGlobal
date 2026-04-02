@@ -2,11 +2,11 @@ export const VipValueSection = () => {
   return (
     <section className="rounded-3xl bg-white/90 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <h2 className="max-w-xl font-serif text-[clamp(1.5rem,2.6vw,1.9rem)] font-semibold leading-snug text-navy">
+        <h2 className="max-w-xl text-[clamp(1.5rem,2.6vw,1.9rem)] font-semibold leading-snug text-navy">
           No estás pagando una opinión más. Estás comprando una decisión migratoria tomada con datos,
           riesgos y escenarios claros delante tuyo.
         </h2>
-        <p className="max-w-xs font-sans text-[11px] leading-relaxed text-gray-600 sm:text-xs">
+        <p className="max-w-xs text-[11px] leading-relaxed text-gray-600 sm:text-xs">
           Esta asesoría funciona como un comité estratégico: miramos tu perfil, tus tiempos y
           tu capacidad de inversión para decidir si tiene sentido avanzar — y cómo.
         </p>

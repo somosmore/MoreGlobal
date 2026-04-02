@@ -19,7 +19,7 @@ export default function VipSessionPage() {
       <Navbar />
       <main className="flex flex-col gap-0">
         <VipHero calendarUrl={calendarUrl} loading={loading} />
-        <section className="bg-white py-20 sm:py-24">
+        <section className="bg-white py-32 sm:py-32">
           <div className="mx-auto flex max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8">
             <VipSessionIncluded />
             <VipSocialProofSection />

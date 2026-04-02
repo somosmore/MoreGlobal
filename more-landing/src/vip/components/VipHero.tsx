@@ -8,7 +8,7 @@ type VipHeroProps = {
 }
 
 export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
-  const ctaLabel = "Aplicar a Asesoría VIP"
+  const ctaLabel = "Aplicar ahora"
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-linear-to-br from-white via-gray-50/50 to-navy/3 py-20 sm:py-24">
@@ -39,10 +39,14 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="space-y-5"
             >
-              <h1 className="font-serif text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
-                Asegura tu Residencia en EE.UU. con el Máximo Estándar de Precisión.
+              <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
+                Asegura tu Residencia en{" "}
+                <span className="bg-linear-to-r from-orange to-orange-dark bg-clip-text text-transparent">
+                  EE.UU.
+                </span>{" "}
+                con el Máximo Estándar de Precisión.
               </h1>
-              <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-600 sm:text-lg">
+              <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
                 El acompañamiento de élite para perfiles de alto impacto que no dejan su futuro al
                 azar. En 60 minutos auditamos tu caso con la metodología MORE y salís con una
                 decisión binaria y un plan a 90 días, no con más información suelta.
@@ -60,7 +64,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
                     Sesión privada · 60 minutos · $97 USD
                   </p>
-                  <p className="max-w-md font-sans text-sm leading-relaxed text-gray-600">
+                  <p className="max-w-md text-sm leading-relaxed text-gray-600">
                     No venís a “informarte”. Venís a tomar una decisión estratégica sobre tu ruta
                     migratoria con números, riesgos y escenarios sobre la mesa.
                   </p>

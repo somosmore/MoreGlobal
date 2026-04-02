@@ -53,7 +53,7 @@ const FaqItem = ({
 }
 
 export const VipFaq = ({ calendarUrl, loading }: VipFaqProps) => {
-  const ctaLabel = "Quiero mi evaluación de perfil"
+  const ctaLabel = "Aplicar ahora"
 
   return (
     <section className="mb-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
