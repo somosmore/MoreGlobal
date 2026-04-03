@@ -25,3 +25,6 @@ npm-debug.log*
 
 # TypeScript cache
 more-landing/node_modules/.tmp/
+
+# Kilo CLI
+.kilo/

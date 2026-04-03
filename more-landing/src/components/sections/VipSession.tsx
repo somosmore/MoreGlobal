@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next"
 export default function VipSession() {
   const { t } = useTranslation()
   const { settings, loading } = useSiteSettings()
-  const calendlyUrl = settings.calendar_url
+  const vipPaymentLink = settings.vip_payment_link || "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
+  const vipPrice = settings.vip_price || "$97"
 
   const deliverables = t("vipSession.deliverables", { returnObjects: true }) as string[]
 
@@ -58,7 +59,7 @@ export default function VipSession() {
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
                   <div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-bold text-[#2A3A4A]">$97</span>
+                      <span className="text-5xl font-bold text-[#2A3A4A]">{vipPrice}</span>
                       <span className="text-gray-400 text-base font-medium">{t("vipSession.currency")}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-2">
@@ -77,9 +78,9 @@ export default function VipSession() {
 
                 {loading ? (
                   <div className="h-14 w-full rounded-2xl bg-gray-100 animate-pulse" />
-                ) : calendlyUrl ? (
+                ) : vipPaymentLink ? (
                   <a
-                    href={calendlyUrl}
+                    href={vipPaymentLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-2xl

@@ -110,6 +110,8 @@ export type SiteSettingsMap = {
   linkedin_url: string
   facebook_url: string
   youtube_url: string
+  vip_payment_link: string
+  vip_price: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

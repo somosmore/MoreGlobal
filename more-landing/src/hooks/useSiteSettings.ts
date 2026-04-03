@@ -9,6 +9,8 @@ const DEFAULTS: SiteSettingsMap = {
   linkedin_url: "",
   facebook_url: "",
   youtube_url: "",
+  vip_payment_link: "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f",
+  vip_price: "$97",
 }
 
 type UseSiteSettingsReturn = {

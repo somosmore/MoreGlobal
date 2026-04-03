@@ -2,16 +2,25 @@ import { motion } from "framer-motion"
 import { Shield } from "lucide-react"
 import { VipCtaButton } from "./VipCtaButton"
 
+const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
+const DEFAULT_PRICE = "$97"
+
 type VipPricingSectionProps = {
   calendarUrl?: string | null
+  vipPaymentLink?: string | null
+  vipPrice?: string | null
   loading?: boolean
 }
 
 export const VipPricingSection = ({
   calendarUrl,
+  vipPaymentLink,
+  vipPrice,
   loading,
 }: VipPricingSectionProps) => {
   const ctaLabel = "Aplicar ahora"
+  const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
+  const effectivePrice = vipPrice || DEFAULT_PRICE
 
   return (
     <motion.section
@@ -27,7 +36,7 @@ export const VipPricingSection = ({
             Inversión única
           </p>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-navy">$97</span>
+            <span className="text-4xl font-bold text-navy">{effectivePrice}</span>
             <span className="text-sm font-medium text-gray-500">USD</span>
           </div>
           <p className="mt-1 text-sm text-gray-600">
@@ -37,7 +46,7 @@ export const VipPricingSection = ({
         <div className="w-full max-w-xs">
           <VipCtaButton
             label={ctaLabel}
-            calendarUrl={calendarUrl}
+            calendarUrl={effectivePaymentLink}
             loading={loading}
           />
         </div>
@@ -56,7 +65,7 @@ export const VipPricingSection = ({
         </p>
       </div>
       <p className="mt-2 text-center text-xs italic text-gray-400 sm:text-[13px]">
-        La única decisión más cara que invertir $97 en claridad es seguir decidiendo a
+        La única decisión más cara que invertir {effectivePrice} en claridad es seguir decidiendo a
         ciegas sobre tu migración.
       </p>
     </motion.section>

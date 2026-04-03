@@ -13,12 +13,14 @@ import { VipFaq } from "@/vip/components/VipFaq"
 export default function VipSessionPage() {
   const { settings, loading } = useSiteSettings()
   const calendarUrl = settings.calendar_url
+  const vipPaymentLink = settings.vip_payment_link
+  const vipPrice = settings.vip_price
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       <main className="flex flex-col gap-0">
-        <VipHero calendarUrl={calendarUrl} loading={loading} />
+        <VipHero calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} vipPrice={vipPrice} loading={loading} />
         <section className="bg-white py-32 sm:py-32">
           <div className="mx-auto flex max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8">
             <VipSessionIncluded />
@@ -26,8 +28,8 @@ export default function VipSessionPage() {
             <VipValueSection />
             <VipAboutIvon />
             <VipFitSection />
-            <VipPricingSection calendarUrl={calendarUrl} loading={loading} />
-            <VipFaq calendarUrl={calendarUrl} loading={loading} />
+            <VipPricingSection calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} vipPrice={vipPrice} loading={loading} />
+            <VipFaq calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} loading={loading} />
           </div>
         </section>
       </main>
