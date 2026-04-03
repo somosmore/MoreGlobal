@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
 import { VipCtaButton } from "./VipCtaButton"
 
+const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
+
 const faqs = [
   {
     question: "¿Qué pasa si no califico para ninguna visa?",
@@ -31,6 +33,7 @@ const faqs = [
 
 type VipFaqProps = {
   calendarUrl?: string | null
+  vipPaymentLink?: string | null
   loading?: boolean
 }
 
@@ -53,8 +56,9 @@ const FaqItem = ({
   )
 }
 
-export const VipFaq = ({ calendarUrl, loading }: VipFaqProps) => {
+export const VipFaq = ({ calendarUrl, vipPaymentLink, loading }: VipFaqProps) => {
   const ctaLabel = "Aplicar ahora"
+  const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
 
   return (
     <motion.section
@@ -84,7 +88,7 @@ export const VipFaq = ({ calendarUrl, loading }: VipFaqProps) => {
       <div className="mt-6 max-w-xs">
         <VipCtaButton
           label={ctaLabel}
-          calendarUrl={calendarUrl}
+          calendarUrl={effectivePaymentLink}
           loading={loading}
           variant="secondary"
         />

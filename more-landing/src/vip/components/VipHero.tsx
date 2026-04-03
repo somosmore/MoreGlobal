@@ -17,14 +17,20 @@ import { cn } from "@/lib/utils"
 
 type VipHeroProps = {
   calendarUrl?: string | null
+  vipPaymentLink?: string | null
+  vipPrice?: string | null
   loading?: boolean
 }
 
 const VIP_VIEWERS_MIN = 87
 const VIP_VIEWERS_MAX = 500
+const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
+const DEFAULT_PRICE = "$97"
 
-export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
+export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipHeroProps) => {
   const ctaLabel = "Aplicar ahora"
+  const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
+  const effectivePrice = vipPrice || DEFAULT_PRICE
 
   const viewersCount = useMemo(
     () =>
@@ -47,7 +53,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
         Inversión única
       </p>
       <p className="mt-2 flex items-baseline justify-center gap-1.5">
-        <span className="text-5xl font-bold tracking-tight sm:text-[3.25rem]">$97</span>
+        <span className="text-5xl font-bold tracking-tight sm:text-[3.25rem]">{effectivePrice}</span>
         <span className="font-sans text-lg font-semibold text-white/95">USD</span>
       </p>
       <p className="mt-2 text-center font-sans text-xs leading-snug text-white/85">
@@ -191,7 +197,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                         </div>
                         <p className="font-sans text-base font-bold text-navy sm:text-lg">
                           Lo que recibís — Asesoría VIP{" "}
-                          <span className="text-orange-dark">$97</span>
+                          <span className="text-orange-dark">{effectivePrice}</span>
                         </p>
                       </div>
 
@@ -275,13 +281,13 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                   </div>
 
                   <div className="flex w-full shrink-0 flex-col justify-between gap-6 lg:w-[min(100%,280px)]">
-                    {!loading && calendarUrl ? (
+                    {!loading && effectivePaymentLink ? (
                       <a
-                        href={calendarUrl}
+                        href={effectivePaymentLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(pricePanelBase, pricePanelLinkExtra)}
-                        aria-label={`${ctaLabel} — inversión única $97 USD`}
+                        aria-label={`${ctaLabel} — inversión única ${effectivePrice} USD`}
                       >
                         <div className="relative z-10">{pricePanelInner}</div>
                       </a>
@@ -296,7 +302,7 @@ export const VipHero = ({ calendarUrl, loading }: VipHeroProps) => {
                     <div className="w-full">
                       <VipCtaButton
                         label={ctaLabel}
-                        calendarUrl={calendarUrl}
+                        calendarUrl={effectivePaymentLink}
                         loading={loading}
                         className="w-full"
                       />
