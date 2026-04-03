@@ -163,7 +163,14 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
                 </li>
                 <li className="flex items-start gap-3 text-white/40 text-sm">
                   <MapPin className="w-4 h-4 text-[#F37021] mt-0.5" />
-                  4538 Bagley Garden Ct, Katy TX 77449, United States
+                  <a
+                    href="https://maps.app.goo.gl/8XhFirGFazKVx68D6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#F37021] transition-colors"
+                  >
+                    1250 W Sam Houston Pkwy S - Houston, Texas, United States, Piso 8, Oficina 800
+                  </a>
                 </li>
                 {socialLinks.map(({ url, Icon, label }) => (
                   <li key={label} className="flex items-center gap-3 text-white/40 text-sm">
