@@ -15,6 +15,7 @@ import AdminClients from "@/pages/AdminClients"
 import AdminResources from "@/pages/AdminResources"
 import BlueprintPage from "@/pages/BlueprintPage"
 import VipSessionPage from "@/pages/VipSessionPage"
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/asesoria-vip" element={<VipSessionPage />} />
+          <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Protected admin area with shared layout */}

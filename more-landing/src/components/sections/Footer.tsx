@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { MessageCircle, Mail, MapPin, Instagram, Linkedin, Facebook, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -201,12 +202,12 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
               >
                 {t("footer.terms")}
               </a>
-              <a
-                href="#"
+              <Link
+                to="/privacidad"
                 className="text-white/30 hover:text-white/60 text-xs transition-colors"
               >
                 {t("footer.privacy")}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
