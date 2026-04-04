@@ -489,5 +489,41 @@
     "iframeTitle": "Blueprint EB2-NIW MORE",
     "pageTitle": "Blueprint EB2-NIW | MORE — Migration with Purpose",
     "defaultTitle": "MORE — Migration with Purpose"
+  },
+  "privacyPolicy": {
+    "pageTitle": "Privacy Policy | MORE",
+    "title": "Privacy Policy — MORE (EB-2 NIW Specialists)",
+    "lastUpdated": "Last updated: April 4, 2026",
+    "intro": "At MORE, we value the privacy of high-profile professionals seeking to advance their careers in the United States. This Privacy Policy describes how we collect, use, and protect your personal information when you use our conversion funnels, websites, and services related to profile evaluation for the National Interest Waiver (EB-2 NIW) visa.",
+    "s1Title": "1. Data Controller",
+    "s1BeforeEmail": "The controller of your data is MORE MARKETING VENTAS (hereinafter, \"MORE\"). For any legal questions, you may contact us at:",
+    "s2Title": "2. Information We Collect",
+    "s2Intro": "To conduct a technical and legal feasibility assessment, we collect the following data:",
+    "s2Items": [
+      "Identification: Full name and contact details (email, phone/WhatsApp).",
+      "Professional profile: Information contained in your résumé, LinkedIn links, and academic/professional background necessary for EB-2 NIW qualification.",
+      "Browsing data: Cookies, IP address, and on-site behavior (analytics to improve the user experience)."
+    ],
+    "s3Title": "3. Purposes of Processing",
+    "s3Intro": "Your data are not sold to third parties. They are used solely for:",
+    "s3Items": [
+      "Profile evaluation: To determine whether you meet the \"exceptional ability\" and \"substantial merit\" criteria required by USCIS.",
+      "Strategic communication: To send you the results of your evaluation and educational content about the immigration process.",
+      "Optimization (CRO): To improve our marketing funnels through analysis of browsing data."
+    ],
+    "s4Title": "4. Cookies and Tracking Technologies",
+    "s4Body": "We use tracking pixels (Meta Pixel, Google Tag Manager) to measure the effectiveness of our advertising campaigns. By browsing this site, you accept the use of these technologies to provide a personalized experience.",
+    "s5Title": "5. Third Parties With Whom We Share Data",
+    "s5Intro": "We share strictly necessary data with technology providers that support our operations:",
+    "s5Items": [
+      "GoHighLevel: For CRM management and marketing automation.",
+      "Meta/Google Ads: For conversion attribution and ad optimization."
+    ],
+    "s6Title": "6. Your Rights",
+    "s6P1": "You have the right to access, rectify, or delete your personal data at any time.",
+    "s6BeforeEmail": "To exercise these rights, please send a request to:",
+    "s7Title": "7. Information Security",
+    "s7Body": "We implement SSL encryption protocols and technical security measures to protect your professional information against unauthorized access.",
+    "emailContactAria": "Send email to {{email}}"
   }
 }

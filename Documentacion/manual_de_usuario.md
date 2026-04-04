@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-02 (refactor: `VipAboutIvon` layout editorial foto + contenido)
+> Última actualización: 2026-04-04 (página pública `/privacidad` — Política de Privacidad)
 
 ---
 
@@ -18,6 +18,7 @@
    - 1.9 [Footer](#19-footer)
    - 1.10 [Página de éxito](#110-página-de-éxito)
    - 1.11 [Blueprint EB2-NIW (descargable)](#111-blueprint-eb2-niw-descargable)
+   - 1.12 [Política de privacidad](#112-política-de-privacidad)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -57,7 +58,7 @@ El sitio público soporta **Español** e **Inglés** de forma dinámica, sin rec
 2. Si es la primera visita, se detecta el idioma del navegador.
 3. Si el navegador no es inglés, el idioma por defecto es español.
 
-**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession, Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage.
+**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession, Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage, PrivacyPolicyPage (`/privacidad`).
 
 **Panel de administración `/admin`:** no está traducido, permanece siempre en español.
 
@@ -255,7 +256,7 @@ Secciones principales:
 - Bloque superior opcional: **Preguntas frecuentes** genéricas del sitio (EB-2 NIW, requisitos, etc.), con acordeón.
 - Bloque CTA oscuro con botón a WhatsApp.
 - Links de navegación secundarios, información de contacto y redes sociales.
-- Aviso legal / política de privacidad.
+- En la franja inferior del pie, el enlace **Política de Privacidad** apunta a la ruta interna **`/privacidad`** (componente `PrivacyPolicyPage`), no a un ancla vacía. El enlace **Términos & Condiciones** puede seguir sin página dedicada según configuración actual.
 
 **Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página.
 
@@ -305,6 +306,16 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 - Al imprimir (`Ctrl+P` o botón "Descargar como PDF"), cada diapositiva ocupa una página individual en orientación horizontal (1280×720px).
 - La barra superior (topbar y botones de navegación) se oculta automáticamente en la impresión.
 - Compatible con los navegadores Chrome, Edge y Firefox para "Guardar como PDF".
+
+### 1.12 Política de privacidad
+
+**Ruta:** `/privacidad`
+
+- Página legal informativa (sin objetivo de venta): texto de política de privacidad en español o inglés según el idioma activo de `react-i18next`.
+- **Contenido:** definido en `src/locales/es/translation.json` y `src/locales/en/translation.json` bajo la clave `privacyPolicy` (título, fecha de última actualización, siete secciones con listas donde aplica).
+- **Layout:** `Navbar`, cuerpo principal con artículo centrado (`max-w-3xl`) y `Footer` con **`hideLandingFaq`** (misma lógica que `/asesoria-vip` para no mostrar el acordeón FAQ del footer).
+- **Correo de contacto legal / derechos:** los enlaces `mailto` usan el valor **`contact_email`** de la tabla `site_settings` (hook `useSiteSettings`), con respaldo por defecto `info@justmore.net` si el valor viene vacío.
+- **Título del documento (`document.title`):** se establece al cargar la página y se restaura al salir (patrón alineado con `BlueprintPage`).
 
 ---
 
