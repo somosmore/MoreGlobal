@@ -492,39 +492,43 @@
     "defaultTitle": "MORE — Migration with Purpose"
   },
   "privacyPolicy": {
-    "pageTitle": "Política de Privacidad | MORE",
-    "title": "Política de Privacidad - MORE (EB-2 NIW Specialists)",
+    "pageTitle": "Política de Privacidad | Somos More (MORE)",
+    "title": "Política de Privacidad — Somos More (MORE)",
     "lastUpdated": "Última actualización: 4 de abril de 2026",
-    "intro": "En MORE, valoramos la privacidad de los profesionales de alto perfil que buscan expandir su carrera en los Estados Unidos. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos su información personal cuando utiliza nuestros embudos de conversión, sitios web y servicios relacionados con la evaluación de perfiles para la Visa de Interés Nacional (EB-2 NIW).",
-    "s1Title": "1. Responsable del Tratamiento de Datos",
-    "s1BeforeEmail": "El responsable de sus datos es MORE MARKETING VENTAS (en adelante, \"MORE\"). Puede contactarnos para cualquier duda legal en:",
-    "s2Title": "2. Información que Recopilamos",
-    "s2Intro": "Para realizar una evaluación de viabilidad técnica y legal, recopilamos los siguientes datos:",
+    "intro": "En Somos More respetamos la privacidad de profesionales y emprendedores que exploran su trayectoria en Estados Unidos. Esta Política de Privacidad explica qué datos personales podemos tratar, con qué finalidades y en qué condiciones, cuando utiliza nuestros sitios web, formularios, comunicaciones comerciales y programas de naturaleza educativa relacionados con información sobre la categoría de visa EB-2 NIW (National Interest Waiver).",
+    "educationalNoticeTitle": "Naturaleza de nuestros contenidos y programas",
+    "educationalNoticeBody": "La información, los contenidos y los programas que ofrecemos tienen fines exclusivamente educativos e informativos. Somos More no es un despacho de abogados ni presta asesoría legal, representación ante autoridades migratorias ni dictámenes jurídicos. Nada de lo publicado o comunicado por nuestros canales sustituye el asesoramiento de un abogado u otro profesional autorizado en la jurisdicción que corresponda a su caso. Para decisiones sobre su situación migratoria o legal, debe consultar a un profesional titulado y regulado.",
+    "s1Title": "1. Responsable del tratamiento y ámbito de la actividad",
+    "s1p1": "El responsable del tratamiento de sus datos personales es Somos More, titular de la marca comercial MORE (en adelante, «Somos More» o «nosotros»). Somos More no ejerce la abogacía; las finalidades descritas en esta política se enmarcan en actividades educativas, comerciales, de marketing y de gestión de la relación con usuarios e interesados.",
+    "s1Address": "Domicilio social: 1250 W Sam Houston Pkwy S — Houston, Texas, United States — Piso 8, Oficina 800 (misma dirección publicada en este sitio web).",
+    "s1ContactLead": "Correo electrónico para consultas sobre esta política, protección de datos y privacidad:",
+    "s2Title": "2. Información que recopilamos",
+    "s2Intro": "Para gestionar su contacto, ofrecerle orientación de carácter educativo sobre la EB-2 NIW y, en su caso, evaluaciones orientativas de perfil basadas en criterios de referencia pública, podemos recopilar:",
     "s2Items": [
-      "Identificación: Nombre completo y datos de contacto (Email, Teléfono/WhatsApp).",
-      "Perfil Profesional: Información contenida en su CV, enlaces a LinkedIn y trayectoria académica/profesional necesaria para la calificación de la EB-2 NIW.",
-      "Datos de Navegación: Cookies, dirección IP y comportamiento en el sitio (analítica para optimizar la experiencia de usuario)."
+      "Identificación y contacto: nombre completo, correo electrónico, teléfono y/o WhatsApp.",
+      "Perfil profesional y académico: datos que usted nos proporciona o autoriza (por ejemplo, contenido de su CV, enlace a LinkedIn u otra información de trayectoria) cuando resulte pertinente a una evaluación orientativa o a la segmentación de comunicaciones educativas.",
+      "Datos de navegación y dispositivo: cookies, dirección IP y patrones de uso del sitio (incluida analítica y mediciones de rendimiento) para mejorar la experiencia y la eficacia de nuestros canales digitales."
     ],
-    "s3Title": "3. Finalidad del Tratamiento",
-    "s3Intro": "Sus datos no se venden a terceros. Se utilizan exclusivamente para:",
+    "s3Title": "3. Finalidades del tratamiento",
+    "s3Intro": "No vendemos sus datos personales a terceros. Los utilizamos de forma proporcionada para:",
     "s3Items": [
-      "Evaluación de Perfil: Determinar si cumple con los criterios de \"Excepcionalidad\" y \"Mérito Sustancial\" exigidos por USCIS.",
-      "Comunicación Estratégica: Enviarle resultados de su evaluación y contenido educativo sobre el proceso migratorio.",
-      "Optimización (CRO): Mejorar nuestros embudos de marketing mediante el análisis de datos de navegación."
+      "Orientación y evaluación preliminar de perfil (fines educativos): facilitarle una lectura orientativa respecto de criterios de referencia pública relacionados con la EB-2 NIW (por ejemplo, conceptos difundidos por USCIS), sin que ello constituya asesoría legal ni garantía de resultado.",
+      "Comunicación: enviarle respuestas, seguimientos y contenido educativo sobre procesos migratorios y nuestras ofertas formativas, según los consentimientos o bases aplicables.",
+      "Mejora de nuestros embudos y experiencia digital (CRO y analítica): analizar el comportamiento agregado en el sitio para optimizar mensajes, formularios y campañas, respetando en lo aplicable su configuración de cookies y preferencias."
     ],
-    "s4Title": "4. Uso de Cookies y Tecnologías de Rastreo",
-    "s4Body": "Utilizamos píxeles de seguimiento (Meta Pixel, Google Tag Manager) para medir la eficacia de nuestras campañas publicitarias. Al navegar en este sitio, usted acepta el uso de estas tecnologías para ofrecerle una experiencia personalizada.",
-    "s5Title": "5. Terceros con los que Compartimos Datos",
-    "s5Intro": "Compartimos datos estrictamente necesarios con proveedores tecnológicos que facilitan nuestra operación:",
+    "s4Title": "4. Cookies y tecnologías de rastreo",
+    "s4Body": "Utilizamos tecnologías como píxeles de seguimiento (por ejemplo, Meta Pixel) y contenedores de etiquetas (por ejemplo, Google Tag Manager) para medir la eficacia de la publicidad, atribuir conversiones y comprender el uso del sitio. Al continuar navegando, salvo que ajuste las preferencias de su navegador o, en su caso, los mecanismos de consentimiento que habilitemos, usted acepta el empleo de estas herramientas en los términos de esta política y de los proveedores correspondientes.",
+    "s5Title": "5. Encargados y proveedores con acceso a datos",
+    "s5Intro": "Podemos compartir los datos estrictamente necesarios con proveedores que nos prestan servicios bajo instrucciones (por ejemplo, alojamiento, CRM, automatización de marketing o publicidad digital), sujetos a obligaciones de confidencialidad y seguridad:",
     "s5Items": [
-      "GoHighLevel: Para la gestión de CRM y automatización de marketing.",
-      "Meta/Google Ads: Para la atribución de conversiones y optimización de anuncios."
+      "GoHighLevel (u equivalente): gestión de CRM, seguimiento de leads y automatización de comunicaciones.",
+      "Meta / Google Ads y afines: atribución de conversiones, remarketing y optimización de campañas publicitarias, conforme a las políticas de cada plataforma."
     ],
-    "s6Title": "6. Sus Derechos",
-    "s6P1": "Usted tiene derecho a acceder, rectificar o eliminar sus datos personales en cualquier momento.",
-    "s6BeforeEmail": "Para ejercer estos derechos, envíe una solicitud a:",
-    "s7Title": "7. Seguridad de la Información",
-    "s7Body": "Implementamos protocolos de cifrado SSL y medidas de seguridad técnicas para proteger su información profesional contra accesos no autorizados.",
+    "s6Title": "6. Sus derechos",
+    "s6P1": "Según la legislación aplicable, usted puede solicitar acceso, rectificación, supresión, oposición, limitación del tratamiento o portabilidad de sus datos personales cuando proceda.",
+    "s6BeforeEmail": "Para ejercer estos derechos o plantear consultas sobre privacidad, escríbanos a:",
+    "s7Title": "7. Seguridad de la información",
+    "s7Body": "Aplicamos medidas técnicas y organizativas razonables para proteger la información frente a accesos no autorizados, pérdida o uso indebido, incluido el uso de conexión cifrada (SSL/TLS) en nuestros sitios cuando corresponda. Ningún sistema es absolutamente invulnerable; le rogamos que también proteja sus credenciales y dispositivos.",
     "emailContactAria": "Enviar correo a {{email}}"
   }
 }

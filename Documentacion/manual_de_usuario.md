@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-04 (página pública `/privacidad` — Política de Privacidad)
+> Última actualización: 2026-04-04 (política de privacidad: Somos More, aviso educativo, correo y domicilio)
 
 ---
 
@@ -311,11 +311,14 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 
 **Ruta:** `/privacidad`
 
-- Página legal informativa (sin objetivo de venta): texto de política de privacidad en español o inglés según el idioma activo de `react-i18next`.
-- **Contenido:** definido en `src/locales/es/translation.json` y `src/locales/en/translation.json` bajo la clave `privacyPolicy` (título, fecha de última actualización, siete secciones con listas donde aplica).
-- **Layout:** `Navbar`, cuerpo principal con artículo centrado (`max-w-3xl`) y `Footer` con **`hideLandingFaq`** (misma lógica que `/asesoria-vip` para no mostrar el acordeón FAQ del footer).
-- **Correo de contacto legal / derechos:** los enlaces `mailto` usan el valor **`contact_email`** de la tabla `site_settings` (hook `useSiteSettings`), con respaldo por defecto `info@justmore.net` si el valor viene vacío.
-- **Título del documento (`document.title`):** se establece al cargar la página y se restaura al salir (patrón alineado con `BlueprintPage`).
+- Página legal informativa (sin objetivo de venta): texto en español o inglés según `react-i18next`.
+- **Identidad declarada:** responsable del tratamiento **Somos More** (marca MORE); el texto deja explícito que **no es un despacho de abogados** y que los contenidos y programas son **educativos e informativos**, sin asesoría legal.
+- **Bloque destacado:** tras el párrafo introductorio se muestra un recuadro (`aside`) con el aviso de naturaleza educativa / no asesoría legal (`educationalNoticeTitle` y `educationalNoticeBody`).
+- **Contenido:** clave `privacyPolicy` en `src/locales/es/translation.json` y `src/locales/en/translation.json` (intro, aviso, siete secciones, listas).
+- **Domicilio social en el texto:** misma dirección que en el pie del sitio — 1250 W Sam Houston Pkwy S, Houston, Texas, United States, Piso 8, Oficina 800.
+- **Correo para privacidad y derechos:** enlaces `mailto` fijos a **`info@moremigracion.com`** (constante `PRIVACY_CONTACT_EMAIL` en `PrivacyPolicyPage.tsx`; ya no depende de `site_settings`).
+- **Layout:** `Navbar`, artículo centrado (`max-w-3xl`), `Footer` con **`hideLandingFaq`**.
+- **`document.title`:** se establece al cargar y se restaura al salir (como `BlueprintPage`).
 
 ---
 

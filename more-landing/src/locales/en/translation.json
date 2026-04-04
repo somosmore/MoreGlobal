@@ -491,39 +491,43 @@
     "defaultTitle": "MORE — Migration with Purpose"
   },
   "privacyPolicy": {
-    "pageTitle": "Privacy Policy | MORE",
-    "title": "Privacy Policy — MORE (EB-2 NIW Specialists)",
+    "pageTitle": "Privacy Policy | Somos More (MORE)",
+    "title": "Privacy Policy — Somos More (MORE)",
     "lastUpdated": "Last updated: April 4, 2026",
-    "intro": "At MORE, we value the privacy of high-profile professionals seeking to advance their careers in the United States. This Privacy Policy describes how we collect, use, and protect your personal information when you use our conversion funnels, websites, and services related to profile evaluation for the National Interest Waiver (EB-2 NIW) visa.",
-    "s1Title": "1. Data Controller",
-    "s1BeforeEmail": "The controller of your data is MORE MARKETING VENTAS (hereinafter, \"MORE\"). For any legal questions, you may contact us at:",
-    "s2Title": "2. Information We Collect",
-    "s2Intro": "To conduct a technical and legal feasibility assessment, we collect the following data:",
+    "intro": "Somos More respects the privacy of professionals and entrepreneurs exploring their path in the United States. This Privacy Policy explains what personal data we may process, for what purposes, and under what conditions when you use our websites, forms, commercial communications, and educational programs related to information about the EB-2 NIW (National Interest Waiver) visa category.",
+    "educationalNoticeTitle": "Nature of our information, content, and programs",
+    "educationalNoticeBody": "The information, materials, and programs we offer are provided solely for educational and informational purposes. Somos More is not a law firm and does not provide legal advice, representation before immigration authorities, or legal opinions. Nothing published or communicated through our channels replaces advice from an attorney or other licensed professional in the jurisdiction relevant to your situation. For decisions about your immigration or legal status, you should consult a duly authorized professional.",
+    "s1Title": "1. Data controller and scope of activity",
+    "s1p1": "The controller of your personal data is Somos More, owner of the MORE brand (hereinafter, \"Somos More\" or \"we\"). Somos More does not practice law; the purposes described in this policy fall within educational, commercial, marketing, and user-relationship management activities.",
+    "s1Address": "Registered address: 1250 W Sam Houston Pkwy S — Houston, Texas, United States — Floor 8, Office 800 (same address published on this website).",
+    "s1ContactLead": "Email for questions about this policy, data protection, and privacy:",
+    "s2Title": "2. Information we collect",
+    "s2Intro": "To manage your inquiry, provide educational orientation on the EB-2 NIW, and, where applicable, conduct indicative profile assessments based on publicly available reference criteria, we may collect:",
     "s2Items": [
-      "Identification: Full name and contact details (email, phone/WhatsApp).",
-      "Professional profile: Information contained in your résumé, LinkedIn links, and academic/professional background necessary for EB-2 NIW qualification.",
-      "Browsing data: Cookies, IP address, and on-site behavior (analytics to improve the user experience)."
+      "Identity and contact details: full name, email address, phone number, and/or WhatsApp.",
+      "Professional and academic profile: information you provide or authorize (for example, résumé content, a LinkedIn link, or other background details) when relevant to an indicative assessment or to segment educational communications.",
+      "Browsing and device data: cookies, IP address, and usage patterns on the site (including analytics and performance measurement) to improve the experience and effectiveness of our digital channels."
     ],
-    "s3Title": "3. Purposes of Processing",
-    "s3Intro": "Your data are not sold to third parties. They are used solely for:",
+    "s3Title": "3. Purposes of processing",
+    "s3Intro": "We do not sell your personal data to third parties. We use it in a proportionate manner to:",
     "s3Items": [
-      "Profile evaluation: To determine whether you meet the \"exceptional ability\" and \"substantial merit\" criteria required by USCIS.",
-      "Strategic communication: To send you the results of your evaluation and educational content about the immigration process.",
-      "Optimization (CRO): To improve our marketing funnels through analysis of browsing data."
+      "Educational orientation and preliminary profile review: provide an indicative overview of publicly referenced EB-2 NIW criteria (for example, concepts published by USCIS), without constituting legal advice or a guarantee of outcome.",
+      "Communications: send responses, follow-ups, and educational content about immigration processes and our educational offerings, in accordance with applicable consent or other lawful bases.",
+      "Improvement of funnels and digital experience (CRO and analytics): analyze aggregated site behavior to optimize messaging, forms, and campaigns, respecting cookie settings and preferences where applicable."
     ],
-    "s4Title": "4. Cookies and Tracking Technologies",
-    "s4Body": "We use tracking pixels (Meta Pixel, Google Tag Manager) to measure the effectiveness of our advertising campaigns. By browsing this site, you accept the use of these technologies to provide a personalized experience.",
-    "s5Title": "5. Third Parties With Whom We Share Data",
-    "s5Intro": "We share strictly necessary data with technology providers that support our operations:",
+    "s4Title": "4. Cookies and tracking technologies",
+    "s4Body": "We use technologies such as tracking pixels (for example, Meta Pixel) and tag management (for example, Google Tag Manager) to measure advertising effectiveness, attribute conversions, and understand site usage. By continuing to browse, unless you adjust your browser settings or, where available, our consent tools, you accept the use of these technologies as described in this policy and in the relevant providers' terms.",
+    "s5Title": "5. Processors and vendors with data access",
+    "s5Intro": "We may share strictly necessary data with vendors that provide services on our instructions (for example, hosting, CRM, marketing automation, or digital advertising), subject to confidentiality and security obligations:",
     "s5Items": [
-      "GoHighLevel: For CRM management and marketing automation.",
-      "Meta/Google Ads: For conversion attribution and ad optimization."
+      "GoHighLevel (or equivalent): CRM management, lead follow-up, and communication automation.",
+      "Meta / Google Ads and similar platforms: conversion attribution, remarketing, and ad campaign optimization, in line with each platform's policies."
     ],
-    "s6Title": "6. Your Rights",
-    "s6P1": "You have the right to access, rectify, or delete your personal data at any time.",
-    "s6BeforeEmail": "To exercise these rights, please send a request to:",
-    "s7Title": "7. Information Security",
-    "s7Body": "We implement SSL encryption protocols and technical security measures to protect your professional information against unauthorized access.",
+    "s6Title": "6. Your rights",
+    "s6P1": "Depending on applicable law, you may request access, rectification, erasure, objection, restriction of processing, or data portability where appropriate.",
+    "s6BeforeEmail": "To exercise these rights or raise privacy questions, please write to:",
+    "s7Title": "7. Information security",
+    "s7Body": "We apply reasonable technical and organizational measures to protect information against unauthorized access, loss, or misuse, including encrypted connections (SSL/TLS) on our sites where appropriate. No system is completely immune; please also protect your credentials and devices.",
     "emailContactAria": "Send email to {{email}}"
   }
 }

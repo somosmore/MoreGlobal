@@ -2,16 +2,16 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
-import { useSiteSettings } from "@/hooks/useSiteSettings"
+
+const PRIVACY_CONTACT_EMAIL = "info@moremigracion.com"
 
 const asStringList = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((x): x is string => typeof x === "string") : []
 
+const mailtoPrivacyHref = `mailto:${PRIVACY_CONTACT_EMAIL}`
+
 export default function PrivacyPolicyPage() {
   const { t } = useTranslation()
-  const { settings } = useSiteSettings()
-  const contactEmail = settings.contact_email.trim() || "info@justmore.net"
-  const mailtoHref = `mailto:${contactEmail}`
 
   useEffect(() => {
     document.title = t("privacyPolicy.pageTitle")
@@ -35,18 +35,35 @@ export default function PrivacyPolicyPage() {
           <p className="mt-2 text-sm text-gray-500">{t("privacyPolicy.lastUpdated")}</p>
           <p className="mt-8 text-base leading-relaxed text-gray-600">{t("privacyPolicy.intro")}</p>
 
+          <aside
+            className="mt-8 rounded-lg border border-gray-200 border-l-4 border-l-[#F37021] bg-gray-50/80 p-5 sm:p-6"
+            aria-labelledby="privacy-educational-notice"
+          >
+            <h2
+              id="privacy-educational-notice"
+              className="text-base font-semibold text-[#2A3A4A]"
+            >
+              {t("privacyPolicy.educationalNoticeTitle")}
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-gray-700">
+              {t("privacyPolicy.educationalNoticeBody")}
+            </p>
+          </aside>
+
           <section className="mt-10" aria-labelledby="privacy-s1">
             <h2 id="privacy-s1" className="text-lg font-semibold text-[#2A3A4A]">
               {t("privacyPolicy.s1Title")}
             </h2>
+            <p className="mt-3 text-base leading-relaxed text-gray-600">{t("privacyPolicy.s1p1")}</p>
+            <p className="mt-3 text-base leading-relaxed text-gray-600">{t("privacyPolicy.s1Address")}</p>
             <p className="mt-3 text-base leading-relaxed text-gray-600">
-              {t("privacyPolicy.s1BeforeEmail")}{" "}
+              {t("privacyPolicy.s1ContactLead")}{" "}
               <a
-                href={mailtoHref}
+                href={mailtoPrivacyHref}
                 className="font-medium text-[#F37021] underline decoration-[#F37021]/30 underline-offset-2 transition-colors hover:text-[#d85f1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
-                aria-label={t("privacyPolicy.emailContactAria", { email: contactEmail })}
+                aria-label={t("privacyPolicy.emailContactAria", { email: PRIVACY_CONTACT_EMAIL })}
               >
-                {contactEmail}
+                {PRIVACY_CONTACT_EMAIL}
               </a>
               .
             </p>
@@ -103,11 +120,11 @@ export default function PrivacyPolicyPage() {
             <p className="mt-3 text-base leading-relaxed text-gray-600">
               {t("privacyPolicy.s6BeforeEmail")}{" "}
               <a
-                href={mailtoHref}
+                href={mailtoPrivacyHref}
                 className="font-medium text-[#F37021] underline decoration-[#F37021]/30 underline-offset-2 transition-colors hover:text-[#d85f1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
-                aria-label={t("privacyPolicy.emailContactAria", { email: contactEmail })}
+                aria-label={t("privacyPolicy.emailContactAria", { email: PRIVACY_CONTACT_EMAIL })}
               >
-                {contactEmail}
+                {PRIVACY_CONTACT_EMAIL}
               </a>
               .
             </p>
