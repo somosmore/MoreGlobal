@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
 
-const PRIVACY_CONTACT_EMAIL = "info@moremigracion.com"
+const PRIVACY_CONTACT_EMAIL = "soporte@justmore.net"
 
 const asStringList = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter((x): x is string => typeof x === "string") : []

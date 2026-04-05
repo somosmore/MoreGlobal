@@ -1,38 +1,15 @@
 import { Sparkles } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
-const pillars: {
+type Pillar = {
   title: string
   description: string
-  highlight?: boolean
-}[] = [
-  {
-    title: "Ingeniería de Perfil",
-    description:
-      "Reconstruimos tu trayectoria para cumplir con los estándares de \"Interés Nacional\" de USCIS.",
-  },
-  {
-    title: "Blindaje de Evidencia",
-    description:
-      "Auditamos cada prueba para eliminar riesgos de RFE (Solicitud de Evidencia Adicional).",
-  },
-  {
-    title: "Construcción de Autoridad",
-    description:
-      "Elevamos tu prestigio profesional ante los ojos de las autoridades migratorias.",
-  },
-  {
-    title: "Aceleración Estratégica",
-    description:
-      "Gestión optimizada para evitar los cuellos de botella de la burocracia tradicional.",
-  },
-  {
-    title: "Soporte de Élite 1-a-1",
-    description:
-      "Acceso directo a expertos para decisiones críticas. Tu éxito es nuestra prioridad.",
-  },
-] as const
+}
 
 export const VipSessionIncluded = () => {
+  const { t } = useTranslation()
+  const pillars = t("vipPage.included.pillars", { returnObjects: true }) as Pillar[]
+
   return (
     <section className="py-32 sm:py-32">
       <div className="relative overflow-hidden rounded-3xl border border-orange/25 bg-linear-to-br from-[#FFF8F4] via-white to-[#FFF3E6] shadow-xl">
@@ -43,10 +20,10 @@ export const VipSessionIncluded = () => {
             <div>
               <p className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-orange">
                 <Sparkles className="h-3 w-3 text-orange" />
-                Método MORE VIP
+                {t("vipPage.included.eyebrow")}
               </p>
               <h2 className="mt-3 max-w-xl text-2xl font-semibold leading-snug text-navy sm:text-3xl">
-                Los 5 pilares estratégicos que sostienen tu decisión migratoria.
+                {t("vipPage.included.title")}
               </h2>
             </div>
           </div>
@@ -69,4 +46,3 @@ export const VipSessionIncluded = () => {
     </section>
   )
 }
-

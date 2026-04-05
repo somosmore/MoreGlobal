@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 
 type VipCtaButtonProps = {
@@ -16,6 +17,8 @@ export const VipCtaButton = ({
   className,
   variant = "primary",
 }: VipCtaButtonProps) => {
+  const { t } = useTranslation()
+  const comingSoon = t("vipPage.cta.comingSoon")
   const baseClasses =
     variant === "primary"
       ? "min-h-[44px] w-full rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-orange/30 transition-all duration-200 hover:bg-orange-dark hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none"
@@ -39,10 +42,10 @@ export const VipCtaButton = ({
         type="button"
         disabled
         className={cn(baseClasses, className)}
-        aria-label="Próximamente disponible"
+        aria-label={comingSoon}
       >
         <CalendarDays className="mr-2 h-4 w-4" />
-        Próximamente disponible
+        {comingSoon}
       </button>
     )
   }
