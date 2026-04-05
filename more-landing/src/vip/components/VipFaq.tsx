@@ -1,35 +1,13 @@
 import { motion } from "framer-motion"
+import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
 
 const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
 
-const faqs = [
-  {
-    question: "¿Qué pasa si no califico para ninguna visa?",
-    answer:
-      "Te lo decimos con honestidad en la sesión y te orientamos sobre los próximos pasos más convenientes, aunque la respuesta hoy sea “todavía no”.",
-  },
-  {
-    question: "¿La sesión es por videollamada?",
-    answer:
-      "Sí, la sesión es virtual, 1 a 1 con Ivon, por la plataforma que más te convenga.",
-  },
-  {
-    question: "¿Recibiré algo después de la sesión?",
-    answer:
-      "Sí. Al finalizar, recibirás un PDF con tu ruta migratoria personalizada para los próximos 90 días.",
-  },
-  {
-    question: "¿Qué es la EB-2 NIW?",
-    answer:
-      "Es una visa de residencia permanente para profesionales con habilidad excepcional o avanzada que benefician el interés nacional de EE.UU. No requiere empleador patrocinador.",
-  },
-  {
-    question: "¿Cuándo podré agendar la sesión?",
-    answer:
-      "Inmediatamente después del pago recibirás un link para elegir el horario disponible en el calendario de Ivon.",
-  },
-] as const
+type FaqEntry = {
+  question: string
+  answer: string
+}
 
 type VipFaqProps = {
   calendarUrl?: string | null
@@ -57,8 +35,10 @@ const FaqItem = ({
 }
 
 export const VipFaq = ({ calendarUrl, vipPaymentLink, loading }: VipFaqProps) => {
-  const ctaLabel = "Aplicar ahora"
+  const { t } = useTranslation()
+  const ctaLabel = t("vipPage.cta.applyNow")
   const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
+  const faqs = t("vipPage.faq.items", { returnObjects: true }) as FaqEntry[]
 
   return (
     <motion.section
@@ -69,16 +49,13 @@ export const VipFaq = ({ calendarUrl, vipPaymentLink, loading }: VipFaqProps) =>
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-orange">
-        Preguntas frecuentes
+        {t("vipPage.faq.title")}
       </h2>
-      <p className="mt-2 text-sm text-gray-600">
-        Antes de agendar tu sesión, resuelve las dudas más comunes sobre cómo
-        funciona la Asesoría VIP.
-      </p>
+      <p className="mt-2 text-sm text-gray-600">{t("vipPage.faq.subtitle")}</p>
       <div className="mt-4 divide-y divide-gray-200">
-        {faqs.map((item) => (
+        {faqs.map((item, index) => (
           <FaqItem
-            key={item.question}
+            key={`${index}-${item.question.slice(0, 24)}`}
             question={item.question}
             answer={item.answer}
           />
@@ -96,4 +73,3 @@ export const VipFaq = ({ calendarUrl, vipPaymentLink, loading }: VipFaqProps) =>
     </motion.section>
   )
 }
-

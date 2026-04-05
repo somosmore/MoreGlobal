@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
@@ -11,10 +13,18 @@ import { VipPricingSection } from "@/vip/components/VipPricingSection"
 import { VipFaq } from "@/vip/components/VipFaq"
 
 export default function VipSessionPage() {
+  const { t } = useTranslation()
   const { settings, loading } = useSiteSettings()
   const calendarUrl = settings.calendar_url
   const vipPaymentLink = settings.vip_payment_link
   const vipPrice = settings.vip_price
+
+  useEffect(() => {
+    document.title = t("vipPage.pageTitle")
+    return () => {
+      document.title = t("blueprint.defaultTitle")
+    }
+  }, [t])
 
   return (
     <div className="min-h-screen bg-white">

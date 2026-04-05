@@ -12,6 +12,7 @@ import {
   Users,
   Video,
 } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
 import { cn } from "@/lib/utils"
 
@@ -28,9 +29,12 @@ const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9
 const DEFAULT_PRICE = "$97"
 
 export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipHeroProps) => {
-  const ctaLabel = "Aplicar ahora"
+  const { t } = useTranslation()
+  const ctaLabel = t("vipPage.cta.applyNow")
   const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
   const effectivePrice = vipPrice || DEFAULT_PRICE
+
+  const duringBullets = t("vipPage.hero.duringBullets", { returnObjects: true }) as string[]
 
   const viewersCount = useMemo(
     () =>
@@ -44,24 +48,28 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
   const pricePanelLinkExtra =
     "vip-price-card-shine block transition-transform duration-200 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange/40 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-dark"
 
+  const pricePanelAria = t("vipPage.hero.pricePanelAria", { cta: ctaLabel, price: effectivePrice })
+
   const pricePanelInner = (
     <>
       <p
         className="text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white/90"
         data-vip-eyebrow="true"
       >
-        Inversión única
+        {t("vipPage.hero.priceEyebrow")}
       </p>
       <p className="mt-2 flex items-baseline justify-center gap-1.5">
         <span className="text-5xl font-bold tracking-tight sm:text-[3.25rem]">{effectivePrice}</span>
-        <span className="font-sans text-lg font-semibold text-white/95">USD</span>
+        <span className="font-sans text-lg font-semibold text-white/95">
+          {t("vipPage.hero.currency")}
+        </span>
       </p>
       <p className="mt-2 text-center font-sans text-xs leading-snug text-white/85">
-        Sesión privada · sin mensualidades · aplicá y elegí tu horario
+        {t("vipPage.hero.priceSubline")}
       </p>
       <div className="mt-4 h-px w-full bg-white/25" />
       <p className="mt-3 text-center font-sans text-[11px] font-medium text-white/90">
-        Menos que un trámite mal hecho te puede costar después.
+        {t("vipPage.hero.priceCompare")}
       </p>
     </>
   )
@@ -84,15 +92,14 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
               className="space-y-5"
             >
               <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
-                Asegura tu Residencia en{" "}
+                {t("vipPage.hero.titleBefore")}
                 <span className="bg-linear-to-r from-orange to-orange-dark bg-clip-text text-transparent">
-                  EE.UU.
-                </span>{" "}
-                con el Máximo Estándar de Precisión.
+                  {t("vipPage.hero.titleHighlight")}
+                </span>
+                {t("vipPage.hero.titleAfter")}
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
-                60 minutos donde tendrás claridad del camino que debes seguir para tu migración con
-                propósito.
+                {t("vipPage.hero.subtitle")}
               </p>
             </motion.div>
 
@@ -124,34 +131,25 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                         data-vip-eyebrow="true"
                       >
                         <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                        Asesoría 1 a 1
+                        {t("vipPage.hero.badgeOneOnOne")}
                       </span>
                       <span
                         className="rounded-full bg-navy/90 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white"
                         data-vip-eyebrow="true"
                       >
-                        Oferta de entrada
+                        {t("vipPage.hero.badgeEntryOffer")}
                       </span>
                     </div>
 
                     <h2 className="text-balance text-[clamp(1.65rem,4vw,2.35rem)] font-semibold leading-[1.15] text-navy">
-                      Una sesión privada con nuestros estrategas especializados e{" "}
-                      <span className="text-orange-dark">Ivón More</span>
+                      {t("vipPage.hero.cardTitleBefore")}
+                      <span className="text-orange-dark">{t("vipPage.hero.cardNameHighlight")}</span>
                     </h2>
 
                     <div className="max-w-xl space-y-3 font-sans text-base leading-relaxed text-gray-600 sm:text-[17px]">
-                      <p>
-                        En esta hora venís a proyectarte financieramente, ver escenarios reales,
-                        informarte y formarte en migración con propósito y cómo expandirte en EE.UU.
-                      </p>
-                      <p>
-                        Un tiempo dedicado a vos y a planear tu siguiente nivel internacional como
-                        empresa y como profesional.
-                      </p>
-                      <p>
-                        Sin webinars grabados, ni cursos complicados, sin inversiones costosas, sin
-                        intermediarios.
-                      </p>
+                      <p>{t("vipPage.hero.bodyP1")}</p>
+                      <p>{t("vipPage.hero.bodyP2")}</p>
+                      <p>{t("vipPage.hero.bodyP3")}</p>
                     </div>
 
                     <div className="flex flex-wrap gap-3">
@@ -164,9 +162,11 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                             className="text-[10px] font-bold uppercase tracking-wider text-gray-500"
                             data-vip-eyebrow="true"
                           >
-                            Formato
+                            {t("vipPage.hero.formatLabel")}
                           </p>
-                          <p className="font-sans text-sm font-semibold text-navy">1 a 1 en vivo</p>
+                          <p className="font-sans text-sm font-semibold text-navy">
+                            {t("vipPage.hero.formatValue")}
+                          </p>
                         </div>
                       </div>
                       <div className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-white/90 px-4 py-3 shadow-sm ring-1 ring-white">
@@ -178,9 +178,11 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                             className="text-[10px] font-bold uppercase tracking-wider text-gray-500"
                             data-vip-eyebrow="true"
                           >
-                            Duración
+                            {t("vipPage.hero.durationLabel")}
                           </p>
-                          <p className="font-sans text-sm font-semibold text-navy">60 minutos</p>
+                          <p className="font-sans text-sm font-semibold text-navy">
+                            {t("vipPage.hero.durationValue")}
+                          </p>
                         </div>
                       </div>
                       <div className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-white/90 px-4 py-3 shadow-sm ring-1 ring-white">
@@ -192,9 +194,11 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                             className="text-[10px] font-bold uppercase tracking-wider text-gray-500"
                             data-vip-eyebrow="true"
                           >
-                            Privacidad
+                            {t("vipPage.hero.privacyLabel")}
                           </p>
-                          <p className="font-sans text-sm font-semibold text-navy">100% confidencial</p>
+                          <p className="font-sans text-sm font-semibold text-navy">
+                            {t("vipPage.hero.privacyValue")}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -205,7 +209,7 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                           <Package className="h-5 w-5" aria-hidden />
                         </div>
                         <p className="font-sans text-base font-bold text-navy sm:text-lg">
-                          Lo que recibís — Asesoría VIP{" "}
+                          {t("vipPage.hero.deliverablesTitleBefore")}{" "}
                           <span className="text-orange-dark">{effectivePrice}</span>
                         </p>
                       </div>
@@ -215,18 +219,13 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                           className="font-sans text-[11px] font-bold uppercase tracking-wider text-gray-500"
                           data-vip-eyebrow="true"
                         >
-                          Durante la sesión
+                          {t("vipPage.hero.duringLabel")}
                         </p>
                         <p className="mt-1 font-sans text-sm font-medium text-navy">
-                          60 min en vivo con Ivon
+                          {t("vipPage.hero.duringSub")}
                         </p>
                         <ul className="mt-3 space-y-2.5 font-sans text-sm text-gray-800 sm:text-[15px]">
-                          {[
-                            "Análisis de perfil profesional y empresarial.",
-                            "Evaluación de elegibilidad para visas de no inmigrante (E1, E2, O, L) y de inmigrante (EB2 NIW, EB1).",
-                            "Identificación de puntos débiles y cómo resolverlos.",
-                            "Definición del programa migratorio más conveniente.",
-                          ].map((line) => (
+                          {duringBullets.map((line) => (
                             <li key={line} className="flex gap-3">
                               <span
                                 className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange text-white shadow-sm"
@@ -245,7 +244,7 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                           className="font-sans text-[11px] font-bold uppercase tracking-wider text-gray-500"
                           data-vip-eyebrow="true"
                         >
-                          Después de la sesión
+                          {t("vipPage.hero.afterLabel")}
                         </p>
                         <ul className="mt-3 space-y-3 font-sans text-sm text-gray-800 sm:text-[15px]">
                           <li className="flex gap-3">
@@ -256,8 +255,10 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                               <Video className="h-4 w-4" />
                             </span>
                             <span>
-                              <span className="font-semibold text-navy">Grabación completa</span> de
-                              la sesión, para revisar cuando quieras.
+                              <span className="font-semibold text-navy">
+                                {t("vipPage.hero.afterRecordingBold")}
+                              </span>
+                              {t("vipPage.hero.afterRecordingRest")}
                             </span>
                           </li>
                           <li className="flex gap-3">
@@ -268,8 +269,10 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                               <FileText className="h-4 w-4" />
                             </span>
                             <span>
-                              <span className="font-semibold text-navy">PDF personalizado</span> con
-                              tu ruta migratoria y plan de acción para los próximos 90 días.
+                              <span className="font-semibold text-navy">
+                                {t("vipPage.hero.afterPdfBold")}
+                              </span>
+                              {t("vipPage.hero.afterPdfRest")}
                             </span>
                           </li>
                           <li className="flex gap-3">
@@ -280,8 +283,10 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                               <MessageCircle className="h-4 w-4" />
                             </span>
                             <span>
-                              <span className="font-semibold text-navy">Seguimiento por WhatsApp</span>{" "}
-                              post-sesión.
+                              <span className="font-semibold text-navy">
+                                {t("vipPage.hero.afterWhatsappBold")}
+                              </span>
+                              {t("vipPage.hero.afterWhatsappRest")}
                             </span>
                           </li>
                         </ul>
@@ -296,7 +301,7 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(pricePanelBase, pricePanelLinkExtra)}
-                        aria-label={`${ctaLabel} — inversión única ${effectivePrice} USD`}
+                        aria-label={pricePanelAria}
                       >
                         <div className="relative z-10">{pricePanelInner}</div>
                       </a>
@@ -321,33 +326,23 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
               </div>
 
               <p className="mx-auto max-w-2xl py-8 text-center font-sans text-xs leading-relaxed text-gray-500 sm:py-10 sm:text-sm">
-                Solo para personas dispuestas a tomar una decisión real en los próximos 90 días.
+                {t("vipPage.hero.ninetyDayNote")}
               </p>
 
               <div className="grid gap-4 text-xs text-gray-600 sm:grid-cols-2 sm:text-[13px]">
                 <div className="rounded-2xl bg-white/80 p-3 shadow-sm ring-1 ring-gray-200">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-400">
-                    Perfiles evaluados
+                    {t("vipPage.hero.stat1Eyebrow")}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-navy">
-                    +200 profesionales y empresarios
-                  </p>
-                  <p className="mt-1">
-                    Personas que eligieron entender su realidad migratoria antes de invertir su
-                    tiempo, dinero y familia.
-                  </p>
+                  <p className="mt-1 text-sm font-semibold text-navy">{t("vipPage.hero.stat1Title")}</p>
+                  <p className="mt-1">{t("vipPage.hero.stat1Body")}</p>
                 </div>
                 <div className="rounded-2xl bg-white/80 p-3 shadow-sm ring-1 ring-gray-200">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-400">
-                    Enfoque de la sesión
+                    {t("vipPage.hero.stat2Eyebrow")}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-navy">
-                    Ruta migratoria, no solo requisitos
-                  </p>
-                  <p className="mt-1">
-                    Trabajamos sobre tu proyecto, evidencias y tiempos reales, no sobre checklists
-                    genéricos.
-                  </p>
+                  <p className="mt-1 text-sm font-semibold text-navy">{t("vipPage.hero.stat2Title")}</p>
+                  <p className="mt-1">{t("vipPage.hero.stat2Body")}</p>
                 </div>
               </div>
             </motion.div>
@@ -358,7 +353,7 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
             <div className="flex items-center gap-2 text-orange-dark">
               <Eye className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" aria-hidden />
               <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-navy/70">
-                Actividad en vivo
+                {t("vipPage.hero.liveActivityEyebrow")}
               </span>
             </div>
             <p className="font-sans text-navy">
@@ -366,11 +361,11 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                 {viewersCount}
               </span>
               <span className="mt-2 block text-base font-extrabold uppercase leading-snug tracking-tight sm:text-lg md:text-xl">
-                personas están viendo esta sesión ahora
+                {t("vipPage.hero.liveViewersLine")}
               </span>
             </p>
             <p className="max-w-md font-sans text-xs font-medium text-navy/75 sm:text-sm">
-              Cupos limitados: mucha gente está evaluando el mismo tipo de asesoría en este momento.
+              {t("vipPage.hero.liveActivityFoot")}
             </p>
           </div>
         </div>
@@ -378,4 +373,3 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
     </section>
   )
 }
-

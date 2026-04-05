@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-05 (copy hero Asesoría VIP: subtítulo, H2 estrategas e Ivón More, tres párrafos de propuesta)
+> Última actualización: 2026-04-05 (i18n página `/asesoria-vip`: todo el contenido VIP + título del documento según idioma; paridad `vipSession.deliverables` EN)
 
 ---
 
@@ -58,7 +58,7 @@ El sitio público soporta **Español** e **Inglés** de forma dinámica, sin rec
 2. Si es la primera visita, se detecta el idioma del navegador.
 3. Si el navegador no es inglés, el idioma por defecto es español.
 
-**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession, Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage, PrivacyPolicyPage (`/privacidad`).
+**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession (bloque en home), **página dedicada `/asesoria-vip`** (hero, pilares, prueba social, valor, Ivon, fit, precios, FAQ y CTAs; claves `vipPage` en locales), Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage, PrivacyPolicyPage (`/privacidad`).
 
 **Panel de administración `/admin`:** no está traducido, permanece siempre en español.
 
@@ -258,7 +258,7 @@ Secciones principales:
 - Links de navegación secundarios, información de contacto y redes sociales.
 - En la franja inferior del pie, el enlace **Política de Privacidad** apunta a la ruta interna **`/privacidad`** (componente `PrivacyPolicyPage`), no a un ancla vacía. El enlace **Términos & Condiciones** puede seguir sin página dedicada según configuración actual.
 
-**Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página.
+**Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página. El **selector ES | EN del navbar** aplica a toda la página (incluido el título de la pestaña del navegador); las cadenas viven en `more-landing/src/locales/{es,en}/vipPage.json`, fusionadas en `i18n.ts`.
 
 ### 1.10 Página de éxito
 

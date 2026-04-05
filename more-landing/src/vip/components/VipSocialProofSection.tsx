@@ -1,7 +1,10 @@
 import { motion } from "framer-motion"
 import { ShieldCheck, TrendingUp, Clock3 } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 export const VipSocialProofSection = () => {
+  const { t } = useTranslation()
+
   return (
     <motion.section
       className="py-32 sm:py-32"
@@ -13,15 +16,14 @@ export const VipSocialProofSection = () => {
       <div className="rounded-3xl bg-navy text-white shadow-xl ring-1 ring-navy/40">
         <div className="border-b border-white/10 px-6 py-8 sm:px-10 sm:py-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-orange/80">
-            Aprobaciones recientes · Casos reales
+            {t("vipPage.socialProof.eyebrow")}
           </p>
           <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="max-w-xl text-2xl font-semibold leading-snug sm:text-3xl">
-              Prueba concreta de lo que pasa cuando se decide con estrategia y no con intuición.
+              {t("vipPage.socialProof.title")}
             </h2>
             <p className="max-w-sm text-xs leading-relaxed text-slate-200/90">
-              Métricas agregadas de procesos EB2-NIW y otras rutas estratégicas trabajadas con el
-              equipo MORE en los últimos meses.
+              {t("vipPage.socialProof.subtitle")}
             </p>
           </div>
         </div>
@@ -33,13 +35,12 @@ export const VipSocialProofSection = () => {
                 <ShieldCheck className="h-4 w-4 text-orange" />
               </div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">
-                Aprobaciones en ventana reciente
+                {t("vipPage.socialProof.stat1Label")}
               </p>
             </div>
-            <p className="text-2xl font-semibold text-white">92%</p>
+            <p className="text-2xl font-semibold text-white">{t("vipPage.socialProof.stat1Value")}</p>
             <p className="text-xs leading-relaxed text-slate-200">
-              Porcentaje de casos aprobados entre perfiles calificados que pasaron primero por
-              diagnóstico estratégico.
+              {t("vipPage.socialProof.stat1Body")}
             </p>
           </article>
 
@@ -49,13 +50,12 @@ export const VipSocialProofSection = () => {
                 <TrendingUp className="h-4 w-4 text-orange" />
               </div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">
-                Perfiles de alto impacto evaluados
+                {t("vipPage.socialProof.stat2Label")}
               </p>
             </div>
-            <p className="text-2xl font-semibold text-white">+200</p>
+            <p className="text-2xl font-semibold text-white">{t("vipPage.socialProof.stat2Value")}</p>
             <p className="text-xs leading-relaxed text-slate-200">
-              Profesionales, fundadores y ejecutivos que decidieron validar su ruta antes de
-              invertir miles de dólares en el camino equivocado.
+              {t("vipPage.socialProof.stat2Body")}
             </p>
           </article>
 
@@ -65,13 +65,12 @@ export const VipSocialProofSection = () => {
                 <Clock3 className="h-4 w-4 text-orange" />
               </div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">
-                Tiempo promedio de decisión
+                {t("vipPage.socialProof.stat3Label")}
               </p>
             </div>
-            <p className="text-2xl font-semibold text-white">90 días</p>
+            <p className="text-2xl font-semibold text-white">{t("vipPage.socialProof.stat3Value")}</p>
             <p className="text-xs leading-relaxed text-slate-200">
-              Horizonte típico para pasar de “no sé si califico” a ejecutar una ruta migratoria
-              definida con respaldo documental.
+              {t("vipPage.socialProof.stat3Body")}
             </p>
           </article>
         </div>
@@ -79,4 +78,3 @@ export const VipSocialProofSection = () => {
     </motion.section>
   )
 }
-
