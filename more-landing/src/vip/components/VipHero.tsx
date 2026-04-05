@@ -91,8 +91,8 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                 con el Máximo Estándar de Precisión.
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
-                En esta página aplicás a una sesión VIP de 60 minutos donde validamos con datos si
-                hoy vale la pena invertir en tu Green Card o si es mejor cuidar tu inversión para más adelante.
+                60 minutos donde tendrás claridad del camino que debes seguir para tu migración con
+                propósito.
               </p>
             </motion.div>
 
@@ -135,15 +135,24 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
                     </div>
 
                     <h2 className="text-balance text-[clamp(1.65rem,4vw,2.35rem)] font-semibold leading-[1.15] text-navy">
-                      Sesión privada con Ivon:{" "}
-                      <span className="text-orange-dark">vos y nadie más</span> en la llamada
+                      Una sesión privada con nuestros estrategas especializados e{" "}
+                      <span className="text-orange-dark">Ivón More</span>
                     </h2>
 
-                    <p className="max-w-xl font-sans text-base leading-relaxed text-gray-600 sm:text-[17px]">
-                      En esta hora no venís a escuchar solo teoría: decidís con números, riesgos y escenarios
-                      reales. Atención dedicada, como una consulta de alto nivel, no un webinar
-                      grabado.
-                    </p>
+                    <div className="max-w-xl space-y-3 font-sans text-base leading-relaxed text-gray-600 sm:text-[17px]">
+                      <p>
+                        En esta hora venís a proyectarte financieramente, ver escenarios reales,
+                        informarte y formarte en migración con propósito y cómo expandirte en EE.UU.
+                      </p>
+                      <p>
+                        Un tiempo dedicado a vos y a planear tu siguiente nivel internacional como
+                        empresa y como profesional.
+                      </p>
+                      <p>
+                        Sin webinars grabados, ni cursos complicados, sin inversiones costosas, sin
+                        intermediarios.
+                      </p>
+                    </div>
 
                     <div className="flex flex-wrap gap-3">
                       <div className="flex min-w-[140px] flex-1 items-center gap-3 rounded-2xl border border-navy/10 bg-white/90 px-4 py-3 shadow-sm ring-1 ring-white">

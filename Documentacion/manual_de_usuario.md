@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-04 (política de privacidad: Somos More, aviso educativo, correo y domicilio)
+> Última actualización: 2026-04-05 (copy hero Asesoría VIP: subtítulo, H2 estrategas e Ivón More, tres párrafos de propuesta)
 
 ---
 
@@ -227,7 +227,7 @@ Secciones principales:
 
 | Sección | Descripción |
 |--------|-------------|
-| Hero VIP (`VipHero`) | Bloque principal con fondo claro y gradientes suaves, en una columna centrada. Sin eyebrow superior duplicado: entra directo al H1. **Tarjeta de oferta** (badges, H2, chips, bloque **“Lo que recibís — Asesoría VIP $97”**). **Panel naranja $97** clicable (= **“Aplicar ahora”** / `calendar_url`) con **una sola** barra de brillo animada. CTA debajo. Filtro “90 días”. Pie: bloque grande **“Actividad en vivo”** con **N** en tipografía muy destacada + “personas están viendo esta sesión ahora” + línea de apoyo sobre cupos (N aleatorio 87–500 por carga; revisar política de marcas). Dos métricas. Foto de Ivon en `VipAboutIvon`. |
+| Hero VIP (`VipHero`) | Bloque principal con fondo claro y gradientes suaves, en una columna centrada. Sin eyebrow superior duplicado: entra directo al H1. **Subtítulo** bajo el H1: 60 minutos y claridad del camino para la migración con propósito. **Tarjeta de oferta**: badges, **H2** (“Una sesión privada con nuestros estrategas especializados e **Ivón More**”, con el nombre resaltado en naranja), **tres párrafos** de copy (proyección financiera y formación en EE.UU.; tiempo dedicado a planear el nivel internacional como empresa y profesional; sin webinars grabados, cursos complicados, inversiones costosas ni intermediarios), chips, bloque **“Lo que recibís — Asesoría VIP $97”**. **Panel naranja $97** clicable (= **“Aplicar ahora”** / `calendar_url`) con **una sola** barra de brillo animada. CTA debajo. Filtro “90 días”. Pie: bloque grande **“Actividad en vivo”** con **N** en tipografía muy destacada + “personas están viendo esta sesión ahora” + línea de apoyo sobre cupos (N aleatorio 87–500 por carga; revisar política de marcas). Dos métricas. Foto de Ivon en `VipAboutIvon`. Mismo componente en `/vip.html` y en la ruta `/asesoria-vip` (`VipSessionPage`). |
 | Método MORE VIP — 5 pilares (`VipSessionIncluded`) | Sección que reemplaza la antigua lista de “qué incluye” por los **5 Pilares Estratégicos**: Blindaje Documental, Estrategia de Autoridad, Optimización de Tiempos, Soporte de Élite y Simulación de Escenarios. Cada pilar se muestra como card con ícono premium, título y descripción breve, con `hover` sutil y diseño mobile-first. |
 | Aprobaciones recientes / Social Proof (`VipSocialProofSection`) | Bloque oscuro de prueba social con métricas agregadas tipo: tasa de aprobación aproximada, cantidad de perfiles evaluados y tiempo promedio de decisión (90 días). No usa nombres individuales sino indicadores numéricos que refuerzan autoridad y probabilidad de éxito de perfiles bien calificados. |
 | Valor y costo de no decidir (`VipValueSection`) | Sección comparativa que contrasta el costo de avanzar sin diagnóstico (gastos innecesarios, decisiones malas, incertidumbre) vs. el escenario de pasar primero por la asesoría (decisión binaria, ruta a 90 días, claridad sobre costo de inacción y PDF para discutir con familia/socios). Se usa tipografía serif para los titulares y una paleta premium centrada en blanco, navy y acentos naranja/dorado. |
@@ -316,7 +316,7 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 - **Bloque destacado:** tras el párrafo introductorio se muestra un recuadro (`aside`) con el aviso de naturaleza educativa / no asesoría legal (`educationalNoticeTitle` y `educationalNoticeBody`).
 - **Contenido:** clave `privacyPolicy` en `src/locales/es/translation.json` y `src/locales/en/translation.json` (intro, aviso, siete secciones, listas).
 - **Domicilio social en el texto:** misma dirección que en el pie del sitio — 1250 W Sam Houston Pkwy S, Houston, Texas, United States, Piso 8, Oficina 800.
-- **Correo para privacidad y derechos:** enlaces `mailto` fijos a **`info@moremigracion.com`** (constante `PRIVACY_CONTACT_EMAIL` en `PrivacyPolicyPage.tsx`; ya no depende de `site_settings`).
+- **Correo para privacidad y derechos:** enlaces `mailto` fijos a **`soporte@justmore.net`** (constante `PRIVACY_CONTACT_EMAIL` en `PrivacyPolicyPage.tsx`; ya no depende de `site_settings`).
 - **Layout:** `Navbar`, artículo centrado (`max-w-3xl`), `Footer` con **`hideLandingFaq`**.
 - **`document.title`:** se establece al cargar y se restaura al salir (como `BlueprintPage`).
 
