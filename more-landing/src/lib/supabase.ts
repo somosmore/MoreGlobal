@@ -112,6 +112,10 @@ export type SiteSettingsMap = {
   youtube_url: string
   vip_payment_link: string
   vip_price: string
+  meta_pixel_id: string
+  google_tag_manager_id: string
+  ga4_measurement_id: string
+  tracking_enabled: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { supabase, type LeadInsert } from "@/lib/supabase"
 import { useTranslation } from "react-i18next"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { trackLeadFromQuiz } from "@/lib/tracking"
 import {
   hasTreatyCountry,
   computeVisaBuckets,
@@ -66,6 +68,7 @@ const getResultTypeFromBuckets = (buckets: VisaBucket[]): "alto_impacto" | "unsu
 
 export default function Quiz() {
   const { t } = useTranslation()
+  const { settings } = useSiteSettings()
 
   const basicOptions = t("quiz.diagnostic.basic", { returnObjects: true }) as {
     countries: Array<{ id: string; label: string }>
@@ -250,6 +253,7 @@ export default function Quiz() {
       const { error } = await supabase.from("leads").insert([lead])
       if (error) throw error
       setLeadSubmitted(true)
+      await trackLeadFromQuiz(settings)
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Error inesperado"
       setLeadError(

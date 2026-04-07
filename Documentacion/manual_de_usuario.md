@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-05 (i18n página `/asesoria-vip`: todo el contenido VIP + título del documento según idioma; paridad `vipSession.deliverables` EN)
+> Última actualización: 2026-04-07 (configuración de medición: Meta Pixel, GTM, GA4 y eventos en `/admin/settings`)
 
 ---
 
@@ -522,7 +522,28 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 
 **Ruta:** `/admin/settings`
 
-Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Contiene dos secciones: calendario de asesorías y redes sociales.
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Incluye: **medición y píxeles**, calendario de asesorías, asesoría VIP (enlace y precio), redes sociales y más.
+
+#### Medición y píxeles (Meta, GTM, GA4)
+
+Permite definir qué herramientas de analítica y publicidad cargan en el **sitio público** (no en rutas `/admin/*`). Los valores se guardan en `site_settings` y el CRM muestra un resumen de parámetros activos y una tabla de **eventos que envía la web** (nombre del evento, cuándo ocurre y si va a Meta, dataLayer/GTM u otra vía).
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `tracking_enabled` | texto (`true` / `false`) | Si es `false`, no se inyectan scripts ni se envían eventos de medición; los IDs guardados se conservan. |
+| `google_tag_manager_id` | texto | ID del contenedor GTM (`GTM-...`). Si está configurado, el sitio **prioriza solo GTM** para cargar etiquetas; el marketer debe configurar Meta/GA4 dentro de GTM. No rellenar además el mismo píxel de Meta en el campo dedicado si ya lo disparas vía GTM, para evitar duplicados. |
+| `meta_pixel_id` | texto (solo dígitos) | ID numérico del píxel de Meta. Se usa cuando **no** hay GTM o el píxel se gestiona directamente desde el código (sin duplicar el mismo ID también en GTM). |
+| `ga4_measurement_id` | texto | ID de medición GA4 (`G-...`). Solo aplica si GA4 no se carga ya vía GTM. |
+
+**Eventos enviados en el sitio público (resumen):**
+
+- **PageView / virtual_page_view:** al cambiar de ruta en la SPA (vistas virtuales para embudo y atribución).
+- **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz).
+- **Schedule / schedule_cta_click:** al hacer clic en el CTA de Asesoría VIP que abre el calendario o enlace de pago externo.
+
+En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y un aviso si GTM e ID de Meta están rellenos a la vez.
+
+**Cómo configurar:** abrir `/admin/settings`, completar la tarjeta «Medición y píxeles», validar formatos (GTM-…, G-…, píxel solo números) y pulsar **Guardar medición**. Para pruebas en Meta: Administrador de eventos → Probar eventos.
 
 #### URL del Calendario de Asesorías
 
@@ -617,7 +638,14 @@ Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de cont
 | `instagram_url` | URL del perfil de Instagram (aparece en el footer si está configurada) |
 | `linkedin_url` | URL de la página de LinkedIn (aparece en el footer si está configurada) |
 | `facebook_url` | URL de la página de Facebook (aparece en el footer si está configurada) |
+| `youtube_url` | URL del canal de YouTube (footer si está configurada) |
+| `vip_payment_link` | URL del enlace de pago de la asesoría VIP |
+| `vip_price` | Texto del precio mostrado en la página VIP |
 | `contact_email` | Email de contacto |
+| `meta_pixel_id` | ID del píxel de Meta (solo dígitos); front público si no se usa GTM para el píxel |
+| `google_tag_manager_id` | Contenedor GTM (`GTM-...`); si existe, el sitio carga solo GTM |
+| `ga4_measurement_id` | Medición GA4 (`G-...`) si GA4 no va solo vía GTM |
+| `tracking_enabled` | `true` / `false`: activa o pausa scripts y eventos de medición |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
 

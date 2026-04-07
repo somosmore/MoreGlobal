@@ -16,11 +16,13 @@ import AdminResources from "@/pages/AdminResources"
 import BlueprintPage from "@/pages/BlueprintPage"
 import VipSessionPage from "@/pages/VipSessionPage"
 import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage"
+import { TrackingBootstrap } from "@/components/TrackingBootstrap"
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <TrackingBootstrap />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/asesoria-vip" element={<VipSessionPage />} />
