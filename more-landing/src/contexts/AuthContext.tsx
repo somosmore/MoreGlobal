@@ -28,11 +28,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchRole = async (userId: string) => {
     if (!supabase) return
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("profiles")
       .select("role")
       .eq("user_id", userId)
-      .single()
+      .maybeSingle()
+    if (error) {
+      setRole("standard")
+      return
+    }
     setRole((data?.role as UserRole) ?? "standard")
   }
 
