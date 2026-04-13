@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import {
   Check,
@@ -101,6 +102,21 @@ export const VipHero = ({ calendarUrl, vipPaymentLink, vipPrice, loading }: VipH
               <p className="max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
                 {t("vipPage.hero.subtitle")}
               </p>
+              <div className="flex flex-col items-stretch gap-2 sm:max-w-xl sm:items-start">
+                <Link
+                  to="/#quiz"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border-2 border-navy/20 bg-white px-5 py-2.5 text-sm font-semibold text-navy shadow-sm transition-all duration-200 hover:border-orange/50 hover:bg-orange/5 hover:text-orange-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+                  aria-label={t("vipPage.hero.freeEvalAria")}
+                >
+                  <span className="rounded-full bg-orange/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-dark">
+                    {t("vipPage.hero.freeEvalEyebrow")}
+                  </span>
+                  {t("vipPage.hero.freeEvalCta")}
+                </Link>
+                <p className="text-center text-xs leading-relaxed text-gray-500 sm:text-left sm:text-sm">
+                  {t("vipPage.hero.freeEvalSub")}
+                </p>
+              </div>
             </motion.div>
 
             <motion.div
