@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
+
+const homeHashTo = (hash: string) => (hash.startsWith("#") ? `/${hash}` : hash)
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
@@ -45,23 +48,23 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18">
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center" aria-label={t("navbar.logoAlt")}>
             <img
               src="/logo_more_light.png"
               alt={t("navbar.logoAlt")}
               className="h-30 w-auto"
             />
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={homeHashTo(link.href)}
                 className="text-sm font-medium text-gray-600 hover:text-[#2A3A4A] transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#F37021] after:transition-all after:duration-300 hover:after:w-full"
               >
                 {t(link.labelKey)}
-              </a>
+              </Link>
             ))}
 
             <button
@@ -75,7 +78,7 @@ export default function Navbar() {
             </button>
 
             <Button size="sm" variant="gold" asChild>
-              <a href="#quiz">{t("navbar.cta")}</a>
+              <Link to="/#quiz">{t("navbar.cta")}</Link>
             </Button>
           </div>
 
@@ -100,14 +103,14 @@ export default function Navbar() {
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={homeHashTo(link.href)}
                   className="block text-sm font-medium text-gray-600 hover:text-[#2A3A4A] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {t(link.labelKey)}
-                </a>
+                </Link>
               ))}
 
               <button
@@ -121,9 +124,9 @@ export default function Navbar() {
               </button>
 
               <Button className="w-full" size="sm" asChild>
-                <a href="#quiz" onClick={() => setIsOpen(false)}>
+                <Link to="/#quiz" onClick={() => setIsOpen(false)}>
                   {t("navbar.cta")}
-                </a>
+                </Link>
               </Button>
             </div>
           </motion.div>
