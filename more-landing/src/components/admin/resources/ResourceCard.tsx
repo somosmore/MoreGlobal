@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { FileText, Globe, Link as LinkIcon, Eye, Pin, Trash2, Loader2 } from "lucide-react"
+import { FileText, Globe, Link as LinkIcon, Eye, Pin, Trash2, Loader2, Pencil } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { supabase } from "@/lib/supabase"
+import { normalizeResourceUrl } from "@/lib/resourceUrl"
 
 export type Resource = {
   id: string
@@ -44,9 +45,10 @@ const FORMAT_COLORS: Record<Resource["format"], string> = {
 type ResourceCardProps = {
   resource: Resource
   onDeleted?: (id: string) => void
+  onEdit?: (resource: Resource) => void
 }
 
-export default function ResourceCard({ resource, onDeleted }: ResourceCardProps) {
+export default function ResourceCard({ resource, onDeleted, onEdit }: ResourceCardProps) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
@@ -57,8 +59,11 @@ export default function ResourceCard({ resource, onDeleted }: ResourceCardProps)
     year: "numeric",
   })
 
+  const resolvedUrl = normalizeResourceUrl(resource.url)
+
   const handleOpen = () => {
-    window.open(resource.url, "_blank", "noopener,noreferrer")
+    if (!resolvedUrl) return
+    window.open(resolvedUrl, "_blank", "noopener,noreferrer")
   }
 
   const handleDelete = async () => {
@@ -78,6 +83,13 @@ export default function ResourceCard({ resource, onDeleted }: ResourceCardProps)
         {resource.is_pinned && (
           <Pin className="w-3.5 h-3.5 text-orange" aria-label="Fijado" />
         )}
+        <button
+          onClick={() => onEdit?.(resource)}
+          aria-label={`Editar ${resource.title}`}
+          className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 hover:text-navy hover:bg-gray-100 rounded-lg transition-all duration-150"
+        >
+          <Pencil className="w-3.5 h-3.5" />
+        </button>
         {!confirmDelete && (
           <button
             onClick={() => setConfirmDelete(true)}
@@ -144,6 +156,11 @@ export default function ResourceCard({ resource, onDeleted }: ResourceCardProps)
         {resource.description && (
           <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
             {resource.description}
+          </p>
+        )}
+        {resolvedUrl && (
+          <p className="text-[11px] text-gray-400 leading-relaxed truncate" title={resolvedUrl}>
+            Destino: {resolvedUrl}
           </p>
         )}
       </div>
