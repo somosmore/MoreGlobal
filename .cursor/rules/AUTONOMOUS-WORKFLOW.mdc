@@ -1,0 +1,26 @@
+---
+description: Modo de trabajo autónomo — lee CLAUDE.md como fuente de verdad
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: true
+---
+
+# Flujo de trabajo autónomo
+
+Este proyecto usa un sistema de 3 archivos para trabajo autónomo entre agentes.
+**Leé CLAUDE.md antes de escribir código** — ahí están todas las reglas.
+
+## Archivos de gestión (en la raíz del proyecto)
+
+| Archivo | Propósito |
+|---------|-----------|
+| CLAUDE.md | Stack, arquitectura, convenciones, modo de trabajo autónomo |
+| SPEC.md | Tasks pendientes. [ ] = pendiente, [x] = completado |
+| PROGRESS.md | Bitácora de lo que se hizo + tasks completados |
+
+## Reglas rápidas (el detalle completo está en CLAUDE.md)
+
+- Leer SPEC.md → encarar el primer task [ ] en orden de prioridad
+- Al terminar: marcar [x], mover a PROGRESS.md, hacer commit
+- Verificar con build y lint antes de declarar terminado
+- No agregar dependencias ni cambiar tipos globales sin consultar
+- Si un error no se resuelve en 2 intentos → pausar y reportar
