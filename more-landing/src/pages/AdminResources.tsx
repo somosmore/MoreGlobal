@@ -17,6 +17,7 @@ import type { Resource, ResourceInsert, LandingProject } from "@/lib/supabase"
 import ResourceCard from "@/components/admin/resources/ResourceCard"
 import LandingPreviewCard from "@/components/admin/resources/LandingPreviewCard"
 import { cn } from "@/lib/utils"
+import { normalizeResourceUrl } from "@/lib/resourceUrl"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,7 @@ type AddModalProps = {
 
 function AddResourceModal({ onClose, onCreated }: AddModalProps) {
   const [saving, setSaving] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [form, setForm] = useState<Omit<ResourceInsert, "is_pinned">>({
     title: "",
     description: "",
@@ -74,22 +76,40 @@ function AddResourceModal({ onClose, onCreated }: AddModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!supabase || !form.title.trim() || !form.url.trim()) return
+    if (!supabase || !form.title.trim() || !form.url.trim()) {
+      setSubmitError("Completá los campos obligatorios antes de guardar.")
+      return
+    }
+
+    setSubmitError(null)
     setSaving(true)
+    const payload: ResourceInsert = {
+      ...form,
+      url: normalizeResourceUrl(form.url),
+      is_pinned: false,
+    }
     const { data, error } = await supabase
       .from("resources")
-      .insert({ ...form, is_pinned: false })
+      .insert(payload)
       .select()
       .single()
     setSaving(false)
+
+    if (error) {
+      setSubmitError(error.message || "No se pudo crear el recurso. Intentá nuevamente.")
+      return
+    }
+
     if (!error && data) {
       onCreated(data as Resource)
       onClose()
     }
   }
 
-  const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) =>
+  const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) => {
+    setSubmitError(null)
     setForm((prev) => ({ ...prev, [key]: value }))
+  }
 
   return (
     <div
@@ -217,6 +237,182 @@ function AddResourceModal({ onClose, onCreated }: AddModalProps) {
               {saving ? "Guardando..." : "Agregar recurso"}
             </button>
           </div>
+          {submitError && (
+            <p className="text-xs text-red-500 leading-relaxed">{submitError}</p>
+          )}
+        </form>
+      </div>
+    </div>
+  )
+}
+
+type EditModalProps = {
+  resource: Resource
+  onClose: () => void
+  onUpdated: (resource: Resource) => void
+}
+
+function EditResourceModal({ resource, onClose, onUpdated }: EditModalProps) {
+  const [saving, setSaving] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [form, setForm] = useState<Omit<ResourceInsert, "is_pinned">>({
+    title: resource.title,
+    description: resource.description ?? "",
+    type: resource.type,
+    format: resource.format,
+    url: resource.url,
+  })
+
+  const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) => {
+    setSubmitError(null)
+    setForm((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!supabase || !form.title.trim() || !form.url.trim()) {
+      setSubmitError("Completá los campos obligatorios antes de guardar.")
+      return
+    }
+
+    setSubmitError(null)
+    const payload = {
+      title: form.title.trim(),
+      description: form.description?.trim() || null,
+      type: form.type,
+      format: form.format,
+      url: normalizeResourceUrl(form.url),
+    }
+
+    setSaving(true)
+    const { data, error } = await supabase
+      .from("resources")
+      .update(payload)
+      .eq("id", resource.id)
+      .select()
+      .single()
+    setSaving(false)
+
+    if (error) {
+      setSubmitError(error.message || "No se pudo actualizar el recurso. Intentá nuevamente.")
+      return
+    }
+
+    if (!error && data) {
+      onUpdated(data as Resource)
+      onClose()
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+          <h2 className="text-sm font-semibold text-navy">Editar recurso</h2>
+          <button
+            onClick={onClose}
+            aria-label="Cerrar"
+            className="p-1.5 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              Título *
+            </label>
+            <input
+              type="text"
+              value={form.title}
+              onChange={(e) => set("title", e.target.value)}
+              required
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              Descripción
+            </label>
+            <textarea
+              value={form.description ?? ""}
+              onChange={(e) => set("description", e.target.value)}
+              rows={2}
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Tipo
+              </label>
+              <select
+                value={form.type}
+                onChange={(e) => set("type", e.target.value as Resource["type"])}
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange bg-white"
+              >
+                <option value="brand">Marca</option>
+                <option value="strategy">Estrategia</option>
+                <option value="playbook">Playbook</option>
+                <option value="landing">Landing</option>
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Formato
+              </label>
+              <select
+                value={form.format}
+                onChange={(e) => set("format", e.target.value as Resource["format"])}
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange bg-white"
+              >
+                <option value="pdf">PDF</option>
+                <option value="html">HTML</option>
+                <option value="link">Link externo</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              URL *
+            </label>
+            <input
+              type="text"
+              value={form.url}
+              onChange={(e) => set("url", e.target.value)}
+              required
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange"
+            />
+          </div>
+
+          <div className="flex items-center justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-navy rounded-xl hover:bg-gray-100 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={saving || !form.title.trim() || !form.url.trim()}
+              className="flex items-center gap-2 px-5 py-2 text-sm font-semibold bg-orange text-white rounded-xl hover:bg-orange-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+              {saving ? "Guardando..." : "Guardar cambios"}
+            </button>
+          </div>
+          {submitError && (
+            <p className="text-xs text-red-500 leading-relaxed">{submitError}</p>
+          )}
         </form>
       </div>
     </div>
@@ -246,6 +442,7 @@ export default function AdminResources() {
   const [loadingResources, setLoadingResources] = useState(true)
   const [loadingLandings, setLoadingLandings] = useState(true)
   const [addModalOpen, setAddModalOpen] = useState(false)
+  const [editingResource, setEditingResource] = useState<Resource | null>(null)
 
   useEffect(() => {
     if (!supabase) {
@@ -280,6 +477,12 @@ export default function AdminResources() {
 
   const handleResourceDeleted = (id: string) => {
     setResources((prev) => prev.filter((r) => r.id !== id))
+  }
+
+  const handleResourceUpdated = (updatedResource: Resource) => {
+    setResources((prev) =>
+      prev.map((resource) => (resource.id === updatedResource.id ? updatedResource : resource))
+    )
   }
 
   const filteredResources =
@@ -384,8 +587,13 @@ export default function AdminResources() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {                    filteredResources.map((resource) => (
-                      <ResourceCard key={resource.id} resource={resource} onDeleted={handleResourceDeleted} />
+                    {filteredResources.map((resource) => (
+                      <ResourceCard
+                        key={resource.id}
+                        resource={resource}
+                        onDeleted={handleResourceDeleted}
+                        onEdit={setEditingResource}
+                      />
                     ))}
                   </div>
                 )}
@@ -418,6 +626,13 @@ export default function AdminResources() {
         <AddResourceModal
           onClose={() => setAddModalOpen(false)}
           onCreated={handleResourceCreated}
+        />
+      )}
+      {editingResource && (
+        <EditResourceModal
+          resource={editingResource}
+          onClose={() => setEditingResource(null)}
+          onUpdated={handleResourceUpdated}
         />
       )}
     </div>
