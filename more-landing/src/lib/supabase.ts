@@ -79,9 +79,10 @@ export type Lead = {
   status: LeadStatus;
   followup_at: string | null;
   created_at: string;
+  deleted_at: string | null;
 };
 
-export type LeadInsert = Omit<Lead, "id" | "created_at" | "status" | "followup_at"> & {
+export type LeadInsert = Omit<Lead, "id" | "created_at" | "status" | "followup_at" | "deleted_at"> & {
   status?: LeadStatus;
   followup_at?: string | null;
 };

@@ -123,6 +123,7 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
                 <img
                   src="/logo_more_dark.png"
                   alt={t("footer.logoAlt")}
+                  loading="lazy"
                   className="h-40 w-40"
                 />
               </div>

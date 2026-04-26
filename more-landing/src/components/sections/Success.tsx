@@ -62,6 +62,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               <img
                 src={testimonial.photo_url}
                 alt={testimonial.name}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover z-10"
                 onError={(e) => {
                   e.currentTarget.style.display = "none"
@@ -337,6 +338,7 @@ export default function Success() {
                     <img
                       src="/ivon.png"
                       alt={t("success.ivonImageAlt")}
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover object-[center_67%]"
                     />
                     <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#2A3A4A]/95 via-[#2A3A4A]/40 to-transparent" />

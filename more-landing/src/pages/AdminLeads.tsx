@@ -307,7 +307,7 @@ export default function AdminLeads() {
     if (!supabase) return
     if (!window.confirm("¿Eliminar este lead?")) return
     setDeletingId(id)
-    const { error: err } = await supabase.from("leads").delete().eq("id", id)
+    const { error: err } = await supabase.from("leads").update({ deleted_at: new Date().toISOString() }).eq("id", id)
     setDeletingId(null)
     if (!err) {
       setLeads((prev) => prev.filter((l) => l.id !== id))

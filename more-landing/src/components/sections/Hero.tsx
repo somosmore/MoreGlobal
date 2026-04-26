@@ -1,11 +1,37 @@
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Play } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
+import { supabase } from "@/lib/supabase"
+
+const FALLBACK_INITIALS = ["IM", "CR", "JR", "AP"]
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/)
+  return parts.length >= 2
+    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    : name.slice(0, 2).toUpperCase()
+}
 
 export default function Hero() {
   const { t } = useTranslation()
+  const [initials, setInitials] = useState<string[]>(FALLBACK_INITIALS)
+
+  useEffect(() => {
+    if (!supabase) return
+    supabase
+      .from("testimonials")
+      .select("name")
+      .order("sort_order", { ascending: true })
+      .limit(4)
+      .then(({ data }) => {
+        if (data && data.length >= 4) {
+          setInitials(data.map((t: { name: string }) => getInitials(t.name)))
+        }
+      })
+  }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-gray-50/50 to-[#2A3A4A]/[0.03]">
@@ -93,12 +119,12 @@ export default function Hero() {
             <div className="hidden sm:block w-px h-4 bg-gray-300" />
             <div className="flex items-center gap-2">
               <div className="flex -space-x-2">
-                {["IM", "CR", "JR", "AP"].map((initials) => (
+                {initials.map((ini) => (
                   <div
-                    key={initials}
+                    key={ini}
                     className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F37021] to-[#D4611A] border-2 border-white flex items-center justify-center text-[9px] text-white font-bold"
                   >
-                    {initials}
+                    {ini}
                   </div>
                 ))}
               </div>
