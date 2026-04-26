@@ -1,28 +1,39 @@
+import { lazy, Suspense } from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { AuthProvider } from "@/contexts/AuthContext"
+import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext"
 import ProtectedAdmin from "@/components/ProtectedAdmin"
 import AdminLayout from "@/components/admin/AdminLayout"
 import HomePage from "@/pages/HomePage"
-import AdminLogin from "@/pages/AdminLogin"
-import AdminDashboard from "@/pages/AdminDashboard"
-import AdminTestimonials from "@/pages/AdminTestimonials"
-import AdminLeads from "@/pages/AdminLeads"
-import AdminSettings from "@/pages/AdminSettings"
-import AdminProjects from "@/pages/AdminProjects"
-import AdminProjectWizard from "@/pages/AdminProjectWizard"
-import AdminProjectResult from "@/pages/AdminProjectResult"
-import AdminClients from "@/pages/AdminClients"
-import AdminResources from "@/pages/AdminResources"
-import BlueprintPage from "@/pages/BlueprintPage"
-import VipSessionPage from "@/pages/VipSessionPage"
-import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage"
 import { TrackingBootstrap } from "@/components/TrackingBootstrap"
+
+const AdminLogin = lazy(() => import("@/pages/AdminLogin"))
+const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"))
+const AdminTestimonials = lazy(() => import("@/pages/AdminTestimonials"))
+const AdminLeads = lazy(() => import("@/pages/AdminLeads"))
+const AdminSettings = lazy(() => import("@/pages/AdminSettings"))
+const AdminProjects = lazy(() => import("@/pages/AdminProjects"))
+const AdminProjectWizard = lazy(() => import("@/pages/AdminProjectWizard"))
+const AdminProjectResult = lazy(() => import("@/pages/AdminProjectResult"))
+const AdminClients = lazy(() => import("@/pages/AdminClients"))
+const AdminResources = lazy(() => import("@/pages/AdminResources"))
+const BlueprintPage = lazy(() => import("@/pages/BlueprintPage"))
+const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
+const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
+
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <p className="text-gray-400 text-sm">Cargando…</p>
+  </div>
+)
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <SiteSettingsProvider>
         <TrackingBootstrap />
+        <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/asesoria-vip" element={<VipSessionPage />} />
@@ -55,6 +66,8 @@ function App() {
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        </Suspense>
+        </SiteSettingsProvider>
       </BrowserRouter>
     </AuthProvider>
   )
