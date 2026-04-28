@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Quote, Scale, User, ArrowRight } from "lucide-react"
+import { Quote, Scale, User, ArrowRight, Video } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   supabase,
@@ -11,7 +11,12 @@ import { useTranslation } from "react-i18next"
 
 type VideoSource = "youtube" | "vimeo" | "drive" | "other"
 
-function getVideoInfo(url: string): { type: VideoSource; embedUrl: string; videoId?: string } | null {
+function getVideoInfo(url: string): {
+  type: VideoSource
+  embedUrl: string
+  videoId?: string
+  thumbnailUrl?: string
+} | null {
   if (!url?.trim()) return null
   const u = url.trim()
   const ytMatch = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)
@@ -20,6 +25,7 @@ function getVideoInfo(url: string): { type: VideoSource; embedUrl: string; video
       type: "youtube",
       videoId: ytMatch[1],
       embedUrl: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&mute=1&playsinline=1`,
+      thumbnailUrl: `https://i.ytimg.com/vi/${ytMatch[1]}/hqdefault.jpg`,
     }
   }
   const vimeoMatch = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)
@@ -38,6 +44,30 @@ function getVideoInfo(url: string): { type: VideoSource; embedUrl: string; video
     }
   }
   return null
+}
+
+const vimeoThumbnailCache = new Map<string, string | null>()
+
+async function fetchVimeoThumbnail(videoUrl: string): Promise<string | null> {
+  if (vimeoThumbnailCache.has(videoUrl)) {
+    return vimeoThumbnailCache.get(videoUrl) ?? null
+  }
+  try {
+    const resp = await fetch(
+      `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(videoUrl)}`
+    )
+    if (!resp.ok) {
+      vimeoThumbnailCache.set(videoUrl, null)
+      return null
+    }
+    const data = (await resp.json()) as { thumbnail_url?: string }
+    const thumbnail = data.thumbnail_url ?? null
+    vimeoThumbnailCache.set(videoUrl, thumbnail)
+    return thumbnail
+  } catch {
+    vimeoThumbnailCache.set(videoUrl, null)
+    return null
+  }
 }
 
 const IVON_AUTO_PLAY_INTERVAL = 5500
@@ -97,6 +127,8 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 function VideoTestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const { t } = useTranslation()
   const [playing, setPlaying] = useState(false)
+  const [vimeoThumbnailUrl, setVimeoThumbnailUrl] = useState<string | null>(null)
+  const [thumbnailError, setThumbnailError] = useState(false)
   const info = getVideoInfo(testimonial.video_url ?? "")
   const displayTimeline = testimonial.status_label ?? testimonial.timeline ?? ""
 
@@ -116,6 +148,33 @@ function VideoTestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     if (e.key === "Enter" || e.key === " ") handlePlay()
   }
 
+  useEffect(() => {
+    setThumbnailError(false)
+  }, [testimonial.video_thumbnail_url, testimonial.video_url])
+
+  useEffect(() => {
+    setVimeoThumbnailUrl(null)
+    if (
+      testimonial.video_thumbnail_url ||
+      !testimonial.video_url ||
+      info?.type !== "vimeo"
+    ) {
+      return
+    }
+    let active = true
+    fetchVimeoThumbnail(testimonial.video_url).then((thumbnail) => {
+      if (active) setVimeoThumbnailUrl(thumbnail)
+    })
+    return () => {
+      active = false
+    }
+  }, [testimonial.video_thumbnail_url, testimonial.video_url, info?.type])
+
+  const autoThumbnailUrl =
+    info?.type === "vimeo" ? vimeoThumbnailUrl : info?.thumbnailUrl ?? null
+  const previewImageUrl =
+    testimonial.video_thumbnail_url ?? autoThumbnailUrl
+
   const name = testimonial.name
 
   return (
@@ -132,13 +191,19 @@ function VideoTestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             />
           ) : (
             <>
-              {testimonial.video_thumbnail_url ? (
+              {previewImageUrl && !thumbnailError ? (
                 <img
-                  src={testimonial.video_thumbnail_url}
+                  src={previewImageUrl}
                   alt={t("success.videoThumbnailAlt", { name })}
                   className="absolute inset-0 w-full h-full object-cover"
+                  onError={() => setThumbnailError(true)}
                 />
               ) : null}
+              {(!previewImageUrl || thumbnailError) && (
+                <div className="absolute inset-0 flex items-center justify-center bg-[#2A3A4A]">
+                  <Video className="w-10 h-10 text-white/45" />
+                </div>
+              )}
 
               {embedUrl ? (
                 <button
