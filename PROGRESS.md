@@ -1,5 +1,7 @@
 # PROGRESS.md — Bitácora de desarrollo
 
+> Cada entrada debe incluir el campo **Agente** para saber quién hizo el trabajo.
+
 ## Tasks completados (desde SPEC.md)
 
 - [x] Setup inicial del proyecto
@@ -18,8 +20,26 @@
 
 ## Bitácora
 
+<!-- Formato por entrada:
+### [YYYY-MM-DD] — nombre del task
+- Agente: claude | cursor | kilo | humano
+- Archivos modificados: ...
+- Qué se implementó: ...
+- Problemas encontrados: ...
+- Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
+-->
+
+### [2026-04-28] — Mejora estructura multi-agente
+
+- Agente: claude
+- Archivos modificados: SPEC.md, PROGRESS.md
+- Qué se implementó: Protocolo multi-agente en SPEC.md (ownership, locking, dependencias, archivos por task). Campo Agente en PROGRESS.md.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
 ### [2026-04-25] — Estado inicial del proyecto (baseline)
 
+- Agente: claude
 - Archivos auditados: package.json, App.tsx, todas las pages/, components/, lib/, hooks/, contexts/
 - Qué se implementó: Auditoría completa para establecer baseline del sistema autónomo
 - Problemas encontrados:
