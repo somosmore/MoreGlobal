@@ -85,6 +85,11 @@ La aplicación estará disponible en `http://localhost:5173/`
 | `npm run preview` | Previsualiza el build de producción localmente |
 | `npm run lint` | Ejecuta ESLint sobre el proyecto |
 
+## Integraciones Externas
+
+- **Go High Level Tracking**: el script global de analitica se carga en `index.html` con `data-tracking-id` para enviar estadisticas de navegacion y conversion.
+- **Script activo**: `https://api.moremigracion.com/js/external-tracking.js`.
+
 ## Secciones de la Landing Page
 
 1. **Navbar** — Logo MORE con transparencia dinámica al hacer scroll
