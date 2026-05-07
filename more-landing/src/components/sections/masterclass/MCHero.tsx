@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Gift, User } from "lucide-react"
+import MCCountdown from "./MCCountdown"
 
 const details = [
   { icon: Calendar, text: "25, 26 y 27 de mayo 2026" },
@@ -44,6 +45,18 @@ export default function MCHero() {
           }}
         />
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F37021]/20 border border-[#F37021]/30 mb-6"
+        >
+          <span className="w-2 h-2 rounded-full bg-[#F37021] animate-pulse" />
+          <span className="text-xs font-semibold text-white tracking-widest uppercase">
+            Masterclass gratuita
+          </span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,10 +98,12 @@ export default function MCHero() {
           ))}
         </motion.div>
 
+        <MCCountdown />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="mt-10"
         >
           <motion.a
@@ -99,6 +114,26 @@ export default function MCHero() {
           >
             QUIERO MI LUGAR GRATIS
           </motion.a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="mt-8 max-w-xs mx-auto"
+        >
+          <div className="flex items-center justify-between text-xs text-white/50 mb-2">
+            <span>Cupos ocupados</span>
+            <span className="font-semibold text-[#F37021]">87%</span>
+          </div>
+          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A]"
+              initial={{ width: 0 }}
+              animate={{ width: "87%" }}
+              transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+            />
+          </div>
         </motion.div>
       </div>
     </section>

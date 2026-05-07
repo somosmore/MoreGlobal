@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2 } from "lucide-react"
+import { Shield, CheckCircle2, Loader2, Calendar } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
+const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
 
 const COUNTRY_CODES = [
   { code: "+57", label: "CO +57" },
@@ -145,6 +146,34 @@ function SuccessCard() {
   )
 }
 
+function ExpiredCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      className="rounded-2xl bg-white shadow-xl border border-gray-100 p-8 sm:p-10 max-w-md mx-auto text-center"
+    >
+      <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
+        <Calendar className="h-8 w-8 text-gray-400" />
+      </div>
+      <h2 className="text-2xl font-bold text-[#1A2340] mb-3">
+        Este evento ya finalizó
+      </h2>
+      <p className="text-[#6B7A9A] mb-6">
+        La masterclass Paso Cero EB2-NIW ya fue realizada. Seguinos en redes
+        para enterarte de próximos eventos.
+      </p>
+      <a
+        href="/"
+        className="inline-flex items-center justify-center h-11 px-6 text-sm font-semibold text-white bg-[#0033A0] rounded-lg hover:bg-[#001A52] transition-colors"
+      >
+        Volver al inicio
+      </a>
+    </motion.div>
+  )
+}
+
 export default function MCRegistrationForm() {
   const [form, setForm] = useState<FormData>({
     nombre: "",
@@ -245,11 +274,15 @@ export default function MCRegistrationForm() {
     }
   }
 
+  const isExpired = Date.now() > EVENT_DATE.getTime()
+
   return (
     <section id="registro" className="py-16 sm:py-20 bg-[#F8F9FC]">
       <div className="max-w-lg mx-auto px-4 sm:px-6">
         <AnimatePresence mode="wait">
-          {submitted ? (
+          {isExpired ? (
+            <ExpiredCard key="expired" />
+          ) : submitted ? (
             <SuccessCard key="success" />
           ) : (
             <motion.form
