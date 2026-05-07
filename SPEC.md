@@ -195,7 +195,209 @@
   Criterio de éxito: menú mobile se abre desde abajo, gesture-friendly,
   se mantiene Sheet en desktop
 
-### P3 — Nuevas capacidades
+### P3 — Masterclass Landing: UI/UX premium
+
+> Objetivo: elevar la landing `/masterclass` a nivel de lanzamiento digital
+> de infoproductor. Diseño persuasivo, componentes Shadcn/UI, animaciones
+> pulidas, optimización de conversión.
+
+- [ ] **MC-01: Componentes Shadcn/UI en formulario de registro**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: UX-01 ✅ (componentes Shadcn base instalados)
+  Reemplazar inputs HTML nativos del form por `<Input>`, `<Select>` de Shadcn/UI.
+  Agregar `<Badge>` para "CUPOS LIMITADOS", `<Separator>` entre secciones.
+  Usar `<Tooltip>` en el icono de seguridad del footer del form.
+  Archivos: `components/sections/masterclass/MCRegistrationForm.tsx`
+  Criterio de éxito: formulario visualmente consistente con el design system,
+  validación mantiene funcionalidad actual
+
+- [ ] **MC-02: Countdown timer y urgencia**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Agregar countdown en tiempo real hasta el 25 de mayo 2026 7PM COT en el Hero.
+  Mostrar días/horas/minutos/segundos en cards estilizadas.
+  Si el evento ya pasó, mostrar "Evento finalizado" en vez del form.
+  Agregar barra de progreso falsa "87% de cupos ocupados" (configurable).
+  Archivos: `components/sections/masterclass/MCHero.tsx`,
+  `components/sections/masterclass/MCRegistrationForm.tsx`
+  Criterio de éxito: countdown funcional, urgencia visible, no se rompe post-evento
+
+- [ ] **MC-03: Social proof y testimonios en landing**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Agregar sección entre Benefits y Form con mini-testimonios:
+  3-4 cards con foto placeholder, nombre, país, y quote corto.
+  Datos hardcodeados por ahora (no de Supabase).
+  Agregar contador animado "+200 profesionales ya se registraron" con
+  `useSpring` de Framer Motion.
+  Archivos: `components/sections/masterclass/MCTestimonials.tsx` (nuevo),
+  `pages/MasterclassPage.tsx`
+  Criterio de éxito: social proof visible antes del formulario, animación suave
+
+- [ ] **MC-04: Mejoras visuales generales**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  - Agregar sección FAQ (3-4 preguntas) con `<Accordion>` de Shadcn (ya instalado)
+  - Sticky CTA en mobile (botón flotante "Reservar lugar" que scroll al form)
+  - Micro-interacciones: hover en benefit cards, pulse en CTA
+  - Mejorar spacing y tipografía para mobile
+  Archivos: `components/sections/masterclass/MCFAQ.tsx` (nuevo),
+  `components/sections/masterclass/MCStickyCTA.tsx` (nuevo),
+  `components/sections/masterclass/MCBenefits.tsx`,
+  `pages/MasterclassPage.tsx`
+  Criterio de éxito: landing se siente profesional y pulida en mobile y desktop
+
+### P4 — Admin: gestión de landings con activación/desactivación
+
+> Objetivo: poder ver, activar y desactivar landings desde el admin panel,
+> incluyendo programación de fechas de activación/desactivación.
+
+#### Fase 1 — Switch activo/inactivo (frontend + backend)
+
+- [ ] **LAND-01: Modelo de datos y migración**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Agregar columnas a tabla `landing_projects` (o crear tabla `landings` nueva):
+  - `is_active` boolean default false
+  - `activate_at` timestamptz nullable
+  - `deactivate_at` timestamptz nullable
+  - `route` text nullable (ej: "/masterclass")
+  Registrar la landing de masterclass como entrada.
+  Actualizar tipos en `lib/supabase.ts` (⚠️ archivo protegido).
+  Archivos: `supabase/migrations/023_landings_activation.sql` (nuevo),
+  `lib/supabase.ts`
+  Criterio de éxito: migración ejecutable, tipos actualizados, build limpio
+
+- [ ] **LAND-02: Switch activo/inactivo en admin/resources/landings**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LAND-01 ✅
+  Agregar toggle switch en cada `LandingPreviewCard` para activar/desactivar.
+  El switch actualiza `is_active` en Supabase inmediatamente.
+  Mostrar badge "Activa" (verde) o "Inactiva" (gris) en la card.
+  Las landings desactivadas en el router devuelven redirect a `/` o página
+  "Evento no disponible".
+  Archivos: `components/admin/resources/LandingPreviewCard.tsx`,
+  `pages/MasterclassPage.tsx` (guard de activación),
+  `App.tsx` (⚠️ protegido — verificar)
+  Criterio de éxito: toggle funciona, landing se activa/desactiva en tiempo real
+
+#### Fase 2 — Activación/desactivación programada
+
+> Análisis de opciones para la automatización:
+>
+> | Opción | Pros | Contras |
+> |--------|------|---------|
+> | **Supabase pg_cron** | Nativo en Supabase, sin infra extra, SQL directo | Solo resolución por minuto, requiere plan Pro |
+> | **n8n workflow** | Visual, fácil de modificar, ya se usa GHL | Infra adicional (hosting n8n), otro punto de fallo |
+> | **Supabase Edge Function + cron** | Lógica en TS, mismo stack | Necesita trigger externo (cron.org, GitHub Actions) |
+> | **Check en runtime (lazy)** | Sin cron, el frontend verifica `activate_at/deactivate_at` en cada request | Sin latencia de cron, pero no actualiza `is_active` en DB |
+>
+> **Recomendación:** Usar **check en runtime (lazy)** como primera implementación
+> porque no agrega infra y funciona inmediatamente. El frontend/Edge Function
+> compara las fechas al servir la página. Si se necesita que `is_active` esté
+> sincronizado en DB (para reportes, etc.), agregar **pg_cron** como segunda capa.
+
+- [ ] **LAND-03: Programación de fechas en admin**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LAND-02 ✅
+  Agregar campos de fecha en la UI del admin para `activate_at` y `deactivate_at`.
+  Usar date picker (o input type="datetime-local" simple).
+  Mostrar estado calculado: "Se activa en X días" / "Se desactiva el DD/MM".
+  Archivos: `components/admin/resources/LandingPreviewCard.tsx` (o modal de config),
+  Criterio de éxito: fechas editables desde admin, se guardan en DB
+
+- [ ] **LAND-04: Runtime check de activación**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LAND-03 ✅
+  Implementar lógica lazy: al cargar una landing, verificar si
+  `now() >= activate_at` y `now() < deactivate_at` (si están seteados).
+  Si no cumple, mostrar página "Evento no disponible" o redirect.
+  Crear hook `useLandingStatus(route)` reutilizable.
+  Archivos: `hooks/useLandingStatus.ts` (nuevo),
+  `pages/MasterclassPage.tsx`
+  Criterio de éxito: landing respeta las fechas programadas sin cron externo
+
+### P5 — Sincronización de leads con GHL
+
+> Objetivo: unificar la estructura de leads con GHL como fuente de verdad.
+> Los leads actuales de la tabla `leads` (del quiz) son de prueba y se pueden borrar.
+> Los leads de `masterclass_leads` deben migrarse a la nueva estructura.
+>
+> **Estructura objetivo (alineada con GHL):**
+> Los campos principales de un contacto en GHL son: firstName, lastName, email,
+> phone, source, tags[], customFields[], dateAdded, assignedTo.
+> La tabla unificada debe mapear estos campos + conservar UTM y metadata local.
+
+#### Sub-tarea 1 — Nueva estructura de datos
+
+- [ ] **LEADS-01: Migración a tabla unificada `contacts`**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Crear tabla `contacts` con estructura alineada a GHL:
+  - `id` uuid PK
+  - `ghl_contact_id` text nullable (ID en GHL, para sync)
+  - `first_name` text not null
+  - `last_name` text
+  - `email` text not null unique
+  - `phone` text
+  - `country` text
+  - `source` text (ej: "masterclass-eb2niw-2026", "quiz-diagnostico", "vip-session")
+  - `tags` text[] (ej: ["Webinar-EB2NIW-2026", "quiz-alto-impacto"])
+  - `status` text default 'new'
+  - `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` text nullable
+  - `custom_fields` jsonb default '{}'
+  - `synced_at` timestamptz nullable (última sync con GHL)
+  - `created_at` timestamptz default now()
+  - `updated_at` timestamptz default now()
+  Migrar datos de `masterclass_leads` a `contacts`.
+  Borrar datos de prueba de tabla `leads`.
+  Archivos: `supabase/migrations/024_contacts_unified.sql` (nuevo)
+  Criterio de éxito: tabla creada, datos de masterclass migrados, RLS configurado
+
+- [ ] **LEADS-02: Actualizar tipos y admin panel**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LEADS-01 ✅
+  Actualizar `lib/supabase.ts` con tipo `Contact` (⚠️ protegido).
+  Adaptar `AdminLeads` y sus sub-componentes para leer de `contacts` en vez de `leads`.
+  Actualizar filtros: agregar filtro por `source` y `tags`.
+  Archivos: `lib/supabase.ts`, `components/admin/leads/*`, `pages/AdminLeads.tsx`
+  Criterio de éxito: admin muestra contacts unificados, filtro por source funciona
+
+- [ ] **LEADS-03: Actualizar formulario masterclass y quiz**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LEADS-02 ✅
+  Actualizar Edge Function `masterclass-register` para insertar en `contacts`.
+  Actualizar quiz para insertar en `contacts` con source="quiz-diagnostico".
+  Los campos específicos del quiz (academic_level, achievements, etc.) van en
+  `custom_fields` jsonb.
+  Archivos: `supabase/functions/masterclass-register/index.ts`,
+  `components/sections/Quiz.tsx` (o sub-componentes), `lib/quizLogic.ts` (lectura)
+  Criterio de éxito: ambos flujos insertan en `contacts`, datos legacy migrados
+
+#### Sub-tarea 2 — Sincronización bidireccional con GHL
+
+- [ ] **LEADS-04: Sync Supabase → GHL (al crear contacto)**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LEADS-03 ✅
+  Cada vez que se crea un contacto en `contacts`, la Edge Function:
+  1. Upsert en GHL (ya implementado en masterclass-register)
+  2. Guardar `ghl_contact_id` en la tabla `contacts`
+  3. Actualizar `synced_at`
+  Extraer la lógica de GHL a función reutilizable `lib/ghl.ts` (Edge Function side).
+  Archivos: `supabase/functions/masterclass-register/index.ts`,
+  `supabase/functions/_shared/ghl.ts` (nuevo)
+  Criterio de éxito: todo contacto nuevo tiene `ghl_contact_id` y `synced_at`
+
+- [ ] **LEADS-05: Sync GHL → Supabase (webhook)**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LEADS-04 ✅
+  Crear Edge Function `ghl-webhook` que reciba webhooks de GHL
+  (contact.created, contact.updated, contact.tag.added) y actualice `contacts`.
+  Configurar el webhook en GHL apuntando a la Edge Function.
+  Archivos: `supabase/functions/ghl-webhook/index.ts` (nuevo)
+  Criterio de éxito: cambios en GHL se reflejan en Supabase automáticamente
+
+### P6 — Tests y calidad
 
 - [ ] **Tests unitarios para lógica crítica**
   Asignado: — | Estado: ⬚ libre
