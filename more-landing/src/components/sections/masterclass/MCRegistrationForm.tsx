@@ -1,7 +1,11 @@
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2, Calendar } from "lucide-react"
+import { Shield, CheckCircle2, Loader2, Calendar, Users } from "lucide-react"
 import { supabase } from "@/lib/supabase"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
@@ -295,12 +299,21 @@ export default function MCRegistrationForm() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="rounded-2xl bg-white shadow-xl border border-gray-100 p-8 sm:p-10"
             >
+              <div className="flex justify-center mb-4">
+                <Badge variant="orange" className="gap-1.5">
+                  <Users className="h-3 w-3" />
+                  CUPOS LIMITADOS
+                </Badge>
+              </div>
+
               <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center mb-2">
                 Reserva tu lugar ahora
               </h2>
-              <p className="text-[#6B7A9A] text-center text-sm mb-8">
-                Los cupos son limitados. Regístrate en 30 segundos.
+              <p className="text-[#6B7A9A] text-center text-sm mb-6">
+                Regístrate en 30 segundos y asegura tu lugar.
               </p>
+
+              <Separator className="mb-6" />
 
               <div className="space-y-5">
                 <div>
@@ -310,14 +323,13 @@ export default function MCRegistrationForm() {
                   >
                     Nombre completo
                   </label>
-                  <input
+                  <Input
                     id="mc-nombre"
                     name="nombre"
                     type="text"
                     value={form.nombre}
                     onChange={handleChange}
                     placeholder="Ej: María García"
-                    className="flex h-11 w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0033A0]/20 focus-visible:border-[#0033A0]/40 transition-all duration-200"
                   />
                   {errors.nombre && (
                     <p className="mt-1 text-xs text-red-500">{errors.nombre}</p>
@@ -331,14 +343,13 @@ export default function MCRegistrationForm() {
                   >
                     Email
                   </label>
-                  <input
+                  <Input
                     id="mc-email"
                     name="email"
                     type="email"
                     value={form.email}
                     onChange={handleChange}
                     placeholder="tu@email.com"
-                    className="flex h-11 w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0033A0]/20 focus-visible:border-[#0033A0]/40 transition-all duration-200"
                   />
                   {errors.email && (
                     <p className="mt-1 text-xs text-red-500">{errors.email}</p>
@@ -357,7 +368,7 @@ export default function MCRegistrationForm() {
                       name="countryCode"
                       value={form.countryCode}
                       onChange={handleChange}
-                      className="h-11 w-[100px] sm:w-[120px] rounded-lg border border-gray-300 bg-white px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0033A0]/20 focus-visible:border-[#0033A0]/40 transition-all duration-200"
+                      className="h-11 w-[100px] sm:w-[120px] rounded-lg border border-gray-300 bg-white px-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20 focus-visible:border-[#2A3A4A]/40 transition-all duration-200"
                     >
                       {COUNTRY_CODES.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -365,14 +376,13 @@ export default function MCRegistrationForm() {
                         </option>
                       ))}
                     </select>
-                    <input
+                    <Input
                       id="mc-phone"
                       name="phone"
                       type="tel"
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="300 123 4567"
-                      className="flex h-11 w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0033A0]/20 focus-visible:border-[#0033A0]/40 transition-all duration-200"
                     />
                   </div>
                   {errors.phone && (
@@ -392,7 +402,7 @@ export default function MCRegistrationForm() {
                     name="pais"
                     value={form.pais}
                     onChange={handleChange}
-                    className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0033A0]/20 focus-visible:border-[#0033A0]/40 transition-all duration-200"
+                    className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20 focus-visible:border-[#2A3A4A]/40 transition-all duration-200"
                   >
                     <option value="">Selecciona tu país</option>
                     {COUNTRIES.map((c) => (
@@ -413,10 +423,12 @@ export default function MCRegistrationForm() {
                 </p>
               )}
 
-              <button
+              <Button
                 type="submit"
+                variant="gold"
+                size="lg"
                 disabled={submitting}
-                className="mt-8 w-full h-13 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#F37021] to-[#D4611A] text-white font-bold text-base shadow-lg hover:from-[#D4611A] hover:to-[#F37021] transition-all duration-300 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+                className="mt-8 w-full h-13 text-base font-bold"
               >
                 {submitting ? (
                   <>
@@ -426,9 +438,11 @@ export default function MCRegistrationForm() {
                 ) : (
                   "QUIERO MI LUGAR GRATIS"
                 )}
-              </button>
+              </Button>
 
-              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[#6B7A9A]">
+              <Separator className="mt-6 mb-4" />
+
+              <div className="flex items-center justify-center gap-2 text-xs text-[#6B7A9A] group relative">
                 <Shield className="h-3.5 w-3.5" />
                 <span>
                   Tu información está segura. No compartimos tus datos con
