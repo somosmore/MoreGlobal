@@ -68,6 +68,133 @@
   Archivos: `vip/*`, `pages/VipSessionPage.tsx`, `locales/*/vipPage.json`
   Criterio de éxito: cambios alineados con el plan, página VIP actualizada
 
+### P2b — UX/UI Refresh (landing + VIP)
+
+> Objetivo: mejorar la experiencia visual y de interacción usando las librerías ya
+> instaladas (Shadcn/UI, Framer Motion 12, Tailwind v4) y agregar solo dependencias
+> mínimas donde el impacto lo justifique.
+
+#### Fase 1 — Expandir componentes Shadcn/UI (locales, sin deps externas)
+
+- [ ] **UX-01: Agregar componentes Shadcn/UI base**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Instalar con `npx shadcn@latest add`: `tooltip`, `badge`, `separator`,
+  `avatar`, `skeleton`, `dropdown-menu`, `alert`.
+  Son archivos locales copiados a `components/ui/`, no dependencias npm.
+  Archivos: `components/ui/tooltip.tsx`, `badge.tsx`, `separator.tsx`,
+  `avatar.tsx`, `skeleton.tsx`, `dropdown-menu.tsx`, `alert.tsx` (nuevos)
+  Criterio de éxito: componentes instalados, importables, build limpio
+
+- [ ] **UX-02: Integrar skeletons en landing pública**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: UX-01 ✅
+  Las secciones que cargan datos de Supabase (Success/testimonials, Hero/initials)
+  muestran vacío mientras cargan. Agregar `<Skeleton>` donde corresponda.
+  Archivos: `components/sections/Hero.tsx`, `components/sections/Success.tsx`
+  Criterio de éxito: feedback visual inmediato mientras carga contenido dinámico
+
+- [ ] **UX-03: Badges y avatares en social proof del Hero**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: UX-01 ✅
+  Reemplazar los círculos de iniciales del Hero con `<Avatar>` de Shadcn.
+  Agregar `<Badge>` para el contador "+200 profesionales" y "98% aprobación".
+  Archivos: `components/sections/Hero.tsx`
+  Criterio de éxito: social proof visualmente más pulido, consistente con design system
+
+#### Fase 2 — Animaciones avanzadas con Framer Motion 12 (ya instalado)
+
+- [ ] **UX-04: Parallax en Hero con useScroll**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Usar `useScroll` + `useTransform` de Framer Motion para efecto parallax
+  sutil en el Hero: el headline se mueve más lento que el background al scrollear.
+  Archivos: `components/sections/Hero.tsx`
+  NO tocar: `index.css`
+  Criterio de éxito: efecto parallax suave, sin jank en mobile, performance ok
+
+- [ ] **UX-05: Transiciones de página con AnimatePresence**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Envolver las rutas en `<AnimatePresence mode="wait">` para fade/slide
+  entre Home ↔ VIP ↔ Privacy. Crear wrapper `PageTransition.tsx`.
+  Archivos: `App.tsx` (⚠️ archivo protegido — verificar con humano),
+  `components/PageTransition.tsx` (nuevo)
+  Criterio de éxito: transición suave entre páginas, sin flash blanco
+
+- [ ] **UX-06: Layout animations en pasos del Quiz**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas. Recomendado después de Refactor Quiz (P1).
+  Usar `layout` prop de Framer Motion para animar el cambio entre pasos
+  del quiz con morphing fluido en vez de fade in/out abrupto.
+  Archivos: `components/sections/Quiz.tsx` (o sub-componentes si ya se refactorizó)
+  Criterio de éxito: transición entre pasos se siente fluida y profesional
+
+#### Fase 3 — Mejoras de conversión y contenido
+
+- [ ] **UX-07: Persistencia de resultado del quiz en localStorage**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Un usuario que completa el quiz pero no deja datos pierde su resultado.
+  Guardar el diagnóstico en localStorage y mostrarlo si vuelve a la página.
+  Archivos: `components/sections/Quiz.tsx` (o sub-componentes),
+  `lib/quizLogic.ts` (solo lectura)
+  Criterio de éxito: al volver a la página, el quiz muestra el resultado previo
+  con opción de "Volver a hacer el diagnóstico"
+
+- [ ] **UX-08: Exit-intent modal para quiz abandonado**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: UX-01 ✅ (usa Dialog de Radix, ya instalado)
+  Si el usuario empezó el quiz (paso ≥ 2) y mueve el mouse hacia arriba
+  (desktop) o intenta salir, mostrar modal: "Tu diagnóstico está casi listo".
+  Solo se muestra una vez por sesión.
+  Archivos: `components/sections/Quiz.tsx`, `components/ExitIntentModal.tsx` (nuevo)
+  Criterio de éxito: modal aparece al intentar salir con quiz en progreso,
+  no es invasivo, solo 1 vez por sesión
+
+- [ ] **UX-09: Mejorar calidad del copy EN**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  El copy en inglés es funcional pero no tiene la fuerza emocional del español.
+  Revisar y reescribir: Hero, PainPoints, WhoWeHelp, Quiz results, Pricing.
+  Archivos: `locales/en/translation.json`
+  Criterio de éxito: copy EN con misma calidad persuasiva que ES,
+  no suena a traducción literal
+
+#### Fase 4 — Dependencias externas mínimas (requiere aprobación)
+
+> ⚠️ Estas tareas agregan dependencias npm nuevas. Requieren aprobación del humano
+> antes de empezar según reglas de CLAUDE.md.
+
+- [ ] **UX-10: Carousel de testimonios con Embla**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: UX-01 ✅ + aprobación humana para `embla-carousel-react`
+  Instalar componente carousel de Shadcn (trae `embla-carousel-react` ~7KB).
+  Reemplazar el scroll manual de testimonios en Success.tsx con carousel
+  touch-friendly, autoplay, dots de navegación.
+  Archivos: `components/ui/carousel.tsx` (nuevo via shadcn),
+  `components/sections/Success.tsx`
+  Criterio de éxito: carousel fluido, swipeable en mobile, autoplay con pausa on hover
+
+- [ ] **UX-11: Toast notifications con Sonner**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: aprobación humana para `sonner` (~5KB)
+  Agregar toasts para feedback del quiz (resultado guardado), errores de red,
+  y confirmaciones en la VIP page (enlace copiado, etc.).
+  Archivos: `App.tsx` (⚠️ protegido), `components/sections/Quiz.tsx`,
+  `vip/components/*.tsx`
+  Criterio de éxito: feedback visual no intrusivo en acciones del usuario
+
+- [ ] **UX-12: Drawer mobile con Vaul**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: aprobación humana para `vaul` (~4KB)
+  Reemplazar Sheet (side panel) por Drawer (bottom sheet) en mobile para
+  el menú de navegación y paneles del quiz. Mejor patrón UX en móvil.
+  Archivos: `components/ui/drawer.tsx` (nuevo via shadcn),
+  `components/sections/Navbar.tsx`
+  Criterio de éxito: menú mobile se abre desde abajo, gesture-friendly,
+  se mantiene Sheet en desktop
+
 ### P3 — Nuevas capacidades
 
 - [ ] **Tests unitarios para lógica crítica**
