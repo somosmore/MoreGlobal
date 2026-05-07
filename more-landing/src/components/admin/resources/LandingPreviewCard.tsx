@@ -2,7 +2,9 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ExternalLink, Eye, ArrowRight, Globe, Sparkles, FileEdit, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabase"
 import type { LandingProject, GeneratedLandingJson } from "@/lib/supabase"
+import { Switch } from "@/components/ui/switch"
 import ResourcePreviewModal from "./ResourcePreviewModal"
 
 const STATUS_CONFIG = {
@@ -22,10 +24,27 @@ const STATUS_CONFIG = {
 
 type LandingPreviewCardProps = {
   project: LandingProject
+  onToggleActive?: (id: string, isActive: boolean) => void
 }
 
-export default function LandingPreviewCard({ project }: LandingPreviewCardProps) {
+export default function LandingPreviewCard({ project, onToggleActive }: LandingPreviewCardProps) {
   const [previewOpen, setPreviewOpen] = useState(false)
+  const [active, setActive] = useState(project.is_active)
+  const [toggling, setToggling] = useState(false)
+
+  async function handleToggle(checked: boolean) {
+    if (!supabase) return
+    setToggling(true)
+    const { error } = await supabase
+      .from("landing_projects")
+      .update({ is_active: checked })
+      .eq("id", project.id)
+    setToggling(false)
+    if (!error) {
+      setActive(checked)
+      onToggleActive?.(project.id, checked)
+    }
+  }
 
   const json = project.generated_json as GeneratedLandingJson | null
   const hero = json?.hero
@@ -127,8 +146,35 @@ export default function LandingPreviewCard({ project }: LandingPreviewCardProps)
           )}
         </div>
 
+        {/* Active toggle */}
+        <div className="px-5 pt-3 pb-1 border-t border-gray-100 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={active}
+              onCheckedChange={handleToggle}
+              disabled={toggling}
+              aria-label={active ? "Desactivar landing" : "Activar landing"}
+            />
+            <span
+              className={cn(
+                "px-2 py-0.5 text-[11px] font-semibold rounded-full",
+                active
+                  ? "bg-green-100 text-green-700"
+                  : "bg-gray-100 text-gray-500"
+              )}
+            >
+              {active ? "Activa" : "Inactiva"}
+            </span>
+          </div>
+          {project.route && (
+            <span className="text-[11px] text-gray-400 font-mono truncate max-w-[120px]">
+              {project.route}
+            </span>
+          )}
+        </div>
+
         {/* Footer */}
-        <div className="px-5 pb-4 pt-2 border-t border-gray-100 flex items-center justify-between gap-2">
+        <div className="px-5 pb-4 pt-2 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
             <span
               className={cn(

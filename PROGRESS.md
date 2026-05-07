@@ -29,6 +29,22 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-07] — LAND-02: Switch activo/inactivo en admin
+
+- Agente: claude
+- Archivos modificados: `components/ui/switch.tsx` (nuevo), `components/admin/resources/LandingPreviewCard.tsx`, `pages/MasterclassPage.tsx`
+- Qué se implementó: Componente Switch (toggle). Toggle en LandingPreviewCard que actualiza `is_active` en Supabase en tiempo real con badge Activa/Inactiva. Guard de activación en MasterclassPage: consulta `is_active` de la landing, muestra spinner mientras carga, página "Evento no disponible" si está inactiva.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-07] — LAND-01: Modelo de datos y migración
+
+- Agente: claude
+- Archivos modificados: `supabase/migrations/023_landings_activation.sql` (nuevo), `src/lib/supabase.ts`
+- Qué se implementó: Columnas `is_active`, `activate_at`, `deactivate_at`, `route` en `landing_projects`. Índice único en `route`. INSERT de la masterclass como landing activa. Tipos actualizados en LandingProject y LandingProjectInsert. Reparación del historial de migraciones de Supabase CLI (006-022 marcadas como applied).
+- Problemas encontrados: Supabase CLI no tenía registradas las migraciones 006-022 como aplicadas. Se reparó con `migration repair --status applied`.
+- Estado: ✅ completo
+
 ### [2026-04-28] — Mejora estructura multi-agente
 
 - Agente: claude

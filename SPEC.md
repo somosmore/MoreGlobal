@@ -254,8 +254,8 @@
 
 #### Fase 1 — Switch activo/inactivo (frontend + backend)
 
-- [ ] **LAND-01: Modelo de datos y migración**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-01: Modelo de datos y migración**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Agregar columnas a tabla `landing_projects` (o crear tabla `landings` nueva):
   - `is_active` boolean default false
@@ -268,8 +268,8 @@
   `lib/supabase.ts`
   Criterio de éxito: migración ejecutable, tipos actualizados, build limpio
 
-- [ ] **LAND-02: Switch activo/inactivo en admin/resources/landings**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-02: Switch activo/inactivo en admin/resources/landings**
+  Asignado: claude | Estado: ✅ completo
   Depende de: LAND-01 ✅
   Agregar toggle switch en cada `LandingPreviewCard` para activar/desactivar.
   El switch actualiza `is_active` en Supabase inmediatamente.
