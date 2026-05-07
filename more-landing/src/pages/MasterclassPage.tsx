@@ -2,8 +2,10 @@ import { useEffect } from "react"
 import MCHero from "@/components/sections/masterclass/MCHero"
 import MCBenefits from "@/components/sections/masterclass/MCBenefits"
 import MCRegistrationForm from "@/components/sections/masterclass/MCRegistrationForm"
+import MCFAQ from "@/components/sections/masterclass/MCFAQ"
 import MCSpeaker from "@/components/sections/masterclass/MCSpeaker"
 import MCFooter from "@/components/sections/masterclass/MCFooter"
+import MCStickyCTA from "@/components/sections/masterclass/MCStickyCTA"
 
 export default function MasterclassPage() {
   useEffect(() => {
@@ -51,8 +53,10 @@ export default function MasterclassPage() {
       <MCHero />
       <MCBenefits />
       <MCRegistrationForm />
+      <MCFAQ />
       <MCSpeaker />
       <MCFooter />
+      <MCStickyCTA />
     </div>
   )
 }

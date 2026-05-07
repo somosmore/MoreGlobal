@@ -34,12 +34,14 @@ export default function MCBenefits() {
           En esta masterclass vas a aprender:
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {benefits.map((text) => (
             <motion.div
               key={text}
               variants={item}
-              className="flex items-start gap-3"
+              whileHover={{ scale: 1.02, x: 4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#F37021]/[0.04] transition-colors duration-200 cursor-default"
             >
               <CheckCircle className="h-5 w-5 text-[#F37021] mt-0.5 shrink-0" />
               <span className="text-[#1A2340] text-sm sm:text-base leading-snug">
