@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json()
-    const { nombre, email, phone, phoneLocal, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
+    const { nombre, email, phone, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
 
     if (!nombre || !email || !phone || !pais) {
       return new Response(
@@ -96,56 +96,65 @@ Deno.serve(async (req) => {
           "Content-Type": "application/json",
         }
 
+        const contactPayload = {
+          locationId: ghlLocationId,
+          firstName,
+          lastName,
+          email: email.trim().toLowerCase(),
+          phone: phone,
+          country: COUNTRY_ISO[pais] || "US",
+          source: "Masterclass EB2-NIW",
+          tags: [ghlTag],
+          customFields: [
+            { id: "2p21GBEtEn6ZmpPzKouP", field_value: pais },
+          ],
+        }
+        console.log("[GHL] Contact upsert payload:", JSON.stringify(contactPayload))
+
         const contactRes = await fetch(
           "https://services.leadconnectorhq.com/contacts/upsert",
           {
             method: "POST",
             headers: ghlHeaders,
-            body: JSON.stringify({
-              locationId: ghlLocationId,
-              firstName,
-              lastName,
-              email: email.trim().toLowerCase(),
-              phone: phoneLocal || phone,
-              country: COUNTRY_ISO[pais] || "US",
-              source: "Masterclass EB2-NIW",
-              tags: [ghlTag],
-              customFields: [
-                { id: "contact.pas_de_origen", field_value: pais },
-              ],
-            }),
+            body: JSON.stringify(contactPayload),
           }
         )
 
+        const contactResText = await contactRes.text()
+        console.log(`[GHL] Contact upsert response (${contactRes.status}):`, contactResText)
+
         if (!contactRes.ok) {
-          console.error("GHL contact upsert failed:", await contactRes.text())
+          console.error("[GHL] Contact upsert FAILED")
           return
         }
 
-        const contactData = await contactRes.json()
+        const contactData = JSON.parse(contactResText)
         const contactId = contactData?.contact?.id
+        console.log("[GHL] Contact ID:", contactId)
 
         if (contactId) {
+          const oppPayload = {
+            pipelineId: ghlPipelineId,
+            pipelineStageId: ghlStageId,
+            locationId: ghlLocationId,
+            contactId,
+            name: `${nombre.trim()} — Masterclass EB2-NIW`,
+            status: "open",
+            monetaryValue: 0,
+          }
+          console.log("[GHL] Opportunity payload:", JSON.stringify(oppPayload))
+
           const oppRes = await fetch(
             "https://services.leadconnectorhq.com/opportunities/",
             {
               method: "POST",
               headers: ghlHeaders,
-              body: JSON.stringify({
-                pipelineId: ghlPipelineId,
-                pipelineStageId: ghlStageId,
-                locationId: ghlLocationId,
-                contactId,
-                name: `${nombre.trim()} — Masterclass EB2-NIW`,
-                status: "open",
-                monetaryValue: 0,
-              }),
+              body: JSON.stringify(oppPayload),
             }
           )
 
-          if (!oppRes.ok) {
-            console.error("GHL opportunity creation failed:", await oppRes.text())
-          }
+          const oppResText = await oppRes.text()
+          console.log(`[GHL] Opportunity response (${oppRes.status}):`, oppResText)
         }
       })()
     }
