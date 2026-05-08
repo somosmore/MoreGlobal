@@ -1,22 +1,22 @@
 import { motion } from "framer-motion"
-import { CheckCircle } from "lucide-react"
+import { CheckCircle2, Sparkles } from "lucide-react"
 
 const benefits = [
   "Qué es la visa EB2-NIW y por qué es la mejor opción para profesionales",
   "Los requisitos reales (no los mitos de internet)",
   "El paso a paso desde cero hasta la aprobación",
   "Errores comunes que retrasan o arruinan tu caso",
-  "Cómo empezar HOY sin necesidad de un empleador en EE.UU.",
+  "Cómo empezar HOY sin necesidad de un empleador en EE.\u00A0UU.",
   "Sesión de preguntas en vivo con Ivon More",
 ]
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.09 } },
 }
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 }
 
@@ -28,23 +28,34 @@ export default function MCBenefits() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={container}
-        className="rounded-2xl bg-white shadow-xl border border-gray-100 p-8 sm:p-10"
+        className="rounded-2xl bg-white shadow-2xl border border-gray-100 p-6 sm:p-8"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] mb-8 text-center">
-          En esta masterclass vas a aprender:
-        </h2>
+        {/* Header */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <Sparkles className="h-5 w-5 text-[#F37021]" />
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center">
+            En esta masterclass vas a aprender:
+          </h2>
+          <Sparkles className="h-5 w-5 text-[#F37021]" />
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Orange accent line */}
+        <div className="h-1 w-20 mx-auto rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A] mb-6 opacity-80" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {benefits.map((text) => (
             <motion.div
               key={text}
               variants={item}
-              whileHover={{ scale: 1.02, x: 4 }}
+              whileHover={{ scale: 1.02, x: 3 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#F37021]/[0.04] transition-colors duration-200 cursor-default"
+              className="group flex items-start gap-3 p-3 rounded-xl border border-transparent
+                hover:bg-gradient-to-r hover:from-[#FFF3EA] hover:to-[#FFF9F5]
+                hover:border-[#F37021]/30 hover:shadow-sm
+                transition-all duration-200 cursor-default"
             >
-              <CheckCircle className="h-5 w-5 text-[#F37021] mt-0.5 shrink-0" />
-              <span className="text-[#1A2340] text-sm sm:text-base leading-snug">
+              <CheckCircle2 className="h-5 w-5 text-[#F37021] mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" />
+              <span className="text-[#1A2340] text-sm sm:text-base leading-snug group-hover:text-[#0033A0] transition-colors duration-200">
                 {text}
               </span>
             </motion.div>

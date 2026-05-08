@@ -238,6 +238,10 @@ export type LandingProject = {
   generated_json: GeneratedLandingJson | null;
   generated_prompt: string | null;
   live_url: string | null;
+  is_active: boolean;
+  activate_at: string | null;
+  deactivate_at: string | null;
+  route: string | null;
   created_at: string;
   updated_at: string;
   clients?: Client | null;
@@ -245,10 +249,14 @@ export type LandingProject = {
 
 export type LandingProjectInsert = Omit<
   LandingProject,
-  "id" | "created_at" | "updated_at" | "clients" | "live_url"
+  "id" | "created_at" | "updated_at" | "clients" | "live_url" | "is_active" | "activate_at" | "deactivate_at" | "route"
 > & {
   id?: string;
   live_url?: string | null;
+  is_active?: boolean;
+  activate_at?: string | null;
+  deactivate_at?: string | null;
+  route?: string | null;
 };
 
 export type LandingProjectUpdate = Partial<

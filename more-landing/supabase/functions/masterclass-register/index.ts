@@ -1,5 +1,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
+const COUNTRY_ISO: Record<string, string> = {
+  "Colombia": "CO", "México": "MX", "Estados Unidos": "US",
+  "Perú": "PE", "Chile": "CL", "Argentina": "AR",
+  "Ecuador": "EC", "Venezuela": "VE", "Costa Rica": "CR",
+  "Panamá": "PA", "Guatemala": "GT", "El Salvador": "SV",
+  "Honduras": "HN", "Nicaragua": "NI", "Bolivia": "BO",
+  "Paraguay": "PY", "Uruguay": "UY", "República Dominicana": "DO",
+  "España": "ES", "Otro": "US",
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -20,7 +30,7 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json()
-    const { nombre, email, phone, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
+    const { nombre, email, phone, phoneLocal, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
 
     if (!nombre || !email || !phone || !pais) {
       return new Response(
@@ -34,14 +44,33 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     const ghlApiKey = Deno.env.get("GHL_API_KEY")
-    const ghlLocationId = Deno.env.get("GHL_LOCATION_ID")!
-    const ghlPipelineId = Deno.env.get("GHL_PIPELINE_ID")!
-    const ghlStageId = Deno.env.get("GHL_STAGE_ID")!
-    const ghlTag = Deno.env.get("GHL_TAG")!
+    const ghlLocationId = Deno.env.get("GHL_LOCATION_ID")
+    const ghlPipelineId = Deno.env.get("GHL_PIPELINE_ID")
+    const ghlStageId = Deno.env.get("GHL_STAGE_ID")
+    const ghlTag = Deno.env.get("GHL_TAG")
+
+    if (ghlApiKey) {
+      const missingGhlEnv: string[] = []
+      if (!ghlLocationId) missingGhlEnv.push("GHL_LOCATION_ID")
+      if (!ghlPipelineId) missingGhlEnv.push("GHL_PIPELINE_ID")
+      if (!ghlStageId) missingGhlEnv.push("GHL_STAGE_ID")
+      if (!ghlTag) missingGhlEnv.push("GHL_TAG")
+
+      if (missingGhlEnv.length > 0) {
+        console.error(`Missing required GHL env vars: ${missingGhlEnv.join(", ")}`)
+        return new Response(
+          JSON.stringify({
+            error: "Configuracion incompleta de GHL en el servidor",
+            missing: missingGhlEnv,
+          }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        )
+      }
+    }
 
     const nameParts = nombre.trim().split(/\s+/)
     const firstName = nameParts[0]
-    const lastName = nameParts.slice(1).join(" ") || ""
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "-"
 
     const supabaseInsert = supabase.from("masterclass_leads").insert({
       nombre: nombre.trim(),
@@ -77,7 +106,8 @@ Deno.serve(async (req) => {
               firstName,
               lastName,
               email: email.trim().toLowerCase(),
-              phone,
+              phone: phoneLocal || phone,
+              country: COUNTRY_ISO[pais] || "US",
               source: "Masterclass EB2-NIW",
               tags: [ghlTag],
               customFields: [
@@ -95,7 +125,7 @@ Deno.serve(async (req) => {
         const contactData = await contactRes.json()
         const contactId = contactData?.contact?.id
 
-        if (contactId && ghlStageId) {
+        if (contactId) {
           const oppRes = await fetch(
             "https://services.leadconnectorhq.com/opportunities/",
             {

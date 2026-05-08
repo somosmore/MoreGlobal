@@ -1,9 +1,35 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { ExternalLink, Eye, ArrowRight, Globe, Sparkles, FileEdit, Clock } from "lucide-react"
+import { ExternalLink, Eye, ArrowRight, Globe, Sparkles, FileEdit, Clock, Calendar } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabase"
 import type { LandingProject, GeneratedLandingJson } from "@/lib/supabase"
+import { Switch } from "@/components/ui/switch"
 import ResourcePreviewModal from "./ResourcePreviewModal"
+
+function toLocalInput(iso: string | null): string {
+  if (!iso) return ""
+  const d = new Date(iso)
+  const off = d.getTimezoneOffset()
+  const local = new Date(d.getTime() - off * 60000)
+  return local.toISOString().slice(0, 16)
+}
+
+function scheduleLabel(activateAt: string | null, deactivateAt: string | null): string | null {
+  const now = Date.now()
+  if (activateAt && new Date(activateAt).getTime() > now) {
+    const diff = Math.ceil((new Date(activateAt).getTime() - now) / (1000 * 60 * 60 * 24))
+    return `Se activa en ${diff} día${diff === 1 ? "" : "s"}`
+  }
+  if (deactivateAt) {
+    const dt = new Date(deactivateAt)
+    if (dt.getTime() > now) {
+      return `Se desactiva el ${dt.toLocaleDateString("es-AR", { day: "2-digit", month: "short" })}`
+    }
+    return "Periodo finalizado"
+  }
+  return null
+}
 
 const STATUS_CONFIG = {
   draft: {
@@ -22,16 +48,52 @@ const STATUS_CONFIG = {
 
 type LandingPreviewCardProps = {
   project: LandingProject
+  onToggleActive?: (id: string, isActive: boolean) => void
 }
 
-export default function LandingPreviewCard({ project }: LandingPreviewCardProps) {
+export default function LandingPreviewCard({ project, onToggleActive }: LandingPreviewCardProps) {
   const [previewOpen, setPreviewOpen] = useState(false)
+  const [active, setActive] = useState(project.is_active)
+  const [toggling, setToggling] = useState(false)
+  const [activateAt, setActivateAt] = useState(project.activate_at)
+  const [deactivateAt, setDeactivateAt] = useState(project.deactivate_at)
+  const [savingDates, setSavingDates] = useState(false)
+  const [showSchedule, setShowSchedule] = useState(!!project.activate_at || !!project.deactivate_at)
+
+  async function handleToggle(checked: boolean) {
+    if (!supabase) return
+    setToggling(true)
+    const { error } = await supabase
+      .from("landing_projects")
+      .update({ is_active: checked })
+      .eq("id", project.id)
+    setToggling(false)
+    if (!error) {
+      setActive(checked)
+      onToggleActive?.(project.id, checked)
+    }
+  }
+
+  async function handleDateChange(field: "activate_at" | "deactivate_at", value: string) {
+    const iso = value ? new Date(value).toISOString() : null
+    if (field === "activate_at") setActivateAt(iso)
+    else setDeactivateAt(iso)
+
+    if (!supabase) return
+    setSavingDates(true)
+    await supabase
+      .from("landing_projects")
+      .update({ [field]: iso })
+      .eq("id", project.id)
+    setSavingDates(false)
+  }
 
   const json = project.generated_json as GeneratedLandingJson | null
   const hero = json?.hero
   const status = STATUS_CONFIG[project.status]
   const hasLiveUrl = !!project.live_url
-  const hasContent = !!hero?.h1
+  const isBuiltIn = !!(project.tech_config as Record<string, unknown>)?.built_in
+  const hasContent = !!hero?.h1 || isBuiltIn
 
   const formattedDate = new Date(project.updated_at).toLocaleDateString("es-AR", {
     day: "2-digit",
@@ -79,25 +141,43 @@ export default function LandingPreviewCard({ project }: LandingPreviewCardProps)
         >
           {hasContent ? (
             <div className="space-y-2">
-              {hero?.badge && (
-                <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-orange/10 text-orange rounded-full">
-                  {hero.badge}
-                </span>
-              )}
-              <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
-                {hero?.h1}
-              </h3>
-              {hero?.h2 && (
-                <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-2">
-                  {hero.h2}
-                </p>
-              )}
-              {hero?.cta_primary && (
-                <div className="pt-1">
-                  <span className="inline-block px-3 py-1 text-[11px] font-semibold bg-orange text-white rounded-lg">
-                    {hero.cta_primary}
+              {isBuiltIn ? (
+                <>
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-[#0033A0]/10 text-[#0033A0] rounded-full">
+                    Landing integrada
                   </span>
-                </div>
+                  <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
+                    {project.name}
+                  </h3>
+                  {project.route && (
+                    <p className="text-[11px] text-gray-500">
+                      Ruta: <span className="font-mono">{project.route}</span>
+                    </p>
+                  )}
+                </>
+              ) : (
+                <>
+                  {hero?.badge && (
+                    <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-orange/10 text-orange rounded-full">
+                      {hero.badge}
+                    </span>
+                  )}
+                  <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
+                    {hero?.h1}
+                  </h3>
+                  {hero?.h2 && (
+                    <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-2">
+                      {hero.h2}
+                    </p>
+                  )}
+                  {hero?.cta_primary && (
+                    <div className="pt-1">
+                      <span className="inline-block px-3 py-1 text-[11px] font-semibold bg-orange text-white rounded-lg">
+                        {hero.cta_primary}
+                      </span>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ) : (
@@ -127,8 +207,78 @@ export default function LandingPreviewCard({ project }: LandingPreviewCardProps)
           )}
         </div>
 
+        {/* Active toggle */}
+        <div className="px-5 pt-3 pb-1 border-t border-gray-100 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={active}
+              onCheckedChange={handleToggle}
+              disabled={toggling}
+              aria-label={active ? "Desactivar landing" : "Activar landing"}
+            />
+            <span
+              className={cn(
+                "px-2 py-0.5 text-[11px] font-semibold rounded-full",
+                active
+                  ? "bg-green-100 text-green-700"
+                  : "bg-gray-100 text-gray-500"
+              )}
+            >
+              {active ? "Activa" : "Inactiva"}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            {project.route && (
+              <span className="text-[11px] text-gray-400 font-mono truncate max-w-[100px]">
+                {project.route}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={() => setShowSchedule((v) => !v)}
+              className={cn(
+                "p-1 rounded transition-colors",
+                showSchedule ? "text-[#F37021] bg-[#F37021]/10" : "text-gray-400 hover:text-gray-600"
+              )}
+              aria-label="Programar fechas"
+            >
+              <Calendar className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {showSchedule && (
+          <div className="px-5 pb-2 space-y-2">
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500 w-16 shrink-0">Activar</label>
+              <input
+                type="datetime-local"
+                value={toLocalInput(activateAt)}
+                onChange={(e) => handleDateChange("activate_at", e.target.value)}
+                disabled={savingDates}
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500 w-16 shrink-0">Desactivar</label>
+              <input
+                type="datetime-local"
+                value={toLocalInput(deactivateAt)}
+                onChange={(e) => handleDateChange("deactivate_at", e.target.value)}
+                disabled={savingDates}
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40"
+              />
+            </div>
+            {scheduleLabel(activateAt, deactivateAt) && (
+              <p className="text-[10px] text-[#F37021] font-medium">
+                {scheduleLabel(activateAt, deactivateAt)}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* Footer */}
-        <div className="px-5 pb-4 pt-2 border-t border-gray-100 flex items-center justify-between gap-2">
+        <div className="px-5 pb-4 pt-2 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
             <span
               className={cn(
