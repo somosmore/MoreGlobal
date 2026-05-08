@@ -3,7 +3,7 @@ import { Calendar, Clock, MapPin, Gift, User } from "lucide-react"
 import MCCountdown from "./MCCountdown"
 
 const details = [
-  { icon: Calendar, text: "25, 26 y 27 de mayo 2026" },
+  { icon: Calendar, text: "25 de mayo 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
   { icon: MapPin, text: "Online y en vivo" },
   { icon: Gift, text: "100% gratis" },
@@ -77,7 +77,7 @@ export default function MCHero() {
           Descubre la ruta que usan los profesionales latinoamericanos para
           obtener la residencia permanente sin necesidad de empleador.{" "}
           <strong className="text-white font-semibold">
-            3 días de contenido en vivo.
+            Una clase en vivo que puede cambiarlo todo.
           </strong>
         </motion.p>
 

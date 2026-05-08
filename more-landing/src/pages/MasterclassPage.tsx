@@ -47,7 +47,7 @@ export default function MasterclassPage() {
     setMeta(
       "name",
       "description",
-      "Masterclass gratuita de 3 días con Ivon More. Descubre el primer paso para migrar a EE.UU. con la visa EB2-NIW para profesionales. 25, 26 y 27 de mayo 2026."
+      "Masterclass gratuita con Ivon More. Descubre el primer paso para migrar a EE.UU. con la visa EB2-NIW para profesionales. 25 de mayo 2026, 7 PM Colombia."
     )
     setMeta(
       "property",
@@ -57,7 +57,7 @@ export default function MasterclassPage() {
     setMeta(
       "property",
       "og:description",
-      "3 días que pueden cambiar tu futuro. Aprende el primer paso para migrar a EE.UU. como profesional. 25-27 mayo 2026, 7 PM Colombia."
+      "Una clase que puede cambiar tu futuro. Aprende el primer paso para migrar a EE.UU. como profesional. 25 de mayo 2026, 7 PM Colombia."
     )
     setMeta("property", "og:type", "website")
 

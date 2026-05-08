@@ -13,15 +13,15 @@ const faqs = [
   },
   {
     q: "¿Necesito una oferta de trabajo o un empleador en EE.UU.?",
-    a: "No. Esa es precisamente la ventaja de la EB2-NIW: puedes auto-peticionarte sin necesidad de un empleador que te patrocine. Te explicamos el proceso completo en las 3 sesiones.",
+    a: "No. Esa es precisamente la ventaja de la EB2-NIW: puedes auto-peticionarte sin necesidad de un empleador que te patrocine. Te explicamos el proceso completo en la masterclass.",
   },
   {
     q: "¿La masterclass es realmente gratis?",
-    a: "Sí, 100% gratuita. Son 3 sesiones en vivo donde compartimos información real y accionable. No hay costos ocultos para asistir.",
+    a: "Sí, 100% gratuita. Es una sesión en vivo donde compartimos información real y accionable. No hay costos ocultos para asistir.",
   },
   {
     q: "¿Quedará grabada?",
-    a: "Las sesiones son en vivo y no garantizamos la disponibilidad de las grabaciones. Te recomendamos asistir en tiempo real para aprovechar las sesiones de preguntas y respuestas.",
+    a: "La sesión es en vivo y no garantizamos la disponibilidad de la grabación. Te recomendamos asistir en tiempo real para aprovechar la sesión de preguntas y respuestas.",
   },
 ]
 

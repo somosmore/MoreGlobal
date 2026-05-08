@@ -201,6 +201,33 @@
 > de infoproductor. Diseño persuasivo, componentes Shadcn/UI, animaciones
 > pulidas, optimización de conversión.
 
+- [ ] **MC-00: Hero con imagen de Ivon More + layout split**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Cambiar el hero de layout centrado a layout split (dos columnas en desktop):
+  - **Izquierda:** logo, badge, headline, subtítulo, detalles, CTA, barra de cupos
+  - **Derecha:** foto profesional de Ivon More con efecto de recorte/fade
+  En mobile se apila: texto arriba, imagen abajo (o imagen como fondo sutil).
+  El countdown se mantiene debajo del bloque split (full width).
+
+  **Imagen requerida:** `public/ivon-hero.png`
+  - Dimensiones: **800×1000px** (retina-ready, se muestra a ~400×500px)
+  - Formato: **PNG con fondo transparente** (para integrar con el degradado azul)
+  - Contenido: foto profesional de Ivon More, de cintura para arriba,
+    mirando al frente o ligeramente hacia la izquierda (hacia el texto)
+  - Estilo: vestimenta formal/business, buena iluminación, alta resolución
+  - Si no hay PNG transparente, se acepta JPG con fondo oscuro/azul
+    que se mimetice con el gradiente `#0033A0` → `#001A52`
+  - Peso máximo recomendado: **150KB** (comprimir con TinyPNG/Squoosh)
+  - Alternativa WebP: `ivon-hero.webp` como fallback optimizado
+
+  Inspiración: layout del hero de EXMA Summit (form izquierda + speakers derecha),
+  adaptado a una sola speaker con foto prominente.
+  Archivos: `components/sections/masterclass/MCHero.tsx`,
+  `public/ivon-hero.png` (nuevo — provisto por el humano)
+  Criterio de éxito: hero con imagen visible en desktop y mobile,
+  no rompe el countdown ni el CTA, imagen optimizada < 150KB
+
 - [ ] **MC-01: Componentes Shadcn/UI en formulario de registro**
   Asignado: — | Estado: ⬚ libre
   Depende de: UX-01 ✅ (componentes Shadcn base instalados)

@@ -92,7 +92,8 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
   const hero = json?.hero
   const status = STATUS_CONFIG[project.status]
   const hasLiveUrl = !!project.live_url
-  const hasContent = !!hero?.h1
+  const isBuiltIn = !!(project.tech_config as Record<string, unknown>)?.built_in
+  const hasContent = !!hero?.h1 || isBuiltIn
 
   const formattedDate = new Date(project.updated_at).toLocaleDateString("es-AR", {
     day: "2-digit",
@@ -140,25 +141,43 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
         >
           {hasContent ? (
             <div className="space-y-2">
-              {hero?.badge && (
-                <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-orange/10 text-orange rounded-full">
-                  {hero.badge}
-                </span>
-              )}
-              <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
-                {hero?.h1}
-              </h3>
-              {hero?.h2 && (
-                <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-2">
-                  {hero.h2}
-                </p>
-              )}
-              {hero?.cta_primary && (
-                <div className="pt-1">
-                  <span className="inline-block px-3 py-1 text-[11px] font-semibold bg-orange text-white rounded-lg">
-                    {hero.cta_primary}
+              {isBuiltIn ? (
+                <>
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-[#0033A0]/10 text-[#0033A0] rounded-full">
+                    Landing integrada
                   </span>
-                </div>
+                  <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
+                    {project.name}
+                  </h3>
+                  {project.route && (
+                    <p className="text-[11px] text-gray-500">
+                      Ruta: <span className="font-mono">{project.route}</span>
+                    </p>
+                  )}
+                </>
+              ) : (
+                <>
+                  {hero?.badge && (
+                    <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-orange/10 text-orange rounded-full">
+                      {hero.badge}
+                    </span>
+                  )}
+                  <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
+                    {hero?.h1}
+                  </h3>
+                  {hero?.h2 && (
+                    <p className="text-[11px] text-gray-500 leading-relaxed line-clamp-2">
+                      {hero.h2}
+                    </p>
+                  )}
+                  {hero?.cta_primary && (
+                    <div className="pt-1">
+                      <span className="inline-block px-3 py-1 text-[11px] font-semibold bg-orange text-white rounded-lg">
+                        {hero.cta_primary}
+                      </span>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ) : (
