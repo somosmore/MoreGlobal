@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu sesión comienza en 1 hora — MORE</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f0f2f5;font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f2f5;">
+    <tr>
+      <td align="center" style="padding:24px 16px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.12);">
+
+          <!-- Header urgente -->
+          <tr>
+            <td style="background:linear-gradient(180deg,#0033A0 0%,#001A52 100%);padding:40px 32px 32px;text-align:center;">
+              <img src="https://moremigracion.com/logo_more_dark.png" alt="MORE" width="140" style="display:block;margin:0 auto 24px;" />
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;">
+                <tr>
+                  <td style="background-color:rgba(243,112,33,0.3);border:1px solid rgba(243,112,33,0.5);border-radius:50px;padding:6px 16px;">
+                    <span style="font-size:12px;font-weight:700;color:#F37021;text-transform:uppercase;letter-spacing:2px;">⏰ En 1 hora</span>
+                  </td>
+                </tr>
+              </table>
+              <h1 style="margin:0 0 8px;font-size:28px;font-weight:800;color:#ffffff;line-height:1.2;">
+                ¡Tu sesión empieza pronto!
+              </h1>
+              <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.7);">
+                Sandra te espera en menos de 1 hora
+              </p>
+            </td>
+          </tr>
+
+          <!-- Cuerpo -->
+          <tr>
+            <td style="background-color:#ffffff;padding:32px;">
+              <p style="margin:0 0 20px;font-size:15px;color:#333333;line-height:1.6;">
+                ¡Hola <strong>{{contact.first_name}}</strong>!
+              </p>
+              <p style="margin:0 0 24px;font-size:15px;color:#333333;line-height:1.6;">
+                Tu sesión con <strong>Sandra</strong> del equipo MORE comienza en menos de <strong>1 hora</strong>. Asegúrate de estar lista/o.
+              </p>
+
+              <!-- Hora destacada -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,#0033A0,#001A52);border-radius:12px;margin:0 0 24px;">
+                <tr>
+                  <td style="padding:28px;text-align:center;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                      <tr>
+                        <td style="text-align:center;padding:0 20px;">
+                          <div style="font-size:40px;font-weight:800;color:#F37021;">{{appointment.start_time}}</div>
+                          <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;">{{appointment.date}}</div>
+                        </td>
+                        <td style="padding:0 20px;">
+                          <div style="width:1px;height:50px;background-color:rgba(255,255,255,0.15);"></div>
+                        </td>
+                        <td style="text-align:center;padding:0 20px;">
+                          <div style="font-size:16px;font-weight:600;color:#ffffff;">{{appointment.location}}</div>
+                          <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;">con Sandra</div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA Grande -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 16px;">
+                <tr>
+                  <td align="center">
+                    <a href="{{appointment.meeting_link}}" target="_blank" style="display:inline-block;width:80%;max-width:400px;padding:18px 32px;background:linear-gradient(135deg,#F37021,#D4611A);color:#ffffff;font-size:18px;font-weight:700;text-decoration:none;border-radius:10px;box-shadow:0 6px 20px rgba(243,112,33,0.4);text-align:center;">
+                      🔴 CONECTARME AHORA
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 24px;font-size:12px;color:#999;text-align:center;">
+                Te recomendamos conectarte 5 minutos antes para probar tu audio.
+              </p>
+
+              <!-- Quick checklist -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8f9fc;border-radius:12px;border:1px solid #e5e7eb;margin:0 0 24px;">
+                <tr>
+                  <td style="padding:20px;">
+                    <p style="margin:0 0 12px;font-size:14px;color:#1a2340;font-weight:600;">Checklist rápido:</p>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="padding:4px 0;font-size:14px;color:#555;">☐ Conexión a internet estable</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:4px 0;font-size:14px;color:#555;">☐ Micrófono y cámara funcionando</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:4px 0;font-size:14px;color:#555;">☐ CV o resumen profesional a la mano</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:4px 0;font-size:14px;color:#555;">☐ Preguntas y dudas anotadas</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Contacto urgente -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fef3c7;border-radius:12px;border:1px solid #fde68a;margin:0 0 24px;">
+                <tr>
+                  <td style="padding:16px 20px;text-align:center;">
+                    <p style="margin:0;font-size:14px;color:#92400e;line-height:1.6;">
+                      <strong>¿Problemas para conectarte?</strong><br>
+                      Escríbenos de inmediato por <a href="https://wa.me/573132219798" style="color:#92400e;font-weight:700;">WhatsApp al +57 313 221 9798</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0;font-size:15px;color:#333;line-height:1.6;text-align:center;font-weight:600;">
+                ¡Te esperamos! 🚀
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#001A52;padding:24px 32px;text-align:center;">
+              <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.5);">
+                MORE — Migración con Propósito
+              </p>
+              <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.3);">
+                © 2026 MORE. Todos los derechos reservados.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

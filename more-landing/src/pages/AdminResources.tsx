@@ -11,17 +11,19 @@ import {
   Palette,
   BookOpen,
   Layers,
+  Mail,
 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import type { Resource, ResourceInsert, LandingProject } from "@/lib/supabase"
 import ResourceCard from "@/components/admin/resources/ResourceCard"
 import LandingPreviewCard from "@/components/admin/resources/LandingPreviewCard"
+import EmailTemplatesSection from "@/components/admin/resources/EmailTemplatesSection"
 import { cn } from "@/lib/utils"
 import { normalizeResourceUrl } from "@/lib/resourceUrl"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Tab = "all" | "brand" | "strategy" | "playbook" | "landings"
+type Tab = "all" | "brand" | "strategy" | "playbook" | "landings" | "emails"
 
 const TABS: { id: Tab; label: string; icon: React.ElementType; description: string }[] = [
   {
@@ -52,7 +54,13 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; description: stri
     id: "landings",
     label: "Landings",
     icon: Globe,
-    description: "Páginas web de MORE. Cada tarjeta muestra el copy del hero",  
+    description: "Páginas web de MORE. Cada tarjeta muestra el copy del hero",
+  },
+  {
+    id: "emails",
+    label: "Emails",
+    icon: Mail,
+    description: "Plantillas de email para GHL: bienvenida, recordatorios de masterclass y agendas.",
   },
 ]
 
@@ -492,8 +500,9 @@ export default function AdminResources() {
       ? resources.filter((r) => r.type === "landing")
       : resources.filter((r) => r.type === activeTab)
 
-  const showResources = activeTab !== "landings" || filteredResources.length > 0
+  const showResources = (activeTab !== "landings" && activeTab !== "emails") || filteredResources.length > 0
   const showLandings = activeTab === "all" || activeTab === "landings"
+  const showEmails = activeTab === "all" || activeTab === "emails"
 
   const isLoading = loadingResources || (showLandings && loadingLandings)
 
@@ -616,6 +625,17 @@ export default function AdminResources() {
                     ))
                   )}
                 </div>
+              </section>
+            )}
+
+            {showEmails && (
+              <section>
+                {activeTab === "all" && (
+                  <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                    Plantillas de email
+                  </h2>
+                )}
+                <EmailTemplatesSection />
               </section>
             )}
           </>

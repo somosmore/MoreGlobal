@@ -1,56 +1,57 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown } from "lucide-react"
+import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown, Globe } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
 
 const COUNTRY_CODES = [
-  { code: "+57",  flag: "🇨🇴", dial: "+57"  },
-  { code: "+52",  flag: "🇲🇽", dial: "+52"  },
-  { code: "+1",   flag: "🇺🇸", dial: "+1"   },
-  { code: "+51",  flag: "🇵🇪", dial: "+51"  },
-  { code: "+56",  flag: "🇨🇱", dial: "+56"  },
-  { code: "+54",  flag: "🇦🇷", dial: "+54"  },
-  { code: "+593", flag: "🇪🇨", dial: "+593" },
-  { code: "+58",  flag: "🇻🇪", dial: "+58"  },
-  { code: "+506", flag: "🇨🇷", dial: "+506" },
-  { code: "+507", flag: "🇵🇦", dial: "+507" },
-  { code: "+502", flag: "🇬🇹", dial: "+502" },
-  { code: "+503", flag: "🇸🇻", dial: "+503" },
-  { code: "+504", flag: "🇭🇳", dial: "+504" },
-  { code: "+505", flag: "🇳🇮", dial: "+505" },
-  { code: "+591", flag: "🇧🇴", dial: "+591" },
-  { code: "+595", flag: "🇵🇾", dial: "+595" },
-  { code: "+598", flag: "🇺🇾", dial: "+598" },
-  { code: "+809", flag: "🇩🇴", dial: "+809" },
-  { code: "+34",  flag: "🇪🇸", dial: "+34"  },
+  { code: "+57",  iso: "co", dial: "+57"  },
+  { code: "+52",  iso: "mx", dial: "+52"  },
+  { code: "+1",   iso: "us", dial: "+1"   },
+  { code: "+51",  iso: "pe", dial: "+51"  },
+  { code: "+56",  iso: "cl", dial: "+56"  },
+  { code: "+54",  iso: "ar", dial: "+54"  },
+  { code: "+593", iso: "ec", dial: "+593" },
+  { code: "+58",  iso: "ve", dial: "+58"  },
+  { code: "+506", iso: "cr", dial: "+506" },
+  { code: "+507", iso: "pa", dial: "+507" },
+  { code: "+502", iso: "gt", dial: "+502" },
+  { code: "+503", iso: "sv", dial: "+503" },
+  { code: "+504", iso: "hn", dial: "+504" },
+  { code: "+505", iso: "ni", dial: "+505" },
+  { code: "+591", iso: "bo", dial: "+591" },
+  { code: "+595", iso: "py", dial: "+595" },
+  { code: "+598", iso: "uy", dial: "+598" },
+  { code: "+809", iso: "do", dial: "+809" },
+  { code: "+34",  iso: "es", dial: "+34"  },
 ]
 
-const COUNTRIES: { name: string; flag: string }[] = [
-  { name: "Colombia",           flag: "🇨🇴" },
-  { name: "México",             flag: "🇲🇽" },
-  { name: "Estados Unidos",     flag: "🇺🇸" },
-  { name: "Perú",               flag: "🇵🇪" },
-  { name: "Chile",              flag: "🇨🇱" },
-  { name: "Argentina",          flag: "🇦🇷" },
-  { name: "Ecuador",            flag: "🇪🇨" },
-  { name: "Venezuela",          flag: "🇻🇪" },
-  { name: "Costa Rica",         flag: "🇨🇷" },
-  { name: "Panamá",             flag: "🇵🇦" },
-  { name: "Guatemala",          flag: "🇬🇹" },
-  { name: "El Salvador",        flag: "🇸🇻" },
-  { name: "Honduras",           flag: "🇭🇳" },
-  { name: "Nicaragua",          flag: "🇳🇮" },
-  { name: "Bolivia",            flag: "🇧🇴" },
-  { name: "Paraguay",           flag: "🇵🇾" },
-  { name: "Uruguay",            flag: "🇺🇾" },
-  { name: "República Dominicana", flag: "🇩🇴" },
-  { name: "España",             flag: "🇪🇸" },
-  { name: "Otro",               flag: "🌍" },
+const COUNTRIES: { name: string; iso: string }[] = [
+  { name: "Colombia",             iso: "co" },
+  { name: "México",               iso: "mx" },
+  { name: "Estados Unidos",       iso: "us" },
+  { name: "Perú",                 iso: "pe" },
+  { name: "Chile",                iso: "cl" },
+  { name: "Argentina",            iso: "ar" },
+  { name: "Ecuador",              iso: "ec" },
+  { name: "Venezuela",            iso: "ve" },
+  { name: "Costa Rica",           iso: "cr" },
+  { name: "Panamá",               iso: "pa" },
+  { name: "Guatemala",            iso: "gt" },
+  { name: "El Salvador",          iso: "sv" },
+  { name: "Honduras",             iso: "hn" },
+  { name: "Nicaragua",            iso: "ni" },
+  { name: "Bolivia",              iso: "bo" },
+  { name: "Paraguay",             iso: "py" },
+  { name: "Uruguay",              iso: "uy" },
+  { name: "República Dominicana", iso: "do" },
+  { name: "España",               iso: "es" },
+  { name: "Otro",                 iso: ""   },
 ]
 
 type FormData = {
@@ -140,7 +141,17 @@ function downloadICS() {
 
 // ── Custom flag select ──────────────────────────────────────────────────────
 
-type FlagOption = { value: string; flag: string; label: string }
+type FlagOption = { value: string; iso: string; label: string }
+
+function FlagIcon({ iso }: { iso: string }) {
+  if (!iso) return <Globe className="h-4 w-4 text-gray-400 shrink-0" />
+  return (
+    <span
+      className={`fi fi-${iso} shrink-0`}
+      style={{ width: "1.33em", height: "1em", borderRadius: 2, display: "inline-block" }}
+    />
+  )
+}
 
 function FlagSelect({
   value,
@@ -187,7 +198,7 @@ function FlagSelect({
         <span className="flex items-center gap-2 min-w-0 truncate">
           {selected ? (
             <>
-              <span className="text-xl leading-none shrink-0">{selected.flag}</span>
+              <FlagIcon iso={selected.iso} />
               <span className="text-[#1A2340] truncate">{selected.label}</span>
             </>
           ) : (
@@ -221,7 +232,9 @@ function FlagSelect({
                       : "text-[#1A2340] hover:bg-[#FFF8F3]"
                   }`}
                 >
-                  <span className="text-xl leading-none w-7 text-center shrink-0">{opt.flag}</span>
+                  <span className="w-6 flex items-center justify-center shrink-0">
+                    <FlagIcon iso={opt.iso} />
+                  </span>
                   <span className="truncate">{opt.label}</span>
                 </button>
               </li>
@@ -523,10 +536,10 @@ export default function MCRegistrationForm() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="rounded-2xl bg-white shadow-[0_8px_40px_rgba(0,0,0,0.35)] border border-white/10 overflow-hidden"
+              className="rounded-2xl bg-white shadow-[0_8px_40px_rgba(0,0,0,0.35)] border border-white/10"
             >
-              {/* Colored top stripe */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] via-[#FFAA5E] to-[#F37021]" />
+              {/* Colored top stripe — rounded-t para no necesitar overflow-hidden en el padre */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] via-[#FFAA5E] to-[#F37021] rounded-t-2xl" />
 
               <div className="p-6 sm:p-8">
                 <div className="flex items-center justify-between mb-5">
@@ -596,7 +609,7 @@ export default function MCRegistrationForm() {
                         onChange={handleFlagSelect("countryCode")}
                         options={COUNTRY_CODES.map((c) => ({
                           value: c.code,
-                          flag: c.flag,
+                          iso: c.iso,
                           label: c.dial,
                         }))}
                         compact
@@ -627,7 +640,7 @@ export default function MCRegistrationForm() {
                       onChange={handleFlagSelect("pais")}
                       options={COUNTRIES.map((c) => ({
                         value: c.name,
-                        flag: c.flag,
+                        iso: c.iso,
                         label: c.name,
                       }))}
                       placeholder="Selecciona tu país"

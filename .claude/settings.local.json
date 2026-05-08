@@ -1,5 +1,7 @@
 {
   "permissions": {
-    "allow": []
+    "allow": [
+      "mcp__plugin_supabase_supabase__list_projects"
+    ]
   }
 }
