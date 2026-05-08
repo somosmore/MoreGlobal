@@ -1,5 +1,15 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
+const COUNTRY_ISO: Record<string, string> = {
+  "Colombia": "CO", "México": "MX", "Estados Unidos": "US",
+  "Perú": "PE", "Chile": "CL", "Argentina": "AR",
+  "Ecuador": "EC", "Venezuela": "VE", "Costa Rica": "CR",
+  "Panamá": "PA", "Guatemala": "GT", "El Salvador": "SV",
+  "Honduras": "HN", "Nicaragua": "NI", "Bolivia": "BO",
+  "Paraguay": "PY", "Uruguay": "UY", "República Dominicana": "DO",
+  "España": "ES", "Otro": "US",
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -60,7 +70,7 @@ Deno.serve(async (req) => {
 
     const nameParts = nombre.trim().split(/\s+/)
     const firstName = nameParts[0]
-    const lastName = nameParts.slice(1).join(" ") || ""
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "-"
 
     const supabaseInsert = supabase.from("masterclass_leads").insert({
       nombre: nombre.trim(),
@@ -97,6 +107,7 @@ Deno.serve(async (req) => {
               lastName,
               email: email.trim().toLowerCase(),
               phone,
+              country: COUNTRY_ISO[pais] || "US",
               source: "Masterclass EB2-NIW",
               tags: [ghlTag],
               customFields: [
