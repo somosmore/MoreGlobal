@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-08] — LAND-04: Runtime check de activación
+
+- Agente: cursor
+- Archivos modificados: `src/hooks/useLandingStatus.ts` (nuevo), `src/pages/MasterclassPage.tsx`, `supabase/migrations/025_landing_projects_public_select.sql` (nuevo)
+- Qué se implementó: Hook `useLandingStatus(route)` reutilizable que consulta `landing_projects` por ruta y calcula el estado efectivo evaluando `deactivate_at`, `activate_at` e `is_active` en este orden. Estados posibles: `loading | active | inactive | scheduled | expired | error`. Retorna `isAccessible` (boolean) y `reason` (string para fallback). `MasterclassPage` refactorizado para consumir el hook en lugar de lógica hardcodeada. Migración SQL que abre política `SELECT` mínima al rol `anon` para rutas públicas (solo filas con `route IS NOT NULL`).
+- Problemas encontrados: lint bloqueaba `setStatus` síncrono en efecto; resuelto con inicialización lazy del useState.
+- Estado: ✅ completo
+
 ### [2026-05-07] — LAND-03: Programación de fechas en admin
 
 - Agente: claude

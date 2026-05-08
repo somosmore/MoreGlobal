@@ -333,8 +333,8 @@
   Archivos: `components/admin/resources/LandingPreviewCard.tsx` (o modal de config),
   Criterio de éxito: fechas editables desde admin, se guardan en DB
 
-- [ ] **LAND-04: Runtime check de activación**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-04: Runtime check de activación**
+  Asignado: cursor | Estado: ✅ completo
   Depende de: LAND-03 ✅
   Implementar lógica lazy: al cargar una landing, verificar si
   `now() >= activate_at` y `now() < deactivate_at` (si están seteados).
