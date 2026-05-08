@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, memo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
@@ -14,7 +14,7 @@ function getTimeLeft() {
   }
 }
 
-function FlipNumber({ value }: { value: number }) {
+const FlipNumber = memo(function FlipNumber({ value }: { value: number }) {
   const formatted = String(value).padStart(2, "0")
   return (
     <div className="relative h-9 overflow-hidden flex items-center">
@@ -32,7 +32,7 @@ function FlipNumber({ value }: { value: number }) {
       </AnimatePresence>
     </div>
   )
-}
+})
 
 type BlockVariant = "default" | "accent" | "hot"
 
@@ -51,7 +51,7 @@ const labelStyles: Record<BlockVariant, string> = {
   hot: "text-[#FFBA7A] font-semibold",
 }
 
-function Block({
+const Block = memo(function Block({
   value,
   label,
   variant = "default",
@@ -74,7 +74,7 @@ function Block({
       </span>
     </div>
   )
-}
+})
 
 export default function MCCountdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)

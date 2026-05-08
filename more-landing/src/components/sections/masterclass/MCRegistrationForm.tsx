@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2, Calendar, Users, Download } from "lucide-react"
+import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -9,48 +9,48 @@ const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
 
 const COUNTRY_CODES = [
-  { code: "+57", label: "CO +57" },
-  { code: "+52", label: "MX +52" },
-  { code: "+1", label: "US +1" },
-  { code: "+51", label: "PE +51" },
-  { code: "+56", label: "CL +56" },
-  { code: "+54", label: "AR +54" },
-  { code: "+593", label: "EC +593" },
-  { code: "+58", label: "VE +58" },
-  { code: "+506", label: "CR +506" },
-  { code: "+507", label: "PA +507" },
-  { code: "+502", label: "GT +502" },
-  { code: "+503", label: "SV +503" },
-  { code: "+504", label: "HN +504" },
-  { code: "+505", label: "NI +505" },
-  { code: "+591", label: "BO +591" },
-  { code: "+595", label: "PY +595" },
-  { code: "+598", label: "UY +598" },
-  { code: "+809", label: "DO +809" },
-  { code: "+34", label: "ES +34" },
+  { code: "+57",  flag: "🇨🇴", dial: "+57"  },
+  { code: "+52",  flag: "🇲🇽", dial: "+52"  },
+  { code: "+1",   flag: "🇺🇸", dial: "+1"   },
+  { code: "+51",  flag: "🇵🇪", dial: "+51"  },
+  { code: "+56",  flag: "🇨🇱", dial: "+56"  },
+  { code: "+54",  flag: "🇦🇷", dial: "+54"  },
+  { code: "+593", flag: "🇪🇨", dial: "+593" },
+  { code: "+58",  flag: "🇻🇪", dial: "+58"  },
+  { code: "+506", flag: "🇨🇷", dial: "+506" },
+  { code: "+507", flag: "🇵🇦", dial: "+507" },
+  { code: "+502", flag: "🇬🇹", dial: "+502" },
+  { code: "+503", flag: "🇸🇻", dial: "+503" },
+  { code: "+504", flag: "🇭🇳", dial: "+504" },
+  { code: "+505", flag: "🇳🇮", dial: "+505" },
+  { code: "+591", flag: "🇧🇴", dial: "+591" },
+  { code: "+595", flag: "🇵🇾", dial: "+595" },
+  { code: "+598", flag: "🇺🇾", dial: "+598" },
+  { code: "+809", flag: "🇩🇴", dial: "+809" },
+  { code: "+34",  flag: "🇪🇸", dial: "+34"  },
 ]
 
-const COUNTRIES = [
-  "Colombia",
-  "México",
-  "Estados Unidos",
-  "Perú",
-  "Chile",
-  "Argentina",
-  "Ecuador",
-  "Venezuela",
-  "Costa Rica",
-  "Panamá",
-  "Guatemala",
-  "El Salvador",
-  "Honduras",
-  "Nicaragua",
-  "Bolivia",
-  "Paraguay",
-  "Uruguay",
-  "República Dominicana",
-  "España",
-  "Otro",
+const COUNTRIES: { name: string; flag: string }[] = [
+  { name: "Colombia",           flag: "🇨🇴" },
+  { name: "México",             flag: "🇲🇽" },
+  { name: "Estados Unidos",     flag: "🇺🇸" },
+  { name: "Perú",               flag: "🇵🇪" },
+  { name: "Chile",              flag: "🇨🇱" },
+  { name: "Argentina",          flag: "🇦🇷" },
+  { name: "Ecuador",            flag: "🇪🇨" },
+  { name: "Venezuela",          flag: "🇻🇪" },
+  { name: "Costa Rica",         flag: "🇨🇷" },
+  { name: "Panamá",             flag: "🇵🇦" },
+  { name: "Guatemala",          flag: "🇬🇹" },
+  { name: "El Salvador",        flag: "🇸🇻" },
+  { name: "Honduras",           flag: "🇭🇳" },
+  { name: "Nicaragua",          flag: "🇳🇮" },
+  { name: "Bolivia",            flag: "🇧🇴" },
+  { name: "Paraguay",           flag: "🇵🇾" },
+  { name: "Uruguay",            flag: "🇺🇾" },
+  { name: "República Dominicana", flag: "🇩🇴" },
+  { name: "España",             flag: "🇪🇸" },
+  { name: "Otro",               flag: "🌍" },
 ]
 
 type FormData = {
@@ -137,6 +137,103 @@ function downloadICS() {
   a.click()
   URL.revokeObjectURL(url)
 }
+
+// ── Custom flag select ──────────────────────────────────────────────────────
+
+type FlagOption = { value: string; flag: string; label: string }
+
+function FlagSelect({
+  value,
+  onChange,
+  options,
+  placeholder = "Selecciona…",
+  compact = false,
+}: {
+  value: string
+  onChange: (v: string) => void
+  options: FlagOption[]
+  placeholder?: string
+  compact?: boolean
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const selected = options.find((o) => o.value === value)
+
+  useEffect(() => {
+    if (!open) return
+    function onOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("mousedown", onOutside)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("mousedown", onOutside)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={`flex items-center justify-between gap-1 h-11 rounded-lg border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021]/60 transition-all duration-200 ${
+          open ? "border-[#F37021]/60 ring-2 ring-[#F37021]/30" : "border-gray-300"
+        } ${compact ? "w-[108px] sm:w-[120px] px-2" : "w-full px-3"}`}
+      >
+        <span className="flex items-center gap-2 min-w-0 truncate">
+          {selected ? (
+            <>
+              <span className="text-xl leading-none shrink-0">{selected.flag}</span>
+              <span className="text-[#1A2340] truncate">{selected.label}</span>
+            </>
+          ) : (
+            <span className="text-gray-400 truncate">{placeholder}</span>
+          )}
+        </span>
+        <ChevronDown
+          className={`h-3.5 w-3.5 text-gray-400 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            initial={{ opacity: 0, y: -6, scaleY: 0.95 }}
+            animate={{ opacity: 1, y: 0, scaleY: 1 }}
+            exit={{ opacity: 0, y: -4, scaleY: 0.97 }}
+            transition={{ duration: 0.14, ease: "easeOut" }}
+            style={{ transformOrigin: "top" }}
+            className="absolute z-50 mt-1 w-full max-h-56 overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl"
+            role="listbox"
+          >
+            {options.map((opt) => (
+              <li key={opt.value} role="option" aria-selected={opt.value === value}>
+                <button
+                  type="button"
+                  onClick={() => { onChange(opt.value); setOpen(false) }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm text-left transition-colors ${
+                    opt.value === value
+                      ? "bg-[#FFF3EA] text-[#D4611A] font-semibold"
+                      : "text-[#1A2340] hover:bg-[#FFF8F3]"
+                  }`}
+                >
+                  <span className="text-xl leading-none w-7 text-center shrink-0">{opt.flag}</span>
+                  <span className="truncate">{opt.label}</span>
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 
 function SuccessCard() {
   return (
@@ -286,7 +383,16 @@ export default function MCRegistrationForm() {
     []
   )
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFlagSelect = useCallback(
+    (field: keyof FormData) => (value: string) => {
+      setForm((prev) => ({ ...prev, [field]: value }))
+      setErrors((prev) => ({ ...prev, [field]: undefined }))
+      setSubmitError(null)
+    },
+    []
+  )
+
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     const validationErrors = validate(form)
     if (Object.keys(validationErrors).length > 0) {
@@ -350,9 +456,20 @@ export default function MCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }
+  }, [form, utmParams])
 
-  const isExpired = Date.now() > EVENT_DATE.getTime()
+  const [isExpired, setIsExpired] = useState(() => Date.now() > EVENT_DATE.getTime())
+
+  useEffect(() => {
+    if (isExpired) return
+    const msUntilExpiry = EVENT_DATE.getTime() - Date.now()
+    if (msUntilExpiry <= 0) {
+      setIsExpired(true)
+      return
+    }
+    const t = setTimeout(() => setIsExpired(true), msUntilExpiry)
+    return () => clearTimeout(t)
+  }, [isExpired])
 
   return (
     <section
@@ -417,7 +534,12 @@ export default function MCRegistrationForm() {
                     <Users className="h-3 w-3" />
                     CUPOS LIMITADOS
                   </Badge>
-                  <span className="text-xs text-[#6B7A9A] font-medium">100% gratis</span>
+                  <div className="flex items-center gap-1.5 bg-[#10B981]/10 border border-[#10B981]/30 rounded-full px-3 py-1">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#10B981] shrink-0" />
+                    <span className="text-xs font-bold text-[#10B981] uppercase tracking-wide">
+                      100% Gratis
+                    </span>
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -469,18 +591,16 @@ export default function MCRegistrationForm() {
                       WhatsApp
                     </label>
                     <div className="flex gap-2">
-                      <select
-                        name="countryCode"
+                      <FlagSelect
                         value={form.countryCode}
-                        onChange={handleChange}
-                        className="h-11 w-[100px] sm:w-[120px] rounded-lg border border-gray-300 bg-white px-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021]/60 transition-all duration-200"
-                      >
-                        {COUNTRY_CODES.map((c) => (
-                          <option key={c.code} value={c.code}>
-                            {c.label}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={handleFlagSelect("countryCode")}
+                        options={COUNTRY_CODES.map((c) => ({
+                          value: c.code,
+                          flag: c.flag,
+                          label: c.dial,
+                        }))}
+                        compact
+                      />
                       <Input
                         id="mc-phone"
                         name="phone"
@@ -502,20 +622,16 @@ export default function MCRegistrationForm() {
                     >
                       País de residencia
                     </label>
-                    <select
-                      id="mc-pais"
-                      name="pais"
+                    <FlagSelect
                       value={form.pais}
-                      onChange={handleChange}
-                      className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021]/60 transition-all duration-200"
-                    >
-                      <option value="">Selecciona tu país</option>
-                      {COUNTRIES.map((c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={handleFlagSelect("pais")}
+                      options={COUNTRIES.map((c) => ({
+                        value: c.name,
+                        flag: c.flag,
+                        label: c.name,
+                      }))}
+                      placeholder="Selecciona tu país"
+                    />
                     {errors.pais && (
                       <p className="mt-1 text-xs text-red-500">{errors.pais}</p>
                     )}
@@ -531,8 +647,16 @@ export default function MCRegistrationForm() {
                 <motion.button
                   type="submit"
                   disabled={submitting}
-                  whileHover={submitting ? {} : { scale: 1.02 }}
-                  whileTap={submitting ? {} : { scale: 0.98 }}
+                  whileHover={
+                    submitting
+                      ? {}
+                      : { scale: 1.02, transition: { duration: 0.15, ease: "easeOut" } }
+                  }
+                  whileTap={
+                    submitting
+                      ? {}
+                      : { scale: 0.97, transition: { duration: 0.08 } }
+                  }
                   animate={
                     submitting
                       ? {}

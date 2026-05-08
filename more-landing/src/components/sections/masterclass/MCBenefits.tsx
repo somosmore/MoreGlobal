@@ -6,7 +6,7 @@ const benefits = [
   "Los requisitos reales (no los mitos de internet)",
   "El paso a paso desde cero hasta la aprobación",
   "Errores comunes que retrasan o arruinan tu caso",
-  "Cómo empezar HOY sin necesidad de un empleador en EE.&nbsp;UU.",
+  "Cómo empezar HOY sin necesidad de un empleador en EE.\u00A0UU.",
   "Sesión de preguntas en vivo con Ivon More",
 ]
 
@@ -55,10 +55,9 @@ export default function MCBenefits() {
                 transition-all duration-200 cursor-default"
             >
               <CheckCircle2 className="h-5 w-5 text-[#F37021] mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" />
-              <span
-                className="text-[#1A2340] text-sm sm:text-base leading-snug group-hover:text-[#0033A0] transition-colors duration-200"
-                dangerouslySetInnerHTML={{ __html: text }}
-              />
+              <span className="text-[#1A2340] text-sm sm:text-base leading-snug group-hover:text-[#0033A0] transition-colors duration-200">
+                {text}
+              </span>
             </motion.div>
           ))}
         </div>

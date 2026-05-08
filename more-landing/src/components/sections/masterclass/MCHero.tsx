@@ -39,14 +39,10 @@ export default function MCHero() {
             <motion.img
               src="/logo_more_dark.png"
               alt="MORE"
-              className="h-20 sm:h-24 lg:h-28 mx-auto lg:mx-0 mb-8 drop-shadow-[0_22px_40px_rgba(0,0,0,0.45)]"
-              initial={{ opacity: 0, scale: 0.85, y: -18 }}
-              animate={{ opacity: 1, scale: [1, 1.03, 1], y: [0, -6, 0] }}
-              transition={{
-                opacity: { duration: 0.6 },
-                scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-              }}
+              className="h-60 sm:h-72 lg:h-84 mx-auto lg:mx-0 mb-8 drop-shadow-[0_22px_40px_rgba(0,0,0,0.45)]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
             />
 
             <motion.div
