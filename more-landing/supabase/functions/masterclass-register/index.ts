@@ -60,7 +60,7 @@ Deno.serve(async (req) => {
 
     const nameParts = nombre.trim().split(/\s+/)
     const firstName = nameParts[0]
-    const lastName = nameParts.slice(1).join(" ") || ""
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "-"
 
     const supabaseInsert = supabase.from("masterclass_leads").insert({
       nombre: nombre.trim(),
@@ -97,6 +97,7 @@ Deno.serve(async (req) => {
               lastName,
               email: email.trim().toLowerCase(),
               phone,
+              country: pais,
               source: "Masterclass EB2-NIW",
               tags: [ghlTag],
               customFields: [
