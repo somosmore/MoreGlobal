@@ -434,6 +434,7 @@ export default function MCRegistrationForm() {
             nombre: form.nombre.trim(),
             email: form.email.trim().toLowerCase(),
             phone: fullPhone,
+            phoneLocal: form.phone.replace(/\s/g, ""),
             pais: form.pais,
             ...utmParams,
           }),

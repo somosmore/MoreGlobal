@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json()
-    const { nombre, email, phone, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
+    const { nombre, email, phone, phoneLocal, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
 
     if (!nombre || !email || !phone || !pais) {
       return new Response(
@@ -106,7 +106,7 @@ Deno.serve(async (req) => {
               firstName,
               lastName,
               email: email.trim().toLowerCase(),
-              phone,
+              phone: phoneLocal || phone,
               country: COUNTRY_ISO[pais] || "US",
               source: "Masterclass EB2-NIW",
               tags: [ghlTag],
