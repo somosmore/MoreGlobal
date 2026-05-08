@@ -1,17 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(npx tsc *)",
-      "Bash(npm run *)",
-      "Bash(git status *)",
-      "Bash(git add *)",
-      "Bash(git commit -m ' *)",
-      "Bash(git push *)",
-      "Bash(git checkout *)",
-      "Bash(git merge *)",
-      "Bash(supabase *)",
-      "Bash(npm install *)",
-      "Bash(npx supabase *)"
-    ]
+    "allow": []
   }
 }

@@ -34,10 +34,29 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     const ghlApiKey = Deno.env.get("GHL_API_KEY")
-    const ghlLocationId = Deno.env.get("GHL_LOCATION_ID")!
-    const ghlPipelineId = Deno.env.get("GHL_PIPELINE_ID")!
-    const ghlStageId = Deno.env.get("GHL_STAGE_ID")!
-    const ghlTag = Deno.env.get("GHL_TAG")!
+    const ghlLocationId = Deno.env.get("GHL_LOCATION_ID")
+    const ghlPipelineId = Deno.env.get("GHL_PIPELINE_ID")
+    const ghlStageId = Deno.env.get("GHL_STAGE_ID")
+    const ghlTag = Deno.env.get("GHL_TAG")
+
+    if (ghlApiKey) {
+      const missingGhlEnv: string[] = []
+      if (!ghlLocationId) missingGhlEnv.push("GHL_LOCATION_ID")
+      if (!ghlPipelineId) missingGhlEnv.push("GHL_PIPELINE_ID")
+      if (!ghlStageId) missingGhlEnv.push("GHL_STAGE_ID")
+      if (!ghlTag) missingGhlEnv.push("GHL_TAG")
+
+      if (missingGhlEnv.length > 0) {
+        console.error(`Missing required GHL env vars: ${missingGhlEnv.join(", ")}`)
+        return new Response(
+          JSON.stringify({
+            error: "Configuracion incompleta de GHL en el servidor",
+            missing: missingGhlEnv,
+          }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        )
+      }
+    }
 
     const nameParts = nombre.trim().split(/\s+/)
     const firstName = nameParts[0]
@@ -95,7 +114,7 @@ Deno.serve(async (req) => {
         const contactData = await contactRes.json()
         const contactId = contactData?.contact?.id
 
-        if (contactId && ghlStageId) {
+        if (contactId) {
           const oppRes = await fetch(
             "https://services.leadconnectorhq.com/opportunities/",
             {

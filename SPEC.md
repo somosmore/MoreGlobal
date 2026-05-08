@@ -19,21 +19,17 @@
 
 ### P1 — Crítico / Deuda técnica
 
-- [ ] **Refactor AdminLeads.tsx**
-  Asignado: — | Estado: ⬚ libre
-  El archivo tiene 1029 líneas. Extraer filtros, tabla y modales en componentes
-  separados dentro de `components/admin/leads/`.
-  Archivos: `pages/AdminLeads.tsx`, `components/admin/leads/*` (nuevo)
-  NO tocar: `lib/supabase.ts`
-  Criterio de éxito: AdminLeads.tsx < 200 líneas, misma funcionalidad, build limpio
+- [x] **Refactor AdminLeads.tsx**
+  Asignado: cursor | Estado: ✅ completo
+  El archivo tiene 82 líneas. Extraído en useLeadsData, LeadsKpiCards,
+  LeadsToolbar, LeadsTable, LeadDetailSheet.
+  Archivos: `pages/AdminLeads.tsx`, `components/admin/leads/*`
 
-- [ ] **Refactor AdminSettings.tsx**
-  Asignado: — | Estado: ⬚ libre
-  El archivo tiene 928 líneas. Separar cada sección (tracking, contacto, precios)
-  en componentes independientes dentro de `components/admin/settings/`.
-  Archivos: `pages/AdminSettings.tsx`, `components/admin/settings/*` (nuevo)
-  NO tocar: `lib/supabase.ts`
-  Criterio de éxito: AdminSettings.tsx < 200 líneas, misma funcionalidad, build limpio
+- [x] **Refactor AdminSettings.tsx**
+  Asignado: claude | Estado: ✅ completo
+  928 → 97 líneas. Extraído en useSettingsData, TrackingSection,
+  CalendarSection, VipSessionSection, SocialNetworksSection.
+  Archivos: `pages/AdminSettings.tsx`, `components/admin/settings/*`
 
 - [ ] **Refactor Quiz.tsx**
   Asignado: — | Estado: ⬚ libre
@@ -76,8 +72,8 @@
 
 #### Fase 1 — Expandir componentes Shadcn/UI (locales, sin deps externas)
 
-- [ ] **UX-01: Agregar componentes Shadcn/UI base**
-  Asignado: — | Estado: ⬚ libre
+- [x] **UX-01: Agregar componentes Shadcn/UI base**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Instalar con `npx shadcn@latest add`: `tooltip`, `badge`, `separator`,
   `avatar`, `skeleton`, `dropdown-menu`, `alert`.
@@ -201,8 +197,35 @@
 > de infoproductor. Diseño persuasivo, componentes Shadcn/UI, animaciones
 > pulidas, optimización de conversión.
 
-- [ ] **MC-01: Componentes Shadcn/UI en formulario de registro**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-00: Hero con imagen de Ivon More + layout split**
+  Asignado: claude | Estado: ✅ completo
+  Sin dependencias previas.
+  Cambiar el hero de layout centrado a layout split (dos columnas en desktop):
+  - **Izquierda:** logo, badge, headline, subtítulo, detalles, CTA, barra de cupos
+  - **Derecha:** foto profesional de Ivon More con efecto de recorte/fade
+  En mobile se apila: texto arriba, imagen abajo (o imagen como fondo sutil).
+  El countdown se mantiene debajo del bloque split (full width).
+
+  **Imagen requerida:** `public/ivon-hero.png`
+  - Dimensiones: **800×1000px** (retina-ready, se muestra a ~400×500px)
+  - Formato: **PNG con fondo transparente** (para integrar con el degradado azul)
+  - Contenido: foto profesional de Ivon More, de cintura para arriba,
+    mirando al frente o ligeramente hacia la izquierda (hacia el texto)
+  - Estilo: vestimenta formal/business, buena iluminación, alta resolución
+  - Si no hay PNG transparente, se acepta JPG con fondo oscuro/azul
+    que se mimetice con el gradiente `#0033A0` → `#001A52`
+  - Peso máximo recomendado: **150KB** (comprimir con TinyPNG/Squoosh)
+  - Alternativa WebP: `ivon-hero.webp` como fallback optimizado
+
+  Inspiración: layout del hero de EXMA Summit (form izquierda + speakers derecha),
+  adaptado a una sola speaker con foto prominente.
+  Archivos: `components/sections/masterclass/MCHero.tsx`,
+  `public/ivon-hero.png` (nuevo — provisto por el humano)
+  Criterio de éxito: hero con imagen visible en desktop y mobile,
+  no rompe el countdown ni el CTA, imagen optimizada < 150KB
+
+- [x] **MC-01: Componentes Shadcn/UI en formulario de registro**
+  Asignado: claude | Estado: ✅ completo
   Depende de: UX-01 ✅ (componentes Shadcn base instalados)
   Reemplazar inputs HTML nativos del form por `<Input>`, `<Select>` de Shadcn/UI.
   Agregar `<Badge>` para "CUPOS LIMITADOS", `<Separator>` entre secciones.
@@ -211,8 +234,8 @@
   Criterio de éxito: formulario visualmente consistente con el design system,
   validación mantiene funcionalidad actual
 
-- [ ] **MC-02: Countdown timer y urgencia**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-02: Countdown timer y urgencia**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Agregar countdown en tiempo real hasta el 25 de mayo 2026 7PM COT en el Hero.
   Mostrar días/horas/minutos/segundos en cards estilizadas.
@@ -222,20 +245,19 @@
   `components/sections/masterclass/MCRegistrationForm.tsx`
   Criterio de éxito: countdown funcional, urgencia visible, no se rompe post-evento
 
-- [ ] **MC-03: Social proof y testimonios en landing**
-  Asignado: — | Estado: ⬚ libre
-  Sin dependencias previas.
-  Agregar sección entre Benefits y Form con mini-testimonios:
-  3-4 cards con foto placeholder, nombre, país, y quote corto.
-  Datos hardcodeados por ahora (no de Supabase).
-  Agregar contador animado "+200 profesionales ya se registraron" con
-  `useSpring` de Framer Motion.
-  Archivos: `components/sections/masterclass/MCTestimonials.tsx` (nuevo),
-  `pages/MasterclassPage.tsx`
-  Criterio de éxito: social proof visible antes del formulario, animación suave
+- [x] ~~**MC-03: Social proof y testimonios en landing**~~ — Descartado (no necesario)
 
-- [ ] **MC-04: Mejoras visuales generales**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-05: Actualización de PUV en hero de masterclass**
+  Asignado: claude | Estado: ✅ completo
+  Sin dependencias previas.
+  Reemplazar el titular y subtítulo del hero por el PUV recomendado en español neutro.
+  - Titular: "Descubre si tu perfil profesional puede calificar para la Green Card EB-2 y llévate un plan paso a paso para buscar la residencia en EE. UU."
+  - Subtítulo/objeción: "Sin depender de un empleador patrocinador, sin inversiones altas de capital y evitando gastos innecesarios en abogados desde el inicio."
+  Archivos: `components/sections/masterclass/MCHero.tsx`
+  Criterio de éxito: copy claro, en español neutro, sin promesas absolutas, build limpio
+
+- [x] **MC-04: Mejoras visuales generales**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   - Agregar sección FAQ (3-4 preguntas) con `<Accordion>` de Shadcn (ya instalado)
   - Sticky CTA en mobile (botón flotante "Reservar lugar" que scroll al form)
@@ -297,8 +319,8 @@
 > compara las fechas al servir la página. Si se necesita que `is_active` esté
 > sincronizado en DB (para reportes, etc.), agregar **pg_cron** como segunda capa.
 
-- [ ] **LAND-03: Programación de fechas en admin**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-03: Programación de fechas en admin**
+  Asignado: claude | Estado: ✅ completo
   Depende de: LAND-02 ✅
   Agregar campos de fecha en la UI del admin para `activate_at` y `deactivate_at`.
   Usar date picker (o input type="datetime-local" simple).
@@ -306,8 +328,8 @@
   Archivos: `components/admin/resources/LandingPreviewCard.tsx` (o modal de config),
   Criterio de éxito: fechas editables desde admin, se guardan en DB
 
-- [ ] **LAND-04: Runtime check de activación**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-04: Runtime check de activación**
+  Asignado: cursor | Estado: ✅ completo
   Depende de: LAND-03 ✅
   Implementar lógica lazy: al cargar una landing, verificar si
   `now() >= activate_at` y `now() < deactivate_at` (si están seteados).

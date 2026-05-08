@@ -29,6 +29,54 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-08] — MC-05: Actualización de PUV en hero de masterclass
+
+- Agente: claude
+- Archivos modificados: `components/sections/masterclass/MCHero.tsx`
+- Qué se implementó: Titular y subtítulo del hero reemplazados por el PUV recomendado en español neutro. Titular: "Descubre si tu perfil profesional puede calificar para la Green Card EB-2 y llévate un plan paso a paso para buscar la residencia en EE. UU." Frase complementaria de objeciones: "Sin depender de un empleador patrocinador, sin inversiones altas de capital y evitando gastos innecesarios en abogados desde el inicio." Se conservó la frase de cierre "Una clase en vivo que puede cambiarlo todo." y el fragmento destacado en naranja para refuerzo visual de la promesa principal.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-08] — MC-00: Hero con imagen + layout split
+
+- Agente: claude
+- Archivos modificados: `components/sections/masterclass/MCHero.tsx`
+- Qué se implementó: Layout split dos columnas en desktop (texto izquierda, foto Ivon derecha). Foto con glow naranja, fade inferior y nombre/título. Mobile apilado. Countdown full-width debajo del split.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-08] — Refactor AdminSettings.tsx
+
+- Agente: claude
+- Archivos modificados: `pages/AdminSettings.tsx`, `components/admin/settings/useSettingsData.ts` (nuevo), `TrackingSection.tsx` (nuevo), `CalendarSection.tsx` (nuevo), `VipSessionSection.tsx` (nuevo), `SocialNetworksSection.tsx` (nuevo), `index.ts` (nuevo)
+- Qué se implementó: Refactor de 928 a 97 líneas. Hook useSettingsData con todo el estado y lógica. 4 secciones como componentes independientes.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-08] — UX-01: Componentes Shadcn/UI base
+
+- Agente: claude
+- Archivos modificados: `components/ui/tooltip.tsx` (nuevo), `avatar.tsx` (nuevo), `skeleton.tsx` (nuevo), `dropdown-menu.tsx` (nuevo), `alert.tsx` (nuevo)
+- Qué se implementó: 5 componentes Shadcn/UI instalados manualmente (sin shadcn CLI por falta de components.json). Dependencias Radix instaladas: @radix-ui/react-tooltip, react-avatar, react-dropdown-menu.
+- Problemas encontrados: shadcn CLI no disponible, se crearon manualmente siguiendo patrones existentes
+- Estado: ✅ completo
+
+### [2026-05-08] — LAND-04: Runtime check de activación
+
+- Agente: cursor
+- Archivos modificados: `src/hooks/useLandingStatus.ts` (nuevo), `src/pages/MasterclassPage.tsx`, `supabase/migrations/025_landing_projects_public_select.sql` (nuevo)
+- Qué se implementó: Hook `useLandingStatus(route)` reutilizable que consulta `landing_projects` por ruta y calcula el estado efectivo evaluando `deactivate_at`, `activate_at` e `is_active` en este orden. Estados posibles: `loading | active | inactive | scheduled | expired | error`. Retorna `isAccessible` (boolean) y `reason` (string para fallback). `MasterclassPage` refactorizado para consumir el hook en lugar de lógica hardcodeada. Migración SQL que abre política `SELECT` mínima al rol `anon` para rutas públicas (solo filas con `route IS NOT NULL`).
+- Problemas encontrados: lint bloqueaba `setStatus` síncrono en efecto; resuelto con inicialización lazy del useState.
+- Estado: ✅ completo
+
+### [2026-05-07] — LAND-03: Programación de fechas en admin
+
+- Agente: claude
+- Archivos modificados: `components/admin/resources/LandingPreviewCard.tsx`
+- Qué se implementó: Date pickers para `activate_at` y `deactivate_at` con guardado automático en Supabase. Botón de calendario para mostrar/ocultar panel de programación. Funciones helper `toLocalInput()` (conversión a datetime-local) y `scheduleLabel()` (estado calculado: "Se activa en X días" / "Se desactiva el DD/MM" / "Periodo finalizado").
+- Problemas encontrados: tarea quedó sin commitear en sesión anterior
+- Estado: ✅ completo
+
 ### [2026-05-07] — LAND-02: Switch activo/inactivo en admin
 
 - Agente: claude
