@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-07] — LAND-03: Programación de fechas en admin
+
+- Agente: claude
+- Archivos modificados: `components/admin/resources/LandingPreviewCard.tsx`
+- Qué se implementó: Date pickers para `activate_at` y `deactivate_at` con guardado automático en Supabase. Botón de calendario para mostrar/ocultar panel de programación. Funciones helper `toLocalInput()` (conversión a datetime-local) y `scheduleLabel()` (estado calculado: "Se activa en X días" / "Se desactiva el DD/MM" / "Periodo finalizado").
+- Problemas encontrados: tarea quedó sin commitear en sesión anterior
+- Estado: ✅ completo
+
 ### [2026-05-07] — LAND-02: Switch activo/inactivo en admin
 
 - Agente: claude

@@ -1,11 +1,35 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { ExternalLink, Eye, ArrowRight, Globe, Sparkles, FileEdit, Clock } from "lucide-react"
+import { ExternalLink, Eye, ArrowRight, Globe, Sparkles, FileEdit, Clock, Calendar } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { supabase } from "@/lib/supabase"
 import type { LandingProject, GeneratedLandingJson } from "@/lib/supabase"
 import { Switch } from "@/components/ui/switch"
 import ResourcePreviewModal from "./ResourcePreviewModal"
+
+function toLocalInput(iso: string | null): string {
+  if (!iso) return ""
+  const d = new Date(iso)
+  const off = d.getTimezoneOffset()
+  const local = new Date(d.getTime() - off * 60000)
+  return local.toISOString().slice(0, 16)
+}
+
+function scheduleLabel(activateAt: string | null, deactivateAt: string | null): string | null {
+  const now = Date.now()
+  if (activateAt && new Date(activateAt).getTime() > now) {
+    const diff = Math.ceil((new Date(activateAt).getTime() - now) / (1000 * 60 * 60 * 24))
+    return `Se activa en ${diff} día${diff === 1 ? "" : "s"}`
+  }
+  if (deactivateAt) {
+    const dt = new Date(deactivateAt)
+    if (dt.getTime() > now) {
+      return `Se desactiva el ${dt.toLocaleDateString("es-AR", { day: "2-digit", month: "short" })}`
+    }
+    return "Periodo finalizado"
+  }
+  return null
+}
 
 const STATUS_CONFIG = {
   draft: {
@@ -31,6 +55,10 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
   const [previewOpen, setPreviewOpen] = useState(false)
   const [active, setActive] = useState(project.is_active)
   const [toggling, setToggling] = useState(false)
+  const [activateAt, setActivateAt] = useState(project.activate_at)
+  const [deactivateAt, setDeactivateAt] = useState(project.deactivate_at)
+  const [savingDates, setSavingDates] = useState(false)
+  const [showSchedule, setShowSchedule] = useState(!!project.activate_at || !!project.deactivate_at)
 
   async function handleToggle(checked: boolean) {
     if (!supabase) return
@@ -44,6 +72,20 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
       setActive(checked)
       onToggleActive?.(project.id, checked)
     }
+  }
+
+  async function handleDateChange(field: "activate_at" | "deactivate_at", value: string) {
+    const iso = value ? new Date(value).toISOString() : null
+    if (field === "activate_at") setActivateAt(iso)
+    else setDeactivateAt(iso)
+
+    if (!supabase) return
+    setSavingDates(true)
+    await supabase
+      .from("landing_projects")
+      .update({ [field]: iso })
+      .eq("id", project.id)
+    setSavingDates(false)
   }
 
   const json = project.generated_json as GeneratedLandingJson | null
@@ -166,12 +208,55 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
               {active ? "Activa" : "Inactiva"}
             </span>
           </div>
-          {project.route && (
-            <span className="text-[11px] text-gray-400 font-mono truncate max-w-[120px]">
-              {project.route}
-            </span>
-          )}
+          <div className="flex items-center gap-2">
+            {project.route && (
+              <span className="text-[11px] text-gray-400 font-mono truncate max-w-[100px]">
+                {project.route}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={() => setShowSchedule((v) => !v)}
+              className={cn(
+                "p-1 rounded transition-colors",
+                showSchedule ? "text-[#F37021] bg-[#F37021]/10" : "text-gray-400 hover:text-gray-600"
+              )}
+              aria-label="Programar fechas"
+            >
+              <Calendar className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
+
+        {showSchedule && (
+          <div className="px-5 pb-2 space-y-2">
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500 w-16 shrink-0">Activar</label>
+              <input
+                type="datetime-local"
+                value={toLocalInput(activateAt)}
+                onChange={(e) => handleDateChange("activate_at", e.target.value)}
+                disabled={savingDates}
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500 w-16 shrink-0">Desactivar</label>
+              <input
+                type="datetime-local"
+                value={toLocalInput(deactivateAt)}
+                onChange={(e) => handleDateChange("deactivate_at", e.target.value)}
+                disabled={savingDates}
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40"
+              />
+            </div>
+            {scheduleLabel(activateAt, deactivateAt) && (
+              <p className="text-[10px] text-[#F37021] font-medium">
+                {scheduleLabel(activateAt, deactivateAt)}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Footer */}
         <div className="px-5 pb-4 pt-2 flex items-center justify-between gap-2">

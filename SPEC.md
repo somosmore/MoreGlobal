@@ -297,8 +297,8 @@
 > compara las fechas al servir la página. Si se necesita que `is_active` esté
 > sincronizado en DB (para reportes, etc.), agregar **pg_cron** como segunda capa.
 
-- [ ] **LAND-03: Programación de fechas en admin**
-  Asignado: — | Estado: ⬚ libre
+- [x] **LAND-03: Programación de fechas en admin**
+  Asignado: claude | Estado: ✅ completo
   Depende de: LAND-02 ✅
   Agregar campos de fecha en la UI del admin para `activate_at` y `deactivate_at`.
   Usar date picker (o input type="datetime-local" simple).
