@@ -19,21 +19,17 @@
 
 ### P1 — Crítico / Deuda técnica
 
-- [ ] **Refactor AdminLeads.tsx**
-  Asignado: — | Estado: ⬚ libre
-  El archivo tiene 1029 líneas. Extraer filtros, tabla y modales en componentes
-  separados dentro de `components/admin/leads/`.
-  Archivos: `pages/AdminLeads.tsx`, `components/admin/leads/*` (nuevo)
-  NO tocar: `lib/supabase.ts`
-  Criterio de éxito: AdminLeads.tsx < 200 líneas, misma funcionalidad, build limpio
+- [x] **Refactor AdminLeads.tsx**
+  Asignado: cursor | Estado: ✅ completo
+  El archivo tiene 82 líneas. Extraído en useLeadsData, LeadsKpiCards,
+  LeadsToolbar, LeadsTable, LeadDetailSheet.
+  Archivos: `pages/AdminLeads.tsx`, `components/admin/leads/*`
 
-- [ ] **Refactor AdminSettings.tsx**
-  Asignado: — | Estado: ⬚ libre
-  El archivo tiene 928 líneas. Separar cada sección (tracking, contacto, precios)
-  en componentes independientes dentro de `components/admin/settings/`.
-  Archivos: `pages/AdminSettings.tsx`, `components/admin/settings/*` (nuevo)
-  NO tocar: `lib/supabase.ts`
-  Criterio de éxito: AdminSettings.tsx < 200 líneas, misma funcionalidad, build limpio
+- [x] **Refactor AdminSettings.tsx**
+  Asignado: claude | Estado: ✅ completo
+  928 → 97 líneas. Extraído en useSettingsData, TrackingSection,
+  CalendarSection, VipSessionSection, SocialNetworksSection.
+  Archivos: `pages/AdminSettings.tsx`, `components/admin/settings/*`
 
 - [ ] **Refactor Quiz.tsx**
   Asignado: — | Estado: ⬚ libre
@@ -76,8 +72,8 @@
 
 #### Fase 1 — Expandir componentes Shadcn/UI (locales, sin deps externas)
 
-- [ ] **UX-01: Agregar componentes Shadcn/UI base**
-  Asignado: — | Estado: ⬚ libre
+- [x] **UX-01: Agregar componentes Shadcn/UI base**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Instalar con `npx shadcn@latest add`: `tooltip`, `badge`, `separator`,
   `avatar`, `skeleton`, `dropdown-menu`, `alert`.
@@ -201,8 +197,8 @@
 > de infoproductor. Diseño persuasivo, componentes Shadcn/UI, animaciones
 > pulidas, optimización de conversión.
 
-- [ ] **MC-00: Hero con imagen de Ivon More + layout split**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-00: Hero con imagen de Ivon More + layout split**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Cambiar el hero de layout centrado a layout split (dos columnas en desktop):
   - **Izquierda:** logo, badge, headline, subtítulo, detalles, CTA, barra de cupos
@@ -228,8 +224,8 @@
   Criterio de éxito: hero con imagen visible en desktop y mobile,
   no rompe el countdown ni el CTA, imagen optimizada < 150KB
 
-- [ ] **MC-01: Componentes Shadcn/UI en formulario de registro**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-01: Componentes Shadcn/UI en formulario de registro**
+  Asignado: claude | Estado: ✅ completo
   Depende de: UX-01 ✅ (componentes Shadcn base instalados)
   Reemplazar inputs HTML nativos del form por `<Input>`, `<Select>` de Shadcn/UI.
   Agregar `<Badge>` para "CUPOS LIMITADOS", `<Separator>` entre secciones.
@@ -238,8 +234,8 @@
   Criterio de éxito: formulario visualmente consistente con el design system,
   validación mantiene funcionalidad actual
 
-- [ ] **MC-02: Countdown timer y urgencia**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-02: Countdown timer y urgencia**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   Agregar countdown en tiempo real hasta el 25 de mayo 2026 7PM COT en el Hero.
   Mostrar días/horas/minutos/segundos en cards estilizadas.
@@ -249,20 +245,10 @@
   `components/sections/masterclass/MCRegistrationForm.tsx`
   Criterio de éxito: countdown funcional, urgencia visible, no se rompe post-evento
 
-- [ ] **MC-03: Social proof y testimonios en landing**
-  Asignado: — | Estado: ⬚ libre
-  Sin dependencias previas.
-  Agregar sección entre Benefits y Form con mini-testimonios:
-  3-4 cards con foto placeholder, nombre, país, y quote corto.
-  Datos hardcodeados por ahora (no de Supabase).
-  Agregar contador animado "+200 profesionales ya se registraron" con
-  `useSpring` de Framer Motion.
-  Archivos: `components/sections/masterclass/MCTestimonials.tsx` (nuevo),
-  `pages/MasterclassPage.tsx`
-  Criterio de éxito: social proof visible antes del formulario, animación suave
+- [x] ~~**MC-03: Social proof y testimonios en landing**~~ — Descartado (no necesario)
 
-- [ ] **MC-04: Mejoras visuales generales**
-  Asignado: — | Estado: ⬚ libre
+- [x] **MC-04: Mejoras visuales generales**
+  Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.
   - Agregar sección FAQ (3-4 preguntas) con `<Accordion>` de Shadcn (ya instalado)
   - Sticky CTA en mobile (botón flotante "Reservar lugar" que scroll al form)

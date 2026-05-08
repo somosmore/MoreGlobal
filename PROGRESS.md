@@ -29,6 +29,30 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-08] — MC-00: Hero con imagen + layout split
+
+- Agente: claude
+- Archivos modificados: `components/sections/masterclass/MCHero.tsx`
+- Qué se implementó: Layout split dos columnas en desktop (texto izquierda, foto Ivon derecha). Foto con glow naranja, fade inferior y nombre/título. Mobile apilado. Countdown full-width debajo del split.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-08] — Refactor AdminSettings.tsx
+
+- Agente: claude
+- Archivos modificados: `pages/AdminSettings.tsx`, `components/admin/settings/useSettingsData.ts` (nuevo), `TrackingSection.tsx` (nuevo), `CalendarSection.tsx` (nuevo), `VipSessionSection.tsx` (nuevo), `SocialNetworksSection.tsx` (nuevo), `index.ts` (nuevo)
+- Qué se implementó: Refactor de 928 a 97 líneas. Hook useSettingsData con todo el estado y lógica. 4 secciones como componentes independientes.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-08] — UX-01: Componentes Shadcn/UI base
+
+- Agente: claude
+- Archivos modificados: `components/ui/tooltip.tsx` (nuevo), `avatar.tsx` (nuevo), `skeleton.tsx` (nuevo), `dropdown-menu.tsx` (nuevo), `alert.tsx` (nuevo)
+- Qué se implementó: 5 componentes Shadcn/UI instalados manualmente (sin shadcn CLI por falta de components.json). Dependencias Radix instaladas: @radix-ui/react-tooltip, react-avatar, react-dropdown-menu.
+- Problemas encontrados: shadcn CLI no disponible, se crearon manualmente siguiendo patrones existentes
+- Estado: ✅ completo
+
 ### [2026-05-08] — LAND-04: Runtime check de activación
 
 - Agente: cursor
