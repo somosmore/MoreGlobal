@@ -78,7 +78,7 @@ export default function MasterclassPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FC]">
+    <div className="min-h-screen bg-white">
       <MCHero />
       <MCBenefits />
       <MCRegistrationForm />

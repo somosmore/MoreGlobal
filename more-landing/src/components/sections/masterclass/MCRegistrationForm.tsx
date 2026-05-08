@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2, Calendar, Users } from "lucide-react"
+import { Shield, CheckCircle2, Loader2, Calendar, Users, Download } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
@@ -101,45 +99,121 @@ function validate(data: FormData): FormErrors {
   return errors
 }
 
+const GOOGLE_CALENDAR_URL = (() => {
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: "Masterclass: El Paso Cero EB2-NIW — MORE",
+    dates: "20260525T190000/20260525T210000",
+    ctz: "America/Bogota",
+    details: "Masterclass gratuita con Ivon More.\\nDescubre el primer paso para migrar a EE.UU. con la visa EB2-NIW.\\n\\nLink de acceso se enviará por WhatsApp y email.",
+    location: "Online (Zoom)",
+  })
+  return `https://calendar.google.com/calendar/render?${params.toString()}`
+})()
+
+function generateICS(): string {
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//MORE//Masterclass//ES",
+    "BEGIN:VEVENT",
+    "DTSTART;TZID=America/Bogota:20260525T190000",
+    "DTEND;TZID=America/Bogota:20260525T210000",
+    "SUMMARY:Masterclass: El Paso Cero EB2-NIW — MORE",
+    "DESCRIPTION:Masterclass gratuita con Ivon More.\\nDescubre el primer paso para migrar a EE.UU. con la visa EB2-NIW.\\nLink de acceso se enviará por WhatsApp y email.",
+    "LOCATION:Online (Zoom)",
+    "STATUS:CONFIRMED",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n")
+}
+
+function downloadICS() {
+  const blob = new Blob([generateICS()], { type: "text/calendar;charset=utf-8" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = "masterclass-more-eb2niw.ics"
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 function SuccessCard() {
-  const [countdown, setCountdown] = useState(5)
-
-  useEffect(() => {
-    if (countdown <= 0) {
-      window.location.href = WHATSAPP_GROUP_URL
-      return
-    }
-    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000)
-    return () => clearTimeout(timer)
-  }, [countdown])
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      className="rounded-2xl bg-white shadow-xl border border-gray-100 p-8 sm:p-10 max-w-md mx-auto text-center"
+      className="rounded-2xl bg-gradient-to-b from-[#0033A0] to-[#001A52] shadow-2xl border border-white/10 p-8 sm:p-10 max-w-lg mx-auto"
     >
-      <div className="w-16 h-16 rounded-full bg-[#10B981]/10 flex items-center justify-center mx-auto mb-6">
-        <CheckCircle2 className="h-8 w-8 text-[#10B981]" />
+      {/* Header */}
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 rounded-full bg-[#10B981]/20 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="h-8 w-8 text-[#10B981]" />
+        </div>
+        <h2 className="text-2xl font-bold text-white mb-2">
+          ¡Tu lugar está reservado!
+        </h2>
+        <p className="text-white/60 text-sm">
+          Revisa tu email y tu WhatsApp. Te enviamos los detalles del evento.
+        </p>
       </div>
-      <h2 className="text-2xl font-bold text-[#1A2340] mb-3">
-        ¡Tu lugar está reservado!
-      </h2>
-      <p className="text-[#6B7A9A] mb-4">
-        Revisa tu email y tu WhatsApp. Te acabamos de enviar los detalles del
-        evento.
-      </p>
-      <p className="text-sm text-[#6B7A9A] mb-6">
-        Registro exitoso! Redirigiendo al grupo de WhatsApp en{" "}
-        <span className="font-semibold text-[#1A2340]">{countdown}</span>{" "}
-        segundos...
-      </p>
+
+      <div className="h-px bg-white/10 mb-6" />
+
+      {/* Add to Calendar */}
+      <div className="mb-6">
+        <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">
+          Agendá la masterclass
+        </p>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <a
+            href={GOOGLE_CALENDAR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-10 px-4 text-sm font-medium text-white bg-white/10 border border-white/15 rounded-lg hover:bg-white/20 transition-colors"
+          >
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+              <path d="M18 3H6a3 3 0 00-3 3v12a3 3 0 003 3h12a3 3 0 003-3V6a3 3 0 00-3-3z" stroke="currentColor" strokeWidth="2" />
+              <path d="M16 1v4M8 1v4M3 9h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+            Google Calendar
+          </a>
+          <button
+            type="button"
+            onClick={downloadICS}
+            className="flex-1 inline-flex items-center justify-center gap-2 h-10 px-4 text-sm font-medium text-white bg-white/10 border border-white/15 rounded-lg hover:bg-white/20 transition-colors"
+          >
+            <Download className="h-4 w-4" />
+            Apple / Outlook
+          </button>
+        </div>
+      </div>
+
+      {/* QR WhatsApp */}
+      <div className="mb-6 p-5 bg-white/5 border border-white/10 rounded-xl text-center">
+        <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">
+          Únete al grupo de WhatsApp
+        </p>
+        <div className="w-40 h-40 mx-auto mb-3 bg-white rounded-xl p-2">
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(WHATSAPP_GROUP_URL)}&margin=8`}
+            alt="QR — Grupo de WhatsApp"
+            className="w-full h-full"
+            loading="eager"
+          />
+        </div>
+        <p className="text-[10px] text-white/40">
+          Escanea con tu cámara para unirte
+        </p>
+      </div>
+
+      {/* WhatsApp button */}
       <a
         href={WHATSAPP_GROUP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 h-12 px-6 text-sm font-bold text-white bg-[#25D366] rounded-lg shadow-md hover:bg-[#20BD5A] transition-all duration-300"
+        className="w-full inline-flex items-center justify-center gap-2 h-12 px-6 text-sm font-bold text-white bg-[#25D366] rounded-lg shadow-md hover:bg-[#20BD5A] transition-all duration-300"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -281,8 +355,43 @@ export default function MCRegistrationForm() {
   const isExpired = Date.now() > EVENT_DATE.getTime()
 
   return (
-    <section id="registro" className="py-16 sm:py-20 bg-[#F8F9FC]">
-      <div className="max-w-lg mx-auto px-4 sm:px-6">
+    <section
+      id="registro"
+      className="relative py-12 sm:py-16 overflow-hidden bg-gradient-to-b from-[#001A52] via-[#0033A0] to-[#001233]"
+    >
+      {/* Background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-72 h-72 rounded-full bg-[#F37021]/10 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#F37021]/8 blur-3xl" />
+      </div>
+
+      <div className="relative max-w-lg mx-auto px-4 sm:px-6">
+        {/* Section headline (outside the card) */}
+        <AnimatePresence mode="wait">
+          {!submitted && !isExpired && (
+            <motion.div
+              key="headline"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-center mb-6"
+            >
+              <p className="text-[#FFBA7A] text-xs font-semibold uppercase tracking-widest mb-2">
+                Clase gratuita · 25 de mayo 2026
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+                ¿Listo para dar el{" "}
+                <span className="text-[#F37021]">primer paso</span> hacia{" "}
+                EE.&nbsp;UU.?
+              </h2>
+              <p className="text-white/55 text-sm mt-2">
+                Regístrate en 30 segundos y asegura tu lugar.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence mode="wait">
           {isExpired ? (
             <ExpiredCard key="expired" />
@@ -297,157 +406,168 @@ export default function MCRegistrationForm() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="rounded-2xl bg-white shadow-xl border border-gray-100 p-8 sm:p-10"
+              className="rounded-2xl bg-white shadow-[0_8px_40px_rgba(0,0,0,0.35)] border border-white/10 overflow-hidden"
             >
-              <div className="flex justify-center mb-4">
-                <Badge variant="orange" className="gap-1.5">
-                  <Users className="h-3 w-3" />
-                  CUPOS LIMITADOS
-                </Badge>
-              </div>
+              {/* Colored top stripe */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] via-[#FFAA5E] to-[#F37021]" />
 
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center mb-2">
-                Reserva tu lugar ahora
-              </h2>
-              <p className="text-[#6B7A9A] text-center text-sm mb-6">
-                Regístrate en 30 segundos y asegura tu lugar.
-              </p>
-
-              <Separator className="mb-6" />
-
-              <div className="space-y-5">
-                <div>
-                  <label
-                    htmlFor="mc-nombre"
-                    className="block text-sm font-medium text-[#1A2340] mb-1.5"
-                  >
-                    Nombre completo
-                  </label>
-                  <Input
-                    id="mc-nombre"
-                    name="nombre"
-                    type="text"
-                    value={form.nombre}
-                    onChange={handleChange}
-                    placeholder="Ej: María García"
-                  />
-                  {errors.nombre && (
-                    <p className="mt-1 text-xs text-red-500">{errors.nombre}</p>
-                  )}
+              <div className="p-6 sm:p-8">
+                <div className="flex items-center justify-between mb-5">
+                  <Badge variant="orange" className="gap-1.5">
+                    <Users className="h-3 w-3" />
+                    CUPOS LIMITADOS
+                  </Badge>
+                  <span className="text-xs text-[#6B7A9A] font-medium">100% gratis</span>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="mc-email"
-                    className="block text-sm font-medium text-[#1A2340] mb-1.5"
-                  >
-                    Email
-                  </label>
-                  <Input
-                    id="mc-email"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="tu@email.com"
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-xs text-red-500">{errors.email}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="mc-phone"
-                    className="block text-sm font-medium text-[#1A2340] mb-1.5"
-                  >
-                    WhatsApp
-                  </label>
-                  <div className="flex gap-2">
-                    <select
-                      name="countryCode"
-                      value={form.countryCode}
-                      onChange={handleChange}
-                      className="h-11 w-[100px] sm:w-[120px] rounded-lg border border-gray-300 bg-white px-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20 focus-visible:border-[#2A3A4A]/40 transition-all duration-200"
+                <div className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="mc-nombre"
+                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
                     >
-                      {COUNTRY_CODES.map((c) => (
-                        <option key={c.code} value={c.code}>
-                          {c.label}
+                      Nombre completo
+                    </label>
+                    <Input
+                      id="mc-nombre"
+                      name="nombre"
+                      type="text"
+                      value={form.nombre}
+                      onChange={handleChange}
+                      placeholder="Ej: María García"
+                    />
+                    {errors.nombre && (
+                      <p className="mt-1 text-xs text-red-500">{errors.nombre}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="mc-email"
+                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                    >
+                      Email
+                    </label>
+                    <Input
+                      id="mc-email"
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="tu@email.com"
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="mc-phone"
+                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                    >
+                      WhatsApp
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        name="countryCode"
+                        value={form.countryCode}
+                        onChange={handleChange}
+                        className="h-11 w-[100px] sm:w-[120px] rounded-lg border border-gray-300 bg-white px-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021]/60 transition-all duration-200"
+                      >
+                        {COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.label}
+                          </option>
+                        ))}
+                      </select>
+                      <Input
+                        id="mc-phone"
+                        name="phone"
+                        type="tel"
+                        value={form.phone}
+                        onChange={handleChange}
+                        placeholder="300 123 4567"
+                      />
+                    </div>
+                    {errors.phone && (
+                      <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="mc-pais"
+                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                    >
+                      País de residencia
+                    </label>
+                    <select
+                      id="mc-pais"
+                      name="pais"
+                      value={form.pais}
+                      onChange={handleChange}
+                      className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021]/60 transition-all duration-200"
+                    >
+                      <option value="">Selecciona tu país</option>
+                      {COUNTRIES.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
                         </option>
                       ))}
                     </select>
-                    <Input
-                      id="mc-phone"
-                      name="phone"
-                      type="tel"
-                      value={form.phone}
-                      onChange={handleChange}
-                      placeholder="300 123 4567"
-                    />
+                    {errors.pais && (
+                      <p className="mt-1 text-xs text-red-500">{errors.pais}</p>
+                    )}
                   </div>
-                  {errors.phone && (
-                    <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
-                  )}
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="mc-pais"
-                    className="block text-sm font-medium text-[#1A2340] mb-1.5"
-                  >
-                    País de residencia
-                  </label>
-                  <select
-                    id="mc-pais"
-                    name="pais"
-                    value={form.pais}
-                    onChange={handleChange}
-                    className="h-11 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20 focus-visible:border-[#2A3A4A]/40 transition-all duration-200"
-                  >
-                    <option value="">Selecciona tu país</option>
-                    {COUNTRIES.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.pais && (
-                    <p className="mt-1 text-xs text-red-500">{errors.pais}</p>
-                  )}
-                </div>
-              </div>
-
-              {submitError && (
-                <p className="mt-4 text-sm text-red-500 text-center">
-                  {submitError}
-                </p>
-              )}
-
-              <Button
-                type="submit"
-                variant="gold"
-                size="lg"
-                disabled={submitting}
-                className="mt-8 w-full h-13 text-base font-bold"
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    REGISTRANDO...
-                  </>
-                ) : (
-                  "QUIERO MI LUGAR GRATIS"
+                {submitError && (
+                  <p className="mt-3 text-sm text-red-500 text-center">
+                    {submitError}
+                  </p>
                 )}
-              </Button>
 
-              <Separator className="mt-6 mb-4" />
+                <motion.button
+                  type="submit"
+                  disabled={submitting}
+                  whileHover={submitting ? {} : { scale: 1.02 }}
+                  whileTap={submitting ? {} : { scale: 0.98 }}
+                  animate={
+                    submitting
+                      ? {}
+                      : {
+                          boxShadow: [
+                            "0 6px 20px rgba(243,112,33,0.35)",
+                            "0 10px 32px rgba(243,112,33,0.6)",
+                            "0 6px 20px rgba(243,112,33,0.35)",
+                          ],
+                        }
+                  }
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="mt-6 w-full h-14 rounded-xl bg-gradient-to-r from-[#F37021] to-[#D4611A] text-white text-base font-bold tracking-wide flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 hover:from-[#D4611A] hover:to-[#F37021]"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      REGISTRANDO...
+                    </>
+                  ) : (
+                    <>
+                      QUIERO MI LUGAR GRATIS
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </>
+                  )}
+                </motion.button>
 
-              <div className="flex items-center justify-center gap-2 text-xs text-[#6B7A9A] group relative">
-                <Shield className="h-3.5 w-3.5" />
-                <span>
-                  Tu información está segura. No compartimos tus datos con
-                  terceros.
-                </span>
+                <div className="flex items-center justify-center gap-2 mt-4 text-xs text-[#9BAAB8]">
+                  <Shield className="h-3.5 w-3.5 shrink-0" />
+                  <span>
+                    Tu información está segura. No compartimos tus datos.
+                  </span>
+                </div>
               </div>
             </motion.form>
           )}

@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 
 export default function MCSpeaker() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="py-8 sm:py-10 bg-[#F4F6FB]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -10,7 +10,7 @@ export default function MCSpeaker() {
         transition={{ duration: 0.5 }}
         className="max-w-2xl mx-auto px-4 sm:px-6"
       >
-        <div className="rounded-2xl bg-white shadow-lg border border-gray-100 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6">
+        <div className="rounded-2xl bg-white shadow-lg border border-gray-100 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5">
           <img
             src="/ivon.png"
             alt="Ivon More"

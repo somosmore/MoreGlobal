@@ -27,7 +27,7 @@ const faqs = [
 
 export default function MCFAQ() {
   return (
-    <section className="py-16 sm:py-20 bg-[#F8F9FC]">
+    <section className="py-10 sm:py-12 bg-[#F4F6FB]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -35,7 +35,7 @@ export default function MCFAQ() {
         transition={{ duration: 0.5 }}
         className="max-w-2xl mx-auto px-4 sm:px-6"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center mb-6">
           Preguntas frecuentes
         </h2>
 

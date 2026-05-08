@@ -67,9 +67,9 @@ export default function MCHero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.1] tracking-tight"
             >
-              El{" "}
-              <span className="text-[#F37021]">Paso Cero</span>
-              {" "}para migrar a EE.UU. con visa EB2-NIW
+              Descubre si tu perfil profesional puede{" "}
+              <span className="text-[#F37021]">calificar para la Green Card EB-2</span>
+              {" "}y llévate un plan paso a paso para buscar la residencia en EE.&nbsp;UU.
             </motion.h1>
 
             <motion.p
@@ -78,8 +78,8 @@ export default function MCHero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-6 text-base sm:text-lg text-white/70 max-w-xl leading-relaxed"
             >
-              Descubre la ruta que usan los profesionales latinoamericanos para
-              obtener la residencia permanente sin necesidad de empleador.{" "}
+              Sin depender de un empleador patrocinador, sin inversiones altas de capital
+              y evitando gastos innecesarios en abogados desde el inicio.{" "}
               <strong className="text-white font-semibold">
                 Una clase en vivo que puede cambiarlo todo.
               </strong>

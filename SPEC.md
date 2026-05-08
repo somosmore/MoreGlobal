@@ -247,6 +247,15 @@
 
 - [x] ~~**MC-03: Social proof y testimonios en landing**~~ — Descartado (no necesario)
 
+- [x] **MC-05: Actualización de PUV en hero de masterclass**
+  Asignado: claude | Estado: ✅ completo
+  Sin dependencias previas.
+  Reemplazar el titular y subtítulo del hero por el PUV recomendado en español neutro.
+  - Titular: "Descubre si tu perfil profesional puede calificar para la Green Card EB-2 y llévate un plan paso a paso para buscar la residencia en EE. UU."
+  - Subtítulo/objeción: "Sin depender de un empleador patrocinador, sin inversiones altas de capital y evitando gastos innecesarios en abogados desde el inicio."
+  Archivos: `components/sections/masterclass/MCHero.tsx`
+  Criterio de éxito: copy claro, en español neutro, sin promesas absolutas, build limpio
+
 - [x] **MC-04: Mejoras visuales generales**
   Asignado: claude | Estado: ✅ completo
   Sin dependencias previas.

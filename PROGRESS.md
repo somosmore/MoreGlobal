@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-08] — MC-05: Actualización de PUV en hero de masterclass
+
+- Agente: claude
+- Archivos modificados: `components/sections/masterclass/MCHero.tsx`
+- Qué se implementó: Titular y subtítulo del hero reemplazados por el PUV recomendado en español neutro. Titular: "Descubre si tu perfil profesional puede calificar para la Green Card EB-2 y llévate un plan paso a paso para buscar la residencia en EE. UU." Frase complementaria de objeciones: "Sin depender de un empleador patrocinador, sin inversiones altas de capital y evitando gastos innecesarios en abogados desde el inicio." Se conservó la frase de cierre "Una clase en vivo que puede cambiarlo todo." y el fragmento destacado en naranja para refuerzo visual de la promesa principal.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
 ### [2026-05-08] — MC-00: Hero con imagen + layout split
 
 - Agente: claude
