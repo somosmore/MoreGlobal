@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown, Globe } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
@@ -362,6 +364,7 @@ function ExpiredCard() {
 }
 
 export default function MCRegistrationForm() {
+  const { settings } = useSiteSettings()
   const [form, setForm] = useState<FormData>({
     nombre: "",
     email: "",
@@ -447,6 +450,7 @@ export default function MCRegistrationForm() {
         )
       }
 
+      void trackMasterclassRegistration(settings)
       setSubmitted(true)
     } catch (err) {
       setSubmitError(
@@ -455,7 +459,7 @@ export default function MCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams])
+  }, [form, utmParams, settings])
 
   const [isExpired, setIsExpired] = useState(() => Date.now() > EVENT_DATE.getTime())
 
