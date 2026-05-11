@@ -419,6 +419,76 @@
   Archivos: `supabase/functions/ghl-webhook/index.ts` (nuevo)
   Criterio de éxito: cambios en GHL se reflejan en Supabase automáticamente
 
+### P7 — Tracking & Analytics
+
+> Objetivo: medir el embudo completo de cada landing y mejorar la atribución de
+> campañas. Cubierto por el módulo central `lib/tracking.ts`, que soporta Meta
+> Pixel directo, GTM (prioritario) y GA4 directo, gobernados desde
+> `admin/settings → Medición y píxeles`.
+
+- [x] **TRK-01: Embudo masterclass en píxel de Meta**
+  Asignado: claude | Estado: ✅ completo
+  Eventos del embudo `/masterclass`:
+  - Entrada a la landing → `ViewContent` (Meta) / `masterclass_landing_view` (dataLayer).
+  - Registro exitoso → `CompleteRegistration` (Meta) / `masterclass_registration` (dataLayer) + `sign_up` en GA4.
+  Funciona con el mismo `meta_pixel_id` global; con GTM, mapear los nombres del `dataLayer` a las etiquetas Meta correspondientes.
+  Archivos: `src/lib/tracking.ts`, `src/components/sections/masterclass/MCRegistrationForm.tsx`
+
+- [x] **TRK-02: Documentación en español de `tracking.ts`**
+  Asignado: claude | Estado: ✅ completo
+  Cabecera del módulo + comentarios por bloque (caché de carga, helpers Meta/GTM/GA4, `ensureTrackingScripts`, `sendPageView`) y bloque `/** ... */` antes de cada export público (`bootstrapTracking`, `trackLeadFromQuiz`, `trackMasterclassRegistration`, `trackScheduleCta`) explicando cuándo se llama y qué evento se dispara en cada modo (GTM / Meta directo / GA4).
+  Archivos: `src/lib/tracking.ts`
+
+- [x] **TRK-03: UX/UI de `admin/settings` (medición)**
+  Asignado: claude | Estado: ✅ completo
+  - Página: fondo en degradado, ancho `max-w-4xl`, barra sticky de navegación por anclas (Medición · Calendario · Sesión VIP · Redes) con `scrollIntoView` suave.
+  - `TrackingSection`: estado actual en pills, guía colapsable (Accordion), tabla de eventos con columnas Meta / dataLayer / Cuándo / Destino — incluye filas de masterclass; en móvil colapsa a tarjetas. Toggle "Medición activa" migrado al componente `Switch` de Shadcn.
+  Archivos: `src/pages/AdminSettings.tsx`, `src/components/admin/settings/TrackingSection.tsx`
+
+#### Mejoras pendientes
+
+- [ ] **TRK-04: Persistencia de UTMs entre sesiones**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Hoy los UTMs solo se leen al cargar `MCRegistrationForm`. Si el usuario llega por una campaña y vuelve días después sin UTMs en la URL, perdemos la atribución. Persistir UTMs en `localStorage` (o cookie de 30 días) y rehidratarlos en quiz, masterclass y CTA VIP cuando el usuario convierta.
+  Archivos: `src/lib/utm.ts` (nuevo), `src/components/sections/Quiz.tsx`, `src/components/sections/masterclass/MCRegistrationForm.tsx`, `src/vip/components/VipCtaButton.tsx`
+  Criterio de éxito: UTMs persisten ≥30 días, se envían junto al lead aunque la URL final no los tenga.
+
+- [ ] **TRK-05: Scroll-depth y dwell time en `/masterclass`**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Disparar eventos extra (`masterclass_scroll_25/50/75/100` y `masterclass_dwell_30s`) para medir engagement real de la landing y optimizar el copy. Útil para audiencias de remarketing.
+  Archivos: `src/lib/tracking.ts`, `src/pages/MasterclassPage.tsx`
+  Criterio de éxito: eventos visibles en Meta Events Manager / GA4 sin degradar performance (throttle + observer).
+
+- [ ] **TRK-06: Conversions API (CAPI) de Meta server-side**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: TRK-01 ✅
+  Crear Edge Function `meta-capi` que reciba los eventos críticos (Lead, CompleteRegistration, Schedule) y los reenvíe al Conversions API de Meta usando `access_token` y `event_id` compartido con el navegador para deduplicación. Mitiga pérdidas por iOS 14.5+ / bloqueadores.
+  Archivos: `supabase/functions/meta-capi/index.ts` (nuevo), `src/lib/tracking.ts`, settings nuevo `meta_capi_access_token` en `site_settings`.
+  Criterio de éxito: Meta Events Manager muestra eventos browser + server con match >70% deduplicados por `event_id`.
+
+- [ ] **TRK-07: Consent Mode (banner de cookies)**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Hoy el tracking se carga sin pedir consentimiento (la política de privacidad lo declara pero no hay banner). Implementar Consent Mode v2 con banner aceptar/rechazar/preferencias; mientras no haya consentimiento, los scripts no se cargan o se cargan en modo "ad_storage=denied".
+  Archivos: `src/components/CookieConsent.tsx` (nuevo), `src/lib/tracking.ts`
+  Criterio de éxito: cumplimiento GDPR/CCPA, sin scripts hasta consentimiento, preferencia persistida.
+
+- [ ] **TRK-08: Modo debug en admin (eventos disparados en sesión)**
+  Asignado: — | Estado: ⬚ libre
+  Sin dependencias previas.
+  Tablero interno en `admin/settings → Medición` que muestre, en sesión, los últimos eventos que disparó el sitio (capturando `window.dataLayer` / wrap de `fbq`). Ayuda a debuggear sin tener que abrir Meta Pixel Helper.
+  Archivos: `src/lib/tracking.ts`, `src/components/admin/settings/TrackingDebugPanel.tsx` (nuevo)
+  Criterio de éxito: el panel muestra evento, payload y timestamp; toggleable y limitado al rol root.
+
+- [ ] **TRK-09: Pixels por landing (no global)**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: LAND-01 ✅
+  Permitir que cada `landing_project` tenga su propio `meta_pixel_id` y `ga4_id`, sobreescribiendo el global. Útil cuando una campaña concreta usa otra cuenta publicitaria.
+  Archivos: nueva migración `supabase/migrations/0XX_landing_pixels.sql`, `src/lib/tracking.ts`, `src/components/admin/resources/LandingPreviewCard.tsx`
+  Criterio de éxito: cargar `/masterclass` envía eventos al pixel configurado en la landing si está seteado; cae al global si no.
+
 ### P6 — Tests y calidad
 
 - [ ] **Tests unitarios para lógica crítica**
