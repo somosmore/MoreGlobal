@@ -29,6 +29,30 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-11] — TRK-03: UX/UI de admin/settings (medición)
+
+- Agente: claude
+- Archivos modificados: `src/pages/AdminSettings.tsx`, `src/components/admin/settings/TrackingSection.tsx`
+- Qué se implementó: Página de ajustes con fondo en degradado, ancho ampliado a `max-w-4xl` y barra sticky de navegación por anclas (Medición · Calendario · Sesión VIP · Redes) con scroll suave dentro del `main` del layout. Cada bloque envuelto en `<section id className="scroll-mt-32">`. `TrackingSection` reorganizada: aviso GTM+Meta arriba, estado actual en grid de pills, guía plegable (Accordion) con tabla de eventos (Meta / dataLayer / Cuándo / Destino) que incluye filas de masterclass (`ViewContent` / `CompleteRegistration`) y en mobile colapsa a tarjetas. Toggle "Medición activa" migrado de checkbox nativo al componente `Switch` Shadcn.
+- Problemas encontrados: ninguno. Warnings de Tailwind sugiriendo aliases (`text-navy`, `bg-orange`) ignorados por consistencia con el resto del proyecto que usa hex literales.
+- Estado: ✅ completo
+
+### [2026-05-11] — TRK-02: Documentación en español de tracking.ts
+
+- Agente: claude
+- Archivos modificados: `src/lib/tracking.ts`
+- Qué se implementó: Cabecera de módulo con resumen, regla GTM-prioritario y lista de eventos. Comentarios por bloque (caché `loadPromise`, helpers Meta/GTM/GA4, `ensureTrackingScripts`, `sendPageView`) y bloques `/** ... */` antes de cada export público (`bootstrapTracking`, `trackLeadFromQuiz`, `trackMasterclassRegistration`, `trackScheduleCta`) describiendo cuándo se dispara y qué evento se envía en cada modo.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
+### [2026-05-11] — TRK-01: Embudo masterclass en píxel de Meta
+
+- Agente: claude
+- Archivos modificados: `src/lib/tracking.ts`, `src/components/sections/masterclass/MCRegistrationForm.tsx`
+- Qué se implementó: En `sendPageView`, al entrar a `/masterclass` se dispara además del `PageView` un `ViewContent` con `content_name: masterclass_eb2niw` (Meta) o `masterclass_landing_view` en `dataLayer` (GTM). Nueva función `trackMasterclassRegistration` que tras el POST OK del registro envía `CompleteRegistration` (Meta) / `masterclass_registration` (dataLayer) / `sign_up` (GA4). `MCRegistrationForm` la invoca antes de `setSubmitted(true)`.
+- Problemas encontrados: ninguno
+- Estado: ✅ completo
+
 ### [2026-05-08] — MC-05: Actualización de PUV en hero de masterclass
 
 - Agente: claude

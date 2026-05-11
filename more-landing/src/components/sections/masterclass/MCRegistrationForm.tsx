@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown, Globe } from "lucide-react"
-import { supabase } from "@/lib/supabase"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
@@ -363,6 +364,7 @@ function ExpiredCard() {
 }
 
 export default function MCRegistrationForm() {
+  const { settings } = useSiteSettings()
   const [form, setForm] = useState<FormData>({
     nombre: "",
     email: "",
@@ -420,47 +422,35 @@ export default function MCRegistrationForm() {
 
     try {
       const edgeFunctionUrl = import.meta.env.VITE_MASTERCLASS_REGISTER_URL
-
-      if (edgeFunctionUrl) {
-        const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-        const res = await fetch(edgeFunctionUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": anonKey,
-            "Authorization": `Bearer ${anonKey}`,
-          },
-          body: JSON.stringify({
-            nombre: form.nombre.trim(),
-            email: form.email.trim().toLowerCase(),
-            phone: fullPhone,
-            pais: form.pais,
-            ...utmParams,
-          }),
-        })
-
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({}))
-          throw new Error(
-            (body as Record<string, string>).error || "Error al registrar"
-          )
-        }
-      } else if (supabase) {
-        await supabase.from("masterclass_leads").insert({
-          nombre: form.nombre.trim(),
-          email: form.email.trim().toLowerCase(),
-          whatsapp: fullPhone,
-          country: form.pais,
-          source: "masterclass-eb2niw-2026",
-          utm_source: utmParams.utm_source,
-          utm_medium: utmParams.utm_medium,
-          utm_campaign: utmParams.utm_campaign,
-          utm_content: utmParams.utm_content,
-          utm_term: utmParams.utm_term,
-          status: "new",
-        })
+      if (!edgeFunctionUrl) {
+        throw new Error("Error de configuración. Contacta al administrador.")
       }
 
+      const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+      const res = await fetch(edgeFunctionUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": anonKey,
+          "Authorization": `Bearer ${anonKey}`,
+        },
+        body: JSON.stringify({
+          nombre: form.nombre.trim(),
+          email: form.email.trim().toLowerCase(),
+          phone: fullPhone,
+          pais: form.pais,
+          ...utmParams,
+        }),
+      })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(
+          (body as Record<string, string>).error || "Error al registrar"
+        )
+      }
+
+      void trackMasterclassRegistration(settings)
       setSubmitted(true)
     } catch (err) {
       setSubmitError(
@@ -469,7 +459,7 @@ export default function MCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams])
+  }, [form, utmParams, settings])
 
   const [isExpired, setIsExpired] = useState(() => Date.now() > EVENT_DATE.getTime())
 

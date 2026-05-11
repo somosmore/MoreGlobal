@@ -7,6 +7,13 @@ import {
   Loader2,
   Save,
 } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Switch } from "@/components/ui/switch"
 import type { SettingsData } from "./useSettingsData"
 
 type Props = Pick<
@@ -32,6 +39,46 @@ type Props = Pick<
   | "gtmAndMetaConflict"
 >
 
+type EventRow = {
+  meta: string
+  dataLayer: string
+  when: string
+  destination: string
+}
+
+const EVENT_ROWS: EventRow[] = [
+  {
+    meta: "PageView",
+    dataLayer: "virtual_page_view",
+    when: "En cada cambio de ruta del sitio público (SPA).",
+    destination: "Meta (directo) o dataLayer (GTM).",
+  },
+  {
+    meta: "ViewContent",
+    dataLayer: "masterclass_landing_view",
+    when: "Al entrar a /masterclass (vista de la landing).",
+    destination: "Meta ViewContent o dataLayer (GTM).",
+  },
+  {
+    meta: "Lead",
+    dataLayer: "lead_submitted",
+    when: "Quiz de diagnóstico enviado y guardado con éxito.",
+    destination: "Meta Lead o dataLayer (GTM).",
+  },
+  {
+    meta: "CompleteRegistration",
+    dataLayer: "masterclass_registration",
+    when: "Registro exitoso en el formulario de masterclass.",
+    destination: "Meta CompleteRegistration o dataLayer (GTM).",
+  },
+  {
+    meta: "Schedule",
+    dataLayer: "schedule_cta_click",
+    when: "Clic en el CTA VIP que abre calendario o pago.",
+    destination: "Meta Schedule o dataLayer (GTM).",
+  },
+]
+
 export default function TrackingSection({
   settings,
   loading,
@@ -53,6 +100,9 @@ export default function TrackingSection({
   trackingFieldsInvalid,
   gtmAndMetaConflict,
 }: Props) {
+  const measurementActive =
+    settings.tracking_enabled.trim().toLowerCase() !== "false"
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
@@ -77,56 +127,6 @@ export default function TrackingSection({
           </div>
         ) : (
           <>
-            <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm text-slate-700 space-y-3">
-              <p className="font-semibold text-[#2A3A4A] flex items-center gap-2">
-                <Info className="w-4 h-4 text-[#F37021] shrink-0" aria-hidden="true" />
-                Qué hace cada pieza
-              </p>
-              <ul className="list-disc list-inside space-y-1.5 text-slate-600 text-xs sm:text-sm">
-                <li>
-                  <strong className="text-[#2A3A4A]">Píxel de Meta:</strong> mide
-                  visitas y conversiones y las atribuye a tus campañas en Meta Ads
-                  (Facebook / Instagram).
-                </li>
-                <li>
-                  <strong className="text-[#2A3A4A]">PageView (virtual):</strong> en
-                  cada cambio de ruta del sitio público el navegador envía una vista
-                  de página para que el embudo en Meta/GA refleje navegación real
-                  (SPA).
-                </li>
-                <li>
-                  <strong className="text-[#2A3A4A]">Lead:</strong> se registra
-                  cuando el visitante envía el formulario del diagnóstico y el lead
-                  se guarda correctamente.
-                </li>
-                <li>
-                  <strong className="text-[#2A3A4A]">Schedule:</strong> se registra
-                  al hacer clic en el CTA que abre el calendario o pago de Asesoría
-                  VIP (enlace externo).
-                </li>
-                <li>
-                  <strong className="text-[#2A3A4A]">Google Tag Manager (GTM):</strong>{" "}
-                  contenedor para cargar Meta, GA4 u otras etiquetas sin redeploy.
-                  Si usas GTM, configura el píxel allí y deja el ID de Meta vacío
-                  aquí para evitar duplicar el mismo píxel.
-                </li>
-                <li>
-                  <strong className="text-[#2A3A4A]">GA4 (G-):</strong> ID de
-                  medición de Google Analytics 4. Solo se usa si{" "}
-                  <strong>no</strong> delegas GA4 dentro de GTM.
-                </li>
-              </ul>
-              <a
-                href="https://developers.facebook.com/docs/meta-pixel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-[#F37021] font-medium hover:underline"
-              >
-                Documentación Meta Pixel
-                <ExternalLink className="w-3 h-3" aria-hidden="true" />
-              </a>
-            </div>
-
             {gtmAndMetaConflict && (
               <div
                 className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900"
@@ -135,106 +135,210 @@ export default function TrackingSection({
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
                 <span>
                   Tienes GTM y ID de Meta rellenos a la vez. El sitio prioriza{" "}
-                  <strong>solo GTM</strong> para cargar scripts. Evita configurar el
-                  mismo píxel dos veces (GTM + este campo) o inflarás eventos
+                  <strong>solo GTM</strong> para cargar scripts. Evita configurar
+                  el mismo píxel dos veces (GTM + este campo) o inflarás eventos
                   duplicados.
                 </span>
               </div>
             )}
 
-            <div className="rounded-xl border border-gray-100 bg-gray-50/80 p-4 space-y-2">
+            {/* Estado actual */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50/80 p-4 space-y-3">
               <p className="text-xs font-semibold text-[#2A3A4A] uppercase tracking-wide">
-                Resumen de parámetros guardados
+                Estado actual
               </p>
-              <ul className="text-xs text-gray-600 space-y-1">
-                <li>
-                  Medición global:{" "}
-                  <strong>
-                    {settings.tracking_enabled.trim().toLowerCase() !==
-                    "false"
-                      ? "activa"
-                      : "pausada"}
-                  </strong>
-                </li>
-                <li>
-                  Google Tag Manager:{" "}
-                  <strong>
-                    {settings.google_tag_manager_id.trim()
-                      ? `configurado (${settings.google_tag_manager_id.trim()})`
-                      : "no configurado"}
-                  </strong>
-                </li>
-                <li>
-                  Meta Pixel:{" "}
-                  <strong>
-                    {settings.meta_pixel_id.trim()
-                      ? `configurado (ID ${settings.meta_pixel_id.trim()})`
-                      : "no configurado"}
-                  </strong>
-                </li>
-                <li>
-                  GA4:{" "}
-                  <strong>
-                    {settings.ga4_measurement_id.trim()
+              <div className="grid sm:grid-cols-2 gap-2">
+                <StatusPill
+                  label="Medición global"
+                  value={measurementActive ? "Activa" : "Pausada"}
+                  active={measurementActive}
+                />
+                <StatusPill
+                  label="Google Tag Manager"
+                  value={
+                    settings.google_tag_manager_id.trim()
+                      ? settings.google_tag_manager_id.trim()
+                      : "No configurado"
+                  }
+                  active={!!settings.google_tag_manager_id.trim()}
+                />
+                <StatusPill
+                  label="Píxel de Meta"
+                  value={
+                    settings.meta_pixel_id.trim()
+                      ? `ID ${settings.meta_pixel_id.trim()}`
+                      : "No configurado"
+                  }
+                  active={!!settings.meta_pixel_id.trim()}
+                />
+                <StatusPill
+                  label="GA4"
+                  value={
+                    settings.ga4_measurement_id.trim()
                       ? settings.ga4_measurement_id.trim()
-                      : "no configurado"}
-                  </strong>
-                </li>
-              </ul>
-              <p className="text-xs font-semibold text-[#2A3A4A] pt-2">
-                Eventos que envía esta web (sitio público)
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs text-left border-collapse">
-                  <thead>
-                    <tr className="border-b border-gray-200 text-gray-500">
-                      <th className="py-1.5 pr-2 font-medium">Evento</th>
-                      <th className="py-1.5 pr-2 font-medium">Cuándo</th>
-                      <th className="py-1.5 font-medium">Destino típico</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-700">
-                    <tr className="border-b border-gray-100">
-                      <td className="py-1.5 pr-2 font-mono">PageView / virtual_page_view</td>
-                      <td className="py-1.5 pr-2">Cambio de ruta pública</td>
-                      <td className="py-1.5">Meta (directo) o dataLayer (GTM)</td>
-                    </tr>
-                    <tr className="border-b border-gray-100">
-                      <td className="py-1.5 pr-2 font-mono">Lead / lead_submitted</td>
-                      <td className="py-1.5 pr-2">Formulario del diagnóstico enviado OK</td>
-                      <td className="py-1.5">Meta Lead o dataLayer</td>
-                    </tr>
-                    <tr>
-                      <td className="py-1.5 pr-2 font-mono">Schedule / schedule_cta_click</td>
-                      <td className="py-1.5 pr-2">Clic CTA VIP → calendario/pago</td>
-                      <td className="py-1.5">Meta Schedule o dataLayer</td>
-                    </tr>
-                  </tbody>
-                </table>
+                      : "No configurado"
+                  }
+                  active={!!settings.ga4_measurement_id.trim()}
+                />
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <input
+            {/* Guía colapsable */}
+            <Accordion type="single" collapsible className="rounded-xl border border-slate-100 bg-slate-50">
+              <AccordionItem value="guia" className="border-b-0">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-[#2A3A4A]">
+                  <span className="flex items-center gap-2">
+                    <Info className="w-4 h-4 text-[#F37021] shrink-0" aria-hidden="true" />
+                    Guía de medición y eventos
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-4">
+                  <ul className="list-disc list-inside space-y-1.5 text-slate-600 text-xs sm:text-sm">
+                    <li>
+                      <strong className="text-[#2A3A4A]">Píxel de Meta:</strong>{" "}
+                      mide visitas y conversiones y las atribuye a tus campañas
+                      en Meta Ads (Facebook / Instagram).
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">
+                        PageView (virtual):
+                      </strong>{" "}
+                      en cada cambio de ruta del sitio público el navegador
+                      envía una vista de página para que el embudo refleje
+                      navegación real (SPA).
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">
+                        ViewContent (masterclass):
+                      </strong>{" "}
+                      al entrar a <code className="font-mono">/masterclass</code>{" "}
+                      se envía un evento adicional con{" "}
+                      <code className="font-mono">content_name</code>{" "}
+                      <em>masterclass_eb2niw</em> para medir el embudo de la
+                      landing.
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">Lead:</strong> se
+                      registra cuando el visitante envía el quiz de diagnóstico
+                      y el lead se guarda correctamente.
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">
+                        CompleteRegistration:
+                      </strong>{" "}
+                      se dispara al registro exitoso del formulario de
+                      masterclass.
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">Schedule:</strong> se
+                      registra al hacer clic en el CTA que abre el calendario o
+                      el pago de Asesoría VIP.
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">
+                        Google Tag Manager (GTM):
+                      </strong>{" "}
+                      contenedor para cargar Meta, GA4 u otras etiquetas sin
+                      redeploy. Si usas GTM, configura el píxel allí y deja el
+                      ID de Meta vacío aquí para evitar duplicar el mismo píxel.
+                    </li>
+                    <li>
+                      <strong className="text-[#2A3A4A]">GA4 (G-):</strong> ID
+                      de medición de Google Analytics 4. Solo se usa si{" "}
+                      <strong>no</strong> delegas GA4 dentro de GTM.
+                    </li>
+                  </ul>
+
+                  <p className="mt-4 text-xs font-semibold text-[#2A3A4A] uppercase tracking-wide">
+                    Eventos que envía esta web
+                  </p>
+                  <p className="text-[11px] text-gray-500 mb-2">
+                    Con GTM, mapea los nombres del <code className="font-mono">dataLayer</code> a tus etiquetas Meta.
+                  </p>
+
+                  {/* Tabla en desktop */}
+                  <div className="hidden sm:block overflow-x-auto">
+                    <table className="w-full text-xs text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-gray-200 text-gray-500">
+                          <th className="py-1.5 pr-2 font-medium">Meta</th>
+                          <th className="py-1.5 pr-2 font-medium">dataLayer</th>
+                          <th className="py-1.5 pr-2 font-medium">Cuándo</th>
+                          <th className="py-1.5 font-medium">Destino</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-gray-700">
+                        {EVENT_ROWS.map((row) => (
+                          <tr key={row.meta} className="border-b border-gray-100 last:border-b-0">
+                            <td className="py-1.5 pr-2 font-mono">{row.meta}</td>
+                            <td className="py-1.5 pr-2 font-mono">{row.dataLayer}</td>
+                            <td className="py-1.5 pr-2">{row.when}</td>
+                            <td className="py-1.5">{row.destination}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Tarjetas en móvil */}
+                  <div className="sm:hidden space-y-2">
+                    {EVENT_ROWS.map((row) => (
+                      <div
+                        key={row.meta}
+                        className="rounded-lg border border-gray-100 bg-white p-3 text-xs space-y-1"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono text-[#2A3A4A] font-semibold">
+                            {row.meta}
+                          </span>
+                          <span className="font-mono text-gray-500 text-[10px] truncate">
+                            {row.dataLayer}
+                          </span>
+                        </div>
+                        <p className="text-gray-600">{row.when}</p>
+                        <p className="text-gray-400">{row.destination}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href="https://developers.facebook.com/docs/meta-pixel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-1 text-xs text-[#F37021] font-medium hover:underline"
+                  >
+                    Documentación Meta Pixel
+                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                  </a>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+
+            {/* Toggle medición activa */}
+            <div className="flex items-start gap-3 rounded-xl border border-gray-100 bg-white p-4">
+              <Switch
                 id="tracking-enabled"
-                type="checkbox"
                 checked={trackingEnabled}
-                onChange={(e) => {
-                  setTrackingEnabled(e.target.checked)
+                onCheckedChange={(checked) => {
+                  setTrackingEnabled(checked)
                   setTrackingSaveState("idle")
                 }}
-                className="h-4 w-4 rounded border-gray-300 text-[#F37021] focus:ring-[#F37021]"
+                aria-labelledby="tracking-enabled-label"
               />
-              <label
-                htmlFor="tracking-enabled"
-                className="text-sm font-medium text-[#2A3A4A]"
-              >
-                Medición activa en el sitio público
-              </label>
+              <div className="flex-1 -mt-0.5">
+                <label
+                  id="tracking-enabled-label"
+                  htmlFor="tracking-enabled"
+                  className="text-sm font-medium text-[#2A3A4A] cursor-pointer"
+                >
+                  Medición activa en el sitio público
+                </label>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Si desactivas, no se cargan scripts ni eventos (los IDs se
+                  guardan).
+                </p>
+              </div>
             </div>
-            <p className="text-xs text-gray-500 -mt-2 ml-7">
-              Si desactivas, no se cargan scripts ni eventos (los IDs se guardan).
-            </p>
 
             <div className="space-y-1.5">
               <label
@@ -373,6 +477,32 @@ export default function TrackingSection({
           </>
         )}
       </div>
+    </div>
+  )
+}
+
+function StatusPill({
+  label,
+  value,
+  active,
+}: {
+  label: string
+  value: string
+  active: boolean
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-lg bg-white border border-gray-100 px-3 py-2">
+      <span className="text-[11px] uppercase tracking-wide text-gray-400 font-medium">
+        {label}
+      </span>
+      <span
+        className={`text-xs font-semibold truncate ${
+          active ? "text-[#2A3A4A]" : "text-gray-400"
+        }`}
+        title={value}
+      >
+        {value}
+      </span>
     </div>
   )
 }
