@@ -26,12 +26,32 @@
  * - ViewContent / masterclass_landing_view → al entrar específicamente a
  *   `/masterclass` (vista de la landing de masterclass).
  * - Lead / lead_submitted → al enviar el quiz de diagnóstico con éxito.
- * - CompleteRegistration / masterclass_registration → al registro exitoso en
- *   el formulario de masterclass.
+ * - masterclass_registration (dataLayer / GA4) → registro masterclass OK. No se
+ *   envía CompleteRegistration al píxel: Meta suele bloquearlo en orígenes
+ *   categorizados (p. ej. datos sensibles); parámetros hacia Meta son neutros (1.h).
  * - Schedule / schedule_cta_click → al hacer clic en el CTA VIP que abre el
  *   calendario o el link de pago.
+ *
+ * Meta Business Tool Terms: no enviar Información de contacto en claro ni
+ * datos de categorías prohibidas; no usar fbq("init", id, user_data) desde aquí.
  */
 import type { SiteSettingsMap } from "@/lib/supabase"
+
+/** Parámetros opacos hacia Meta (evitar nombres que describan categorías sensibles en eventos). */
+const META_EVENT_PARAMS = {
+  masterclassView: {
+    content_name: "svc_page_a",
+    content_category: "content_view",
+  },
+  quizLead: {
+    content_name: "form_flow_b",
+    content_category: "interactive_flow",
+  },
+  masterclassFormOk: {
+    content_name: "form_flow_c",
+    content_category: "content_view",
+  },
+} as const
 
 declare global {
   interface Window {
@@ -132,6 +152,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
   })
 
 // Inicializa el píxel de Meta con el ID configurado en admin.
+// No pasar user_data / Información de contacto aquí (Cond. herramientas Meta).
 const initMetaPixel = async (pixelId: string) => {
   await ensureFbqStub()
   window.fbq?.("init", pixelId)
@@ -243,7 +264,7 @@ export const sendPageView = (
     if (pathname === "/masterclass") {
       window.dataLayer.push({
         event: "masterclass_landing_view",
-        content_name: "masterclass_eb2niw",
+        ...META_EVENT_PARAMS.masterclassView,
         page_path: pathname,
       })
     }
@@ -254,8 +275,7 @@ export const sendPageView = (
     window.fbq?.("track", "PageView")
     if (pathname === "/masterclass") {
       window.fbq?.("track", "ViewContent", {
-        content_name: "masterclass_eb2niw",
-        content_category: "masterclass",
+        ...META_EVENT_PARAMS.masterclassView,
       })
     }
   }
@@ -309,8 +329,7 @@ export const trackLeadFromQuiz = async (settings: SiteSettingsMap) => {
 
   const payload = {
     event: "lead_submitted",
-    content_name: "diagnostico_quiz",
-    content_category: "migration_diagnostic",
+    ...META_EVENT_PARAMS.quizLead,
   }
 
   if (gtm) {
@@ -321,8 +340,7 @@ export const trackLeadFromQuiz = async (settings: SiteSettingsMap) => {
 
   if (settings.meta_pixel_id.trim()) {
     window.fbq?.("track", "Lead", {
-      content_name: "diagnostico_quiz",
-      content_category: "migration_diagnostic",
+      ...META_EVENT_PARAMS.quizLead,
     })
   }
 
@@ -339,8 +357,8 @@ export const trackLeadFromQuiz = async (settings: SiteSettingsMap) => {
  *
  * Se llama justo después de que el endpoint `masterclass-register` responde OK.
  * - GTM: empuja `masterclass_registration` al `dataLayer`.
- * - Sin GTM: `fbq("track", "CompleteRegistration", { content_name, ... })` y,
- *   si hay GA4 directo, `sign_up` con `method: "masterclass_eb2niw"`.
+ * - Sin GTM: no se usa `CompleteRegistration` (Meta lo suele bloquear en este
+ *   tipo de origen). GA4: `sign_up` con method neutro.
  */
 export const trackMasterclassRegistration = async (
   settings: SiteSettingsMap
@@ -357,8 +375,7 @@ export const trackMasterclassRegistration = async (
 
   const payload = {
     event: "masterclass_registration",
-    content_name: "masterclass_eb2niw",
-    content_category: "masterclass",
+    ...META_EVENT_PARAMS.masterclassFormOk,
     page_path: "/masterclass",
   }
 
@@ -368,15 +385,8 @@ export const trackMasterclassRegistration = async (
     return
   }
 
-  if (settings.meta_pixel_id.trim()) {
-    window.fbq?.("track", "CompleteRegistration", {
-      content_name: "masterclass_eb2niw",
-      content_category: "masterclass",
-    })
-  }
-
   if (settings.ga4_measurement_id.trim()) {
-    window.gtag?.("event", "sign_up", { method: "masterclass_eb2niw" })
+    window.gtag?.("event", "sign_up", { method: "mc_web" })
   }
 }
 
@@ -401,7 +411,7 @@ export const trackScheduleCta = async (settings: SiteSettingsMap) => {
 
   const payload = {
     event: "schedule_cta_click",
-    content_name: "asesoria_vip_calendar",
+    content_name: "cta_calendar",
   }
 
   if (gtm) {

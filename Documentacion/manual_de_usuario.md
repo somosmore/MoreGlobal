@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-04-13 (navbar: enlaces `/#sección` y `/#quiz` desde cualquier ruta; hero `/asesoria-vip`: CTA “evaluar perfil gratis” al diagnóstico; `HomePage` scroll con hash)
+> Última actualización: 2026-05-13 (medición Meta: parámetros neutros; registro masterclass sin CompleteRegistration en píxel directo; tabla de eventos en admin actualizada)
 
 ---
 
@@ -539,7 +539,9 @@ Permite definir qué herramientas de analítica y publicidad cargan en el **siti
 **Eventos enviados en el sitio público (resumen):**
 
 - **PageView / virtual_page_view:** al cambiar de ruta en la SPA (vistas virtuales para embudo y atribución).
-- **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz).
+- **ViewContent / masterclass_landing_view:** al visitar `/masterclass` (parámetros hacia Meta con identificadores neutros, alineados a buenas prácticas de las Condiciones de las herramientas de Meta para empresas).
+- **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz); parámetros hacia Meta neutros.
+- **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM). Con **píxel Meta directo** (sin GTM) **no** se envía el evento estándar `CompleteRegistration` a Meta (suele estar bloqueado en orígenes categorizados); sí puede registrarse **GA4** `sign_up` si configuraste `ga4_measurement_id`.
 - **Schedule / schedule_cta_click:** al hacer clic en el CTA de Asesoría VIP que abre el calendario o enlace de pago externo.
 
 En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y un aviso si GTM e ID de Meta están rellenos a la vez.
