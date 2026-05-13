@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-13 (medición Meta: parámetros neutros; registro masterclass sin CompleteRegistration en píxel directo; tabla de eventos en admin actualizada)
+> Última actualización: 2026-05-13 (pantalla de éxito masterclass: redirección automática opcional a WhatsApp; medición Meta y tabla de eventos en admin)
 
 ---
 
@@ -19,6 +19,7 @@
    - 1.10 [Página de éxito](#110-página-de-éxito)
    - 1.11 [Blueprint EB2-NIW (descargable)](#111-blueprint-eb2-niw-descargable)
    - 1.12 [Política de privacidad](#112-política-de-privacidad)
+   - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -320,6 +321,25 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 - **Correo para privacidad y derechos:** enlaces `mailto` fijos a **`soporte@justmore.net`** (constante `PRIVACY_CONTACT_EMAIL` en `PrivacyPolicyPage.tsx`; ya no depende de `site_settings`).
 - **Layout:** `Navbar`, artículo centrado (`max-w-3xl`), `Footer` con **`hideLandingFaq`**.
 - **`document.title`:** se establece al cargar y se restaura al salir (como `BlueprintPage`).
+
+### 1.13 Landing Masterclass (`/masterclass`)
+
+**Ruta:** `/masterclass`
+
+Landing dedicada al evento (hero, beneficios, formulario de registro, FAQ, speaker, pie y CTA fijo). El registro envía los datos a la función Edge `masterclass-register` y guarda el lead en Supabase.
+
+#### Pantalla de agradecimiento tras registro exitoso
+
+Tras enviar el formulario correctamente se muestra una tarjeta de confirmación que incluye:
+
+| Elemento | Comportamiento |
+|----------|----------------|
+| Bloque “Entra al grupo exclusivo” | Cuenta regresiva de **4 segundos** con barra de progreso; al llegar a cero, el navegador abre el enlace del **grupo de WhatsApp en la misma pestaña** (salvo que el usuario haya pausado la acción). |
+| “Sí, llevarme al grupo ahora” | Abre el grupo de WhatsApp de inmediato en la misma pestaña y cancela la cuenta regresiva. |
+| “Prefiero quedarme aquí (agenda y QR)” | Cancela la redirección automática; el usuario permanece en la página para agendar o usar el QR. |
+| Google Calendar / Apple·Outlook | Al usar cualquiera de estas opciones se **cancela** la redirección automática para que la pestaña del registro no cambie mientras el usuario agenda en otra ventana. |
+| Código QR | Enlace al mismo grupo de WhatsApp; pensado para quien registró en **computadora** y entra al grupo desde el **celular**. |
+| Botón verde de WhatsApp | Abre el grupo en **pestaña nueva** y cancela la redirección automática en la pestaña actual. |
 
 ---
 
