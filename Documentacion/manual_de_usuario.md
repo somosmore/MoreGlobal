@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-13 (pantalla de éxito masterclass: redirección automática opcional a WhatsApp; medición Meta y tabla de eventos en admin)
+> Última actualización: 2026-05-14 (registro masterclass: evento Meta `CompleteRegistration` con píxel directo; medición documentada)
 
 ---
 
@@ -561,7 +561,7 @@ Permite definir qué herramientas de analítica y publicidad cargan en el **siti
 - **PageView / virtual_page_view:** al cambiar de ruta en la SPA (vistas virtuales para embudo y atribución).
 - **ViewContent / masterclass_landing_view:** al visitar `/masterclass` (parámetros hacia Meta con identificadores neutros, alineados a buenas prácticas de las Condiciones de las herramientas de Meta para empresas).
 - **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz); parámetros hacia Meta neutros.
-- **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM). Con **píxel Meta directo** (sin GTM) **no** se envía el evento estándar `CompleteRegistration` a Meta (suele estar bloqueado en orígenes categorizados); sí puede registrarse **GA4** `sign_up` si configuraste `ga4_measurement_id`.
+- **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM). Con **píxel Meta directo** (sin GTM) se envía **`CompleteRegistration`** a Meta con parámetros neutros (`content_name` / `content_category`, sin datos de contacto). Si además configuraste **GA4**, se registra `sign_up`.
 - **Schedule / schedule_cta_click:** al hacer clic en el CTA de Asesoría VIP que abre el calendario o enlace de pago externo.
 
 En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y un aviso si GTM e ID de Meta están rellenos a la vez.

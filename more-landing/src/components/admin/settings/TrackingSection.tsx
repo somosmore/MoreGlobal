@@ -66,10 +66,10 @@ const EVENT_ROWS: EventRow[] = [
     destination: "Meta Lead o dataLayer (GTM).",
   },
   {
-    meta: "— (píxel directo)",
+    meta: "CompleteRegistration",
     dataLayer: "masterclass_registration",
-    when: "Registro exitoso masterclass. Meta suele bloquear CompleteRegistration en este origen; GTM puede mapear el dataLayer si lo configuráis.",
-    destination: "dataLayer (GTM) y/o GA4 sign_up. Sin CompleteRegistration en Meta directo.",
+    when: "Registro exitoso del formulario de la masterclass (respuesta OK del servidor).",
+    destination: "Meta CompleteRegistration (píxel directo), dataLayer (GTM) y/o GA4 sign_up.",
   },
   {
     meta: "Schedule",

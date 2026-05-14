@@ -26,9 +26,8 @@
  * - ViewContent / masterclass_landing_view → al entrar específicamente a
  *   `/masterclass` (vista de la landing de masterclass).
  * - Lead / lead_submitted → al enviar el quiz de diagnóstico con éxito.
- * - masterclass_registration (dataLayer / GA4) → registro masterclass OK. No se
- *   envía CompleteRegistration al píxel: Meta suele bloquearlo en orígenes
- *   categorizados (p. ej. datos sensibles); parámetros hacia Meta son neutros (1.h).
+ * - CompleteRegistration / masterclass_registration → registro masterclass OK
+ *   (píxel directo: `fbq` con parámetros neutros; GTM: `dataLayer`). GA4: `sign_up`.
  * - Schedule / schedule_cta_click → al hacer clic en el CTA VIP que abre el
  *   calendario o el link de pago.
  *
@@ -357,8 +356,8 @@ export const trackLeadFromQuiz = async (settings: SiteSettingsMap) => {
  *
  * Se llama justo después de que el endpoint `masterclass-register` responde OK.
  * - GTM: empuja `masterclass_registration` al `dataLayer`.
- * - Sin GTM: no se usa `CompleteRegistration` (Meta lo suele bloquear en este
- *   tipo de origen). GA4: `sign_up` con method neutro.
+ * - Píxel Meta directo: `CompleteRegistration` con parámetros neutros (sin datos
+ *   de contacto ni categorías sensibles). GA4: `sign_up` con method neutro.
  */
 export const trackMasterclassRegistration = async (
   settings: SiteSettingsMap
@@ -383,6 +382,12 @@ export const trackMasterclassRegistration = async (
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push(payload)
     return
+  }
+
+  if (settings.meta_pixel_id.trim()) {
+    window.fbq?.("track", "CompleteRegistration", {
+      ...META_EVENT_PARAMS.masterclassFormOk,
+    })
   }
 
   if (settings.ga4_measurement_id.trim()) {
