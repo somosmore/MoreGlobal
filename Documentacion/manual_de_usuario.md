@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-14 (registro masterclass: evento Meta `CompleteRegistration` con píxel directo; medición documentada)
+> Última actualización: 2026-05-14 (Meta Conversions API: ViewContent y CompleteRegistration de masterclass desde Edge; deduplicación con píxel vía `event_id`)
 
 ---
 
@@ -328,6 +328,8 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 
 Landing dedicada al evento (hero, beneficios, formulario de registro, FAQ, speaker, pie y CTA fijo). El registro envía los datos a la función Edge `masterclass-register` y guarda el lead en Supabase.
 
+**Meta Conversions API (servidor):** si en Supabase está configurado el secreto `META_ACCESS_TOKEN` y en `site_settings` hay `meta_pixel_id`, tras un registro exitoso la misma Edge Function puede enviar a Meta el evento estándar **`CompleteRegistration`** con email y teléfono hasheados (SHA-256), además de IP/UA y cookies `_fbp`/`_fbc` cuando el navegador las envía. El formulario genera un `capi_event_id` compartido con el píxel en navegador (cuando hay píxel directo o dato en `dataLayer` para GTM) para **deduplicar** navegador + servidor. La vista de landing puede disparar **`ViewContent`** por servidor mediante la Edge Function `meta-capi-masterclass-view` si el build incluye `VITE_META_CAPI_MASTERCLASS_VIEW_URL`.
+
 #### Pantalla de agradecimiento tras registro exitoso
 
 Tras enviar el formulario correctamente se muestra una tarjeta de confirmación que incluye:
@@ -559,9 +561,9 @@ Permite definir qué herramientas de analítica y publicidad cargan en el **siti
 **Eventos enviados en el sitio público (resumen):**
 
 - **PageView / virtual_page_view:** al cambiar de ruta en la SPA (vistas virtuales para embudo y atribución).
-- **ViewContent / masterclass_landing_view:** al visitar `/masterclass` (parámetros hacia Meta con identificadores neutros, alineados a buenas prácticas de las Condiciones de las herramientas de Meta para empresas).
+- **ViewContent / masterclass_landing_view:** al visitar `/masterclass` (parámetros hacia Meta con identificadores neutros). Si está desplegada la función `meta-capi-masterclass-view` y el frontend tiene `VITE_META_CAPI_MASTERCLASS_VIEW_URL`, también se envía **ViewContent por Conversions API** con el mismo `event_id` que el píxel o el campo `capi_event_id` en `dataLayer` (GTM).
 - **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz); parámetros hacia Meta neutros.
-- **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM). Con **píxel Meta directo** (sin GTM) se envía **`CompleteRegistration`** a Meta con parámetros neutros (`content_name` / `content_category`, sin datos de contacto). Si además configuraste **GA4**, se registra `sign_up`.
+- **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM; puede incluir `capi_event_id` para alinear con CAPI). Con **píxel Meta directo** (sin GTM) se envía **`CompleteRegistration`** con parámetros neutros y `eventID` igual al `capi_event_id` del servidor. La Edge Function `masterclass-register` envía el mismo evento por **Conversions API** cuando existen `META_ACCESS_TOKEN` y `meta_pixel_id` (contacto hasheado en servidor). Si configuraste **GA4** sin GTM, se registra `sign_up`.
 - **Schedule / schedule_cta_click:** al hacer clic en el CTA de Asesoría VIP que abre el calendario o enlace de pago externo.
 
 En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y un aviso si GTM e ID de Meta están rellenos a la vez.

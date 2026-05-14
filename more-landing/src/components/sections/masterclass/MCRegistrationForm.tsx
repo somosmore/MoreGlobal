@@ -4,7 +4,7 @@ import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown, 
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { trackMasterclassRegistration } from "@/lib/tracking"
+import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
@@ -527,6 +527,8 @@ export default function MCRegistrationForm() {
     setSubmitError(null)
 
     const fullPhone = `${form.countryCode}${form.phone.replace(/\s/g, "")}`
+    const capiEventId = crypto.randomUUID()
+    const { fbp, fbc } = getFbpFbcFromDocument()
 
     try {
       const edgeFunctionUrl = import.meta.env.VITE_MASTERCLASS_REGISTER_URL
@@ -548,6 +550,13 @@ export default function MCRegistrationForm() {
           phone: fullPhone,
           pais: form.pais,
           ...utmParams,
+          capi_event_id: capiEventId,
+          client_user_agent:
+            typeof navigator !== "undefined" ? navigator.userAgent : "",
+          event_source_url:
+            typeof window !== "undefined" ? window.location.href : "",
+          ...(fbp ? { fbp } : {}),
+          ...(fbc ? { fbc } : {}),
         }),
       })
 
@@ -558,7 +567,7 @@ export default function MCRegistrationForm() {
         )
       }
 
-      void trackMasterclassRegistration(settings)
+      void trackMasterclassRegistration(settings, { eventId: capiEventId })
       setSubmitted(true)
     } catch (err) {
       setSubmitError(

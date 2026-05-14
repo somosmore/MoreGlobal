@@ -1,4 +1,12 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
+import {
+  getClientIp,
+  getMetaPixelId,
+  hashEmailForMeta,
+  hashPhoneForMeta,
+  isTrackingEnabledForCapi,
+  sendPixelCapi,
+} from "../_shared/metaCapi.ts"
 
 const COUNTRY_ISO: Record<string, string> = {
   "Colombia": "CO", "México": "MX", "Estados Unidos": "US",
@@ -30,7 +38,22 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json()
-    const { nombre, email, phone, pais, utm_source, utm_medium, utm_campaign, utm_content, utm_term } = body
+    const {
+      nombre,
+      email,
+      phone,
+      pais,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_content,
+      utm_term,
+      capi_event_id,
+      client_user_agent,
+      event_source_url,
+      fbp,
+      fbc,
+    } = body
 
     if (!nombre || !email || !phone || !pais) {
       return new Response(
@@ -167,6 +190,67 @@ Deno.serve(async (req) => {
         JSON.stringify({ error: "Error al guardar el registro" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
+    }
+
+    const metaToken = Deno.env.get("META_ACCESS_TOKEN")?.trim()
+    if (
+      metaToken &&
+      typeof capi_event_id === "string" &&
+      capi_event_id.trim() &&
+      typeof client_user_agent === "string" &&
+      client_user_agent.trim() &&
+      typeof event_source_url === "string" &&
+      event_source_url.trim() &&
+      (await isTrackingEnabledForCapi(supabase))
+    ) {
+      const pixelId = await getMetaPixelId(supabase)
+      if (pixelId && /^\d+$/.test(pixelId)) {
+        try {
+          const emHash = await hashEmailForMeta(String(email))
+          const phHash = await hashPhoneForMeta(String(phone))
+          const userData: Record<string, unknown> = {
+            em: [emHash],
+            client_user_agent: String(client_user_agent).trim().slice(0, 2048),
+          }
+          if (phHash) userData.ph = [phHash]
+          const ip = getClientIp(req)
+          if (ip) userData.client_ip_address = ip
+          if (typeof fbp === "string" && fbp.trim()) userData.fbp = fbp.trim()
+          if (typeof fbc === "string" && fbc.trim()) userData.fbc = fbc.trim()
+
+          const event_time = Math.floor(Date.now() / 1000)
+          const capiData = [
+            {
+              event_name: "CompleteRegistration",
+              event_time,
+              event_id: capi_event_id.trim(),
+              action_source: "website",
+              event_source_url: String(event_source_url).trim().slice(0, 2048),
+              user_data: userData,
+              custom_data: {
+                content_name: "form_flow_c",
+                content_category: "content_view",
+              },
+            },
+          ]
+          const testCode = Deno.env.get("META_TEST_EVENT_CODE")?.trim() || null
+          const capiRes = await sendPixelCapi(
+            pixelId,
+            metaToken,
+            capiData,
+            testCode
+          )
+          if (!capiRes.ok) {
+            console.error(
+              "[masterclass-register] Meta CAPI error:",
+              capiRes.status,
+              capiRes.body
+            )
+          }
+        } catch (capiErr) {
+          console.error("[masterclass-register] Meta CAPI exception:", capiErr)
+        }
+      }
     }
 
     return new Response(

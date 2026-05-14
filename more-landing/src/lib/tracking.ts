@@ -24,10 +24,13 @@
  * --------------------------
  * - PageView / virtual_page_view → en cada cambio de ruta pública.
  * - ViewContent / masterclass_landing_view → al entrar específicamente a
- *   `/masterclass` (vista de la landing de masterclass).
+ *   `/masterclass` (vista de la landing de masterclass). Si existe
+ *   `VITE_META_CAPI_MASTERCLASS_VIEW_URL`, también se envía ViewContent por
+ *   Conversions API (Edge) con el mismo `event_id` que el píxel (deduplicación).
  * - Lead / lead_submitted → al enviar el quiz de diagnóstico con éxito.
  * - CompleteRegistration / masterclass_registration → registro masterclass OK
- *   (píxel directo: `fbq` con parámetros neutros; GTM: `dataLayer`). GA4: `sign_up`.
+ *   (píxel directo: `fbq` con parámetros neutros; GTM: `dataLayer`; CAPI en
+ *   `masterclass-register` cuando el cliente envía `capi_event_id`). GA4: `sign_up`.
  * - Schedule / schedule_cta_click → al hacer clic en el CTA VIP que abre el
  *   calendario o el link de pago.
  *
@@ -51,6 +54,47 @@ const META_EVENT_PARAMS = {
     content_category: "content_view",
   },
 } as const
+
+/** Lee cookies _fbp / _fbc para emparejar con Conversions API. */
+export const getFbpFbcFromDocument = (): { fbp?: string; fbc?: string } => {
+  if (typeof document === "undefined") return {}
+  const out: { fbp?: string; fbc?: string } = {}
+  for (const part of document.cookie.split(";")) {
+    const s = part.trim()
+    if (s.startsWith("_fbp=")) out.fbp = decodeURIComponent(s.slice(5))
+    if (s.startsWith("_fbc=")) out.fbc = decodeURIComponent(s.slice(5))
+  }
+  return out
+}
+
+const fireMasterclassViewContentCapi = (params: {
+  eventId: string
+  eventSourceUrl: string
+  clientUserAgent: string
+  fbp?: string
+  fbc?: string
+}) => {
+  const url = (import.meta.env.VITE_META_CAPI_MASTERCLASS_VIEW_URL as string | undefined)?.trim()
+  if (!url) return
+  const anonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim()
+  if (!anonKey) return
+  const body: Record<string, string> = {
+    event_id: params.eventId,
+    event_source_url: params.eventSourceUrl,
+    client_user_agent: params.clientUserAgent,
+  }
+  if (params.fbp) body.fbp = params.fbp
+  if (params.fbc) body.fbc = params.fbc
+  void fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
+    },
+    body: JSON.stringify(body),
+  }).catch(() => {})
+}
 
 declare global {
   interface Window {
@@ -252,6 +296,22 @@ export const sendPageView = (
   if (isAdminRoute(pathname)) return
   if (!trackingActive(settings)) return
 
+  let masterclassViewEventId: string | undefined
+  if (pathname === "/masterclass") {
+    const capiUrl = (import.meta.env.VITE_META_CAPI_MASTERCLASS_VIEW_URL as string | undefined)?.trim()
+    if (capiUrl) {
+      masterclassViewEventId = crypto.randomUUID()
+      const { fbp, fbc } = getFbpFbcFromDocument()
+      fireMasterclassViewContentCapi({
+        eventId: masterclassViewEventId,
+        eventSourceUrl: typeof window !== "undefined" ? window.location.href : "",
+        clientUserAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+        fbp,
+        fbc,
+      })
+    }
+  }
+
   const gtm = settings.google_tag_manager_id.trim()
   if (gtm) {
     window.dataLayer = window.dataLayer || []
@@ -265,6 +325,7 @@ export const sendPageView = (
         event: "masterclass_landing_view",
         ...META_EVENT_PARAMS.masterclassView,
         page_path: pathname,
+        ...(masterclassViewEventId ? { capi_event_id: masterclassViewEventId } : {}),
       })
     }
     return
@@ -273,9 +334,21 @@ export const sendPageView = (
   if (settings.meta_pixel_id.trim()) {
     window.fbq?.("track", "PageView")
     if (pathname === "/masterclass") {
-      window.fbq?.("track", "ViewContent", {
-        ...META_EVENT_PARAMS.masterclassView,
-      })
+      const viewOpts = masterclassViewEventId
+        ? { eventID: masterclassViewEventId }
+        : undefined
+      if (viewOpts) {
+        window.fbq?.(
+          "track",
+          "ViewContent",
+          { ...META_EVENT_PARAMS.masterclassView },
+          viewOpts
+        )
+      } else {
+        window.fbq?.("track", "ViewContent", {
+          ...META_EVENT_PARAMS.masterclassView,
+        })
+      }
     }
   }
 
@@ -358,9 +431,16 @@ export const trackLeadFromQuiz = async (settings: SiteSettingsMap) => {
  * - GTM: empuja `masterclass_registration` al `dataLayer`.
  * - Píxel Meta directo: `CompleteRegistration` con parámetros neutros (sin datos
  *   de contacto ni categorías sensibles). GA4: `sign_up` con method neutro.
+ * - Si `capi.eventId` está definido, se pasa a `fbq` / `dataLayer` para deduplicar
+ *   con el evento enviado por Conversions API desde el servidor.
  */
+export type MasterclassTrackingCapiContext = {
+  eventId?: string
+}
+
 export const trackMasterclassRegistration = async (
-  settings: SiteSettingsMap
+  settings: SiteSettingsMap,
+  capi?: MasterclassTrackingCapiContext
 ) => {
   if (isAdminRoute(window.location.pathname)) return
   if (!trackingActive(settings)) return
@@ -376,6 +456,7 @@ export const trackMasterclassRegistration = async (
     event: "masterclass_registration",
     ...META_EVENT_PARAMS.masterclassFormOk,
     page_path: "/masterclass",
+    ...(capi?.eventId ? { capi_event_id: capi.eventId } : {}),
   }
 
   if (gtm) {
@@ -385,9 +466,19 @@ export const trackMasterclassRegistration = async (
   }
 
   if (settings.meta_pixel_id.trim()) {
-    window.fbq?.("track", "CompleteRegistration", {
-      ...META_EVENT_PARAMS.masterclassFormOk,
-    })
+    const fbOpts = capi?.eventId ? { eventID: capi.eventId } : undefined
+    if (fbOpts) {
+      window.fbq?.(
+        "track",
+        "CompleteRegistration",
+        { ...META_EVENT_PARAMS.masterclassFormOk },
+        fbOpts
+      )
+    } else {
+      window.fbq?.("track", "CompleteRegistration", {
+        ...META_EVENT_PARAMS.masterclassFormOk,
+      })
+    }
   }
 
   if (settings.ga4_measurement_id.trim()) {
