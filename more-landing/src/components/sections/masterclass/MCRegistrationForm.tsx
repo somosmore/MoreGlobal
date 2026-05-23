@@ -7,7 +7,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa"
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/ESfl34rL4HFEbNmvj4EKnX"
 /** Segundos antes de abrir el grupo en la misma pestaña (si el usuario no pausa). */
 const MC_WHATSAPP_GROUP_REDIRECT_SECONDS = 4
 const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")

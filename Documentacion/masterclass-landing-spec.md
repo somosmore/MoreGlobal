@@ -30,7 +30,7 @@ El workflow de emails de recordatorio ya esta configurado en GHL — se dispara 
 | Hora | 7:00 PM hora Colombia (UTC-5) |
 | Formato | Online, en vivo, gratis |
 | Duracion | ~45 min por sesion |
-| WhatsApp Group | `https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa` |
+| WhatsApp Group | `https://chat.whatsapp.com/ESfl34rL4HFEbNmvj4EKnX` |
 
 ---
 
@@ -121,7 +121,7 @@ Disenar mobile-first, scroll vertical, sin navbar del sitio principal (landing i
 - H2: "Tu lugar esta reservado"
 - Texto: "Revisa tu email y tu WhatsApp. Te acabamos de enviar los detalles del evento."
 - Nota: "Registro exitoso! Redirigiendo al grupo de WhatsApp en X segundos..."
-  - Countdown de 3 segundos, luego redirect automatico a `https://chat.whatsapp.com/IN6xGGn4Lr2JQsZzwN2EQa`
+  - Countdown de 4 segundos, luego redirect automatico a `https://chat.whatsapp.com/ESfl34rL4HFEbNmvj4EKnX`
 - Boton fallback: "Unirme al grupo de WhatsApp" (verde WhatsApp `#25D366`)
   - Con icono de WhatsApp inline
 
