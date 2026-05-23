@@ -21,6 +21,7 @@ const BlueprintPage = lazy(() => import("@/pages/BlueprintPage"))
 const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
 const MasterclassPage = lazy(() => import("@/pages/MasterclassPage"))
+const UppPage = lazy(() => import("@/pages/UppPage"))
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -40,6 +41,7 @@ function App() {
           <Route path="/asesoria-vip" element={<VipSessionPage />} />
           <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
+          <Route path="/upp" element={<UppPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Protected admin area with shared layout */}

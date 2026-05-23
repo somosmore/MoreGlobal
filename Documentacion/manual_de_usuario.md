@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-14 (Meta Conversions API: ViewContent y CompleteRegistration de masterclass desde Edge; deduplicación con píxel vía `event_id`)
+> Última actualización: 2026-05-23 (Hero UPP actualizado con portada fotográfica full-width y copy reubicado para no cubrir el rostro)
 
 ---
 
@@ -20,6 +20,7 @@
    - 1.11 [Blueprint EB2-NIW (descargable)](#111-blueprint-eb2-niw-descargable)
    - 1.12 [Política de privacidad](#112-política-de-privacidad)
    - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
+   - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -342,6 +343,14 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 | Google Calendar / Apple·Outlook | Al usar cualquiera de estas opciones se **cancela** la redirección automática para que la pestaña del registro no cambie mientras el usuario agenda en otra ventana. |
 | Código QR | Enlace al mismo grupo de WhatsApp; pensado para quien registró en **computadora** y entra al grupo desde el **celular**. |
 | Botón verde de WhatsApp | Abre el grupo en **pestaña nueva** y cancela la redirección automática en la pestaña actual. |
+
+### 1.14 Landing UPP (`/upp`)
+
+**Ruta:** `/upp`
+
+Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
+
+El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`.
 
 ---
 
