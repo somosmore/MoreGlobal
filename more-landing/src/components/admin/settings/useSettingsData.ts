@@ -22,6 +22,13 @@ export function useSettingsData() {
   const [socialSaveState, setSocialSaveState] = useState<SaveState>("idle")
   const [socialSaveError, setSocialSaveError] = useState<string | null>(null)
 
+  // UPP
+  const [uppPaymentLink, setUppPaymentLink] = useState("")
+  const [uppPrice, setUppPrice] = useState("")
+  const [uppCountdownDate, setUppCountdownDate] = useState("")
+  const [uppSaveState, setUppSaveState] = useState<SaveState>("idle")
+  const [uppSaveError, setUppSaveError] = useState<string | null>(null)
+
   // Tracking
   const [metaPixelId, setMetaPixelId] = useState("")
   const [gtmId, setGtmId] = useState("")
@@ -39,6 +46,9 @@ export function useSettingsData() {
       setYoutubeUrl(settings.youtube_url)
       setVipPaymentLink(settings.vip_payment_link)
       setVipPrice(settings.vip_price)
+      setUppPaymentLink(settings.upp_payment_link)
+      setUppPrice(settings.upp_price)
+      setUppCountdownDate(settings.upp_countdown_date)
       setMetaPixelId(settings.meta_pixel_id)
       setGtmId(settings.google_tag_manager_id)
       setGa4Id(settings.ga4_measurement_id)
@@ -75,6 +85,37 @@ export function useSettingsData() {
     refetch()
 
     setTimeout(() => setSaveState("idle"), 3000)
+  }
+
+  const handleSaveUpp = async () => {
+    if (!supabase) {
+      setUppSaveError("No hay conexión con la base de datos.")
+      setUppSaveState("error")
+      return
+    }
+
+    setUppSaveState("saving")
+    setUppSaveError(null)
+
+    const { error } = await supabase.from("site_settings").upsert(
+      [
+        { key: "upp_payment_link", value: uppPaymentLink.trim() },
+        { key: "upp_price", value: uppPrice.trim() },
+        { key: "upp_countdown_date", value: uppCountdownDate.trim() },
+      ],
+      { onConflict: "key" }
+    )
+
+    if (error) {
+      setUppSaveError(error.message)
+      setUppSaveState("error")
+      return
+    }
+
+    setUppSaveState("success")
+    refetch()
+
+    setTimeout(() => setUppSaveState("idle"), 3000)
   }
 
   const handleSaveSocial = async () => {
@@ -153,6 +194,7 @@ export function useSettingsData() {
 
   const urlInvalid = calendarUrl.trim().length > 0 && !isValidUrl(calendarUrl)
   const vipPaymentLinkInvalid = vipPaymentLink.trim().length > 0 && !isValidUrl(vipPaymentLink)
+  const uppPaymentLinkInvalid = uppPaymentLink.trim().length > 0 && !isValidUrl(uppPaymentLink)
 
   const socialUrlInvalid = [instagramUrl, linkedinUrl, facebookUrl, youtubeUrl].some(
     (v) => v.trim().length > 0 && !isValidUrl(v)
@@ -181,6 +223,15 @@ export function useSettingsData() {
     handleSave,
     urlInvalid,
     vipPaymentLinkInvalid,
+
+    // UPP
+    uppPaymentLink, setUppPaymentLink,
+    uppPrice, setUppPrice,
+    uppCountdownDate, setUppCountdownDate,
+    uppSaveState, setUppSaveState,
+    uppSaveError,
+    handleSaveUpp,
+    uppPaymentLinkInvalid,
 
     // Social
     instagramUrl, setInstagramUrl,

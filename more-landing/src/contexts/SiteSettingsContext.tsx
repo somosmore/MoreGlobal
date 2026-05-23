@@ -15,6 +15,9 @@ const DEFAULTS: SiteSettingsMap = {
   google_tag_manager_id: "",
   ga4_measurement_id: "",
   tracking_enabled: "true",
+  upp_payment_link: "",
+  upp_price: "$2,500",
+  upp_countdown_date: "",
 }
 
 type SiteSettingsContextValue = {

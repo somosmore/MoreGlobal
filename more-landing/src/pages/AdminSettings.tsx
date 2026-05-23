@@ -1,16 +1,18 @@
-import { Calendar, LineChart, Settings, Share2, Sparkles } from "lucide-react"
+import { BookOpen, Calendar, LineChart, Settings, Share2, Sparkles } from "lucide-react"
 import {
   useSettingsData,
   TrackingSection,
   CalendarSection,
   VipSessionSection,
   SocialNetworksSection,
+  UppSection,
 } from "@/components/admin/settings"
 
 const SECTION_LINKS = [
   { id: "medicion", label: "Medición", Icon: LineChart },
   { id: "calendario", label: "Calendario", Icon: Calendar },
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
+  { id: "upp", label: "Programa UPP", Icon: BookOpen },
   { id: "redes", label: "Redes", Icon: Share2 },
 ] as const
 
@@ -112,6 +114,23 @@ export default function AdminSettings() {
               setSaveState={data.setSaveState}
               saveError={data.saveError}
               vipPaymentLinkInvalid={data.vipPaymentLinkInvalid}
+            />
+          </section>
+
+          <section id="upp" className="scroll-mt-32">
+            <UppSection
+              loading={data.loading}
+              uppPaymentLink={data.uppPaymentLink}
+              setUppPaymentLink={data.setUppPaymentLink}
+              uppPrice={data.uppPrice}
+              setUppPrice={data.setUppPrice}
+              uppCountdownDate={data.uppCountdownDate}
+              setUppCountdownDate={data.setUppCountdownDate}
+              uppSaveState={data.uppSaveState}
+              setUppSaveState={data.setUppSaveState}
+              uppSaveError={data.uppSaveError}
+              handleSaveUpp={data.handleSaveUpp}
+              uppPaymentLinkInvalid={data.uppPaymentLinkInvalid}
             />
           </section>
 

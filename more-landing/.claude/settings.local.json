@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Project\\\\Project\\\\MoreGlobal\\\\more-landing\" -Recurse -Depth 2)",
+      "Bash(Select-Object FullName)",
+      "WebFetch(domain:mdd.luqueacademy.com)"
+    ]
+  }
+}

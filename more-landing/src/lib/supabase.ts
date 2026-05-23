@@ -117,6 +117,9 @@ export type SiteSettingsMap = {
   google_tag_manager_id: string
   ga4_measurement_id: string
   tracking_enabled: string
+  upp_payment_link: string
+  upp_price: string
+  upp_countdown_date: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

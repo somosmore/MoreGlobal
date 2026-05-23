@@ -1,0 +1,231 @@
+{
+  "uppPage": {
+    "pageTitle": "Unsung Professional Program | MORE",
+    "meta": {
+      "description": "Self-managed program for professionals preparing their EB-2 NIW case with expert step-by-step guidance. 9 modules, 1:1 coaching and private community.",
+      "ogTitle": "Unsung Professional Program — Your Path to a Green Card",
+      "ogDescription": "Prepare your EB-2 NIW case with expert guidance. 9 modules, 4 live workshops, 4 coaching sessions. Starting at $2,500 USD."
+    },
+    "cta": {
+      "payNow": "Start my program now",
+      "talkToAdvisor": "Talk to an advisor",
+      "whatsappUrl": "https://wa.me/15483122105?text=Hi%20MORE,%20I'm%20interested%20in%20the%20Unsung%20Professional%20program.",
+      "comingSoon": "Coming soon"
+    },
+    "hero": {
+      "badge": "Self-managed program",
+      "titleBefore": "Turn your career into an ",
+      "titleHighlight": "approved Green Card",
+      "subtitle": "The step-by-step program for professionals who want to prepare their EB-2 NIW case with strategy, real evidence and expert guidance.",
+      "stats": [
+        { "value": "9", "label": "Complete modules" },
+        { "value": "4", "label": "Live workshops" },
+        { "value": "4", "label": "1:1 sessions" },
+        { "value": "90–120", "label": "Day roadmap" }
+      ],
+      "countdownLabel": "Offer closes in",
+      "priceEyebrow": "One-time investment",
+      "currency": "USD"
+    },
+    "audience": {
+      "eyebrow": "Is it for you?",
+      "title": "This program was designed for professionals like you",
+      "subtitle": "If you identify with any of these profiles, the UPP could be your best investment.",
+      "profiles": [
+        {
+          "icon": "briefcase",
+          "title": "Career professionals",
+          "text": "Engineers, doctors, lawyers, scientists and other professionals with advanced degrees who want to demonstrate their national impact."
+        },
+        {
+          "icon": "building",
+          "title": "Business owners & entrepreneurs",
+          "text": "Business owners with operations that generate economic or social impact in the U.S. seeking permanent residency."
+        },
+        {
+          "icon": "globe",
+          "title": "Global impact talent",
+          "text": "Professionals whose work transcends borders with publications, patents or international-reach projects."
+        },
+        {
+          "icon": "graduationCap",
+          "title": "Researchers & academics",
+          "text": "Faculty, researchers and PhDs with scientific output looking to build a solid national interest case."
+        }
+      ]
+    },
+    "problem": {
+      "eyebrow": "The problem",
+      "title": "What happens to most professionals",
+      "points": [
+        {
+          "icon": "alertTriangle",
+          "title": "They spend thousands without a strategy",
+          "description": "They pay lawyers who only fill out forms without building a strategic case. The result: weak petitions and avoidable denials."
+        },
+        {
+          "icon": "clock",
+          "title": "They waste months without progress",
+          "description": "They get stuck in analysis paralysis, researching contradictory and outdated information on their own."
+        },
+        {
+          "icon": "xCircle",
+          "title": "They underestimate their own profile",
+          "description": "They think they don't qualify because they lack a PhD or a million-dollar company, when their career has more power than they realize."
+        }
+      ]
+    },
+    "solution": {
+      "eyebrow": "The solution",
+      "title": "The Unsung Professional Program gives you the complete method",
+      "subtitle": "It's not a generic course or an automated process. It's a self-managed system with real guidance to build an approvable EB-2 NIW case.",
+      "highlights": [
+        "A proven method with 200+ approved professionals",
+        "Personalized coaching for your specific profile",
+        "Templates and guides to build real evidence",
+        "Community of professionals in the same process",
+        "Clear 90 to 120-day roadmap to petition"
+      ]
+    },
+    "benefits": {
+      "eyebrow": "What's included",
+      "title": "Everything you need to prepare your case",
+      "items": [
+        {
+          "icon": "bookOpen",
+          "title": "9 complete modules",
+          "text": "Structured content covering from profile evaluation to final petition preparation."
+        },
+        {
+          "icon": "video",
+          "title": "4 practical live workshops",
+          "text": "Group sessions where you work directly on your case with real-time feedback."
+        },
+        {
+          "icon": "users",
+          "title": "4 one-on-one coaching sessions",
+          "text": "Individual guidance from a specialist who knows your profile and helps you with key decisions."
+        },
+        {
+          "icon": "fileText",
+          "title": "Implementation guides",
+          "text": "Templates, checklists and frameworks to implement your national interest project in 90 days with real evidence."
+        },
+        {
+          "icon": "messageCircle",
+          "title": "Private community",
+          "text": "Network of professionals in the same process. Share experiences, resolve doubts and stay motivated."
+        },
+        {
+          "icon": "target",
+          "title": "Clear 90–120 day roadmap",
+          "text": "No guessing. Each week you know exactly what to build, document and how to move forward."
+        }
+      ]
+    },
+    "modules": {
+      "eyebrow": "Program content",
+      "title": "9 modules that take you from profile to petition",
+      "items": [
+        { "number": "01", "title": "Profile evaluation & eligibility", "description": "Deep analysis of your background to identify your EB-2 NIW strengths and areas to reinforce.", "value": "$500" },
+        { "number": "02", "title": "EB-2 NIW fundamentals", "description": "Master the legal requirements, the 3 Dhanasar pillars and how a winning case is built.", "value": "$400" },
+        { "number": "03", "title": "National interest project design", "description": "Create a project with real, measurable impact that demonstrates your benefit to the U.S. national interest.", "value": "$600" },
+        { "number": "04", "title": "Evidence building", "description": "Learn to generate, document and present solid evidence: publications, letters, impact metrics.", "value": "$500" },
+        { "number": "05", "title": "Professional narrative", "description": "Write your professional story in a way that connects your background to the national interest.", "value": "$400" },
+        { "number": "06", "title": "Recommendation letters", "description": "Strategy for obtaining powerful letters from independent experts that support your case.", "value": "$500" },
+        { "number": "07", "title": "Business plan / Professional plan", "description": "Build the document that demonstrates the viability and impact of your proposal in the U.S.", "value": "$600" },
+        { "number": "08", "title": "Case file preparation", "description": "Organize all documents and forms for a complete, professional petition.", "value": "$400" },
+        { "number": "09", "title": "Post-filing strategy", "description": "What to expect after filing, how to respond to RFEs and prepare for approval.", "value": "$300" }
+      ]
+    },
+    "testimonials": {
+      "eyebrow": "Real cases",
+      "title": "Professionals who already made it",
+      "items": [
+        {
+          "name": "Carlos M.",
+          "role": "Medical specialist",
+          "country": "Venezuela",
+          "quote": "I thought without a PhD I had no chance. The program helped me build such a strong case that it was approved in 4 months."
+        },
+        {
+          "name": "Ana P.",
+          "role": "Business owner",
+          "country": "Colombia",
+          "quote": "The best part of the UPP is that it gives you the structure to move forward independently. The coaching sessions were key to my approval."
+        },
+        {
+          "name": "Roberto L.",
+          "role": "Software engineer",
+          "country": "Mexico",
+          "quote": "The evidence building module changed everything. I discovered my work had much more impact than I believed."
+        }
+      ]
+    },
+    "valueStack": {
+      "eyebrow": "Your investment",
+      "title": "The real value of what you receive",
+      "items": [
+        { "label": "9 strategic training modules", "value": "$4,200" },
+        { "label": "4 practical live workshops", "value": "$2,000" },
+        { "label": "4 one-on-one coaching sessions", "value": "$1,600" },
+        { "label": "Implementation guides & templates", "value": "$800" },
+        { "label": "Private community access", "value": "$500" }
+      ],
+      "totalLabel": "Total value",
+      "totalValue": "$9,100",
+      "youPayLabel": "Today you get it for only"
+    },
+    "pricing": {
+      "eyebrow": "One-time investment",
+      "currency": "USD",
+      "timeline": "90 – 120 days",
+      "timelineLabel": "Program duration",
+      "guarantee": "7-day guarantee: if you feel the program isn't for you, we'll refund 100% of your investment.",
+      "guaranteeLabel": "Risk-free",
+      "urgencyLine": "Spots are limited to ensure the quality of guidance."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "subtitle": "Get your questions answered about the Unsung Professional Program.",
+      "items": [
+        {
+          "question": "What exactly is the Unsung Professional Program?",
+          "answer": "It's a self-managed program for professionals who want to prepare their EB-2 NIW case step by step. It includes 9 content modules, live workshops, individual coaching and access to a private community."
+        },
+        {
+          "question": "Do I need a lawyer in addition to the program?",
+          "answer": "The program prepares you to build a solid case. Many of our students complement with a lawyer for final review, but the program covers the complete strategy and preparation."
+        },
+        {
+          "question": "How long do I have to complete the program?",
+          "answer": "The suggested roadmap is 90 to 120 days, but you have unlimited access to the content. You can progress at your own pace."
+        },
+        {
+          "question": "Are there payment options?",
+          "answer": "Yes, we offer flexible payment plans. Contact an advisor via WhatsApp to learn about available options."
+        },
+        {
+          "question": "What happens if my case is denied?",
+          "answer": "The program teaches you to build a case with the highest standards. If you receive an RFE (Request for Evidence), you have access to the post-filing strategy module and your coach to prepare the response."
+        },
+        {
+          "question": "Can I start if I'm not in the U.S. yet?",
+          "answer": "Yes. The EB-2 NIW doesn't require you to be in the U.S. to start the process. You can build your case from any country."
+        },
+        {
+          "question": "What's the difference between UPP and Plan Plus?",
+          "answer": "With the UPP you get the tools, templates and coaching to manage your own case. Plan Plus ($8,000) includes complete professional plan development, testimonial writing and full case management. It's for those who prefer to delegate the execution."
+        },
+        {
+          "question": "Do you offer a refund guarantee?",
+          "answer": "Yes. If within the first 7 days you feel the program isn't for you, we'll refund 100% of your investment, no questions asked."
+        }
+      ]
+    },
+    "stickyCta": {
+      "text": "Enroll in UPP",
+      "subtext": "Only {{price}} USD"
+    }
+  }
+}

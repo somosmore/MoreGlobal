@@ -4,11 +4,13 @@ import LanguageDetector from "i18next-browser-languagedetector"
 
 import es from "./locales/es/translation.json"
 import esVipPage from "./locales/es/vipPage.json"
+import esUppPage from "./locales/es/uppPage.json"
 import en from "./locales/en/translation.json"
 import enVipPage from "./locales/en/vipPage.json"
+import enUppPage from "./locales/en/uppPage.json"
 
-const esMerged = { ...es, ...esVipPage }
-const enMerged = { ...en, ...enVipPage }
+const esMerged = { ...es, ...esVipPage, ...esUppPage }
+const enMerged = { ...en, ...enVipPage, ...enUppPage }
 
 i18n
   .use(LanguageDetector)
