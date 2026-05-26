@@ -10,7 +10,7 @@ import "flag-icons/css/flag-icons.min.css"
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/ESfl34rL4HFEbNmvj4EKnX"
 /** Segundos antes de abrir el grupo en la misma pestaña (si el usuario no pausa). */
 const MC_WHATSAPP_GROUP_REDIRECT_SECONDS = 4
-const EVENT_DATE = new Date("2026-05-25T19:00:00-05:00")
+const REGISTRATION_CLOSES_AT = new Date("2026-05-27T23:59:59-05:00")
 
 const COUNTRY_CODES = [
   { code: "+57",  iso: "co", dial: "+57"  },
@@ -578,11 +578,11 @@ export default function MCRegistrationForm() {
     }
   }, [form, utmParams, settings])
 
-  const [isExpired, setIsExpired] = useState(() => Date.now() > EVENT_DATE.getTime())
+  const [isExpired, setIsExpired] = useState(() => Date.now() > REGISTRATION_CLOSES_AT.getTime())
 
   useEffect(() => {
     if (isExpired) return
-    const msUntilExpiry = EVENT_DATE.getTime() - Date.now()
+    const msUntilExpiry = REGISTRATION_CLOSES_AT.getTime() - Date.now()
     if (msUntilExpiry <= 0) {
       setIsExpired(true)
       return
