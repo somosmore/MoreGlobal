@@ -591,7 +591,7 @@ export default function AdminProjectWizard() {
                     ))}
                   </div>
                   <Input
-                    placeholder="URL o número (Ej: https://wa.me/15483122105 o https://calendly.com/...)"
+                    placeholder="URL o número (Ej: https://wa.me/573245327948 o https://calendly.com/...)"
                     value={p4.primary_action_url ?? ""}
                     onChange={(e) =>
                       updateAnswers("part4", "primary_action_url", e.target.value)
