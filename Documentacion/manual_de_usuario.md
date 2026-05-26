@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-23 (Hero UPP actualizado con portada fotográfica full-width y copy reubicado para no cubrir el rostro)
+> Última actualización: 2026-05-26 (Control de disponibilidad de landings: status visual, fechas con auto-save al perder foco, feedback de éxito/error y botón "Programar" más visible)
 
 ---
 
@@ -328,6 +328,8 @@ La página Blueprint es un recurso de contenido educativo de alto valor (lead ma
 **Ruta:** `/masterclass`
 
 Landing dedicada al evento (hero, beneficios, formulario de registro, FAQ, speaker, pie y CTA fijo). El registro envía los datos a la función Edge `masterclass-register` y guarda el lead en Supabase.
+
+**Disponibilidad:** La página solo se renderiza si la fila correspondiente en `landing_projects` (route = `/masterclass`) tiene `is_active = true` y la fecha actual está dentro del rango `activate_at` / `deactivate_at`. Si no, muestra un fallback "Evento no disponible". Esta configuración se controla desde el admin en **Recursos → Landings**, sobre la tarjeta de la masterclass: switch para encender/apagar y botón "Programar" para fechas (ver detalle en sección 2.9).
 
 **Meta Conversions API (servidor):** si en Supabase está configurado el secreto `META_ACCESS_TOKEN` y en `site_settings` hay `meta_pixel_id`, tras un registro exitoso la misma Edge Function puede enviar a Meta el evento estándar **`CompleteRegistration`** con email y teléfono hasheados (SHA-256), además de IP/UA y cookies `_fbp`/`_fbc` cuando el navegador las envía. El formulario genera un `capi_event_id` compartido con el píxel en navegador (cuando hay píxel directo o dato en `dataLayer` para GTM) para **deduplicar** navegador + servidor. La vista de landing puede disparar **`ViewContent`** por servidor mediante la Edge Function `meta-capi-masterclass-view` si el build incluye `VITE_META_CAPI_MASTERCLASS_VIEW_URL`.
 
@@ -857,6 +859,37 @@ Biblioteca centralizada donde se almacenan y consultan todos los activos estrat�
 - **Vista previa embebida**: Modal a pantalla completa con `<iframe>` para PDF y HTML; enlace externo para links
 - **Landings con mock browser**: Las landings generadas muestran una tarjeta con ventana de navegador simulada con el copy del hero (`h1`, `h2`, CTA)
 - **Landings con URL live**: Si el campo `live_url` está cargado en el proyecto, aparece un chip `LIVE` y se puede ver el sitio en un modal iframe
+- **Control de disponibilidad de landings**: Cada tarjeta de landing tiene un switch para encender/apagar la página y un botón "Programar" para definir ventanas de activación/desactivación automáticas (ver detalle abajo)
+
+### Control de disponibilidad de una landing pública
+
+En la tab **Landings** (o **Todos**) cada landing muestra:
+
+- **Switch** verde/gris para activar o apagar la página manualmente. Actualiza la columna `is_active` en `landing_projects`.
+- **Badge de estado** al lado del switch con la disponibilidad real combinando switch + fechas:
+  - 🟢 **Disponible**: la página se ve públicamente
+  - ⚪ **Apagada**: el switch está en off
+  - 🟠 **Programada**: hay `activate_at` futuro
+  - 🔴 **Expirada**: la fecha de `deactivate_at` ya pasó
+- **Botón "Programar"**: abre dos inputs `datetime-local`:
+  - **Activar**: fecha/hora a partir de la cual la landing pasa a estar disponible (puede dejarse vacío)
+  - **Desactivar**: fecha/hora en la que la landing deja de estar disponible (puede dejarse vacío)
+- Las fechas se guardan **al salir del input** (`onBlur`) y muestran feedback inmediato ("Fecha guardada" / "No se pudo guardar"). Cada fecha tiene un botón ✕ para borrarla.
+
+#### Lógica de runtime (cómo se evalúa la disponibilidad)
+
+El componente público de la landing (por ejemplo `/masterclass`) usa el hook `useLandingStatus(route)` que consulta `landing_projects` por `route` y aplica este orden:
+
+1. Si `deactivate_at` ya pasó → **expired** (muestra fallback "Evento no disponible")
+2. Si `activate_at` aún no llega → **scheduled** (muestra fallback "El evento aún no ha comenzado")
+3. Si `is_active = false` → **inactive** (muestra fallback "Este evento no está activo")
+4. Si pasa todo lo anterior → **active** (la landing se renderiza normalmente)
+
+#### Buenas prácticas
+
+- Para que una landing esté disponible **ya**: dejá `activate_at` vacío y el switch encendido.
+- Para que una landing **expire** sola: dejá el switch encendido y poné `deactivate_at` en la fecha/hora local de corte.
+- Si no querés que use fechas, dejá ambas vacías. La disponibilidad la define solo el switch.
 
 ### Tipos de recursos (`type`)
 
@@ -865,6 +898,7 @@ Biblioteca centralizada donde se almacenan y consultan todos los activos estrat�
 | `brand` | Recursos de identidad visual (manual de marca, paleta, tipografías) |
 | `strategy` | Documentos estratégicos (blueprint, planes de negocio) |
 | `playbook` | Guías de proceso y operación |
+| `landing` | Páginas/landings (referencias o ya integradas en el sitio) |
 
 ### Formatos de recursos (`format`)
 

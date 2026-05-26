@@ -122,13 +122,13 @@ export default function MCHero() {
             >
               <div className="flex items-center justify-between text-xs text-white/50 mb-2">
                 <span>Cupos ocupados</span>
-                <span className="font-semibold text-[#F37021]">87%</span>
+                <span className="font-semibold text-[#F37021]">98%</span>
               </div>
               <div className="h-2 rounded-full bg-white/10 overflow-hidden">
                 <motion.div
                   className="h-full rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A]"
                   initial={{ width: 0 }}
-                  animate={{ width: "87%" }}
+                  animate={{ width: "98%" }}
                   transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
                 />
               </div>
