@@ -22,6 +22,7 @@ const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
 const MasterclassPage = lazy(() => import("@/pages/MasterclassPage"))
 const UppPage = lazy(() => import("@/pages/UppPage"))
+const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -42,6 +43,7 @@ function App() {
           <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/upp" element={<UppPage />} />
+          <Route path="/wppequipo" element={<WppEquipoPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Protected admin area with shared layout */}

@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-26 (Control de disponibilidad de landings: status visual, fechas con auto-save al perder foco, feedback de éxito/error y botón "Programar" más visible)
+> Última actualización: 2026-05-27 (`/wppequipo` autogestionable desde admin: CRUD de números, activación de página, QR y enlace para compartir)
 
 ---
 
@@ -21,6 +21,7 @@
    - 1.12 [Política de privacidad](#112-política-de-privacidad)
    - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
    - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
+   - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -354,6 +355,22 @@ Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una porta
 
 El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`.
 
+### 1.15 Redirección WhatsApp Equipo (`/wppequipo`)
+
+**Ruta pública:** `https://moremigracion.com/wppequipo` (equivalente a `/wppequipo` en el sitio)
+
+Página de utilidad para campañas, QR impresos y enlaces cortos que distribuyen el contacto del **Equipo MORE** entre varios números de WhatsApp sin intervención del programador.
+
+**Comportamiento para el visitante:**
+
+- Al cargar, se elige **al azar** uno de los enlaces activos en la tabla `wpp_team_numbers` y se redirige automáticamente con `window.location.replace`.
+- Mientras redirige, muestra la pantalla **“Conectando con el Equipo MORE”** y un botón de respaldo *“¿No abrió solo? Tocá acá para continuar”*.
+- Si la página está **desactivada** en admin (`wppequipo_enabled = false`) o no hay números activos, redirige al **WhatsApp general** del sitio (`whatsapp_number` en configuración).
+- Si tampoco hay WhatsApp general configurado, muestra un mensaje amable de indisponibilidad con enlace a la home.
+- Incluye `<meta name="robots" content="noindex, nofollow">` (no indexable en buscadores).
+
+**Gestión:** todo se configura desde `/admin/settings` → sección **WhatsApp Equipo** (ver [2.5](#25-módulo-de-configuración)).
+
 ---
 
 ## 2. Panel de Administración (CRM)
@@ -614,6 +631,36 @@ A partir de ese momento, el botón CTA del Blueprint abrirá el calendario confi
 
 Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de contacto del footer únicamente si tienen URL configurada.
 
+#### WhatsApp Equipo (`/wppequipo`)
+
+**Ubicación:** `/admin/settings` → ancla **WhatsApp Equipo** (o sección `#wppequipo`).
+
+Permite autogestionar la página pública `https://moremigracion.com/wppequipo` sin editar código.
+
+| Control | Descripción |
+|---------|-------------|
+| **Página activa** (switch) | Activa o desactiva la distribución por números del equipo. Si está desactivada, los visitantes caen al WhatsApp general (`whatsapp_number`). |
+| **URL pública + Copiar** | Muestra `https://moremigracion.com/wppequipo` con botón para copiar al portapapeles. |
+| **Código QR** | QR generado en el panel apuntando a la URL pública. Botón **Descargar QR (PNG)** para materiales impresos. |
+| **Lista de números** | CRUD de enlaces: nombre/etiqueta, URL de WhatsApp, activar/desactivar cada uno, editar y eliminar. |
+
+**Cómo agregar un número:**
+
+1. Ir a `/admin/settings` → **WhatsApp Equipo**.
+2. Verificar que **Página activa** esté encendida.
+3. Clic en **Agregar número**.
+4. Completar **Nombre / etiqueta** (ej: Sandra, Hugo) y **Enlace de WhatsApp** (formatos válidos: `wa.me`, `wa.link`, `api.whatsapp.com`, `chat.whatsapp.com`).
+5. Guardar. El número entra en la rotación aleatoria si está **Activo**.
+
+**Cómo compartir:**
+
+- Copiar el enlace desde el campo URL o descargar el QR PNG para flyers, tarjetas o presentaciones.
+- El enlace siempre es `https://moremigracion.com/wppequipo` (no cambia al agregar números).
+
+| Campo en BD | Tipo | Descripción |
+|-------------|------|-------------|
+| `wppequipo_enabled` | texto (`true` / `false`) | En `site_settings`. Activa la página de reparto entre números del equipo. |
+
 ---
 
 ## Tablas de base de datos (Supabase)
@@ -682,8 +729,28 @@ Los íconos de Instagram, LinkedIn y Facebook aparecerán en la sección de cont
 | `google_tag_manager_id` | Contenedor GTM (`GTM-...`); si existe, el sitio carga solo GTM |
 | `ga4_measurement_id` | Medición GA4 (`G-...`) si GA4 no va solo vía GTM |
 | `tracking_enabled` | `true` / `false`: activa o pausa scripts y eventos de medición |
+| `wppequipo_enabled` | `true` / `false`: activa la página `/wppequipo` con reparto aleatorio entre números del equipo |
+| `upp_payment_link` | URL de pago del programa UPP |
+| `upp_price` | Precio mostrado en landing UPP |
+| `upp_countdown_date` | Fecha de cierre del countdown UPP (opcional) |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
+
+### `wpp_team_numbers`
+
+Números/enlaces de WhatsApp del equipo para la página `/wppequipo`.
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | uuid | Clave primaria |
+| `label` | text | Nombre visible en admin (ej: Sandra, Equipo MORE 1) |
+| `url` | text | Enlace completo de WhatsApp (`wa.me`, `wa.link`, etc.) |
+| `is_active` | boolean | Si participa en la rotación aleatoria |
+| `sort_order` | int | Orden de visualización en el panel admin |
+| `created_at` | timestamptz | Fecha de alta |
+| `updated_at` | timestamptz | Última modificación (automático) |
+
+**RLS:** Lectura pública solo filas con `is_active = true` (página pública). Usuarios autenticados ven y editan todos los registros.
 
 ---
 

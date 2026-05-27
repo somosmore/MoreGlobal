@@ -29,6 +29,22 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-27] — `/wppequipo` autogestionable desde admin (CRUD + QR + activación)
+
+- Agente: cursor
+- Archivos modificados: `supabase/migrations/026_wpp_team_numbers.sql`, `src/lib/supabase.ts`, `src/lib/wppEquipo.ts`, `src/contexts/SiteSettingsContext.tsx`, `src/pages/WppEquipoPage.tsx`, `src/components/admin/settings/useWppTeamData.ts`, `src/components/admin/settings/WppTeamSection.tsx`, `src/components/admin/settings/index.ts`, `src/pages/AdminSettings.tsx`, `package.json`, `package-lock.json`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Tabla `wpp_team_numbers` con RLS (público lee activos, admin CRUD completo). Flag `wppequipo_enabled` en `site_settings`. Sección admin en Configuración con switch de activación, lista CRUD de números, QR (`qrcode.react`) y copiar enlace `https://moremigracion.com/wppequipo`. Página pública lee números desde Supabase; si página desactivada o sin activos, fallback a `whatsapp_number` general; si no hay fallback, pantalla de indisponibilidad.
+- Problemas encontrados: ninguno en build/lint. Requiere ejecutar migración `026_wpp_team_numbers.sql` en Supabase SQL Editor.
+- Estado: ✅ completo
+
+### [2026-05-26] — Página `/wppequipo` con redirección aleatoria a WhatsApp
+
+- Agente: cursor
+- Archivos modificados: `more-landing/src/pages/WppEquipoPage.tsx` (nuevo), `more-landing/src/App.tsx`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Nueva ruta pública `/wppequipo` que redirige automáticamente a un enlace aleatorio entre `https://wa.me/message/VRDWDC4SHZIOA1` y `https://wa.link/a1z0jm`. La página muestra una pantalla de carga con identidad visual MORE/WhatsApp (degradado verde, ícono animado y CTA fallback "¿No abrió solo? Tocá acá para continuar"). Se inyectan `meta description` y `meta robots="noindex, nofollow"` por SEO y se restauran al desmontar. La ruta se registra como lazy import en `App.tsx`.
+- Problemas encontrados: warnings de Tailwind v4 (`min-h-[100dvh]` → `min-h-dvh`, `bg-gradient-to-br` → `bg-linear-to-br`) corregidos al primer pase.
+- Estado: ✅ completo
+
 ### [2026-05-11] — TRK-03: UX/UI de admin/settings (medición)
 
 - Agente: claude

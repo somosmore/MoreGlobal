@@ -18,6 +18,7 @@ const DEFAULTS: SiteSettingsMap = {
   upp_payment_link: "",
   upp_price: "$2,500",
   upp_countdown_date: "",
+  wppequipo_enabled: "true",
 }
 
 type SiteSettingsContextValue = {

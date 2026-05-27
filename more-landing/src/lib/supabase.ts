@@ -103,6 +103,16 @@ export type SiteSetting = {
   updated_at: string
 }
 
+export type WppTeamNumber = {
+  id: string
+  label: string
+  url: string
+  is_active: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
 export type SiteSettingsMap = {
   calendar_url: string
   whatsapp_number: string
@@ -120,6 +130,7 @@ export type SiteSettingsMap = {
   upp_payment_link: string
   upp_price: string
   upp_countdown_date: string
+  wppequipo_enabled: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

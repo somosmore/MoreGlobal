@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, LineChart, Settings, Share2, Sparkles } from "lucide-react"
+import { BookOpen, Calendar, LineChart, MessageCircle, Settings, Share2, Sparkles } from "lucide-react"
 import {
   useSettingsData,
   TrackingSection,
@@ -6,6 +6,7 @@ import {
   VipSessionSection,
   SocialNetworksSection,
   UppSection,
+  WppTeamSection,
 } from "@/components/admin/settings"
 
 const SECTION_LINKS = [
@@ -13,6 +14,7 @@ const SECTION_LINKS = [
   { id: "calendario", label: "Calendario", Icon: Calendar },
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
   { id: "upp", label: "Programa UPP", Icon: BookOpen },
+  { id: "wppequipo", label: "WhatsApp Equipo", Icon: MessageCircle },
   { id: "redes", label: "Redes", Icon: Share2 },
 ] as const
 
@@ -132,6 +134,10 @@ export default function AdminSettings() {
               handleSaveUpp={data.handleSaveUpp}
               uppPaymentLinkInvalid={data.uppPaymentLinkInvalid}
             />
+          </section>
+
+          <section id="wppequipo" className="scroll-mt-32">
+            <WppTeamSection />
           </section>
 
           <section id="redes" className="scroll-mt-32">
