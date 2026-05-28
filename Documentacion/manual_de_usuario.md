@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-27 (`/wppequipo` autogestionable desde admin: CRUD de números, activación de página, QR y enlace para compartir)
+> Última actualización: 2026-05-28 (`/wppequipo`: importación masiva de números con formateo automático y código de país por defecto + CRUD individual, QR y enlace para compartir)
 
 ---
 
@@ -643,14 +643,42 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 | **URL pública + Copiar** | Muestra `https://moremigracion.com/wppequipo` con botón para copiar al portapapeles. |
 | **Código QR** | QR generado en el panel apuntando a la URL pública. Botón **Descargar QR (PNG)** para materiales impresos. |
 | **Lista de números** | CRUD de enlaces: nombre/etiqueta, URL de WhatsApp, activar/desactivar cada uno, editar y eliminar. |
+| **Importar lista** (botón) | Importación masiva con formateo automático: pegás un bloque de texto con índice + nombre + teléfono y el sistema arma las URLs `https://wa.me/<numero>` con el código de país correspondiente. |
 
-**Cómo agregar un número:**
+**Cómo agregar un número (uno a uno):**
 
 1. Ir a `/admin/settings` → **WhatsApp Equipo**.
 2. Verificar que **Página activa** esté encendida.
 3. Clic en **Agregar número**.
 4. Completar **Nombre / etiqueta** (ej: Sandra, Hugo) y **Enlace de WhatsApp** (formatos válidos: `wa.me`, `wa.link`, `api.whatsapp.com`, `chat.whatsapp.com`).
 5. Guardar. El número entra en la rotación aleatoria si está **Activo**.
+
+**Cómo importar una lista masiva:**
+
+1. Clic en **Importar lista**.
+2. Pegar el texto con el formato libre. El parser entiende bloques tipo:
+   ```
+   36
+   Andres Chancusig
+   0989812877
+   37
+   Jose Forero
+   954932639
+   ```
+   - Los números cortos sueltos (1–3 dígitos) se ignoran (índices de la lista).
+   - Las líneas con letras se toman como **nombre/etiqueta**.
+   - Las líneas con 7+ dígitos se toman como **teléfono**.
+3. Seleccionar **País por defecto** (ej: Ecuador +593). Se usa solo para números sin prefijo internacional; los que ya traen código de país (ej: `50498549249` para Honduras) se respetan.
+4. Clic en **Procesar y previsualizar**. Se muestra una tabla con cada entrada:
+   - Nombre, teléfono original, URL final `https://wa.me/...`.
+   - Las entradas inválidas se marcan en rojo (con el motivo: falta nombre o número inválido).
+   - Cada fila es editable; se puede corregir el nombre/teléfono o quitar la fila.
+5. Clic en **Importar X números**. Solo se guardan las válidas, en una sola operación masiva.
+
+> Reglas de formateo:
+> - Los ceros iniciales del teléfono nacional se eliminan al anteponer el código de país (ej: `0989812877` con país Ecuador → `https://wa.me/593989812877`).
+> - Si el número ya viene con código de país conocido, no se modifica.
+> - Cambiar el país por defecto después de procesar **vuelve a normalizar** los números que no traían prefijo internacional.
 
 **Cómo compartir:**
 

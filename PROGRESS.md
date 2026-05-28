@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-28] — `/wppequipo`: importación masiva de números con formateo automático
+
+- Agente: cursor
+- Archivos modificados: `src/lib/wppEquipo.ts`, `src/components/admin/settings/useWppTeamData.ts`, `src/components/admin/settings/WppTeamSection.tsx`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Botón **Importar lista** en `/admin/settings` → WhatsApp Equipo. Modal con textarea + selector de país por defecto (20 países: Ecuador, Colombia, México, Argentina, Perú, Chile, Bolivia, Paraguay, Uruguay, Honduras, Guatemala, El Salvador, Nicaragua, Costa Rica, Panamá, Haití, Venezuela, Brasil, España, USA/Canadá). El parser entiende el formato libre (índice + nombre + teléfono, una línea cada uno) usado en listas internas: ignora índices cortos, detecta nombres por letras y teléfonos por dígitos. `normalizePhone` aplica el código de país por defecto solo a los números que no lo traen, elimina ceros iniciales nacionales y respeta los que ya vienen con prefijo internacional conocido. Preview tabular con nombre/teléfono/URL editables y badge de errores (falta nombre o número inválido) antes de la inserción masiva vía `bulkCreateNumbers` (un solo INSERT).
+- Problemas encontrados: ninguno nuevo en build/lint. Los errores de lint en `useWppTeamData.ts` son preexistentes (patrón `setState-in-effect` heredado).
+- Estado: ✅ completo
+
 ### [2026-05-27] — `/wppequipo` autogestionable desde admin (CRUD + QR + activación)
 
 - Agente: cursor

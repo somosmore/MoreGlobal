@@ -174,6 +174,50 @@ export function useWppTeamData() {
     return true
   }
 
+  const bulkCreateNumbers = async (
+    items: Array<{ label: string; url: string }>,
+  ): Promise<{ success: number; failed: number; error?: string }> => {
+    if (!supabase) {
+      setActionError("No hay conexión con la base de datos.")
+      return { success: 0, failed: items.length, error: "Sin conexión" }
+    }
+
+    const cleanItems = items
+      .map((i) => ({ label: i.label.trim(), url: i.url.trim() }))
+      .filter((i) => i.label && isValidWhatsappUrl(i.url))
+
+    if (cleanItems.length === 0) {
+      setActionError("No hay entradas válidas para importar.")
+      return { success: 0, failed: items.length, error: "Sin entradas válidas" }
+    }
+
+    setActionError(null)
+
+    const maxOrder = numbers.reduce((max, n) => Math.max(max, n.sort_order), -1)
+    const rows = cleanItems.map((item, idx) => ({
+      label: item.label,
+      url: item.url,
+      is_active: true,
+      sort_order: maxOrder + 1 + idx,
+    }))
+
+    const { data: inserted, error: err } = await supabase
+      .from("wpp_team_numbers")
+      .insert(rows)
+      .select()
+
+    if (err) {
+      setActionError(err.message)
+      return { success: 0, failed: items.length, error: err.message }
+    }
+
+    await fetchNumbers()
+    return {
+      success: inserted?.length ?? cleanItems.length,
+      failed: items.length - cleanItems.length,
+    }
+  }
+
   const deleteNumber = async (id: string) => {
     if (!supabase) {
       setActionError("No hay conexión con la base de datos.")
@@ -207,6 +251,7 @@ export function useWppTeamData() {
     updateNumber,
     toggleNumberActive,
     deleteNumber,
+    bulkCreateNumbers,
     refetch: fetchNumbers,
   }
 }
