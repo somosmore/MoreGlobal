@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-05-28] — Script one-shot de importación Zoom a GHL
+
+- Agente: cursor
+- Archivos modificados: `more-landing/scripts/import-ghl-zoom27mayo.mjs`, `.gitignore`
+- Qué se implementó: Script operativo para importar asistentes de Zoom a GoHighLevel usando credenciales desde `.env`, con lectura CSV, detección básica de país por teléfono, búsqueda de duplicados por email/teléfono, throttle y modo `--dry-run`. Se excluyeron de git los reportes generados en `more-landing/scripts/reports/` porque contienen datos personales de contactos.
+- Problemas encontrados: los reportes generados tienen PII y no deben versionarse.
+- Estado: ✅ completo
+
 ### [2026-05-28] — `/wppequipo`: importación masiva de números con formateo automático
 
 - Agente: cursor

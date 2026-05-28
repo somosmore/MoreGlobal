@@ -23,6 +23,9 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Generated import reports with contact data
+more-landing/scripts/reports/*.json
+
 # TypeScript cache
 more-landing/node_modules/.tmp/
 
