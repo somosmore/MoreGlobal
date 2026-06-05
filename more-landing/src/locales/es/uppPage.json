@@ -176,6 +176,81 @@
       "totalValue": "$9,100",
       "youPayLabel": "Hoy lo obtienes por solo"
     },
+    "bonusStack": {
+      "eyebrow": "Stack de bonos · Próximas 24 h",
+      "title": "El stack completo, gratis con tu pago único hoy",
+      "deadlineBadge": "24 h · Solo hoy",
+      "bonuses": [
+        {
+          "icon": "fileSearch",
+          "tag": "Bono 1",
+          "title": "Revisión Estratégica de Expediente",
+          "text": "Segunda mirada experta sobre tu expediente EB-2 NIW antes de presentarlo a USCIS."
+        },
+        {
+          "icon": "sparkles",
+          "tag": "Bono 2",
+          "title": "Mentoría · IA aplicada a tu caso",
+          "text": "Cómo usar IA correctamente para potenciar tu narrativa y evidencia."
+        },
+        {
+          "icon": "crown",
+          "tag": "Bono 3",
+          "title": "Sesión VIP 1:1 con Ivon More",
+          "text": "Encuentro estratégico para validar tu propuesta de esfuerzo e interés nacional."
+        },
+        {
+          "icon": "usersRound",
+          "tag": "Bono 4",
+          "title": "Coaching grupal de acompañamiento",
+          "text": "Espacios en vivo con el equipo MORE para sostener tu proceso en movimiento."
+        }
+      ],
+      "stackValueLabel": "Valor del stack",
+      "stackValueAmount": "$1,500 USD",
+      "freeLabel": "GRATIS",
+      "priceNote": "con tu pago único de {{price}} USD en las próximas 24 horas."
+    },
+    "plans": {
+      "eyebrow": "Tu modalidad · Tu inversión",
+      "title": "Elige cómo entrar",
+      "subtitle": "Cada modalidad desbloquea bonos distintos.",
+      "recommendedBadge": "Recomendada · 24 h",
+      "single": {
+        "name": "Pago único",
+        "tagline": "El stack completo, activado.",
+        "priceNote": "Un solo pago al inscribirte.",
+        "currency": "USD",
+        "includesLabel": "Incluye:",
+        "includes": [
+          "Programa Unsung Professional completo",
+          "Bono 1 · Revisión Estratégica de Expediente",
+          "Bono 2 · Mentoría IA aplicada al caso",
+          "Bono 3 · Sesión VIP 1:1 con Ivon More",
+          "Bono 4 · Coaching grupal de acompañamiento"
+        ],
+        "stackLabel": "Stack completo · 4 bonos",
+        "stackStrike": "$1,500 USD",
+        "stackFree": "GRATIS",
+        "cta": "Activar el stack completo"
+      },
+      "installments": {
+        "name": "Pago en 2 cuotas",
+        "tagline": "Empieza hoy, paga en dos etapas.",
+        "price": "2 × $1,250 USD",
+        "priceNote": "Total $2,500 · sin intereses.",
+        "includesLabel": "Incluye:",
+        "includes": [
+          "Programa Unsung Professional completo",
+          "Bono 1 · Revisión Estratégica de Expediente"
+        ],
+        "bonusLabel": "Bono incluido:",
+        "bonusValue": "Revisión Estratégica",
+        "cta": "Empezar en 2 cuotas"
+      },
+      "quote": "Tu proceso puede comenzar hoy, incluso si aún estás construyendo el resto del camino.",
+      "quoteAuthor": "Ivon More"
+    },
     "pricing": {
       "eyebrow": "Inversión única",
       "currency": "USD",

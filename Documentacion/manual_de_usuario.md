@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-05-28 (`/wppequipo`: importación masiva de números con formateo automático y código de país por defecto + CRUD individual, QR y enlace para compartir)
+> Última actualización: 2026-06-05 (landing `/upp`: nuevas secciones **Stack de bonos** (4 bonos por 24 h) y **Modalidades de pago** (pago único vs 2 cuotas))
 
 ---
 
@@ -354,6 +354,26 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
 
 El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`.
+
+**Secuencia de secciones de la landing:** Hero → ¿Es para ti? → Problema → Solución → Beneficios → Módulos → Testimonios → Stack de valor → **Stack de bonos** → Inversión (precio único) → **Modalidades de pago** → Preguntas frecuentes → CTA flotante.
+
+**Stack de bonos (próximas 24 h):** sección de urgencia que presenta cuatro bonos que se activan al pagar hoy:
+
+1. **Revisión Estratégica de Expediente** — segunda mirada experta sobre el expediente EB-2 NIW antes de presentarlo a USCIS.
+2. **Mentoría · IA aplicada al caso** — uso correcto de IA para potenciar narrativa y evidencia.
+3. **Sesión VIP 1:1 con Ivon More** — encuentro estratégico para validar la propuesta de esfuerzo e interés nacional.
+4. **Coaching grupal de acompañamiento** — espacios en vivo con el equipo MORE.
+
+Cierra con el valor del stack (~~$1.500 USD~~ → **GRATIS**) condicionado al pago único, usando el precio configurado en `upp_price`.
+
+**Modalidades de pago:** sección que ofrece dos formas de inscribirse, cada una desbloquea bonos distintos:
+
+| Modalidad | Precio | Bonos incluidos | CTA |
+|---|---|---|---|
+| **Pago único** (recomendada) | `upp_price` (ej. $2.500 USD) | Programa completo + los 4 bonos del stack | Botón de pago → `upp_payment_link` |
+| **Pago en 2 cuotas** | 2 × $1.250 USD (sin intereses) | Programa completo + Bono 1 (Revisión Estratégica) | Botón → WhatsApp del asesor |
+
+Incluye una cita de cierre de Ivon More. Los textos son editables desde `locales/{es,en}/uppPage.json` bajo las claves `bonusStack` y `plans`.
 
 ### 1.15 Redirección WhatsApp Equipo (`/wppequipo`)
 

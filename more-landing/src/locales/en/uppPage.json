@@ -176,6 +176,81 @@
       "totalValue": "$9,100",
       "youPayLabel": "Today you get it for only"
     },
+    "bonusStack": {
+      "eyebrow": "Bonus stack · Next 24 h",
+      "title": "The complete stack, free with your one-time payment today",
+      "deadlineBadge": "24 h · Today only",
+      "bonuses": [
+        {
+          "icon": "fileSearch",
+          "tag": "Bonus 1",
+          "title": "Strategic Case File Review",
+          "text": "A second expert look at your EB-2 NIW file before submitting it to USCIS."
+        },
+        {
+          "icon": "sparkles",
+          "tag": "Bonus 2",
+          "title": "Mentorship · AI applied to your case",
+          "text": "How to use AI correctly to strengthen your narrative and evidence."
+        },
+        {
+          "icon": "crown",
+          "tag": "Bonus 3",
+          "title": "1:1 VIP Session with Ivon More",
+          "text": "A strategic meeting to validate your endeavor and national interest proposal."
+        },
+        {
+          "icon": "usersRound",
+          "tag": "Bonus 4",
+          "title": "Group accompaniment coaching",
+          "text": "Live spaces with the MORE team to keep your process moving forward."
+        }
+      ],
+      "stackValueLabel": "Stack value",
+      "stackValueAmount": "$1,500 USD",
+      "freeLabel": "FREE",
+      "priceNote": "with your one-time payment of {{price}} USD within the next 24 hours."
+    },
+    "plans": {
+      "eyebrow": "Your plan · Your investment",
+      "title": "Choose how to start",
+      "subtitle": "Each plan unlocks different bonuses.",
+      "recommendedBadge": "Recommended · 24 h",
+      "single": {
+        "name": "One-time payment",
+        "tagline": "The complete stack, activated.",
+        "priceNote": "A single payment when you enroll.",
+        "currency": "USD",
+        "includesLabel": "Includes:",
+        "includes": [
+          "Complete Unsung Professional Program",
+          "Bonus 1 · Strategic Case File Review",
+          "Bonus 2 · AI mentorship applied to your case",
+          "Bonus 3 · 1:1 VIP Session with Ivon More",
+          "Bonus 4 · Group accompaniment coaching"
+        ],
+        "stackLabel": "Complete stack · 4 bonuses",
+        "stackStrike": "$1,500 USD",
+        "stackFree": "FREE",
+        "cta": "Activate the complete stack"
+      },
+      "installments": {
+        "name": "Pay in 2 installments",
+        "tagline": "Start today, pay in two stages.",
+        "price": "2 × $1,250 USD",
+        "priceNote": "Total $2,500 · interest-free.",
+        "includesLabel": "Includes:",
+        "includes": [
+          "Complete Unsung Professional Program",
+          "Bonus 1 · Strategic Case File Review"
+        ],
+        "bonusLabel": "Bonus included:",
+        "bonusValue": "Strategic Review",
+        "cta": "Start in 2 installments"
+      },
+      "quote": "Your process can begin today, even if you're still building the rest of the path.",
+      "quoteAuthor": "Ivon More"
+    },
     "pricing": {
       "eyebrow": "One-time investment",
       "currency": "USD",

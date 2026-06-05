@@ -11,7 +11,9 @@ import { UppBenefitsSection } from "@/upp/components/UppBenefitsSection"
 import { UppModulesSection } from "@/upp/components/UppModulesSection"
 import { UppTestimonialsSection } from "@/upp/components/UppTestimonialsSection"
 import { UppValueStackSection } from "@/upp/components/UppValueStackSection"
+import { UppBonusStackSection } from "@/upp/components/UppBonusStackSection"
 import { UppPricingSection } from "@/upp/components/UppPricingSection"
+import { UppPlansSection } from "@/upp/components/UppPlansSection"
 import { UppFaq } from "@/upp/components/UppFaq"
 import { UppStickyCta } from "@/upp/components/UppStickyCta"
 
@@ -68,11 +70,18 @@ export default function UppPage() {
             <UppModulesSection />
             <UppTestimonialsSection />
             <UppValueStackSection price={price} loading={loading} />
+            <UppBonusStackSection price={price} loading={loading} />
             <UppPricingSection
               paymentLink={paymentLink}
               price={price}
               whatsappUrl={whatsappUrl}
               countdownDate={countdownDate}
+              loading={loading}
+            />
+            <UppPlansSection
+              paymentLink={paymentLink}
+              price={price}
+              whatsappUrl={whatsappUrl}
               loading={loading}
             />
             <UppFaq
