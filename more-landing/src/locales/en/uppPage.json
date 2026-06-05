@@ -13,15 +13,15 @@
       "comingSoon": "Coming soon"
     },
     "hero": {
-      "badge": "Self-managed program",
+      "badge": "Guided program",
       "titleBefore": "Turn your career into an ",
-      "titleHighlight": "approved Green Card",
+      "titleHighlight": "EB-2 NIW Green Card",
       "subtitle": "The step-by-step program for professionals who want to prepare their EB-2 NIW case with strategy, real evidence and expert guidance.",
       "stats": [
         { "value": "9", "label": "Complete modules" },
         { "value": "4", "label": "Live workshops" },
         { "value": "4", "label": "1:1 sessions" },
-        { "value": "90–120", "label": "Day roadmap" }
+        { "value": "90–120", "label": "Days to filing" }
       ],
       "countdownLabel": "Offer closes in",
       "priceEyebrow": "One-time investment",
@@ -135,7 +135,7 @@
         { "number": "06", "title": "Recommendation letters", "description": "Strategy for obtaining powerful letters from independent experts that support your case.", "value": "$500" },
         { "number": "07", "title": "Business plan / Professional plan", "description": "Build the document that demonstrates the viability and impact of your proposal in the U.S.", "value": "$600" },
         { "number": "08", "title": "Case file preparation", "description": "Organize all documents and forms for a complete, professional petition.", "value": "$400" },
-        { "number": "09", "title": "Post-filing strategy", "description": "What to expect after filing, how to respond to RFEs and prepare for approval.", "value": "$300" }
+        { "number": "09", "title": "Post-filing strategy", "description": "What to expect after filing, how to respond to RFEs and prepare for approval.", "value": "$500" }
       ]
     },
     "testimonials": {
@@ -159,6 +159,12 @@
           "role": "Software engineer",
           "country": "Mexico",
           "quote": "The evidence building module changed everything. I discovered my work had much more impact than I believed."
+        },
+        {
+          "name": "María V.",
+          "role": "PhD Researcher",
+          "country": "Colombia",
+          "quote": "I had publications and citations but didn't know how to frame them in an EB-2 NIW case. The UPP gave me the exact structure to present my impact in a way USCIS could evaluate."
         }
       ]
     },
@@ -278,7 +284,7 @@
         },
         {
           "question": "Are there payment options?",
-          "answer": "Yes, we offer flexible payment plans. Contact an advisor via WhatsApp to learn about available options."
+          "answer": "Yes, we offer a one-time payment or 2 installments. You can see the details of each option in the plans section further down this page."
         },
         {
           "question": "What happens if my case is denied?",

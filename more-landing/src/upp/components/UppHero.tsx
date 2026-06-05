@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Sparkles } from "lucide-react"
+import { Sparkles, Users } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { UppCtaButtons } from "./UppCtaButtons"
 import { UppCountdown } from "./UppCountdown"
@@ -134,7 +134,14 @@ export function UppHero({
               whatsappUrl={whatsappUrl}
               loading={loading}
               layout="stack"
+              showGuarantee
             />
+            {!countdownDate && !loading && (
+              <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-white/55">
+                <Users className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                Plazas limitadas para garantizar la calidad del acompañamiento
+              </p>
+            )}
           </motion.div>
 
           {countdownDate && <UppCountdown targetDate={countdownDate} />}

@@ -13,15 +13,15 @@
       "comingSoon": "Próximamente"
     },
     "hero": {
-      "badge": "Programa de autogestión",
+      "badge": "Programa guiado",
       "titleBefore": "Convierte tu trayectoria en una ",
-      "titleHighlight": "Green Card aprobada",
+      "titleHighlight": "Green Card EB-2 NIW aprobada",
       "subtitle": "El programa paso a paso para profesionales que quieren preparar su caso EB-2 NIW con estrategia, evidencia real y acompañamiento experto.",
       "stats": [
         { "value": "9", "label": "Módulos completos" },
         { "value": "4", "label": "Talleres en vivo" },
         { "value": "4", "label": "Sesiones 1:1" },
-        { "value": "90–120", "label": "Días de ruta" }
+        { "value": "90–120", "label": "Días hasta la petición" }
       ],
       "countdownLabel": "La oferta cierra en",
       "priceEyebrow": "Inversión única",
@@ -135,7 +135,7 @@
         { "number": "06", "title": "Cartas de recomendación", "description": "Estrategia para conseguir cartas poderosas de expertos independientes que respalden tu caso.", "value": "$500" },
         { "number": "07", "title": "Plan de negocio / Plan profesional", "description": "Construye el documento que demuestra la viabilidad y el impacto de tu propuesta en EE.UU.", "value": "$600" },
         { "number": "08", "title": "Preparación del expediente", "description": "Organiza todos los documentos y formularios para una petición completa y profesional.", "value": "$400" },
-        { "number": "09", "title": "Estrategia post-envío", "description": "Qué esperar después del envío, cómo responder a RFEs y prepararte para la aprobación.", "value": "$300" }
+        { "number": "09", "title": "Estrategia post-envío", "description": "Qué esperar después del envío, cómo responder a RFEs y prepararte para la aprobación.", "value": "$500" }
       ]
     },
     "testimonials": {
@@ -159,6 +159,12 @@
           "role": "Ingeniero de software",
           "country": "México",
           "quote": "El módulo de construcción de evidencia cambió todo. Descubrí que mi trabajo tenía mucho más impacto del que yo creía."
+        },
+        {
+          "name": "María V.",
+          "role": "Investigadora PhD",
+          "country": "Colombia",
+          "quote": "Tenía publicaciones y citas pero no sabía cómo articularlas en un caso EB-2 NIW. El UPP me dio la estructura exacta para presentar mi impacto de forma que USCIS pudiera valorarlo."
         }
       ]
     },
@@ -278,7 +284,7 @@
         },
         {
           "question": "¿Hay opciones de pago?",
-          "answer": "Sí, ofrecemos planes de pago flexibles. Contacta a un asesor por WhatsApp para conocer las opciones disponibles."
+          "answer": "Sí, ofrecemos pago único o en 2 cuotas. Puedes ver los detalles de cada modalidad en la sección de planes más abajo en esta misma página."
         },
         {
           "question": "¿Qué pasa si mi caso es rechazado?",

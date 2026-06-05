@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Play } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 export function UppModulesSection() {
@@ -54,6 +55,10 @@ export function UppModulesSection() {
                   {mod.value}
                 </span>
               </div>
+              <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gray-400">
+                <Play className="h-3 w-3" aria-hidden />
+                Video + Material PDF
+              </span>
               <p className="mt-1.5 text-sm leading-relaxed text-gray-500">{mod.description}</p>
             </div>
           </motion.div>

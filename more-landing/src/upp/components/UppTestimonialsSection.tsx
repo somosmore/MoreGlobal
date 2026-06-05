@@ -1,6 +1,29 @@
 import { motion } from "framer-motion"
-import { Quote } from "lucide-react"
 import { useTranslation } from "react-i18next"
+
+const avatarColors = [
+  "bg-[#0A3161]",
+  "bg-orange",
+  "bg-teal-600",
+  "bg-purple-700",
+]
+
+const countryFlags: Record<string, string> = {
+  Venezuela: "🇻🇪",
+  Colombia: "🇨🇴",
+  México: "🇲🇽",
+  Mexico: "🇲🇽",
+}
+
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2)
+}
 
 export function UppTestimonialsSection() {
   const { t } = useTranslation()
@@ -28,33 +51,40 @@ export function UppTestimonialsSection() {
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item, i) => (
           <motion.div
             key={item.name}
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5, delay: i * 0.12, type: "spring", stiffness: 130 }}
+            transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 130 }}
             whileHover={{ y: -5, scale: 1.02 }}
             className="flex flex-col rounded-2xl border border-[#0A3161]/10 bg-white p-6 shadow-sm ring-1 ring-[#0A3161]/5 transition-shadow hover:shadow-lg"
           >
-            <motion.div
-              initial={{ scale: 0, rotate: -20 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.12, type: "spring", stiffness: 200 }}
-            >
-              <Quote className="h-8 w-8 text-[#0A3161]/20 mb-4" aria-hidden />
-            </motion.div>
+            <div className="flex gap-0.5 text-yellow-400 mb-3" aria-label="5 estrellas">
+              {[...Array(5)].map((_, s) => (
+                <span key={s} aria-hidden>★</span>
+              ))}
+            </div>
+
             <p className="flex-1 text-sm leading-relaxed text-gray-600 italic">
               "{item.quote}"
             </p>
-            <div className="mt-5 border-t border-[#0A3161]/10 pt-4">
-              <p className="text-sm font-semibold text-[#0A3161]">{item.name}</p>
-              <p className="text-xs text-gray-500">
-                {item.role} — {item.country}
-              </p>
+
+            <div className="mt-5 flex items-center gap-3 border-t border-[#0A3161]/10 pt-4">
+              <div
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${avatarColors[i % avatarColors.length]}`}
+                aria-hidden
+              >
+                {getInitials(item.name)}
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-[#0A3161] truncate">{item.name}</p>
+                <p className="text-xs text-gray-500 truncate">
+                  {item.role} · {countryFlags[item.country] ?? ""} {item.country}
+                </p>
+              </div>
             </div>
           </motion.div>
         ))}

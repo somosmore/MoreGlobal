@@ -123,7 +123,7 @@ export function UppPlansSection({
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 120 }}
-          className="relative overflow-hidden rounded-3xl border border-navy/12 bg-white shadow-sm lg:mt-[42px]"
+          className="relative overflow-hidden rounded-3xl border border-navy/12 bg-white shadow-sm"
         >
           <div className="p-7 sm:p-8">
             <h3 className="text-xl font-bold text-navy">
