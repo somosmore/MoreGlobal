@@ -50,15 +50,18 @@ export function TurboHero({
             transition={{ duration: 0.7, delay: 0.05 }}
             className="space-y-5"
           >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-1.5 rounded-full bg-orange px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-orange/30"
-            >
-              <Zap className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              {t("turboPage.hero.badge")}
-            </motion.span>
+            <div className="relative inline-flex">
+              <span className="absolute inset-0 rounded-full bg-orange/40 blur-md animate-pulse" />
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 200 }}
+                className="badge-shine relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange to-orange-dark px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-orange/40 ring-2 ring-orange/30"
+              >
+                <Zap className="h-4 w-4 shrink-0" aria-hidden />
+                {t("turboPage.hero.badge")}
+              </motion.span>
+            </div>
 
             <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
               {t("turboPage.hero.titleBefore")}
