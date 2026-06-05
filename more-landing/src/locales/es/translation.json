@@ -142,8 +142,8 @@
       { "id": "patentes", "label": "Patentes o propiedad intelectual" },
       { "id": "conferencias", "label": "Ponencias en conferencias internacionales" }
     ],
-    "whatsappHighImpact": "https://wa.me/573245327948?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20agendar%20mi%20evaluación%20gratuita.",
-    "whatsappUnsung": "https://wa.me/573245327948?text=Hola%20MORE,%20completé%20el%20diagnóstico%20y%20quiero%20conocer%20el%20programa%20Unsung.",
+    "whatsappHighImpact": "https://wa.me/573132219798?text=Hola%20MORE,%20obtuve%20Perfil%20de%20Alto%20Impacto%20en%20el%20quiz.%20Quiero%20agendar%20mi%20evaluación%20gratuita.",
+    "whatsappUnsung": "https://wa.me/573132219798?text=Hola%20MORE,%20completé%20el%20diagnóstico%20y%20quiero%20conocer%20el%20programa%20Unsung.",
     "diagnostic": {
       "basic": {
         "countries": [
@@ -337,7 +337,7 @@
           "Acceso a comunidad privada"
         ],
         "cta": "Sí, quiero comenzar mi programa",
-        "whatsapp": "https://wa.me/573245327948?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
+        "whatsapp": "https://wa.me/573132219798?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung."
       },
       {
         "name": "Plan Plus",
@@ -356,7 +356,7 @@
           "Seguimiento post envío"
         ],
         "cta": "Sí, quiero obtener mi Expediente",
-        "whatsapp": "https://wa.me/573245327948?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
+        "whatsapp": "https://wa.me/573132219798?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Plus."
       }
     ]
   },
@@ -367,7 +367,7 @@
     "ctaTitle": "Tu futuro en EE.UU. comienza hoy",
     "ctaSubtitle": "Agenda una evaluación gratuita de tu perfil y descubre si calificas para la visa EB-2 NIW.",
     "ctaButton": "Evaluar mi Perfil Gratis",
-    "ctaWhatsapp": "https://wa.me/573245327948?text=Hola%20MORE,%20quiero%20evaluar%20mi%20perfil%20para%20la%20EB-2%20NIW.",
+    "ctaWhatsapp": "https://wa.me/573132219798?text=Hola%20MORE,%20quiero%20evaluar%20mi%20perfil%20para%20la%20EB-2%20NIW.",
     "logoAlt": "MORE Logo",
     "brandDesc": "Consultora especializada en visas y migración EB-2 NIW. Ayudamos a empresarios, comerciantes, profesionales e inversionistas a lograr su residencia permanente y Green Card en EE.UU.",
     "quickLinksTitle": "Enlaces Rápidos",

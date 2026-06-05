@@ -3,7 +3,7 @@ import { supabase, type SiteSetting, type SiteSettingsMap } from "@/lib/supabase
 
 const DEFAULTS: SiteSettingsMap = {
   calendar_url: "",
-  whatsapp_number: "+573245327948",
+  whatsapp_number: "+573132219798",
   contact_email: "info@justmore.net",
   instagram_url: "https://instagram.com/somos.more",
   linkedin_url: "",
