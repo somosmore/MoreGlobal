@@ -1,0 +1,245 @@
+{
+  "turboPage": {
+    "pageTitle": "Turbo Plan EB-2 NIW | MORE",
+    "meta": {
+      "description": "Full done-with-you service for your EB-2 NIW visa. MORE builds most of your documents with you in 16 weeks.",
+      "ogTitle": "Turbo Plan — Your EB-2 NIW Green Card with Expert Support",
+      "ogDescription": "Premium service where MORE works with you to prepare your complete EB-2 NIW file. $8,000 USD · 16 weeks · Professional result."
+    },
+    "cta": {
+      "payNow": "Reserve my Turbo Plan spot",
+      "talkToAdvisor": "Talk to an advisor",
+      "whatsappUrl": "https://wa.me/573132219798?text=Hi%20MORE,%20I'm%20interested%20in%20the%20Turbo%20Plan%20EB-2%20NIW.",
+      "comingSoon": "Coming Soon"
+    },
+    "hero": {
+      "badge": "Full service · Done-with-you",
+      "titleBefore": "Your EB-2 NIW Green Card with ",
+      "titleHighlight": "expert support",
+      "subtitle": "A team of experts builds most of your immigration documents with you, from start to finish. You provide the information, we build the file.",
+      "stats": [
+        { "value": "120-160", "label": "Days to filing" },
+        { "value": "16", "label": "Weeks of process" },
+        { "value": "$8,000", "label": "USD total investment" },
+        { "value": "5+", "label": "Years experience required" }
+      ],
+      "priceEyebrow": "Total investment",
+      "currency": "USD",
+      "priceNote": "One-time payment · Plus wire transfer fees"
+    },
+    "requirements": {
+      "eyebrow": "Do you qualify for the Turbo Plan?",
+      "title": "Prerequisites to access the plan",
+      "subtitle": "The Turbo Plan is designed for professionals with a solid profile who want the highest level of support for their EB-2 NIW process.",
+      "items": [
+        { "icon": "graduation-cap", "title": "Professional with diplomas", "text": "Formal university degrees, duly apostilled or legalized." },
+        { "icon": "book-open", "title": "Master's degree or postgraduate", "text": "Master's degree or equivalent academic level in your area of specialization." },
+        { "icon": "briefcase", "title": "Certified experience ≥ 5 years", "text": "Certifiable work experience in your professional field of at least 5 years." },
+        { "icon": "file-text", "title": "Academic records and transcripts", "text": "Complete academic documentation available for management and translation." },
+        { "icon": "user", "title": "Updated resume / CV", "text": "Complete CV with work history, achievements and professional contributions." }
+      ],
+      "note": "Not sure if you meet the requirements? Write to us and an advisor will evaluate your profile for free."
+    },
+    "includes": {
+      "eyebrow": "What does the Turbo Plan include?",
+      "title": "Everything you need to reach the filing",
+      "subtitle": "MORE prepares most of the required documents with you, based on the information you provide.",
+      "items": [
+        { "number": "01", "title": "Access to the MORE Academy Platform", "description": "Educational materials, guides and resources to understand each stage of the EB-2 NIW process.", "tag": "Immediate access" },
+        { "number": "02", "title": "Case Strategy Development", "description": "Initial session to define a personalized approach for your petition based on your profile.", "tag": "Live session" },
+        { "number": "03", "title": "Professional Statement Review", "description": "Detailed feedback and adjustments to your statement so it reflects the real impact of your work.", "tag": "Iterative review" },
+        { "number": "04", "title": "National Interest Focus Session", "description": "We work with you to identify and articulate how your work benefits the United States.", "tag": "Strategic session" },
+        { "number": "05", "title": "Professional Plan Development", "description": "Document that projects your future contribution in the U.S. and supports the national interest petition.", "tag": "Key document" },
+        { "number": "06", "title": "Preparation of 4 letters (Testimonial and/or intent)", "description": "MORE drafts recommendation and/or intent letters that will give legal weight to your file.", "tag": "4 letters" },
+        { "number": "07", "title": "Executive Presentation Design", "description": "Professional presentation that summarizes your case clearly and convincingly for the adjudicator.", "tag": "Professional design" },
+        { "number": "08", "title": "Immigration Forms Processing", "description": "We complete the official USCIS forms required for the petition with you.", "tag": "USCIS forms" },
+        { "number": "09", "title": "Cover Letter + Exhibits List", "description": "Legal cover letter and complete organization of the evidence index for the file.", "tag": "Final document" },
+        { "number": "10", "title": "File Consolidation and Digital Submission", "description": "MORE organizes, verifies and digitally submits the complete package to USCIS on your behalf.", "tag": "Submission included" },
+        { "number": "11", "title": "Relationship Strategy for Letters of Interest", "description": "We advise you on how to identify and contact organizations that can endorse your work.", "tag": "Network strategy" },
+        { "number": "12", "title": "Practical Guide to Implement Your Project in 90 Days", "description": "Concrete roadmap so you can demonstrate tangible progress of your project in the U.S.", "tag": "Action plan" }
+      ],
+      "notIncluded": {
+        "title": "Not included",
+        "items": ["Title equivalency", "Document translations", "USCIS filing fees"]
+      }
+    },
+    "process": {
+      "eyebrow": "Week by week",
+      "title": "Your 16-week roadmap to filing",
+      "subtitle": "A structured process where each phase builds on the previous one. You provide the information, MORE builds the file.",
+      "phases": [
+        {
+          "weeks": "Weeks 1-2",
+          "title": "Induction and Diagnosis",
+          "tasks": [
+            "Induction and diagnosis session to define strategy — MORE",
+            "Identify pending documents per evidence matrix — MORE",
+            "Draft professional statement — Petitioner",
+            "Start management and translation of academic and work documents — Petitioner"
+          ],
+          "responsible": "MORE + Petitioner",
+          "alert": null
+        },
+        {
+          "weeks": "Weeks 3-4",
+          "title": "Professional Statement",
+          "tasks": [
+            "Receive comments from MORE and adjust professional statement",
+            "Manage evidence per matrix — Petitioner",
+            "Define recommendation letter signatories — Petitioner",
+            "Request title equivalency and adjust translations — Petitioner"
+          ],
+          "responsible": "MORE + Petitioner",
+          "alert": "Second payment due at month completion. Without this payment, the process freezes."
+        },
+        {
+          "weeks": "Weeks 5-6",
+          "title": "Effort Proposal",
+          "tasks": [
+            "MORE develops the effort proposal",
+            "Technical review and adjustments by petitioner",
+            "Draft recommendation letters — Petitioner"
+          ],
+          "responsible": "MORE + Petitioner",
+          "alert": "Without the validated proposal from the petitioner, the process cannot continue."
+        },
+        {
+          "weeks": "Weeks 7-8",
+          "title": "Evidence and Executive Presentation",
+          "tasks": [
+            "Deliver final evidence versions (original, translation and PDF) — Petitioner",
+            "Sign recommendation letters with signer's CV — Petitioner",
+            "MORE develops executive presentation",
+            "Send to organizations and chamber of commerce affiliations — Petitioner"
+          ],
+          "responsible": "MORE + Petitioner",
+          "alert": null
+        },
+        {
+          "weeks": "Weeks 9-11",
+          "title": "Implementation Plan",
+          "tasks": [
+            "MORE develops implementation plan",
+            "Petitioner reviews and approves",
+            "Delivery of signed letters of interest"
+          ],
+          "responsible": "MORE + Petitioner",
+          "alert": "From the implementation plan, the file must be sent within 4-6 weeks max. Otherwise extra costs for updates will apply."
+        },
+        {
+          "weeks": "Weeks 12-15",
+          "title": "Cover Letter and Exhibits List",
+          "tasks": [
+            "MORE drafts Cover Letter",
+            "Complete Intake with petitioner's information",
+            "Sign formats and consolidate file — MORE",
+            "Final review by petitioner and adjustments"
+          ],
+          "responsible": "MORE",
+          "alert": null
+        },
+        {
+          "weeks": "Week 16",
+          "title": "Final Submission to USCIS",
+          "tasks": [
+            "Submit complete file to USCIS — MORE"
+          ],
+          "responsible": "MORE",
+          "alert": null
+        }
+      ]
+    },
+    "commitments": {
+      "eyebrow": "Your commitment",
+      "title": "Your file moves forward if...",
+      "subtitle": "The Turbo Plan is a collaborative process. Your active participation is as important as our technical work.",
+      "items": [
+        { "number": "1", "title": "Weekly Compliance", "text": "Participate in and complete each week's activities without delays." },
+        { "number": "2", "title": "Honesty and Transparency", "text": "Be honest about all your information, experience, and available documents." },
+        { "number": "3", "title": "Punctuality and Respect", "text": "Attend scheduled sessions. We value your time and the team's time." },
+        { "number": "4", "title": "Responsibility and Timely Payment", "text": "Timely payments keep your process moving smoothly without interruptions." },
+        { "number": "5", "title": "Trust and Follow-through", "text": "Trust the expert team and follow recommendations with transparency." }
+      ]
+    },
+    "ivon": {
+      "eyebrow": "Who leads your process",
+      "title": "Ivon More",
+      "subtitle": "Colombian attorney who moved to the U.S. five years ago with big dreams. There, she discovered her talent for identifying exceptional Latin American professionals and specialized in managing high-impact national projects.",
+      "bio": "Her mission is to help these professionals be recognized as National Interest in the U.S. through a High Impact Plan. With a personalized approach, she has achieved numerous successful cases, facilitating the meaningful establishment of families from diverse nations. Ivon's passion for empowering professionals continues to grow.",
+      "role": "Founder & EB-2 NIW Strategist",
+      "tagline": "MORE — Everything that unites us"
+    },
+    "testimonials": {
+      "eyebrow": "Success stories",
+      "title": "Professionals who trusted the Turbo Plan",
+      "items": [
+        {
+          "name": "Carlos M.",
+          "role": "Civil Engineer",
+          "country": "Colombia",
+          "quote": "With the Turbo Plan I didn't have to guess which documents to prepare. MORE told me exactly what was needed and drafted letters I would never have known how to write. The file was impeccable."
+        },
+        {
+          "name": "Andrea R.",
+          "role": "Doctor of Education",
+          "country": "Venezuela",
+          "quote": "In 4 months the MORE team had my file ready to submit. I provided the information and they transformed everything into perfect legal documents. It was exactly what I needed."
+        },
+        {
+          "name": "Luis F.",
+          "role": "Architect",
+          "country": "Mexico",
+          "quote": "Having a team that drafted the Cover Letter and assembled the Exhibits was a huge differentiator. I knew my file was at the level USCIS expects to see. That's priceless."
+        },
+        {
+          "name": "Patricia S.",
+          "role": "PhD Researcher",
+          "country": "Colombia",
+          "quote": "The relationship strategy helped me get letters from people I never would have contacted on my own. MORE knows exactly what kind of endorsement an EB-2 NIW case needs."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Investment",
+      "title": "Turbo Plan",
+      "currency": "USD",
+      "priceNote": "Plus wire transfer fees",
+      "timeline": "120-160 days · From diagnosis to submission",
+      "notIncluded": {
+        "title": "Not included:",
+        "items": ["Title equivalency", "Document translations", "USCIS filing fees"]
+      },
+      "urgencyLine": "Limited spots to guarantee personalized attention on each file."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "subtitle": "Everything you need to know before taking the step.",
+      "items": [
+        {
+          "question": "What is the difference between the Turbo Plan and the UPP program?",
+          "answer": "The UPP is a guided self-managed program where you prepare your case with our structured support ($2,500). The Turbo Plan is a done-with-you service where MORE prepares most of the documents with you ($8,000). If you want the highest level of support and the team to build the file for you, the Turbo Plan is the option."
+        },
+        {
+          "question": "What if I don't have all the documents ready from the start?",
+          "answer": "No problem. The first weeks of the process are dedicated to identifying which documents you have, which ones need to be obtained, and which require translation. MORE will guide you step by step in getting each one."
+        },
+        {
+          "question": "How are the payments structured? Are there installments?",
+          "answer": "The total price is $8,000 USD. Payment is structured in installments during the process: first payment at the start, second payment at month completion (weeks 3-4). If you have questions about payment options, write to us on WhatsApp and an advisor will explain the details."
+        },
+        {
+          "question": "What happens if USCIS requests additional documents (RFE)?",
+          "answer": "The Turbo Plan covers the preparation and initial submission of the file. In case of an RFE (Request for Evidence), we can support you with an additional service. However, our thorough preparation aims to minimize the likelihood of this occurring."
+        },
+        {
+          "question": "In what language is the file prepared?",
+          "answer": "The entire file is prepared in English, which is the language required by USCIS. Documents in Spanish are officially translated. Translation costs are not included in the plan, but we advise you on how to obtain them."
+        },
+        {
+          "question": "Can I start the process if I'm outside the U.S.?",
+          "answer": "Yes, the Turbo Plan is completely remote. Sessions are conducted via video call and all documents are managed digitally. You can start from any country."
+        }
+      ]
+    }
+  }
+}

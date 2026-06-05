@@ -130,6 +130,9 @@ export type SiteSettingsMap = {
   upp_payment_link: string
   upp_price: string
   upp_countdown_date: string
+  turbo_payment_link: string
+  turbo_price: string
+  turbo_countdown_date: string
   wppequipo_enabled: string
 }
 

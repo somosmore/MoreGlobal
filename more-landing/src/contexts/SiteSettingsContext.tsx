@@ -18,6 +18,9 @@ const DEFAULTS: SiteSettingsMap = {
   upp_payment_link: "",
   upp_price: "$2,500",
   upp_countdown_date: "",
+  turbo_payment_link: "",
+  turbo_price: "$8,000",
+  turbo_countdown_date: "",
   wppequipo_enabled: "true",
 }
 

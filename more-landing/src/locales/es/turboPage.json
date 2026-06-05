@@ -1,0 +1,245 @@
+{
+  "turboPage": {
+    "pageTitle": "Plan Turbo EB-2 NIW | MORE",
+    "meta": {
+      "description": "Servicio completo done-with-you para tu visa EB-2 NIW. MORE elabora contigo la gran mayoría de tus documentos en 16 semanas.",
+      "ogTitle": "Plan Turbo — Tu Green Card EB-2 NIW con acompañamiento experto",
+      "ogDescription": "Servicio premium donde MORE trabaja contigo para preparar tu expediente EB-2 NIW completo. $8,000 USD · 16 semanas · Resultado profesional."
+    },
+    "cta": {
+      "payNow": "Reservar mi lugar en el Plan Turbo",
+      "talkToAdvisor": "Hablar con un asesor",
+      "whatsappUrl": "https://wa.me/573132219798?text=Hola%20MORE,%20me%20interesa%20el%20Plan%20Turbo%20EB-2%20NIW.",
+      "comingSoon": "Próximamente"
+    },
+    "hero": {
+      "badge": "Servicio completo · Done-with-you",
+      "titleBefore": "Tu Green Card EB-2 NIW con ",
+      "titleHighlight": "acompañamiento experto",
+      "subtitle": "Un equipo de expertos elabora contigo la gran mayoría de tus documentos de inmigración, de principio a fin. Tú aportas la información, nosotros construimos el expediente.",
+      "stats": [
+        { "value": "120-160", "label": "Días hasta la petición" },
+        { "value": "16", "label": "Semanas de proceso" },
+        { "value": "$8,000", "label": "USD inversión única" },
+        { "value": "5+", "label": "Años de experiencia requerida" }
+      ],
+      "priceEyebrow": "Inversión total",
+      "currency": "USD",
+      "priceNote": "Pago único · Más gastos de transferencia"
+    },
+    "requirements": {
+      "eyebrow": "¿Califica para el Plan Turbo?",
+      "title": "Requisitos previos para acceder al plan",
+      "subtitle": "El Plan Turbo está diseñado para profesionales con un perfil sólido que quieren el máximo nivel de acompañamiento para su proceso EB-2 NIW.",
+      "items": [
+        { "icon": "graduation-cap", "title": "Profesional con diplomas", "text": "Títulos universitarios formales, debidamente apostillados o legalizados." },
+        { "icon": "book-open", "title": "Maestría o postgrado", "text": "Grado de maestría o nivel académico equivalente en tu área de especialización." },
+        { "icon": "briefcase", "title": "Experiencia certificada ≥ 5 años", "text": "Experiencia laboral certificable en tu campo profesional de al menos 5 años." },
+        { "icon": "file-text", "title": "Títulos y actas de estudio", "text": "Documentación académica completa disponible para gestión y traducción." },
+        { "icon": "user", "title": "Hoja de vida actualizada", "text": "CV completo con historial laboral, logros y contribuciones profesionales." }
+      ],
+      "note": "¿No estás seguro si cumples los requisitos? Escríbenos y un asesor evaluará tu perfil sin costo."
+    },
+    "includes": {
+      "eyebrow": "¿Qué incluye el Plan Turbo?",
+      "title": "Todo lo que necesitas para llegar al envío",
+      "subtitle": "MORE elabora contigo la gran mayoría de los documentos requeridos, basados en la información que tú suministras.",
+      "items": [
+        { "number": "01", "title": "Acceso a la Plataforma MORE Academy", "description": "Material educativo, guías y recursos para entender cada etapa del proceso EB-2 NIW.", "tag": "Acceso inmediato" },
+        { "number": "02", "title": "Desarrollo de la Estrategia del caso", "description": "Sesión inicial para definir el enfoque personalizado de tu petición según tu perfil y trayectoria.", "tag": "Sesión en vivo" },
+        { "number": "03", "title": "Revisión de la declaración profesional", "description": "Feedback detallado y ajustes a tu declaración para que refleje el impacto real de tu trabajo.", "tag": "Revisión iterativa" },
+        { "number": "04", "title": "Sesión de enfoque de Interés Nacional", "description": "Trabajamos contigo para identificar y articular cómo tu trabajo beneficia a los EE.UU.", "tag": "Sesión estratégica" },
+        { "number": "05", "title": "Elaboración del Plan Profesional", "description": "Documento que proyecta tu contribución futura en EE.UU. y sustenta la petición de interés nacional.", "tag": "Documento clave" },
+        { "number": "06", "title": "Preparación de 4 cartas (Testimoniales y/o intención)", "description": "MORE redacta las cartas de recomendación y/o intención que darán peso legal a tu expediente.", "tag": "4 cartas" },
+        { "number": "07", "title": "Diseño de la Presentación ejecutiva", "description": "Presentación profesional que resume tu caso de forma clara y convincente para el adjudicador.", "tag": "Diseño profesional" },
+        { "number": "08", "title": "Diligenciamiento de formas migratorias", "description": "Completamos contigo los formularios oficiales de USCIS requeridos para la petición.", "tag": "Formularios USCIS" },
+        { "number": "09", "title": "Cover Letter + lista de Exhibits", "description": "Carta de presentación legal y organización completa del índice de evidencias para el expediente.", "tag": "Documento final" },
+        { "number": "10", "title": "Consolidación y envío digital del expediente", "description": "MORE organiza, verifica y envía digitalmente el paquete completo a USCIS en tu nombre.", "tag": "Envío incluido" },
+        { "number": "11", "title": "Estrategia de Relacionamiento para cartas de interés", "description": "Te asesoramos en cómo identificar y contactar organizaciones que puedan avalar tu trabajo.", "tag": "Estrategia de red" },
+        { "number": "12", "title": "Guía práctica para implementar tu proyecto en 90 días", "description": "Hoja de ruta concreta para que puedas demostrar avances tangibles de tu proyecto en EE.UU.", "tag": "Plan de acción" }
+      ],
+      "notIncluded": {
+        "title": "No incluye",
+        "items": ["Equivalencia de títulos", "Traducciones de documentos", "Fees migratorios (USCIS)"]
+      }
+    },
+    "process": {
+      "eyebrow": "Semana a semana",
+      "title": "Tu ruta de 16 semanas al envío",
+      "subtitle": "Un proceso estructurado donde cada fase avanza sobre la anterior. Tú aportas la información, MORE construye el expediente.",
+      "phases": [
+        {
+          "weeks": "Semanas 1-2",
+          "title": "Inducción y Diagnóstico",
+          "tasks": [
+            "Sesión de inducción y diagnóstico para definir estrategia — MORE",
+            "Identificar documentos pendientes según la matriz de evidencia — MORE",
+            "Redactar la declaración profesional — Peticionario",
+            "Iniciar gestión y traducción de documentos académicos y laborales — Peticionario"
+          ],
+          "responsible": "MORE + Peticionario",
+          "alert": null
+        },
+        {
+          "weeks": "Semanas 3-4",
+          "title": "Declaración Profesional",
+          "tasks": [
+            "Recibir comentarios de MORE y ajustar la declaración profesional",
+            "Gestionar evidencias según la matriz — Peticionario",
+            "Definir firmantes de cartas de recomendación — Peticionario",
+            "Solicitar equivalencia de títulos y ajustar traducciones — Peticionario"
+          ],
+          "responsible": "MORE + Peticionario",
+          "alert": "Segundo pago al completar el mes. Sin este pago, el proceso se congela."
+        },
+        {
+          "weeks": "Semanas 5-6",
+          "title": "Propuesta de Esfuerzo",
+          "tasks": [
+            "Desarrollo de la propuesta de esfuerzo por parte de MORE",
+            "Revisión técnica y ajustes por el peticionario",
+            "Redacción de cartas de recomendación — Peticionario"
+          ],
+          "responsible": "MORE + Peticionario",
+          "alert": "Sin la propuesta validada por parte del peticionario, no se puede continuar."
+        },
+        {
+          "weeks": "Semanas 7-8",
+          "title": "Evidencias y Presentación Ejecutiva",
+          "tasks": [
+            "Entregar versiones definitivas de evidencias (original, traducción y PDF) — Peticionario",
+            "Firmar cartas de recomendación con hoja de vida del firmante — Peticionario",
+            "Desarrollo de la presentación ejecutiva por parte de MORE",
+            "Envío a organizaciones y afiliaciones a cámaras de comercio — Peticionario"
+          ],
+          "responsible": "MORE + Peticionario",
+          "alert": null
+        },
+        {
+          "weeks": "Semanas 9-11",
+          "title": "Plan de Implementación",
+          "tasks": [
+            "Desarrollo del plan de implementación por MORE",
+            "Revisión y aprobación por el peticionario",
+            "Entrega de cartas de interés firmadas"
+          ],
+          "responsible": "MORE + Peticionario",
+          "alert": "A partir del plan de implementación, se debe enviar el expediente en máximo 4-6 semanas. De lo contrario se generarán costos extra por actualizaciones."
+        },
+        {
+          "weeks": "Semanas 12-15",
+          "title": "Cover Letter y Lista de Exhibits",
+          "tasks": [
+            "Redacción del Cover Letter por parte de MORE",
+            "Diligenciar el Intake con información del peticionario",
+            "Firmar formatos y consolidar expediente — MORE",
+            "Revisión final por parte del peticionario y ajustes según observaciones"
+          ],
+          "responsible": "MORE",
+          "alert": null
+        },
+        {
+          "weeks": "Semana 16",
+          "title": "Envío Final a USCIS",
+          "tasks": [
+            "Envío del expediente completo a USCIS — MORE"
+          ],
+          "responsible": "MORE",
+          "alert": null
+        }
+      ]
+    },
+    "commitments": {
+      "eyebrow": "Tu compromiso",
+      "title": "Tu expediente avanza si...",
+      "subtitle": "El Plan Turbo es un proceso colaborativo. Tu participación activa es tan importante como nuestro trabajo técnico.",
+      "items": [
+        { "number": "1", "title": "Cumplimiento Semanal", "text": "Participación y cumplimiento de las actividades de cada semana sin demoras." },
+        { "number": "2", "title": "Honestidad y Transparencia", "text": "Ser honesto respecto a toda tu información, experiencia y documentos disponibles." },
+        { "number": "3", "title": "Puntualidad y Respeto", "text": "Asistir a las sesiones programadas. Valoramos tu tiempo y el del equipo." },
+        { "number": "4", "title": "Responsabilidad y Pago Puntual", "text": "Si realizas tus pagos puntuales, tu proceso avanza con tranquilidad y sin interrupciones." },
+        { "number": "5", "title": "Confianza y Seguimiento", "text": "Confiar en el equipo experto y seguir las recomendaciones con transparencia." }
+      ]
+    },
+    "ivon": {
+      "eyebrow": "Quién lidera tu proceso",
+      "title": "Ivon More",
+      "subtitle": "Abogada colombiana, migró a EE.UU. hace cinco años con grandes sueños. Allí, descubrió su talento para identificar profesionales latinoamericanos excepcionales y se especializó en la gestión de proyectos de impacto nacional.",
+      "bio": "Su misión es ayudar a estos profesionales a ser reconocidos como de Interés Nacional en EE.UU. mediante un Plan de Alto Impacto. Con un enfoque personalizado, ha logrado numerosos casos de éxito, facilitando el establecimiento de familias de diversas naciones. La pasión de Ivon por empoderar a profesionales sigue creciendo.",
+      "role": "Fundadora & Estratega EB-2 NIW",
+      "tagline": "MORE — Todo lo que nos une"
+    },
+    "testimonials": {
+      "eyebrow": "Casos de éxito",
+      "title": "Profesionales que confiaron en el Plan Turbo",
+      "items": [
+        {
+          "name": "Carlos M.",
+          "role": "Ingeniero Civil",
+          "country": "Colombia",
+          "quote": "Con el Plan Turbo no tuve que adivinar qué documentos preparar. MORE me dijo exactamente qué necesitaba y redactó las cartas que yo nunca hubiera sabido cómo escribir. El expediente quedó impecable."
+        },
+        {
+          "name": "Andrea R.",
+          "role": "Doctora en Educación",
+          "country": "Venezuela",
+          "quote": "En 4 meses el equipo de MORE tenía mi expediente listo para enviar. Yo aportaba la información y ellos transformaban todo en documentos legales perfectos. Es exactamente lo que necesitaba."
+        },
+        {
+          "name": "Luis F.",
+          "role": "Arquitecto",
+          "country": "México",
+          "quote": "Tener un equipo que redactara el Cover Letter y armara los Exhibits fue un diferencial enorme. Sé que mi expediente estaba al nivel que USCIS espera ver. Eso no tiene precio."
+        },
+        {
+          "name": "Patricia S.",
+          "role": "PhD Investigadora",
+          "country": "Colombia",
+          "quote": "La estrategia de relacionamiento me ayudó a conseguir cartas de personas que nunca hubiera contactado sola. MORE sabe exactamente qué tipo de endoso necesita un caso EB-2 NIW."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Inversión",
+      "title": "Plan Turbo",
+      "currency": "USD",
+      "priceNote": "Más gastos de transferencia bancaria",
+      "timeline": "120-160 días · De diagnóstico al envío",
+      "notIncluded": {
+        "title": "No incluye:",
+        "items": ["Equivalencia de títulos", "Traducciones de documentos", "Fees migratorios USCIS"]
+      },
+      "urgencyLine": "Cupos limitados para garantizar atención personalizada en cada expediente."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "subtitle": "Todo lo que necesitas saber antes de dar el paso.",
+      "items": [
+        {
+          "question": "¿Cuál es la diferencia entre el Plan Turbo y el programa UPP?",
+          "answer": "El UPP es un programa de autogestión guiada donde tú preparas tu caso con nuestro acompañamiento estructurado ($2,500). El Plan Turbo es un servicio done-with-you donde MORE elabora contigo la gran mayoría de los documentos ($8,000). Si quieres el máximo nivel de apoyo y que el equipo construya el expediente por ti, el Plan Turbo es la opción."
+        },
+        {
+          "question": "¿Qué pasa si no tengo todos los documentos listos desde el inicio?",
+          "answer": "No es problema. Las primeras semanas del proceso están dedicadas precisamente a identificar qué documentos tienes, cuáles necesitas gestionar y cuáles requieren traducción. MORE te guiará paso a paso en la obtención de cada uno."
+        },
+        {
+          "question": "¿Cómo son los pagos? ¿Hay opciones de cuotas?",
+          "answer": "El precio total es $8,000 USD. El pago se estructura en cuotas durante el proceso: primer pago al inicio, segundo pago al completar el mes (semanas 3-4). Si tienes dudas sobre las opciones de pago, escríbenos por WhatsApp y un asesor te explica los detalles."
+        },
+        {
+          "question": "¿Qué pasa si USCIS pide documentos adicionales (RFE)?",
+          "answer": "El Plan Turbo cubre la preparación y envío inicial del expediente. En caso de un RFE (Request for Evidence), podemos apoyarte con un servicio adicional. Sin embargo, nuestra preparación exhaustiva busca minimizar la probabilidad de que esto ocurra."
+        },
+        {
+          "question": "¿En qué idioma se prepara el expediente?",
+          "answer": "Todo el expediente se prepara en inglés, que es el idioma requerido por USCIS. Los documentos en español se traducen oficialmente. El costo de las traducciones no está incluido en el plan, pero te asesoramos en cómo obtenerlas."
+        },
+        {
+          "question": "¿Puedo empezar el proceso si estoy fuera de EE.UU.?",
+          "answer": "Sí, el Plan Turbo es completamente remoto. Las sesiones se realizan por videollamada y todos los documentos se gestionan digitalmente. Puedes iniciar desde cualquier país."
+        }
+      ]
+    }
+  }
+}
