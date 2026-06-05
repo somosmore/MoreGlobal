@@ -159,37 +159,28 @@ export function TurboHero({
           className="hidden lg:block lg:ml-16 lg:flex-1"
         >
           <div className="relative mx-auto w-full max-w-sm">
-            <div className="absolute -inset-4 rounded-3xl bg-orange/10 blur-2xl" />
-            <div className="relative rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange">
-                  <Zap className="h-5 w-5 text-white" />
+            <div className="absolute -inset-6 rounded-3xl bg-orange/15 blur-3xl" />
+            <div className="relative">
+              <img
+                src="/ivon.png"
+                alt="Ivon More — Fundadora MORE"
+                className="relative mx-auto w-full max-w-[380px] rounded-3xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/10"
+                style={{ aspectRatio: "3/4", objectPosition: "top center" }}
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="absolute bottom-5 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)]"
+              >
+                <div className="rounded-2xl border border-white/20 bg-[#0A1F3D]/80 px-5 py-4 backdrop-blur-md text-center">
+                  <p className="text-sm font-bold text-white">Ivon More</p>
+                  <p className="text-xs text-orange font-medium mt-0.5">Fundadora & Estratega EB-2 NIW</p>
+                  <p className="text-xs text-white/55 mt-1.5 leading-snug">
+                    Lidera personalmente cada expediente del Plan Turbo
+                  </p>
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-white">Plan Turbo</p>
-                  <p className="text-xs text-white/50">Proceso completo EB-2 NIW</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {["Estrategia personalizada", "Documentos elaborados", "Cartas redactadas", "Expediente enviado"].map((item, i) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + i * 0.1 }}
-                    className="flex items-center gap-2.5"
-                  >
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange/20 text-orange text-xs font-bold">
-                      {i + 1}
-                    </span>
-                    <span className="text-sm text-white/80">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="mt-6 rounded-xl bg-orange/15 px-4 py-3 text-center">
-                <p className="text-xs text-white/60">Resultado esperado</p>
-                <p className="text-sm font-bold text-white mt-0.5">Green Card EB-2 NIW enviada</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>
