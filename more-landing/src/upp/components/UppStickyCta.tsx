@@ -36,7 +36,7 @@ export function UppStickyCta({ paymentLink, price, loading }: UppStickyCtaProps)
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#0A3161]/20 bg-[#0A3161]/95 backdrop-blur-md p-3 shadow-[0_-4px_20px_rgba(10,49,97,0.3)] sm:p-4"
+          className="upp-no-print fixed bottom-0 left-0 right-0 z-50 border-t border-[#0A3161]/20 bg-[#0A3161]/95 backdrop-blur-md p-3 shadow-[0_-4px_20px_rgba(10,49,97,0.3)] sm:p-4"
         >
           <div className="mx-auto flex max-w-xl items-center justify-between gap-4">
             <div className="min-w-0">

@@ -52,6 +52,34 @@ export default function UppPage() {
     }
   }, [t])
 
+  useEffect(() => {
+    document.body.classList.add("upp-print")
+
+    const openedForPrint: HTMLDetailsElement[] = []
+    const handleBeforePrint = () => {
+      openedForPrint.length = 0
+      document.querySelectorAll<HTMLDetailsElement>("main details:not([open])").forEach((el) => {
+        el.open = true
+        openedForPrint.push(el)
+      })
+    }
+    const handleAfterPrint = () => {
+      openedForPrint.forEach((el) => {
+        el.open = false
+      })
+      openedForPrint.length = 0
+    }
+
+    window.addEventListener("beforeprint", handleBeforePrint)
+    window.addEventListener("afterprint", handleAfterPrint)
+
+    return () => {
+      document.body.classList.remove("upp-print")
+      window.removeEventListener("beforeprint", handleBeforePrint)
+      window.removeEventListener("afterprint", handleAfterPrint)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />

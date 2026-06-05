@@ -110,3 +110,67 @@
     line-height: 1.6;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Impresión de la página UPP (Ctrl + P).
+   Scope: body.upp-print (la clase la agrega UppPage al montarse),
+   para no afectar la impresión del resto del sitio.
+   ────────────────────────────────────────────────────────────── */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body.upp-print {
+    background: #ffffff !important;
+  }
+
+  /* Mantener los colores de marca al imprimir */
+  body.upp-print * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    /* Neutralizar framer-motion (whileInView arranca en opacity:0) */
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ocultar cromo no imprimible */
+  body.upp-print nav,
+  body.upp-print footer,
+  body.upp-print .upp-no-print {
+    display: none !important;
+  }
+
+  /* Evitar cortes feos entre páginas */
+  body.upp-print h1,
+  body.upp-print h2,
+  body.upp-print h3 {
+    break-after: avoid-page;
+  }
+
+  body.upp-print img,
+  body.upp-print figure,
+  body.upp-print details,
+  body.upp-print [data-upp-card] {
+    break-inside: avoid;
+  }
+
+  /* FAQ: mostrar las respuestas aunque el <details> esté cerrado */
+  body.upp-print details > summary {
+    list-style: none;
+  }
+
+  body.upp-print details > summary > span {
+    display: none !important;
+  }
+
+  body.upp-print details > *:not(summary) {
+    display: block !important;
+  }
+}
