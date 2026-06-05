@@ -5,6 +5,7 @@ import Footer from "@/components/sections/Footer"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { UppHero } from "@/upp/components/UppHero"
 import { UppCtaButtons } from "@/upp/components/UppCtaButtons"
+import { UppPdfExport } from "@/upp/components/UppPdfExport"
 import { UppAudienceSection } from "@/upp/components/UppAudienceSection"
 import { UppProblemSection } from "@/upp/components/UppProblemSection"
 import { UppSolutionSection } from "@/upp/components/UppSolutionSection"
@@ -100,6 +101,14 @@ export default function UppPage() {
                 loading={loading}
               />
             </div>
+            <div className="relative mx-auto max-w-2xl w-full rounded-2xl border border-[#0A3161]/10 bg-[#F9FAFB] px-6 py-7 text-center">
+              <p className="text-sm font-semibold text-[#0A3161] mb-1">¿Quieres compartir esta información?</p>
+              <p className="text-xs text-gray-500 mb-5">
+                Descarga el brochure del programa en PDF para enviarlo por WhatsApp o email.
+              </p>
+              <UppPdfExport price={price} loading={loading} />
+            </div>
+
             <div id="upp-faq">
               <UppFaq
                 paymentLink={paymentLink}
