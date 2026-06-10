@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-06-05 (landing `/upp`: nuevas secciones **Stack de bonos** (4 bonos por 24 h) y **Modalidades de pago** (pago único vs 2 cuotas))
+> Última actualización: 2026-06-09 (landing `/upp`: microcopy del hero, garantía del CTA y bloque intermedio conectados al sistema bilingüe ES/EN)
 
 ---
 
@@ -353,7 +353,7 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
 
-El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`.
+El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`. El microcopy de inversión, cupos limitados, garantía del CTA y bloque intermedio de conversión se traduce desde `locales/{es,en}/uppPage.json`.
 
 **Secuencia de secciones de la landing:** Hero → ¿Es para ti? → Problema → Solución → Beneficios → Módulos → Testimonios → Stack de valor → **Stack de bonos** → Inversión (precio único) → **Modalidades de pago** → Preguntas frecuentes → CTA flotante.
 

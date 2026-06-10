@@ -10,7 +10,8 @@
       "payNow": "Empezar mi programa ahora",
       "talkToAdvisor": "Hablar con un asesor",
       "whatsappUrl": "https://wa.me/573132219798?text=Hola%20MORE,%20me%20interesa%20el%20programa%20Unsung%20Professional.",
-      "comingSoon": "Próximamente"
+      "comingSoon": "Próximamente",
+      "guarantee": "Garantía de devolución de 7 días · Sin preguntas"
     },
     "hero": {
       "badge": "Programa guiado",
@@ -25,7 +26,13 @@
       ],
       "countdownLabel": "La oferta cierra en",
       "priceEyebrow": "Inversión única",
-      "currency": "USD"
+      "currency": "USD",
+      "priceNote": "Pago único · acceso completo",
+      "limitedSpots": "Plazas limitadas para garantizar la calidad del acompañamiento"
+    },
+    "midCta": {
+      "eyebrow": "¿Ya estás convencido?",
+      "title": "Empieza tu ruta a la Green Card hoy"
     },
     "audience": {
       "eyebrow": "¿Es para ti?",

@@ -118,7 +118,7 @@ export function UppHero({
               </div>
               <div className="hidden h-12 w-px bg-white/15 sm:block" />
               <p className="hidden max-w-[150px] text-xs leading-snug text-white/60 sm:block">
-                Pago único · acceso completo
+                {t("uppPage.hero.priceNote")}
               </p>
             </motion.div>
           </motion.div>
@@ -139,7 +139,7 @@ export function UppHero({
             {!countdownDate && !loading && (
               <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-white/55">
                 <Users className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                Plazas limitadas para garantizar la calidad del acompañamiento
+                {t("uppPage.hero.limitedSpots")}
               </p>
             )}
           </motion.div>

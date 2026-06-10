@@ -43,7 +43,7 @@ export function UppCtaButtons({
             href={paymentLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange to-orange-dark px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange/25 transition-all duration-200 hover:shadow-xl hover:shadow-orange/30 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+            className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-linear-to-r from-orange to-orange-dark px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange/25 transition-all duration-200 hover:shadow-xl hover:shadow-orange/30 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
             aria-label={t("uppPage.cta.payNow")}
           >
             {t("uppPage.cta.payNow")}
@@ -74,7 +74,7 @@ export function UppCtaButtons({
           )}
         >
           <Shield className="h-3.5 w-3.5 text-green-500 shrink-0" />
-          Garantía de devolución de 7 días · Sin preguntas
+          {t("uppPage.cta.guarantee")}
         </p>
       )}
     </div>

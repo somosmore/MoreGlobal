@@ -100,8 +100,12 @@ export default function UppPage() {
             <div id="upp-modulos"><UppModulesSection /></div>
             <UppTestimonialsSection />
             <div className="mx-auto max-w-2xl w-full rounded-2xl bg-[#0A3161]/5 border border-[#0A3161]/10 px-6 py-8 text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-orange mb-1">¿Ya estás convencido?</p>
-              <p className="text-xl font-bold text-navy mb-5">Empieza tu ruta a la Green Card hoy</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-orange mb-1">
+                {t("uppPage.midCta.eyebrow")}
+              </p>
+              <p className="text-xl font-bold text-navy mb-5">
+                {t("uppPage.midCta.title")}
+              </p>
               <UppCtaButtons
                 paymentLink={paymentLink}
                 whatsappUrl={whatsappUrl}
