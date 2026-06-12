@@ -24,6 +24,8 @@ const MasterclassPage = lazy(() => import("@/pages/MasterclassPage"))
 const UppPage = lazy(() => import("@/pages/UppPage"))
 const TurboPage = lazy(() => import("@/pages/TurboPage"))
 const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
+import TurboPdfPage from "@/pages/TurboPdfPage"
+import UppPdfPage from "@/pages/UppPdfPage"
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -44,7 +46,9 @@ function App() {
           <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/upp" element={<UppPage />} />
+          <Route path="/upp/pdf" element={<UppPdfPage />} />
           <Route path="/turbo" element={<TurboPage />} />
+          <Route path="/turbo/pdf" element={<TurboPdfPage />} />
           <Route path="/wppequipo" element={<WppEquipoPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
