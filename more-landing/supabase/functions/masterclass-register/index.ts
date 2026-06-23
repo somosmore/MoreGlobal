@@ -43,6 +43,10 @@ Deno.serve(async (req) => {
       email,
       phone,
       pais,
+      profesion,
+      source,
+      event_label,
+      ghl_tag,
       utm_source,
       utm_medium,
       utm_campaign,
@@ -61,6 +65,22 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
+
+    // Permite reutilizar esta función para distintos eventos/webinars.
+    // Si el frontend no envía `source`/`event_label`, se asume la masterclass.
+    const leadSource =
+      typeof source === "string" && source.trim()
+        ? source.trim()
+        : "masterclass-eb2niw-2026"
+    const eventLabel =
+      typeof event_label === "string" && event_label.trim()
+        ? event_label.trim()
+        : "Masterclass EB2-NIW"
+    const profesionValue =
+      typeof profesion === "string" && profesion.trim() ? profesion.trim() : null
+    // Tag de GHL específico del evento; si no llega, cae al GHL_TAG por defecto.
+    const eventTag =
+      typeof ghl_tag === "string" && ghl_tag.trim() ? ghl_tag.trim() : null
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -100,7 +120,8 @@ Deno.serve(async (req) => {
       email: email.trim().toLowerCase(),
       whatsapp: phone,
       country: pais,
-      source: "masterclass-eb2niw-2026",
+      profesion: profesionValue,
+      source: leadSource,
       utm_source: utm_source || null,
       utm_medium: utm_medium || null,
       utm_campaign: utm_campaign || null,
@@ -126,8 +147,8 @@ Deno.serve(async (req) => {
           email: email.trim().toLowerCase(),
           phone: phone,
           country: COUNTRY_ISO[pais] || "US",
-          source: "Masterclass EB2-NIW",
-          tags: [ghlTag],
+          source: eventLabel,
+          tags: [eventTag || ghlTag],
           customFields: [
             { id: "2p21GBEtEn6ZmpPzKouP", field_value: pais },
           ],
@@ -161,7 +182,7 @@ Deno.serve(async (req) => {
             pipelineStageId: ghlStageId,
             locationId: ghlLocationId,
             contactId,
-            name: `${nombre.trim()} — Masterclass EB2-NIW`,
+            name: `${nombre.trim()} — ${eventLabel}`,
             status: "open",
             monetaryValue: 0,
           }
