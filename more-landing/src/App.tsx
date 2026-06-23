@@ -21,6 +21,7 @@ const BlueprintPage = lazy(() => import("@/pages/BlueprintPage"))
 const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
 const MasterclassPage = lazy(() => import("@/pages/MasterclassPage"))
+const TallerNiwPage = lazy(() => import("@/pages/TallerNiwPage"))
 const UppPage = lazy(() => import("@/pages/UppPage"))
 const TurboPage = lazy(() => import("@/pages/TurboPage"))
 const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
@@ -45,6 +46,7 @@ function App() {
           <Route path="/asesoria-vip" element={<VipSessionPage />} />
           <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
+          <Route path="/taller-niw" element={<TallerNiwPage />} />
           <Route path="/upp" element={<UppPage />} />
           <Route path="/upp/pdf" element={<UppPdfPage />} />
           <Route path="/turbo" element={<TurboPage />} />

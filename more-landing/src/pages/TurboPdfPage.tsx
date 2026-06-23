@@ -426,7 +426,7 @@ export default function TurboPdfPage() {
 
             {/* No incluye reminder */}
             <div style={{ padding: "20px 24px", background: "white", borderRadius: 12, border: "1px solid #e5e7eb", borderLeft: "4px solid #F37021" }}>
-              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 18, lineHeight: 1.6, color: "#6b7280" }}>
+              <p style={{ fontSize: 18, lineHeight: 1.6, color: "#6b7280" }}>
                 <strong style={{ color: "#374151" }}>No incluye:</strong>{" "}
                 Equivalencia de títulos · Traducciones oficiales · Fees migratorios USCIS
               </p>

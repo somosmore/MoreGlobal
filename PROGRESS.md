@@ -29,6 +29,25 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-06-23] — `/taller-niw`: optimización de conversión (CRO)
+
+- Agente: claude
+- Archivos modificados: `src/components/sections/taller-niw/scrollToRegistro.ts` (nuevo), `TNTestimonials.tsx` (nuevo), `TNHero.tsx`, `TNStickyCTA.tsx`, `TNRegistrationForm.tsx`, `src/pages/TallerNiwPage.tsx`.
+- Qué se implementó: Reducción de fricción y refuerzo de confianza para subir el % de inscripciones. (1) Formulario de 5 → 4 campos: profesión ahora **opcional** y se **eliminó el dropdown de país**, derivándolo del prefijo telefónico (`DIAL_TO_COUNTRY`) — la Edge Function sigue recibiendo `pais` como string. (2) CTA del hero y sticky con **scroll suave** + **autofocus por intención** (helper `scrollToRegistro` dispara evento `focus-registro`, el form enfoca el primer campo). (3) **Sticky CTA visible también en desktop** (centrado). (4) Barra de cupos creíble (98% → **82%**, constante `CUPOS_PCT`). (5) **Prueba social**: línea "+N profesionales ya reservaron" en el hero + nueva sección de testimonios antes del formulario. Microcopy "Gratis · En vivo · Cupos limitados" bajo el CTA.
+- Problemas encontrados: ninguno. tsc/eslint/build limpios.
+- Pendiente: reemplazar placeholders de prueba social marcados con `TODO` (`REGISTRANTS_COUNT` en `TNHero.tsx` y los testimonios en `TNTestimonials.tsx`) por datos reales antes de publicar.
+- Estado: ✅ completo
+
+### [2026-06-23] — Landing `/taller-niw` (Red flags de los abogados de inmigración)
+
+- Agente: claude
+- Archivos modificados: `src/pages/TallerNiwPage.tsx` (nuevo), `src/components/sections/taller-niw/*` (nuevos: TNHero, TNBenefits, TNRegistrationForm, TNFAQ, TNSpeaker, TNFooter, TNStickyCTA, TNCountdown), `src/App.tsx` (ruta `/taller-niw` + lazy import), `supabase/migrations/026_taller_niw.sql` (nuevo), `supabase/functions/masterclass-register/index.ts`, `src/pages/TurboPdfPage.tsx` (fix puntual).
+- Qué se implementó: Nueva landing de webinar al estilo de `/masterclass` (Hero con countdown + barra de cupos, Benefits, formulario de registro, FAQ, Speaker, Footer, Sticky CTA). Evento: martes 30 de junio 2026, 7 PM Colombia, con Ivon More. El formulario captura **nombre, email, teléfono, país y profesión** (campo profesión añadido respecto a la masterclass) y, tras registrar, redirige al grupo de WhatsApp (placeholder `REEMPLAZAR_LINK_DEL_GRUPO` pendiente de reemplazar). Backend reutiliza la Edge Function `masterclass-register` de forma backward-compatible: acepta `profesion`, `source` (`taller-redflags-2026`) y `event_label`; si no llegan, mantiene el comportamiento de la masterclass. Migración `026` añade columna `profesion` a `masterclass_leads` y registra la landing en `landing_projects` (necesario para que `useLandingStatus` la deje accesible).
+- Problemas encontrados: (1) El MCP de Supabase solo expone el proyecto `fozhnfxehbbgqaerprgf`, no el de esta app (`pqextffbzzwadrlzgnvb`), así que la migración y el deploy de la Edge Function quedan pendientes de aplicar manualmente con la CLI. (2) Bug preexistente en `TurboPdfPage.tsx:429` (clave `color` duplicada en un objeto `style`) que rompía `tsc -b` de todo el proyecto; corregido quitando el duplicado erróneo.
+- Tag de GHL propio del taller: `Taller-junio-2026` (parametrizado vía `ghl_tag`; la masterclass cae al `GHL_TAG` por defecto). Grupo de WhatsApp configurado.
+- Pendiente: aplicar migración `026` y desplegar `masterclass-register` en el proyecto de producción (`pqextffbzzwadrlzgnvb`) con la CLI.
+- Estado: ✅ completo (frontend) / ⛔ backend pendiente de deploy manual
+
 ### [2026-05-28] — Script one-shot de importación Zoom a GHL
 
 - Agente: cursor
