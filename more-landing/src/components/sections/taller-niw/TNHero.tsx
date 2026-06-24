@@ -6,7 +6,7 @@ import { scrollToRegistro } from "./scrollToRegistro"
 const details = [
   { icon: Calendar, text: "Martes 30 de junio 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
-  { icon: MapPin, text: "Online y en vivo" },
+  { icon: MapPin, text: "En línea y en vivo" },
   { icon: Gift, text: "100% gratis" },
   { icon: User, text: "Con Ivon More" },
 ]

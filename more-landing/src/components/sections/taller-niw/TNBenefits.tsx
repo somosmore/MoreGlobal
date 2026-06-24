@@ -34,7 +34,7 @@ export default function TNBenefits() {
         <div className="flex items-center justify-center gap-2 mb-6">
           <Sparkles className="h-5 w-5 text-[#F37021]" />
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center">
-            En este taller vas a aprender:
+            En este taller aprenderás:
           </h2>
           <Sparkles className="h-5 w-5 text-[#F37021]" />
         </div>

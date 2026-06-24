@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "¿El taller es realmente gratis?",
-    a: "Sí, 100% gratuito. Es una sesión en vivo donde compartimos información real y accionable. No hay costos ocultos para asistir.",
+    a: "Sí, 100% gratuito. Es una sesión en vivo donde compartimos información real y aplicable. No hay costos ocultos para asistir.",
   },
   {
     q: "¿Quedará grabado?",
