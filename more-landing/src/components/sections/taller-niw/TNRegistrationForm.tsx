@@ -344,7 +344,7 @@ function SuccessCard() {
                 Entra al grupo exclusivo del taller
               </p>
               <p className="text-xs text-white/70 mt-1.5 leading-relaxed">
-                Ahí mandamos recordatorios y el enlace para conectarte el día del vivo. Si no entrás, perdés contexto y preguntas en vivo.
+                Ahí mandamos recordatorios y el enlace para conectarte el día del vivo. Si no entras, pierdes contexto y las preguntas en vivo.
               </p>
               <p className="text-sm font-semibold text-[#F37021] mt-3 tabular-nums">
                 Te llevamos a WhatsApp en {secondsLeft} segundo{secondsLeft === 1 ? "" : "s"}…
@@ -388,7 +388,7 @@ function SuccessCard() {
 
       <div className="mb-6">
         <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">
-          Agendá el taller
+          Agenda el taller
         </p>
         <div className="flex flex-col sm:flex-row gap-2">
           <a
@@ -417,7 +417,7 @@ function SuccessCard() {
 
       <div className="mb-6 p-5 bg-white/5 border border-white/10 rounded-xl text-center">
         <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">
-          O unite al grupo con el QR
+          Únete al grupo con el QR
         </p>
         <div className="w-40 h-40 mx-auto mb-3 bg-white rounded-xl p-2">
           <img
@@ -428,7 +428,7 @@ function SuccessCard() {
           />
         </div>
         <p className="text-[10px] text-white/40">
-          Ideal si completaste el registro en computadora y quieres entrar desde el celular
+          Ideal si completaste el registro en computadora y quieres entrar desde el teléfono
         </p>
       </div>
 
@@ -464,7 +464,7 @@ function ExpiredCard() {
       </h2>
       <p className="text-[#6B7A9A] mb-6">
         El taller sobre red flags de los abogados de inmigración ya fue
-        realizado. Seguinos en redes para enterarte de próximos eventos.
+        realizado. Síguenos en redes para enterarte de los próximos eventos.
       </p>
       <a
         href="/"

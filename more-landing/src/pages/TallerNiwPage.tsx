@@ -33,7 +33,7 @@ export default function TallerNiwPage() {
     setMeta(
       "name",
       "description",
-      "Taller gratuito con Ivon More. Las red flags que debes detectar antes de pagarle a un abogado de inmigración. Martes 30 de junio 2026, 7 PM Colombia."
+      "Taller gratuito con Ivon More. Las señales de alerta que debes detectar antes de pagarle a un abogado de inmigración. Martes 30 de junio 2026, 7 PM Colombia."
     )
     setMeta(
       "property",

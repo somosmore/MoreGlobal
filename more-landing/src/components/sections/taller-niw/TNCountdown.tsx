@@ -105,11 +105,11 @@ export default function TNCountdown() {
         <span className="text-2xl font-bold text-white/30 -mt-6">:</span>
         <Block value={timeLeft.hours} label="Horas" variant="default" />
         <span className="text-2xl font-bold text-white/30 -mt-6">:</span>
-        <Block value={timeLeft.minutes} label="Min" variant="accent" />
+        <Block value={timeLeft.minutes} label="Minutos" variant="accent" />
         <span className="text-xl font-bold text-[#F37021] -mt-6 drop-shadow-[0_0_6px_rgba(243,112,33,0.8)]">
           :
         </span>
-        <Block value={timeLeft.seconds} label="Seg" variant="hot" />
+        <Block value={timeLeft.seconds} label="Segundos" variant="hot" />
       </div>
     </motion.div>
   )
