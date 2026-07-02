@@ -1,7 +1,7 @@
 import { useState, useEffect, memo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
-const EVENT_DATE = new Date("2026-06-30T19:00:00-05:00")
+const EVENT_DATE = new Date("2026-07-13T19:00:00-05:00")
 
 function getTimeLeft() {
   const diff = EVENT_DATE.getTime() - Date.now()

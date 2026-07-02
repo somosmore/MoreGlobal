@@ -4,7 +4,7 @@ import TNCountdown from "./TNCountdown"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const details = [
-  { icon: Calendar, text: "Martes 30 de junio 2026" },
+  { icon: Calendar, text: "Lunes 13 de julio 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
   { icon: MapPin, text: "En línea y en vivo" },
   { icon: Gift, text: "100% gratis" },
