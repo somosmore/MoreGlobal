@@ -33,7 +33,7 @@ export default function TallerNiwPage() {
     setMeta(
       "name",
       "description",
-      "Taller gratuito con Ivon More. Las señales de alerta que debes detectar antes de pagarle a un abogado de inmigración. Martes 30 de junio 2026, 7 PM Colombia."
+      "Taller gratuito con Ivon More. Las señales de alerta que debes detectar antes de pagarle a un abogado de inmigración. Lunes 13 de julio 2026, 7 PM Colombia."
     )
     setMeta(
       "property",
@@ -43,7 +43,7 @@ export default function TallerNiwPage() {
     setMeta(
       "property",
       "og:description",
-      "Un taller en vivo que te puede ahorrar miles de dólares. Aprende a detectar a un mal abogado antes de pagarle. Martes 30 de junio 2026, 7 PM Colombia."
+      "Un taller en vivo que te puede ahorrar miles de dólares. Aprende a detectar a un mal abogado antes de pagarle. Lunes 13 de julio 2026, 7 PM Colombia."
     )
     setMeta("property", "og:type", "website")
 

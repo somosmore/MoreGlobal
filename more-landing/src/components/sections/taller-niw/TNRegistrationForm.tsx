@@ -15,7 +15,7 @@ const TALLER_EVENT_LABEL = "Taller Red Flags Abogados"
 const TALLER_GHL_TAG = "Taller-junio-2026"
 /** Segundos antes de abrir el grupo en la misma pestaña (si el usuario no pausa). */
 const TN_WHATSAPP_GROUP_REDIRECT_SECONDS = 4
-const REGISTRATION_CLOSES_AT = new Date("2026-07-02T23:59:59-05:00")
+const REGISTRATION_CLOSES_AT = new Date("2026-07-15T23:59:59-05:00")
 
 const COUNTRY_CODES = [
   { code: "+57",  iso: "co", dial: "+57"  },
@@ -112,7 +112,7 @@ const GOOGLE_CALENDAR_URL = (() => {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: "Taller: Red flags de los abogados de inmigración — MORE",
-    dates: "20260630T190000/20260630T210000",
+    dates: "20260713T190000/20260713T210000",
     ctz: "America/Bogota",
     details: "Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\n\\nLink de acceso se enviará por WhatsApp y email.",
     location: "Online (Zoom)",
@@ -126,8 +126,8 @@ function generateICS(): string {
     "VERSION:2.0",
     "PRODID:-//MORE//Taller Red Flags//ES",
     "BEGIN:VEVENT",
-    "DTSTART;TZID=America/Bogota:20260630T190000",
-    "DTEND;TZID=America/Bogota:20260630T210000",
+    "DTSTART;TZID=America/Bogota:20260713T190000",
+    "DTEND;TZID=America/Bogota:20260713T210000",
     "SUMMARY:Taller: Red flags de los abogados de inmigración — MORE",
     "DESCRIPTION:Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\nLink de acceso se enviará por WhatsApp y email.",
     "LOCATION:Online (Zoom)",
@@ -638,7 +638,7 @@ export default function TNRegistrationForm() {
               className="text-center mb-6"
             >
               <p className="text-[#FFBA7A] text-xs font-semibold uppercase tracking-widest mb-2">
-                Taller gratuito · Martes 30 de junio 2026
+                Taller gratuito · Lunes 13 de julio 2026
               </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
                 Antes de pagarle a un{" "}
