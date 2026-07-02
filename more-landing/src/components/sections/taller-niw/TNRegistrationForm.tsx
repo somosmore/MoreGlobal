@@ -7,7 +7,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/DpJ4pF0Z87G1Wq9GF45PZ6"
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HbCUqesJRA02HxVkyNNlFc"
 /** Identificador del evento para distinguir estos leads en la base de datos / GHL. */
 const TALLER_SOURCE = "taller-redflags-2026"
 const TALLER_EVENT_LABEL = "Taller Red Flags Abogados"
