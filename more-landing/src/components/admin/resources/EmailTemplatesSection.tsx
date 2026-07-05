@@ -7,7 +7,7 @@ type EmailTemplate = {
   name: string
   description: string
   file: string
-  group: "masterclass" | "ivon" | "sandra"
+  group: "masterclass" | "taller" | "ivon" | "sandra"
 }
 
 const TEMPLATES: EmailTemplate[] = [
@@ -31,6 +31,27 @@ const TEMPLATES: EmailTemplate[] = [
     description: "Recordatorio el día del evento con link de Zoom",
     file: "recordatorio-masterclass.html",
     group: "masterclass",
+  },
+  {
+    id: "bienvenida-taller",
+    name: "Bienvenida Taller Red Flags",
+    description: "Confirmación post-registro + link de inscripción Zoom + WhatsApp",
+    file: "bienvenida-taller-redflags.html",
+    group: "taller",
+  },
+  {
+    id: "previo-taller",
+    name: "Recordatorio 24h Taller Red Flags",
+    description: "Recordatorio un día antes (12 jul) con link Zoom",
+    file: "previo-taller-redflags.html",
+    group: "taller",
+  },
+  {
+    id: "recordatorio-taller",
+    name: "Día del Evento Taller Red Flags",
+    description: "Recordatorio el 13 jul con link Zoom y WhatsApp",
+    file: "recordatorio-taller-redflags.html",
+    group: "taller",
   },
   {
     id: "confirmacion-ivon",
@@ -78,6 +99,7 @@ const TEMPLATES: EmailTemplate[] = [
 
 const GROUPS = [
   { id: "masterclass" as const, label: "Masterclass", color: "bg-blue-500" },
+  { id: "taller" as const, label: "Taller Red Flags", color: "bg-red-500" },
   { id: "ivon" as const, label: "Agenda Ivon", color: "bg-orange-500" },
   { id: "sandra" as const, label: "Agenda Sandra", color: "bg-purple-500" },
 ]

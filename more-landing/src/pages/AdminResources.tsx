@@ -60,7 +60,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; description: stri
     id: "emails",
     label: "Emails",
     icon: Mail,
-    description: "Plantillas de email para GHL: bienvenida, recordatorios de masterclass y agendas.",
+    description: "Plantillas de email para GHL: masterclass, taller Red Flags, agendas Ivon/Sandra.",
   },
 ]
 
