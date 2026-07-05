@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-06-09 (landing `/upp`: microcopy del hero, garantía del CTA y bloque intermedio conectados al sistema bilingüe ES/EN)
+> Última actualización: 2026-07-05 (taller `/taller-niw`: emails GHL + plantillas Red Flags)
 
 ---
 
@@ -22,6 +22,7 @@
    - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
    - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
+   - 1.16 [Landing Taller Red Flags (`/taller-niw`)](#116-landing-taller-red-flags-taller-niw)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -390,6 +391,27 @@ Página de utilidad para campañas, QR impresos y enlaces cortos que distribuyen
 - Incluye `<meta name="robots" content="noindex, nofollow">` (no indexable en buscadores).
 
 **Gestión:** todo se configura desde `/admin/settings` → sección **WhatsApp Equipo** (ver [2.5](#25-módulo-de-configuración)).
+
+### 1.16 Landing Taller Red Flags (`/taller-niw`)
+
+**Ruta:** `/taller-niw`
+
+Landing del taller gratuito **"Red flags de los abogados de inmigración"** (Ivon More). Incluye hero con countdown, beneficios, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo.
+
+| Dato | Valor |
+|------|-------|
+| Evento | Lunes **13 de julio de 2026**, 7:00 PM (Colombia) |
+| Registro cierra | 15 de julio de 2026 (configurado en frontend) |
+| Tag GHL | `taller-junio-2026` |
+| Source Supabase | `taller-redflags-2026` |
+| Zoom (inscripción) | Enlace de registro webinar en emails y plantillas GHL |
+| WhatsApp | Grupo exclusivo del taller (redirect post-registro, 4 s) |
+
+**Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión.
+
+**Emails automáticos (GHL):** al recibir el tag `taller-junio-2026` debe dispararse un workflow con 3 correos (bienvenida inmediata, recordatorio 24 h el **12 jul**, recordatorio día del evento **13 jul mediodía**). Plantillas HTML en `public/emails/*taller-redflags*` y guía de configuración en `Documentacion/taller-redflags-ghl-workflow.md`. Sincronizar plantillas a GHL: `node scripts/sync-ghl-taller-emails.mjs`.
+
+**Admin:** plantillas visibles en **Recursos → Emails → Taller Red Flags** (preview y copiar HTML).
 
 ---
 
@@ -968,7 +990,7 @@ Biblioteca centralizada donde se almacenan y consultan todos los activos estrat�
 
 ### Funcionalidades principales
 
-- **Tabs de filtro**: Todos / Marca / Estrategia / Playbooks / Landings
+- **Tabs de filtro**: Todos / Marca / Estrategia / Playbooks / Landings / **Emails**
 - **Contador de recursos**: Muestra el total en la pestaña activa
 - **Agregar recurso**: Modal para crear nuevos recursos con título, descripción, tipo, formato y URL
 - **Vista previa embebida**: Modal a pantalla completa con `<iframe>` para PDF y HTML; enlace externo para links
@@ -1005,6 +1027,18 @@ El componente público de la landing (por ejemplo `/masterclass`) usa el hook `u
 - Para que una landing esté disponible **ya**: dejá `activate_at` vacío y el switch encendido.
 - Para que una landing **expire** sola: dejá el switch encendido y poné `deactivate_at` en la fecha/hora local de corte.
 - Si no querés que use fechas, dejá ambas vacías. La disponibilidad la define solo el switch.
+
+### Tab Emails
+
+Muestra plantillas HTML para copiar a GoHighLevel, agrupadas por campaña:
+
+| Grupo | Plantillas |
+|-------|------------|
+| Masterclass | Bienvenida, recordatorio 24 h, día del evento |
+| **Taller Red Flags** | Bienvenida, recordatorio 24 h (12 jul), día del evento (13 jul) |
+| Agenda Ivon / Sandra | Confirmación y recordatorios de sesiones |
+
+Cada tarjeta permite **visualizar** el email en iframe y **copiar el HTML** al portapapeles.
 
 ### Tipos de recursos (`type`)
 
