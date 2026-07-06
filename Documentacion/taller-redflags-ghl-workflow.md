@@ -1,6 +1,16 @@
 # Workflow GHL — Taller Red Flags (13 jul 2026)
 
-Configuración de emails automáticos cuando un contacto recibe el tag **`taller-junio-2026`** (disparado al registrarse en `/taller-niw`).
+Configuración de emails automáticos cuando un contacto recibe el tag **`taller-julio-2026`** (disparado al registrarse en `/taller-niw` o en `/taller-niw/registro`).
+
+## URL para Facebook Ads
+
+Usar la página solo formulario (copy Meta-safe en DOM y meta tags):
+
+```
+https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio
+```
+
+La landing completa `/taller-niw` conserva copy orientado a SEO/conversión orgánica; para anuncios pagos en Meta conviene la ruta `/registro`.
 
 ## Datos del evento
 
@@ -8,7 +18,7 @@ Configuración de emails automáticos cuando un contacto recibe el tag **`taller
 |-------|-------|
 | Fecha | Lunes **13 de julio de 2026** |
 | Hora | **7:00 PM** (Colombia / Perú / Ecuador) |
-| Tag GHL | `taller-junio-2026` |
+| Tag GHL | `taller-julio-2026` |
 | Zoom (inscripción) | https://us02web.zoom.us/meeting/register/z1tEaTnxTEKctLPQ1rEEtg |
 | WhatsApp grupo | https://chat.whatsapp.com/HbCUqesJRA02HxVkyNNlFc |
 
@@ -37,7 +47,7 @@ También visibles en **Admin → Recursos → Emails → Taller Red Flags** (cop
 
 ### Trigger
 
-- **Contact Tag** → Tag added → `taller-junio-2026`
+- **Contact Tag** → Tag added → `taller-julio-2026`
 
 ### Acciones (en orden)
 
@@ -58,12 +68,12 @@ También visibles en **Admin → Recursos → Emails → Taller Red Flags** (cop
 
 - **Goal / Exit:** quitar tag o mover oportunidad tras el evento.
 - **Allow re-entry:** desactivado (evita emails duplicados si alguien se registra 2 veces).
-- **Filter:** solo contactos con tag `taller-junio-2026` (sin tag de masterclass activo si quieres segmentar).
+- **Filter:** solo contactos con tag `taller-julio-2026` (sin tag de masterclass activo si quieres segmentar).
 
 ## Verificación
 
-1. Registro de prueba en `/taller-niw` con email de test.
-2. En GHL: contacto con tag `taller-junio-2026`.
+1. Registro de prueba en `/taller-niw` o `/taller-niw/registro` con email de test.
+2. En GHL: contacto con tag `taller-julio-2026`.
 3. Recibir email de bienvenida en &lt; 5 min.
 4. Revisar **Automation → Workflow history** del contacto de prueba.
 
@@ -72,4 +82,4 @@ También visibles en **Admin → Recursos → Emails → Taller Red Flags** (cop
 El link de Zoom es de **inscripción** (webinar registration). Tras inscribirse, Zoom envía su propio email con el enlace personal de acceso. Las plantillas MORE refuerzan ese paso y el grupo de WhatsApp.
 
 ---
-*Última actualización: 2026-07-05*
+*Última actualización: 2026-07-06*

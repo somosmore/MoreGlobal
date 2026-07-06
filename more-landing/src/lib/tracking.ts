@@ -39,6 +39,15 @@
  */
 import type { SiteSettingsMap } from "@/lib/supabase"
 
+const MASTERCLASS_LANDING_PATHS = new Set([
+  "/masterclass",
+  "/taller-niw",
+  "/taller-niw/registro",
+])
+
+const isMasterclassLandingPath = (pathname: string): boolean =>
+  MASTERCLASS_LANDING_PATHS.has(pathname)
+
 /** Parámetros opacos hacia Meta (evitar nombres que describan categorías sensibles en eventos). */
 const META_EVENT_PARAMS = {
   masterclassView: {
@@ -297,7 +306,7 @@ export const sendPageView = (
   if (!trackingActive(settings)) return
 
   let masterclassViewEventId: string | undefined
-  if (pathname === "/masterclass") {
+  if (isMasterclassLandingPath(pathname)) {
     const capiUrl = (import.meta.env.VITE_META_CAPI_MASTERCLASS_VIEW_URL as string | undefined)?.trim()
     if (capiUrl) {
       masterclassViewEventId = crypto.randomUUID()
@@ -320,7 +329,7 @@ export const sendPageView = (
       page_path: pathname,
       page_title: typeof document !== "undefined" ? document.title : "",
     })
-    if (pathname === "/masterclass") {
+    if (isMasterclassLandingPath(pathname)) {
       window.dataLayer.push({
         event: "masterclass_landing_view",
         ...META_EVENT_PARAMS.masterclassView,
@@ -333,7 +342,7 @@ export const sendPageView = (
 
   if (settings.meta_pixel_id.trim()) {
     window.fbq?.("track", "PageView")
-    if (pathname === "/masterclass") {
+    if (isMasterclassLandingPath(pathname)) {
       const viewOpts = masterclassViewEventId
         ? { eventID: masterclassViewEventId }
         : undefined
@@ -455,7 +464,7 @@ export const trackMasterclassRegistration = async (
   const payload = {
     event: "masterclass_registration",
     ...META_EVENT_PARAMS.masterclassFormOk,
-    page_path: "/masterclass",
+    page_path: window.location.pathname,
     ...(capi?.eventId ? { capi_event_id: capi.eventId } : {}),
   }
 

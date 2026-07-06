@@ -22,6 +22,7 @@ const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
 const MasterclassPage = lazy(() => import("@/pages/MasterclassPage"))
 const TallerNiwPage = lazy(() => import("@/pages/TallerNiwPage"))
+const TallerNiwRegistroPage = lazy(() => import("@/pages/TallerNiwRegistroPage"))
 const UppPage = lazy(() => import("@/pages/UppPage"))
 const TurboPage = lazy(() => import("@/pages/TurboPage"))
 const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
@@ -47,6 +48,7 @@ function App() {
           <Route path="/privacidad" element={<PrivacyPolicyPage />} />
           <Route path="/masterclass" element={<MasterclassPage />} />
           <Route path="/taller-niw" element={<TallerNiwPage />} />
+          <Route path="/taller-niw/registro" element={<TallerNiwRegistroPage />} />
           <Route path="/upp" element={<UppPage />} />
           <Route path="/upp/pdf" element={<UppPdfPage />} />
           <Route path="/turbo" element={<TurboPage />} />

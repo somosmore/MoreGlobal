@@ -5,6 +5,13 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
+import {
+  buildGoogleCalendarUrl,
+  buildIcsContent,
+  getTallerNiwFormCopy,
+  type TallerNiwFormCopy,
+  type TallerNiwFormVariant,
+} from "@/components/sections/taller-niw/tallerNiwCopy"
 import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HbCUqesJRA02HxVkyNNlFc"
@@ -12,7 +19,7 @@ const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HbCUqesJRA02HxVkyNNlFc"
 const TALLER_SOURCE = "taller-redflags-2026"
 const TALLER_EVENT_LABEL = "Taller Red Flags Abogados"
 /** Etiqueta (tag) con la que se marcan los leads en GoHighLevel. */
-const TALLER_GHL_TAG = "Taller-junio-2026"
+const TALLER_GHL_TAG = "Taller-julio-2026"
 /** Segundos antes de abrir el grupo en la misma pestaña (si el usuario no pausa). */
 const TN_WHATSAPP_GROUP_REDIRECT_SECONDS = 4
 const REGISTRATION_CLOSES_AT = new Date("2026-07-15T23:59:59-05:00")
@@ -108,37 +115,8 @@ function validate(data: FormData): FormErrors {
   return errors
 }
 
-const GOOGLE_CALENDAR_URL = (() => {
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: "Taller: Red flags de los abogados de inmigración — MORE",
-    dates: "20260713T190000/20260713T210000",
-    ctz: "America/Bogota",
-    details: "Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\n\\nLink de acceso se enviará por WhatsApp y email.",
-    location: "Online (Zoom)",
-  })
-  return `https://calendar.google.com/calendar/render?${params.toString()}`
-})()
-
-function generateICS(): string {
-  return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//MORE//Taller Red Flags//ES",
-    "BEGIN:VEVENT",
-    "DTSTART;TZID=America/Bogota:20260713T190000",
-    "DTEND;TZID=America/Bogota:20260713T210000",
-    "SUMMARY:Taller: Red flags de los abogados de inmigración — MORE",
-    "DESCRIPTION:Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\nLink de acceso se enviará por WhatsApp y email.",
-    "LOCATION:Online (Zoom)",
-    "STATUS:CONFIRMED",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n")
-}
-
-function downloadICS() {
-  const blob = new Blob([generateICS()], { type: "text/calendar;charset=utf-8" })
+function downloadICS(copy: TallerNiwFormCopy) {
+  const blob = new Blob([buildIcsContent(copy)], { type: "text/calendar;charset=utf-8" })
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url
@@ -256,7 +234,8 @@ function FlagSelect({
 
 // ────────────────────────────────────────────────────────────────────────────
 
-function SuccessCard() {
+function SuccessCard({ copy }: { copy: TallerNiwFormCopy }) {
+  const googleCalendarUrl = buildGoogleCalendarUrl(copy)
   const [secondsLeft, setSecondsLeft] = useState(TN_WHATSAPP_GROUP_REDIRECT_SECONDS)
   const [redirectPaused, setRedirectPaused] = useState(false)
   const skipRedirectRef = useRef(false)
@@ -282,8 +261,8 @@ function SuccessCard() {
 
   const handleDownloadIcs = useCallback(() => {
     handlePauseAutoRedirect()
-    downloadICS()
-  }, [handlePauseAutoRedirect])
+    downloadICS(copy)
+  }, [handlePauseAutoRedirect, copy])
 
   useEffect(() => {
     let elapsed = 0
@@ -392,7 +371,7 @@ function SuccessCard() {
         </p>
         <div className="flex flex-col sm:flex-row gap-2">
           <a
-            href={GOOGLE_CALENDAR_URL}
+            href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handlePauseAutoRedirect}
@@ -448,7 +427,7 @@ function SuccessCard() {
   )
 }
 
-function ExpiredCard() {
+function ExpiredCard({ body }: { body: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -463,8 +442,7 @@ function ExpiredCard() {
         Este evento ya finalizó
       </h2>
       <p className="text-[#6B7A9A] mb-6">
-        El taller sobre red flags de los abogados de inmigración ya fue
-        realizado. Síguenos en redes para enterarte de los próximos eventos.
+        {body}
       </p>
       <a
         href="/"
@@ -476,7 +454,12 @@ function ExpiredCard() {
   )
 }
 
-export default function TNRegistrationForm() {
+type TNRegistrationFormProps = {
+  variant?: TallerNiwFormVariant
+}
+
+export default function TNRegistrationForm({ variant = "default" }: TNRegistrationFormProps) {
+  const copy = getTallerNiwFormCopy(variant)
   const { settings } = useSiteSettings()
   const nombreInputRef = useRef<HTMLInputElement>(null)
   const [form, setForm] = useState<FormData>({
@@ -503,16 +486,16 @@ export default function TNRegistrationForm() {
   }, [])
 
   // Enfoca el primer campo cuando el usuario llega al form vía un CTA
-  // (evento `focus-registro` disparado por scrollToRegistro) o si la página
-  // carga directamente con #registro en la URL.
+  // (evento `focus-registro` disparado por scrollToRegistro), si la página
+  // carga con #registro, o en la variante ads al montar la página.
   useEffect(() => {
     const focusFirstField = () => {
-      window.setTimeout(() => nombreInputRef.current?.focus(), 500)
+      window.setTimeout(() => nombreInputRef.current?.focus(), variant === "ads" ? 150 : 500)
     }
     window.addEventListener("focus-registro", focusFirstField)
-    if (window.location.hash === "#registro") focusFirstField()
+    if (variant === "ads" || window.location.hash === "#registro") focusFirstField()
     return () => window.removeEventListener("focus-registro", focusFirstField)
-  }, [])
+  }, [variant])
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -638,14 +621,14 @@ export default function TNRegistrationForm() {
               className="text-center mb-6"
             >
               <p className="text-[#FFBA7A] text-xs font-semibold uppercase tracking-widest mb-2">
-                Taller gratuito · Lunes 13 de julio 2026
+                {copy.formEyebrow}
               </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
-                Antes de pagarle a un{" "}
-                <span className="text-[#F37021]">abogado</span>, mira esto
+                {copy.formHeadlineBefore}{" "}
+                <span className="text-[#F37021]">{copy.formHeadlineHighlight}</span>, mira esto
               </h2>
               <p className="text-white/55 text-sm mt-2">
-                Regístrate en 30 segundos y asegura tu lugar.
+                {copy.formSubcopy}
               </p>
             </motion.div>
           )}
@@ -653,9 +636,9 @@ export default function TNRegistrationForm() {
 
         <AnimatePresence mode="wait">
           {isExpired ? (
-            <ExpiredCard key="expired" />
+            <ExpiredCard key="expired" body={copy.expiredBody} />
           ) : submitted ? (
-            <SuccessCard key="success" />
+            <SuccessCard key="success" copy={copy} />
           ) : (
             <motion.form
               key="form"

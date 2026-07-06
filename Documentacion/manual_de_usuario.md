@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-05 (taller `/taller-niw`: emails GHL + plantillas Red Flags)
+> Última actualización: 2026-07-06 (página ads `/taller-niw/registro` Meta-safe)
 
 ---
 
@@ -402,16 +402,36 @@ Landing del taller gratuito **"Red flags de los abogados de inmigración"** (Ivo
 |------|-------|
 | Evento | Lunes **13 de julio de 2026**, 7:00 PM (Colombia) |
 | Registro cierra | 15 de julio de 2026 (configurado en frontend) |
-| Tag GHL | `taller-junio-2026` |
+| Tag GHL | `taller-julio-2026` |
 | Source Supabase | `taller-redflags-2026` |
 | Zoom (inscripción) | Enlace de registro webinar en emails y plantillas GHL |
 | WhatsApp | Grupo exclusivo del taller (redirect post-registro, 4 s) |
 
 **Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión.
 
-**Emails automáticos (GHL):** al recibir el tag `taller-junio-2026` debe dispararse un workflow con 3 correos (bienvenida inmediata, recordatorio 24 h el **12 jul**, recordatorio día del evento **13 jul mediodía**). Plantillas HTML en `public/emails/*taller-redflags*` y guía de configuración en `Documentacion/taller-redflags-ghl-workflow.md`. Sincronizar plantillas a GHL: `node scripts/sync-ghl-taller-emails.mjs`.
+**Emails automáticos (GHL):** al recibir el tag `taller-julio-2026` debe dispararse un workflow con 3 correos (bienvenida inmediata, recordatorio 24 h el **12 jul**, recordatorio día del evento **13 jul mediodía**). Plantillas HTML en `public/emails/*taller-redflags*` y guía de configuración en `Documentacion/taller-redflags-ghl-workflow.md`. Sincronizar plantillas a GHL: `node scripts/sync-ghl-taller-emails.mjs`.
 
 **Admin:** plantillas visibles en **Recursos → Emails → Taller Red Flags** (preview y copiar HTML).
+
+#### 1.16.1 Página solo formulario para ads (`/taller-niw/registro`)
+
+**Ruta:** `/taller-niw/registro`
+
+Página mínima pensada para **Facebook Ads**: logo MORE, una línea de contexto, formulario de registro y pie con copyright + enlace a privacidad. **Sin** hero, testimonios, FAQ ni CTA sticky.
+
+| Aspecto | Detalle |
+|---------|---------|
+| Disponibilidad | Misma que `/taller-niw` (`useLandingStatus("/taller-niw")`) |
+| Formulario | `TNRegistrationForm` con `variant="ads"` (copy e ICS sin términos sensibles para revisión Meta) |
+| Backend | Idéntico: `source=taller-redflags-2026`, tag GHL `taller-julio-2026`, Edge Function `masterclass-register` |
+| Meta tags | Título y descripción neutros (sin "migración", "inmigración", "visa", etc.) |
+| Tracking | `page_path` dinámico en conversión; `ViewContent` en entrada (mismos parámetros neutros que masterclass) |
+
+**URL recomendada para el anuncio (con UTMs):**
+
+```
+https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio
+```
 
 ---
 
