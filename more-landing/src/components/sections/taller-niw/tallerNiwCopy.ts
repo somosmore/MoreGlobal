@@ -14,12 +14,12 @@ export type TallerNiwFormCopy = {
 }
 
 export const TALLER_NIW_REGISTRO_PAGE_META = {
-  title: "Taller gratis: Red flags de abogados — MORE",
+  title: "¡Listo! Únete al grupo del taller — MORE",
   description:
-    "Aprende a detectar señales de alerta antes de pagarle a un abogado. En vivo con Ivon More. 13 jul 2026, 7 PM Colombia.",
-  ogTitle: "Taller gratis: Red flags de abogados — MORE",
+    "Tu lugar está reservado. Únete al grupo de WhatsApp para recibir el acceso al taller en vivo y los recordatorios.",
+  ogTitle: "¡Listo! Únete al grupo del taller — MORE",
   ogDescription:
-    "Aprende a detectar señales de alerta antes de pagarle a un abogado. En vivo con Ivon More. 13 jul 2026, 7 PM Colombia.",
+    "Tu lugar está reservado. Únete al grupo de WhatsApp para recibir el acceso al taller en vivo y los recordatorios.",
 } as const
 
 export const TALLER_NIW_REGISTRO_HEADER =

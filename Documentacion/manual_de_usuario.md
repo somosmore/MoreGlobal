@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-06 (pantalla éxito taller: solo botón WhatsApp)
+> Última actualización: 2026-07-06 (página Meta Lead Ads: solo WhatsApp en `/taller-niw/registro`)
 
 ---
 
@@ -425,21 +425,22 @@ Sin cuenta regresiva, sin agenda de calendario ni código QR.
 
 **Admin:** plantillas visibles en **Recursos → Emails → Taller Red Flags** (preview y copiar HTML).
 
-#### 1.16.1 Página solo formulario para ads (`/taller-niw/registro`)
+#### 1.16.1 Página post-registro Meta Lead Ads (`/taller-niw/registro`)
 
 **Ruta:** `/taller-niw/registro`
 
-Página mínima pensada para **Facebook Ads**: logo MORE, una línea de contexto, formulario de registro y pie con copyright + enlace a privacidad. **Sin** hero, testimonios, FAQ ni CTA sticky.
+Página de **confirmación** para quien ya se registró en el **formulario nativo de Meta** (Lead Ads). No incluye formulario propio: solo mensaje de éxito + botón verde al grupo de WhatsApp. Diseño mobile-first (`min-h-[100dvh]`, CTA grande).
 
 | Aspecto | Detalle |
 |---------|---------|
+| Uso | URL de redirección tras completar el lead en Facebook/Instagram |
+| Componente | `TNWhatsappJoinCard` (`variant="ads"`) |
+| Contenido | Título, 3 líneas de copy con emojis, botón «Quiero unirme al grupo de WhatsApp» |
 | Disponibilidad | Misma que `/taller-niw` (`useLandingStatus("/taller-niw")`) |
-| Formulario | `TNRegistrationForm` con `variant="ads"` (copy sin términos sensibles para revisión Meta) |
-| Backend | Idéntico: `source=taller-redflags-2026`, tag GHL `taller-julio-2026`, Edge Function `masterclass-register` |
-| Meta tags | Título y descripción neutros (sin "migración", "inmigración", "visa", etc.) |
-| Tracking | `page_path` dinámico en conversión; `ViewContent` en entrada (mismos parámetros neutros que masterclass) |
+| Registro de leads | Lo hace Meta → integración GHL/Zapier (no pasa por `masterclass-register` de esta página) |
+| Meta tags | Copy neutro (sin términos sensibles para revisión Meta) |
 
-**URL recomendada para el anuncio (con UTMs):**
+**URL para configurar en Meta como destino post-lead:**
 
 ```
 https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio

@@ -2,15 +2,17 @@
 
 Configuración de emails automáticos cuando un contacto recibe el tag **`taller-julio-2026`** (disparado al registrarse en `/taller-niw` o en `/taller-niw/registro`).
 
-## URL para Facebook Ads
+## URL para Facebook Ads (Lead Ads)
 
-Usar la página solo formulario (copy Meta-safe en DOM y meta tags):
+Tras el formulario nativo de Meta, redirigir al lead a la página de confirmación (solo WhatsApp, sin formulario):
 
 ```
 https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio
 ```
 
-La landing completa `/taller-niw` conserva copy orientado a SEO/conversión orgánica; para anuncios pagos en Meta conviene la ruta `/registro`.
+El registro del contacto lo captura Meta/GHL; esta URL solo pide unirse al grupo de WhatsApp.
+
+La landing completa `/taller-niw` sigue disponible para tráfico orgánico con formulario propio.
 
 ## Datos del evento
 
