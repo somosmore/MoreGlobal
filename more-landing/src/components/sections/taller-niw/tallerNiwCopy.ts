@@ -5,11 +5,12 @@ export type TallerNiwFormCopy = {
   formHeadlineBefore: string
   formHeadlineHighlight: string
   formSubcopy: string
-  calendarTitle: string
-  calendarDetails: string
-  icsSummary: string
-  icsDescription: string
   expiredBody: string
+  successTitle: string
+  successLine1: string
+  successLine2: string
+  successLine3: string
+  successCta: string
 }
 
 export const TALLER_NIW_REGISTRO_PAGE_META = {
@@ -24,65 +25,36 @@ export const TALLER_NIW_REGISTRO_PAGE_META = {
 export const TALLER_NIW_REGISTRO_HEADER =
   "Taller en vivo · Lunes 13 de julio · 7 PM (Colombia)"
 
+const SUCCESS_COPY = {
+  successTitle: "¡Listo, tu lugar está reservado!",
+  successLine1: "Solo falta un paso 👇",
+  successLine2: "Únete a la comunidad de WhatsApp 📲",
+  successLine3:
+    "Ahí te compartimos el acceso al taller en vivo y los recordatorios para que no te lo pierdas.",
+  successCta: "Quiero unirme al grupo de WhatsApp",
+} as const
+
 const FORM_COPY: Record<TallerNiwFormVariant, TallerNiwFormCopy> = {
   default: {
     formEyebrow: "Taller gratuito · Lunes 13 de julio 2026",
     formHeadlineBefore: "Antes de pagarle a un",
     formHeadlineHighlight: "abogado",
     formSubcopy: "Regístrate en 30 segundos y asegura tu lugar.",
-    calendarTitle: "Taller: Red flags de los abogados de inmigración — MORE",
-    calendarDetails:
-      "Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\n\\nLink de acceso se enviará por WhatsApp y email.",
-    icsSummary: "Taller: Red flags de los abogados de inmigración — MORE",
-    icsDescription:
-      "Taller gratuito en vivo con Ivon More.\\nLas señales de alerta que casi nadie te confiesa antes de pagarle a un abogado de inmigración.\\nLink de acceso se enviará por WhatsApp y email.",
     expiredBody:
       "El taller sobre red flags de los abogados de inmigración ya fue realizado. Síguenos en redes para enterarte de los próximos eventos.",
+    ...SUCCESS_COPY,
   },
   ads: {
     formEyebrow: "Taller gratuito · Lunes 13 de julio 2026",
     formHeadlineBefore: "Antes de pagarle a un",
     formHeadlineHighlight: "abogado",
     formSubcopy: "Regístrate en 30 segundos y asegura tu lugar.",
-    calendarTitle: "Taller: Red flags de abogados — MORE",
-    calendarDetails:
-      "Taller gratuito en vivo con Ivon More.\\nSeñales de alerta antes de pagarle a un abogado.\\n\\nLink de acceso se enviará por WhatsApp y email.",
-    icsSummary: "Taller: Red flags de abogados — MORE",
-    icsDescription:
-      "Taller gratuito en vivo con Ivon More.\\nSeñales de alerta antes de pagarle a un abogado.\\nLink de acceso se enviará por WhatsApp y email.",
     expiredBody:
       "Este taller ya fue realizado. Síguenos en redes para enterarte de los próximos eventos.",
+    ...SUCCESS_COPY,
   },
 }
 
 export const getTallerNiwFormCopy = (
   variant: TallerNiwFormVariant = "default"
 ): TallerNiwFormCopy => FORM_COPY[variant]
-
-export const buildGoogleCalendarUrl = (copy: TallerNiwFormCopy): string => {
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: copy.calendarTitle,
-    dates: "20260713T190000/20260713T210000",
-    ctz: "America/Bogota",
-    details: copy.calendarDetails,
-    location: "Online (Zoom)",
-  })
-  return `https://calendar.google.com/calendar/render?${params.toString()}`
-}
-
-export const buildIcsContent = (copy: TallerNiwFormCopy): string =>
-  [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//MORE//Taller Red Flags//ES",
-    "BEGIN:VEVENT",
-    "DTSTART;TZID=America/Bogota:20260713T190000",
-    "DTEND;TZID=America/Bogota:20260713T210000",
-    `SUMMARY:${copy.icsSummary}`,
-    `DESCRIPTION:${copy.icsDescription}`,
-    "LOCATION:Online (Zoom)",
-    "STATUS:CONFIRMED",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n")

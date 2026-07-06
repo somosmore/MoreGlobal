@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-06 (página ads `/taller-niw/registro` Meta-safe)
+> Última actualización: 2026-07-06 (pantalla éxito taller: solo botón WhatsApp)
 
 ---
 
@@ -405,9 +405,21 @@ Landing del taller gratuito **"Red flags de los abogados de inmigración"** (Ivo
 | Tag GHL | `taller-julio-2026` |
 | Source Supabase | `taller-redflags-2026` |
 | Zoom (inscripción) | Enlace de registro webinar en emails y plantillas GHL |
-| WhatsApp | Grupo exclusivo del taller (redirect post-registro, 4 s) |
+| WhatsApp | Grupo exclusivo del taller (botón único post-registro) |
 
 **Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión.
+
+#### Pantalla tras registro exitoso
+
+Tras enviar el formulario correctamente se muestra una tarjeta de confirmación con:
+
+| Elemento | Comportamiento |
+|----------|----------------|
+| Título | `¡Listo, tu lugar está reservado!` con ícono de check verde |
+| Mensaje | Tres líneas: un paso pendiente, invitación al grupo de WhatsApp y acceso al taller en vivo |
+| Botón verde | Único CTA: abre el grupo de WhatsApp del taller en **pestaña nueva** |
+
+Sin cuenta regresiva, sin agenda de calendario ni código QR.
 
 **Emails automáticos (GHL):** al recibir el tag `taller-julio-2026` debe dispararse un workflow con 3 correos (bienvenida inmediata, recordatorio 24 h el **12 jul**, recordatorio día del evento **13 jul mediodía**). Plantillas HTML en `public/emails/*taller-redflags*` y guía de configuración en `Documentacion/taller-redflags-ghl-workflow.md`. Sincronizar plantillas a GHL: `node scripts/sync-ghl-taller-emails.mjs`.
 
@@ -422,7 +434,7 @@ Página mínima pensada para **Facebook Ads**: logo MORE, una línea de contexto
 | Aspecto | Detalle |
 |---------|---------|
 | Disponibilidad | Misma que `/taller-niw` (`useLandingStatus("/taller-niw")`) |
-| Formulario | `TNRegistrationForm` con `variant="ads"` (copy e ICS sin términos sensibles para revisión Meta) |
+| Formulario | `TNRegistrationForm` con `variant="ads"` (copy sin términos sensibles para revisión Meta) |
 | Backend | Idéntico: `source=taller-redflags-2026`, tag GHL `taller-julio-2026`, Edge Function `masterclass-register` |
 | Meta tags | Título y descripción neutros (sin "migración", "inmigración", "visa", etc.) |
 | Tracking | `page_path` dinámico en conversión; `ViewContent` en entrada (mismos parámetros neutros que masterclass) |
