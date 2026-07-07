@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-07-07] — Taller Red Flags: integración GHL (pipeline, 5 emails, scripts)
+
+- Agente: cursor
+- Archivos modificados: `more-landing/supabase/functions/masterclass-register/index.ts`, `more-landing/.env.example`, `more-landing/public/emails/recordatorio-taller-redflags.html`, `more-landing/public/emails/recordatorio-taller-redflags-manana.html` (nuevo), `more-landing/public/emails/recordatorio-taller-redflags-1h.html` (nuevo), `more-landing/scripts/sync-ghl-taller-emails.mjs`, `more-landing/scripts/create-ghl-taller-pipeline.mjs` (nuevo), `more-landing/scripts/verify-ghl-taller-workflow.mjs` (nuevo), `more-landing/scripts/ghl-taller-workflow-links.mjs` (nuevo), `more-landing/scripts/ghl-crm-url.mjs` (nuevo), `more-landing/scripts/enroll-ghl-taller-workflow.mjs` (nuevo), `more-landing/scripts/enroll-ghl-bienvenida.mjs` (nuevo), `more-landing/scripts/ghl-check-bienvenida.mjs` (nuevo), `more-landing/scripts/ghl-contact-emails.mjs` (nuevo), `more-landing/scripts/ghl-workflow-detail.mjs` (nuevo), `more-landing/src/components/admin/resources/EmailTemplatesSection.tsx`, `Documentacion/taller-redflags-ghl-workflow.md`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Edge Function `masterclass-register` enruta registros con `source: taller-redflags-2026` al pipeline/tag del taller (`GHL_TALLER_*`). Secuencia de emails ampliada a 5: bienvenida, recordatorio 24 h (12 jul), mañana del evento (13 jul 9 AM), 1 h antes (13 jul 6 PM) y en vivo (13 jul 7 PM). Scripts operativos para crear pipeline, sincronizar plantillas HTML a GHL, verificar workflows, inscribir contactos de prueba y enlaces al CRM (`crm.moremigracion.com`). Admin → Recursos muestra las 5 plantillas. Documentación actualizada en manual y guía GHL.
+- Problemas encontrados: la API de GHL no permite crear/publicar workflows ni leer pasos internos; workflow Bienvenida publicado manualmente en UI; Recordatorio sigue en draft pendiente de configurar/publicar.
+- Estado: ✅ código y docs / ⚠️ workflow Recordatorio pendiente en GHL UI
+
 ### [2026-06-23] — `/taller-niw`: optimización de conversión (CRO)
 
 - Agente: claude

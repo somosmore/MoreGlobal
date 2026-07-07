@@ -29,10 +29,22 @@ const TEMPLATES = [
     previewText: "Falta 1 día para el taller gratuito con Ivon More.",
   },
   {
+    name: "TALLER-REDFLAGS-Hoy-Manana",
+    file: "recordatorio-taller-redflags-manana.html",
+    subject: "¡Hoy es el taller! — Red flags de abogados",
+    previewText: "Esta noche a las 7 PM (Colombia). Confirma tu cupo en Zoom.",
+  },
+  {
+    name: "TALLER-REDFLAGS-Hoy-1h",
+    file: "recordatorio-taller-redflags-1h.html",
+    subject: "¡En 1 hora empezamos! — Taller Red Flags",
+    previewText: "El taller con Ivon More arranca a las 7 PM. Ten listo tu link de Zoom.",
+  },
+  {
     name: "TALLER-REDFLAGS-EnVivo",
     file: "recordatorio-taller-redflags.html",
-    subject: "¡Es HOY! — Taller Red Flags en vivo",
-    previewText: "Conéctate esta noche a las 7 PM (Colombia).",
+    subject: "🔴 ¡ESTAMOS EN VIVO! — Entra al taller ahora",
+    previewText: "El taller Red Flags ya comenzó. Entra a Zoom ahora mismo.",
   },
 ]
 

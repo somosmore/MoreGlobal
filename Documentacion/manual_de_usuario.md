@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-06 (página Meta Lead Ads: solo WhatsApp en `/taller-niw/registro`)
+> Última actualización: 2026-07-06 (emails día del evento: mañana, 1h antes y en vivo)
 
 ---
 
@@ -421,7 +421,7 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 Sin cuenta regresiva, sin agenda de calendario ni código QR.
 
-**Emails automáticos (GHL):** al recibir el tag `taller-julio-2026` debe dispararse un workflow con 3 correos (bienvenida inmediata, recordatorio 24 h el **12 jul**, recordatorio día del evento **13 jul mediodía**). Plantillas HTML en `public/emails/*taller-redflags*` y guía de configuración en `Documentacion/taller-redflags-ghl-workflow.md`. Sincronizar plantillas a GHL: `node scripts/sync-ghl-taller-emails.mjs`.
+**Emails automáticos (GHL):** al recibir el tag `taller-julio-2026` se disparan workflows con **5 correos**: bienvenida inmediata; recordatorio 24 h (**12 jul 7 PM**); el día del evento (**13 jul 9 AM**, **6 PM** y **7 PM en vivo**). Plantillas en `public/emails/*taller-redflags*`. Guía: `Documentacion/taller-redflags-ghl-workflow.md`. Sync GHL: `node scripts/sync-ghl-taller-emails.mjs`.
 
 **Admin:** plantillas visibles en **Recursos → Emails → Taller Red Flags** (preview y copiar HTML).
 

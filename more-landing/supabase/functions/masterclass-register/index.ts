@@ -24,6 +24,33 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 }
 
+const TALLER_SOURCE = "taller-redflags-2026"
+
+type GhlEventConfig = {
+  pipelineId: string
+  stageId: string
+  defaultTag: string
+}
+
+/** Pipeline, stage y tag por tipo de evento (masterclass vs taller). */
+const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
+  const isTaller = leadSource === TALLER_SOURCE
+
+  const pipelineId = isTaller
+    ? Deno.env.get("GHL_TALLER_PIPELINE_ID") ?? Deno.env.get("GHL_PIPELINE_ID")
+    : Deno.env.get("GHL_PIPELINE_ID")
+  const stageId = isTaller
+    ? Deno.env.get("GHL_TALLER_STAGE_ID") ?? Deno.env.get("GHL_STAGE_ID")
+    : Deno.env.get("GHL_STAGE_ID")
+  const defaultTag = isTaller
+    ? Deno.env.get("GHL_TALLER_TAG") ?? "Taller-julio-2026"
+    : Deno.env.get("GHL_TAG")
+
+  if (!pipelineId || !stageId || !defaultTag) return null
+
+  return { pipelineId, stageId, defaultTag }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders })
@@ -88,16 +115,22 @@ Deno.serve(async (req) => {
 
     const ghlApiKey = Deno.env.get("GHL_API_KEY")
     const ghlLocationId = Deno.env.get("GHL_LOCATION_ID")
-    const ghlPipelineId = Deno.env.get("GHL_PIPELINE_ID")
-    const ghlStageId = Deno.env.get("GHL_STAGE_ID")
-    const ghlTag = Deno.env.get("GHL_TAG")
+    const ghlEventConfig = resolveGhlEventConfig(leadSource)
 
     if (ghlApiKey) {
       const missingGhlEnv: string[] = []
       if (!ghlLocationId) missingGhlEnv.push("GHL_LOCATION_ID")
-      if (!ghlPipelineId) missingGhlEnv.push("GHL_PIPELINE_ID")
-      if (!ghlStageId) missingGhlEnv.push("GHL_STAGE_ID")
-      if (!ghlTag) missingGhlEnv.push("GHL_TAG")
+      if (!ghlEventConfig) {
+        if (leadSource === TALLER_SOURCE) {
+          missingGhlEnv.push(
+            "GHL_TALLER_PIPELINE_ID (o GHL_PIPELINE_ID)",
+            "GHL_TALLER_STAGE_ID (o GHL_STAGE_ID)",
+            "GHL_TALLER_TAG (o GHL_TAG)"
+          )
+        } else {
+          missingGhlEnv.push("GHL_PIPELINE_ID", "GHL_STAGE_ID", "GHL_TAG")
+        }
+      }
 
       if (missingGhlEnv.length > 0) {
         console.error(`Missing required GHL env vars: ${missingGhlEnv.join(", ")}`)
@@ -132,7 +165,10 @@ Deno.serve(async (req) => {
 
     let ghlPromise: Promise<unknown> = Promise.resolve()
 
-    if (ghlApiKey) {
+    if (ghlApiKey && ghlEventConfig) {
+      const { pipelineId: ghlPipelineId, stageId: ghlStageId, defaultTag: ghlTag } =
+        ghlEventConfig
+
       ghlPromise = (async () => {
         const ghlHeaders = {
           Authorization: `Bearer ${ghlApiKey}`,
