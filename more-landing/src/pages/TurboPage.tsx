@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
+import { buildWhatsappUrl } from "@/lib/whatsapp"
 import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
@@ -21,7 +22,7 @@ export default function TurboPage() {
   const paymentLink = settings.turbo_payment_link
   const price = settings.turbo_price
   const countdownDate = settings.turbo_countdown_date
-  const whatsappUrl = t("turboPage.cta.whatsappUrl")
+  const whatsappUrl = buildWhatsappUrl(settings.whatsapp_number, t("turboPage.cta.whatsappMsg"))
 
   useEffect(() => {
     document.title = t("turboPage.pageTitle")

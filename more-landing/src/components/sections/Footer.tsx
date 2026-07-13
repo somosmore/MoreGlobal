@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
 import { useTranslation } from "react-i18next"
 
 type FooterProps = {
@@ -19,6 +20,7 @@ type FooterProps = {
 export default function Footer({ hideLandingFaq = false }: FooterProps) {
   const { t } = useTranslation()
   const { settings } = useSiteSettings()
+  const whatsappUrl = useWhatsappUrl()
 
   const faqs = hideLandingFaq
     ? []
@@ -100,7 +102,7 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
             <div className="flex justify-center">
               <CtaButton
                 label={t("footer.ctaButton")}
-                href={t("footer.ctaWhatsapp")}
+                href={whatsappUrl(t("footer.ctaWhatsappMsg"))}
                 size="lg"
                 icon={MessageCircle}
                 className="w-auto"

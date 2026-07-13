@@ -7,6 +7,7 @@ import {
   Settings,
   Share2,
   Sparkles,
+  Users,
 } from "lucide-react"
 import {
   useSettingsData,
@@ -14,6 +15,7 @@ import {
   CalendarSection,
   VipSessionSection,
   LandingCountdownsSection,
+  ContactSection,
   SocialNetworksSection,
   UppSection,
   WppTeamSection,
@@ -21,11 +23,12 @@ import {
 
 const SECTION_LINKS = [
   { id: "medicion", label: "Medición", Icon: LineChart },
+  { id: "contacto", label: "Contacto", Icon: MessageCircle },
   { id: "calendario", label: "Calendario", Icon: Calendar },
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
   { id: "landings", label: "Landings", Icon: CalendarClock },
   { id: "upp", label: "Programa UPP", Icon: BookOpen },
-  { id: "wppequipo", label: "WhatsApp Equipo", Icon: MessageCircle },
+  { id: "wppequipo", label: "WhatsApp Equipo", Icon: Users },
   { id: "redes", label: "Redes", Icon: Share2 },
 ] as const
 
@@ -99,6 +102,22 @@ export default function AdminSettings() {
               ga4Invalid={data.ga4Invalid}
               trackingFieldsInvalid={data.trackingFieldsInvalid}
               gtmAndMetaConflict={data.gtmAndMetaConflict}
+            />
+          </section>
+
+          <section id="contacto" className="scroll-mt-32">
+            <ContactSection
+              loading={data.loading}
+              whatsappNumber={data.whatsappNumber}
+              setWhatsappNumber={data.setWhatsappNumber}
+              contactEmail={data.contactEmail}
+              setContactEmail={data.setContactEmail}
+              contactSaveState={data.contactSaveState}
+              setContactSaveState={data.setContactSaveState}
+              contactSaveError={data.contactSaveError}
+              handleSaveContact={data.handleSaveContact}
+              whatsappNumberInvalid={data.whatsappNumberInvalid}
+              contactEmailInvalid={data.contactEmailInvalid}
             />
           </section>
 

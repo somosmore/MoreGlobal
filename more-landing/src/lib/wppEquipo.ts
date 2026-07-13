@@ -1,3 +1,5 @@
+import { buildWhatsappUrl } from "./whatsapp"
+
 export const WPPEQUIPO_PUBLIC_URL = "https://moremigracion.com/wppequipo"
 
 export const WHATSAPP_URL_PATTERN =
@@ -10,9 +12,8 @@ export const isValidWhatsappUrl = (url: string) => {
 }
 
 export const buildWhatsappUrlFromPhone = (phone: string) => {
-  const digits = phone.replace(/\D/g, "")
-  if (!digits) return null
-  return `https://wa.me/${digits}`
+  if (!phone.replace(/\D/g, "")) return null
+  return buildWhatsappUrl(phone)
 }
 
 export const pickRandomUrl = (urls: string[]) => {

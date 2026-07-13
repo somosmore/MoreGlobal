@@ -3,19 +3,16 @@ import { ArrowRight, CalendarX, MessageCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { Backdrop } from "@/components/brand/Backdrop"
+import { buildWhatsappUrl } from "@/lib/whatsapp"
 
 type VipOfferClosedProps = {
   whatsappNumber?: string | null
 }
 
-const DEFAULT_WHATSAPP = "+573132219798"
-
 export const VipOfferClosed = ({ whatsappNumber }: VipOfferClosedProps) => {
   const { t } = useTranslation()
 
-  const digits = (whatsappNumber || DEFAULT_WHATSAPP).replace(/\D/g, "")
-  const message = encodeURIComponent(t("vipPage.closed.whatsappMessage"))
-  const whatsappUrl = `https://wa.me/${digits}?text=${message}`
+  const whatsappUrl = buildWhatsappUrl(whatsappNumber, t("vipPage.closed.whatsappMessage"))
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-4 py-24">

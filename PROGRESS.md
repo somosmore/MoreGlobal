@@ -29,6 +29,17 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-07-13] — Número de WhatsApp unificado en una sola fuente
+
+- Agente: claude
+- Archivos modificados: `src/lib/whatsapp.ts` (nuevo), `src/hooks/useWhatsappUrl.ts` (nuevo), `src/lib/wppEquipo.ts`, `src/locales/{es,en}/{translation,uppPage,turboPage}.json`, `src/components/sections/{Footer,Quiz,Pricing}.tsx`, `src/pages/{UppPage,TurboPage,UppPdfPage,TurboPdfPage}.tsx`, `src/turbo/components/{TurboStickyCta,TurboRequirementsSection}.tsx`, `src/vip/components/VipOfferClosed.tsx`, `src/components/admin/settings/{ContactSection,useSettingsData,index}.ts(x)`, `src/pages/AdminSettings.tsx`.
+- Qué se implementó: el número de WhatsApp estaba repetido en 14 URLs completas dentro de los archivos de traducción (ES y EN) más varios `.tsx`, y la clave `whatsapp_number` de `site_settings` casi no se usaba ni tenía campo en el panel. Ahora el número vive en un solo lugar: los JSON guardan **solo el mensaje** que se pre-carga en el chat (el patrón que ya usaba `vipPage.closed.whatsappMessage`) y el enlace lo arma `buildWhatsappUrl(phone, message)` en `lib/whatsapp.ts`, con el hook `useWhatsappUrl()` para los componentes. Nueva sección **Contacto** en Admin → Settings con el número de WhatsApp (validado: 10-15 dígitos, mismo criterio que `normalizePhone`) y el email de contacto, que tampoco era editable. Las páginas PDF de UPP y Turbo, que imprimían el número como texto, ahora lo leen de settings.
+- No se tocó (a propósito): los enlaces de **grupo** de WhatsApp del taller y la masterclass (`chat.whatsapp.com`), el teléfono del **lead** en el admin, y los números de asesores del round-robin (`wpp_team_numbers`), que tienen su propia administración.
+- Problemas encontrados: (1) reescribir los JSON con `json.dumps` reformateaba los arrays inline y generaba un diff de 1.100 líneas; se revirtió y se hizo un reemplazo línea por línea, quedando un diff de 14 líneas. (2) `TurboStickyCta` y `TurboRequirementsSection` llamaban a `t("turboPage.cta.whatsappUrl")` directo, sin recibir la prop de la página: si solo se cambiaban las páginas, quedaban rotos.
+- Verificación: `tsc --noEmit` limpio, `lint` 27 problemas (mismo baseline), `build` OK. `grep 573132219798` en `src/` solo devuelve el fallback del helper, el default del contexto y el placeholder del panel. En el navegador se leyeron los `href` reales del DOM: home (2 planes + footer), `/upp` y `/turbo` (6 enlaces cada una, incluidos el sticky y la sección de requisitos) construyen bien el enlace con el número de la base y el mensaje de cada página.
+- Pendiente: no probé el cambio de número end-to-end desde el panel porque implicaba modificar el valor en producción; el binding quedó verificado leyendo los enlaces del DOM. Las plantillas de email (`public/emails/*.html`) siguen con el número quemado: son estáticas y se sincronizan con GHL, así que si el número cambia hay que regenerarlas con los scripts de `more-landing/scripts/`.
+- Estado: ✅ completo
+
 ### [2026-07-13] — CTA unificado con efecto + home editorial + countdowns configurables (BR-02, BR-06, BR-07)
 
 - Agente: claude

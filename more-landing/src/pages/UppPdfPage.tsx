@@ -1,4 +1,6 @@
 import { useEffect } from "react"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { formatWhatsappDisplay } from "@/lib/whatsapp"
 
 const modules = [
   { num: "01", title: "Evaluación de perfil y elegibilidad", value: "$500" },
@@ -66,6 +68,9 @@ const PageFooter = ({ right }: { right: string }) => (
 )
 
 export default function UppPdfPage() {
+  const { settings } = useSiteSettings()
+  const whatsappDisplay = formatWhatsappDisplay(settings.whatsapp_number)
+
   useEffect(() => {
     document.title = "Unsung Professional Program | MORE"
   }, [])
@@ -287,7 +292,7 @@ export default function UppPdfPage() {
               Garantía 7 días · Devolución del 100% sin preguntas
             </span>
             <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 16 }}>
-              wa.me/573132219798
+              {whatsappDisplay}
             </span>
           </div>
         </div>
@@ -435,7 +440,7 @@ export default function UppPdfPage() {
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 12 }}>
                 <div style={{ padding: "18px 16px", background: "#F37021", borderRadius: 12, textAlign: "center" }}>
                   <p style={{ color: "white", fontSize: 20, fontWeight: 800 }}>Inscribirme al UPP →</p>
-                  <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 16, marginTop: 4 }}>wa.me/573132219798</p>
+                  <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 16, marginTop: 4 }}>{whatsappDisplay}</p>
                 </div>
                 <div style={{ padding: "14px 14px", background: "rgba(255,255,255,0.06)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)", textAlign: "center" }}>
                   <div style={{ color: "#fca76a", fontSize: 18, fontWeight: 700 }}>🛡 Garantía 7 días</div>

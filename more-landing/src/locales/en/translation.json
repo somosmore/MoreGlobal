@@ -142,8 +142,8 @@
       { "id": "patentes", "label": "Patents or intellectual property" },
       { "id": "conferencias", "label": "Presentations at international conferences" }
     ],
-    "whatsappHighImpact": "https://wa.me/573132219798?text=Hi%20MORE,%20I%20got%20a%20High-Impact%20Profile%20on%20the%20quiz.%20I%20want%20to%20schedule%20my%20free%20evaluation.",
-    "whatsappUnsung": "https://wa.me/573132219798?text=Hi%20MORE,%20I%20completed%20the%20diagnostic%20and%20want%20to%20learn%20about%20the%20Unsung%20program.",
+    "whatsappMsgHighImpact": "Hi MORE, I got a High-Impact Profile on the quiz. I want to schedule my free evaluation.",
+    "whatsappMsgUnsung": "Hi MORE, I completed the diagnostic and want to learn about the Unsung program.",
     "diagnostic": {
       "basic": {
         "countries": [
@@ -337,7 +337,7 @@
           "Access to private community"
         ],
         "cta": "Yes, I want to start my program",
-        "whatsapp": "https://wa.me/573132219798?text=Hi%20MORE,%20I'm%20interested%20in%20the%20Unsung%20program."
+        "whatsappMsg": "Hi MORE, I'm interested in the Unsung program."
       },
       {
         "name": "Plan Plus",
@@ -356,7 +356,7 @@
           "Post-submission follow-up"
         ],
         "cta": "Yes, I want to get my Petition Built",
-        "whatsapp": "https://wa.me/573132219798?text=Hi%20MORE,%20I'm%20interested%20in%20Plan%20Plus."
+        "whatsappMsg": "Hi MORE, I'm interested in Plan Plus."
       }
     ]
   },
@@ -367,7 +367,7 @@
     "ctaTitle": "Your future in the U.S. starts today",
     "ctaSubtitle": "Schedule a free profile evaluation and find out if you qualify for the EB-2 NIW visa.",
     "ctaButton": "Evaluate My Profile for Free",
-    "ctaWhatsapp": "https://wa.me/573132219798?text=Hi%20MORE,%20I%20want%20to%20evaluate%20my%20profile%20for%20the%20EB-2%20NIW.",
+    "ctaWhatsappMsg": "Hi MORE, I want to evaluate my profile for the EB-2 NIW.",
     "logoAlt": "MORE Logo",
     "brandDesc": "Consulting firm specializing in EB-2 NIW visas and immigration. We help entrepreneurs, business owners, professionals, and investors achieve permanent residency and a Green Card in the U.S.",
     "quickLinksTitle": "Quick Links",

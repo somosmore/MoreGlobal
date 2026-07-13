@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { supabase, type LeadInsert } from "@/lib/supabase"
 import { useTranslation } from "react-i18next"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
 import { trackLeadFromQuiz } from "@/lib/tracking"
 import {
   hasTreatyCountry,
@@ -69,6 +70,7 @@ const getResultTypeFromBuckets = (buckets: VisaBucket[]): "alto_impacto" | "unsu
 export default function Quiz() {
   const { t } = useTranslation()
   const { settings } = useSiteSettings()
+  const whatsappUrl = useWhatsappUrl()
 
   const basicOptions = t("quiz.diagnostic.basic", { returnObjects: true }) as {
     countries: Array<{ id: string; label: string }>
@@ -266,10 +268,11 @@ export default function Quiz() {
     }
   }
 
-  const whatsappBase =
+  const whatsappBase = whatsappUrl(
     diagnosis && diagnosis.resultType === "alto_impacto"
-      ? t("quiz.whatsappHighImpact")
-      : t("quiz.whatsappUnsung")
+      ? t("quiz.whatsappMsgHighImpact")
+      : t("quiz.whatsappMsgUnsung")
+  )
 
   const stepLabel = leadSubmitted
     ? t("quiz.completed")

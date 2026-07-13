@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
+import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
 
 const featureIconsByPlan = [
   [BookOpen, Video, Users, Target, Users],
@@ -24,6 +25,7 @@ const featureIconsByPlan = [
 
 export default function Pricing() {
   const { t } = useTranslation()
+  const whatsappUrl = useWhatsappUrl()
 
   const plans = t("pricing.plans", { returnObjects: true }) as Array<{
     name: string
@@ -34,7 +36,7 @@ export default function Pricing() {
     timeline: string
     features: string[]
     cta: string
-    whatsapp: string
+    whatsappMsg: string
   }>
 
   return (
@@ -242,14 +244,14 @@ export default function Pricing() {
                     )}
                     {isPopular ? (
                       <Button variant="gold" className="w-full gap-2" size="lg" asChild>
-                        <a href={plan.whatsapp} target="_blank" rel="noopener noreferrer">
+                        <a href={whatsappUrl(plan.whatsappMsg)} target="_blank" rel="noopener noreferrer">
                           <MessageCircle className="w-4 h-4" />
                           {plan.cta}
                         </a>
                       </Button>
                     ) : (
                       <Button variant="outline" className="w-full gap-2" size="lg" asChild>
-                        <a href={plan.whatsapp} target="_blank" rel="noopener noreferrer">
+                        <a href={whatsappUrl(plan.whatsappMsg)} target="_blank" rel="noopener noreferrer">
                           {plan.cta}
                         </a>
                       </Button>

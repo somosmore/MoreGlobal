@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
 import { Zap } from "lucide-react"
 import { CtaButton } from "@/components/brand/CtaButton"
 
@@ -12,6 +13,7 @@ type TurboStickyCtaProps = {
 
 export function TurboStickyCta({ paymentLink, price, loading }: TurboStickyCtaProps) {
   const { t } = useTranslation()
+  const whatsappUrl = useWhatsappUrl()
   const [visible, setVisible] = useState(false)
   const effectivePrice = price || "$8,000"
 
@@ -47,7 +49,7 @@ export function TurboStickyCta({ paymentLink, price, loading }: TurboStickyCtaPr
 
               <div className="flex shrink-0 gap-2">
                 <a
-                  href={t("turboPage.cta.whatsappUrl")}
+                  href={whatsappUrl(t("turboPage.cta.whatsappMsg"))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border border-white/20 px-3 text-xs font-semibold text-white hover:bg-white/10 transition-colors"

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
+import { buildWhatsappUrl } from "@/lib/whatsapp"
 import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
@@ -24,7 +25,7 @@ export default function UppPage() {
   const paymentLink = settings.upp_payment_link
   const price = settings.upp_price
   const countdownDate = settings.upp_countdown_date
-  const whatsappUrl = t("uppPage.cta.whatsappUrl")
+  const whatsappUrl = buildWhatsappUrl(settings.whatsapp_number, t("uppPage.cta.whatsappMsg"))
 
   useEffect(() => {
     document.title = t("uppPage.pageTitle")

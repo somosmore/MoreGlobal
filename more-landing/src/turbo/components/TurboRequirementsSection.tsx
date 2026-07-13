@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { GraduationCap, BookOpen, Briefcase, FileText, User, MessageCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "graduation-cap": GraduationCap,
@@ -12,6 +13,7 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function TurboRequirementsSection() {
   const { t } = useTranslation()
+  const whatsappUrl = useWhatsappUrl()
   const items = t("turboPage.requirements.items", { returnObjects: true }) as Array<{
     icon: string
     title: string
@@ -71,7 +73,7 @@ export function TurboRequirementsSection() {
           {t("turboPage.requirements.note")}
         </p>
         <a
-          href={t("turboPage.cta.whatsappUrl")}
+          href={whatsappUrl(t("turboPage.cta.whatsappMsg"))}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 transition-colors"

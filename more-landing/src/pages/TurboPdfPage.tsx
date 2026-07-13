@@ -1,4 +1,6 @@
 import { useEffect } from "react"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { formatWhatsappDisplay } from "@/lib/whatsapp"
 
 const includes = [
   "Estrategia del caso personalizada",
@@ -63,6 +65,9 @@ const PageFooter = ({ left, right }: { left: string; right: string }) => (
 )
 
 export default function TurboPdfPage() {
+  const { settings } = useSiteSettings()
+  const whatsappDisplay = formatWhatsappDisplay(settings.whatsapp_number)
+
   useEffect(() => {
     document.title = "Plan Turbo EB-2 NIW — MORE"
   }, [])
@@ -289,7 +294,7 @@ export default function TurboPdfPage() {
               Cupos limitados · Atención personalizada garantizada
             </span>
             <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 16 }}>
-              wa.me/573132219798
+              {whatsappDisplay}
             </span>
           </div>
         </div>
@@ -418,7 +423,7 @@ export default function TurboPdfPage() {
                   </div>
                   <div style={{ padding: "16px 20px", background: "#F37021", borderRadius: 12, textAlign: "center" }}>
                     <p style={{ color: "white", fontSize: 20, fontWeight: 800 }}>Reservar mi lugar →</p>
-                    <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 16, marginTop: 4 }}>wa.me/573132219798</p>
+                    <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 16, marginTop: 4 }}>{whatsappDisplay}</p>
                   </div>
                 </div>
               </div>

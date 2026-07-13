@@ -53,6 +53,12 @@ export function useSettingsData() {
   const [uppSaveState, setUppSaveState] = useState<SaveState>("idle")
   const [uppSaveError, setUppSaveError] = useState<string | null>(null)
 
+  // Contacto (WhatsApp + email)
+  const [whatsappNumber, setWhatsappNumber] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactSaveState, setContactSaveState] = useState<SaveState>("idle")
+  const [contactSaveError, setContactSaveError] = useState<string | null>(null)
+
   // Landings de campaña (masterclass + taller)
   const [mcEventDate, setMcEventDate] = useState("")
   const [mcRegistrationClosesAt, setMcRegistrationClosesAt] = useState("")
@@ -82,6 +88,8 @@ export function useSettingsData() {
       setUppPaymentLink(settings.upp_payment_link)
       setUppPrice(settings.upp_price)
       setUppCountdownDate(settings.upp_countdown_date)
+      setWhatsappNumber(settings.whatsapp_number)
+      setContactEmail(settings.contact_email)
       setMcEventDate(toLocalInput(settings.mc_event_date))
       setMcRegistrationClosesAt(toLocalInput(settings.mc_registration_closes_at))
       setTnEventDate(toLocalInput(settings.tn_event_date))
@@ -154,6 +162,36 @@ export function useSettingsData() {
     refetch()
 
     setTimeout(() => setUppSaveState("idle"), 3000)
+  }
+
+  const handleSaveContact = async () => {
+    if (!supabase) {
+      setContactSaveError("No hay conexión con la base de datos.")
+      setContactSaveState("error")
+      return
+    }
+
+    setContactSaveState("saving")
+    setContactSaveError(null)
+
+    const { error } = await supabase.from("site_settings").upsert(
+      [
+        { key: "whatsapp_number", value: whatsappNumber.trim() },
+        { key: "contact_email", value: contactEmail.trim() },
+      ],
+      { onConflict: "key" }
+    )
+
+    if (error) {
+      setContactSaveError(error.message)
+      setContactSaveState("error")
+      return
+    }
+
+    setContactSaveState("success")
+    refetch()
+
+    setTimeout(() => setContactSaveState("idle"), 3000)
   }
 
   const handleSaveLandings = async () => {
@@ -262,6 +300,14 @@ export function useSettingsData() {
     }
   }
 
+  // Mismo criterio que normalizePhone en lib/wppEquipo: 10 a 15 dígitos con código de país.
+  const whatsappDigits = whatsappNumber.replace(/\D/g, "")
+  const whatsappNumberInvalid =
+    whatsappNumber.trim().length > 0 && (whatsappDigits.length < 10 || whatsappDigits.length > 15)
+
+  const contactEmailInvalid =
+    contactEmail.trim().length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail.trim())
+
   const urlInvalid = calendarUrl.trim().length > 0 && !isValidUrl(calendarUrl)
   const vipPaymentLinkInvalid = vipPaymentLink.trim().length > 0 && !isValidUrl(vipPaymentLink)
   const uppPaymentLinkInvalid = uppPaymentLink.trim().length > 0 && !isValidUrl(uppPaymentLink)
@@ -314,6 +360,15 @@ export function useSettingsData() {
     handleSaveSocial,
     socialUrlInvalid,
     isValidUrl,
+
+    // Contacto
+    whatsappNumber, setWhatsappNumber,
+    contactEmail, setContactEmail,
+    contactSaveState, setContactSaveState,
+    contactSaveError,
+    handleSaveContact,
+    whatsappNumberInvalid,
+    contactEmailInvalid,
 
     // Landings de campaña
     mcEventDate, setMcEventDate,
