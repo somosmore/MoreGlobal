@@ -512,17 +512,34 @@
   `src/locales/{es,en}/vipPage.json`, `src/components/admin/settings/VipSessionSection.tsx`,
   `supabase/migrations/028_vip_countdown.sql`, `Manual de marca/**`
 
-- [ ] **BR-02 (Sprint 2): Home — Hero, Navbar y Footer**
-  Asignado: — | Estado: ⬚ libre
-  Depende de: BR-01 ✅ (los tokens ya están en `index.css`)
-  Aplicar el sistema editorial a la portada: Hero con titular Playfair + regla con estrella,
-  `VipBackdrop` promovido a `components/brand/Backdrop.tsx` (compartido), Navbar sobre papel,
-  Footer con las olas de cierre. Revisar el social proof del Hero: si las cifras
-  ("+200", "98% aprobación") no tienen respaldo verificable, reemplazarlas por testimonios reales.
-  Archivos: `src/components/sections/Hero.tsx`, `Navbar.tsx`, `Footer.tsx`,
-  `src/components/brand/*` (nuevo, movido desde `src/vip/components`)
-  Criterio de éxito: home coherente con `/asesoria-vip`, sin glows ni gradientes recortados,
-  LCP no empeora (fuente display con `display=swap` y preconnect ya configurados).
+- [x] **BR-02 (Sprint 2): Home — Hero, Navbar, VipSession y Footer**
+  Asignado: claude | Estado: ✅ completo
+  Sistema editorial en la portada: Hero con titular Playfair y regla con estrella, `Backdrop`
+  compartido (movido desde `src/vip/components`), Navbar sobre papel, bloque VipSession como
+  tarjeta de borde fino, Footer con olas de cierre (variante `footer` del Backdrop).
+  Sin glows ni texto con gradiente. Las cifras de social proof se conservaron por decisión
+  explícita del cliente (ver BR-07).
+  Archivos: `src/components/sections/{Hero,Navbar,VipSession,Footer}.tsx`, `src/components/brand/*`
+
+- [x] **BR-06: CTA unificado con efecto visual**
+  Asignado: claude | Estado: ✅ completo
+  `src/components/brand/CtaButton.tsx`: un solo CTA para todo el sitio público (pastilla naranja,
+  barrido de luz `.cta-shine` en hover/foco, elevación de 2 px, tap a 0.97), con `min-h-[44px]`,
+  `focus-visible` y `aria-label`. Adoptado por Navbar, Hero, Pricing, Quiz y Footer (vía la
+  variante `gold` de Shadcn), Success, VipSession, VIP, UPP, Turbo, masterclass y taller.
+  Se retiraron los pulsos de `boxShadow` en loop y el CSS muerto `.vip-price-card-shine`.
+  Se agregó la primera regla `prefers-reduced-motion` del proyecto.
+  Archivos: `src/index.css`, `src/components/brand/CtaButton.tsx`, `src/components/ui/button.tsx`,
+  y los consumidores en `sections/`, `upp/`, `turbo/`, `vip/`
+
+- [x] **BR-07: Countdowns de campaña configurables**
+  Asignado: claude | Estado: ✅ completo
+  Las fechas de taller y masterclass salieron del código a `site_settings`
+  (`tn_event_date`, `tn_registration_closes_at`, `mc_event_date`, `mc_registration_closes_at`),
+  editables en Admin → Settings → Landings. `MCCountdown`/`TNCountdown` (duplicados) se
+  reemplazaron por `components/brand/EventCountdown.tsx`, y `useVipOffer` se generalizó a
+  `hooks/useOfferWindow.ts`.
+  Pendiente: aplicar `supabase/migrations/029_landing_countdowns.sql` en producción.
 
 - [ ] **BR-03 (Sprint 3): Quiz, PainPoints, WhoWeHelp, Pricing, Success**
   Asignado: — | Estado: ⬚ libre

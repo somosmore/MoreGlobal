@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Minus, Plus } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
-import { VipSectionHeading } from "./VipSectionHeading"
+import { SectionHeading } from "@/components/brand/SectionHeading"
 
 type FaqEntry = {
   question: string
@@ -40,7 +40,7 @@ export const VipFaq = ({ paymentLink, loading }: VipFaqProps) => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <VipSectionHeading
+      <SectionHeading
         id="vip-faq-heading"
         title={t("vipPage.faq.title")}
         highlight={t("vipPage.faq.titleHighlight")}

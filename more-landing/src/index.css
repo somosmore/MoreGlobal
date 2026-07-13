@@ -71,13 +71,21 @@
   pointer-events: none;
 }
 
-.vip-price-card-shine {
+/* ──────────────────────────────────────────────────────────────
+   CTA del sistema 2026: barrido de luz + elevación.
+   A diferencia de .badge-shine (loop infinito), el barrido corre
+   una sola vez y solo ante interacción: hover o foco de teclado.
+   ────────────────────────────────────────────────────────────── */
+.cta-shine {
   position: relative;
   overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
-/* Una sola barra de brillo que atraviesa la tarjeta */
-.vip-price-card-shine::after {
+.cta-shine::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -85,16 +93,47 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0) 36%,
-    rgba(255, 255, 255, 0.52) 50%,
-    rgba(255, 255, 255, 0) 64%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 65%,
     transparent 100%
   );
   width: 45%;
-  transform: translateX(-100%) skewX(-12deg);
-  animation: shine-sweep 3.2s ease-in-out infinite;
-  animation-delay: 0.4s;
+  transform: translateX(-100%) skewX(-15deg);
+  opacity: 0;
   pointer-events: none;
+}
+
+.cta-shine:hover::after,
+.cta-shine:focus-visible::after {
+  opacity: 1;
+  animation: shine-sweep 0.7s ease-out 1;
+}
+
+.cta-shine:hover,
+.cta-shine:focus-visible {
+  transform: translateY(-2px);
+}
+
+.cta-shine:active {
+  transform: scale(0.97);
+}
+
+/* Sin animaciones para quien las desactivó en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  .cta-shine::after,
+  .badge-shine::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .cta-shine,
+  .cta-shine:hover,
+  .cta-shine:focus-visible,
+  .cta-shine:active {
+    transform: none;
+    transition: background-color 0.2s ease;
+  }
 }
 
 @layer base {

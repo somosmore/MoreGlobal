@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-type VipSectionHeadingProps = {
+type SectionHeadingProps = {
   /** Parte del título en navy. */
   title: string
   /** Parte final del título, en naranja. */
@@ -13,7 +13,7 @@ type VipSectionHeadingProps = {
   className?: string
 }
 
-export const VipSectionHeading = ({
+export const SectionHeading = ({
   title,
   highlight,
   kicker,
@@ -21,7 +21,7 @@ export const VipSectionHeading = ({
   id,
   align = "center",
   className,
-}: VipSectionHeadingProps) => {
+}: SectionHeadingProps) => {
   const centered = align === "center"
 
   return (

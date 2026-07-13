@@ -9,7 +9,7 @@ import {
   Loader2,
   Save,
 } from "lucide-react"
-import { useVipOffer } from "@/vip/hooks/useVipOffer"
+import { useOfferWindow } from "@/hooks/useOfferWindow"
 import type { SettingsData } from "./useSettingsData"
 
 type Props = Pick<
@@ -52,7 +52,7 @@ export default function VipSessionSection({
   handleSave,
   vipPaymentLinkInvalid,
 }: Props) {
-  const { expired } = useVipOffer(vipCountdownDate)
+  const { expired } = useOfferWindow(vipCountdownDate)
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">

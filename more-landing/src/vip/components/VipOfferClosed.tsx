@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, CalendarX, MessageCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { VipBackdrop } from "./VipBackdrop"
+import { Backdrop } from "@/components/brand/Backdrop"
 
 type VipOfferClosedProps = {
   whatsappNumber?: string | null
@@ -19,7 +19,7 @@ export const VipOfferClosed = ({ whatsappNumber }: VipOfferClosedProps) => {
 
   return (
     <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-4 py-24">
-      <VipBackdrop variant="hero" />
+      <Backdrop variant="hero" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

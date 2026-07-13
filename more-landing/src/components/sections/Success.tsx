@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Quote, Scale, User, ArrowRight, Video } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { CtaButton } from "@/components/brand/CtaButton"
 import {
   supabase,
   CATEGORY_LABELS,
@@ -532,15 +533,14 @@ export default function Success() {
                     <p className="text-sm text-gray-500 font-medium">
                       {t("success.videoIdentify")}
                     </p>
-                    <a
+                    <CtaButton
+                      label={t("success.videoCta")}
                       href="#quiz"
-                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#F37021] text-white font-semibold text-base hover:bg-[#d95f10] transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#F37021]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
-                      tabIndex={0}
-                      aria-label={t("success.videoCtaAria")}
-                    >
-                      {t("success.videoCta")}
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                      size="lg"
+                      icon={ArrowRight}
+                      ariaLabel={t("success.videoCtaAria")}
+                      className="w-auto"
+                    />
                   </motion.div>
                 </motion.div>
               )}

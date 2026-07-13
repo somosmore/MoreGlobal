@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { MessageCircle, Mail, MapPin, Instagram, Linkedin, Facebook, Youtube } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Backdrop } from "@/components/brand/Backdrop"
+import { CtaButton } from "@/components/brand/CtaButton"
 import {
   Accordion,
   AccordionContent,
@@ -80,36 +81,30 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
         </section>
       )}
 
-      <section className="py-20 bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#F37021]/[0.05] blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[#F37021]/[0.03] blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden bg-navy-deep py-20">
+        <Backdrop variant="footer" />
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-display text-4xl leading-tight text-white sm:text-5xl">
               {t("footer.ctaTitle")}
             </h2>
-            <p className="text-white/60 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="mx-auto mb-8 max-w-2xl font-sans text-lg text-white/70">
               {t("footer.ctaSubtitle")}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="gold" size="lg" className="gap-2" asChild>
-                <a
-                  href={t("footer.ctaWhatsapp")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  {t("footer.ctaButton")}
-                </a>
-              </Button>
+            <div className="flex justify-center">
+              <CtaButton
+                label={t("footer.ctaButton")}
+                href={t("footer.ctaWhatsapp")}
+                size="lg"
+                icon={MessageCircle}
+                className="w-auto"
+              />
             </div>
           </motion.div>
         </div>

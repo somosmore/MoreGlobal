@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslation } from "react-i18next"
+import { CtaButton } from "@/components/brand/CtaButton"
 
 type UppStickyCtaProps = {
   paymentLink?: string | null
@@ -47,14 +48,13 @@ export function UppStickyCta({ paymentLink, price, loading }: UppStickyCtaProps)
                 {t("uppPage.stickyCta.subtext", { price: effectivePrice })}
               </p>
             </div>
-            <a
+            <CtaButton
+              label={t("uppPage.cta.payNow")}
               href={paymentLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-orange to-orange-dark px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange/25 transition-all hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-            >
-              {t("uppPage.cta.payNow")}
-            </a>
+              icon={null}
+              trackSchedule
+              className="w-auto shrink-0 font-bold"
+            />
           </div>
         </motion.div>
       )}

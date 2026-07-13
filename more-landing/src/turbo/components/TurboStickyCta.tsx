@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Zap } from "lucide-react"
+import { CtaButton } from "@/components/brand/CtaButton"
 
 type TurboStickyCtaProps = {
   paymentLink?: string | null
@@ -53,20 +54,14 @@ export function TurboStickyCta({ paymentLink, price, loading }: TurboStickyCtaPr
                 >
                   Asesor
                 </a>
-                {paymentLink ? (
-                  <a
-                    href={paymentLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-10 items-center justify-center rounded-xl bg-gradient-to-r from-orange to-orange-dark px-4 text-xs font-bold text-white shadow-lg shadow-orange/25"
-                  >
-                    {t("turboPage.cta.payNow")}
-                  </a>
-                ) : (
-                  <span className="inline-flex h-10 items-center justify-center rounded-xl bg-orange/40 px-4 text-xs font-bold text-white/70 cursor-not-allowed">
-                    {t("turboPage.cta.comingSoon")}
-                  </span>
-                )}
+                <CtaButton
+                  label={t("turboPage.cta.payNow")}
+                  href={paymentLink}
+                  icon={null}
+                  disabledLabel={t("turboPage.cta.comingSoon")}
+                  trackSchedule
+                  className="w-auto px-4 text-xs font-bold"
+                />
               </div>
             </div>
           </div>

@@ -4,15 +4,15 @@ import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
 import { VipCountdown } from "./VipCountdown"
-import { VipBackdrop } from "./VipBackdrop"
+import { Backdrop } from "@/components/brand/Backdrop"
 import { VipSpecsBar } from "./VipSpecsBar"
-import type { VipTimeLeft } from "../hooks/useVipOffer"
+import type { OfferTimeLeft } from "@/hooks/useOfferWindow"
 
 type VipHeroProps = {
   paymentLink: string
   price: string
   loading?: boolean
-  timeLeft?: VipTimeLeft | null
+  timeLeft?: OfferTimeLeft | null
 }
 
 export const VipHero = ({ paymentLink, price, loading, timeLeft }: VipHeroProps) => {
@@ -21,7 +21,7 @@ export const VipHero = ({ paymentLink, price, loading, timeLeft }: VipHeroProps)
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
-      <VipBackdrop variant="hero" />
+      <Backdrop variant="hero" />
 
       <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
         <motion.div

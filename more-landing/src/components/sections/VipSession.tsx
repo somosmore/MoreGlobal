@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
-import { Shield, Clock, CheckCircle, CalendarDays, Star } from "lucide-react"
+import { Shield, Clock, Check, CalendarDays, Star } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useTranslation } from "react-i18next"
+import { CtaButton } from "@/components/brand/CtaButton"
 
 export default function VipSession() {
   const { t } = useTranslation()
@@ -12,101 +13,93 @@ export default function VipSession() {
   const deliverables = t("vipSession.deliverables", { returnObjects: true }) as string[]
 
   return (
-    <section id="asesoria-vip" className="py-24 sm:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
+    <section id="asesoria-vip" className="bg-paper py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative rounded-3xl border-2 border-[#F37021]/30 bg-gradient-to-br from-[#FFF8F4] to-white shadow-2xl overflow-hidden">
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] to-[#D4611A]" />
+            <div className="relative overflow-hidden rounded-3xl border border-navy/15 bg-white shadow-[0_28px_70px_-34px_rgba(27,43,68,0.4)]">
+              <div
+                className="h-1.5 w-full bg-linear-to-r from-navy-deep via-orange to-orange-light"
+                aria-hidden
+              />
 
-              <div className="px-8 sm:px-12 py-10 sm:py-12">
-                <div className="flex flex-wrap items-center gap-2 mb-6">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F37021]/10 text-[#F37021] text-xs font-semibold uppercase tracking-widest">
-                    <Star className="w-3 h-3" />
+              <div className="px-8 py-10 sm:px-12 sm:py-12">
+                <div className="mb-6 flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-navy/15 bg-white px-3 py-1 text-xs font-bold uppercase tracking-widest text-navy">
+                    <Star className="h-3 w-3 fill-orange text-orange" aria-hidden />
                     {t("vipSession.eyebrow")}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">
-                    <Clock className="w-3 h-3" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-paper-warm px-3 py-1 text-xs font-semibold text-orange-dark">
+                    <Clock className="h-3 w-3" aria-hidden />
                     {t("vipSession.limited")}
                   </span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#2A3A4A] leading-tight tracking-tight mb-4">
+                <h2 className="mb-4 font-display text-3xl leading-tight text-navy-deep sm:text-4xl">
                   {t("vipSession.title")}{" "}
-                  <span className="text-[#F37021]">{t("vipSession.titleHighlight")}</span>
+                  <span className="text-orange">{t("vipSession.titleHighlight")}</span>
                 </h2>
 
-                <p className="text-gray-600 text-base leading-relaxed mb-8">
+                <p className="mb-8 font-sans text-base leading-relaxed text-ink-muted">
                   {t("vipSession.subtitle")}
                 </p>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="mb-8 space-y-3">
                   {deliverables.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[#F37021] shrink-0 mt-0.5" />
-                      <span className="text-sm text-gray-700 leading-snug">{item}</span>
+                      <span
+                        className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange text-white"
+                        aria-hidden
+                      >
+                        <Check className="h-4 w-4 stroke-3" />
+                      </span>
+                      <span className="font-sans text-sm leading-snug text-navy">{item}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="border-t border-gray-100 my-8" />
+                <div className="my-8 border-t border-navy/10" />
 
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-bold text-[#2A3A4A]">{vipPrice}</span>
-                      <span className="text-gray-400 text-base font-medium">{t("vipSession.currency")}</span>
+                      <span className="font-display text-5xl font-bold text-navy-deep">{vipPrice}</span>
+                      <span className="font-sans text-base font-medium text-ink-muted">
+                        {t("vipSession.currency")}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-2 mt-2">
-                      <CalendarDays className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-500">{t("vipSession.sessionInfo")}</span>
+                    <div className="mt-2 flex items-center gap-2">
+                      <CalendarDays className="h-4 w-4 text-ink-muted" aria-hidden />
+                      <span className="font-sans text-sm text-ink-muted">
+                        {t("vipSession.sessionInfo")}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2 px-4 py-3 rounded-xl bg-green-50 border border-green-100 sm:max-w-[220px]">
-                    <Shield className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                    <p className="text-xs text-green-800 leading-snug font-medium">
+                  <div className="flex items-start gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 px-4 py-3 sm:max-w-[220px]">
+                    <Shield className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden />
+                    <p className="font-sans text-xs font-medium leading-snug text-emerald-900">
                       {t("vipSession.guarantee")}
                     </p>
                   </div>
                 </div>
 
-                {loading ? (
-                  <div className="h-14 w-full rounded-2xl bg-gray-100 animate-pulse" />
-                ) : vipPaymentLink ? (
-                  <a
-                    href={vipPaymentLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-2xl
-                      bg-gradient-to-r from-[#F37021] to-[#D4611A] text-white font-bold text-base
-                      shadow-lg shadow-[#F37021]/30 hover:shadow-xl hover:shadow-[#F37021]/40
-                      hover:from-[#D4611A] hover:to-[#C05010] transition-all duration-200
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F37021] focus-visible:ring-offset-2"
-                    aria-label={t("vipSession.ctaAriaLabel")}
-                  >
-                    <CalendarDays className="w-5 h-5 shrink-0" />
-                    {t("vipSession.cta")}
-                  </a>
-                ) : (
-                  <button
-                    disabled
-                    type="button"
-                    className="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-2xl
-                      bg-gray-200 text-gray-400 font-bold text-base cursor-not-allowed"
-                    aria-label={t("vipSession.comingSoon")}
-                  >
-                    <CalendarDays className="w-5 h-5 shrink-0" />
-                    {t("vipSession.comingSoon")}
-                  </button>
-                )}
+                <CtaButton
+                  label={t("vipSession.cta")}
+                  href={vipPaymentLink}
+                  loading={loading}
+                  size="lg"
+                  disabledLabel={t("vipSession.comingSoon")}
+                  ariaLabel={t("vipSession.ctaAriaLabel")}
+                  trackSchedule
+                />
 
-                <p className="text-center text-xs text-gray-400 mt-4 italic">
+                <p className="mt-4 text-center font-sans text-xs italic text-ink-muted">
                   {t("vipSession.valueContrast")}
                 </p>
               </div>

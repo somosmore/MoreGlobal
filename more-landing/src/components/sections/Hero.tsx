@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Play, Star } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { Backdrop } from "@/components/brand/Backdrop"
+import { CtaButton } from "@/components/brand/CtaButton"
 import { useTranslation } from "react-i18next"
 import { supabase } from "@/lib/supabase"
 
@@ -34,23 +36,19 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-gray-50/50 to-[#2A3A4A]/[0.03]">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F37021]/[0.10] blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#2A3A4A]/[0.07] blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#F37021]/[0.03] blur-3xl" />
-      </div>
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <Backdrop variant="hero" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-32 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="badge-shine inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2A3A4A]/[0.05] border border-[#2A3A4A]/10 mb-8"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-navy/15 bg-white/80 px-4 py-2 backdrop-blur-sm"
           >
-            <span className="w-2 h-2 rounded-full bg-[#F37021] animate-pulse" />
-            <span className="text-xs font-medium text-[#2A3A4A]/70 tracking-wide uppercase">
+            <Star className="h-3.5 w-3.5 fill-orange text-orange" aria-hidden />
+            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-navy">
               {t("hero.badge")}
             </span>
           </motion.div>
@@ -59,40 +57,48 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2A3A4A] leading-[1.1] tracking-tight"
+            className="text-balance font-display text-5xl leading-[1.05] text-navy-deep sm:text-6xl lg:text-7xl"
           >
-            {t("hero.title")}{" "}
-            <span className="relative">
-              <span className="relative z-10 bg-gradient-to-r from-[#F37021] to-[#D4611A] bg-clip-text text-transparent">
-                {t("hero.titleHighlight")}
-              </span>
-            </span>{" "}
+            {t("hero.title")} <span className="text-orange">{t("hero.titleHighlight")}</span>{" "}
             {t("hero.titleEnd")}
           </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="mt-6 flex items-center justify-center gap-3"
+            aria-hidden
+          >
+            <span className="h-px w-16 bg-navy/50 sm:w-24" />
+            <Star className="h-4 w-4 fill-orange text-orange" />
+            <span className="h-px w-16 bg-orange sm:w-24" />
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-6 text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed"
+            className="mx-auto mt-6 max-w-2xl font-sans text-lg leading-relaxed text-ink-muted sm:text-xl"
           >
             {t("hero.subtitle")}{" "}
-            <strong className="text-[#2A3A4A] font-semibold">{t("hero.subtitleStrong")}</strong>.
+            <strong className="font-semibold text-navy">{t("hero.subtitleStrong")}</strong>.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <Button size="lg" variant="gold" className="group" asChild>
-              <a href="#quiz">
-                {t("hero.cta1")}
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button size="lg" variant="secondary" className="group" asChild>
+            <CtaButton
+              label={t("hero.cta1")}
+              href="#quiz"
+              size="lg"
+              icon={ArrowRight}
+              className="w-auto"
+            />
+            <Button size="lg" variant="secondary" className="group rounded-full" asChild>
               <Link to="/blueprint">
                 <Play className="mr-2 h-4 w-4" />
                 {t("hero.cta2")}
@@ -104,7 +110,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="mt-6 text-sm text-gray-500 max-w-xl mx-auto italic"
+            className="mx-auto mt-6 max-w-xl font-sans text-sm italic text-ink-muted"
           >
             {t("hero.urgency")}
           </motion.p>
@@ -113,16 +119,16 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-sm text-gray-400"
+            className="mt-16 flex flex-col items-center justify-center gap-6 font-sans text-sm text-ink-muted sm:flex-row sm:gap-8"
           >
-            <span className="font-medium text-[#2A3A4A]/70">{t("hero.audienceLabel")}</span>
-            <div className="hidden sm:block w-px h-4 bg-gray-300" />
+            <span className="font-medium text-navy">{t("hero.audienceLabel")}</span>
+            <div className="hidden h-4 w-px bg-navy/15 sm:block" />
             <div className="flex items-center gap-2">
               <div className="flex -space-x-2">
                 {initials.map((ini) => (
                   <div
                     key={ini}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F37021] to-[#D4611A] border-2 border-white flex items-center justify-center text-[9px] text-white font-bold"
+                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-navy-deep text-[9px] font-bold text-white"
                   >
                     {ini}
                   </div>
@@ -130,9 +136,9 @@ export default function Hero() {
               </div>
               <span>{t("hero.socialProof")}</span>
             </div>
-            <div className="hidden sm:block w-px h-4 bg-gray-300" />
+            <div className="hidden h-4 w-px bg-navy/15 sm:block" />
             <span>{t("hero.approvalRate")}</span>
-            <div className="hidden sm:block w-px h-4 bg-gray-300" />
+            <div className="hidden h-4 w-px bg-navy/15 sm:block" />
             <span>{t("hero.noSponsor")}</span>
           </motion.div>
         </div>

@@ -9,7 +9,7 @@ import {
   UserSearch,
 } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { VipSectionHeading } from "./VipSectionHeading"
+import { SectionHeading } from "@/components/brand/SectionHeading"
 
 const IDEAL_ICONS = [FileCheck, TriangleAlert, Brain, ListChecks] as const
 
@@ -25,7 +25,7 @@ export const VipWhySection = () => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <VipSectionHeading
+      <SectionHeading
         id="vip-why-heading"
         title={t("vipPage.why.title")}
         highlight={t("vipPage.why.titleHighlight")}

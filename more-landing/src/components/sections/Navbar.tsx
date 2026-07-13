@@ -42,7 +42,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/70 backdrop-blur-xl border-b border-gray-200/50 shadow-sm"
+          ? "bg-paper/80 backdrop-blur-xl border-b border-navy/10 shadow-sm"
           : "bg-transparent backdrop-blur-none border-b border-transparent"
       }`}
     >
@@ -123,7 +123,7 @@ export default function Navbar() {
                 <span className={currentLang === "EN" ? "text-[#F37021]" : "text-gray-400"}>EN</span>
               </button>
 
-              <Button className="w-full" size="sm" asChild>
+              <Button className="w-full" size="sm" variant="gold" asChild>
                 <Link to="/#quiz" onClick={() => setIsOpen(false)}>
                   {t("navbar.cta")}
                 </Link>

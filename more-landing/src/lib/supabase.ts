@@ -135,6 +135,10 @@ export type SiteSettingsMap = {
   turbo_price: string
   turbo_countdown_date: string
   wppequipo_enabled: string
+  mc_event_date: string
+  mc_registration_closes_at: string
+  tn_event_date: string
+  tn_registration_closes_at: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

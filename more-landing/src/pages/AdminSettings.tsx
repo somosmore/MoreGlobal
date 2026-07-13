@@ -1,9 +1,19 @@
-import { BookOpen, Calendar, LineChart, MessageCircle, Settings, Share2, Sparkles } from "lucide-react"
+import {
+  BookOpen,
+  Calendar,
+  CalendarClock,
+  LineChart,
+  MessageCircle,
+  Settings,
+  Share2,
+  Sparkles,
+} from "lucide-react"
 import {
   useSettingsData,
   TrackingSection,
   CalendarSection,
   VipSessionSection,
+  LandingCountdownsSection,
   SocialNetworksSection,
   UppSection,
   WppTeamSection,
@@ -13,6 +23,7 @@ const SECTION_LINKS = [
   { id: "medicion", label: "Medición", Icon: LineChart },
   { id: "calendario", label: "Calendario", Icon: Calendar },
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
+  { id: "landings", label: "Landings", Icon: CalendarClock },
   { id: "upp", label: "Programa UPP", Icon: BookOpen },
   { id: "wppequipo", label: "WhatsApp Equipo", Icon: MessageCircle },
   { id: "redes", label: "Redes", Icon: Share2 },
@@ -119,6 +130,24 @@ export default function AdminSettings() {
               saveError={data.saveError}
               handleSave={data.handleSave}
               vipPaymentLinkInvalid={data.vipPaymentLinkInvalid}
+            />
+          </section>
+
+          <section id="landings" className="scroll-mt-32">
+            <LandingCountdownsSection
+              loading={data.loading}
+              mcEventDate={data.mcEventDate}
+              setMcEventDate={data.setMcEventDate}
+              mcRegistrationClosesAt={data.mcRegistrationClosesAt}
+              setMcRegistrationClosesAt={data.setMcRegistrationClosesAt}
+              tnEventDate={data.tnEventDate}
+              setTnEventDate={data.setTnEventDate}
+              tnRegistrationClosesAt={data.tnRegistrationClosesAt}
+              setTnRegistrationClosesAt={data.setTnRegistrationClosesAt}
+              landingsSaveState={data.landingsSaveState}
+              setLandingsSaveState={data.setLandingsSaveState}
+              landingsSaveError={data.landingsSaveError}
+              handleSaveLandings={data.handleSaveLandings}
             />
           </section>
 

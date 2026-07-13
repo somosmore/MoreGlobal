@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Check, X } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { VipSectionHeading } from "./VipSectionHeading"
+import { SectionHeading } from "@/components/brand/SectionHeading"
 
 export const VipFitSection = () => {
   const { t } = useTranslation()
@@ -16,7 +16,7 @@ export const VipFitSection = () => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <VipSectionHeading
+      <SectionHeading
         id="vip-fit-heading"
         title={t("vipPage.fit.title")}
         highlight={t("vipPage.fit.titleHighlight")}

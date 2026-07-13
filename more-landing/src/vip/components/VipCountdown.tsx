@@ -2,7 +2,7 @@ import { memo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Clock } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import type { VipTimeLeft } from "../hooks/useVipOffer"
+import type { OfferTimeLeft } from "@/hooks/useOfferWindow"
 
 const FlipNumber = memo(function FlipNumber({ value }: { value: number }) {
   const formatted = String(value).padStart(2, "0")
@@ -36,7 +36,7 @@ const Block = ({ value, label }: { value: number; label: string }) => (
 )
 
 type VipCountdownProps = {
-  timeLeft: VipTimeLeft
+  timeLeft: OfferTimeLeft
 }
 
 export const VipCountdown = ({ timeLeft }: VipCountdownProps) => {
@@ -60,7 +60,8 @@ export const VipCountdown = ({ timeLeft }: VipCountdownProps) => {
         </div>
 
         <div className="flex items-start gap-3 sm:gap-4">
-          <Block value={timeLeft.hours} label={t("vipPage.countdown.hours")} />
+          {/* La oferta VIP se cuenta en horas totales, no en días */}
+          <Block value={timeLeft.totalHours} label={t("vipPage.countdown.hours")} />
           <span className="font-display text-2xl text-white/30 sm:mt-3">:</span>
           <Block value={timeLeft.minutes} label={t("vipPage.countdown.minutes")} />
           <span className="font-display text-2xl text-white/30 sm:mt-3">:</span>

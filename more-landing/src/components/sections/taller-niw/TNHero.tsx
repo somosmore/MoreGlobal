@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Gift, User } from "lucide-react"
-import TNCountdown from "./TNCountdown"
+import { CtaButton } from "@/components/brand/CtaButton"
+import { EventCountdown } from "@/components/brand/EventCountdown"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const details = [
@@ -17,6 +19,8 @@ const CUPOS_PCT = 82
 const REGISTRANTS_COUNT = 1200
 
 export default function TNHero() {
+  const { settings } = useSiteSettings()
+
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-b from-[#0033A0] to-[#001A52]">
       {/* Background blobs */}
@@ -111,15 +115,14 @@ export default function TNHero() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-8"
             >
-              <motion.a
+              <CtaButton
+                label="QUIERO MI LUGAR GRATIS"
                 href="#registro"
                 onClick={scrollToRegistro}
-                className="inline-flex items-center justify-center h-13 px-8 text-base font-bold text-white bg-gradient-to-r from-[#F37021] to-[#D4611A] rounded-lg shadow-lg hover:from-[#D4611A] hover:to-[#F37021] transition-all duration-300 hover:shadow-xl"
-                animate={{ y: [0, -3, 0], boxShadow: ["0 10px 24px rgba(243,112,33,0.35)", "0 16px 36px rgba(243,112,33,0.55)", "0 10px 24px rgba(243,112,33,0.35)"] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-              >
-                QUIERO MI LUGAR GRATIS
-              </motion.a>
+                size="lg"
+                icon={null}
+                className="w-auto font-bold"
+              />
               <p className="mt-3 text-xs text-white/60 flex items-center justify-center lg:justify-start gap-2">
                 <Gift className="h-3.5 w-3.5 text-[#F37021]" />
                 Gratis · En vivo · Cupos limitados
@@ -196,7 +199,7 @@ export default function TNHero() {
         </div>
 
         {/* Countdown — full width below the split */}
-        <TNCountdown />
+        <EventCountdown targetDate={settings.tn_event_date} />
       </div>
     </section>
   )

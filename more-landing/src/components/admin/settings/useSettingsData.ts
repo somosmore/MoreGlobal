@@ -4,6 +4,29 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 
 export type SaveState = "idle" | "saving" | "success" | "error"
 
+/**
+ * Las fechas de campaña se guardan en ISO absoluto (con zona), pero
+ * <input type="datetime-local"> solo entiende "YYYY-MM-DDTHH:mm" en hora local.
+ */
+function toLocalInput(iso: string): string {
+  const trimmed = iso.trim()
+  if (!trimmed) return ""
+  const date = new Date(trimmed)
+  if (Number.isNaN(date.getTime())) return ""
+  const pad = (n: number) => String(n).padStart(2, "0")
+  return (
+    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
+    `T${pad(date.getHours())}:${pad(date.getMinutes())}`
+  )
+}
+
+function toIso(localValue: string): string {
+  const trimmed = localValue.trim()
+  if (!trimmed) return ""
+  const date = new Date(trimmed)
+  return Number.isNaN(date.getTime()) ? "" : date.toISOString()
+}
+
 export function useSettingsData() {
   const { settings, loading, refetch } = useSiteSettings()
 
@@ -30,6 +53,14 @@ export function useSettingsData() {
   const [uppSaveState, setUppSaveState] = useState<SaveState>("idle")
   const [uppSaveError, setUppSaveError] = useState<string | null>(null)
 
+  // Landings de campaña (masterclass + taller)
+  const [mcEventDate, setMcEventDate] = useState("")
+  const [mcRegistrationClosesAt, setMcRegistrationClosesAt] = useState("")
+  const [tnEventDate, setTnEventDate] = useState("")
+  const [tnRegistrationClosesAt, setTnRegistrationClosesAt] = useState("")
+  const [landingsSaveState, setLandingsSaveState] = useState<SaveState>("idle")
+  const [landingsSaveError, setLandingsSaveError] = useState<string | null>(null)
+
   // Tracking
   const [metaPixelId, setMetaPixelId] = useState("")
   const [gtmId, setGtmId] = useState("")
@@ -51,6 +82,10 @@ export function useSettingsData() {
       setUppPaymentLink(settings.upp_payment_link)
       setUppPrice(settings.upp_price)
       setUppCountdownDate(settings.upp_countdown_date)
+      setMcEventDate(toLocalInput(settings.mc_event_date))
+      setMcRegistrationClosesAt(toLocalInput(settings.mc_registration_closes_at))
+      setTnEventDate(toLocalInput(settings.tn_event_date))
+      setTnRegistrationClosesAt(toLocalInput(settings.tn_registration_closes_at))
       setMetaPixelId(settings.meta_pixel_id)
       setGtmId(settings.google_tag_manager_id)
       setGa4Id(settings.ga4_measurement_id)
@@ -119,6 +154,38 @@ export function useSettingsData() {
     refetch()
 
     setTimeout(() => setUppSaveState("idle"), 3000)
+  }
+
+  const handleSaveLandings = async () => {
+    if (!supabase) {
+      setLandingsSaveError("No hay conexión con la base de datos.")
+      setLandingsSaveState("error")
+      return
+    }
+
+    setLandingsSaveState("saving")
+    setLandingsSaveError(null)
+
+    const { error } = await supabase.from("site_settings").upsert(
+      [
+        { key: "mc_event_date", value: toIso(mcEventDate) },
+        { key: "mc_registration_closes_at", value: toIso(mcRegistrationClosesAt) },
+        { key: "tn_event_date", value: toIso(tnEventDate) },
+        { key: "tn_registration_closes_at", value: toIso(tnRegistrationClosesAt) },
+      ],
+      { onConflict: "key" }
+    )
+
+    if (error) {
+      setLandingsSaveError(error.message)
+      setLandingsSaveState("error")
+      return
+    }
+
+    setLandingsSaveState("success")
+    refetch()
+
+    setTimeout(() => setLandingsSaveState("idle"), 3000)
   }
 
   const handleSaveSocial = async () => {
@@ -247,6 +314,15 @@ export function useSettingsData() {
     handleSaveSocial,
     socialUrlInvalid,
     isValidUrl,
+
+    // Landings de campaña
+    mcEventDate, setMcEventDate,
+    mcRegistrationClosesAt, setMcRegistrationClosesAt,
+    tnEventDate, setTnEventDate,
+    tnRegistrationClosesAt, setTnRegistrationClosesAt,
+    landingsSaveState, setLandingsSaveState,
+    landingsSaveError,
+    handleSaveLandings,
 
     // Tracking
     metaPixelId, setMetaPixelId,

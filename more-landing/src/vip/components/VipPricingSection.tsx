@@ -3,14 +3,14 @@ import { ShieldCheck } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
 import { VipCountdown } from "./VipCountdown"
-import { VipSectionHeading } from "./VipSectionHeading"
-import type { VipTimeLeft } from "../hooks/useVipOffer"
+import { SectionHeading } from "@/components/brand/SectionHeading"
+import type { OfferTimeLeft } from "@/hooks/useOfferWindow"
 
 type VipPricingSectionProps = {
   paymentLink: string
   price: string
   loading?: boolean
-  timeLeft?: VipTimeLeft | null
+  timeLeft?: OfferTimeLeft | null
 }
 
 export const VipPricingSection = ({
@@ -30,7 +30,7 @@ export const VipPricingSection = ({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <VipSectionHeading
+      <SectionHeading
         id="vip-pricing-heading"
         title={t("vipPage.pricing.title")}
         highlight={t("vipPage.pricing.titleHighlight")}

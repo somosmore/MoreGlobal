@@ -7,7 +7,7 @@ import type { MouseEvent } from "react"
  *
  * Mantiene `href="#registro"` en los enlaces como fallback sin JS.
  */
-export function scrollToRegistro(e?: MouseEvent<HTMLAnchorElement>) {
+export function scrollToRegistro(e?: MouseEvent<HTMLElement>) {
   e?.preventDefault()
   const el = document.getElementById("registro")
   el?.scrollIntoView({ behavior: "smooth" })

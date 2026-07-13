@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useLandingStatus } from "@/hooks/useLandingStatus"
+import { CtaButton } from "@/components/brand/CtaButton"
 import TNHero from "@/components/sections/taller-niw/TNHero"
 import TNBenefits from "@/components/sections/taller-niw/TNBenefits"
 import TNTestimonials from "@/components/sections/taller-niw/TNTestimonials"
@@ -67,12 +68,7 @@ export default function TallerNiwPage() {
           <img src="/logo_more_dark.png" alt="MORE" className="h-20 mx-auto mb-8 opacity-80" />
           <h1 className="text-2xl font-bold text-white mb-3">Evento no disponible</h1>
           <p className="text-white/60 mb-8">{reason}</p>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#F37021] rounded-lg hover:bg-[#D4611A] transition-colors"
-          >
-            Ir al inicio
-          </a>
+          <CtaButton label="Ir al inicio" to="/" icon={null} className="w-auto" />
         </div>
       </div>
     )

@@ -1,8 +1,11 @@
 import { cn } from "@/lib/utils"
 
-type VipBackdropProps = {
-  /** "hero" muestra el marco completo; "section" deja solo la textura de papel. */
-  variant?: "hero" | "section"
+type BackdropProps = {
+  /**
+   * "hero": marco completo sobre papel. "section": solo la textura.
+   * "footer": el mismo lenguaje de olas, invertido sobre navy para cerrar la página.
+   */
+  variant?: "hero" | "section" | "footer"
   className?: string
 }
 
@@ -13,7 +16,77 @@ type VipBackdropProps = {
  * En secciones largas el viewBox se estiraría y deformaría el grano, así que
  * "section" usa un patrón a escala real en lugar del marco completo.
  */
-export const VipBackdrop = ({ variant = "hero", className }: VipBackdropProps) => {
+export const Backdrop = ({ variant = "hero", className }: BackdropProps) => {
+  if (variant === "footer") {
+    return (
+      <div
+        className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+        aria-hidden="true"
+      >
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 1440 420"
+          preserveAspectRatio="xMidYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="footer-wave-navy" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#4A6D96" />
+              <stop offset="100%" stopColor="#2A3A4A" />
+            </linearGradient>
+            <linearGradient id="footer-wave-orange" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#E0561A" />
+              <stop offset="100%" stopColor="#FF9052" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="1440" height="420" fill="#1B2B44" />
+
+          {/* Olas espejadas: nacen del borde superior, como el reflejo del hero */}
+          <path
+            d="M0 0 C 140 30 250 96 340 180 C 396 232 430 300 448 420 L0 420 Z"
+            fill="url(#footer-wave-navy)"
+            opacity="0.35"
+          />
+          <path
+            d="M0 0 C 96 24 176 78 240 146 C 288 198 316 268 330 420 L0 420 Z"
+            fill="#16243D"
+            opacity="0.55"
+          />
+          <path
+            d="M1440 0 C 1310 34 1204 106 1130 196 C 1074 264 1044 336 1032 420 L1440 420 Z"
+            fill="url(#footer-wave-orange)"
+            opacity="0.22"
+          />
+          <path
+            d="M1440 60 C 1350 90 1276 154 1220 232 C 1180 288 1160 350 1152 420 L1440 420 Z"
+            fill="#D4611A"
+            opacity="0.28"
+          />
+
+          <g fill="none" stroke="#8AA4C1" strokeWidth="1" opacity="0.18">
+            <path d="M0 40 C 160 66 286 146 380 244 C 448 314 486 366 504 420" />
+            <path d="M0 74 C 172 100 306 184 404 286 C 470 354 508 386 524 420" />
+          </g>
+
+          {/* Ruta punteada con avión, cruzando el cierre */}
+          <path
+            d="M300 120 C 520 40 780 190 1040 96 C 1140 60 1200 96 1280 70"
+            fill="none"
+            stroke="#F37021"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeDasharray="1 10"
+            opacity="0.5"
+          />
+          <g transform="translate(1268 46) rotate(-20) scale(1.4)" fill="#F37021" opacity="0.85">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+
   if (variant === "section") {
     return (
       <div

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Gift, User } from "lucide-react"
-import MCCountdown from "./MCCountdown"
+import { CtaButton } from "@/components/brand/CtaButton"
+import { EventCountdown } from "@/components/brand/EventCountdown"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
 
 const details = [
   { icon: Calendar, text: "25 de mayo 2026" },
@@ -11,6 +13,8 @@ const details = [
 ]
 
 export default function MCHero() {
+  const { settings } = useSiteSettings()
+
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-b from-[#0033A0] to-[#001A52]">
       {/* Background blobs */}
@@ -104,14 +108,13 @@ export default function MCHero() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-8"
             >
-              <motion.a
+              <CtaButton
+                label="QUIERO MI LUGAR GRATIS"
                 href="#registro"
-                className="inline-flex items-center justify-center h-13 px-8 text-base font-bold text-white bg-gradient-to-r from-[#F37021] to-[#D4611A] rounded-lg shadow-lg hover:from-[#D4611A] hover:to-[#F37021] transition-all duration-300 hover:shadow-xl"
-                animate={{ y: [0, -3, 0], boxShadow: ["0 10px 24px rgba(243,112,33,0.35)", "0 16px 36px rgba(243,112,33,0.55)", "0 10px 24px rgba(243,112,33,0.35)"] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-              >
-                QUIERO MI LUGAR GRATIS
-              </motion.a>
+                size="lg"
+                icon={null}
+                className="w-auto font-bold"
+              />
             </motion.div>
 
             <motion.div
@@ -166,7 +169,7 @@ export default function MCHero() {
         </div>
 
         {/* Countdown — full width below the split */}
-        <MCCountdown />
+        <EventCountdown targetDate={settings.mc_event_date} />
       </div>
     </section>
   )

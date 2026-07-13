@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { Check, MessageCircle, Quote } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { CtaButton } from "@/components/brand/CtaButton"
 
 type UppPlansSectionProps = {
   paymentLink?: string | null
@@ -98,22 +99,15 @@ export function UppPlansSection({
             </div>
 
             <div className="mt-7">
-              {loading ? (
-                <div className="h-12 w-full animate-pulse rounded-xl bg-gray-200" />
-              ) : paymentLink ? (
-                <a
-                  href={paymentLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange to-orange-dark px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange/25 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-orange/30 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
-                >
-                  {t("uppPage.plans.single.cta")}
-                </a>
-              ) : (
-                <span className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-gray-200 px-6 py-3 text-sm font-bold text-gray-500">
-                  {t("uppPage.cta.comingSoon")}
-                </span>
-              )}
+              <CtaButton
+                label={t("uppPage.plans.single.cta")}
+                href={paymentLink}
+                icon={null}
+                loading={loading}
+                disabledLabel={t("uppPage.cta.comingSoon")}
+                trackSchedule
+                className="font-bold"
+              />
             </div>
           </div>
         </motion.div>
@@ -164,15 +158,13 @@ export function UppPlansSection({
             </div>
 
             <div className="mt-7">
-              <a
+              <CtaButton
+                label={t("uppPage.plans.installments.cta")}
                 href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border-2 border-navy/15 bg-white px-6 py-3 text-sm font-bold text-navy transition-all duration-200 hover:border-green-500/50 hover:bg-green-50 hover:text-green-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-              >
-                <MessageCircle className="h-4 w-4" />
-                {t("uppPage.plans.installments.cta")}
-              </a>
+                variant="whatsapp"
+                icon={MessageCircle}
+                className="font-bold"
+              />
             </div>
           </div>
         </motion.div>

@@ -4,13 +4,13 @@ import { Shield, CheckCircle2, Loader2, Calendar, Users, Download, ChevronDown, 
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { useOfferWindow } from "@/hooks/useOfferWindow"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import "flag-icons/css/flag-icons.min.css"
 
 const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/ESfl34rL4HFEbNmvj4EKnX"
 /** Segundos antes de abrir el grupo en la misma pestaña (si el usuario no pausa). */
 const MC_WHATSAPP_GROUP_REDIRECT_SECONDS = 4
-const REGISTRATION_CLOSES_AT = new Date("2026-05-27T23:59:59-05:00")
 
 const COUNTRY_CODES = [
   { code: "+57",  iso: "co", dial: "+57"  },
@@ -578,18 +578,8 @@ export default function MCRegistrationForm() {
     }
   }, [form, utmParams, settings])
 
-  const [isExpired, setIsExpired] = useState(() => Date.now() > REGISTRATION_CLOSES_AT.getTime())
-
-  useEffect(() => {
-    if (isExpired) return
-    const msUntilExpiry = REGISTRATION_CLOSES_AT.getTime() - Date.now()
-    if (msUntilExpiry <= 0) {
-      setIsExpired(true)
-      return
-    }
-    const t = setTimeout(() => setIsExpired(true), msUntilExpiry)
-    return () => clearTimeout(t)
-  }, [isExpired])
+  // El cierre de inscripción se configura en Admin → Settings, no en el código.
+  const { expired: isExpired } = useOfferWindow(settings.mc_registration_closes_at)
 
   return (
     <section
@@ -764,32 +754,10 @@ export default function MCRegistrationForm() {
                   </p>
                 )}
 
-                <motion.button
+                <button
                   type="submit"
                   disabled={submitting}
-                  whileHover={
-                    submitting
-                      ? {}
-                      : { scale: 1.02, transition: { duration: 0.15, ease: "easeOut" } }
-                  }
-                  whileTap={
-                    submitting
-                      ? {}
-                      : { scale: 0.97, transition: { duration: 0.08 } }
-                  }
-                  animate={
-                    submitting
-                      ? {}
-                      : {
-                          boxShadow: [
-                            "0 6px 20px rgba(243,112,33,0.35)",
-                            "0 10px 32px rgba(243,112,33,0.6)",
-                            "0 6px 20px rgba(243,112,33,0.35)",
-                          ],
-                        }
-                  }
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="mt-6 w-full h-14 rounded-xl bg-gradient-to-r from-[#F37021] to-[#D4611A] text-white text-base font-bold tracking-wide flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 hover:from-[#D4611A] hover:to-[#F37021]"
+                  className="cta-shine mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-full bg-orange text-base font-bold tracking-wide text-white shadow-md shadow-orange/25 hover:bg-orange-dark hover:shadow-lg hover:shadow-orange/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {submitting ? (
                     <>
@@ -804,7 +772,7 @@ export default function MCRegistrationForm() {
                       </svg>
                     </>
                   )}
-                </motion.button>
+                </button>
 
                 <div className="flex items-center justify-center gap-2 mt-4 text-xs text-[#9BAAB8]">
                   <Shield className="h-3.5 w-3.5 shrink-0" />

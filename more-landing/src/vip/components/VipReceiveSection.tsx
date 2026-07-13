@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
-import { VipSectionHeading } from "./VipSectionHeading"
+import { SectionHeading } from "@/components/brand/SectionHeading"
 import { VipSpecsBar } from "./VipSpecsBar"
 
 const DELIVERABLE_ICONS = [
@@ -41,7 +41,7 @@ export const VipReceiveSection = ({ paymentLink, price, loading }: VipReceiveSec
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <VipSectionHeading
+      <SectionHeading
         id="vip-receive-heading"
         title={t("vipPage.receive.title")}
         highlight={t("vipPage.receive.titleHighlight")}

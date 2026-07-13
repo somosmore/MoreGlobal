@@ -10,9 +10,9 @@ import { VipAboutIvon } from "@/vip/components/VipAboutIvon"
 import { VipFitSection } from "@/vip/components/VipFitSection"
 import { VipPricingSection } from "@/vip/components/VipPricingSection"
 import { VipFaq } from "@/vip/components/VipFaq"
-import { VipBackdrop } from "@/vip/components/VipBackdrop"
+import { Backdrop } from "@/components/brand/Backdrop"
 import { VipOfferClosed } from "@/vip/components/VipOfferClosed"
-import { useVipOffer } from "@/vip/hooks/useVipOffer"
+import { useOfferWindow } from "@/hooks/useOfferWindow"
 
 const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
 const DEFAULT_PRICE = "$97"
@@ -23,7 +23,7 @@ export default function VipSessionPage() {
 
   const paymentLink = settings.vip_payment_link || settings.calendar_url || DEFAULT_PAYMENT_LINK
   const price = settings.vip_price || DEFAULT_PRICE
-  const { expired, timeLeft } = useVipOffer(settings.vip_countdown_date)
+  const { expired, timeLeft } = useOfferWindow(settings.vip_countdown_date)
 
   useEffect(() => {
     document.title = t("vipPage.pageTitle")
@@ -50,7 +50,7 @@ export default function VipSessionPage() {
           />
 
           <section className="relative overflow-hidden py-20 sm:py-24">
-            <VipBackdrop variant="section" />
+            <Backdrop variant="section" />
             <div className="relative mx-auto flex max-w-6xl flex-col gap-24 px-4 sm:px-6 lg:px-8">
               <VipWhySection />
               <VipReceiveSection paymentLink={paymentLink} price={price} loading={loading} />
