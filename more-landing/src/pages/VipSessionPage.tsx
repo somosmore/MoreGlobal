@@ -4,20 +4,26 @@ import Navbar from "@/components/sections/Navbar"
 import Footer from "@/components/sections/Footer"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { VipHero } from "@/vip/components/VipHero"
-import { VipSessionIncluded } from "@/vip/components/VipSessionIncluded"
-import { VipValueSection } from "@/vip/components/VipValueSection"
+import { VipWhySection } from "@/vip/components/VipWhySection"
+import { VipReceiveSection } from "@/vip/components/VipReceiveSection"
 import { VipAboutIvon } from "@/vip/components/VipAboutIvon"
 import { VipFitSection } from "@/vip/components/VipFitSection"
-import { VipSocialProofSection } from "@/vip/components/VipSocialProofSection"
 import { VipPricingSection } from "@/vip/components/VipPricingSection"
 import { VipFaq } from "@/vip/components/VipFaq"
+import { VipBackdrop } from "@/vip/components/VipBackdrop"
+import { VipOfferClosed } from "@/vip/components/VipOfferClosed"
+import { useVipOffer } from "@/vip/hooks/useVipOffer"
+
+const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
+const DEFAULT_PRICE = "$97"
 
 export default function VipSessionPage() {
   const { t } = useTranslation()
   const { settings, loading } = useSiteSettings()
-  const calendarUrl = settings.calendar_url
-  const vipPaymentLink = settings.vip_payment_link
-  const vipPrice = settings.vip_price
+
+  const paymentLink = settings.vip_payment_link || settings.calendar_url || DEFAULT_PAYMENT_LINK
+  const price = settings.vip_price || DEFAULT_PRICE
+  const { expired, timeLeft } = useVipOffer(settings.vip_countdown_date)
 
   useEffect(() => {
     document.title = t("vipPage.pageTitle")
@@ -27,24 +33,42 @@ export default function VipSessionPage() {
   }, [t])
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-paper">
       <Navbar />
-      <main className="flex flex-col gap-0">
-        <VipHero calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} vipPrice={vipPrice} loading={loading} />
-        <section className="bg-white py-32 sm:py-32">
-          <div className="mx-auto flex max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8">
-            <VipSessionIncluded />
-            <VipSocialProofSection />
-            <VipValueSection />
-            <VipAboutIvon />
-            <VipFitSection />
-            <VipPricingSection calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} vipPrice={vipPrice} loading={loading} />
-            <VipFaq calendarUrl={calendarUrl} vipPaymentLink={vipPaymentLink} loading={loading} />
-          </div>
-        </section>
-      </main>
+
+      {!loading && expired ? (
+        <main>
+          <VipOfferClosed whatsappNumber={settings.whatsapp_number} />
+        </main>
+      ) : (
+        <main className="flex flex-col">
+          <VipHero
+            paymentLink={paymentLink}
+            price={price}
+            loading={loading}
+            timeLeft={timeLeft}
+          />
+
+          <section className="relative overflow-hidden py-20 sm:py-24">
+            <VipBackdrop variant="section" />
+            <div className="relative mx-auto flex max-w-6xl flex-col gap-24 px-4 sm:px-6 lg:px-8">
+              <VipWhySection />
+              <VipReceiveSection paymentLink={paymentLink} price={price} loading={loading} />
+              <VipAboutIvon />
+              <VipFitSection />
+              <VipPricingSection
+                paymentLink={paymentLink}
+                price={price}
+                loading={loading}
+                timeLeft={timeLeft}
+              />
+              <VipFaq paymentLink={paymentLink} loading={loading} />
+            </div>
+          </section>
+        </main>
+      )}
+
       <Footer hideLandingFaq />
     </div>
   )
 }
-

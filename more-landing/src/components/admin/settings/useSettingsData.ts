@@ -11,6 +11,7 @@ export function useSettingsData() {
   const [calendarUrl, setCalendarUrl] = useState("")
   const [vipPaymentLink, setVipPaymentLink] = useState("")
   const [vipPrice, setVipPrice] = useState("")
+  const [vipCountdownDate, setVipCountdownDate] = useState("")
   const [saveState, setSaveState] = useState<SaveState>("idle")
   const [saveError, setSaveError] = useState<string | null>(null)
 
@@ -46,6 +47,7 @@ export function useSettingsData() {
       setYoutubeUrl(settings.youtube_url)
       setVipPaymentLink(settings.vip_payment_link)
       setVipPrice(settings.vip_price)
+      setVipCountdownDate(settings.vip_countdown_date)
       setUppPaymentLink(settings.upp_payment_link)
       setUppPrice(settings.upp_price)
       setUppCountdownDate(settings.upp_countdown_date)
@@ -71,6 +73,7 @@ export function useSettingsData() {
         { key: "calendar_url", value: calendarUrl.trim() },
         { key: "vip_payment_link", value: vipPaymentLink.trim() },
         { key: "vip_price", value: vipPrice.trim() },
+        { key: "vip_countdown_date", value: vipCountdownDate.trim() },
       ],
       { onConflict: "key" }
     )
@@ -218,6 +221,7 @@ export function useSettingsData() {
     calendarUrl, setCalendarUrl,
     vipPaymentLink, setVipPaymentLink,
     vipPrice, setVipPrice,
+    vipCountdownDate, setVipCountdownDate,
     saveState, setSaveState,
     saveError,
     handleSave,

@@ -2,186 +2,165 @@
   "vipPage": {
     "pageTitle": "Asesoría VIP | MORE",
     "cta": {
-      "applyNow": "Aplicar ahora",
+      "applyNow": "Sí, quiero mi estrategia migratoria con Ivon",
       "comingSoon": "Próximamente disponible"
     },
     "hero": {
-      "priceEyebrow": "Inversión única",
-      "currency": "USD",
-      "priceSubline": "Sesión privada · sin mensualidades · aplicá y elegí tu horario",
-      "priceCompare": "Menos que un trámite mal hecho te puede costar después.",
-      "titleBefore": "Descubre cómo lograr tu visa en ",
-      "titleHighlight": "EE.UU.",
-      "titleAfter": " sin complicaciones",
-      "subtitle": "60 minutos para ganar claridad sobre tu ruta: la visa que encaja con tu perfil y cómo avanzar con propósito en EE.UU.",
-      "freeEvalEyebrow": "Gratis",
-      "freeEvalCta": "Evaluar mi perfil gratis",
-      "freeEvalSub": "Si aún no quieres la sesión de pago, hacé primero el diagnóstico en línea: sin costo y en minutos.",
-      "freeEvalAria": "Ir al diagnóstico gratuito en la página principal",
-      "badgeOneOnOne": "Asesoría 1 a 1",
-      "badgeEntryOffer": "Oferta de entrada",
-      "cardTitleBefore": "Una sesión privada con nuestros estrategas especializados e ",
-      "cardNameHighlight": "Ivón More",
-      "bodyP1": "En una hora vienes a proyectarte financieramente, a ver escenarios reales, a informarte y a formarte en migración con propósito, y a tener una ruta clara para lograr tu visa.",
-      "bodyP2": "Un tiempo dedicado a vos y a planear tu siguiente nivel internacional como empresa y como profesional.",
-      "bodyP3": "Sin webinars grabados, ni cursos complicados, sin inversiones costosas, sin intermediarios.",
-      "formatLabel": "Formato",
-      "formatValue": "1 a 1 en vivo",
-      "durationLabel": "Duración",
-      "durationValue": "60 minutos",
-      "privacyLabel": "Privacidad",
-      "privacyValue": "100% confidencial",
-      "deliverablesTitleBefore": "Lo que recibes — Asesoría VIP",
-      "duringLabel": "Durante la sesión",
-      "duringSub": "60 min en vivo con Ivon",
-      "duringBullets": [
-        "Análisis de perfil profesional y empresarial.",
-        "Evaluación de elegibilidad para visas de no inmigrante (E1, E2, O, L) y de inmigrante (EB2 NIW, EB1).",
-        "Identificación de puntos débiles y cómo resolverlos.",
-        "Definición del programa migratorio más conveniente."
-      ],
-      "afterLabel": "Después de la sesión",
-      "afterRecordingBold": "Grabación completa",
-      "afterRecordingRest": " de la sesión, para revisar cuando quieras.",
-      "afterPdfBold": "PDF personalizado",
-      "afterPdfRest": " con tu ruta migratoria y plan de acción para los próximos 90 días.",
-      "afterWhatsappBold": "Seguimiento por WhatsApp",
-      "afterWhatsappRest": " post-sesión.",
-      "pricePanelAria": "{{cta}} — inversión única {{price}} USD",
-      "ninetyDayNote": "Solo para personas dispuestas a tomar una decisión real en los próximos 90 días.",
-      "stat1Eyebrow": "Perfiles evaluados",
-      "stat1Title": "+200 profesionales y empresarios",
-      "stat1Body": "Personas que eligieron entender su realidad migratoria antes de invertir su tiempo, dinero y familia.",
-      "stat2Eyebrow": "Enfoque de la sesión",
-      "stat2Title": "Ruta migratoria, no solo requisitos",
-      "stat2Body": "Trabajamos sobre tu proyecto, evidencias y tiempos reales, no sobre checklists genéricos.",
-      "liveActivityEyebrow": "Actividad en vivo",
-      "liveViewersLine": "personas están viendo esta sesión ahora",
-      "liveActivityFoot": "Cupos limitados: mucha gente está evaluando el mismo tipo de asesoría en este momento."
+      "badge": "Sesión estratégica 1 a 1",
+      "titleBefore": "Asesoría ",
+      "titleHighlight": "VIP",
+      "taglineBefore": "Tu mejor ruta migratoria, con ",
+      "taglineHighlight": "claridad, estrategia y propósito",
+      "taglineAfter": ".",
+      "subtitle": "En 60 minutos de estrategia migratoria con Ivon analizamos tu perfil profesional, académico o empresarial para identificar qué visa se ajusta mejor a tu caso. Te llevas una hoja de ruta clara para los próximos 90 días.",
+      "guarantee": "Si en los primeros 15 minutos vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas.",
+      "freeEvalCta": "¿Aún no estás listo? Evalúa tu perfil gratis en 2 minutos"
     },
-    "included": {
-      "eyebrow": "Método MORE VIP",
-      "title": "Los 5 pilares estratégicos que sostienen tu decisión migratoria.",
-      "pillars": [
-        {
-          "title": "Ingeniería de Perfil",
-          "description": "Reconstruimos tu trayectoria para cumplir con los estándares de \"Interés Nacional\" de USCIS."
-        },
-        {
-          "title": "Blindaje de Evidencia",
-          "description": "Auditamos cada prueba para eliminar riesgos de RFE (Solicitud de Evidencia Adicional)."
-        },
-        {
-          "title": "Construcción de Autoridad",
-          "description": "Elevamos tu prestigio profesional ante los ojos de las autoridades migratorias."
-        },
-        {
-          "title": "Aceleración Estratégica",
-          "description": "Gestión optimizada para evitar los cuellos de botella de la burocracia tradicional."
-        },
-        {
-          "title": "Soporte de Élite 1-a-1",
-          "description": "Acceso directo a expertos para decisiones críticas. Tu éxito es nuestra prioridad."
-        }
+    "specs": {
+      "durationLabel": "Duración:",
+      "durationValue": "60 minutos",
+      "modalityLabel": "Modalidad:",
+      "modalityValue": "Online",
+      "priceLabel": "Valor especial:",
+      "priceValue": "USD {{price}}"
+    },
+    "countdown": {
+      "eyebrow": "La oferta cierra en",
+      "subline": "Cuando el contador llegue a cero, esta página deja de estar disponible.",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos"
+    },
+    "closed": {
+      "eyebrow": "Oferta cerrada",
+      "titleBefore": "Esta ventana ya se ",
+      "titleHighlight": "cerró",
+      "body": "El plazo para agendar la Asesoría VIP a este valor terminó. Si quieres conocer las opciones disponibles hoy, escríbenos por WhatsApp y te orientamos sin compromiso.",
+      "whatsappCta": "Escríbenos por WhatsApp",
+      "whatsappMessage": "Hola, vi la página de la Asesoría VIP de MORE y quiero saber cómo agendar.",
+      "quizLink": "Mientras tanto, evalúa tu perfil gratis"
+    },
+    "why": {
+      "title": "¿Por qué tomar una ",
+      "titleHighlight": "Asesoría VIP?",
+      "kicker": "Descubre tu mejor ruta migratoria hacia EE.UU.",
+      "strategyLead": "No apliques a una visa",
+      "strategyLeadAccent": "sin estrategia.",
+      "strategyBody": "En 60 minutos analizamos tu perfil profesional, académico o empresarial para identificar qué visa puede ajustarse mejor a tu caso.",
+      "notACallLead": "No es una llamada informativa.",
+      "notACallBody": "Es una sesión estratégica para tomar",
+      "notACallAccent": "decisiones con dirección.",
+      "idealTitle": "Ideal si quieres:",
+      "idealItems": [
+        "Saber si calificas para una visa como E-2, EB2 NIW, O-1A, EB1A o EB1B.",
+        "Evitar errores antes de invertir en un proceso migratorio.",
+        "Entender tus fortalezas, debilidades y oportunidades.",
+        "Tener claridad sobre los próximos pasos."
       ]
     },
-    "socialProof": {
-      "eyebrow": "Aprobaciones recientes · Casos reales",
-      "title": "Prueba concreta de lo que pasa cuando se decide con estrategia y no con intuición.",
-      "subtitle": "Métricas agregadas de procesos EB2-NIW y otras rutas estratégicas trabajadas con el equipo MORE en los últimos meses.",
-      "stat1Label": "Aprobaciones en ventana reciente",
-      "stat1Value": "92%",
-      "stat1Body": "Porcentaje de casos aprobados entre perfiles calificados que pasaron primero por diagnóstico estratégico.",
-      "stat2Label": "Perfiles de alto impacto evaluados",
-      "stat2Value": "+200",
-      "stat2Body": "Profesionales, fundadores y ejecutivos que decidieron validar su ruta antes de invertir miles de dólares en el camino equivocado.",
-      "stat3Label": "Tiempo promedio de decisión",
-      "stat3Value": "90 días",
-      "stat3Body": "Horizonte típico para pasar de \"no sé si califico\" a ejecutar una ruta migratoria definida con respaldo documental."
-    },
-    "value": {
-      "title": "No estás pagando una opinión más. Estás comprando una decisión migratoria tomada con datos, riesgos y escenarios claros delante tuyo.",
-      "subtitle": "En vez de sumar opiniones, actuamos como tu comité estratégico para decidir con datos si tiene sentido avanzar ahora o no.",
-      "timelineEyebrow": "Qué cambia al pasar por la Asesoría VIP",
-      "beforeTitle": "Antes de la sesión",
-      "beforeBody": "Dudas sobre si tu perfil sostiene una Green Card o solo una buena intención costosa.",
-      "duringTitle": "Durante la sesión (60 minutos)",
-      "duringBody": "Decisión binaria sobre tu ruta migratoria y hoja de ruta clara basada en evidencias.",
-      "afterTitle": "Después de 90 días",
-      "afterBody": "Ejecutando un plan concreto o ahorrándote un intento caro que no tenía sentido hoy."
+    "receive": {
+      "title": "¿Qué recibes en la ",
+      "titleHighlight": "Asesoría VIP?",
+      "kicker": "Una ruta clara, personalizada y accionable",
+      "description": "Durante esta sesión obtendrás una visión estratégica de tu caso para avanzar con mayor claridad y confianza.",
+      "items": [
+        "Análisis estratégico de tu perfil.",
+        "Evaluación de posibles rutas migratorias.",
+        "Identificación de fortalezas y puntos débiles.",
+        "Recomendaciones para fortalecer tu caso.",
+        "Orientación sobre el programa migratorio más conveniente.",
+        "Seguimiento por WhatsApp después de la sesión."
+      ],
+      "ctaLead": "Agenda tu ",
+      "ctaLeadHighlight": "Asesoría VIP",
+      "ctaLeadRest": " y empieza a construir tu camino migratorio con claridad, estrategia y propósito."
     },
     "aboutIvon": {
       "imageAlt": "Ivon More, fundadora y estratega migratoria en MORE",
       "overlayEyebrow": "Fundadora & estratega · MORE",
       "overlayName": "Ivon More",
-      "quote": "\u201cNo todos los perfiles encajan en una Green Card: mi trabajo es decirte con claridad qu\u00e9 s\u00ed pod\u00e9s construir y en qu\u00e9 plazo.\u201d",
-      "headerEyebrow": "Qui\u00e9n te acompa\u00f1a en la llamada",
-      "heading": "Migraci\u00f3n vivida en primera persona; hoy la encara con vos con m\u00e9todo y sin venderte humo.",
-      "intro": "Soy mam\u00e1, esposa, profesional y empresaria. Cruz\u00e9 migraci\u00f3n familiar y de negocio sin un mapa claro y pagando errores caros. Eso es lo que alimenta cada diagn\u00f3stico: criterio real, no discurso comercial.",
-      "sessionTopicsEyebrow": "En la sesi\u00f3n VIP hablamos como pares sobre",
+      "quote": "“No todos los perfiles encajan en una Green Card: mi trabajo es decirte con claridad qué sí puedes construir y en qué plazo.”",
+      "headerEyebrow": "Quién te acompaña en la sesión",
+      "heading": "Ivon no solo conoce el camino. Ella lo recorrió.",
+      "intro": "Soy mamá, esposa, profesional y empresaria. Migré con mis hijos, con mi esposo y con mi empresa, sin una ruta clara y descubriendo el camino sobre la marcha. Eso me costó tiempo, dinero y desgaste emocional. Hoy acompaño a otros para que no cometan los mismos errores que yo cometí.",
+      "sessionTopicsEyebrow": "En la sesión VIP hablamos como pares sobre",
       "sessionFocus": [
         {
           "title": "Tu historia real",
-          "text": "Proyecto y evidencias, no teor\u00eda gen\u00e9rica de visas."
+          "text": "Proyecto y evidencias, no teoría genérica de visas."
         },
         {
           "title": "Riesgos y tiempos",
-          "text": "Escenarios claros y qu\u00e9 esperar del proceso."
+          "text": "Escenarios claros y qué esperar del proceso."
         },
         {
-          "title": "La decisi\u00f3n de hoy",
-          "text": "Qu\u00e9 conviene hacer primero seg\u00fan tu perfil."
+          "title": "La decisión de hoy",
+          "text": "Qué conviene hacer primero según tu perfil."
         }
       ],
       "credibility": [
-        "Experiencia migratoria personal, familiar y empresarial.",
-        "Equipo de estrategas: no solo \u201cpapeler\u00eda\u201d ni abogado gen\u00e9rico.",
-        "Casos aprobados en varias categor\u00edas y contextos.",
-        "Enfoque de negocio aplicado a tu proyecto migratorio."
+        "Equipo multidisciplinario y multicultural.",
+        "Aprobaciones exitosas en varias categorías de visa.",
+        "Estrategas: no solo preparadores ni abogados.",
+        "Experiencia migratoria personal, familiar y empresarial."
       ],
-      "howWeWorkTitle": "C\u00f3mo trabajamos en MORE",
-      "howWeWorkBody": "Trabajamos con profesionales y empresarios de distintas industrias con una misma l\u00f3gica: proyecto, evidencia y estrategia. Multidisciplina, diagn\u00f3stico honesto al inicio y cero gui\u00f3n de venta \u2014 si no hay encaje, te lo decimos.",
-      "quoteAttribution": "\u2014 Ivon More"
+      "howWeWorkTitle": "La metodología MOR",
+      "howWeWorkBody": "La metodología MOR nos permite trabajar con cualquier profesional o empresario, de cualquier país y en cualquier industria, con una misma lógica: proyecto, evidencia y estrategia. Diagnóstico honesto desde el inicio y cero guion de venta — si no hay encaje, te lo decimos.",
+      "quoteAttribution": "— Ivon More"
     },
     "fit": {
-      "title": "Esta asesor\u00eda es para ti si...",
-      "items": [
-        "Profesionales de alto impacto",
-        "Empresarios con visi\u00f3n global",
-        "Perfiles con trayectoria excepcional"
+      "title": "Esta asesoría es para ti ",
+      "titleHighlight": "si...",
+      "kicker": "Un filtro honesto antes de que inviertas",
+      "forYouTitle": "Es para ti si...",
+      "forYou": [
+        "Eres profesional, empresario/a o emprendedor/a.",
+        "Quieres migrar a EE.UU. con una visa que refleje tu perfil real.",
+        "Ya gastaste dinero en asesorías vagas que no te dieron claridad.",
+        "Quieres saber si calificas para EB2 NIW u otros programas antes de invertir miles de dólares.",
+        "Buscas una ruta, no información genérica."
+      ],
+      "notForYouTitle": "No es para ti si...",
+      "notForYou": [
+        "Buscas una solución mágica sin comprometerte con el proceso.",
+        "Ya tienes abogado y solo quieres un segundo papel.",
+        "No estás dispuesto/a a invertir en tu migración."
       ]
     },
     "pricing": {
-      "eyebrow": "Inversi\u00f3n \u00fanica",
+      "title": "Agenda tu ",
+      "titleHighlight": "Asesoría VIP",
+      "kicker": "No es el costo de una asesoría: es el costo de decidir en serio",
+      "eyebrow": "Valor especial",
       "currency": "USD",
-      "sessionLine": "Sesi\u00f3n 1 a 1 \u00b7 60 minutos con Ivon",
-      "guarantee": "Si en los primeros 15 minutos vemos que tu caso no encaja de verdad, te devolvemos el dinero. Sin preguntas ni discusiones.",
-      "valueLine": "Una hora que puede ahorrarte meses de decisiones equivocadas y miles de d\u00f3lares invertidos en el camino incorrecto.",
-      "footerNote": "La \u00fanica decisi\u00f3n m\u00e1s cara que invertir {{price}} en claridad es seguir decidiendo a ciegas sobre tu migraci\u00f3n."
+      "sessionLine": "Sesión 1 a 1 · 60 minutos · online, con Ivon.",
+      "guarantee": "Si en los primeros 15 minutos vemos que no podemos ayudarte, te devolvemos el dinero. Sin preguntas. Tu inversión está protegida.",
+      "valueLine": "Una hora que puede ahorrarte meses de decisiones equivocadas, gastos innecesarios y el desgaste de migrar sin una ruta clara."
     },
     "faq": {
-      "title": "Preguntas frecuentes",
-      "subtitle": "Antes de agendar tu sesi\u00f3n, resuelve las dudas m\u00e1s comunes sobre c\u00f3mo funciona la Asesor\u00eda VIP.",
+      "title": "Preguntas ",
+      "titleHighlight": "frecuentes",
+      "subtitle": "Antes de agendar tu sesión, resuelve las dudas más comunes sobre cómo funciona la Asesoría VIP.",
       "items": [
         {
-          "question": "\u00bfQu\u00e9 pasa si no califico para ninguna visa?",
-          "answer": "Te lo decimos con honestidad en la sesi\u00f3n y te orientamos sobre los pr\u00f3ximos pasos m\u00e1s convenientes, aunque la respuesta hoy sea \u201ctodav\u00eda no\u201d."
+          "question": "¿Qué pasa si no califico para ninguna visa?",
+          "answer": "Te lo decimos con honestidad en la sesión y te orientamos sobre los próximos pasos más convenientes, aunque la respuesta hoy sea “todavía no”."
         },
         {
-          "question": "\u00bfLa sesi\u00f3n es por videollamada?",
-          "answer": "S\u00ed, la sesi\u00f3n es virtual, 1 a 1 con Ivon, por la plataforma que m\u00e1s te convenga."
+          "question": "¿La sesión es por videollamada?",
+          "answer": "Sí, la sesión es online, 1 a 1 con Ivon, por la plataforma que más te convenga."
         },
         {
-          "question": "\u00bfRecibir\u00e9 algo despu\u00e9s de la sesi\u00f3n?",
-          "answer": "S\u00ed. Al finalizar, recibir\u00e1s un PDF con tu ruta migratoria personalizada para los pr\u00f3ximos 90 d\u00edas."
+          "question": "¿Recibiré algo después de la sesión?",
+          "answer": "Sí. Al finalizar recibirás tu ruta migratoria documentada y seguimiento por WhatsApp para resolver dudas puntuales."
         },
         {
-          "question": "\u00bfQu\u00e9 es la EB-2 NIW?",
-          "answer": "Es una visa de residencia permanente para profesionales con habilidad excepcional o avanzada que benefician el inter\u00e9s nacional de EE.UU. No requiere empleador patrocinador."
+          "question": "¿Qué es la EB2 NIW?",
+          "answer": "Es una visa de residencia permanente para profesionales con habilidad excepcional o avanzada que benefician el interés nacional de EE.UU. No requiere empleador patrocinador."
         },
         {
-          "question": "\u00bfCu\u00e1ndo podr\u00e9 agendar la sesi\u00f3n?",
-          "answer": "Inmediatamente despu\u00e9s del pago recibir\u00e1s un link para elegir el horario disponible en el calendario de Ivon."
+          "question": "¿Cuándo podré agendar la sesión?",
+          "answer": "Inmediatamente después del pago recibirás un link para elegir el horario disponible en el calendario de Ivon."
         }
       ]
     }

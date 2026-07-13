@@ -1,66 +1,84 @@
 import { motion } from "framer-motion"
-import { Shield } from "lucide-react"
+import { ShieldCheck } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { VipCtaButton } from "./VipCtaButton"
-
-const DEFAULT_PAYMENT_LINK = "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f"
-const DEFAULT_PRICE = "$97"
+import { VipCountdown } from "./VipCountdown"
+import { VipSectionHeading } from "./VipSectionHeading"
+import type { VipTimeLeft } from "../hooks/useVipOffer"
 
 type VipPricingSectionProps = {
-  calendarUrl?: string | null
-  vipPaymentLink?: string | null
-  vipPrice?: string | null
+  paymentLink: string
+  price: string
   loading?: boolean
+  timeLeft?: VipTimeLeft | null
 }
 
 export const VipPricingSection = ({
-  calendarUrl,
-  vipPaymentLink,
-  vipPrice,
+  paymentLink,
+  price,
   loading,
+  timeLeft,
 }: VipPricingSectionProps) => {
   const { t } = useTranslation()
   const ctaLabel = t("vipPage.cta.applyNow")
-  const effectivePaymentLink = vipPaymentLink || calendarUrl || DEFAULT_PAYMENT_LINK
-  const effectivePrice = vipPrice || DEFAULT_PRICE
 
   return (
     <motion.section
-      className="space-y-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8"
-      initial={{ opacity: 0, y: 30 }}
+      aria-labelledby="vip-pricing-heading"
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <div className="flex flex-col items-start justify-between gap-4 border-t-4 border-orange/80 pt-4 sm:flex-row sm:items-center">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">
-            {t("vipPage.pricing.eyebrow")}
-          </p>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-navy">{effectivePrice}</span>
-            <span className="text-sm font-medium text-gray-500">{t("vipPage.pricing.currency")}</span>
+      <VipSectionHeading
+        id="vip-pricing-heading"
+        title={t("vipPage.pricing.title")}
+        highlight={t("vipPage.pricing.titleHighlight")}
+        kicker={t("vipPage.pricing.kicker")}
+      />
+
+      <div className="mt-10 overflow-hidden rounded-3xl border border-navy/15 bg-white shadow-[0_28px_70px_-34px_rgba(27,43,68,0.4)]">
+        <div className="h-1.5 w-full bg-linear-to-r from-navy-deep via-orange to-orange-light" aria-hidden />
+
+        <div className="grid gap-8 p-6 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+          <div>
+            <p className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-ink-muted">
+              {t("vipPage.pricing.eyebrow")}
+            </p>
+
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="font-display text-6xl font-bold leading-none text-navy-deep">
+                {price}
+              </span>
+              <span className="font-sans text-lg font-semibold text-ink-muted">
+                {t("vipPage.pricing.currency")}
+              </span>
+            </div>
+
+            <p className="mt-3 font-sans text-[15px] text-navy">{t("vipPage.pricing.sessionLine")}</p>
+
+            <div className="mt-6 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/70 px-4 py-3.5">
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
+              <p className="font-sans text-[13px] leading-relaxed text-emerald-900 sm:text-sm">
+                {t("vipPage.pricing.guarantee")}
+              </p>
+            </div>
           </div>
-          <p className="mt-1 text-sm text-gray-600">{t("vipPage.pricing.sessionLine")}</p>
+
+          <div className="w-full space-y-4 lg:w-[300px]">
+            <VipCtaButton label={ctaLabel} calendarUrl={paymentLink} loading={loading} />
+            <p className="text-center font-sans text-xs leading-relaxed text-ink-muted">
+              {t("vipPage.pricing.valueLine")}
+            </p>
+          </div>
         </div>
-        <div className="w-full max-w-xs">
-          <VipCtaButton
-            label={ctaLabel}
-            calendarUrl={effectivePaymentLink}
-            loading={loading}
-          />
-        </div>
+
+        {timeLeft ? (
+          <div className="border-t border-navy/10 p-6 sm:p-9 sm:pt-6">
+            <VipCountdown timeLeft={timeLeft} />
+          </div>
+        ) : null}
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex items-start gap-2 rounded-xl bg-orange/5 px-3 py-2 text-xs text-navy sm:max-w-sm ring-1 ring-orange/25">
-          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
-          <p>{t("vipPage.pricing.guarantee")}</p>
-        </div>
-        <p className="text-xs italic text-gray-500 sm:text-[13px]">{t("vipPage.pricing.valueLine")}</p>
-      </div>
-      <p className="mt-2 text-center text-xs italic text-gray-400 sm:text-[13px]">
-        {t("vipPage.pricing.footerNote", { price: effectivePrice })}
-      </p>
     </motion.section>
   )
 }

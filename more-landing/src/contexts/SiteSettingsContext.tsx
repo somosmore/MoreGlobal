@@ -11,6 +11,7 @@ const DEFAULTS: SiteSettingsMap = {
   youtube_url: "",
   vip_payment_link: "https://link.fastpaydirect.com/payment-link/69cea9584e543f5c4f105c5f",
   vip_price: "$97",
+  vip_countdown_date: "",
   meta_pixel_id: "",
   google_tag_manager_id: "",
   ga4_measurement_id: "",

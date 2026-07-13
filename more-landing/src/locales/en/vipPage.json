@@ -2,186 +2,165 @@
   "vipPage": {
     "pageTitle": "VIP Advisory | MORE",
     "cta": {
-      "applyNow": "Apply now",
+      "applyNow": "Yes, I want my immigration strategy with Ivon",
       "comingSoon": "Coming soon"
     },
     "hero": {
-      "priceEyebrow": "One-time investment",
-      "currency": "USD",
-      "priceSubline": "Private session · no monthly fees · apply and pick your time",
-      "priceCompare": "Less than one poorly handled filing can cost you later.",
-      "titleBefore": "Discover how to get your visa in the ",
-      "titleHighlight": "U.S.",
-      "titleAfter": " without unnecessary complications",
-      "subtitle": "60 minutes to gain clarity on your path: the visa that fits your profile and how to move forward with purpose in the U.S.",
-      "freeEvalEyebrow": "Free",
-      "freeEvalCta": "Evaluate my profile for free",
-      "freeEvalSub": "Not ready for the paid session yet? Start with the free online diagnostic—it takes just a few minutes.",
-      "freeEvalAria": "Go to the free diagnostic on the home page",
-      "badgeOneOnOne": "1-on-1 advisory",
-      "badgeEntryOffer": "Entry offer",
-      "cardTitleBefore": "A private session with our specialized strategists and ",
-      "cardNameHighlight": "Ivon More",
-      "bodyP1": "In one hour you come to project financially, see real scenarios, get informed and build skills in purposeful migration, and get a clear path to obtaining your visa.",
-      "bodyP2": "Time dedicated to you and planning your next international level as a company and as a professional.",
-      "bodyP3": "No recorded webinars, no complicated courses, no costly investments, no middlemen.",
-      "formatLabel": "Format",
-      "formatValue": "Live 1-on-1",
-      "durationLabel": "Duration",
-      "durationValue": "60 minutes",
-      "privacyLabel": "Privacy",
-      "privacyValue": "100% confidential",
-      "deliverablesTitleBefore": "What you receive — VIP Advisory",
-      "duringLabel": "During the session",
-      "duringSub": "60 min live with Ivon",
-      "duringBullets": [
-        "Analysis of your professional and business profile.",
-        "Eligibility review for nonimmigrant visas (E1, E2, O, L) and immigrant visas (EB-2 NIW, EB-1).",
-        "Identification of weak points and how to fix them.",
-        "Definition of the most suitable immigration program for you."
-      ],
-      "afterLabel": "After the session",
-      "afterRecordingBold": "Full recording",
-      "afterRecordingRest": " of the session, to review whenever you want.",
-      "afterPdfBold": "Custom PDF",
-      "afterPdfRest": " with your immigration roadmap and 90-day action plan.",
-      "afterWhatsappBold": "WhatsApp follow-up",
-      "afterWhatsappRest": " after the session.",
-      "pricePanelAria": "{{cta}} — one-time investment {{price}} USD",
-      "ninetyDayNote": "Only for people ready to make a real decision in the next 90 days.",
-      "stat1Eyebrow": "Profiles evaluated",
-      "stat1Title": "+200 professionals and business owners",
-      "stat1Body": "People who chose to understand their immigration reality before investing their time, money, and family.",
-      "stat2Eyebrow": "Session focus",
-      "stat2Title": "Immigration path, not just checklists",
-      "stat2Body": "We work on your project, evidence, and real timelines — not generic checklists.",
-      "liveActivityEyebrow": "Live activity",
-      "liveViewersLine": "people are viewing this session right now",
-      "liveActivityFoot": "Limited spots: many people are evaluating the same type of advisory right now."
+      "badge": "1-on-1 strategy session",
+      "titleBefore": "VIP ",
+      "titleHighlight": "Advisory",
+      "taglineBefore": "Your best immigration path, with ",
+      "taglineHighlight": "clarity, strategy and purpose",
+      "taglineAfter": ".",
+      "subtitle": "In 60 minutes of immigration strategy with Ivon, we analyze your professional, academic or business profile to identify which visa best fits your case. You leave with a clear roadmap for the next 90 days.",
+      "guarantee": "If in the first 15 minutes we see we can't help you, we refund your money. No questions asked.",
+      "freeEvalCta": "Not ready yet? Assess your profile free in 2 minutes"
     },
-    "included": {
-      "eyebrow": "MORE VIP method",
-      "title": "The five strategic pillars that support your immigration decision.",
-      "pillars": [
-        {
-          "title": "Profile engineering",
-          "description": "We rebuild your trajectory to meet USCIS \"national interest\" standards."
-        },
-        {
-          "title": "Evidence shielding",
-          "description": "We audit every proof to reduce RFE (Request for Evidence) risk."
-        },
-        {
-          "title": "Authority building",
-          "description": "We elevate your professional standing in the eyes of immigration authorities."
-        },
-        {
-          "title": "Strategic acceleration",
-          "description": "Optimized management to avoid traditional bureaucracy bottlenecks."
-        },
-        {
-          "title": "Elite 1-on-1 support",
-          "description": "Direct access to experts for critical decisions. Your success is our priority."
-        }
+    "specs": {
+      "durationLabel": "Duration:",
+      "durationValue": "60 minutes",
+      "modalityLabel": "Format:",
+      "modalityValue": "Online",
+      "priceLabel": "Special price:",
+      "priceValue": "USD {{price}}"
+    },
+    "countdown": {
+      "eyebrow": "This offer closes in",
+      "subline": "When the countdown hits zero, this page is no longer available.",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "closed": {
+      "eyebrow": "Offer closed",
+      "titleBefore": "This window has ",
+      "titleHighlight": "closed",
+      "body": "The window to book the VIP Advisory at this price has ended. If you'd like to know what options are available today, message us on WhatsApp and we'll guide you with no strings attached.",
+      "whatsappCta": "Message us on WhatsApp",
+      "whatsappMessage": "Hi, I saw the MORE VIP Advisory page and I'd like to know how to book a session.",
+      "quizLink": "In the meantime, assess your profile for free"
+    },
+    "why": {
+      "title": "Why take a ",
+      "titleHighlight": "VIP Advisory?",
+      "kicker": "Find your best immigration path to the U.S.",
+      "strategyLead": "Don't apply for a visa",
+      "strategyLeadAccent": "without a strategy.",
+      "strategyBody": "In 60 minutes we analyze your professional, academic or business profile to identify which visa best fits your case.",
+      "notACallLead": "This is not an information call.",
+      "notACallBody": "It's a strategy session to make",
+      "notACallAccent": "decisions with direction.",
+      "idealTitle": "Ideal if you want to:",
+      "idealItems": [
+        "Know whether you qualify for a visa such as E-2, EB2 NIW, O-1A, EB1A or EB1B.",
+        "Avoid mistakes before investing in an immigration process.",
+        "Understand your strengths, weaknesses and opportunities.",
+        "Get clarity on your next steps."
       ]
     },
-    "socialProof": {
-      "eyebrow": "Recent approvals · Real cases",
-      "title": "Concrete proof of what happens when you decide with strategy, not gut feeling.",
-      "subtitle": "Aggregated metrics from EB-2 NIW and other strategic routes the MORE team has worked on in recent months.",
-      "stat1Label": "Approvals in recent window",
-      "stat1Value": "92%",
-      "stat1Body": "Share of approved cases among qualified profiles that first went through strategic diagnosis.",
-      "stat2Label": "High-impact profiles evaluated",
-      "stat2Value": "+200",
-      "stat2Body": "Professionals, founders, and executives who chose to validate their path before spending thousands on the wrong route.",
-      "stat3Label": "Typical decision horizon",
-      "stat3Value": "90 days",
-      "stat3Body": "Typical path from “I don’t know if I qualify” to executing a defined immigration route with documentation behind it."
-    },
-    "value": {
-      "title": "You’re not paying for another opinion. You’re buying an immigration decision made with data, risks, and clear scenarios in front of you.",
-      "subtitle": "Instead of stacking opinions, we act as your strategic committee to decide with data whether moving forward now makes sense.",
-      "timelineEyebrow": "What changes after VIP Advisory",
-      "beforeTitle": "Before the session",
-      "beforeBody": "Uncertainty about whether your profile supports a Green Card or just an expensive good intention.",
-      "duringTitle": "During the session (60 minutes)",
-      "duringBody": "A clear yes/no on your immigration path and a roadmap based on evidence.",
-      "afterTitle": "After 90 days",
-      "afterBody": "Executing a concrete plan — or avoiding an expensive attempt that didn’t make sense today."
+    "receive": {
+      "title": "What you get in the ",
+      "titleHighlight": "VIP Advisory",
+      "kicker": "A clear, personalized and actionable path",
+      "description": "In this session you get a strategic view of your case so you can move forward with more clarity and confidence.",
+      "items": [
+        "Strategic analysis of your profile.",
+        "Assessment of possible immigration paths.",
+        "Identification of strengths and weak points.",
+        "Recommendations to strengthen your case.",
+        "Guidance on the most suitable immigration program.",
+        "WhatsApp follow-up after the session."
+      ],
+      "ctaLead": "Book your ",
+      "ctaLeadHighlight": "VIP Advisory",
+      "ctaLeadRest": " and start building your immigration path with clarity, strategy and purpose."
     },
     "aboutIvon": {
       "imageAlt": "Ivon More, founder and immigration strategist at MORE",
       "overlayEyebrow": "Founder & strategist · MORE",
       "overlayName": "Ivon More",
       "quote": "“Not every profile fits a Green Card: my job is to tell you clearly what you can build and on what timeline.”",
-      "headerEyebrow": "Who joins you on the call",
-      "heading": "Immigration lived firsthand; today she meets you with method and zero fluff.",
-      "intro": "I’m a mom, wife, professional, and business owner. I crossed family and business migration without a clear map and paid for costly mistakes. That fuels every diagnosis: real judgment, not sales talk.",
-      "sessionTopicsEyebrow": "In the VIP session we speak peer-to-peer about",
+      "headerEyebrow": "Who you'll be talking to",
+      "heading": "Ivon doesn't just know the path. She walked it.",
+      "intro": "I'm a mother, wife, professional and business owner. I migrated with my children, my husband and my company, without a clear path and figuring it out along the way. It cost me time, money and emotional strain. Today I guide others so they don't make the same mistakes I made.",
+      "sessionTopicsEyebrow": "In the VIP session we talk, peer to peer, about",
       "sessionFocus": [
         {
           "title": "Your real story",
-          "text": "Project and evidence — not generic visa theory."
+          "text": "Your project and evidence, not generic visa theory."
         },
         {
           "title": "Risks and timelines",
           "text": "Clear scenarios and what to expect from the process."
         },
         {
-          "title": "Today’s decision",
-          "text": "What to do first based on your profile."
+          "title": "Today's decision",
+          "text": "What to do first, based on your profile."
         }
       ],
       "credibility": [
-        "Personal, family, and business immigration experience.",
-        "A team of strategists — not just “paperwork” or a generic attorney.",
-        "Approvals across multiple categories and contexts.",
-        "Business thinking applied to your immigration project."
+        "Multidisciplinary and multicultural team.",
+        "Successful approvals across several visa categories.",
+        "Strategists: not just paperwork preparers or lawyers.",
+        "Personal, family and business immigration experience."
       ],
-      "howWeWorkTitle": "How we work at MORE",
-      "howWeWorkBody": "We work with professionals and business owners across industries with one logic: project, evidence, and strategy. Multidisciplinary team, honest diagnosis up front, and zero sales script — if it’s not a fit, we say so.",
+      "howWeWorkTitle": "The MOR methodology",
+      "howWeWorkBody": "The MOR methodology lets us work with any professional or business owner, from any country and any industry, with the same logic: project, evidence and strategy. An honest diagnosis from the start and zero sales script — if it's not a fit, we'll tell you.",
       "quoteAttribution": "— Ivon More"
     },
     "fit": {
-      "title": "This advisory is for you if…",
-      "items": [
-        "High-impact professionals",
-        "Business owners with a global vision",
-        "Profiles with an exceptional track record"
+      "title": "This advisory is for you ",
+      "titleHighlight": "if...",
+      "kicker": "An honest filter before you invest",
+      "forYouTitle": "It's for you if...",
+      "forYou": [
+        "You're a professional, business owner or entrepreneur.",
+        "You want to move to the U.S. with a visa that reflects your real profile.",
+        "You've already spent money on vague advice that gave you no clarity.",
+        "You want to know if you qualify for EB2 NIW or other programs before investing thousands of dollars.",
+        "You're looking for a path, not generic information."
+      ],
+      "notForYouTitle": "It's not for you if...",
+      "notForYou": [
+        "You're looking for a magic solution without committing to the process.",
+        "You already have a lawyer and just want a second opinion on paper.",
+        "You're not willing to invest in your immigration process."
       ]
     },
     "pricing": {
-      "eyebrow": "One-time investment",
+      "title": "Book your ",
+      "titleHighlight": "VIP Advisory",
+      "kicker": "It's not the cost of advice: it's the cost of deciding seriously",
+      "eyebrow": "Special price",
       "currency": "USD",
-      "sessionLine": "1-on-1 session · 60 minutes with Ivon",
-      "guarantee": "If in the first 15 minutes we see your case truly isn’t a fit, we refund your money. No questions, no debate.",
-      "valueLine": "One hour that can save you months of wrong calls and thousands of dollars down the wrong path.",
-      "footerNote": "The only decision costlier than investing {{price}} in clarity is to keep deciding blind about your migration."
+      "sessionLine": "1-on-1 session · 60 minutes · online, with Ivon.",
+      "guarantee": "If in the first 15 minutes we see we can't help you, we refund your money. No questions asked. Your investment is protected.",
+      "valueLine": "One hour that can save you months of wrong decisions, unnecessary costs and the strain of migrating without a clear path."
     },
     "faq": {
-      "title": "Frequently asked questions",
-      "subtitle": "Before you book, clear the most common doubts about how VIP Advisory works.",
+      "title": "Frequently asked ",
+      "titleHighlight": "questions",
+      "subtitle": "Before booking your session, clear up the most common questions about how the VIP Advisory works.",
       "items": [
         {
-          "question": "What if I don’t qualify for any visa?",
-          "answer": "We tell you honestly in the session and guide you on the best next steps — even if the answer today is “not yet.”"
+          "question": "What if I don't qualify for any visa?",
+          "answer": "We'll tell you honestly during the session and guide you on the most sensible next steps, even if today's answer is “not yet”."
         },
         {
-          "question": "Is the session by video call?",
-          "answer": "Yes. It’s virtual, 1-on-1 with Ivon, on the platform that works best for you."
+          "question": "Is the session a video call?",
+          "answer": "Yes, the session is online, 1-on-1 with Ivon, on whichever platform works best for you."
         },
         {
           "question": "Will I receive anything after the session?",
-          "answer": "Yes. When we finish, you’ll get a PDF with your personalized immigration roadmap for the next 90 days."
+          "answer": "Yes. You'll get your immigration path documented, plus WhatsApp follow-up for specific questions."
         },
         {
-          "question": "What is the EB-2 NIW?",
-          "answer": "It’s a permanent-residence visa for professionals with exceptional or advanced ability who benefit the U.S. national interest. It does not require an employer sponsor."
+          "question": "What is the EB2 NIW?",
+          "answer": "It's a permanent residence visa for professionals with exceptional or advanced ability who benefit the national interest of the U.S. It does not require an employer sponsor."
         },
         {
           "question": "When can I schedule the session?",
-          "answer": "Right after payment you’ll get a link to pick an available slot on Ivon’s calendar."
+          "answer": "Right after payment you'll receive a link to pick an available time on Ivon's calendar."
         }
       ]
     }

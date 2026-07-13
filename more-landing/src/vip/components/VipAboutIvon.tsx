@@ -23,7 +23,10 @@ export const VipAboutIvon = () => {
       transition={{ duration: 0.55, ease: "easeOut" }}
       aria-labelledby="vip-about-ivon-heading"
     >
-      <div className="h-1 w-full bg-linear-to-r from-orange via-orange-dark to-navy/40" aria-hidden />
+      <div
+        className="h-1.5 w-full bg-linear-to-r from-navy-deep via-orange to-orange-light"
+        aria-hidden
+      />
 
       <div className="grid lg:grid-cols-12 lg:items-stretch">
         <div className="relative aspect-4/5 min-h-[300px] w-full lg:col-span-5 lg:aspect-auto lg:min-h-[min(100%,620px)]">
@@ -45,7 +48,7 @@ export const VipAboutIvon = () => {
             >
               {t("vipPage.aboutIvon.overlayEyebrow")}
             </p>
-            <p className="mt-2 font-sans text-2xl font-bold tracking-tight sm:text-3xl">
+            <p className="mt-2 font-display text-3xl sm:text-4xl">
               {t("vipPage.aboutIvon.overlayName")}
             </p>
             <figure className="mt-5 hidden border-l-[3px] border-orange pl-4 sm:block">
@@ -66,11 +69,11 @@ export const VipAboutIvon = () => {
             </p>
             <h2
               id="vip-about-ivon-heading"
-              className="text-balance text-2xl font-semibold leading-snug text-navy sm:text-3xl lg:text-[1.75rem] lg:leading-tight xl:text-4xl"
+              className="text-balance font-display text-3xl leading-tight text-navy-deep sm:text-4xl"
             >
               {t("vipPage.aboutIvon.heading")}
             </h2>
-            <p className="max-w-xl font-sans text-[15px] leading-relaxed text-gray-600 sm:text-base">
+            <p className="max-w-xl font-sans text-[15px] leading-relaxed text-ink-muted sm:text-base">
               {t("vipPage.aboutIvon.intro")}
             </p>
           </header>
@@ -88,13 +91,15 @@ export const VipAboutIvon = () => {
                 return (
                   <div
                     key={item.title}
-                    className="rounded-2xl border border-navy/8 bg-linear-to-b from-navy/4 to-white px-4 py-4 ring-1 ring-black/3"
+                    className="rounded-2xl border border-navy/10 bg-paper px-4 py-4"
                   >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange/12 text-orange">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-deep text-white">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
                     <p className="mt-3 font-sans text-sm font-semibold text-navy">{item.title}</p>
-                    <p className="mt-1.5 font-sans text-xs leading-relaxed text-gray-600">{item.text}</p>
+                    <p className="mt-1.5 font-sans text-xs leading-relaxed text-ink-muted">
+                      {item.text}
+                    </p>
                   </div>
                 )
               })}
@@ -115,17 +120,17 @@ export const VipAboutIvon = () => {
             ))}
           </ul>
 
-          <aside className="rounded-2xl border border-navy/10 bg-navy/3 p-5 sm:p-6">
+          <aside className="rounded-2xl border border-navy/10 bg-paper p-5 sm:p-6">
             <p className="font-sans text-xs font-bold uppercase tracking-[0.16em] text-navy/60">
               {t("vipPage.aboutIvon.howWeWorkTitle")}
             </p>
-            <p className="mt-3 font-sans text-sm leading-relaxed text-gray-700 sm:text-[15px]">
+            <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted sm:text-[15px]">
               {t("vipPage.aboutIvon.howWeWorkBody")}
             </p>
           </aside>
 
-          <figure className="rounded-2xl border border-orange/20 bg-orange/6 p-5 sm:hidden">
-            <blockquote className="text-center font-sans text-sm italic leading-relaxed text-navy">
+          <figure className="rounded-2xl border border-orange/30 bg-paper-warm p-5 sm:hidden">
+            <blockquote className="text-center font-display text-lg italic leading-relaxed text-navy">
               {t("vipPage.aboutIvon.quote")}
             </blockquote>
             <figcaption className="mt-3 text-center font-sans text-xs font-semibold text-orange-dark">

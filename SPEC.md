@@ -489,6 +489,70 @@
   Archivos: nueva migración `supabase/migrations/0XX_landing_pixels.sql`, `src/lib/tracking.ts`, `src/components/admin/resources/LandingPreviewCard.tsx`
   Criterio de éxito: cargar `/masterclass` envía eventos al pixel configurado en la landing si está seteado; cae al global si no.
 
+### P8 — Rebrand editorial 2026 (sistema gráfico MORE)
+
+> Origen: `Presentación Asesoría VIP - 2026.pdf` (cliente). El sistema pasa de "SaaS con
+> gradientes y glows" a **editorial premium de viaje**: papel claro, olas navy/naranja,
+> rutas punteadas con avión y pines, titulares en Playfair Display, iconos duotono
+> en círculos sólidos. Fuente de verdad: `Manual de marca/Manual_de_Marca_MORE_2026.pdf`
+> (editable en `manual-marca-more-2026.html`) y los tokens de `src/index.css`.
+>
+> Regla de oro para todos los sprints: **nada de urgencia inventada ni cifras sin respaldo.**
+> La urgencia se maneja con la ventana de oferta real, configurable desde el admin.
+
+- [x] **BR-01 (Sprint 1): Fundaciones + página `/asesoria-vip`**
+  Asignado: claude | Estado: ✅ completo
+  Tokens 2026 (`--color-navy-deep`, `--color-orange-light`, `--color-paper`,
+  `--color-paper-warm`, `--color-ink-muted`, `--font-display`), Playfair Display,
+  `VipBackdrop` (olas/rutas/avión/pines/trama en SVG), `VipSectionHeading`,
+  `VipSpecsBar`, rediseño completo de la VIP con el copy del PDF (ES/EN),
+  contador de oferta configurable + cierre automático con CTA a WhatsApp,
+  y manual de marca 2026 (HTML + PDF).
+  Archivos: `src/index.css`, `index.html`, `src/vip/**`, `src/pages/VipSessionPage.tsx`,
+  `src/locales/{es,en}/vipPage.json`, `src/components/admin/settings/VipSessionSection.tsx`,
+  `supabase/migrations/028_vip_countdown.sql`, `Manual de marca/**`
+
+- [ ] **BR-02 (Sprint 2): Home — Hero, Navbar y Footer**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: BR-01 ✅ (los tokens ya están en `index.css`)
+  Aplicar el sistema editorial a la portada: Hero con titular Playfair + regla con estrella,
+  `VipBackdrop` promovido a `components/brand/Backdrop.tsx` (compartido), Navbar sobre papel,
+  Footer con las olas de cierre. Revisar el social proof del Hero: si las cifras
+  ("+200", "98% aprobación") no tienen respaldo verificable, reemplazarlas por testimonios reales.
+  Archivos: `src/components/sections/Hero.tsx`, `Navbar.tsx`, `Footer.tsx`,
+  `src/components/brand/*` (nuevo, movido desde `src/vip/components`)
+  Criterio de éxito: home coherente con `/asesoria-vip`, sin glows ni gradientes recortados,
+  LCP no empeora (fuente display con `display=swap` y preconnect ya configurados).
+
+- [ ] **BR-03 (Sprint 3): Quiz, PainPoints, WhoWeHelp, Pricing, Success**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: BR-02
+  Migrar las secciones internas de la landing al sistema: encabezados con kicker,
+  tarjetas de borde fino sobre papel, iconos duotono, CTA pastilla naranja.
+  El quiz mantiene su lógica intacta (`lib/quizLogic.ts` solo lectura).
+  Archivos: `src/components/sections/{Quiz,PainPoints,WhoWeHelp,Pricing,Success}.tsx`
+  Criterio de éxito: ninguna sección conserva `blur-3xl`, `bg-clip-text` ni sombras naranjas.
+
+- [ ] **BR-04 (Sprint 4): Landings de campaña (masterclass, taller-niw, UPP)**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: BR-02
+  Unificar las landings de campaña bajo el sistema, conservando su lógica de countdown
+  y registro. Ojo: `MCCountdown`/`TNCountdown` tienen fechas hardcodeadas — moverlas a
+  `site_settings` como se hizo con `vip_countdown_date`.
+  Archivos: `src/components/sections/masterclass/*`, `src/components/sections/taller-niw/*`,
+  `src/pages/UppPage.tsx`
+  Criterio de éxito: las tres landings comparten backdrop, tipografía y componentes de marca.
+
+- [ ] **BR-05 (Sprint 5): Panel admin + QA final**
+  Asignado: — | Estado: ⬚ libre
+  Depende de: BR-03, BR-04
+  Admin: alinear a los tokens (hoy usa hex hardcodeados `#2A3A4A` / `#F37021` en cada
+  componente) sin rediseñarlo — es herramienta interna, no pieza de marca.
+  QA: contraste AA (el naranja sobre blanco no pasa en texto pequeño → usar `orange-dark`),
+  foco visible, mobile 360–430 px, peso de fuentes, y revisión de textos EN.
+  Archivos: `src/components/admin/**`, `src/pages/Admin*.tsx`
+  Criterio de éxito: sin hex hardcodeados fuera de `index.css`, auditoría de contraste limpia.
+
 ### P6 — Tests y calidad
 
 - [ ] **Tests unitarios para lógica crítica**

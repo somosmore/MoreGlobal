@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Manual de Marca MORE — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #2A3A4A;
+    --navy-deep: #1B2B44;
+    --navy-light: #3A4D5E;
+    --orange: #F37021;
+    --orange-dark: #D4611A;
+    --orange-light: #FF9052;
+    --paper: #F6F7F9;
+    --paper-warm: #FDF8F4;
+    --ink-muted: #5B6B7C;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--navy);
+    background: var(--paper);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @page { size: A4; margin: 0; }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 16mm 15mm 20mm;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; font-weight: 700; margin: 0; }
+  h1 { font-size: 46px; line-height: 1.1; color: var(--navy-deep); }
+  h2 { font-size: 30px; color: var(--navy-deep); margin-bottom: 6px; }
+  h3 { font-size: 19px; color: var(--navy-deep); }
+  .accent { color: var(--orange); }
+
+  .rule {
+    display: flex; align-items: center; gap: 12px; margin: 10px 0 26px;
+  }
+  .rule::before { content: ""; height: 1px; width: 60px; background: var(--orange); }
+  .rule span { font-family: "Playfair Display", serif; font-style: italic; font-size: 15px; color: var(--ink-muted); }
+  .rule::after { content: ""; height: 1px; flex: 1; background: rgba(42,58,74,.2); }
+
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--orange);
+  }
+
+  p { margin: 0 0 12px; color: var(--ink-muted); }
+  strong { color: var(--navy); }
+
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    border: 1px solid rgba(42,58,74,.14);
+    border-radius: 14px;
+    padding: 16px;
+    background: var(--white);
+  }
+  .card.warm { background: var(--paper-warm); border-color: rgba(243,112,33,.35); }
+  .card.soft { background: var(--paper); }
+
+  .swatch { height: 74px; border-radius: 12px; margin-bottom: 8px; border: 1px solid rgba(0,0,0,.06); }
+  .hex { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; font-weight: 600; color: var(--navy); }
+  .swatch-name { font-size: 12px; color: var(--ink-muted); }
+  .swatch-use { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+
+  .cover {
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+    text-align: center; padding-top: 55mm;
+  }
+  .cover .logo { width: 190px; margin-bottom: 26px; }
+  .star-rule { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
+  .star-rule i { display: block; width: 70px; height: 1px; background: rgba(42,58,74,.5); }
+  .star-rule i.o { background: var(--orange); }
+  .star { color: var(--orange); font-size: 14px; }
+
+  /* En flujo con márgenes negativos: al paginar, Chrome no resuelve bien un absolute con bottom:0. */
+  .wave {
+    display: block; width: calc(100% + 30mm); height: 110mm;
+    margin: auto -15mm -20mm; z-index: 0;
+  }
+
+  ul { margin: 0; padding-left: 18px; color: var(--ink-muted); }
+  li { margin-bottom: 6px; }
+
+  .do { border-left: 3px solid #17A673; padding-left: 12px; }
+  .dont { border-left: 3px solid #E4572E; padding-left: 12px; }
+
+  code {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    background: var(--paper);
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: var(--navy-deep);
+  }
+
+  pre {
+    background: var(--navy-deep); color: #E7EDF5; padding: 14px 16px; border-radius: 12px;
+    font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; line-height: 1.7; overflow-x: auto;
+  }
+  pre .c { color: #8FA6BF; }
+  pre .k { color: var(--orange-light); }
+
+  .icon-circle {
+    width: 48px; height: 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 18px; font-weight: 700;
+  }
+  .ic-navy { background: var(--navy-deep); }
+  .ic-orange { background: var(--orange); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 999px; padding: 12px 22px; font-weight: 600; font-size: 13px;
+  }
+  .btn-primary { background: var(--orange); color: #fff; }
+  .btn-secondary { background: #fff; color: var(--navy); border: 1px solid rgba(42,58,74,.2); }
+  .btn-disabled { background: #E5E7EB; color: #9CA3AF; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; border-radius: 999px;
+    padding: 6px 14px; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    border: 1px solid rgba(42,58,74,.15); background: #fff; color: var(--navy);
+  }
+
+  .specs {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(243,112,33,.3); border-radius: 14px; padding: 14px; background: #fff;
+  }
+  .spec { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .spec small { display: block; font-size: 12px; color: var(--navy); }
+  .spec b { font-family: "Playfair Display", serif; font-size: 16px; color: var(--orange); }
+
+  .type-sample-display { font-family: "Playfair Display", serif; font-size: 40px; color: var(--navy-deep); line-height: 1.1; }
+  .type-sample-sans { font-size: 15px; color: var(--ink-muted); }
+  .glyphs { font-size: 13px; color: var(--ink-muted); word-break: break-all; }
+
+  footer.note { position: absolute; bottom: 12mm; left: 16mm; right: 16mm; font-size: 10px; color: #9AA7B4; border-top: 1px solid rgba(42,58,74,.1); padding-top: 8px; display: flex; justify-content: space-between; }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ PORTADA ═══ -->
+<section class="page cover">
+  <img class="logo" src="../more-landing/public/logo_more_light.png" alt="MORE — Migración con propósito" />
+  <h1>Manual de <span class="accent">Marca</span></h1>
+  <div class="star-rule"><i></i><span class="star">★</span><i class="o"></i></div>
+  <p style="font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--navy);">
+    Migración con claridad, estrategia y propósito.
+  </p>
+  <p style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink-muted);margin-top:18px;">
+    Edición 2026 · Sistema editorial
+  </p>
+
+  <svg class="wave" viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wn" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4A6D96"/><stop offset="100%" stop-color="#1B2B44"/>
+      </linearGradient>
+      <linearGradient id="wns" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#C3D2E2"/><stop offset="100%" stop-color="#8AA4C1"/>
+      </linearGradient>
+      <linearGradient id="wo" x1="1" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#E0561A"/><stop offset="100%" stop-color="#FF9052"/>
+      </linearGradient>
+      <linearGradient id="wos" x1="1" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="#FFC9A6"/><stop offset="100%" stop-color="#FFE4D2"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 250 C 80 235 150 300 210 370 C 255 420 285 470 300 500 L0 500 Z" fill="url(#wns)" opacity=".5"/>
+    <path d="M0 320 C 62 310 120 360 172 420 C 205 460 225 485 235 500 L0 500 Z" fill="url(#wn)" opacity=".92"/>
+    <path d="M800 210 C 730 235 668 300 620 370 C 585 420 563 470 553 500 L800 500 Z" fill="url(#wos)" opacity=".75"/>
+    <path d="M800 300 C 745 320 700 375 662 435 C 640 470 628 490 622 500 L800 500 Z" fill="url(#wo)" opacity=".92"/>
+  </svg>
+</section>
+
+<!-- ═══ ESENCIA Y VOZ ═══ -->
+<section class="page">
+  <p class="eyebrow">01 — Fundamento</p>
+  <h2>Nuestra esencia: <span class="accent">migración con propósito</span></h2>
+  <div class="rule"><span>Quiénes somos y cómo hablamos</span></div>
+
+  <p>MORE es un catalizador de sueños para profesionales latinoamericanos excepcionales. Nuestra misión es empoderar, guiar y conectar talento, facilitando su reconocimiento y establecimiento en EE.&nbsp;UU. con un propósito claro y un plan de alto impacto.</p>
+
+  <p><strong>No vendemos trámites: vendemos criterio.</strong> Somos estrategas, no preparadores de formularios. Cuando un perfil no encaja, lo decimos. Esa honestidad es el activo de marca que sostiene todo lo demás — y por eso la comunicación nunca recurre a urgencia inventada, cifras sin respaldo ni promesas de resultado.</p>
+
+  <h3 style="margin-top:26px;">Voz y tono</h3>
+  <div class="grid g3" style="margin-top:12px;">
+    <div class="card soft">
+      <h3 style="font-size:16px;">Profesional y confiable</h3>
+      <p style="font-size:13px;margin:8px 0 0;">Comunicamos con seriedad, precisión y la autoridad de un experto. Generamos confianza con proceso claro y resultados probados.</p>
+    </div>
+    <div class="card soft">
+      <h3 style="font-size:16px;">Empoderador y motivador</h3>
+      <p style="font-size:13px;margin:8px 0 0;">Inspiramos a la acción y al crecimiento. Lenguaje positivo, centrado en oportunidades y en el potencial de cada profesional.</p>
+    </div>
+    <div class="card soft">
+      <h3 style="font-size:16px;">Claro y directo</h3>
+      <p style="font-size:13px;margin:8px 0 0;">Evitamos la ambigüedad. Explicamos qué se hace, por qué importa y qué sigue. Sin humo y sin guion de venta.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px;">Cómo se traduce en copy</h3>
+  <div class="grid g2" style="margin-top:12px;">
+    <div class="card">
+      <p class="eyebrow" style="color:#17A673;">Sí</p>
+      <ul style="font-size:13px;margin-top:8px;">
+        <li class="do">“No apliques a una visa sin estrategia.”</li>
+        <li class="do">“No es una llamada informativa. Es una sesión estratégica.”</li>
+        <li class="do">“Si no podemos ayudarte, te devolvemos el dinero.”</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="color:#E4572E;">No</p>
+      <ul style="font-size:13px;margin-top:8px;">
+        <li class="dont">Contadores de “personas viendo ahora” generados al azar.</li>
+        <li class="dont">Porcentajes de aprobación sin fuente verificable.</li>
+        <li class="dont">Promesas de resultado migratorio garantizado.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>01 — Fundamento</span></footer>
+</section>
+
+<!-- ═══ LOGOTIPO ═══ -->
+<section class="page">
+  <p class="eyebrow">02 — Identidad</p>
+  <h2>Logotipo</h2>
+  <div class="rule"><span>Versiones y espacio de respeto</span></div>
+
+  <div class="grid g2">
+    <div>
+      <div class="card" style="background:var(--paper);text-align:center;padding:34px;">
+        <img src="../more-landing/public/logo_more_light.png" alt="Logo MORE versión principal" style="width:170px;" />
+      </div>
+      <p style="font-size:12px;margin-top:8px;text-align:center;">Versión principal (fondo claro)</p>
+    </div>
+    <div>
+      <div class="card" style="background:var(--navy-deep);text-align:center;padding:34px;border-color:var(--navy-deep);">
+        <img src="../more-landing/public/logo_more_dark.png" alt="Logo MORE versión negativa" style="width:170px;" />
+      </div>
+      <p style="font-size:12px;margin-top:8px;text-align:center;">Versión negativa (fondo oscuro)</p>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:22px;">
+    <div class="card">
+      <h3 style="font-size:16px;">Usos correctos</h3>
+      <ul style="font-size:13px;margin-top:10px;">
+        <li class="do">Fondos claros que aseguren legibilidad.</li>
+        <li class="do">Espacio de protección igual a la altura de la “o” alrededor del logo.</li>
+        <li class="do">Versión negativa sobre navy o sobre las olas oscuras.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;">Usos incorrectos</h3>
+      <ul style="font-size:13px;margin-top:10px;">
+        <li class="dont">Distorsionar, estirar o comprimir.</li>
+        <li class="dont">Alterar colores o el gradiente del isotipo.</li>
+        <li class="dont">Colocarlo sobre imágenes complejas o sobre las olas naranjas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px;">Firma de marca</h3>
+  <p style="margin-top:8px;">El bajada <strong>“Migración con propósito”</strong> acompaña siempre al logotipo en piezas institucionales. En piezas de campaña puede sustituirse por el claim del sistema 2026: <strong>“Migración con claridad, estrategia y propósito.”</strong></p>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>02 — Identidad</span></footer>
+</section>
+
+<!-- ═══ COLOR ═══ -->
+<section class="page">
+  <p class="eyebrow">03 — Color</p>
+  <h2>Paleta</h2>
+  <div class="rule"><span>Núcleo de marca y superficies del sistema 2026</span></div>
+
+  <h3>Colores núcleo</h3>
+  <div class="grid g4" style="margin-top:12px;">
+    <div>
+      <div class="swatch" style="background:#2A3A4A;"></div>
+      <p class="hex">#2A3A4A</p>
+      <p class="swatch-name">Navy</p>
+      <p class="swatch-use">Texto principal, iconografía.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#1B2B44;"></div>
+      <p class="hex">#1B2B44</p>
+      <p class="swatch-name">Navy Deep <em>(nuevo)</em></p>
+      <p class="swatch-use">Titulares serif, círculos de icono, contador.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#F37021;"></div>
+      <p class="hex">#F37021</p>
+      <p class="swatch-name">Naranja</p>
+      <p class="swatch-use">Acento, CTA, palabra clave del titular.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#D4611A;"></div>
+      <p class="hex">#D4611A</p>
+      <p class="swatch-name">Naranja Dark</p>
+      <p class="swatch-use">Hover de CTA, cierre de gradientes.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">Superficies y apoyos</h3>
+  <div class="grid g4" style="margin-top:12px;">
+    <div>
+      <div class="swatch" style="background:#FF9052;"></div>
+      <p class="hex">#FF9052</p>
+      <p class="swatch-name">Naranja Light <em>(nuevo)</em></p>
+      <p class="swatch-use">Crestas de ola, gradientes.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#F6F7F9;"></div>
+      <p class="hex">#F6F7F9</p>
+      <p class="swatch-name">Paper <em>(nuevo)</em></p>
+      <p class="swatch-use">Fondo base de página.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#FDF8F4;"></div>
+      <p class="hex">#FDF8F4</p>
+      <p class="swatch-name">Paper Warm <em>(nuevo)</em></p>
+      <p class="swatch-use">Tarjetas destacadas, bloques de CTA.</p>
+    </div>
+    <div>
+      <div class="swatch" style="background:#5B6B7C;"></div>
+      <p class="hex">#5B6B7C</p>
+      <p class="swatch-name">Ink Muted <em>(nuevo)</em></p>
+      <p class="swatch-use">Texto secundario y bajadas.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">Reglas de uso</h3>
+  <ul style="margin-top:10px;font-size:13px;">
+    <li><strong>El naranja no se reparte:</strong> es acento. En un titular, solo una palabra o sintagma va en naranja.</li>
+    <li><strong>Los CTA son siempre naranja sólido</strong> con texto blanco y forma pastilla. Nunca outline como acción principal.</li>
+    <li><strong>Garantía = verde</strong> (<code>#ECFDF5</code> fondo, <code>#059669</code> icono). Es el único color fuera de paleta y solo aparece en el bloque de devolución.</li>
+    <li><strong>Los fondos son de papel</strong>, no blancos puros: el blanco se reserva para las tarjetas que flotan sobre el papel.</li>
+  </ul>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>03 — Color</span></footer>
+</section>
+
+<!-- ═══ TIPOGRAFÍA ═══ -->
+<section class="page">
+  <p class="eyebrow">04 — Tipografía</p>
+  <h2>Sistema tipográfico dual</h2>
+  <div class="rule"><span>Serif editorial para la voz, sans para la información</span></div>
+
+  <p>El sistema 2026 sustituye el par Montserrat / Lato por una combinación editorial: una serif de alto contraste que da autoridad y calma al mensaje, y una sans neutra que sostiene la lectura funcional.</p>
+
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card">
+      <p class="eyebrow">Display</p>
+      <h3 style="margin-top:4px;">Playfair Display</h3>
+      <p class="type-sample-display" style="margin-top:12px;">Asesoría <span class="accent">VIP</span></p>
+      <p class="glyphs" style="margin-top:12px;">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br/>abcdefghijklmnñopqrstuvwxyz 0123456789</p>
+      <p style="font-size:12px;margin-top:12px;">Titulares, precios, cifras del contador y frases de cierre. Pesos 400–700. Nunca en párrafos largos ni en mayúsculas sostenidas.</p>
+    </div>
+    <div class="card">
+      <p class="eyebrow">Texto</p>
+      <h3 style="margin-top:4px;">Inter</h3>
+      <p class="type-sample-sans" style="margin-top:12px;font-size:15px;color:var(--navy);">
+        Tipografía de cuerpo: legible, moderna y versátil. Ideal para párrafos, listas, botones, etiquetas y toda la interfaz del panel.
+      </p>
+      <p class="glyphs" style="margin-top:12px;">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br/>abcdefghijklmnñopqrstuvwxyz 0123456789</p>
+      <p style="font-size:12px;margin-top:12px;">Pesos 300–800. Etiquetas en mayúsculas con <code>letter-spacing: .18em</code> y peso 700.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">Jerarquía</h3>
+  <div class="card soft" style="margin-top:12px;">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <tr style="text-align:left;color:var(--navy);">
+        <th style="padding:6px 0;">Nivel</th><th>Fuente</th><th>Tamaño</th><th>Uso</th>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">H1</td><td>Playfair 700</td><td>48–72&nbsp;px</td><td>Título de landing</td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">H2</td><td>Playfair 700</td><td>30–44&nbsp;px</td><td>Título de sección</td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Kicker</td><td>Playfair italic</td><td>18–20&nbsp;px</td><td>Bajada entre reglas</td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Cuerpo</td><td>Inter 400</td><td>15–16&nbsp;px</td><td>Párrafos y listas</td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Eyebrow</td><td>Inter 700 · caps</td><td>10–11&nbsp;px</td><td>Etiquetas y badges</td>
+      </tr>
+    </table>
+  </div>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>04 — Tipografía</span></footer>
+</section>
+
+<!-- ═══ SISTEMA GRÁFICO ═══ -->
+<section class="page">
+  <p class="eyebrow">05 — Sistema gráfico</p>
+  <h2>El lenguaje del <span class="accent">viaje</span></h2>
+  <div class="rule"><span>Olas, rutas e iconografía duotono</span></div>
+
+  <p>Todo el sistema visual cuenta la misma historia: un recorrido desde el origen hasta el destino. Se construye con cuatro elementos, siempre sobre fondo de papel.</p>
+
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card">
+      <h3 style="font-size:16px;">1. Olas de contorno</h3>
+      <p style="font-size:13px;margin-top:8px;">Navy abajo a la izquierda (origen), naranja abajo a la derecha (destino). Tres capas de opacidad decreciente más líneas de nivel finas. Anclan la composición y nunca invaden el centro, que queda libre para el contenido.</p>
+      <svg viewBox="0 0 320 90" style="width:100%;margin-top:10px;">
+        <path d="M0 40 C 40 34 70 60 96 90 L0 90 Z" fill="#8AA4C1" opacity=".5"/>
+        <path d="M0 58 C 30 54 56 70 74 90 L0 90 Z" fill="#1B2B44" opacity=".9"/>
+        <path d="M320 34 C 280 42 250 64 226 90 L320 90 Z" fill="#FFC9A6" opacity=".75"/>
+        <path d="M320 54 C 292 60 268 72 250 90 L320 90 Z" fill="#E0561A" opacity=".92"/>
+      </svg>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;">2. Rutas punteadas</h3>
+      <p style="font-size:13px;margin-top:8px;">Líneas de puntos (<code>stroke-dasharray: 1 10</code>) con un pin navy en el origen, un avión naranja en tránsito y un pin naranja en el destino. Se ubican en los márgenes superiores y laterales, nunca cruzan el texto.</p>
+      <svg viewBox="0 0 320 90" style="width:100%;margin-top:10px;">
+        <path d="M14 26 C 70 6 120 46 190 28 C 240 15 270 40 306 30" fill="none" stroke="#2A3A4A" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 10" opacity=".5"/>
+        <path d="M14 70 C 90 52 150 84 306 62" fill="none" stroke="#F37021" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 10" opacity=".5"/>
+        <circle cx="14" cy="26" r="5" fill="#2A3A4A"/>
+        <circle cx="306" cy="62" r="5" fill="#F37021"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card">
+      <h3 style="font-size:16px;">3. Retícula de puntos</h3>
+      <p style="font-size:13px;margin-top:8px;">Sustituye al mapamundi de la presentación: una trama de puntos al 12–16&nbsp;% de opacidad, con desvanecido radial. Evoca el mapa sin competir con el texto y escala sin deformarse.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;">4. Iconografía duotono</h3>
+      <p style="font-size:13px;margin-top:8px;">Iconos lineales blancos (Lucide, <code>stroke-width: 2</code>) dentro de círculos sólidos que <strong>alternan navy y naranja</strong>. Nunca iconos con fondo de tinte suave: el círculo es sólido y pleno.</p>
+      <div style="display:flex;gap:10px;margin-top:12px;">
+        <div class="icon-circle ic-navy">◉</div>
+        <div class="icon-circle ic-orange">✦</div>
+        <div class="icon-circle ic-navy">◈</div>
+        <div class="icon-circle ic-orange">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px;">Qué desapareció del sistema anterior</h3>
+  <ul style="margin-top:10px;font-size:13px;">
+    <li class="dont">Glows y manchas difusas (<code>blur-3xl</code>) como fondo.</li>
+    <li class="dont">Gradientes naranjas sobre tarjetas grandes y textos con gradiente recortado.</li>
+    <li class="dont">Sombras coloreadas intensas. La profundidad ahora viene del borde fino y una sombra neutra baja.</li>
+  </ul>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>05 — Sistema gráfico</span></footer>
+</section>
+
+<!-- ═══ COMPONENTES ═══ -->
+<section class="page">
+  <p class="eyebrow">06 — Componentes</p>
+  <h2>Piezas de interfaz</h2>
+  <div class="rule"><span>Los bloques que se repiten en toda la web</span></div>
+
+  <h3>Botones</h3>
+  <div style="display:flex;gap:12px;align-items:center;margin:12px 0 6px;">
+    <span class="btn btn-primary">Sí, quiero mi estrategia migratoria</span>
+    <span class="btn btn-secondary">Evaluar mi perfil gratis</span>
+    <span class="btn btn-disabled">Próximamente disponible</span>
+  </div>
+  <p style="font-size:12px;">Pastilla completa, altura mínima 44&nbsp;px (táctil). Primario naranja sólido; secundario blanco con borde; deshabilitado gris. Un solo primario visible por bloque.</p>
+
+  <h3 style="margin-top:22px;">Encabezado de sección</h3>
+  <div class="card soft" style="text-align:center;margin-top:12px;padding:24px;">
+    <h2 style="font-size:26px;">¿Qué recibes en la <span class="accent">Asesoría VIP?</span></h2>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;">
+      <i style="display:block;width:36px;height:1px;background:var(--orange);"></i>
+      <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--navy);">Una ruta clara, personalizada y accionable</span>
+      <i style="display:block;width:36px;height:1px;background:rgba(42,58,74,.4);"></i>
+    </div>
+  </div>
+  <p style="font-size:12px;margin-top:8px;">Título serif con una única palabra en naranja + kicker itálico entre reglas (naranja a la izquierda, navy a la derecha).</p>
+
+  <h3 style="margin-top:22px;">Barra de specs</h3>
+  <div class="specs" style="margin-top:12px;">
+    <div class="spec"><span class="icon-circle ic-navy" style="width:38px;height:38px;font-size:14px;">⏱</span><span><small>Duración:</small><b>60 minutos</b></span></div>
+    <div class="spec"><span class="icon-circle ic-navy" style="width:38px;height:38px;font-size:14px;">▣</span><span><small>Modalidad:</small><b>Online</b></span></div>
+    <div class="spec"><span class="icon-circle ic-navy" style="width:38px;height:38px;font-size:14px;">◷</span><span><small>Valor especial:</small><b>USD $97</b></span></div>
+  </div>
+
+  <h3 style="margin-top:22px;">Badge, contador y garantía</h3>
+  <div class="grid g3" style="margin-top:12px;">
+    <div class="card" style="display:flex;align-items:center;justify-content:center;">
+      <span class="badge"><span class="star">★</span> Sesión estratégica 1 a 1</span>
+    </div>
+    <div class="card" style="background:var(--navy-deep);border-color:var(--navy-deep);text-align:center;">
+      <p style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--orange-light);margin:0;">La oferta cierra en</p>
+      <p style="font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin:6px 0 0;">05 : 28 : 47</p>
+    </div>
+    <div class="card" style="background:#ECFDF5;border-color:#A7F3D0;">
+      <p style="font-size:12px;color:#065F46;margin:0;">🛡 Si en los primeros 15 minutos no podemos ayudarte, te devolvemos el dinero.</p>
+    </div>
+  </div>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>06 — Componentes</span></footer>
+</section>
+
+<!-- ═══ TOKENS ═══ -->
+<section class="page">
+  <p class="eyebrow">07 — Implementación</p>
+  <h2>Tokens de código</h2>
+  <div class="rule"><span>Fuente de verdad: more-landing/src/index.css</span></div>
+
+  <p>El manual y el código comparten los mismos valores. Cualquier cambio de marca empieza aquí y se propaga por Tailwind: <code>text-navy-deep</code>, <code>bg-orange</code>, <code>font-display</code>, <code>bg-paper</code>.</p>
+
+  <pre><span class="c">/* more-landing/src/index.css */</span>
+@theme {
+  <span class="k">--color-navy</span>: #2A3A4A;
+  <span class="k">--color-navy-light</span>: #3A4D5E;
+  <span class="k">--color-navy-deep</span>: #1B2B44;   <span class="c">/* 2026 */</span>
+  <span class="k">--color-orange</span>: #F37021;
+  <span class="k">--color-orange-dark</span>: #D4611A;
+  <span class="k">--color-orange-light</span>: #FF9052;  <span class="c">/* 2026 */</span>
+  <span class="k">--color-paper</span>: #F6F7F9;        <span class="c">/* 2026 */</span>
+  <span class="k">--color-paper-warm</span>: #FDF8F4;   <span class="c">/* 2026 */</span>
+  <span class="k">--color-ink-muted</span>: #5B6B7C;    <span class="c">/* 2026 */</span>
+
+  <span class="k">--font-sans</span>: "Inter", system-ui, sans-serif;
+  <span class="k">--font-display</span>: "Playfair Display", Georgia, serif;  <span class="c">/* 2026 */</span>
+}</pre>
+
+  <h3 style="margin-top:22px;">Dónde vive cada pieza</h3>
+  <div class="card soft" style="margin-top:12px;">
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+      <tr style="text-align:left;color:var(--navy);">
+        <th style="padding:6px 0;">Pieza</th><th>Archivo</th>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Olas, rutas, avión, pines, trama</td><td><code>src/vip/components/VipBackdrop.tsx</code></td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Encabezado de sección + kicker</td><td><code>src/vip/components/VipSectionHeading.tsx</code></td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Barra de specs</td><td><code>src/vip/components/VipSpecsBar.tsx</code></td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">Contador y cierre de oferta</td><td><code>src/vip/components/VipCountdown.tsx</code> · <code>VipOfferClosed.tsx</code></td>
+      </tr>
+      <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
+        <td style="padding:6px 0;">CTA</td><td><code>src/vip/components/VipCtaButton.tsx</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3 style="margin-top:22px;">Accesibilidad</h3>
+  <ul style="margin-top:10px;font-size:13px;">
+    <li>Naranja <code>#F37021</code> sobre blanco no alcanza AA en texto pequeño: úsalo en texto ≥ 19&nbsp;px o sobre navy. Para texto pequeño de acento, usa <code>#D4611A</code>.</li>
+    <li>Todo elemento interactivo mantiene un área táctil mínima de 44&nbsp;px y anillo de foco visible.</li>
+    <li>Los elementos decorativos (olas, rutas, iconos de adorno) van con <code>aria-hidden</code>.</li>
+  </ul>
+
+  <footer class="note"><span>MORE · Manual de Marca 2026</span><span>07 — Implementación</span></footer>
+</section>
+
+</body>
+</html>

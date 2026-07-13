@@ -5,7 +5,16 @@
   --color-navy-light: #3A4D5E;
   --color-orange: #F37021;
   --color-orange-dark: #D4611A;
+
+  /* Sistema editorial 2026 — ver Manual de marca */
+  --color-navy-deep: #1B2B44;
+  --color-orange-light: #FF9052;
+  --color-paper: #F6F7F9;
+  --color-paper-warm: #FDF8F4;
+  --color-ink-muted: #5B6B7C;
+
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Playfair Display", "Times New Roman", Georgia, serif;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;

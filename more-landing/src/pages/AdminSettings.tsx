@@ -112,9 +112,12 @@ export default function AdminSettings() {
               setVipPaymentLink={data.setVipPaymentLink}
               vipPrice={data.vipPrice}
               setVipPrice={data.setVipPrice}
+              vipCountdownDate={data.vipCountdownDate}
+              setVipCountdownDate={data.setVipCountdownDate}
               saveState={data.saveState}
               setSaveState={data.setSaveState}
               saveError={data.saveError}
+              handleSave={data.handleSave}
               vipPaymentLinkInvalid={data.vipPaymentLinkInvalid}
             />
           </section>
