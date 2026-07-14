@@ -4,6 +4,8 @@ import { ArrowRight, ArrowLeft, CheckCircle2, MessageCircle, Sparkles, Send, Che
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { SectionHeading } from "@/components/brand/SectionHeading"
+import { CtaButton } from "@/components/brand/CtaButton"
 import { supabase, type LeadInsert } from "@/lib/supabase"
 import { useTranslation } from "react-i18next"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
@@ -298,7 +300,7 @@ export default function Quiz() {
       className="space-y-4 mt-4"
     >
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.countryResidenceQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.countryResidenceQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {basicOptions.countries.map((option) => (
             <button
@@ -312,7 +314,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.country_residence === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -323,7 +325,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.nationalityQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.nationalityQuestion")}</p>
         <Input
           placeholder={t("quiz.diagnostic.nationalityPlaceholder")}
           value={quiz.answers.nationality ?? ""}
@@ -351,7 +353,7 @@ export default function Quiz() {
       className="space-y-5 mt-4"
     >
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.inUsQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.inUsQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
             { id: "en_usa_status", label: t("quiz.diagnostic.inUsWithStatus") },
@@ -369,7 +371,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.in_us_status === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -380,7 +382,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.mainGoalQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.mainGoalQuestion")}</p>
         <div className="space-y-2">
           {basicOptions.goals.map((option) => (
             <button
@@ -394,7 +396,7 @@ export default function Quiz() {
               }
               className={`w-full p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.migration_goal === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -422,7 +424,7 @@ export default function Quiz() {
         transition={{ duration: 0.3 }}
         className="space-y-4 mt-4"
       >
-        <p className="text-sm font-medium text-[#2A3A4A]">
+        <p className="text-sm font-medium text-navy-deep">
           {t("quiz.diagnostic.treatyIntro")}
         </p>
         <div className="p-4 rounded-2xl border-2 bg-white flex flex-col gap-2">
@@ -451,7 +453,7 @@ export default function Quiz() {
       className="space-y-5 mt-4"
     >
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.educationQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.educationQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {professionalOptions.education.map((option) => (
             <button
@@ -465,7 +467,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.academic_level === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -481,7 +483,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.yearsExperienceQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.yearsExperienceQuestion")}</p>
         <div className="grid grid-cols-2 gap-3">
           {[
             { id: true, label: t("quiz.diagnostic.yes") },
@@ -498,7 +500,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-center text-sm transition-all ${
                 quiz.answers.years_experience_5_plus === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -543,7 +545,7 @@ export default function Quiz() {
         className="space-y-5 mt-4"
       >
         <div className="space-y-2">
-          <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.achievementsQuestion")}</p>
+          <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.achievementsQuestion")}</p>
           <div className="space-y-3">
             {achievements.map((achievement) => {
               const selected = quiz.answers.achievements.includes(achievement.id)
@@ -554,13 +556,13 @@ export default function Quiz() {
                   onClick={() => handleAchievementClick(achievement.id)}
                   className={`flex items-center gap-3 w-full p-3 rounded-xl border-2 text-left text-sm transition-all ${
                     selected
-                      ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                      ? "border-orange bg-paper-warm text-navy-deep"
                       : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
                   }`}
                 >
                   <div
                     className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                      selected ? "border-[#F37021] bg-[#F37021]" : "border-gray-300"
+                      selected ? "border-orange bg-orange" : "border-gray-300"
                     }`}
                   >
                     {selected && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
@@ -578,7 +580,7 @@ export default function Quiz() {
         </div>
 
         <div className="space-y-2">
-          <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.sectorQuestion")}</p>
+          <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.sectorQuestion")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {sectors.map((sector) => (
               <button
@@ -592,7 +594,7 @@ export default function Quiz() {
                 }
                 className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                   quiz.answers.impact_area === sector.id
-                    ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                    ? "border-orange bg-paper-warm text-navy-deep"
                     : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
                 }`}
               >
@@ -615,7 +617,7 @@ export default function Quiz() {
       className="space-y-5 mt-4"
     >
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.businessQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.businessQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {businessOptions.business.map((option) => (
             <button
@@ -629,7 +631,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.has_business === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -640,7 +642,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.investmentQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.investmentQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {businessOptions.investment.map((option) => (
             <button
@@ -657,7 +659,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.investment_capacity === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -668,7 +670,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.expansionQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.expansionQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {businessOptions.expansion.map((option) => (
             <button
@@ -685,7 +687,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.company_can_expand === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -696,7 +698,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.recognitionQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.recognitionQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {extraordinaryOptions.recognition.map((option) => (
             <button
@@ -713,7 +715,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.extraordinary_profile === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -724,7 +726,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.connectionsQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.connectionsQuestion")}</p>
         <div className="space-y-3">
           {extraordinaryOptions.connections.map((option) => {
             const selected = (quiz.answers.high_level_connections ?? []).includes(option.id)
@@ -735,13 +737,13 @@ export default function Quiz() {
                 onClick={() => handleToggleInArray("high_level_connections", option.id)}
                 className={`flex items-center gap-3 w-full p-3 rounded-xl border-2 text-left text-sm transition-all ${
                   selected
-                    ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                    ? "border-orange bg-paper-warm text-navy-deep"
                     : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
                 }`}
               >
                 <div
                   className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                    selected ? "border-[#F37021] bg-[#F37021]" : "border-gray-300"
+                    selected ? "border-orange bg-orange" : "border-gray-300"
                   }`}
                 >
                   {selected && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
@@ -765,7 +767,7 @@ export default function Quiz() {
       className="space-y-5 mt-4"
     >
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.projectQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.projectQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {preparationOptions.project.map((option) => (
             <button
@@ -782,7 +784,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.project_clarity === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -793,7 +795,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.evidenceQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.evidenceQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {preparationOptions.evidence.map((option) => (
             <button
@@ -810,7 +812,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.evidence_readiness === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -821,7 +823,7 @@ export default function Quiz() {
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-[#2A3A4A]">{t("quiz.diagnostic.timeframeQuestion")}</p>
+        <p className="text-sm font-medium text-navy-deep">{t("quiz.diagnostic.timeframeQuestion")}</p>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           {preparationOptions.timeframe.map((option) => (
             <button
@@ -838,7 +840,7 @@ export default function Quiz() {
               }
               className={`p-3 rounded-xl border-2 text-left text-sm transition-all ${
                 quiz.answers.timeframe === option.id
-                  ? "border-[#F37021] bg-[#F37021]/5 shadow-md text-[#2A3A4A]"
+                  ? "border-orange bg-paper-warm text-navy-deep"
                   : "border-gray-200 hover:border-gray-300 bg-white text-gray-600"
               }`}
             >
@@ -877,30 +879,30 @@ export default function Quiz() {
         transition={{ duration: 0.4 }}
         className="mt-8"
       >
-        <div className="p-6 rounded-2xl bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E] text-white">
-          <div className="flex items-center gap-3 mb-3">
-            <Sparkles className="w-6 h-6 text-[#F37021]" />
-            <h3 className="text-lg font-semibold">
+        <div className="rounded-2xl border border-navy/15 bg-navy-deep p-6 text-white">
+          <div className="mb-3 flex items-center gap-3">
+            <Sparkles className="h-6 w-6 text-orange-light" aria-hidden />
+            <h3 className="font-display text-lg">
               {t("quiz.diagnostic.resultTitle")}
             </h3>
           </div>
 
-          <p className="text-white/80 text-sm mb-4 leading-relaxed">
+          <p className="mb-4 text-sm leading-relaxed text-white/80">
             {t("quiz.diagnostic.resultIntro")}
           </p>
 
           <div className="space-y-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-white/60 mb-1">
+              <p className="mb-1 text-xs font-semibold tracking-wide text-white/60 uppercase">
                 {t("quiz.diagnostic.segmentLabel")}
               </p>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-xs font-medium">
+              <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium">
                 {t(segmentKey)}
               </span>
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-white/60 mb-1">
+              <p className="mb-1 text-xs font-semibold tracking-wide text-white/60 uppercase">
                 {t("quiz.diagnostic.visaBucketsLabel")}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -912,7 +914,7 @@ export default function Quiz() {
                   diagnosis.visaBuckets.map((bucket) => (
                     <span
                       key={bucket}
-                      className="inline-flex items-center px-3 py-1 rounded-full bg-[#F37021]/15 text-xs font-medium text-white"
+                      className="inline-flex items-center rounded-full bg-orange/20 px-3 py-1 text-xs font-medium text-white"
                     >
                       {t(`quiz.diagnostic.bucket.${bucket}`)}
                     </span>
@@ -922,7 +924,7 @@ export default function Quiz() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-white/60 mb-1">
+              <p className="mb-1 text-xs font-semibold tracking-wide text-white/60 uppercase">
                 {t("quiz.diagnostic.recommendedRouteLabel")}
               </p>
               <p className="text-sm text-white">
@@ -932,22 +934,20 @@ export default function Quiz() {
           </div>
 
           {!showLeadCapture && !leadSubmitted && (
-            <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button
-                variant="gold"
-                className="gap-2"
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <CtaButton
+                label={t("quiz.diagnostic.ctaLead")}
+                icon={Send}
                 onClick={() => setShowLeadCapture(true)}
-              >
-                <Send className="w-4 h-4" />
-                {t("quiz.diagnostic.ctaLead")}
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white text-[#2A3A4A] hover:bg-[#2A3A4A] hover:text-white"
+                className="sm:flex-1"
+              />
+              <CtaButton
+                label={t("quiz.restartQuiz")}
+                variant="secondary"
+                icon={null}
                 onClick={resetQuiz}
-              >
-                {t("quiz.restartQuiz")}
-              </Button>
+                className="sm:flex-1"
+              />
             </div>
           )}
         </div>
@@ -956,24 +956,20 @@ export default function Quiz() {
   }
 
   return (
-    <section id="quiz" className="py-24 sm:py-32 bg-gray-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="quiz" className="relative overflow-hidden bg-paper py-24 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="mb-12"
         >
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
-            {t("quiz.eyebrow")}
-          </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-            {t("quiz.title")}
-          </h2>
-          <p className="mt-4 text-gray-500 text-lg">
-            {t("quiz.subtitle")}
-          </p>
+          <SectionHeading
+            title={t("quiz.title")}
+            kicker={t("quiz.eyebrow")}
+            description={t("quiz.subtitle")}
+          />
         </motion.div>
 
         <motion.div
@@ -981,24 +977,24 @@ export default function Quiz() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-2xl mx-auto"
+          className="mx-auto max-w-2xl"
         >
-          <Card className="border-0 shadow-2xl overflow-hidden">
+          <Card className="overflow-hidden border border-navy/15 bg-white shadow-[0_24px_60px_-30px_rgba(27,43,68,0.18)]">
             <div className="px-6 pt-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-gray-400">{stepLabel}</span>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-xs font-medium text-ink-muted">{stepLabel}</span>
                 <motion.span
                   key={quiz.step}
                   initial={{ scale: 0.9, opacity: 0.5 }}
-                  animate={{ scale: 1.1, opacity: 1 }}
+                  animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="text-xs font-semibold text-[#F37021]"
+                  className="text-xs font-semibold text-orange-dark"
                 >
                   {Math.round(progressValue)}%
                 </motion.span>
               </div>
               <div
-                className="relative h-2 w-full overflow-hidden rounded-full bg-gray-200"
+                className="relative h-2 w-full overflow-hidden rounded-full bg-paper"
                 role="progressbar"
                 aria-valuemin={0}
                 aria-valuemax={100}
@@ -1006,33 +1002,16 @@ export default function Quiz() {
               >
                 <motion.div
                   key={quiz.step}
-                  initial={{
-                    width: `${Math.max(progressValue - 15, 0)}%`,
-                    boxShadow: "0 0 0 rgba(243,112,33,0)",
-                  }}
-                  animate={{
-                    width: `${progressValue}%`,
-                    boxShadow: [
-                      "0 0 0 rgba(243,112,33,0)",
-                      "0 0 18px rgba(243,112,33,0.85)",
-                      "0 0 0 rgba(243,112,33,0)",
-                    ],
-                  }}
+                  initial={{ width: `${Math.max(progressValue - 15, 0)}%` }}
+                  animate={{ width: `${progressValue}%` }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
-                  className="h-full bg-gradient-to-r from-[#F37021] via-[#FF8A3C] to-[#D4611A]"
-                />
-                <motion.div
-                  key={`shine-${quiz.step}`}
-                  initial={{ x: "-100%" }}
-                  animate={{ x: "120%" }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent mix-blend-screen"
+                  className="h-full bg-orange"
                 />
               </div>
             </div>
 
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg text-[#2A3A4A]">{cardTitle}</CardTitle>
+              <CardTitle className="font-display text-lg text-navy-deep">{cardTitle}</CardTitle>
             </CardHeader>
 
             <CardContent className="pb-8">
@@ -1051,34 +1030,32 @@ export default function Quiz() {
               </AnimatePresence>
 
               {!showResult && !showLeadCapture && !leadSubmitted && (
-                <div className="flex items-center justify-between mt-8">
+                <div className="mt-8 flex items-center justify-between gap-3">
                   <Button
                     variant="ghost"
                     onClick={prevStep}
                     disabled={quiz.step === 1}
                     className="gap-2"
                   >
-                    <ArrowLeft className="w-4 h-4" />
+                    <ArrowLeft className="h-4 w-4" />
                     {t("quiz.back")}
                   </Button>
 
                   {quiz.step < TOTAL_STEPS ? (
                     <Button onClick={nextStep} disabled={!canProceed()} className="gap-2">
                       {t("quiz.continue")}
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="h-4 w-4" />
                     </Button>
                   ) : (
-                    <Button
+                    <CtaButton
+                      label={t("quiz.seeMyEvaluation")}
+                      icon={Sparkles}
                       onClick={() => {
                         if (canProceed()) computeDiagnosis()
                       }}
-                      disabled={!canProceed()}
-                      variant="gold"
-                      className="gap-2"
-                    >
-                      {t("quiz.seeMyEvaluation")}
-                      <Sparkles className="w-4 h-4" />
-                    </Button>
+                      className={!canProceed() ? "pointer-events-none opacity-50" : "w-auto"}
+                      ariaLabel={t("quiz.seeMyEvaluation")}
+                    />
                   )}
                 </div>
               )}
@@ -1094,11 +1071,11 @@ export default function Quiz() {
                     transition={{ duration: 0.4 }}
                     className="mt-6"
                   >
-                    <div className="p-6 rounded-2xl border-2 border-[#F37021]/30 bg-white">
-                      <p className="text-sm font-semibold text-[#2A3A4A] mb-1">
+                    <div className="rounded-2xl border border-orange/40 bg-white p-6">
+                      <p className="mb-1 text-sm font-semibold text-navy-deep">
                         {t("quiz.leadTitle")}
                       </p>
-                      <p className="text-xs text-gray-500 mb-4">
+                      <p className="mb-4 text-xs text-ink-muted">
                         {t("quiz.leadDesc")}
                       </p>
                       <form onSubmit={handleLeadSubmit} className="space-y-3">
@@ -1125,16 +1102,16 @@ export default function Quiz() {
                           disabled={leadSubmitting}
                         />
                         {leadError && <p className="text-xs text-red-500">{leadError}</p>}
-                        <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                          <Button
-                            type="submit"
-                            variant="gold"
-                            className="gap-2 flex-1"
-                            disabled={leadSubmitting}
-                          >
-                            <Send className="w-4 h-4" />
-                            {leadSubmitting ? t("quiz.submitting") : t("quiz.submitCta")}
-                          </Button>
+                        <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                          <CtaButton
+                            label={leadSubmitting ? t("quiz.submitting") : t("quiz.submitCta")}
+                            icon={Send}
+                            onClick={(e) => {
+                              const form = (e.currentTarget as HTMLElement).closest("form")
+                              form?.requestSubmit()
+                            }}
+                            className={`flex-1 ${leadSubmitting ? "pointer-events-none opacity-50" : ""}`}
+                          />
                           <Button
                             type="button"
                             variant="ghost"
@@ -1157,23 +1134,28 @@ export default function Quiz() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
-                    className="mt-6 p-6 rounded-2xl bg-green-50 border border-green-200 text-center"
+                    className="mt-6 rounded-2xl border border-navy/10 bg-paper-warm p-6 text-center"
                   >
-                    <CheckCircle className="w-10 h-10 text-green-500 mx-auto mb-3" />
-                    <h3 className="text-base font-semibold text-[#2A3A4A] mb-1">
+                    <CheckCircle className="mx-auto mb-3 h-10 w-10 text-orange" aria-hidden />
+                    <h3 className="mb-1 font-display text-base text-navy-deep">
                       {t("quiz.successTitle")}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-5">{t("quiz.successDesc")}</p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Button variant="gold" className="gap-2" asChild>
-                        <a href={whatsappBase} target="_blank" rel="noopener noreferrer">
-                          <MessageCircle className="w-4 h-4" />
-                          {t("quiz.whatsappCta")}
-                        </a>
-                      </Button>
-                      <Button variant="outline" onClick={resetQuiz}>
-                        {t("quiz.restartQuiz")}
-                      </Button>
+                    <p className="mb-5 text-sm text-ink-muted">{t("quiz.successDesc")}</p>
+                    <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                      <CtaButton
+                        label={t("quiz.whatsappCta")}
+                        href={whatsappBase}
+                        variant="whatsapp"
+                        icon={MessageCircle}
+                        className="w-auto"
+                      />
+                      <CtaButton
+                        label={t("quiz.restartQuiz")}
+                        variant="secondary"
+                        icon={null}
+                        onClick={resetQuiz}
+                        className="w-auto"
+                      />
                     </div>
                   </motion.div>
                 )}
@@ -1187,7 +1169,7 @@ export default function Quiz() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-sm text-gray-400 mt-10 italic"
+          className="mt-10 text-center text-sm italic text-ink-muted"
         >
           {t("quiz.bridge")}
         </motion.p>

@@ -29,6 +29,14 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-07-14] — BR-03: secciones internas Home al sistema editorial 2026
+
+- Agente: cursor
+- Archivos modificados: `src/components/brand/BrandIconCircle.tsx` (nuevo), `src/components/sections/{PainPoints,WhoWeHelp,Pricing,Success,Quiz}.tsx`, `SPEC.md`, `PROGRESS.md`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: skin editorial en PainPoints, WhoWeHelp, Pricing, Success y Quiz. `SectionHeading` + fondos paper/paper-warm/white, tarjetas `border-navy/15`, `BrandIconCircle` (navy/orange), CTAs con `CtaButton`. Pricing sin glass/ring naranja (plan popular = `bg-navy-deep` sólido). Quiz: progress sin glow/shine, panel diagnóstico navy sólido, hex → tokens; `lib/quizLogic.ts` intacto.
+- Problemas encontrados: `npm run lint` sigue en ~27 errores de baseline (admin + hooks en Success preexistentes); build OK.
+- Estado: ✅ completo
+
 ### [2026-07-13] — Número de WhatsApp unificado en una sola fuente
 
 - Agente: claude

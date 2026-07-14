@@ -1,43 +1,13 @@
 import { motion } from "framer-motion"
 import { Briefcase, Store, GraduationCap, TrendingUp, ArrowRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { SectionHeading } from "@/components/brand/SectionHeading"
+import { BrandIconCircle } from "@/components/brand/BrandIconCircle"
+import { CtaButton } from "@/components/brand/CtaButton"
+import { Backdrop } from "@/components/brand/Backdrop"
 
-const iconsByIndex = [Briefcase, Store, GraduationCap, TrendingUp]
-
-const stylesByIndex = [
-  {
-    borderColor: "border-l-blue-500",
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-600",
-    tagStyle: "bg-blue-50 text-blue-700",
-    proofBg: "bg-blue-50/80",
-    proofColor: "text-blue-700",
-  },
-  {
-    borderColor: "border-l-[#F37021]",
-    iconBg: "bg-orange-50",
-    iconColor: "text-[#F37021]",
-    tagStyle: "bg-orange-50 text-orange-700",
-    proofBg: "bg-orange-50/80",
-    proofColor: "text-orange-700",
-  },
-  {
-    borderColor: "border-l-violet-500",
-    iconBg: "bg-violet-50",
-    iconColor: "text-violet-600",
-    tagStyle: "bg-violet-50 text-violet-700",
-    proofBg: "bg-violet-50/80",
-    proofColor: "text-violet-700",
-  },
-  {
-    borderColor: "border-l-emerald-500",
-    iconBg: "bg-emerald-50",
-    iconColor: "text-emerald-600",
-    tagStyle: "bg-emerald-50 text-emerald-700",
-    proofBg: "bg-emerald-50/80",
-    proofColor: "text-emerald-700",
-  },
-]
+const iconsByIndex = [Briefcase, Store, GraduationCap, TrendingUp] as const
+const tonesByIndex = ["navy", "orange", "navy", "orange"] as const
 
 const containerVariants = {
   hidden: {},
@@ -59,25 +29,22 @@ export default function WhoWeHelp() {
   }>
 
   return (
-    <section id="quienes-ayudamos" className="py-24 sm:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="quienes-ayudamos" className="relative overflow-hidden bg-white py-24 sm:py-32">
+      <Backdrop variant="section" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="mb-16"
         >
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
-            {t("whoWeHelp.eyebrow")}
-          </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-            {t("whoWeHelp.title")}{" "}
-            <span className="text-[#F37021]">{t("whoWeHelp.titleHighlight")}</span>
-          </h2>
-          <p className="mt-4 text-gray-500 text-lg">
-            {t("whoWeHelp.subtitle")}
-          </p>
+          <SectionHeading
+            title={`${t("whoWeHelp.title")} `}
+            highlight={t("whoWeHelp.titleHighlight")}
+            kicker={t("whoWeHelp.eyebrow")}
+            description={t("whoWeHelp.subtitle")}
+          />
         </motion.div>
 
         <motion.div
@@ -85,27 +52,25 @@ export default function WhoWeHelp() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6"
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6"
         >
           {profiles.map((profile, index) => {
-            const Icon = iconsByIndex[index]
-            const styles = stylesByIndex[index]
+            const Icon = iconsByIndex[index] ?? Briefcase
+            const tone = tonesByIndex[index] ?? "navy"
             return (
-              <motion.div key={index} variants={cardVariants}>
-                <div className={`group h-full bg-white border border-gray-200/80 border-l-4 ${styles.borderColor} rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 sm:p-8 flex flex-col`}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className={`w-14 h-14 rounded-2xl ${styles.iconBg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300`}>
-                      <Icon className={`w-7 h-7 ${styles.iconColor}`} />
-                    </div>
+              <motion.div key={profile.title} variants={cardVariants}>
+                <article className="flex h-full flex-col rounded-3xl border border-navy/15 bg-white p-6 shadow-[0_24px_60px_-30px_rgba(27,43,68,0.18)] sm:p-8">
+                  <div className="mb-4 flex items-start gap-4">
+                    <BrandIconCircle icon={Icon} tone={tone} />
                     <div className="min-w-0">
-                      <h3 className="text-lg font-bold text-[#2A3A4A] leading-snug">
+                      <h3 className="font-display text-lg leading-snug text-navy-deep">
                         {profile.title}
                       </h3>
-                      <div className="flex flex-wrap gap-1.5 mt-2">
+                      <div className="mt-2 flex flex-wrap gap-1.5">
                         {profile.tags.map((tag) => (
                           <span
                             key={tag}
-                            className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${styles.tagStyle}`}
+                            className="rounded-full border border-navy/15 bg-paper px-2 py-0.5 text-[11px] font-medium text-navy"
                           >
                             {tag}
                           </span>
@@ -114,27 +79,29 @@ export default function WhoWeHelp() {
                     </div>
                   </div>
 
-                  <p className="text-gray-500 text-[15px] leading-relaxed flex-1">
+                  <p className="flex-1 text-[15px] leading-relaxed text-ink-muted">
                     {profile.description}
                   </p>
 
-                  <div className={`mt-5 px-4 py-3 rounded-xl ${styles.proofBg}`}>
-                    <p className={`text-xs font-medium ${styles.proofColor} leading-relaxed`}>
-                      <span className="opacity-60 mr-1">{t("whoWeHelp.caseLabel")}</span>
+                  <div className="mt-5 rounded-xl border border-navy/10 bg-paper-warm/70 px-4 py-3">
+                    <p className="text-xs font-medium leading-relaxed text-navy">
+                      <span className="mr-1 text-ink-muted">{t("whoWeHelp.caseLabel")}</span>
                       {profile.proof}
                     </p>
                   </div>
 
-                  <a
-                    href="#quiz"
-                    tabIndex={0}
-                    aria-label={t("whoWeHelp.ariaLabel", { profile: profile.title })}
-                    className={`mt-4 inline-flex items-center gap-1.5 text-sm font-semibold ${styles.iconColor} hover:gap-3 transition-all duration-200`}
-                  >
-                    {t("whoWeHelp.selfCta")}
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
+                  <div className="mt-4">
+                    <CtaButton
+                      label={t("whoWeHelp.selfCta")}
+                      href="#quiz"
+                      variant="secondary"
+                      size="md"
+                      icon={ArrowRight}
+                      ariaLabel={t("whoWeHelp.ariaLabel", { profile: profile.title })}
+                      className="w-full sm:w-auto"
+                    />
+                  </div>
+                </article>
               </motion.div>
             )
           })}
@@ -145,7 +112,7 @@ export default function WhoWeHelp() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-sm text-gray-500 mt-14 font-medium"
+          className="mt-14 text-center text-sm font-medium text-ink-muted"
         >
           {t("whoWeHelp.bridge")}
         </motion.p>

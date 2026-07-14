@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-06 (emails día del evento: mañana, 1h antes y en vivo)
+> Última actualización: 2026-07-14 (BR-03: secciones internas del Home alineadas a marca editorial 2026)
 
 ---
 
@@ -39,6 +39,8 @@
 ## 1. Sitio público
 
 El sitio público está construido en React + Vite y se accede desde la ruta raíz `/`. Es una landing page de una sola página con scroll continuo.
+
+**Sistema visual (marca editorial 2026):** Las secciones del Home (Hero, PainPoints, WhoWeHelp, Quiz, Success/testimonios, Pricing, VipSession y Footer) usan tipografía Playfair Display en titulares, fondos papel (`paper` / `paper-warm`), tarjetas de borde fino navy, iconos en círculos sólidos navy/naranja y el CTA unificado `CtaButton`. La lógica del quiz y los flujos de conversión no cambian; solo el aspecto.
 
 ### 1.1 Navbar
 

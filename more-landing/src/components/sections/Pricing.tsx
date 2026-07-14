@@ -13,10 +13,13 @@ import {
   Eye,
   Shield,
   Send,
+  Check,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
 import { useWhatsappUrl } from "@/hooks/useWhatsappUrl"
+import { SectionHeading } from "@/components/brand/SectionHeading"
+import { CtaButton } from "@/components/brand/CtaButton"
+import { Backdrop } from "@/components/brand/Backdrop"
 
 const featureIconsByPlan = [
   [BookOpen, Video, Users, Target, Users],
@@ -40,23 +43,22 @@ export default function Pricing() {
   }>
 
   return (
-    <section id="programas" className="py-24 sm:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="programas" className="relative overflow-hidden bg-paper py-24 sm:py-32">
+      <Backdrop variant="section" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-8"
+          className="mb-8"
         >
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#F37021]">
-            {t("pricing.eyebrow")}
-          </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-            {t("pricing.title")}{" "}
-            <span className="text-[#F37021]">{t("pricing.titleHighlight")}</span>
-          </h2>
-          <p className="mt-4 text-gray-500 text-lg">{t("pricing.subtitle")}</p>
+          <SectionHeading
+            title={`${t("pricing.title")} `}
+            highlight={t("pricing.titleHighlight")}
+            kicker={t("pricing.eyebrow")}
+            description={t("pricing.subtitle")}
+          />
         </motion.div>
 
         <motion.p
@@ -64,12 +66,12 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center text-gray-500 text-sm max-w-xl mx-auto mb-14 italic"
+          className="mx-auto mb-14 max-w-xl text-center font-display text-sm italic text-ink-muted"
         >
           {t("pricing.costOfInaction")}
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
           {plans.map((plan, index) => {
             const isPopular = index === 1
             const icons = featureIconsByPlan[index] ?? []
@@ -84,37 +86,28 @@ export default function Pricing() {
                 className="relative"
               >
                 {isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A] text-white text-xs font-semibold shadow-lg">
-                      <Star className="w-3 h-3" />
+                  <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-orange px-4 py-1.5 text-xs font-semibold text-white">
+                      <Star className="h-3 w-3" aria-hidden />
                       {t("pricing.mostPopular")}
                     </span>
                   </div>
                 )}
 
                 <div
-                  className={`h-full rounded-3xl p-8 transition-all duration-300 flex flex-col ${
+                  className={`flex h-full flex-col rounded-3xl border p-8 transition-colors duration-300 ${
                     isPopular
-                      ? "bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] text-white shadow-2xl ring-2 ring-[#F37021]/30"
-                      : "bg-white/60 backdrop-blur-sm border border-gray-200/80 shadow-lg hover:shadow-xl"
+                      ? "border-navy-deep bg-navy-deep text-white shadow-[0_24px_60px_-30px_rgba(27,43,68,0.45)]"
+                      : "border-navy/15 bg-white shadow-[0_24px_60px_-30px_rgba(27,43,68,0.18)]"
                   }`}
-                  style={
-                    isPopular
-                      ? {}
-                      : {
-                          background:
-                            "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(249,250,251,0.6) 100%)",
-                          backdropFilter: "blur(20px)",
-                        }
-                  }
                 >
-                  <div className="flex-1 flex flex-col min-h-0 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
+                  <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+                    <div className="mb-2 flex items-center gap-3">
                       <span
-                        className={`text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full ${
+                        className={`rounded-full px-3 py-1 text-xs font-semibold tracking-wider uppercase ${
                           isPopular
-                            ? "bg-[#F37021]/20 text-[#F37021]"
-                            : "bg-[#2A3A4A]/5 text-[#2A3A4A]/60"
+                            ? "bg-orange/20 text-orange-light"
+                            : "bg-paper text-navy/70"
                         }`}
                       >
                         {plan.badge}
@@ -122,8 +115,8 @@ export default function Pricing() {
                     </div>
 
                     <h3
-                      className={`text-xl font-bold mt-3 ${
-                        isPopular ? "text-white" : "text-[#2A3A4A]"
+                      className={`mt-3 font-display text-xl ${
+                        isPopular ? "text-white" : "text-navy-deep"
                       }`}
                     >
                       {plan.name}
@@ -131,7 +124,7 @@ export default function Pricing() {
 
                     <p
                       className={`mt-2 text-sm leading-relaxed ${
-                        isPopular ? "text-white/60" : "text-gray-500"
+                        isPopular ? "text-white/70" : "text-ink-muted"
                       }`}
                     >
                       {plan.description}
@@ -139,15 +132,15 @@ export default function Pricing() {
 
                     <div className="mt-6 mb-6">
                       <span
-                        className={`text-4xl font-bold ${
-                          isPopular ? "text-white" : "text-[#2A3A4A]"
+                        className={`font-display text-4xl font-normal sm:text-5xl ${
+                          isPopular ? "text-white" : "text-navy-deep"
                         }`}
                       >
                         {prices[index]}
                       </span>
                       <span
-                        className={`text-sm ml-2 ${
-                          isPopular ? "text-white/50" : "text-gray-400"
+                        className={`ml-2 text-sm ${
+                          isPopular ? "text-white/50" : "text-ink-muted"
                         }`}
                       >
                         {t("pricing.currency")}
@@ -155,18 +148,19 @@ export default function Pricing() {
                     </div>
 
                     <div
-                      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg mb-6 ${
-                        isPopular ? "bg-white/10" : "bg-gray-100"
+                      className={`mb-6 inline-flex items-center gap-2 rounded-lg px-3 py-1.5 ${
+                        isPopular ? "bg-white/10" : "bg-paper"
                       }`}
                     >
                       <Clock
-                        className={`w-4 h-4 ${
-                          isPopular ? "text-[#F37021]" : "text-gray-400"
+                        className={`h-4 w-4 ${
+                          isPopular ? "text-orange-light" : "text-ink-muted"
                         }`}
+                        aria-hidden
                       />
                       <span
                         className={`text-xs font-medium ${
-                          isPopular ? "text-white/80" : "text-gray-600"
+                          isPopular ? "text-white/80" : "text-navy"
                         }`}
                       >
                         {plan.timeline}
@@ -174,35 +168,42 @@ export default function Pricing() {
                     </div>
 
                     <div
-                      className={`flex items-center gap-2 mb-6 p-3 rounded-xl ${
+                      className={`mb-6 flex items-center gap-2 rounded-xl border p-3 ${
                         isPopular
-                          ? "bg-white/10 border border-white/20"
-                          : "bg-green-50 border border-green-100"
+                          ? "border-white/20 bg-white/10"
+                          : "border-navy/10 bg-paper-warm/70"
                       }`}
                     >
                       <Shield
-                        className={`w-4 h-4 shrink-0 ${
-                          isPopular ? "text-green-300" : "text-green-600"
+                        className={`h-4 w-4 shrink-0 ${
+                          isPopular ? "text-orange-light" : "text-orange-dark"
                         }`}
+                        aria-hidden
                       />
                       <span
                         className={`text-xs font-medium ${
-                          isPopular ? "text-green-200" : "text-green-800"
+                          isPopular ? "text-white/85" : "text-navy"
                         }`}
                       >
                         {t("pricing.riskReversal")}
                       </span>
                     </div>
 
-                    <ul className="space-y-3 mb-8">
+                    <ul className="mb-8 space-y-3">
                       {plan.features.map((feature, fIdx) => {
-                        const Icon = icons[fIdx] ?? BookOpen
+                        const Icon = icons[fIdx] ?? Check
                         return (
-                          <li key={fIdx} className="flex items-start gap-3">
-                            <Icon className="w-4 h-4 mt-0.5 shrink-0 text-[#F37021]" />
+                          <li key={feature} className="flex items-start gap-3">
+                            <span
+                              className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                                isPopular ? "bg-orange text-white" : "bg-navy-deep text-white"
+                              }`}
+                            >
+                              <Icon className="h-3 w-3" aria-hidden />
+                            </span>
                             <span
                               className={`text-sm ${
-                                isPopular ? "text-white/80" : "text-gray-600"
+                                isPopular ? "text-white/80" : "text-ink-muted"
                               }`}
                             >
                               {feature}
@@ -215,11 +216,11 @@ export default function Pricing() {
 
                   <div className="mt-auto pt-6">
                     {plan.ratingValue && plan.ratingText && (
-                      <div className="flex flex-col items-center gap-1 mb-4 text-xs">
+                      <div className="mb-4 flex flex-col items-center gap-1 text-xs">
                         <div className="flex items-center gap-1">
                           <span
-                            className={`font-semibold mr-1 ${
-                              isPopular ? "text-white" : "text-[#2A3A4A]"
+                            className={`mr-1 font-semibold ${
+                              isPopular ? "text-white" : "text-navy-deep"
                             }`}
                           >
                             {plan.ratingValue}
@@ -227,35 +228,25 @@ export default function Pricing() {
                           {Array.from({ length: 5 }).map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-4 h-4 ${
-                                isPopular ? "text-yellow-300" : "text-yellow-400"
+                              className={`h-4 w-4 ${
+                                isPopular ? "fill-orange-light text-orange-light" : "fill-orange text-orange"
                               }`}
+                              aria-hidden
                             />
                           ))}
                         </div>
-                        <span
-                          className={`${
-                            isPopular ? "text-white/80" : "text-gray-600"
-                          }`}
-                        >
+                        <span className={isPopular ? "text-white/80" : "text-ink-muted"}>
                           {plan.ratingText}
                         </span>
                       </div>
                     )}
-                    {isPopular ? (
-                      <Button variant="gold" className="w-full gap-2" size="lg" asChild>
-                        <a href={whatsappUrl(plan.whatsappMsg)} target="_blank" rel="noopener noreferrer">
-                          <MessageCircle className="w-4 h-4" />
-                          {plan.cta}
-                        </a>
-                      </Button>
-                    ) : (
-                      <Button variant="outline" className="w-full gap-2" size="lg" asChild>
-                        <a href={whatsappUrl(plan.whatsappMsg)} target="_blank" rel="noopener noreferrer">
-                          {plan.cta}
-                        </a>
-                      </Button>
-                    )}
+                    <CtaButton
+                      label={plan.cta}
+                      href={whatsappUrl(plan.whatsappMsg)}
+                      variant={isPopular ? "whatsapp" : "secondary"}
+                      size="lg"
+                      icon={isPopular ? MessageCircle : undefined}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -268,7 +259,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-sm text-gray-400 mt-14 italic"
+          className="mt-14 text-center text-sm italic text-ink-muted"
         >
           {t("pricing.bridge")}
         </motion.p>

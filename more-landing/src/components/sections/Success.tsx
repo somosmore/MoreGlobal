@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Quote, Scale, User, ArrowRight, Video } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
 import { CtaButton } from "@/components/brand/CtaButton"
+import { SectionHeading } from "@/components/brand/SectionHeading"
 import {
   supabase,
   CATEGORY_LABELS,
@@ -82,46 +82,46 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   })
 
   return (
-    <Card className="border-0 shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
-      <CardContent className="p-5 sm:p-6 flex flex-col flex-1">
-        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#2A3A4A]/10 text-[#2A3A4A] text-xs font-medium w-fit mb-3">
+    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-navy/15 bg-white shadow-[0_24px_60px_-30px_rgba(27,43,68,0.18)]">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <span className="mb-3 inline-flex w-fit items-center rounded-full border border-navy/15 bg-paper px-2.5 py-1 text-xs font-medium text-navy">
           {categoryLabel}
         </span>
-        <div className="flex items-center gap-3 mb-3">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center shrink-0">
+        <div className="mb-3 flex items-center gap-3">
+          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-navy-deep">
             {testimonial.photo_url ? (
               <img
                 src={testimonial.photo_url}
                 alt={testimonial.name}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover z-10"
+                className="absolute inset-0 z-10 h-full w-full object-cover"
                 onError={(e) => {
                   e.currentTarget.style.display = "none"
                 }}
               />
             ) : null}
-            <User className="w-6 h-6 text-[#F37021] relative z-0" />
+            <User className="relative z-0 h-6 w-6 text-orange-light" aria-hidden />
           </div>
           <div className="min-w-0">
-            <h4 className="font-bold text-[#2A3A4A] text-base truncate">{testimonial.name}</h4>
+            <h4 className="truncate font-display text-base text-navy-deep">{testimonial.name}</h4>
             {(testimonial.country || testimonial.role) && (
-              <p className="text-xs text-gray-500 truncate">
+              <p className="truncate text-xs text-ink-muted">
                 {[testimonial.country, testimonial.role].filter(Boolean).join(" · ")}
               </p>
             )}
           </div>
         </div>
-        <Quote className="w-6 h-6 text-[#F37021]/20 mb-2" />
-        <p className="text-gray-600 text-sm leading-relaxed italic flex-1 line-clamp-4 whitespace-pre-line">
+        <Quote className="mb-2 h-6 w-6 text-orange/30" aria-hidden />
+        <p className="flex-1 whitespace-pre-line text-sm leading-relaxed italic text-ink-muted line-clamp-4">
           &ldquo;{testimonial.quote}&rdquo;
         </p>
         {displayTimeline && (
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium mt-3 w-fit">
+          <span className="mt-3 inline-flex w-fit items-center rounded-full border border-navy/10 bg-paper-warm px-2.5 py-1 text-xs font-medium text-navy">
             {displayTimeline}
           </span>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </article>
   )
 }
 
@@ -179,90 +179,88 @@ function VideoTestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const name = testimonial.name
 
   return (
-    <Card className="border-0 shadow-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow">
-      <CardContent className="p-0 flex flex-col flex-1">
-        <div className="relative aspect-video bg-[#2A3A4A]">
-          {playing && embedUrl ? (
-            <iframe
-              src={embedUrl}
-              title={t("success.videoIframeTitle", { name })}
-              className="absolute inset-0 w-full h-full"
-              allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          ) : (
-            <>
-              {previewImageUrl && !thumbnailError ? (
-                <img
-                  src={previewImageUrl}
-                  alt={t("success.videoThumbnailAlt", { name })}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  onError={() => setThumbnailError(true)}
-                />
-              ) : null}
-              {(!previewImageUrl || thumbnailError) && (
-                <div className="absolute inset-0 flex items-center justify-center bg-[#2A3A4A]">
-                  <Video className="w-10 h-10 text-white/45" />
-                </div>
-              )}
+    <article className="flex flex-col overflow-hidden rounded-3xl border border-navy/15 bg-white shadow-[0_24px_60px_-30px_rgba(27,43,68,0.18)]">
+      <div className="relative aspect-video bg-navy-deep">
+        {playing && embedUrl ? (
+          <iframe
+            src={embedUrl}
+            title={t("success.videoIframeTitle", { name })}
+            className="absolute inset-0 h-full w-full"
+            allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            {previewImageUrl && !thumbnailError ? (
+              <img
+                src={previewImageUrl}
+                alt={t("success.videoThumbnailAlt", { name })}
+                className="absolute inset-0 h-full w-full object-cover"
+                onError={() => setThumbnailError(true)}
+              />
+            ) : null}
+            {(!previewImageUrl || thumbnailError) && (
+              <div className="absolute inset-0 flex items-center justify-center bg-navy-deep">
+                <Video className="h-10 w-10 text-white/45" aria-hidden />
+              </div>
+            )}
 
-              {embedUrl ? (
-                <button
-                  type="button"
-                  aria-label={t("success.videoPlayAria", { name })}
-                  tabIndex={0}
-                  onClick={handlePlay}
-                  onKeyDown={handleKeyDownPlay}
-                  className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
-                >
-                  <span className="w-16 h-16 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-xl">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-7 h-7 text-[#F37021] translate-x-0.5"
-                      aria-hidden="true"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                </button>
-              ) : testimonial.video_url ? (
-                <a
-                  href={testimonial.video_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t("success.videoExternalAria", { name })}
-                  className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors text-white"
-                >
-                  <span className="text-sm font-medium">{t("success.watchVideo")}</span>
-                </a>
-              ) : null}
-            </>
-          )}
-        </div>
+            {embedUrl ? (
+              <button
+                type="button"
+                aria-label={t("success.videoPlayAria", { name })}
+                tabIndex={0}
+                onClick={handlePlay}
+                onKeyDown={handleKeyDownPlay}
+                className="group absolute inset-0 flex h-full w-full items-center justify-center bg-black/30 transition-colors hover:bg-black/40"
+              >
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 transition-all duration-200 group-hover:scale-105 group-hover:bg-white">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-7 w-7 translate-x-0.5 text-orange"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </button>
+            ) : testimonial.video_url ? (
+              <a
+                href={testimonial.video_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("success.videoExternalAria", { name })}
+                className="absolute inset-0 flex items-center justify-center bg-black/30 text-white transition-colors hover:bg-black/40"
+              >
+                <span className="text-sm font-medium">{t("success.watchVideo")}</span>
+              </a>
+            ) : null}
+          </>
+        )}
+      </div>
 
-        <div className="px-4 py-3 flex flex-col gap-1 bg-white">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E] flex items-center justify-center shrink-0">
-              <User className="w-3.5 h-3.5 text-[#F37021]" />
-            </div>
-            <div className="min-w-0">
-              <p className="font-bold text-[#2A3A4A] text-sm truncate">{testimonial.name}</p>
-              {(testimonial.country || testimonial.role) && (
-                <p className="text-xs text-gray-400 truncate">
-                  {[testimonial.country, testimonial.role].filter(Boolean).join(" · ")}
-                </p>
-              )}
-            </div>
+      <div className="flex flex-col gap-1 bg-white px-4 py-3">
+        <div className="flex items-center gap-2">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy-deep">
+            <User className="h-3.5 w-3.5 text-orange-light" aria-hidden />
           </div>
-          {displayTimeline && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-green-50 text-green-700 text-xs font-medium w-fit mt-0.5">
-              {displayTimeline}
-            </span>
-          )}
+          <div className="min-w-0">
+            <p className="truncate font-display text-sm text-navy-deep">{testimonial.name}</p>
+            {(testimonial.country || testimonial.role) && (
+              <p className="truncate text-xs text-ink-muted">
+                {[testimonial.country, testimonial.role].filter(Boolean).join(" · ")}
+              </p>
+            )}
+          </div>
         </div>
-      </CardContent>
-    </Card>
+        {displayTimeline && (
+          <span className="mt-0.5 inline-flex w-fit items-center rounded-full border border-navy/10 bg-paper-warm px-2 py-0.5 text-xs font-medium text-navy">
+            {displayTimeline}
+          </span>
+        )}
+      </div>
+    </article>
   )
 }
 
@@ -313,8 +311,8 @@ export default function Success() {
   ]
 
   return (
-    <section id="exito" className="py-28 sm:py-36 bg-gray-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="exito" className="relative overflow-hidden bg-paper-warm py-28 sm:py-36">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -322,117 +320,113 @@ export default function Success() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-[#2A3A4A] to-[#3A4D5E]">
-            <CardContent className="p-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Scale className="w-5 h-5 text-[#F37021]" />
-                    <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#F37021]">
-                      {t("success.eyebrow")}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                    {t("success.ivonName")}
-                  </h3>
-                  <p className="text-white/50 text-sm font-medium mb-1">
-                    {t("success.ivonTitle")}
-                  </p>
-                  <p className="text-[#F37021] text-sm font-medium mb-5">
-                    {t("success.ivonExpertise")}
-                  </p>
+          <div className="overflow-hidden rounded-3xl border border-navy/15 bg-navy-deep shadow-[0_24px_60px_-30px_rgba(27,43,68,0.45)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+                <div className="mb-3 flex items-center gap-3">
+                  <Scale className="h-5 w-5 text-orange-light" aria-hidden />
+                  <span className="font-display text-sm italic text-orange-light">
+                    {t("success.eyebrow")}
+                  </span>
+                </div>
+                <h3 className="mb-1 font-display text-2xl text-white sm:text-3xl">
+                  {t("success.ivonName")}
+                </h3>
+                <p className="mb-1 text-sm font-medium text-white/50">
+                  {t("success.ivonTitle")}
+                </p>
+                <p className="mb-5 text-sm font-medium text-orange-light">
+                  {t("success.ivonExpertise")}
+                </p>
 
-                  <div
-                    className="min-h-[140px] sm:min-h-[160px] mb-6 flex flex-col justify-center"
-                    onMouseEnter={() => setIvonPaused(true)}
-                    onMouseLeave={() => setIvonPaused(false)}
-                  >
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeIvonSlide}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.4 }}
-                        className="flex flex-col justify-center"
+                <div
+                  className="mb-6 flex min-h-[140px] flex-col justify-center sm:min-h-[160px]"
+                  onMouseEnter={() => setIvonPaused(true)}
+                  onMouseLeave={() => setIvonPaused(false)}
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIvonSlide}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.4 }}
+                      className="flex flex-col justify-center"
+                    >
+                      <p
+                        className={`leading-[1.65] text-white/75 ${
+                          activeIvonSlide === 0
+                            ? "text-[15px] font-medium sm:text-base"
+                            : "text-[14px] sm:text-[15px]"
+                        }`}
                       >
-                        <p
-                          className={`text-white/75 leading-[1.65] ${
-                            activeIvonSlide === 0
-                              ? "text-[15px] sm:text-base font-medium"
-                              : "text-[14px] sm:text-[15px]"
-                          }`}
-                        >
-                          {ivonSlides[activeIvonSlide]}
-                        </p>
-                      </motion.div>
-                    </AnimatePresence>
+                        {ivonSlides[activeIvonSlide]}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
 
-                    <div className="flex justify-center gap-2 mt-4">
-                      {ivonSlides.map((_, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => setActiveIvonSlide(i)}
-                          className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                            i === activeIvonSlide
-                              ? "w-6 bg-[#F37021]"
-                              : "w-1.5 bg-white/30 hover:bg-white/50"
-                          }`}
-                          aria-label={t("success.slideAriaLabel", { slide: i + 1 })}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-4">
-                    {ivonStats.map((stat) => (
-                      <div key={stat.label} className="text-center">
-                        <div className="text-2xl sm:text-3xl font-bold text-[#F37021]">
-                          {stat.value}
-                        </div>
-                        <div className="text-xs text-white/50 mt-1">
-                          {stat.label}
-                        </div>
-                      </div>
+                  <div className="mt-4 flex justify-center gap-2">
+                    {ivonSlides.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setActiveIvonSlide(i)}
+                        className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${
+                          i === activeIvonSlide
+                            ? "w-6 bg-orange"
+                            : "w-1.5 bg-white/30 hover:bg-white/50"
+                        }`}
+                        aria-label={t("success.slideAriaLabel", { slide: i + 1 })}
+                      />
                     ))}
                   </div>
                 </div>
 
-                <div className="flex flex-col h-full min-h-0">
-                  <div className="relative w-full flex-1 min-h-[320px] aspect-[4/5] sm:aspect-[16/10] lg:aspect-auto lg:min-h-0 lg:h-full overflow-hidden">
-                    <img
-                      src="/ivon.png"
-                      alt={t("success.ivonImageAlt")}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover object-[center_67%]"
-                    />
-                    <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#2A3A4A]/95 via-[#2A3A4A]/40 to-transparent" />
-                    <div className="hidden lg:block absolute bottom-0 left-0 right-0 pl-8 pr-8 pt-6 pb-0 sm:pl-10 sm:pr-10 sm:pt-6 lg:pl-12 lg:pr-12 lg:pt-8 text-left">
-                      <p className="text-white/95 text-sm sm:text-base italic leading-relaxed max-w-xl h-0">
-                        &ldquo;{t("success.ivonQuote")}&rdquo;
-                      </p>
-                      <img
-                        src="/logo_more_dark.png"
-                        alt={t("success.logoAlt")}
-                        className="h-40 mt-2 opacity-90 w-auto"
-                      />
+                <div className="grid grid-cols-3 gap-4">
+                  {ivonStats.map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <div className="font-display text-2xl text-orange-light sm:text-3xl">
+                        {stat.value}
+                      </div>
+                      <div className="mt-1 text-xs text-white/50">{stat.label}</div>
                     </div>
-                  </div>
-                  <div className="lg:hidden bg-[#2A3A4A] px-6 py-5 sm:px-8 sm:py-6">
-                    <p className="text-white/95 text-sm sm:text-base italic leading-relaxed mb-4">
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex h-full min-h-0 flex-col">
+                <div className="relative aspect-[4/5] w-full min-h-[320px] flex-1 overflow-hidden sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-0">
+                  <img
+                    src="/ivon.png"
+                    alt={t("success.ivonImageAlt")}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover object-[center_67%]"
+                  />
+                  <div className="absolute inset-0 hidden bg-gradient-to-t from-navy-deep/95 via-navy-deep/40 to-transparent lg:block" />
+                  <div className="absolute right-0 bottom-0 left-0 hidden pt-6 pr-8 pb-0 pl-8 text-left sm:pt-6 sm:pr-10 sm:pl-10 lg:block lg:pt-8 lg:pr-12 lg:pl-12">
+                    <p className="h-0 max-w-xl text-sm leading-relaxed text-white/95 italic sm:text-base">
                       &ldquo;{t("success.ivonQuote")}&rdquo;
                     </p>
                     <img
                       src="/logo_more_dark.png"
                       alt={t("success.logoAlt")}
-                      className="h-12 sm:h-14 w-auto opacity-90"
+                      className="mt-2 h-40 w-auto opacity-90"
                     />
                   </div>
                 </div>
+                <div className="bg-navy-deep px-6 py-5 sm:px-8 sm:py-6 lg:hidden">
+                  <p className="mb-4 text-sm leading-relaxed text-white/95 italic sm:text-base">
+                    &ldquo;{t("success.ivonQuote")}&rdquo;
+                  </p>
+                  <img
+                    src="/logo_more_dark.png"
+                    alt={t("success.logoAlt")}
+                    className="h-12 w-auto opacity-90 sm:h-14"
+                  />
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -440,20 +434,13 @@ export default function Success() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center max-w-2xl mx-auto mb-20"
+          className="mb-20"
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2A3A4A] tracking-tight">
-            <span className="text-[#F37021]">{t("success.casesTitleLead")}</span>{" "}
-            {t("success.casesTitleMid")}{" "}
-            <span className="text-[#F37021]">{t("success.casesTitleHighlight")}</span>
-          </h2>
-          <p className="mt-5 text-base sm:text-lg text-gray-600 leading-relaxed">
-            <span className="font-semibold text-[#2A3A4A]">{t("success.casesStrong1")}</span>
-            {t("success.casesSubBefore")}
-            <span className="font-semibold text-[#2A3A4A]">{t("success.casesStrong2")}</span>
-            {t("success.casesSubAfter")}
-            <span className="font-semibold text-[#F37021]">{t("success.casesSubHighlight")}</span>
-          </p>
+          <SectionHeading
+            title={`${t("success.casesTitleLead")} ${t("success.casesTitleMid")} `}
+            highlight={t("success.casesTitleHighlight")}
+            description={`${t("success.casesStrong1")}${t("success.casesSubBefore")}${t("success.casesStrong2")}${t("success.casesSubAfter")}${t("success.casesSubHighlight")}`}
+          />
         </motion.div>
 
         <motion.div
@@ -463,17 +450,15 @@ export default function Success() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {loading ? (
-            <div className="text-center py-12 text-gray-500">
-              {t("success.loading")}
-            </div>
+            <div className="py-12 text-center text-ink-muted">{t("success.loading")}</div>
           ) : textPhotoTestimonials.length === 0 && videoTestimonials.length === 0 ? (
-            <div className="text-center py-12 text-gray-500 max-w-md mx-auto">
+            <div className="mx-auto max-w-md py-12 text-center text-ink-muted">
               {t("success.empty")}
             </div>
           ) : (
             <>
               {textPhotoTestimonials.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   <AnimatePresence mode="popLayout">
                     {textPhotoTestimonials.map((item, i) => (
                       <motion.div
@@ -497,19 +482,17 @@ export default function Success() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6 }}
-                  className="mt-24 pt-16 border-t border-gray-200"
+                  className="mt-24 border-t border-navy/10 pt-16"
                 >
-                  <div className="text-center max-w-xl mx-auto mb-12">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-[#2A3A4A] tracking-tight">
-                      {t("success.videoTitleLead")}{" "}
-                      <span className="text-[#F37021]">{t("success.videoTitleHighlight")}</span>
-                    </h3>
-                    <p className="mt-3 text-base text-gray-500">
-                      {t("success.videoSubtitle")}
-                    </p>
+                  <div className="mx-auto mb-12 max-w-xl">
+                    <SectionHeading
+                      title={`${t("success.videoTitleLead")} `}
+                      highlight={t("success.videoTitleHighlight")}
+                      description={t("success.videoSubtitle")}
+                    />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {videoTestimonials.map((item, i) => (
                       <motion.div
                         key={item.id}
@@ -530,7 +513,7 @@ export default function Success() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="mt-14 flex flex-col items-center gap-3 text-center"
                   >
-                    <p className="text-sm text-gray-500 font-medium">
+                    <p className="text-sm font-medium text-ink-muted">
                       {t("success.videoIdentify")}
                     </p>
                     <CtaButton
@@ -553,7 +536,7 @@ export default function Success() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-base font-semibold text-[#2A3A4A] mt-16"
+          className="mt-16 text-center font-display text-base text-navy-deep"
         >
           {t("success.bridgePricing")}
         </motion.p>

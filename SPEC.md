@@ -541,13 +541,14 @@
   `hooks/useOfferWindow.ts`.
   Pendiente: aplicar `supabase/migrations/029_landing_countdowns.sql` en producción.
 
-- [ ] **BR-03 (Sprint 3): Quiz, PainPoints, WhoWeHelp, Pricing, Success**
-  Asignado: — | Estado: ⬚ libre
+- [x] **BR-03 (Sprint 3): Quiz, PainPoints, WhoWeHelp, Pricing, Success**
+  Asignado: cursor | Estado: ✅ completo
   Depende de: BR-02
   Migrar las secciones internas de la landing al sistema: encabezados con kicker,
   tarjetas de borde fino sobre papel, iconos duotono, CTA pastilla naranja.
   El quiz mantiene su lógica intacta (`lib/quizLogic.ts` solo lectura).
-  Archivos: `src/components/sections/{Quiz,PainPoints,WhoWeHelp,Pricing,Success}.tsx`
+  Archivos: `src/components/sections/{Quiz,PainPoints,WhoWeHelp,Pricing,Success}.tsx`,
+  `src/components/brand/BrandIconCircle.tsx`
   Criterio de éxito: ninguna sección conserva `blur-3xl`, `bg-clip-text` ni sombras naranjas.
 
 - [ ] **BR-04 (Sprint 4): Landings de campaña (masterclass, taller-niw, UPP)**
