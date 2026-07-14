@@ -206,6 +206,7 @@ export default function Quiz() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (leadSubmitting) return
     if (!leadForm.nombre.trim() || !leadForm.email.trim()) return
 
     setLeadSubmitting(true)
@@ -1050,10 +1051,9 @@ export default function Quiz() {
                     <CtaButton
                       label={t("quiz.seeMyEvaluation")}
                       icon={Sparkles}
-                      onClick={() => {
-                        if (canProceed()) computeDiagnosis()
-                      }}
-                      className={!canProceed() ? "pointer-events-none opacity-50" : "w-auto"}
+                      disabled={!canProceed()}
+                      onClick={() => computeDiagnosis()}
+                      className="w-auto"
                       ariaLabel={t("quiz.seeMyEvaluation")}
                     />
                   )}
@@ -1106,11 +1106,9 @@ export default function Quiz() {
                           <CtaButton
                             label={leadSubmitting ? t("quiz.submitting") : t("quiz.submitCta")}
                             icon={Send}
-                            onClick={(e) => {
-                              const form = (e.currentTarget as HTMLElement).closest("form")
-                              form?.requestSubmit()
-                            }}
-                            className={`flex-1 ${leadSubmitting ? "pointer-events-none opacity-50" : ""}`}
+                            type="submit"
+                            disabled={leadSubmitting}
+                            className="flex-1"
                           />
                           <Button
                             type="button"

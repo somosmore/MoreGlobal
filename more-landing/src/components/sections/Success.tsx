@@ -436,11 +436,22 @@ export default function Success() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-20"
         >
-          <SectionHeading
-            title={`${t("success.casesTitleLead")} ${t("success.casesTitleMid")} `}
-            highlight={t("success.casesTitleHighlight")}
-            description={`${t("success.casesStrong1")}${t("success.casesSubBefore")}${t("success.casesStrong2")}${t("success.casesSubAfter")}${t("success.casesSubHighlight")}`}
-          />
+          <header className="text-center">
+            <h2 className="text-balance font-display text-3xl leading-tight text-navy-deep sm:text-4xl lg:text-[2.75rem]">
+              <span className="text-orange">{t("success.casesTitleLead")}</span>{" "}
+              {t("success.casesTitleMid")}{" "}
+              <span className="text-orange">{t("success.casesTitleHighlight")}</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl font-sans text-[15px] leading-relaxed text-ink-muted sm:text-base">
+              <span className="font-semibold text-navy-deep">{t("success.casesStrong1")}</span>
+              {t("success.casesSubBefore")}
+              <span className="font-semibold text-navy-deep">{t("success.casesStrong2")}</span>
+              {t("success.casesSubAfter")}
+              <span className="font-semibold text-orange-dark">
+                {t("success.casesSubHighlight")}
+              </span>
+            </p>
+          </header>
         </motion.div>
 
         <motion.div

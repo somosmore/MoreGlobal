@@ -22,6 +22,10 @@ type CtaButtonProps = {
   loading?: boolean
   /** Texto del estado deshabilitado (cuando no hay destino configurado). */
   disabledLabel?: string
+  /** Deshabilita el CTA (atributo HTML real; no solo CSS). */
+  disabled?: boolean
+  /** Tipo del botón nativo. Usar `submit` dentro de formularios. */
+  type?: "button" | "submit"
   icon?: LucideIcon | null
   /** Dispara el evento de agendamiento (Meta/GTM/GA4) al hacer clic. */
   trackSchedule?: boolean
@@ -46,6 +50,9 @@ const SIZES: Record<CtaSize, string> = {
 const BASE =
   "cta-shine inline-flex w-full items-center justify-center gap-2 rounded-full font-sans font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
 
+const DISABLED =
+  "cursor-not-allowed opacity-50 shadow-none hover:shadow-none hover:bg-inherit"
+
 /**
  * CTA único del sitio: pastilla naranja con barrido de luz y elevación
  * (ver `.cta-shine` en index.css). Sirve como <a>, <Link> o <button>.
@@ -59,6 +66,8 @@ export const CtaButton = ({
   size = "md",
   loading,
   disabledLabel,
+  disabled = false,
+  type = "button",
   icon = CalendarDays,
   trackSchedule = false,
   ariaLabel,
@@ -66,10 +75,20 @@ export const CtaButton = ({
 }: CtaButtonProps) => {
   const { settings } = useSiteSettings()
 
-  const classes = cn(BASE, VARIANTS[variant], SIZES[size], className)
+  const classes = cn(
+    BASE,
+    VARIANTS[variant],
+    SIZES[size],
+    disabled && DISABLED,
+    className,
+  )
   const Icon = icon
 
   const handleClick: MouseEventHandler<HTMLElement> = (event) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
     if (trackSchedule) void trackScheduleCta(settings)
     onClick?.(event)
   }
@@ -93,7 +112,7 @@ export const CtaButton = ({
     )
   }
 
-  if (to) {
+  if (to && !disabled) {
     return (
       <Link to={to} onClick={handleClick} aria-label={ariaLabel ?? label} className={classes}>
         {content}
@@ -101,8 +120,7 @@ export const CtaButton = ({
     )
   }
 
-  if (href) {
-    // Un ancla de la misma página no debe abrirse en una pestaña nueva.
+  if (href && !disabled) {
     const isAnchor = href.startsWith("#")
 
     return (
@@ -119,15 +137,20 @@ export const CtaButton = ({
     )
   }
 
-  if (onClick) {
+  if (onClick || type === "submit" || disabled) {
     return (
-      <button type="button" onClick={handleClick} aria-label={ariaLabel ?? label} className={classes}>
+      <button
+        type={type}
+        disabled={disabled}
+        onClick={onClick || trackSchedule ? handleClick : undefined}
+        aria-label={ariaLabel ?? label}
+        className={classes}
+      >
         {content}
       </button>
     )
   }
 
-  // Sin destino configurado: el CTA queda inerte pero visible.
   return (
     <button
       type="button"

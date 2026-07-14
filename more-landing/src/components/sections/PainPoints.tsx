@@ -45,8 +45,14 @@ export default function PainPoints() {
           <SectionHeading
             title={t("painPoints.title")}
             kicker={t("painPoints.eyebrow")}
-            description={`${t("painPoints.subtitle")} ${t("painPoints.subtitleHighlight")}.`}
           />
+          <p className="mx-auto mt-4 max-w-2xl text-center font-sans text-[15px] leading-relaxed text-ink-muted sm:text-base">
+            {t("painPoints.subtitle")}{" "}
+            <span className="font-semibold text-orange-dark">
+              {t("painPoints.subtitleHighlight")}
+            </span>
+            .
+          </p>
         </motion.div>
 
         <motion.div

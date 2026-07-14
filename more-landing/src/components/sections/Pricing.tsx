@@ -245,7 +245,7 @@ export default function Pricing() {
                       href={whatsappUrl(plan.whatsappMsg)}
                       variant={isPopular ? "whatsapp" : "secondary"}
                       size="lg"
-                      icon={isPopular ? MessageCircle : undefined}
+                      icon={isPopular ? MessageCircle : null}
                     />
                   </div>
                 </div>
