@@ -35,7 +35,7 @@ export default function MCFAQ() {
         transition={{ duration: 0.5 }}
         className="max-w-2xl mx-auto px-4 sm:px-6"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center mb-6">
+        <h2 className="mb-6 text-center font-display text-2xl font-bold text-navy-deep sm:text-3xl">
           Preguntas frecuentes
         </h2>
 
@@ -43,7 +43,7 @@ export default function MCFAQ() {
           <Accordion type="single" collapsible>
             {faqs.map((faq, i) => (
               <AccordionItem key={i} value={`faq-${i}`}>
-                <AccordionTrigger className="text-left text-[#1A2340] text-sm sm:text-base">
+                <AccordionTrigger className="text-left text-sm text-navy-deep sm:text-base">
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="text-[#6B7A9A] text-sm leading-relaxed">

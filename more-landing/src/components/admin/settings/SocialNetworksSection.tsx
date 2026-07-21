@@ -85,11 +85,11 @@ export default function SocialNetworksSection({
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#F37021]/10 flex items-center justify-center">
-          <Instagram className="w-4 h-4 text-[#F37021]" />
+        <div className="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center">
+          <Instagram className="w-4 h-4 text-orange" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             Redes Sociales
           </h2>
           <p className="text-xs text-gray-400">
@@ -112,7 +112,7 @@ export default function SocialNetworksSection({
                 <div key={id} className="space-y-1.5">
                   <label
                     htmlFor={id}
-                    className="flex items-center gap-2 text-sm font-medium text-[#2A3A4A]"
+                    className="flex items-center gap-2 text-sm font-medium text-navy"
                   >
                     <Icon className="w-4 h-4 text-gray-400" aria-hidden="true" />
                     {label}
@@ -131,7 +131,7 @@ export default function SocialNetworksSection({
                         ${
                           invalid
                             ? "border-red-300 bg-red-50 focus:border-red-400"
-                            : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                            : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                         }`}
                     />
                     {value.trim() && !invalid && (
@@ -140,7 +140,7 @@ export default function SocialNetworksSection({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Probar enlace de ${label}`}
-                        className="shrink-0 text-[#F37021] hover:text-[#D4611A] transition-colors"
+                        className="shrink-0 text-orange hover:text-orange-dark transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -174,7 +174,7 @@ export default function SocialNetworksSection({
               <button
                 onClick={handleSaveSocial}
                 disabled={socialSaveState === "saving" || socialUrlInvalid}
-                className="inline-flex items-center gap-2 bg-[#F37021] hover:bg-[#D4611A] disabled:bg-gray-200 disabled:text-gray-400
+                className="inline-flex items-center gap-2 bg-orange hover:bg-orange-dark disabled:bg-gray-200 disabled:text-gray-400
                   text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
               >
                 {socialSaveState === "saving" ? (

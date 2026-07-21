@@ -106,11 +106,11 @@ export default function TrackingSection({
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#F37021]/10 flex items-center justify-center">
-          <LineChart className="w-4 h-4 text-[#F37021]" aria-hidden="true" />
+        <div className="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center">
+          <LineChart className="w-4 h-4 text-orange" aria-hidden="true" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             Medición y píxeles
           </h2>
           <p className="text-xs text-gray-400">
@@ -144,7 +144,7 @@ export default function TrackingSection({
 
             {/* Estado actual */}
             <div className="rounded-xl border border-gray-100 bg-gray-50/80 p-4 space-y-3">
-              <p className="text-xs font-semibold text-[#2A3A4A] uppercase tracking-wide">
+              <p className="text-xs font-semibold text-navy uppercase tracking-wide">
                 Estado actual
               </p>
               <div className="grid sm:grid-cols-2 gap-2">
@@ -186,9 +186,9 @@ export default function TrackingSection({
             {/* Guía colapsable */}
             <Accordion type="single" collapsible className="rounded-xl border border-slate-100 bg-slate-50">
               <AccordionItem value="guia" className="border-b-0">
-                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-[#2A3A4A]">
+                <AccordionTrigger className="px-4 py-3 text-sm font-semibold text-navy">
                   <span className="flex items-center gap-2">
-                    <Info className="w-4 h-4 text-[#F37021] shrink-0" aria-hidden="true" />
+                    <Info className="w-4 h-4 text-orange shrink-0" aria-hidden="true" />
                     Guía de medición y eventos
                   </span>
                 </AccordionTrigger>
@@ -200,7 +200,7 @@ export default function TrackingSection({
                       en Meta Ads (Facebook / Instagram).
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">
+                      <strong className="text-navy">
                         PageView (virtual):
                       </strong>{" "}
                       en cada cambio de ruta del sitio público el navegador
@@ -208,7 +208,7 @@ export default function TrackingSection({
                       navegación real (SPA).
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">
+                      <strong className="text-navy">
                         ViewContent (masterclass):
                       </strong>{" "}
                       al entrar a <code className="font-mono">/masterclass</code>{" "}
@@ -218,24 +218,24 @@ export default function TrackingSection({
                       landing.
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">Lead:</strong> se
+                      <strong className="text-navy">Lead:</strong> se
                       registra cuando el visitante envía el quiz de diagnóstico
                       y el lead se guarda correctamente.
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">
+                      <strong className="text-navy">
                         CompleteRegistration:
                       </strong>{" "}
                       se dispara al registro exitoso del formulario de
                       masterclass.
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">Schedule:</strong> se
+                      <strong className="text-navy">Schedule:</strong> se
                       registra al hacer clic en el CTA que abre el calendario o
                       el pago de Asesoría VIP.
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">
+                      <strong className="text-navy">
                         Google Tag Manager (GTM):
                       </strong>{" "}
                       contenedor para cargar Meta, GA4 u otras etiquetas sin
@@ -243,13 +243,13 @@ export default function TrackingSection({
                       ID de Meta vacío aquí para evitar duplicar el mismo píxel.
                     </li>
                     <li>
-                      <strong className="text-[#2A3A4A]">GA4 (G-):</strong> ID
+                      <strong className="text-navy">GA4 (G-):</strong> ID
                       de medición de Google Analytics 4. Solo se usa si{" "}
                       <strong>no</strong> delegas GA4 dentro de GTM.
                     </li>
                   </ul>
 
-                  <p className="mt-4 text-xs font-semibold text-[#2A3A4A] uppercase tracking-wide">
+                  <p className="mt-4 text-xs font-semibold text-navy uppercase tracking-wide">
                     Eventos que envía esta web
                   </p>
                   <p className="text-[11px] text-gray-500 mb-2">
@@ -288,7 +288,7 @@ export default function TrackingSection({
                         className="rounded-lg border border-gray-100 bg-white p-3 text-xs space-y-1"
                       >
                         <div className="flex items-center justify-between gap-2">
-                          <span className="font-mono text-[#2A3A4A] font-semibold">
+                          <span className="font-mono text-navy font-semibold">
                             {row.meta}
                           </span>
                           <span className="font-mono text-gray-500 text-[10px] truncate">
@@ -305,7 +305,7 @@ export default function TrackingSection({
                     href="https://developers.facebook.com/docs/meta-pixel"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-1 text-xs text-[#F37021] font-medium hover:underline"
+                    className="mt-4 inline-flex items-center gap-1 text-xs text-orange font-medium hover:underline"
                   >
                     Documentación Meta Pixel
                     <ExternalLink className="w-3 h-3" aria-hidden="true" />
@@ -329,7 +329,7 @@ export default function TrackingSection({
                 <label
                   id="tracking-enabled-label"
                   htmlFor="tracking-enabled"
-                  className="text-sm font-medium text-[#2A3A4A] cursor-pointer"
+                  className="text-sm font-medium text-navy cursor-pointer"
                 >
                   Medición activa en el sitio público
                 </label>
@@ -343,7 +343,7 @@ export default function TrackingSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="google-tag-manager-id"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 ID contenedor Google Tag Manager (opcional)
               </label>
@@ -361,7 +361,7 @@ export default function TrackingSection({
                   ${
                     gtmInvalid
                       ? "border-red-300 bg-red-50 focus:border-red-400"
-                      : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                      : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                   }`}
               />
               {gtmInvalid && (
@@ -375,7 +375,7 @@ export default function TrackingSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="meta-pixel-id"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 ID del píxel de Meta (opcional si usas GTM con el píxel dentro)
               </label>
@@ -394,7 +394,7 @@ export default function TrackingSection({
                   ${
                     metaPixelInvalid
                       ? "border-red-300 bg-red-50 focus:border-red-400"
-                      : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                      : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                   }`}
               />
               {metaPixelInvalid && (
@@ -408,7 +408,7 @@ export default function TrackingSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="ga4-measurement-id"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 ID de medición GA4 (opcional)
               </label>
@@ -426,7 +426,7 @@ export default function TrackingSection({
                   ${
                     ga4Invalid
                       ? "border-red-300 bg-red-50 focus:border-red-400"
-                      : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                      : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                   }`}
               />
               {ga4Invalid && (
@@ -458,7 +458,7 @@ export default function TrackingSection({
                 disabled={
                   trackingSaveState === "saving" || trackingFieldsInvalid
                 }
-                className="inline-flex items-center gap-2 bg-[#F37021] hover:bg-[#D4611A] disabled:bg-gray-200 disabled:text-gray-400
+                className="inline-flex items-center gap-2 bg-orange hover:bg-orange-dark disabled:bg-gray-200 disabled:text-gray-400
                   text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
               >
                 {trackingSaveState === "saving" ? (
@@ -497,7 +497,7 @@ function StatusPill({
       </span>
       <span
         className={`text-xs font-semibold truncate ${
-          active ? "text-[#2A3A4A]" : "text-gray-400"
+          active ? "text-navy" : "text-gray-400"
         }`}
         title={value}
       >

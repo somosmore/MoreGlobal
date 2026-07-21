@@ -97,7 +97,7 @@ function FunnelBar({ steps }: { steps: FunnelStep[] }) {
               style={{ width: `${(step.value / max) * 100}%` }}
             />
           </div>
-          <span className="text-xs font-bold text-[#2A3A4A] w-6 text-right shrink-0">
+          <span className="text-xs font-bold text-navy w-6 text-right shrink-0">
             {step.value}
           </span>
         </div>
@@ -115,8 +115,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!supabase) {
-      setLoading(false)
-      return
+      const timer = window.setTimeout(() => setLoading(false), 0)
+      return () => window.clearTimeout(timer)
     }
     const fetchAll = async () => {
       setLoading(true)
@@ -154,14 +154,17 @@ export default function AdminDashboard() {
 
   const recentLeads = leads.slice(0, 8)
 
-  const todayStart = new Date()
-  todayStart.setHours(0, 0, 0, 0)
+  const todayStart = useMemo(() => {
+    const date = new Date()
+    date.setHours(0, 0, 0, 0)
+    return date
+  }, [])
   const followupDue = useMemo(
     () =>
       leads.filter(
         (l) => l.followup_at && new Date(l.followup_at) <= new Date(todayStart.getTime() + 86400000)
       ),
-    [leads]
+    [leads, todayStart]
   )
 
   const funnelSteps: FunnelStep[] = [
@@ -178,16 +181,16 @@ export default function AdminDashboard() {
       label: "Total leads",
       value: stats.totalLeads,
       icon: Users,
-      color: "text-[#2A3A4A]",
-      bg: "bg-[#2A3A4A]/8",
+      color: "text-navy",
+      bg: "bg-navy/8",
       href: "/admin/leads",
     },
     {
       label: "Alto Impacto",
       value: stats.altoImpacto,
       icon: Sparkles,
-      color: "text-[#F37021]",
-      bg: "bg-[#F37021]/10",
+      color: "text-orange",
+      bg: "bg-orange/10",
       href: "/admin/leads",
     },
     {
@@ -247,7 +250,7 @@ export default function AdminDashboard() {
     <div className="p-6 sm:p-8 space-y-8">
       {/* Page title */}
       <div>
-        <h1 className="text-2xl font-bold text-[#2A3A4A]">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-navy">Dashboard</h1>
         <p className="text-sm text-gray-400 mt-0.5">
           Resumen general de actividad —{" "}
           {new Date().toLocaleDateString("es-CO", {
@@ -270,7 +273,7 @@ export default function AdminDashboard() {
                 >
                   <Icon className={`w-4.5 h-4.5 ${color}`} />
                 </div>
-                <p className="text-2xl font-bold text-[#2A3A4A] leading-none">
+                <p className="text-2xl font-bold text-navy leading-none">
                   {value}
                 </p>
                 <p className="text-xs text-gray-400 mt-1 leading-tight">
@@ -313,7 +316,7 @@ export default function AdminDashboard() {
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-[#2A3A4A] truncate">{lead.nombre}</p>
+                      <p className="text-sm font-semibold text-navy truncate">{lead.nombre}</p>
                       <p className="text-xs text-gray-400 truncate">{lead.email}</p>
                     </div>
                     <span className={`hidden sm:inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full ${sm.color}`}>
@@ -354,13 +357,13 @@ export default function AdminDashboard() {
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-gray-400" />
-                  <h2 className="text-sm font-semibold text-[#2A3A4A]">
+                  <h2 className="text-sm font-semibold text-navy">
                     Leads recientes
                   </h2>
                 </div>
                 <Link
                   to="/admin/leads"
-                  className="flex items-center gap-1 text-xs text-[#F37021] hover:text-[#F37021]/80 font-medium transition-colors"
+                  className="flex items-center gap-1 text-xs text-orange hover:text-orange/80 font-medium transition-colors"
                 >
                   Ver todos <ArrowRight className="w-3 h-3" />
                 </Link>
@@ -382,15 +385,15 @@ export default function AdminDashboard() {
                         className="flex items-center gap-4 px-6 py-3 hover:bg-gray-50/80 transition-colors"
                       >
                         {/* Avatar */}
-                        <div className="w-8 h-8 rounded-xl bg-[#2A3A4A]/8 flex items-center justify-center shrink-0">
-                          <span className="text-xs font-bold text-[#2A3A4A]">
+                        <div className="w-8 h-8 rounded-xl bg-navy/8 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-bold text-navy">
                             {lead.nombre.charAt(0).toUpperCase()}
                           </span>
                         </div>
 
                         {/* Name + email */}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-[#2A3A4A] truncate">
+                          <p className="text-sm font-semibold text-navy truncate">
                             {lead.nombre}
                           </p>
                           <p className="text-xs text-gray-400 truncate">
@@ -402,7 +405,7 @@ export default function AdminDashboard() {
                         <span
                           className={`hidden sm:inline-flex text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${
                             lead.result_type === "alto_impacto"
-                              ? "bg-[#F37021]/10 text-[#F37021]"
+                              ? "bg-orange/10 text-orange"
                               : "bg-purple-50 text-purple-700"
                           }`}
                         >
@@ -460,7 +463,7 @@ export default function AdminDashboard() {
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-5">
                 <BarChart3 className="w-4 h-4 text-gray-400" />
-                <h2 className="text-sm font-semibold text-[#2A3A4A]">
+                <h2 className="text-sm font-semibold text-navy">
                   Pipeline de leads
                 </h2>
               </div>
@@ -471,17 +474,17 @@ export default function AdminDashboard() {
           {/* Quick actions */}
           <Card className="border-0 shadow-sm">
             <CardContent className="p-6">
-              <h2 className="text-sm font-semibold text-[#2A3A4A] mb-4">
+              <h2 className="text-sm font-semibold text-navy mb-4">
                 Acciones rápidas
               </h2>
               <div className="space-y-2">
                 <Link
                   to="/admin/leads"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#2A3A4A]/5 hover:bg-[#2A3A4A]/10 transition-colors group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-navy/5 hover:bg-navy/10 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
-                    <Users className="w-4 h-4 text-[#2A3A4A]" />
-                    <span className="text-sm font-medium text-[#2A3A4A]">
+                    <Users className="w-4 h-4 text-navy" />
+                    <span className="text-sm font-medium text-navy">
                       Gestionar leads
                     </span>
                   </div>
@@ -489,11 +492,11 @@ export default function AdminDashboard() {
                 </Link>
                 <Link
                   to="/admin/testimonials"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#F37021]/5 hover:bg-[#F37021]/10 transition-colors group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-orange/5 hover:bg-orange/10 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
-                    <MessageSquare className="w-4 h-4 text-[#F37021]" />
-                    <span className="text-sm font-medium text-[#2A3A4A]">
+                    <MessageSquare className="w-4 h-4 text-orange" />
+                    <span className="text-sm font-medium text-navy">
                       Gestionar testimonios
                     </span>
                   </div>
@@ -505,7 +508,7 @@ export default function AdminDashboard() {
 
           {/* Conversion rate */}
           {stats.totalLeads > 0 && (
-            <Card className="border-0 shadow-sm bg-gradient-to-br from-[#2A3A4A] to-[#3d5268] text-white">
+            <Card className="border-0 shadow-sm bg-gradient-to-br from-navy to-navy-light text-white">
               <CardContent className="p-6">
                 <p className="text-xs text-white/60 uppercase tracking-wider font-semibold mb-1">
                   Tasa de calificación
@@ -521,7 +524,7 @@ export default function AdminDashboard() {
                 </p>
                 <div className="mt-4 h-1.5 bg-white/10 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#F37021] rounded-full transition-all duration-700"
+                    className="h-full bg-orange rounded-full transition-all duration-700"
                     style={{
                       width: `${(stats.calificados / stats.totalLeads) * 100}%`,
                     }}

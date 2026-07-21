@@ -32,7 +32,7 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md border-0 shadow-xl">
         <CardContent className="p-8">
-          <h1 className="text-2xl font-bold text-[#2A3A4A] mb-2">
+          <h1 className="text-2xl font-bold text-navy mb-2">
             Admin MORE
           </h1>
           <p className="text-gray-500 text-sm mb-6">

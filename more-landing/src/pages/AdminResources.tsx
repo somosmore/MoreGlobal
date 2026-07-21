@@ -454,9 +454,11 @@ export default function AdminResources() {
 
   useEffect(() => {
     if (!supabase) {
-      setLoadingResources(false)
-      setLoadingLandings(false)
-      return
+      const timer = window.setTimeout(() => {
+        setLoadingResources(false)
+        setLoadingLandings(false)
+      }, 0)
+      return () => window.clearTimeout(timer)
     }
 
     supabase

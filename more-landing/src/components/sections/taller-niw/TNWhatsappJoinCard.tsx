@@ -50,7 +50,7 @@ export default function TNWhatsappJoinCard({
         href={TALLER_WHATSAPP_GROUP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full inline-flex items-center justify-center gap-2.5 min-h-[3.25rem] px-6 text-base font-bold text-white bg-[#25D366] rounded-xl shadow-lg shadow-black/20 hover:bg-[#20BD5A] active:scale-[0.98] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#001A52]"
+        className="inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2.5 rounded-xl bg-[#25D366] px-6 text-base font-bold text-white shadow-lg shadow-black/20 transition-all duration-200 hover:bg-[#20BD5A] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep active:scale-[0.98]"
         aria-label={copy.successCta}
       >
         <WhatsappIcon />

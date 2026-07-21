@@ -33,7 +33,7 @@ function DateField({ id, label, hint, value, onChange }: FieldProps) {
 
   return (
     <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-sm font-medium text-[#2A3A4A]">
+      <label htmlFor={id} className="block text-sm font-medium text-navy">
         {label}
       </label>
       <input
@@ -41,7 +41,7 @@ function DateField({ id, label, hint, value, onChange }: FieldProps) {
         type="datetime-local"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm outline-none transition-colors focus:border-[#F37021] focus:bg-white"
+        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm outline-none transition-colors focus:border-orange focus:bg-white"
       />
       <p className="text-xs text-gray-400">{hint}</p>
       {value.trim() && (
@@ -80,11 +80,11 @@ export default function LandingCountdownsSection({
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
       <div className="flex items-center gap-3 border-b border-gray-100 px-6 py-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#F37021]/10">
-          <CalendarClock className="h-4 w-4 text-[#F37021]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange/10">
+          <CalendarClock className="h-4 w-4 text-orange" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             Landings de campaña - Fechas y cierre
           </h2>
           <p className="text-xs text-gray-400">
@@ -145,7 +145,7 @@ export default function LandingCountdownsSection({
               type="button"
               onClick={handleSaveLandings}
               disabled={landingsSaveState === "saving"}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#2A3A4A] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#3A4D5E] disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-50"
             >
               {landingsSaveState === "saving" ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

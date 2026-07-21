@@ -11,9 +11,18 @@
     --navy: #2A3A4A;
     --navy-deep: #1B2B44;
     --navy-light: #3A4D5E;
+    --navy-mid: #4A6D96;
+    --navy-soft: #8AA4C1;
+    --navy-pale: #C3D2E2;
+    --navy-ink: #16243D;
     --orange: #F37021;
     --orange-dark: #D4611A;
+    --orange-deep: #E0561A;
     --orange-light: #FF9052;
+    --orange-pale: #FFC9A6;
+    --orange-wash: #FFE4D2;
+    --navy-line: #5C7EA6;
+    --orange-line: #F79B67;
     --paper: #F6F7F9;
     --paper-warm: #FDF8F4;
     --ink-muted: #5B6B7C;
@@ -543,16 +552,28 @@
   <span class="k">--color-navy</span>: #2A3A4A;
   <span class="k">--color-navy-light</span>: #3A4D5E;
   <span class="k">--color-navy-deep</span>: #1B2B44;   <span class="c">/* 2026 */</span>
+  <span class="k">--color-navy-mid</span>: #4A6D96;     <span class="c">/* decorativo */</span>
+  <span class="k">--color-navy-soft</span>: #8AA4C1;    <span class="c">/* decorativo */</span>
+  <span class="k">--color-navy-pale</span>: #C3D2E2;    <span class="c">/* decorativo */</span>
+  <span class="k">--color-navy-ink</span>: #16243D;     <span class="c">/* decorativo */</span>
   <span class="k">--color-orange</span>: #F37021;
   <span class="k">--color-orange-dark</span>: #D4611A;
+  <span class="k">--color-orange-deep</span>: #E0561A;   <span class="c">/* decorativo */</span>
   <span class="k">--color-orange-light</span>: #FF9052;  <span class="c">/* 2026 */</span>
+  <span class="k">--color-orange-pale</span>: #FFC9A6;   <span class="c">/* decorativo */</span>
+  <span class="k">--color-orange-wash</span>: #FFE4D2;   <span class="c">/* decorativo */</span>
+  <span class="k">--color-navy-line</span>: #5C7EA6;     <span class="c">/* decorativo */</span>
+  <span class="k">--color-orange-line</span>: #F79B67;   <span class="c">/* decorativo */</span>
   <span class="k">--color-paper</span>: #F6F7F9;        <span class="c">/* 2026 */</span>
   <span class="k">--color-paper-warm</span>: #FDF8F4;   <span class="c">/* 2026 */</span>
   <span class="k">--color-ink-muted</span>: #5B6B7C;    <span class="c">/* 2026 */</span>
+  <span class="k">--color-white</span>: #FFFFFF;
 
   <span class="k">--font-sans</span>: "Inter", system-ui, sans-serif;
   <span class="k">--font-display</span>: "Playfair Display", Georgia, serif;  <span class="c">/* 2026 */</span>
 }</pre>
+
+  <p style="font-size:12px;margin-top:10px;">Implementacion actual: las piezas compartidas de marca viven en <code>src/components/brand/</code>.</p>
 
   <h3 style="margin-top:22px;">Dónde vive cada pieza</h3>
   <div class="card soft" style="margin-top:12px;">
@@ -561,10 +582,10 @@
         <th style="padding:6px 0;">Pieza</th><th>Archivo</th>
       </tr>
       <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
-        <td style="padding:6px 0;">Olas, rutas, avión, pines, trama</td><td><code>src/vip/components/VipBackdrop.tsx</code></td>
+        <td style="padding:6px 0;">Olas, rutas, avión, pines, trama</td><td><code>src/components/brand/Backdrop.tsx</code></td>
       </tr>
       <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
-        <td style="padding:6px 0;">Encabezado de sección + kicker</td><td><code>src/vip/components/VipSectionHeading.tsx</code></td>
+        <td style="padding:6px 0;">Encabezado de sección + kicker</td><td><code>src/components/brand/SectionHeading.tsx</code></td>
       </tr>
       <tr style="color:var(--ink-muted);border-top:1px solid rgba(42,58,74,.1);">
         <td style="padding:6px 0;">Barra de specs</td><td><code>src/vip/components/VipSpecsBar.tsx</code></td>

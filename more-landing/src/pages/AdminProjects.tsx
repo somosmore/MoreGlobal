@@ -34,11 +34,7 @@ export default function AdminProjects() {
   const [statusFilter, setStatusFilter] = useState<ProjectStatus | "all">("all")
   const [deleting, setDeleting] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchProjects()
-  }, [])
-
-  const fetchProjects = async () => {
+  async function fetchProjects() {
     if (!supabase) return
     setLoading(true)
     const { data } = await supabase
@@ -48,6 +44,11 @@ export default function AdminProjects() {
     setProjects((data as LandingProject[]) ?? [])
     setLoading(false)
   }
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void fetchProjects() }, 0)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const handleDelete = async (id: string) => {
     if (!supabase) return
@@ -81,7 +82,7 @@ export default function AdminProjects() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#2A3A4A]">Proyectos de Landing</h1>
+          <h1 className="text-2xl font-bold text-navy">Proyectos de Landing</h1>
           <p className="text-sm text-gray-500 mt-0.5">
             Creá y gestioná landings con ayuda de Gemini
           </p>
@@ -115,7 +116,7 @@ export default function AdminProjects() {
               className={cn(
                 "px-3 py-2 text-xs font-medium rounded-lg border transition-all duration-150",
                 statusFilter === s
-                  ? "bg-[#2A3A4A] text-white border-[#2A3A4A]"
+                  ? "bg-navy text-white border-navy"
                   : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
               )}
             >
@@ -182,14 +183,14 @@ export default function AdminProjects() {
                       className="hover:bg-gray-50/50 transition-colors group"
                     >
                       <td className="px-5 py-4">
-                        <p className="text-sm font-semibold text-[#2A3A4A] group-hover:text-[#F37021] transition-colors truncate max-w-[200px]">
+                        <p className="text-sm font-semibold text-navy group-hover:text-orange transition-colors truncate max-w-[200px]">
                           {project.name}
                         </p>
                       </td>
                       <td className="px-5 py-4">
                         {client ? (
                           <div>
-                            <p className="text-sm text-[#2A3A4A]">{client.name}</p>
+                            <p className="text-sm text-navy">{client.name}</p>
                             {client.company && (
                               <p className="text-xs text-gray-400">{client.company}</p>
                             )}
@@ -220,7 +221,7 @@ export default function AdminProjects() {
                           {project.status === "generated" && (
                             <Link
                               to={`/admin/projects/${project.id}`}
-                              className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                              className="p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
                               title="Ver resultado"
                             >
                               <Eye className="w-4 h-4" />
@@ -228,7 +229,7 @@ export default function AdminProjects() {
                           )}
                           <Link
                             to={`/admin/projects/${project.id}/edit`}
-                            className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                            className="p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
                             title="Editar"
                           >
                             <FileEdit className="w-4 h-4" />
@@ -261,7 +262,7 @@ export default function AdminProjects() {
                 <div key={project.id} className="px-4 py-4 space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-[#2A3A4A] truncate">
+                      <p className="text-sm font-semibold text-navy truncate">
                         {project.name}
                       </p>
                       {client && (
@@ -289,14 +290,14 @@ export default function AdminProjects() {
                       {project.status === "generated" && (
                         <Link
                           to={`/admin/projects/${project.id}`}
-                          className="p-1.5 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                          className="p-1.5 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
                       )}
                       <Link
                         to={`/admin/projects/${project.id}/edit`}
-                        className="p-1.5 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                        className="p-1.5 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
                       >
                         <FileEdit className="w-4 h-4" />
                       </Link>

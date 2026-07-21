@@ -302,21 +302,30 @@ Usar `useInView` o `whileInView` de Framer Motion.
 
 ## Checklist de implementacion
 
-- [ ] Crear `src/pages/MasterclassPage.tsx`
-- [ ] Crear componentes en `src/components/sections/masterclass/`
-- [ ] Agregar ruta `/masterclass` en `App.tsx`
-- [ ] Implementar formulario con validacion
-- [ ] Captura de UTM params al cargar la pagina
-- [ ] Crear Supabase Edge Function `masterclass-register` (o reutilizar webhook.js)
-- [ ] Conectar formulario → Edge Function → GHL API
-- [ ] Insert en tabla leads de Supabase
-- [ ] Redirect a grupo WhatsApp post-registro (countdown 3s)
-- [ ] Meta tags SEO / Open Graph
-- [ ] Animaciones con Framer Motion
+- [x] Crear `src/pages/MasterclassPage.tsx`
+- [x] Crear componentes en `src/components/sections/masterclass/`
+- [x] Agregar ruta `/masterclass` en `App.tsx`
+- [x] Implementar formulario con validacion
+- [x] Captura de UTM params al cargar la pagina
+- [x] Crear Supabase Edge Function `masterclass-register` (o reutilizar webhook.js)
+- [x] Conectar formulario → Edge Function → GHL API
+- [x] Insert en tabla leads de Supabase
+- [x] Redirect a grupo WhatsApp post-registro (countdown 3s)
+- [x] Meta tags SEO / Open Graph
+- [x] Animaciones con Framer Motion
 - [ ] Testear responsive (mobile, tablet, desktop)
 - [ ] Verificar que leads aparecen en `/admin/leads`
 - [ ] Verificar que el contacto se crea en GHL con el tag correcto
 - [ ] Verificar que el workflow de GHL se dispara (email de bienvenida)
+
+### Pendientes de cierre
+
+- [ ] Aplicar las migraciones de producción requeridas para `masterclass_leads` y
+  `landing_projects`.
+- [ ] Desplegar y probar la Edge Function en el proyecto Supabase de producción.
+- [ ] Ejecutar el registro completo en producción: Supabase, GHL, tag, oportunidad,
+  emails y redirección a WhatsApp.
+- [ ] Ejecutar QA responsive y de accesibilidad en móvil, tablet y desktop.
 
 ---
 

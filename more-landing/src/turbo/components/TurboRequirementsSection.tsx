@@ -48,7 +48,7 @@ export function TurboRequirementsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.07, type: "spring", stiffness: 120 }}
-              className="flex items-start gap-4 rounded-2xl border border-[#0A3161]/10 bg-white p-5 shadow-sm"
+              className="flex items-start gap-4 rounded-2xl border border-navy/15 bg-white p-5 shadow-sm"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange/10">
                 <Icon className="h-5 w-5 text-orange" />
@@ -67,7 +67,7 @@ export function TurboRequirementsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-8 mx-auto max-w-2xl rounded-2xl bg-[#0A3161]/4 border border-[#0A3161]/10 px-6 py-5 text-center"
+        className="mx-auto mt-8 max-w-2xl rounded-2xl border border-navy/15 bg-white px-6 py-5 text-center shadow-sm"
       >
         <p className="text-sm text-gray-600">
           {t("turboPage.requirements.note")}

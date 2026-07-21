@@ -551,18 +551,26 @@
   `src/components/brand/BrandIconCircle.tsx`
   Criterio de éxito: ninguna sección conserva `blur-3xl`, `bg-clip-text` ni sombras naranjas.
 
-- [ ] **BR-04 (Sprint 4): Landings de campaña (masterclass, taller-niw, UPP)**
-  Asignado: — | Estado: ⬚ libre
+- [x] **BR-04 (Sprint 4): Landings de campaña (masterclass, taller-niw, UPP)**
+  Asignado: codex | Estado: ✅ completo
   Depende de: BR-02
-  Unificar las landings de campaña bajo el sistema, conservando su lógica de countdown
-  y registro. Ojo: `MCCountdown`/`TNCountdown` tienen fechas hardcodeadas — moverlas a
-  `site_settings` como se hizo con `vip_countdown_date`.
+  Unificar las landings de campaña y `/turbo` bajo el sistema, conservando su lógica de
+  countdown, registro, pagos y WhatsApp. Las fechas de masterclass y taller ya fueron
+  externalizadas a `site_settings` en BR-07; esta fase es principalmente visual. UPP
+  conserva su countdown configurado mediante `upp_countdown_date`.
   Archivos: `src/components/sections/masterclass/*`, `src/components/sections/taller-niw/*`,
-  `src/pages/UppPage.tsx`
-  Criterio de éxito: las tres landings comparten backdrop, tipografía y componentes de marca.
+  `src/pages/UppPage.tsx`, `src/turbo/**`
+  Criterio de éxito: todas las landings públicas de campaña comparten backdrop, tipografía y componentes de marca.
 
-- [ ] **BR-05 (Sprint 5): Panel admin + QA final**
-  Asignado: — | Estado: ⬚ libre
+  Nota de alcance: `/turbo` tambien queda incluido en BR-04; la externalizacion de fechas de
+  masterclass y taller ya esta cubierta por BR-07.
+  Implementacion Fase 2: heroes editoriales claros con `Backdrop`, `EventCountdown` compartido
+  con tono papel e i18n, tarjetas y secciones sobre tokens de marca, y eliminacion de gradientes,
+  glows y colores legacy en las landings publicas. Se preservaron registro, pagos, WhatsApp,
+  tracking, settings y countdowns.
+
+- [x] **BR-05 (Sprint 5): Panel admin + QA final**
+  Asignado: codex | Estado: ✅ completo
   Depende de: BR-03, BR-04
   Admin: alinear a los tokens (hoy usa hex hardcodeados `#2A3A4A` / `#F37021` en cada
   componente) sin rediseñarlo — es herramienta interna, no pieza de marca.
@@ -570,6 +578,30 @@
   foco visible, mobile 360–430 px, peso de fuentes, y revisión de textos EN.
   Archivos: `src/components/admin/**`, `src/pages/Admin*.tsx`
   Criterio de éxito: sin hex hardcodeados fuera de `index.css`, auditoría de contraste limpia.
+  Implementación: tokens semánticos aplicados en admin, focus states preservados, y lint del
+  alcance admin limpio sin cambios en APIs, Supabase, tracking, pagos o flujos públicos.
+
+### Pendientes de cierre operativo
+
+- [ ] **QA manual de Fase 3**
+  Revisar `/admin/login`, `/admin/dashboard`, `/admin/leads`, `/admin/testimonials`,
+  `/admin/projects`, `/admin/clients`, `/admin/resources` y `/admin/settings` en 360, 390,
+  430 px y desktop. Validar sidebar móvil/colapsado, navegación, logout, foco visible,
+  contraste, formularios, guardado de settings, countdowns, tracking y WhatsApp.
+- [ ] **Aplicar migraciones de configuración en producción**
+  Ejecutar `supabase/migrations/028_vip_countdown.sql` y
+  `supabase/migrations/029_landing_countdowns.sql` en el proyecto de producción.
+- [ ] **Completar despliegue backend pendiente**
+  Aplicar la migración `026_taller_niw.sql` y desplegar la Edge Function
+  `masterclass-register` en el proyecto de producción.
+- [ ] **Cerrar automatizaciones externas**
+  Configurar y publicar el workflow de recordatorio en GHL, y verificar que el flujo
+  completo de registro, tag, emails y aparición del lead en Admin funcione end-to-end.
+- [ ] **Reemplazar placeholders de campaña**
+  Sustituir `REGISTRANTS_COUNT`, los testimonios de prueba y cualquier enlace de grupo
+  pendiente en la landing de Taller NIW antes de publicar.
+- [ ] **Tests unitarios de lógica crítica**
+  Agregar cobertura Vitest para `quizLogic.ts`, `resourceUrl.ts` y `utils.ts`.
 
 ### P6 — Tests y calidad
 

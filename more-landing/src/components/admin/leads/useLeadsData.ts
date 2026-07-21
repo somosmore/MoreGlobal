@@ -68,23 +68,29 @@ export function useLeadsData() {
     setNotes((data ?? []) as LeadNote[])
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void load() }, 0)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
-    if (selectedLead) {
-      loadNotes(selectedLead.id)
-      setFollowupDate(
-        selectedLead.followup_at
-          ? new Date(selectedLead.followup_at).toISOString().slice(0, 10)
-          : ""
-      )
-      setNewNote("")
-      setFollowupSaved(false)
-    } else {
-      setNotes([])
-      setFollowupDate("")
-    }
-  }, [selectedLead?.id])
+    const timer = window.setTimeout(() => {
+      if (selectedLead) {
+        void loadNotes(selectedLead.id)
+        setFollowupDate(
+          selectedLead.followup_at
+            ? new Date(selectedLead.followup_at).toISOString().slice(0, 10)
+            : ""
+        )
+        setNewNote("")
+        setFollowupSaved(false)
+      } else {
+        setNotes([])
+        setFollowupDate("")
+      }
+    }, 0)
+    return () => window.clearTimeout(timer)
+  }, [selectedLead])
 
   const today = new Date().toDateString()
 
@@ -94,7 +100,7 @@ export function useLeadsData() {
     unsung: leads.filter((l) => l.result_type === "unsung").length,
     hoy: leads.filter((l) => new Date(l.created_at).toDateString() === today).length,
     calificados: leads.filter((l) => l.status === "calificado").length,
-  }), [leads])
+  }), [leads, today])
 
   const displayed = useMemo(() => {
     let list = [...leads]

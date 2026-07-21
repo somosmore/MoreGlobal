@@ -19,7 +19,7 @@ type Props = {
 }
 
 const selectClass =
-  "text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30"
+  "text-sm border border-gray-200 rounded-lg px-3 h-9 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange/30"
 
 export default function LeadsToolbar({
   search, setSearch, filterResult, setFilterResult,

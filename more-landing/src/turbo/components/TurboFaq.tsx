@@ -38,7 +38,7 @@ export function TurboFaq({ paymentLink, whatsappUrl, loading }: TurboFaqProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: i * 0.06, type: "spring", stiffness: 120 }}
-            className="group rounded-2xl border border-[#0A3161]/10 bg-white shadow-sm ring-1 ring-[#0A3161]/5 transition-shadow hover:shadow-md"
+            className="group rounded-2xl border border-navy/15 bg-white shadow-sm transition-shadow hover:shadow-md"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-sm font-semibold text-navy sm:text-base">
               {item.question}

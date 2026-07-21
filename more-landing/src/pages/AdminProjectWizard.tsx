@@ -94,9 +94,9 @@ const FieldWrapper = ({
 }) => (
   <div className="space-y-2">
     <div className="flex items-start justify-between gap-2">
-      <label className="text-sm font-semibold text-[#2A3A4A] leading-snug">
+      <label className="text-sm font-semibold text-navy leading-snug">
         {label}
-        {!optional && <span className="text-[#F37021] ml-0.5">*</span>}
+        {!optional && <span className="text-orange ml-0.5">*</span>}
       </label>
       {optional && onSkip && !skipped && <SkipButton onClick={onSkip} />}
     </div>
@@ -310,7 +310,7 @@ export default function AdminProjectWizard() {
         <div className="max-w-3xl mx-auto flex items-center gap-3">
           <button
             onClick={() => navigate("/admin/projects")}
-            className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Volver"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -320,7 +320,7 @@ export default function AdminProjectWizard() {
               value={projectName}
               onChange={(e) => handleProjectNameChange(e.target.value)}
               placeholder="Nombre del proyecto (ej: Landing MORE Migraciones)"
-              className="w-full text-sm font-semibold text-[#2A3A4A] bg-transparent outline-none placeholder:text-gray-400 placeholder:font-normal truncate"
+              className="w-full text-sm font-semibold text-navy bg-transparent outline-none placeholder:text-gray-400 placeholder:font-normal truncate"
             />
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -358,11 +358,11 @@ export default function AdminProjectWizard() {
         {/* Part card */}
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
           {/* Part header */}
-          <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-[#2A3A4A]/[0.02] to-transparent">
-            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#F37021]">
+          <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-navy/[0.02] to-transparent">
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase text-orange">
               {WIZARD_PARTS[currentPart]?.description}
             </span>
-            <h2 className="mt-1 text-xl font-bold text-[#2A3A4A]">
+            <h2 className="mt-1 text-xl font-bold text-navy">
               {currentPart === 0 && "¿Para quién es este proyecto?"}
               {currentPart === 1 && "Cuéntame sobre tu marca"}
               {currentPart === 2 && "El corazón emocional de tu negocio"}
@@ -425,7 +425,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: Ayudamos a profesionales latinoamericanos a obtener la Green Card sin necesitar un empleador que los patrocine."
                     value={p1.one_liner ?? ""}
                     onChange={(e) => updateAnswers("part1", "one_liner", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -442,7 +442,7 @@ export default function AdminProjectWizard() {
                         className={cn(
                           "px-3 py-2 text-xs font-medium rounded-lg border-2 text-left transition-all duration-150",
                           p1.industry === ind
-                            ? "border-[#F37021] bg-[#F37021]/5 text-[#2A3A4A]"
+                            ? "border-orange bg-orange/5 text-navy"
                             : "border-gray-200 text-gray-600 hover:border-gray-300"
                         )}
                       >
@@ -461,10 +461,10 @@ export default function AdminProjectWizard() {
                 >
                   <textarea
                     rows={2}
-                    placeholder="Ej: Logo con el nombre en azul oscuro #2A3A4A y naranja #F37021. Sensación: profesional, confiable, con energía."
+                    placeholder="Ej: Logo con el nombre en azul oscuro y naranja. Sensación: profesional, confiable, con energía."
                     value={p1.brand_colors ?? ""}
                     onChange={(e) => updateAnswers("part1", "brand_colors", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
               </>
@@ -482,7 +482,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: No sabían cómo demostrar que su trabajo importa a nivel nacional. Tenían años de experiencia pero nadie les había enseñado a presentar su perfil como extraordinario..."
                     value={p2.client_pain ?? ""}
                     onChange={(e) => updateAnswers("part2", "client_pain", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -495,7 +495,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: Vivir en Estados Unidos con su familia, trabajar libremente sin depender de un empleador, construir su legado profesional en el país que eligieron..."
                     value={p2.happy_ending ?? ""}
                     onChange={(e) => updateAnswers("part2", "happy_ending", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -511,7 +511,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: No solo tramitamos la visa. Construimos toda la narrativa del cliente, desarrollamos su proyecto de impacto nacional y los acompañamos emocionalmente durante el proceso..."
                     value={p2.differentiator ?? ""}
                     onChange={(e) => updateAnswers("part2", "differentiator", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
               </>
@@ -529,7 +529,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: Profesionales latinoamericanos con maestría o doctorado, empresarios y emprendedores con negocios en crecimiento, estudiantes de posgrado en STEM..."
                     value={p3.ideal_client ?? ""}
                     onChange={(e) => updateAnswers("part3", "ideal_client", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -545,7 +545,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej:&#10;1. El profesional establecido: maestría o doctorado, +5 años de experiencia, necesita organizar y presentar su perfil.&#10;2. El talento desapercibido: grandes logros pero sin idea de cómo demostrar su impacto nacional.&#10;3. El empresario/emprendedor: construyendo algo propio que beneficia a EE.UU."
                     value={p3.client_segments ?? ""}
                     onChange={(e) => updateAnswers("part3", "client_segments", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
               </>
@@ -563,7 +563,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej:&#10;1. Unsung Professional Program ($2,500): Programa de 9 módulos + 4 sesiones coaching + comunidad privada.&#10;2. Plan Plus ($8,000): Acompañamiento premium completo, redactamos y diligenciamos todo tu expediente."
                     value={p4.services ?? ""}
                     onChange={(e) => updateAnswers("part4", "services", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -582,7 +582,7 @@ export default function AdminProjectWizard() {
                         className={cn(
                           "px-3 py-2.5 text-xs font-medium rounded-lg border-2 text-left transition-all duration-150",
                           p4.primary_action === action.label
-                            ? "border-[#F37021] bg-[#F37021]/5 text-[#2A3A4A]"
+                            ? "border-orange bg-orange/5 text-navy"
                             : "border-gray-200 text-gray-600 hover:border-gray-300"
                         )}
                       >
@@ -613,7 +613,7 @@ export default function AdminProjectWizard() {
                     onChange={(e) =>
                       updateAnswers("part4", "impressive_number", e.target.value)
                     }
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
               </>
@@ -634,7 +634,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej:&#10;'MORE me ayudó a obtener mi Green Card en 8 meses. Su acompañamiento fue increíble.' — María González, Médica&#10;&#10;'Tenía miedo de que mi perfil no calificara, pero ellos construyeron una narrativa que nunca hubiera imaginado.' — Carlos Ruiz, Ingeniero"
                     value={p5.testimonials ?? ""}
                     onChange={(e) => updateAnswers("part5", "testimonials", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
 
@@ -650,7 +650,7 @@ export default function AdminProjectWizard() {
                     placeholder="Ej: Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificás. Si no sos candidato, te lo decimos antes de cobrar."
                     value={p5.guarantee ?? ""}
                     onChange={(e) => updateAnswers("part5", "guarantee", e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400"
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"
                   />
                 </FieldWrapper>
               </>
@@ -684,7 +684,7 @@ export default function AdminProjectWizard() {
                           className={cn(
                             "px-3 py-2 text-xs font-medium rounded-lg border-2 text-left transition-all duration-150",
                             techConfig.stack === stack
-                              ? "border-[#F37021] bg-[#F37021]/5 text-[#2A3A4A]"
+                              ? "border-orange bg-orange/5 text-navy"
                               : "border-gray-200 text-gray-600 hover:border-gray-300",
                             !isRoot && "opacity-60"
                           )}
@@ -730,7 +730,7 @@ export default function AdminProjectWizard() {
                           className={cn(
                             "px-4 py-2 text-sm font-medium rounded-lg border-2 transition-all",
                             techConfig.needs_admin === value
-                              ? "border-[#F37021] bg-[#F37021]/5 text-[#2A3A4A]"
+                              ? "border-orange bg-orange/5 text-navy"
                               : "border-gray-200 text-gray-500 hover:border-gray-300",
                             !isRoot && "opacity-60"
                           )}
@@ -762,7 +762,7 @@ export default function AdminProjectWizard() {
                       value={techConfig.notes ?? ""}
                       disabled={!isRoot}
                       onChange={(e) => updateTechConfig("notes", e.target.value)}
-                      className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400 disabled:opacity-60 disabled:bg-gray-50"
+                      className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400 disabled:opacity-60 disabled:bg-gray-50"
                     />
                   </FieldWrapper>
                 </div>

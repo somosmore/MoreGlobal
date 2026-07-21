@@ -33,7 +33,7 @@ export default function TNBenefits() {
         {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-6">
           <Sparkles className="h-5 w-5 text-[#F37021]" />
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340] text-center">
+          <h2 className="font-display text-2xl font-bold text-navy-deep sm:text-3xl">
             En este taller aprenderás:
           </h2>
           <Sparkles className="h-5 w-5 text-[#F37021]" />
@@ -55,7 +55,7 @@ export default function TNBenefits() {
                 transition-all duration-200 cursor-default"
             >
               <CheckCircle2 className="h-5 w-5 text-[#F37021] mt-0.5 shrink-0 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-[#1A2340] text-sm sm:text-base leading-snug group-hover:text-[#0033A0] transition-colors duration-200">
+              <span className="text-sm leading-snug text-navy-deep transition-colors duration-200 group-hover:text-orange-dark sm:text-base">
                 {text}
               </span>
             </motion.div>

@@ -45,7 +45,7 @@ export function UppValueStackSection({ price, loading }: UppValueStackSectionPro
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 120 }}
-        className="mx-auto max-w-xl rounded-3xl border border-[#0A3161]/15 bg-white p-6 shadow-lg ring-1 ring-[#0A3161]/5 sm:p-8"
+        className="mx-auto max-w-xl rounded-3xl border border-navy/15 bg-white p-6 shadow-lg sm:p-8"
       >
         <div className="space-y-3">
           {items.map((item, i) => (
@@ -68,10 +68,10 @@ export function UppValueStackSection({ price, loading }: UppValueStackSectionPro
           ))}
         </div>
 
-        <div className="my-5 h-px bg-[#0A3161]/10" />
+        <div className="my-5 h-px bg-navy/10" />
 
         <div className="flex items-center justify-between gap-4 px-1">
-          <span className="text-base font-semibold text-[#0A3161] sm:text-lg">
+          <span className="text-base font-semibold text-navy-deep sm:text-lg">
             {t("uppPage.valueStack.totalLabel")}
           </span>
           <span className="text-lg font-bold text-gray-400 line-through sm:text-xl">
@@ -84,7 +84,7 @@ export function UppValueStackSection({ price, loading }: UppValueStackSectionPro
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 150 }}
-          className="mt-5 rounded-2xl bg-gradient-to-r from-[#0A3161] via-[#0D3B6E] to-[#14477A] p-6 text-center text-white"
+          className="mt-5 rounded-2xl bg-navy-deep p-6 text-center text-white"
         >
           <p className="text-sm font-semibold uppercase tracking-wider text-white/80">
             {t("uppPage.valueStack.youPayLabel")}

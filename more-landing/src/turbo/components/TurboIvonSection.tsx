@@ -18,7 +18,7 @@ export function TurboIvonSection() {
         </span>
       </motion.div>
 
-      <div className="flex flex-col items-center gap-8 rounded-3xl border border-[#0A3161]/10 bg-gradient-to-br from-[#0A3161]/3 to-white p-8 shadow-sm sm:flex-row sm:gap-10 sm:p-10">
+      <div className="flex flex-col items-center gap-8 rounded-3xl border border-navy/15 bg-white p-8 shadow-sm sm:flex-row sm:gap-10 sm:p-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}

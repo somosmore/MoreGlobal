@@ -37,7 +37,7 @@ function CopyButton({ text, className }: { text: string; className?: string }) {
         "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-all duration-150",
         copied
           ? "bg-green-50 border-green-200 text-green-700"
-          : "bg-white border-gray-200 text-gray-600 hover:border-gray-300 hover:text-[#2A3A4A]",
+          : "bg-white border-gray-200 text-gray-600 hover:border-gray-300 hover:text-navy",
         className
       )}
     >
@@ -65,7 +65,7 @@ function Section({
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-5 py-3.5 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
       >
-        <span className="text-sm font-semibold text-[#2A3A4A]">{title}</span>
+        <span className="text-sm font-semibold text-navy">{title}</span>
         {open ? (
           <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" />
         ) : (
@@ -86,7 +86,7 @@ function Field({ label, value }: { label: string; value?: string | null }) {
       <span className="text-[11px] font-semibold tracking-wider uppercase text-gray-400">
         {label}
       </span>
-      <p className="text-sm text-[#2A3A4A] leading-relaxed">{value}</p>
+      <p className="text-sm text-navy leading-relaxed">{value}</p>
     </div>
   )
 }
@@ -163,7 +163,7 @@ export default function AdminProjectResult() {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-3">
         <p className="text-gray-500 text-sm">Proyecto no encontrado.</p>
-        <Link to="/admin/projects" className="text-[#F37021] text-sm hover:underline">
+        <Link to="/admin/projects" className="text-orange text-sm hover:underline">
           ← Volver a proyectos
         </Link>
       </div>
@@ -180,13 +180,13 @@ export default function AdminProjectResult() {
         <div className="max-w-4xl mx-auto flex items-center gap-3">
           <button
             onClick={() => navigate("/admin/projects")}
-            className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Volver"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-semibold text-[#2A3A4A] truncate">
+            <h1 className="text-sm font-semibold text-navy truncate">
               {project.name}
             </h1>
             {project.clients && (
@@ -259,8 +259,8 @@ export default function AdminProjectResult() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150",
                   tab === "content"
-                    ? "bg-white text-[#2A3A4A] shadow-sm"
-                    : "text-gray-500 hover:text-[#2A3A4A]"
+                    ? "bg-white text-navy shadow-sm"
+                    : "text-gray-500 hover:text-navy"
                 )}
               >
                 <LayoutTemplate className="w-4 h-4" />
@@ -271,8 +271,8 @@ export default function AdminProjectResult() {
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150",
                   tab === "prompt"
-                    ? "bg-white text-[#2A3A4A] shadow-sm"
-                    : "text-gray-500 hover:text-[#2A3A4A]"
+                    ? "bg-white text-navy shadow-sm"
+                    : "text-gray-500 hover:text-navy"
                 )}
               >
                 <Code2 className="w-4 h-4" />
@@ -303,7 +303,7 @@ export default function AdminProjectResult() {
                   <Section title="Pain Points">
                     {json.pain_points.map((p, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg space-y-1">
-                        <p className="text-sm font-semibold text-[#2A3A4A]">{p.title}</p>
+                        <p className="text-sm font-semibold text-navy">{p.title}</p>
                         <p className="text-sm text-gray-600 leading-relaxed">{p.description}</p>
                       </div>
                     ))}
@@ -315,9 +315,9 @@ export default function AdminProjectResult() {
                   <Section title="¿A quién ayudamos?" defaultOpen={false}>
                     {json.who_we_help.map((w, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg space-y-1">
-                        <p className="text-sm font-semibold text-[#2A3A4A]">{w.segment}</p>
+                        <p className="text-sm font-semibold text-navy">{w.segment}</p>
                         <p className="text-sm text-gray-600">{w.description}</p>
-                        <p className="text-xs text-[#F37021] font-medium">→ {w.result}</p>
+                        <p className="text-xs font-medium text-orange">→ {w.result}</p>
                       </div>
                     ))}
                   </Section>
@@ -328,17 +328,17 @@ export default function AdminProjectResult() {
                   <Section title="Planes / Precios" defaultOpen={false}>
                     {json.pricing.map((p, i) => (
                       <div key={i} className="p-4 border border-gray-200 rounded-xl space-y-2">
-                        <p className="text-sm font-bold text-[#2A3A4A]">{p.name}</p>
+                        <p className="text-sm font-bold text-navy">{p.name}</p>
                         <p className="text-sm text-gray-600">{p.description}</p>
                         <ul className="space-y-1">
                           {p.features.map((f, j) => (
                             <li key={j} className="text-xs text-gray-500 flex items-start gap-1.5">
-                              <span className="text-[#F37021] mt-0.5">•</span>
+                              <span className="mt-0.5 text-orange">•</span>
                               {f}
                             </li>
                           ))}
                         </ul>
-                        <p className="text-xs font-medium text-[#F37021]">CTA: "{p.cta}"</p>
+                        <p className="text-xs font-medium text-orange">CTA: "{p.cta}"</p>
                       </div>
                     ))}
                   </Section>
@@ -350,11 +350,11 @@ export default function AdminProjectResult() {
                     {json.testimonials.map((t, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg space-y-1">
                         <div className="flex items-center justify-between">
-                          <p className="text-sm font-semibold text-[#2A3A4A]">
+                          <p className="text-sm font-semibold text-navy">
                             {t.name} · {t.role}
                           </p>
                           {t.metric && (
-                            <span className="text-xs font-medium text-[#F37021] bg-[#F37021]/10 px-2 py-0.5 rounded-full">
+                            <span className="text-xs font-medium text-orange bg-orange/10 px-2 py-0.5 rounded-full">
                               {t.metric}
                             </span>
                           )}
@@ -369,8 +369,8 @@ export default function AdminProjectResult() {
                 {json.faq && json.faq.length > 0 && (
                   <Section title="FAQ" defaultOpen={false}>
                     {json.faq.map((f, i) => (
-                      <div key={i} className="p-3 border-l-2 border-[#F37021]/30 space-y-1">
-                        <p className="text-sm font-semibold text-[#2A3A4A]">{f.question}</p>
+                      <div key={i} className="p-3 border-l-2 border-orange/30 space-y-1">
+                        <p className="text-sm font-semibold text-navy">{f.question}</p>
                         <p className="text-sm text-gray-600 leading-relaxed">{f.answer}</p>
                       </div>
                     ))}
@@ -385,7 +385,7 @@ export default function AdminProjectResult() {
                         {json.trust_stats.map((s, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1.5 bg-[#2A3A4A]/5 rounded-lg text-xs font-medium text-[#2A3A4A]"
+                            className="px-3 py-1.5 bg-navy/5 rounded-lg text-xs font-medium text-navy"
                           >
                             {s}
                           </span>
@@ -415,7 +415,7 @@ export default function AdminProjectResult() {
                       onClick={() =>
                         handleDownload(prompt, `prompt-${project.name.replace(/\s+/g, "-")}.md`)
                       }
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-[#2A3A4A] transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-navy transition-all"
                     >
                       <Download className="w-3.5 h-3.5" />
                       Descargar .md
@@ -423,7 +423,7 @@ export default function AdminProjectResult() {
                   </div>
                 </div>
                 <div className="relative">
-                  <pre className="bg-[#1e2d3d] text-gray-100 text-xs leading-relaxed p-5 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono max-h-[600px] overflow-y-auto">
+                  <pre className="bg-navy-ink text-gray-100 text-xs leading-relaxed p-5 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono max-h-[600px] overflow-y-auto">
                     {prompt}
                   </pre>
                 </div>

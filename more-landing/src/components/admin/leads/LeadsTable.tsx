@@ -26,8 +26,8 @@ type Props = {
 function SortIcon({ field, sortField, sortDir }: { field: SortField; sortField: SortField; sortDir: SortDir }) {
   if (sortField !== field) return <ChevronsUpDown className="w-3 h-3 opacity-40" />
   return sortDir === "asc"
-    ? <ChevronUp className="w-3 h-3 text-[#F37021]" />
-    : <ChevronDown className="w-3 h-3 text-[#F37021]" />
+    ? <ChevronUp className="w-3 h-3 text-orange" />
+    : <ChevronDown className="w-3 h-3 text-orange" />
 }
 
 function FollowupBadge({ followup_at }: { followup_at: string | null | undefined }) {
@@ -57,12 +57,12 @@ export default function LeadsTable({
         <thead>
           <tr className="border-b border-gray-100 bg-gray-50/60">
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
-              <button onClick={() => toggleSort("created_at")} className="flex items-center gap-1 hover:text-[#2A3A4A]">
+              <button onClick={() => toggleSort("created_at")} className="flex items-center gap-1 hover:text-navy">
                 Fecha <SortIcon field="created_at" sortField={sortField} sortDir={sortDir} />
               </button>
             </th>
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-              <button onClick={() => toggleSort("nombre")} className="flex items-center gap-1 hover:text-[#2A3A4A]">
+              <button onClick={() => toggleSort("nombre")} className="flex items-center gap-1 hover:text-navy">
                 Nombre <SortIcon field="nombre" sortField={sortField} sortDir={sortDir} />
               </button>
             </th>
@@ -73,12 +73,12 @@ export default function LeadsTable({
               Perfil
             </th>
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-              <button onClick={() => toggleSort("result_type")} className="flex items-center gap-1 hover:text-[#2A3A4A]">
+              <button onClick={() => toggleSort("result_type")} className="flex items-center gap-1 hover:text-navy">
                 Resultado <SortIcon field="result_type" sortField={sortField} sortDir={sortDir} />
               </button>
             </th>
             <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-              <button onClick={() => toggleSort("status")} className="flex items-center gap-1 hover:text-[#2A3A4A]">
+              <button onClick={() => toggleSort("status")} className="flex items-center gap-1 hover:text-navy">
                 Estado <SortIcon field="status" sortField={sortField} sortDir={sortDir} />
               </button>
             </th>
@@ -103,11 +103,11 @@ export default function LeadsTable({
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="font-semibold text-[#2A3A4A] block">{lead.nombre}</span>
+                  <span className="font-semibold text-navy block">{lead.nombre}</span>
                 </td>
                 <td className="px-4 py-3 hidden md:table-cell">
                   <a href={`mailto:${lead.email}`} onClick={(e) => e.stopPropagation()}
-                    className="text-xs text-gray-600 hover:text-[#F37021] transition-colors block truncate max-w-[180px]">
+                    className="text-xs text-gray-600 hover:text-orange transition-colors block truncate max-w-[180px]">
                     {lead.email}
                   </a>
                   {lead.whatsapp && <span className="text-[11px] text-gray-400">{lead.whatsapp}</span>}
@@ -127,7 +127,7 @@ export default function LeadsTable({
                 </td>
                 <td className="px-4 py-3 space-y-1">
                   <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
-                    lead.result_type === "alto_impacto" ? "bg-[#F37021]/10 text-[#F37021]" : "bg-purple-50 text-purple-700"
+                    lead.result_type === "alto_impacto" ? "bg-orange/10 text-orange" : "bg-purple-50 text-purple-700"
                   }`}>
                     {RESULT_LABELS[lead.result_type] ?? lead.result_type}
                   </span>
@@ -147,7 +147,7 @@ export default function LeadsTable({
                     value={lead.status ?? "nuevo"}
                     disabled={updatingStatusId === lead.id}
                     onChange={(e) => handleStatusChange(lead.id, e.target.value as LeadStatus)}
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full border appearance-none cursor-pointer pr-6 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#F37021]/30 transition-all ${sm.color} ${updatingStatusId === lead.id ? "opacity-50" : ""}`}
+                    className={`text-xs font-medium px-2.5 py-1 rounded-full border appearance-none cursor-pointer pr-6 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-orange/30 transition-all ${sm.color} ${updatingStatusId === lead.id ? "opacity-50" : ""}`}
                   >
                     {STATUS_OPTIONS.map((s) => (
                       <option key={s.value} value={s.value}>{s.label}</option>

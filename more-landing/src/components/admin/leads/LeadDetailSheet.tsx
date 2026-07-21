@@ -52,7 +52,7 @@ export default function LeadDetailSheet({
       <SheetContent side="right" className="w-full sm:max-w-[420px] flex flex-col p-0">
         {selectedLead && (
           <>
-            <SheetHeader className="px-6 py-5 pr-14 bg-gradient-to-r from-[#2A3A4A] to-[#3A4D5E]">
+            <SheetHeader className="px-6 py-5 pr-14 bg-gradient-to-r from-navy to-navy-light">
               <SheetTitle className="text-white">{selectedLead.nombre}</SheetTitle>
               <p className="text-xs text-white/60 mt-0.5">{timeAgo(selectedLead.created_at)}</p>
             </SheetHeader>
@@ -87,7 +87,7 @@ export default function LeadDetailSheet({
                   <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50 border border-gray-100">
                     <div>
                       <p className="text-[11px] text-gray-400 mb-0.5">Email</p>
-                      <a href={`mailto:${selectedLead.email}`} className="text-sm font-medium text-[#2A3A4A] hover:text-[#F37021]">
+                      <a href={`mailto:${selectedLead.email}`} className="text-sm font-medium text-navy hover:text-orange">
                         {selectedLead.email}
                       </a>
                     </div>
@@ -99,7 +99,7 @@ export default function LeadDetailSheet({
                     <div className="flex items-center justify-between p-3 rounded-xl bg-gray-50 border border-gray-100">
                       <div>
                         <p className="text-[11px] text-gray-400 mb-0.5">WhatsApp</p>
-                        <p className="text-sm font-medium text-[#2A3A4A]">{selectedLead.whatsapp}</p>
+                        <p className="text-sm font-medium text-navy">{selectedLead.whatsapp}</p>
                       </div>
                       <a href={waLink(selectedLead)} target="_blank" rel="noopener noreferrer"
                         className="p-2 text-gray-400 hover:text-green-600 rounded-lg hover:bg-green-50 transition-colors">
@@ -117,7 +117,7 @@ export default function LeadDetailSheet({
                   {([
                     ["Resultado", (
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                        selectedLead.result_type === "alto_impacto" ? "bg-[#F37021]/10 text-[#F37021]" : "bg-purple-50 text-purple-700"
+                        selectedLead.result_type === "alto_impacto" ? "bg-orange/10 text-orange" : "bg-purple-50 text-purple-700"
                       }`}>
                         {RESULT_LABELS[selectedLead.result_type]}
                       </span>
@@ -137,7 +137,7 @@ export default function LeadDetailSheet({
                     <div key={label} className="flex justify-between items-center py-2 border-b border-gray-50">
                       <span className="text-xs text-gray-500">{label}</span>
                       {typeof value === "string"
-                        ? <span className="text-xs font-medium text-[#2A3A4A]">{value}</span>
+                        ? <span className="text-xs font-medium text-navy">{value}</span>
                         : value}
                     </div>
                   ))}
@@ -168,8 +168,8 @@ export default function LeadDetailSheet({
                 <div className="flex flex-wrap gap-2">
                   {selectedLead.achievements.length > 0
                     ? selectedLead.achievements.map((a) => (
-                        <span key={a} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2A3A4A]/5 text-[#2A3A4A] text-xs font-medium border border-[#2A3A4A]/10">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#F37021]" />
+                        <span key={a} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-navy/5 text-navy text-xs font-medium border border-navy/10">
+                          <span className="w-1.5 h-1.5 rounded-full bg-orange" />
                           {ACHIEVEMENT_LABELS[a] ?? a}
                         </span>
                       ))
@@ -227,7 +227,7 @@ export default function LeadDetailSheet({
                     type="date"
                     value={followupDate}
                     onChange={(e) => setFollowupDate(e.target.value)}
-                    className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 bg-white text-gray-700"
+                    className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange/30 bg-white text-gray-700"
                   />
                   <Button size="sm" variant="outline" onClick={handleSaveFollowup}
                     disabled={savingFollowup || !followupDate} className="shrink-0 gap-1.5">
@@ -256,10 +256,10 @@ export default function LeadDetailSheet({
                     }}
                     placeholder="Escribe una nota… (Ctrl+Enter para guardar)"
                     rows={2}
-                    className="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 bg-white text-gray-700 placeholder:text-gray-300"
+                    className="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-orange/30 bg-white text-gray-700 placeholder:text-gray-300"
                   />
                   <button onClick={handleAddNote} disabled={savingNote || !newNote.trim()}
-                    className="p-2 self-end rounded-xl bg-[#2A3A4A] text-white hover:bg-[#3A4D5E] disabled:opacity-40 transition-colors" title="Agregar nota">
+                    className="p-2 self-end rounded-xl bg-navy text-white hover:bg-navy-light disabled:opacity-40 transition-colors" title="Agregar nota">
                     <Send className="w-4 h-4" />
                   </button>
                 </div>

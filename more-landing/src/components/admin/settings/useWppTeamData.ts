@@ -42,12 +42,16 @@ export function useWppTeamData() {
   }, [])
 
   useEffect(() => {
-    fetchNumbers()
+    const timer = window.setTimeout(() => { void fetchNumbers() }, 0)
+    return () => window.clearTimeout(timer)
   }, [fetchNumbers])
 
   useEffect(() => {
     if (!settingsLoading) {
-      setWppequipoEnabled(settings.wppequipo_enabled.trim().toLowerCase() !== "false")
+      const timer = window.setTimeout(() => {
+        setWppequipoEnabled(settings.wppequipo_enabled.trim().toLowerCase() !== "false")
+      }, 0)
+      return () => window.clearTimeout(timer)
     }
   }, [settingsLoading, settings.wppequipo_enabled])
 

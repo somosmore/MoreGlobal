@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { useTranslation } from "react-i18next"
 
 const avatarColors = [
-  "bg-[#0A3161]",
+  "bg-navy-deep",
   "bg-orange",
   "bg-teal-600",
   "bg-purple-700",
@@ -59,7 +59,7 @@ export function TurboTestimonialsSection() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08, type: "spring", stiffness: 120 }}
             whileHover={{ y: -4, boxShadow: "0 16px 40px -8px rgba(10,49,97,0.14)" }}
-            className="flex flex-col rounded-2xl border border-[#0A3161]/10 bg-white p-6 shadow-sm transition-all"
+            className="flex flex-col rounded-2xl border border-navy/15 bg-white p-6 shadow-sm transition-all"
           >
             <div className="flex gap-0.5 text-yellow-400 mb-4" aria-label="5 estrellas">
               {[...Array(5)].map((_, j) => (

@@ -43,11 +43,11 @@ export default function ContactSection({
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
       <div className="flex items-center gap-3 border-b border-gray-100 px-6 py-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#F37021]/10">
-          <MessageCircle className="h-4 w-4 text-[#F37021]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange/10">
+          <MessageCircle className="h-4 w-4 text-orange" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">Contacto - WhatsApp y email</h2>
+          <h2 className="text-sm font-semibold text-navy">Contacto - WhatsApp y email</h2>
           <p className="text-xs text-gray-400">
             El número que usan todos los botones de WhatsApp del sitio público
           </p>
@@ -77,7 +77,7 @@ export default function ContactSection({
 
             {/* WhatsApp */}
             <div className="space-y-1.5">
-              <label htmlFor="whatsapp-number" className="block text-sm font-medium text-[#2A3A4A]">
+              <label htmlFor="whatsapp-number" className="block text-sm font-medium text-navy">
                 Número de WhatsApp
               </label>
               <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function ContactSection({
                     ${
                       whatsappNumberInvalid
                         ? "border-red-300 bg-red-50 focus:border-red-400"
-                        : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                        : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                     }`}
                 />
                 {whatsappNumber.trim() && !whatsappNumberInvalid && (
@@ -103,7 +103,7 @@ export default function ContactSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Probar el enlace de WhatsApp"
-                    className="shrink-0 text-[#F37021] transition-colors hover:text-[#D4611A]"
+                    className="shrink-0 text-orange transition-colors hover:text-orange-dark"
                   >
                     <ExternalLink className="h-4 w-4" />
                   </a>
@@ -124,7 +124,7 @@ export default function ContactSection({
 
             {/* Email */}
             <div className="space-y-1.5">
-              <label htmlFor="contact-email" className="block text-sm font-medium text-[#2A3A4A]">
+              <label htmlFor="contact-email" className="block text-sm font-medium text-navy">
                 Email de contacto
               </label>
               <div className="relative">
@@ -144,7 +144,7 @@ export default function ContactSection({
                     ${
                       contactEmailInvalid
                         ? "border-red-300 bg-red-50 focus:border-red-400"
-                        : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                        : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                     }`}
                 />
               </div>
@@ -162,7 +162,7 @@ export default function ContactSection({
               disabled={
                 contactSaveState === "saving" || whatsappNumberInvalid || contactEmailInvalid
               }
-              className="inline-flex items-center gap-2 rounded-xl bg-[#2A3A4A] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#3A4D5E] disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-50"
             >
               {contactSaveState === "saving" ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

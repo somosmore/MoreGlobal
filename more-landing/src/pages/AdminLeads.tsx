@@ -11,7 +11,7 @@ export default function AdminLeads() {
   return (
     <div className="p-6 sm:p-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#2A3A4A]">Leads</h1>
+        <h1 className="text-2xl font-bold text-navy">Leads</h1>
         <p className="text-sm text-gray-400 mt-0.5">Gestiona y da seguimiento a los leads del quiz</p>
       </div>
 

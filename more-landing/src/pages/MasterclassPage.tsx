@@ -54,19 +54,19 @@ export default function MasterclassPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FC]">
-        <div className="w-8 h-8 border-4 border-[#F37021] border-t-transparent rounded-full animate-spin" />
+      <div className="flex min-h-screen items-center justify-center bg-paper">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange border-t-transparent" />
       </div>
     )
   }
 
   if (!isAccessible) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0033A0] to-[#001A52] px-4">
-        <div className="text-center max-w-md">
-          <img src="/logo_more_dark.png" alt="MORE" className="h-20 mx-auto mb-8 opacity-80" />
-          <h1 className="text-2xl font-bold text-white mb-3">Evento no disponible</h1>
-          <p className="text-white/60 mb-8">{reason}</p>
+      <div className="flex min-h-screen items-center justify-center bg-paper px-4">
+        <div className="max-w-md text-center">
+          <img src="/logo_more_light.png" alt="MORE" className="mx-auto mb-8 h-20" />
+          <h1 className="mb-3 text-2xl font-bold text-navy-deep">Evento no disponible</h1>
+          <p className="mb-8 text-ink-muted">{reason}</p>
           <CtaButton label="Ir al inicio" to="/" icon={null} className="w-auto" />
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function MasterclassPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="campaign-editorial min-h-screen bg-paper">
       <MCHero />
       <MCBenefits />
       <MCRegistrationForm />

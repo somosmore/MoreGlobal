@@ -29,6 +29,32 @@
 - Estado: ✅ completo / ⛔ bloqueado / 🔄 en progreso
 -->
 
+### [2026-07-20] - Fase 1: fundaciones del sistema de marca editorial 2026
+
+- Agente: codex
+- Archivos modificados: `src/index.css`, `src/components/brand/Backdrop.tsx`, `SPEC.md`, `Manual de marca/manual-marca-more-2026.html`
+- Que se implemento: se centralizaron los tonos decorativos usados por olas, rutas, trama y pines en tokens del tema; `Backdrop` ahora consume esos tokens sin cambiar su composicion visual. Se actualizo el alcance de BR-04 para incluir `/turbo` y se aclaro que la externalizacion de fechas de masterclass/taller ya fue resuelta por BR-07.
+- Verificacion: `npx tsc --noEmit` limpio; `npm run build` OK. `npm run lint` mantiene los 27 errores baseline ya existentes fuera de esta fase. La auditoria confirma que `Backdrop.tsx` ya no contiene hexadecimales decorativos hardcodeados.
+- Estado: completo
+
+### [2026-07-20] - Fase 2: migracion visual de landings de campana
+
+- Agente: codex
+- Archivos modificados: `src/components/brand/EventCountdown.tsx`, `src/locales/{es,en}/*`, `src/components/sections/{masterclass,taller-niw}/*`, `src/{upp,turbo}/components/*`, `src/pages/{MasterclassPage,TallerNiwPage,TallerNiwRegistroPage,UppPage,TurboPage}.tsx`
+- Que se implemento: las cuatro landings publicas comparten tratamiento editorial claro, `Backdrop`, superficies `paper`/`paper-warm`, bordes finos y tipografia de marca. Se unifico el contador de UPP/Turbo con `EventCountdown`, se agregaron etiquetas traducibles y se mantuvieron intactos registro, pagos, WhatsApp, tracking, settings y countdowns.
+- Verificacion: `npx tsc --noEmit` limpio; `npx vite build` OK (2423 modulos transformados; warning existente de chunks grandes); `npm run lint` conserva los 27 problemas baseline; la auditoria de rutas no encuentra `#0033A0`, `#001A52`, `#0A1F3D`, `blur-3xl`, `bg-clip-text` ni los gradientes legacy auditados.
+- Estado: completo
+
+### [2026-07-20] - Fase 3: panel admin y QA final
+
+- Agente: codex
+- Archivos modificados: `src/components/admin/**`, `src/pages/Admin*.tsx`, `src/index.css`
+- Que se implemento: se migraron los colores hardcodeados del admin a tokens semanticos, incluyendo sidebar, topbar, dashboard, leads, testimonios, proyectos, clientes, recursos y configuracion. Se agregaron tokens funcionales para WhatsApp y se conservaron las operaciones existentes.
+- Calidad: se corrigieron los 10 hallazgos de ESLint del alcance admin, incluyendo efectos de carga, dependencias de hooks, funciones declaradas despues de su uso y el render de SidebarContent.
+- Checklist QA: revisar `/admin/login`, `/admin/dashboard`, `/admin/leads`, `/admin/testimonials`, `/admin/projects`, `/admin/clients`, `/admin/resources` y `/admin/settings` en 360, 390, 430 px y desktop; validar sidebar colapsado/movil, navegacion, logout, focus visible, contraste, formularios, guardado de settings, countdowns, tracking y WhatsApp.
+- Verificacion: `npx eslint src/components/admin src/pages/Admin*.tsx` limpio; `npx tsc --noEmit` limpio; `npm run build` OK (2423 modulos, warning existente de chunks grandes). `npm run lint` queda con 11 problemas fuera del alcance admin: Success, UI shared, wizard y contexts.
+- Estado: completo
+
 ### [2026-07-14] — BR-03: secciones internas Home al sistema editorial 2026
 
 - Agente: cursor

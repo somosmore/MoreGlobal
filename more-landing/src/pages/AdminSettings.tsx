@@ -47,11 +47,11 @@ export default function AdminSettings() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#2A3A4A]/10 flex items-center justify-center">
-              <Settings className="w-5 h-5 text-[#2A3A4A]" />
+            <div className="w-10 h-10 rounded-xl bg-navy/10 flex items-center justify-center">
+              <Settings className="w-5 h-5 text-navy" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-[#2A3A4A]">Configuración</h1>
+              <h1 className="text-xl font-bold text-navy">Configuración</h1>
               <p className="text-sm text-gray-500">
                 Gestiona los parámetros globales del sitio web
               </p>
@@ -70,7 +70,7 @@ export default function AdminSettings() {
                 <button
                   type="button"
                   onClick={() => scrollToSection(id)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 text-xs font-medium text-[#2A3A4A] hover:bg-[#F37021]/10 hover:border-[#F37021]/40 hover:text-[#F37021] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 text-xs font-medium text-navy hover:bg-orange/10 hover:border-orange/40 hover:text-orange transition-colors"
                 >
                   <Icon className="w-3.5 h-3.5" aria-hidden="true" />
                   {label}

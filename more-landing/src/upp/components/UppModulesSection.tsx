@@ -37,14 +37,14 @@ export function UppModulesSection() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.06, type: "spring", stiffness: 120 }}
             whileHover={{ x: 6, boxShadow: "0 12px 30px -8px rgba(10,49,97,0.12)" }}
-            className="flex items-start gap-4 rounded-2xl border border-[#0A3161]/10 bg-white p-5 shadow-sm transition-all sm:p-6"
+            className="flex items-start gap-4 rounded-2xl border border-navy/15 bg-white p-5 shadow-sm transition-all sm:p-6"
           >
             <motion.span
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.1 + i * 0.06, type: "spring", stiffness: 300 }}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0A3161] text-white text-sm font-bold"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy-deep text-white text-sm font-bold"
             >
               {mod.number}
             </motion.span>

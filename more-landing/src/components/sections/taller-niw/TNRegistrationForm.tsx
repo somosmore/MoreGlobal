@@ -170,7 +170,7 @@ function FlagSelect({
           {selected ? (
             <>
               <FlagIcon iso={selected.iso} />
-              <span className="text-[#1A2340] truncate">{selected.label}</span>
+              <span className="truncate text-navy-deep">{selected.label}</span>
             </>
           ) : (
             <span className="text-gray-400 truncate">{placeholder}</span>
@@ -200,7 +200,7 @@ function FlagSelect({
                   className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm text-left transition-colors ${
                     opt.value === value
                       ? "bg-[#FFF3EA] text-[#D4611A] font-semibold"
-                      : "text-[#1A2340] hover:bg-[#FFF8F3]"
+                      : "text-navy-deep hover:bg-orange-wash"
                   }`}
                 >
                   <span className="w-6 flex items-center justify-center shrink-0">
@@ -234,7 +234,7 @@ function ExpiredCard({ body }: { body: string }) {
       <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
         <Calendar className="h-8 w-8 text-gray-400" />
       </div>
-      <h2 className="text-2xl font-bold text-[#1A2340] mb-3">
+      <h2 className="mb-3 text-2xl font-bold text-navy-deep">
         Este evento ya finalizó
       </h2>
       <p className="text-[#6B7A9A] mb-6">
@@ -242,7 +242,7 @@ function ExpiredCard({ body }: { body: string }) {
       </p>
       <a
         href="/"
-        className="inline-flex items-center justify-center h-11 px-6 text-sm font-semibold text-white bg-[#0033A0] rounded-lg hover:bg-[#001A52] transition-colors"
+        className="inline-flex h-11 items-center justify-center rounded-lg bg-navy-deep px-6 text-sm font-semibold text-white transition-colors hover:bg-navy-ink"
       >
         Volver al inicio
       </a>
@@ -386,13 +386,9 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
   return (
     <section
       id="registro"
-      className="relative py-12 sm:py-16 overflow-hidden bg-gradient-to-b from-[#001A52] via-[#0033A0] to-[#001233]"
+      className="relative overflow-hidden bg-paper-warm py-12 sm:py-16"
     >
       {/* Background blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-72 h-72 rounded-full bg-[#F37021]/10 blur-3xl" />
-        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#F37021]/8 blur-3xl" />
-      </div>
 
       <div className="relative max-w-lg mx-auto px-4 sm:px-6">
         {/* Section headline (outside the card) */}
@@ -406,14 +402,14 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
               transition={{ duration: 0.4 }}
               className="text-center mb-6"
             >
-              <p className="text-[#FFBA7A] text-xs font-semibold uppercase tracking-widest mb-2">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-orange-dark">
                 {copy.formEyebrow}
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+              <h2 className="font-display text-2xl font-bold leading-tight text-navy-deep sm:text-3xl">
                 {copy.formHeadlineBefore}{" "}
                 <span className="text-[#F37021]">{copy.formHeadlineHighlight}</span>, mira esto
               </h2>
-              <p className="text-white/55 text-sm mt-2">
+              <p className="mt-2 text-sm text-ink-muted">
                 {copy.formSubcopy}
               </p>
             </motion.div>
@@ -434,7 +430,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="rounded-2xl bg-white shadow-[0_8px_40px_rgba(0,0,0,0.35)] border border-white/10"
+              className="rounded-2xl border border-navy/15 bg-white shadow-sm"
             >
               {/* Colored top stripe — rounded-t para no necesitar overflow-hidden en el padre */}
               <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] via-[#FFAA5E] to-[#F37021] rounded-t-2xl" />
@@ -457,7 +453,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
                   <div>
                     <label
                       htmlFor="tn-nombre"
-                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                      className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
                       Nombre completo
                     </label>
@@ -478,7 +474,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
                   <div>
                     <label
                       htmlFor="tn-email"
-                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                      className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
                       Email
                     </label>
@@ -498,7 +494,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
                   <div>
                     <label
                       htmlFor="tn-phone"
-                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                      className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
                       WhatsApp
                     </label>
@@ -530,7 +526,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
                   <div>
                     <label
                       htmlFor="tn-profesion"
-                      className="block text-xs font-semibold text-[#1A2340] mb-1 uppercase tracking-wide"
+                      className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
                       Profesión <span className="text-[#9BAAB8] normal-case font-normal">(opcional)</span>
                     </label>

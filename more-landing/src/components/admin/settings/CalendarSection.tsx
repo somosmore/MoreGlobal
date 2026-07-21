@@ -35,11 +35,11 @@ export default function CalendarSection({
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#F37021]/10 flex items-center justify-center">
-          <Calendar className="w-4 h-4 text-[#F37021]" />
+        <div className="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center">
+          <Calendar className="w-4 h-4 text-orange" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             Calendario de Asesorías
           </h2>
           <p className="text-xs text-gray-400">
@@ -84,7 +84,7 @@ export default function CalendarSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="calendar-url"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 URL del calendario
               </label>
@@ -101,7 +101,7 @@ export default function CalendarSection({
                   ${
                     urlInvalid
                       ? "border-red-300 bg-red-50 focus:border-red-400"
-                      : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                      : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                   }`}
               />
               {urlInvalid && (
@@ -115,7 +115,7 @@ export default function CalendarSection({
                   href={calendarUrl.trim()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-[#F37021] hover:underline"
+                  className="inline-flex items-center gap-1 text-xs text-orange hover:underline"
                 >
                   <ExternalLink className="w-3 h-3" />
                   Probar enlace en nueva pestaña
@@ -144,7 +144,7 @@ export default function CalendarSection({
               <button
                 onClick={handleSave}
                 disabled={saveState === "saving" || urlInvalid || vipPaymentLinkInvalid}
-                className="inline-flex items-center gap-2 bg-[#F37021] hover:bg-[#D4611A] disabled:bg-gray-200 disabled:text-gray-400
+                className="inline-flex items-center gap-2 bg-orange hover:bg-orange-dark disabled:bg-gray-200 disabled:text-gray-400
                   text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
               >
                 {saveState === "saving" ? (

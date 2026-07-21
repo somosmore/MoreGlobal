@@ -46,9 +46,9 @@ export function UppAudienceSection() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 150 }}
               whileHover={{ y: -5, boxShadow: "0 20px 40px -12px rgba(10,49,97,0.15)" }}
-              className="rounded-2xl border border-[#0A3161]/10 bg-white p-6 shadow-sm ring-1 ring-[#0A3161]/5 transition-all"
+              className="rounded-2xl border border-navy/15 bg-white p-6 shadow-sm transition-all"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0A3161]/10 text-[#0A3161] mb-4">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-navy/10 text-navy-deep">
                 <Icon className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold text-navy">{profile.title}</h3>

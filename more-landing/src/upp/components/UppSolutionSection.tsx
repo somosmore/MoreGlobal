@@ -7,7 +7,7 @@ export function UppSolutionSection() {
   const highlights = t("uppPage.solution.highlights", { returnObjects: true }) as string[]
 
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-[#0A3161] via-[#0D3B6E] to-[#14477A] p-8 sm:p-12 relative overflow-hidden">
+    <div className="relative overflow-hidden rounded-3xl border border-navy/15 bg-paper p-8 sm:p-12">
       <motion.div
         className="absolute inset-0 opacity-10"
         aria-hidden
@@ -33,10 +33,10 @@ export function UppSolutionSection() {
         <span className="text-xs font-semibold tracking-[0.2em] uppercase text-orange">
           {t("uppPage.solution.eyebrow")}
         </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("uppPage.solution.title")}
         </h2>
-        <p className="mt-4 text-white/60 text-lg">{t("uppPage.solution.subtitle")}</p>
+        <p className="mt-4 text-lg text-ink-muted">{t("uppPage.solution.subtitle")}</p>
       </motion.div>
 
       <div className="mx-auto max-w-xl space-y-4 relative">
@@ -48,7 +48,7 @@ export function UppSolutionSection() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08, type: "spring", stiffness: 120 }}
             whileHover={{ x: 6 }}
-            className="flex items-start gap-3 rounded-xl bg-white/10 border border-white/10 p-4 backdrop-blur-sm transition-colors hover:bg-white/15"
+            className="flex items-start gap-3 rounded-xl border border-navy/15 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
           >
             <motion.span
               initial={{ scale: 0 }}
@@ -59,7 +59,7 @@ export function UppSolutionSection() {
             >
               <Check className="h-4 w-4 stroke-[3]" />
             </motion.span>
-            <span className="text-base text-white/90 sm:text-lg">{item}</span>
+            <span className="text-base text-navy-deep sm:text-lg">{item}</span>
           </motion.div>
         ))}
       </div>

@@ -37,10 +37,10 @@ export function UppBenefitsSection() {
         transition={{ duration: 0.6 }}
         className="text-center max-w-2xl mx-auto mb-12"
       >
-        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#0A3161]">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-navy-deep">
           {t("uppPage.benefits.eyebrow")}
         </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0A3161] tracking-tight">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("uppPage.benefits.title")}
         </h2>
       </motion.div>
@@ -61,11 +61,11 @@ export function UppBenefitsSection() {
               <motion.div
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.5 }}
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0A3161]/10 text-[#0A3161] mb-4"
+                className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-navy/10 text-navy-deep"
               >
                 <Icon className="h-6 w-6" />
               </motion.div>
-              <h3 className="text-base font-semibold text-[#0A3161]">{item.title}</h3>
+              <h3 className="text-base font-semibold text-navy-deep">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-gray-500">{item.text}</p>
             </motion.div>
           )

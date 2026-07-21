@@ -35,7 +35,7 @@ export function TurboStickyCta({ paymentLink, price, loading }: TurboStickyCtaPr
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-0 left-0 right-0 z-50 sm:hidden"
         >
-          <div className="border-t border-white/10 bg-[#0A1F3D]/95 px-4 py-3 pb-safe backdrop-blur-md">
+          <div className="border-t border-navy/15 bg-navy-deep px-4 py-3 pb-safe backdrop-blur-md">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2 min-w-0">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange">

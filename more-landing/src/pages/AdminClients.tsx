@@ -43,11 +43,7 @@ export default function AdminClients() {
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchClients()
-  }, [])
-
-  const fetchClients = async () => {
+  async function fetchClients() {
     if (!supabase) return
     setLoading(true)
     const { data } = await supabase
@@ -57,6 +53,11 @@ export default function AdminClients() {
     setClients((data as Client[]) ?? [])
     setLoading(false)
   }
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void fetchClients() }, 0)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const handleEdit = (client: Client) => {
     setEditingId(client.id)
@@ -144,7 +145,7 @@ export default function AdminClients() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#2A3A4A]">Clientes</h1>
+          <h1 className="text-2xl font-bold text-navy">Clientes</h1>
           <p className="text-sm text-gray-500 mt-0.5">
             Contactos vinculados a proyectos de landing
           </p>
@@ -187,8 +188,8 @@ export default function AdminClients() {
               className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50/50 transition-colors group"
             >
               {/* Avatar */}
-              <div className="w-10 h-10 rounded-full bg-[#2A3A4A]/10 flex items-center justify-center shrink-0">
-                <span className="text-xs font-bold text-[#2A3A4A]/70">
+              <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center shrink-0">
+                <span className="text-xs font-bold text-navy/70">
                   {client.name.slice(0, 2).toUpperCase()}
                 </span>
               </div>
@@ -196,7 +197,7 @@ export default function AdminClients() {
               {/* Info */}
               <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-3 gap-0.5 sm:gap-4">
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[#2A3A4A] truncate">
+                  <p className="text-sm font-semibold text-navy truncate">
                     {client.name}
                   </p>
                   {client.company && (
@@ -224,7 +225,7 @@ export default function AdminClients() {
               <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                 <button
                   onClick={() => handleEdit(client)}
-                  className="p-2 text-gray-400 hover:text-[#2A3A4A] hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
                   title="Editar"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -316,7 +317,7 @@ export default function AdminClients() {
                 placeholder="Referencias, contexto, observaciones..."
                 value={formData.notes ?? ""}
                 onChange={(e) => setField("notes", e.target.value)}
-                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F37021]/30 focus:border-[#F37021] resize-none placeholder:text-gray-400 bg-white"
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400 bg-white"
               />
             </div>
           </div>

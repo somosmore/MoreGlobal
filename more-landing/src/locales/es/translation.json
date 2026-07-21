@@ -1,4 +1,12 @@
 {
+  "countdown": {
+    "startsIn": "Comienza en",
+    "offerCloses": "La oferta cierra en",
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos"
+  },
   "navbar": {
     "methodology": "Metodología",
     "whoWeHelp": "¿A quién ayudamos?",

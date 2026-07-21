@@ -119,7 +119,7 @@ export default function WppTeamSection() {
   const handleDownloadQr = async () => {
     if (!qrRef.current) return
     const canvas = await html2canvas(qrRef.current, {
-      backgroundColor: "#ffffff",
+      backgroundColor: "white",
       scale: 2,
     })
     const link = document.createElement("a")
@@ -249,11 +249,11 @@ export default function WppTeamSection() {
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#25D366]/10 flex items-center justify-center">
-          <MessageCircle className="w-4 h-4 text-[#128C7E]" />
+        <div className="w-8 h-8 rounded-lg bg-whatsapp/10 flex items-center justify-center">
+          <MessageCircle className="w-4 h-4 text-whatsapp-deep" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             WhatsApp Equipo (/wppequipo)
           </h2>
           <p className="text-xs text-gray-400">
@@ -309,8 +309,8 @@ export default function WppTeamSection() {
 
             <div className="rounded-xl border border-gray-200 p-4 space-y-4">
               <div className="flex items-center gap-2">
-                <QrCode className="w-4 h-4 text-[#2A3A4A]" />
-                <h3 className="text-sm font-semibold text-[#2A3A4A]">
+                <QrCode className="w-4 h-4 text-navy" />
+                <h3 className="text-sm font-semibold text-navy">
                   Enlace y código QR para compartir
                 </h3>
               </div>
@@ -342,12 +342,12 @@ export default function WppTeamSection() {
                         type="text"
                         readOnly
                         value={WPPEQUIPO_PUBLIC_URL}
-                        className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono text-[#2A3A4A]"
+                        className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono text-navy"
                       />
                       <button
                         type="button"
                         onClick={handleCopyLink}
-                        className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 bg-white text-sm font-medium text-[#2A3A4A] hover:bg-gray-50 transition-colors"
+                        className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 bg-white text-sm font-medium text-navy hover:bg-gray-50 transition-colors"
                         aria-label="Copiar enlace"
                       >
                         <Copy className="w-4 h-4" />
@@ -361,7 +361,7 @@ export default function WppTeamSection() {
                       href={WPPEQUIPO_PUBLIC_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 text-sm text-[#2A3A4A] hover:bg-gray-50 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 text-sm text-navy hover:bg-gray-50 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Abrir página
@@ -369,7 +369,7 @@ export default function WppTeamSection() {
                     <button
                       type="button"
                       onClick={handleDownloadQr}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#2A3A4A] text-white text-sm font-medium hover:bg-[#3A4D5E] transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-navy text-white text-sm font-medium hover:bg-navy-light transition-colors"
                     >
                       <Download className="w-4 h-4" />
                       Descargar QR (PNG)
@@ -381,14 +381,14 @@ export default function WppTeamSection() {
 
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <h3 className="text-sm font-semibold text-[#2A3A4A]">
+                <h3 className="text-sm font-semibold text-navy">
                   Números del equipo ({data.numbers.length})
                 </h3>
                 <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={handleOpenBulk}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#2A3A4A]/15 bg-white text-sm font-medium text-[#2A3A4A] hover:bg-gray-50 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-navy/15 bg-white text-sm font-medium text-navy hover:bg-gray-50 transition-colors"
                   >
                     <Upload className="w-4 h-4" />
                     Importar lista
@@ -396,7 +396,7 @@ export default function WppTeamSection() {
                   <button
                     type="button"
                     onClick={handleOpenCreate}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F37021] text-white text-sm font-medium hover:bg-[#D4611A] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange text-white text-sm font-medium hover:bg-orange-dark transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                     Agregar número
@@ -423,7 +423,7 @@ export default function WppTeamSection() {
                       className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-xl border border-gray-100 bg-gray-50/50 px-4 py-3"
                     >
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-[#2A3A4A]">{item.label}</p>
+                        <p className="text-sm font-medium text-navy">{item.label}</p>
                         <p className="text-xs text-gray-400 font-mono truncate mt-0.5">
                           {item.url}
                         </p>
@@ -443,7 +443,7 @@ export default function WppTeamSection() {
                         <button
                           type="button"
                           onClick={() => handleOpenEdit(item)}
-                          className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-[#2A3A4A] transition-colors"
+                          className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-navy transition-colors"
                           aria-label={`Editar ${item.label}`}
                         >
                           <Pencil className="w-4 h-4" />
@@ -480,7 +480,7 @@ export default function WppTeamSection() {
         >
           <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-              <h3 id="wpp-form-title" className="text-sm font-semibold text-[#2A3A4A]">
+              <h3 id="wpp-form-title" className="text-sm font-semibold text-navy">
                 {form.mode === "create" ? "Agregar número" : "Editar número"}
               </h3>
               <button
@@ -495,7 +495,7 @@ export default function WppTeamSection() {
 
             <div className="p-5 space-y-4">
               <div className="space-y-1.5">
-                <label htmlFor="wpp-label" className="block text-sm font-medium text-[#2A3A4A]">
+                <label htmlFor="wpp-label" className="block text-sm font-medium text-navy">
                   Nombre / etiqueta
                 </label>
                 <input
@@ -504,12 +504,12 @@ export default function WppTeamSection() {
                   value={form.label}
                   onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))}
                   placeholder="Ej: Sandra, Hugo, Equipo general"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-[#F37021] focus:bg-white"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-orange focus:bg-white"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="wpp-url" className="block text-sm font-medium text-[#2A3A4A]">
+                <label htmlFor="wpp-url" className="block text-sm font-medium text-navy">
                   Enlace de WhatsApp
                 </label>
                 <input
@@ -522,7 +522,7 @@ export default function WppTeamSection() {
                     ${
                       urlInvalid
                         ? "border-red-300 bg-red-50 focus:border-red-400"
-                        : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                        : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                     }`}
                 />
                 {urlInvalid && (
@@ -550,7 +550,7 @@ export default function WppTeamSection() {
                     !form.url.trim() ||
                     urlInvalid
                   }
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#2A3A4A] text-white text-sm font-medium hover:bg-[#3A4D5E] disabled:opacity-50"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy text-white text-sm font-medium hover:bg-navy-light disabled:opacity-50"
                 >
                   {formSaving && <Loader2 className="w-4 h-4 animate-spin" />}
                   {form.mode === "create" ? "Agregar" : "Guardar"}
@@ -571,8 +571,8 @@ export default function WppTeamSection() {
           <div className="w-full max-w-3xl max-h-[90vh] bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#F37021]" />
-                <h3 id="wpp-bulk-title" className="text-sm font-semibold text-[#2A3A4A]">
+                <Sparkles className="w-4 h-4 text-orange" />
+                <h3 id="wpp-bulk-title" className="text-sm font-semibold text-navy">
                   Importar lista de números
                 </h3>
               </div>
@@ -604,7 +604,7 @@ export default function WppTeamSection() {
                 <div className="sm:col-span-2 space-y-1.5">
                   <label
                     htmlFor="wpp-bulk-text"
-                    className="block text-sm font-medium text-[#2A3A4A]"
+                    className="block text-sm font-medium text-navy"
                   >
                     Pegá la lista (índice, nombre y teléfono, una línea cada uno)
                   </label>
@@ -616,14 +616,14 @@ export default function WppTeamSection() {
                     }
                     rows={8}
                     placeholder={"36\nAndres Chancusig\n0989812877\n37\nJose Forero\n954932639"}
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono outline-none focus:border-[#F37021] focus:bg-white resize-y"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono outline-none focus:border-orange focus:bg-white resize-y"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label
                     htmlFor="wpp-bulk-country"
-                    className="block text-sm font-medium text-[#2A3A4A]"
+                    className="block text-sm font-medium text-navy"
                   >
                     País por defecto
                   </label>
@@ -631,7 +631,7 @@ export default function WppTeamSection() {
                     id="wpp-bulk-country"
                     value={bulk.defaultCountry}
                     onChange={(e) => handleChangeBulkCountry(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-[#F37021] focus:bg-white"
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm outline-none focus:border-orange focus:bg-white"
                   >
                     {COUNTRY_OPTIONS.map((c) => (
                       <option key={c.code} value={c.code}>
@@ -650,7 +650,7 @@ export default function WppTeamSection() {
                   type="button"
                   onClick={handleParseBulk}
                   disabled={!bulk.text.trim()}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#2A3A4A] text-white text-sm font-medium hover:bg-[#3A4D5E] disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-navy text-white text-sm font-medium hover:bg-navy-light disabled:opacity-50"
                 >
                   <Sparkles className="w-4 h-4" />
                   Procesar y previsualizar
@@ -692,7 +692,7 @@ export default function WppTeamSection() {
                               handleUpdateEntry(entry.id, "label", e.target.value)
                             }
                             placeholder="Nombre"
-                            className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-white text-sm outline-none focus:border-[#F37021]"
+                            className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-white text-sm outline-none focus:border-orange"
                           />
                         </div>
                         <div className="sm:col-span-3">
@@ -703,7 +703,7 @@ export default function WppTeamSection() {
                               handleUpdateEntry(entry.id, "rawPhone", e.target.value)
                             }
                             placeholder="Teléfono"
-                            className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-white text-sm font-mono outline-none focus:border-[#F37021]"
+                            className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-white text-sm font-mono outline-none focus:border-orange"
                           />
                         </div>
                         <div className="sm:col-span-4 min-w-0">
@@ -712,7 +712,7 @@ export default function WppTeamSection() {
                               href={entry.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="font-mono text-xs text-[#128C7E] hover:underline truncate block"
+                              className="font-mono text-xs text-whatsapp-deep hover:underline truncate block"
                               title={entry.url}
                             >
                               {entry.url}
@@ -753,7 +753,7 @@ export default function WppTeamSection() {
                 type="button"
                 onClick={handleConfirmBulkImport}
                 disabled={bulk.saving || bulkStats.valid === 0}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#F37021] text-white text-sm font-medium hover:bg-[#D4611A] disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-orange text-white text-sm font-medium hover:bg-orange-dark disabled:opacity-50"
               >
                 {bulk.saving ? (
                   <Loader2 className="w-4 h-4 animate-spin" />

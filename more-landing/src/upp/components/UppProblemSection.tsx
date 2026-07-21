@@ -17,7 +17,7 @@ export function UppProblemSection() {
   }>
 
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-[#0A3161] via-[#0D3B6E] to-[#1A4F8A] p-8 sm:p-12 relative overflow-hidden">
+    <div className="relative overflow-hidden rounded-3xl border border-navy/15 bg-paper p-8 sm:p-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export function UppProblemSection() {
         <span className="text-xs font-semibold tracking-[0.2em] uppercase text-orange">
           {t("uppPage.problem.eyebrow")}
         </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("uppPage.problem.title")}
         </h2>
       </motion.div>
@@ -44,7 +44,7 @@ export function UppProblemSection() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: i * 0.12, type: "spring", stiffness: 120 }}
               whileHover={{ scale: 1.03, y: -3 }}
-              className="rounded-2xl bg-white/10 border border-white/15 p-6 backdrop-blur-sm transition-all hover:bg-white/15"
+              className="rounded-2xl border border-navy/15 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -55,8 +55,8 @@ export function UppProblemSection() {
               >
                 <Icon className="h-5 w-5" />
               </motion.div>
-              <h3 className="text-lg font-semibold text-white">{point.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/60">{point.description}</p>
+              <h3 className="text-lg font-semibold text-navy-deep">{point.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{point.description}</p>
             </motion.div>
           )
         })}

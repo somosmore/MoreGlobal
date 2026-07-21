@@ -75,7 +75,7 @@ export function TurboProcessSection() {
                   </div>
 
                   <div className="flex-1 pb-2">
-                    <div className={`rounded-2xl border bg-white p-5 shadow-sm ${phase.alert ? "border-amber-200" : "border-[#0A3161]/10"}`}>
+                    <div className={`rounded-2xl border bg-white p-5 shadow-sm ${phase.alert ? "border-amber-200" : "border-navy/15"}`}>
                       <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div>
                           <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">

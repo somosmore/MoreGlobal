@@ -44,7 +44,7 @@ export default function TNTestimonials() {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2340]">
+          <h2 className="font-display text-2xl font-bold text-navy-deep sm:text-3xl">
             Lo que dicen quienes ya lo vieron
           </h2>
           <div className="h-1 w-20 mx-auto rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A] mt-4 opacity-80" />
@@ -64,11 +64,11 @@ export default function TNTestimonials() {
               className="flex flex-col rounded-2xl bg-[#F4F6FB] border border-gray-100 shadow-sm p-5 sm:p-6"
             >
               <Quote className="h-6 w-6 text-[#F37021] mb-3 shrink-0" />
-              <blockquote className="text-[#1A2340] text-sm leading-relaxed flex-1">
+              <blockquote className="flex-1 text-sm leading-relaxed text-navy-deep">
                 {t.quote}
               </blockquote>
               <figcaption className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-sm font-bold text-[#1A2340]">{t.name}</p>
+                <p className="text-sm font-bold text-navy-deep">{t.name}</p>
                 <p className="text-xs font-medium text-[#F37021]">{t.role}</p>
               </figcaption>
             </motion.figure>

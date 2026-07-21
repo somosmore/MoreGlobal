@@ -1,6 +1,6 @@
 export default function TNFooter() {
   return (
-    <footer className="py-8 bg-[#001A52] text-center">
+    <footer className="bg-navy-deep py-8 text-center">
       <p className="text-white/70 text-sm">
         MORE — Migración con Propósito
       </p>

@@ -57,11 +57,11 @@ export default function VipSessionSection({
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#F37021]/10 flex items-center justify-center">
-          <CreditCard className="w-4 h-4 text-[#F37021]" />
+        <div className="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center">
+          <CreditCard className="w-4 h-4 text-orange" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-[#2A3A4A]">
+          <h2 className="text-sm font-semibold text-navy">
             Asesoría VIP - Links, precio y ventana de oferta
           </h2>
           <p className="text-xs text-gray-400">
@@ -82,7 +82,7 @@ export default function VipSessionSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="vip-payment-link"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 Link de pago
               </label>
@@ -100,7 +100,7 @@ export default function VipSessionSection({
                     ${
                       vipPaymentLinkInvalid
                         ? "border-red-300 bg-red-50 focus:border-red-400"
-                        : "border-gray-200 bg-gray-50 focus:border-[#F37021] focus:bg-white"
+                        : "border-gray-200 bg-gray-50 focus:border-orange focus:bg-white"
                     }`}
                 />
                 {vipPaymentLink.trim() && !vipPaymentLinkInvalid && (
@@ -109,7 +109,7 @@ export default function VipSessionSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Probar enlace de pago"
-                    className="shrink-0 text-[#F37021] hover:text-[#D4611A] transition-colors"
+                    className="shrink-0 text-orange hover:text-orange-dark transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
@@ -127,7 +127,7 @@ export default function VipSessionSection({
             <div className="space-y-1.5">
               <label
                 htmlFor="vip-price"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 Precio
               </label>
@@ -144,7 +144,7 @@ export default function VipSessionSection({
                     setSaveState("idle")
                   }}
                   placeholder="$97 USD"
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm transition-colors outline-none focus:border-[#F37021] focus:bg-white"
+                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm transition-colors outline-none focus:border-orange focus:bg-white"
                 />
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function VipSessionSection({
             <div className="space-y-1.5 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
               <label
                 htmlFor="vip-countdown-date"
-                className="block text-sm font-medium text-[#2A3A4A]"
+                className="block text-sm font-medium text-navy"
               >
                 Cierre de la oferta (contador)
               </label>
@@ -170,7 +170,7 @@ export default function VipSessionSection({
                       setVipCountdownDate(e.target.value)
                       setSaveState("idle")
                     }}
-                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm transition-colors outline-none focus:border-[#F37021]"
+                    className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm transition-colors outline-none focus:border-orange"
                   />
                 </div>
                 <button
@@ -179,7 +179,7 @@ export default function VipSessionSection({
                     setVipCountdownDate(localDateTimeIn(24))
                     setSaveState("idle")
                   }}
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-[#F37021]/40 bg-[#F37021]/10 px-4 py-2.5 text-sm font-medium text-[#D4611A] transition-colors hover:bg-[#F37021]/20"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-orange/40 bg-orange/10 px-4 py-2.5 text-sm font-medium text-orange-dark transition-colors hover:bg-orange/20"
                 >
                   <Clock className="w-4 h-4" />
                   Abrir 24 h desde ahora
@@ -205,7 +205,7 @@ export default function VipSessionSection({
               type="button"
               onClick={handleSave}
               disabled={saveState === "saving" || vipPaymentLinkInvalid}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2A3A4A] text-white text-sm font-medium hover:bg-[#3A4D5E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-navy text-white text-sm font-medium hover:bg-navy-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saveState === "saving" ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

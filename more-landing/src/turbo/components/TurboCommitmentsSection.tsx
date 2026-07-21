@@ -18,7 +18,7 @@ export function TurboCommitmentsSection() {
   }>
 
   return (
-    <div className="rounded-3xl border border-[#0A3161]/10 bg-gradient-to-br from-[#0A1F3D] to-[#0D2A50] p-8 sm:p-12 relative overflow-hidden">
+    <div className="relative overflow-hidden rounded-3xl border border-navy/15 bg-paper p-8 sm:p-12">
       <div className="pointer-events-none absolute inset-0">
         {[...Array(3)].map((_, i) => (
           <motion.div
@@ -41,10 +41,10 @@ export function TurboCommitmentsSection() {
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-orange">
           {t("turboPage.commitments.eyebrow")}
         </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("turboPage.commitments.title")}
         </h2>
-        <p className="mt-3 text-base text-white/60">{t("turboPage.commitments.subtitle")}</p>
+        <p className="mt-3 text-base text-ink-muted">{t("turboPage.commitments.subtitle")}</p>
       </motion.div>
 
       <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mx-auto max-w-5xl">
@@ -56,13 +56,13 @@ export function TurboCommitmentsSection() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.08, type: "spring", stiffness: 120 }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm hover:border-white/20 hover:bg-white/8 transition-all"
+            className="flex flex-col items-center rounded-2xl border border-navy/15 bg-white p-6 text-center shadow-sm transition-shadow hover:border-orange/30 hover:shadow-md"
           >
             <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br ${COLORS[i]} text-2xl font-bold text-white shadow-lg`}>
               {item.number}
             </div>
-            <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
-            <p className="text-xs text-white/60 leading-relaxed">{item.text}</p>
+            <h3 className="mb-2 text-sm font-bold text-navy-deep">{item.title}</h3>
+            <p className="text-xs leading-relaxed text-ink-muted">{item.text}</p>
           </motion.div>
         ))}
       </div>

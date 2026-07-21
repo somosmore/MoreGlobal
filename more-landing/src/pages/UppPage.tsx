@@ -82,7 +82,7 @@ export default function UppPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="campaign-editorial min-h-screen bg-paper">
       <Navbar />
       <main className="flex flex-col gap-0">
         <UppHero
@@ -92,7 +92,7 @@ export default function UppPage() {
           whatsappUrl={whatsappUrl}
           loading={loading}
         />
-        <section className="bg-white py-16 sm:py-24">
+        <section className="bg-paper-warm py-16 sm:py-24">
           <div className="mx-auto flex max-w-7xl flex-col gap-20 px-4 sm:px-6 lg:px-8">
             <div id="upp-audiencia"><UppAudienceSection /></div>
             <UppProblemSection />
@@ -100,7 +100,7 @@ export default function UppPage() {
             <UppBenefitsSection />
             <div id="upp-modulos"><UppModulesSection /></div>
             <UppTestimonialsSection />
-            <div className="mx-auto max-w-2xl w-full rounded-2xl bg-[#0A3161]/5 border border-[#0A3161]/10 px-6 py-8 text-center">
+            <div className="mx-auto w-full max-w-2xl rounded-2xl border border-navy/15 bg-white px-6 py-8 text-center shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-wider text-orange mb-1">
                 {t("uppPage.midCta.eyebrow")}
               </p>

@@ -17,7 +17,7 @@ export default function MCSpeaker() {
             className="w-24 h-24 rounded-full object-cover border-4 border-[#F37021]/20 shrink-0"
           />
           <div className="text-center sm:text-left">
-            <h3 className="text-xl font-bold text-[#1A2340]">Ivon More</h3>
+            <h3 className="text-xl font-bold text-navy-deep">Ivon More</h3>
             <p className="text-sm font-semibold text-[#F37021] mt-1">
               Fundadora de MORE — Migración con Propósito
             </p>

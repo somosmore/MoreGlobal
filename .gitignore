@@ -25,6 +25,7 @@ npm-debug.log*
 
 # Generated import reports with contact data
 more-landing/scripts/reports/*.json
+more-landing/scripts/reports/*.csv
 
 # TypeScript cache
 more-landing/node_modules/.tmp/

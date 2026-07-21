@@ -122,7 +122,7 @@ function SortableCard({
       <Card
         className={`border transition-all duration-150 ${
           isDragging
-            ? "border-[#F37021] shadow-xl bg-orange-50/30"
+            ? "border-orange shadow-xl bg-orange-50/30"
             : "border-gray-200 hover:border-gray-300 hover:shadow-md bg-white"
         }`}
       >
@@ -149,12 +149,12 @@ function SortableCard({
                     <img
                       src={t.video_thumbnail_url}
                       alt={`Portada de ${t.name}`}
-                      className="w-16 h-16 rounded-xl object-cover border border-[#F37021]/20"
+                      className="w-16 h-16 rounded-xl object-cover border border-orange/20"
                       onError={(e) => { e.currentTarget.style.display = "none" }}
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-xl bg-[#F37021]/10 flex items-center justify-center border border-[#F37021]/20">
-                      <Video className="w-7 h-7 text-[#F37021]" />
+                    <div className="w-16 h-16 rounded-xl bg-orange/10 flex items-center justify-center border border-orange/20">
+                      <Video className="w-7 h-7 text-orange" />
                     </div>
                   )
                 ) : t.photo_url ? (
@@ -167,8 +167,8 @@ function SortableCard({
                     }}
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-xl bg-[#2A3A4A]/10 flex items-center justify-center border border-[#2A3A4A]/10">
-                    <span className="text-xl font-bold text-[#2A3A4A]/40">
+                  <div className="w-16 h-16 rounded-xl bg-navy/10 flex items-center justify-center border border-navy/10">
+                    <span className="text-xl font-bold text-navy/40">
                       {t.name?.charAt(0)?.toUpperCase() ?? "?"}
                     </span>
                   </div>
@@ -180,7 +180,7 @@ function SortableCard({
 
                 {/* Row 1: name + badges */}
                 <div className="flex flex-wrap items-start gap-2">
-                  <span className="font-bold text-[#2A3A4A] text-base leading-tight">
+                  <span className="font-bold text-navy text-base leading-tight">
                     {isVideo
                       ? (t.video_url ? "Video testimonio" : "Video")
                       : t.name}
@@ -228,7 +228,7 @@ function SortableCard({
                       </span>
                     )}
                     {t.timeline && (
-                      <span className="flex items-center gap-1 font-semibold text-[#F37021]">
+                      <span className="flex items-center gap-1 font-semibold text-orange">
                         <Clock className="w-3 h-3" />
                         {t.timeline}
                       </span>
@@ -243,7 +243,7 @@ function SortableCard({
                       href={t.video_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-[#F37021] hover:underline truncate max-w-full"
+                      className="inline-flex items-center gap-1 text-xs text-orange hover:underline truncate max-w-full"
                     >
                       <ExternalLink className="w-3 h-3 shrink-0" />
                       <span className="truncate">{t.video_url}</span>
@@ -274,7 +274,7 @@ function SortableCard({
                     size="icon"
                     onClick={() => onEdit(t)}
                     aria-label="Editar"
-                    className="w-8 h-8 text-gray-500 hover:text-[#2A3A4A] hover:bg-gray-100"
+                    className="w-8 h-8 text-gray-500 hover:text-navy hover:bg-gray-100"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </Button>
@@ -339,7 +339,10 @@ export default function AdminTestimonials() {
     setTestimonials((data as Testimonial[]) ?? [])
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    const timer = window.setTimeout(() => { void load() }, 0)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const filtered =
     categoryFilter === ""
@@ -473,7 +476,7 @@ export default function AdminTestimonials() {
     <div className="p-6 sm:p-8 max-w-5xl mx-auto">
       {/* Page title */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#2A3A4A]">Testimonios</h1>
+        <h1 className="text-2xl font-bold text-navy">Testimonios</h1>
         <p className="text-sm text-gray-400 mt-0.5">
           Administra los testimonios del sitio. Arrastra para reordenar dentro de cada categoría.
         </p>
@@ -534,7 +537,7 @@ export default function AdminTestimonials() {
             <button
               type="button"
               onClick={() => setCategoryFilter("")}
-              className="mt-2 text-sm text-[#F37021] hover:underline"
+              className="mt-2 text-sm text-orange hover:underline"
             >
               Ver todos
             </button>
@@ -596,7 +599,7 @@ export default function AdminTestimonials() {
                     onClick={() => updateField("media_type", o.value as "text_photo" | "video")}
                     className={`flex items-center gap-2 px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors ${
                       form.media_type === o.value
-                        ? "border-[#F37021] bg-[#F37021]/10 text-[#2A3A4A]"
+                        ? "border-orange bg-orange/10 text-navy"
                         : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                     }`}
                   >
@@ -710,7 +713,7 @@ export default function AdminTestimonials() {
                     onChange={(e) => updateField("quote", e.target.value)}
                     required={form.media_type === "text_photo"}
                     rows={4}
-                    className="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A3A4A]/20"
+                    className="flex w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy/20"
                     placeholder="Texto del testimonio..."
                   />
                 </div>

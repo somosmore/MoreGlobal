@@ -249,7 +249,7 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
             <div className="space-y-2">
               {isBuiltIn ? (
                 <>
-                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-[#0033A0]/10 text-[#0033A0] rounded-full">
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-semibold bg-navy-mid/10 text-navy-mid rounded-full">
                     Landing integrada
                   </span>
                   <h3 className="text-sm font-bold text-navy leading-snug line-clamp-2">
@@ -353,8 +353,8 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
               className={cn(
                 "flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded transition-colors",
                 showSchedule
-                  ? "text-[#F37021] bg-[#F37021]/10"
-                  : "text-gray-500 hover:text-[#2A3A4A] hover:bg-gray-100"
+                  ? "text-orange bg-orange/10"
+                  : "text-gray-500 hover:text-navy hover:bg-gray-100"
               )}
               aria-label="Programar fechas"
               aria-expanded={showSchedule}
@@ -375,7 +375,7 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
                 onChange={(e) => setActivateInput(e.target.value)}
                 onBlur={(e) => saveDate("activate_at", e.target.value)}
                 disabled={savingField === "activate_at"}
-                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40 disabled:opacity-50"
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-orange/40 disabled:opacity-50"
               />
               {activateAt && (
                 <button
@@ -397,7 +397,7 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
                 onChange={(e) => setDeactivateInput(e.target.value)}
                 onBlur={(e) => saveDate("deactivate_at", e.target.value)}
                 disabled={savingField === "deactivate_at"}
-                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-[#F37021]/40 disabled:opacity-50"
+                className="flex-1 text-[11px] border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-orange/40 disabled:opacity-50"
               />
               {deactivateAt && (
                 <button
@@ -413,7 +413,7 @@ export default function LandingPreviewCard({ project, onToggleActive }: LandingP
             </div>
             <div className="flex items-center justify-between gap-2 min-h-[14px]">
               {scheduleLabel(activateAt, deactivateAt) ? (
-                <p className="text-[10px] text-[#F37021] font-medium">
+                <p className="text-[10px] text-orange font-medium">
                   {scheduleLabel(activateAt, deactivateAt)}
                 </p>
               ) : (

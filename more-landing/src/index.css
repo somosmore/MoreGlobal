@@ -8,10 +8,24 @@
 
   /* Sistema editorial 2026 — ver Manual de marca */
   --color-navy-deep: #1B2B44;
+  /* Decorative tones for the editorial travel system. */
+  --color-navy-mid: #4A6D96;
+  --color-navy-soft: #8AA4C1;
+  --color-navy-pale: #C3D2E2;
+  --color-navy-ink: #16243D;
   --color-orange-light: #FF9052;
+  --color-orange-deep: #E0561A;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #20BD5A;
+  --color-whatsapp-deep: #128C7E;
+  --color-orange-pale: #FFC9A6;
+  --color-orange-wash: #FFE4D2;
+  --color-navy-line: #5C7EA6;
+  --color-orange-line: #F79B67;
   --color-paper: #F6F7F9;
   --color-paper-warm: #FDF8F4;
   --color-ink-muted: #5B6B7C;
+  --color-white: #FFFFFF;
 
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", "Times New Roman", Georgia, serif;

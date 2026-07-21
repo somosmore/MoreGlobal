@@ -25,7 +25,7 @@ export function UppBonusStackSection({ price, loading }: UppBonusStackSectionPro
   }>
 
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-[#0A3161] via-[#0D3B6E] to-[#14477A] p-8 sm:p-12">
+    <div className="rounded-3xl border border-navy/15 bg-paper p-8 sm:p-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export function UppBonusStackSection({ price, loading }: UppBonusStackSectionPro
           <Gift className="h-3.5 w-3.5" />
           {t("uppPage.bonusStack.eyebrow")}
         </span>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("uppPage.bonusStack.title")}
         </h2>
       </motion.div>
@@ -53,12 +53,12 @@ export function UppBonusStackSection({ price, loading }: UppBonusStackSectionPro
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.08, type: "spring", stiffness: 150 }}
               whileHover={{ y: -5 }}
-              className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-orange/30 hover:bg-white/10"
+              className="flex items-start gap-4 rounded-2xl border border-navy/15 bg-white p-6 shadow-sm transition-shadow hover:border-orange/30 hover:shadow-md"
             >
               <motion.div
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.5 }}
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange to-orange-dark text-white shadow-lg shadow-orange/25"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange text-white shadow-sm"
               >
                 <Icon className="h-6 w-6" />
               </motion.div>
@@ -66,8 +66,8 @@ export function UppBonusStackSection({ price, loading }: UppBonusStackSectionPro
                 <span className="text-xs font-semibold uppercase tracking-wider text-orange">
                   {bonus.tag}
                 </span>
-                <h3 className="mt-1 text-base font-semibold text-white">{bonus.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/60">{bonus.text}</p>
+                <h3 className="mt-1 text-base font-semibold text-navy-deep">{bonus.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{bonus.text}</p>
               </div>
             </motion.div>
           )
@@ -79,20 +79,20 @@ export function UppBonusStackSection({ price, loading }: UppBonusStackSectionPro
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 150 }}
-        className="mx-auto mt-8 max-w-xl rounded-2xl border border-orange/20 bg-white/5 p-6 text-center backdrop-blur-sm"
+        className="mx-auto mt-8 max-w-xl rounded-2xl border border-orange/20 bg-white p-6 text-center shadow-sm"
       >
         <div className="flex items-center justify-center gap-3">
-          <span className="text-sm font-semibold uppercase tracking-wider text-white/70">
+          <span className="text-sm font-semibold uppercase tracking-wider text-ink-muted">
             {t("uppPage.bonusStack.stackValueLabel")}
           </span>
-          <span className="text-lg font-bold text-white/50 line-through sm:text-xl">
+          <span className="text-lg font-bold text-ink-muted line-through sm:text-xl">
             {t("uppPage.bonusStack.stackValueAmount")}
           </span>
         </div>
         <p className="mt-3 text-3xl font-bold tracking-tight text-orange sm:text-4xl">
           {t("uppPage.bonusStack.freeLabel")}
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-white/70">
+        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
           {loading ? (
             <span className="inline-block h-4 w-48 animate-pulse rounded bg-white/20 align-middle" />
           ) : (

@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { useTranslation } from "react-i18next"
 
 const avatarColors = [
-  "bg-[#0A3161]",
+  "bg-navy-deep",
   "bg-orange",
   "bg-teal-600",
   "bg-purple-700",
@@ -60,7 +60,7 @@ export function UppTestimonialsSection() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5, delay: i * 0.1, type: "spring", stiffness: 130 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="flex flex-col rounded-2xl border border-[#0A3161]/10 bg-white p-6 shadow-sm ring-1 ring-[#0A3161]/5 transition-shadow hover:shadow-lg"
+            className="flex flex-col rounded-2xl border border-navy/15 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg"
           >
             <div className="flex gap-0.5 text-yellow-400 mb-3" aria-label="5 estrellas">
               {[...Array(5)].map((_, s) => (
@@ -72,7 +72,7 @@ export function UppTestimonialsSection() {
               "{item.quote}"
             </p>
 
-            <div className="mt-5 flex items-center gap-3 border-t border-[#0A3161]/10 pt-4">
+            <div className="mt-5 flex items-center gap-3 border-t border-navy/15 pt-4">
               <div
                 className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${avatarColors[i % avatarColors.length]}`}
                 aria-hidden
@@ -80,7 +80,7 @@ export function UppTestimonialsSection() {
                 {getInitials(item.name)}
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-[#0A3161] truncate">{item.name}</p>
+                <p className="truncate text-sm font-semibold text-navy-deep">{item.name}</p>
                 <p className="text-xs text-gray-500 truncate">
                   {item.role} · {countryFlags[item.country] ?? ""} {item.country}
                 </p>

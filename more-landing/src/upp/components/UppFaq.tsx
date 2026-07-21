@@ -24,7 +24,7 @@ export function UppFaq({ paymentLink, whatsappUrl, loading }: UppFaqProps) {
         transition={{ duration: 0.6 }}
         className="text-center max-w-2xl mx-auto mb-10"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-[#0A3161] tracking-tight">
+        <h2 className="font-display text-3xl font-bold tracking-tight text-navy-deep sm:text-4xl">
           {t("uppPage.faq.title")}
         </h2>
         <p className="mt-4 text-gray-500 text-lg">{t("uppPage.faq.subtitle")}</p>
@@ -38,11 +38,11 @@ export function UppFaq({ paymentLink, whatsappUrl, loading }: UppFaqProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: i * 0.06, type: "spring", stiffness: 120 }}
-            className="group rounded-2xl border border-[#0A3161]/10 bg-white shadow-sm ring-1 ring-[#0A3161]/5 transition-shadow hover:shadow-md"
+            className="group rounded-2xl border border-navy/15 bg-white shadow-sm transition-shadow hover:shadow-md"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-sm font-semibold text-[#0A3161] sm:text-base">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-sm font-semibold text-navy-deep sm:text-base">
               {item.question}
-              <span className="shrink-0 text-[#0A3161]/40 transition-transform duration-200 group-open:rotate-45 text-xl leading-none">
+              <span className="shrink-0 text-xl leading-none text-navy/40 transition-transform duration-200 group-open:rotate-45">
                 +
               </span>
             </summary>
