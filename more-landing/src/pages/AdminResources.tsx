@@ -18,6 +18,7 @@ import type { Resource, ResourceInsert, LandingProject } from "@/lib/supabase"
 import ResourceCard from "@/components/admin/resources/ResourceCard"
 import LandingPreviewCard from "@/components/admin/resources/LandingPreviewCard"
 import EmailTemplatesSection from "@/components/admin/resources/EmailTemplatesSection"
+import CalendarNotificationTemplatesSection from "@/components/admin/resources/CalendarNotificationTemplatesSection"
 import { cn } from "@/lib/utils"
 import { normalizeResourceUrl } from "@/lib/resourceUrl"
 
@@ -60,7 +61,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType; description: stri
     id: "emails",
     label: "Emails",
     icon: Mail,
-    description: "Plantillas de email para GHL: masterclass, taller Red Flags, agendas Ivon/Sandra.",
+    description: "Plantillas generales para calendarios GHL: email, SMS y WhatsApp, incluyendo confirmaciones, recordatorios y seguimiento.",
   },
 ]
 
@@ -638,6 +639,9 @@ export default function AdminResources() {
                   </h2>
                 )}
                 <EmailTemplatesSection />
+                <div className="mt-10 border-t border-gray-100 pt-8">
+                  <CalendarNotificationTemplatesSection />
+                </div>
               </section>
             )}
           </>
