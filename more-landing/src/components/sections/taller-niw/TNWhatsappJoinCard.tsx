@@ -47,7 +47,7 @@ export default function TNWhatsappJoinCard({
             <img
               src="/logo_more_dark.png"
               alt="MORE — Migración con Propósito"
-              className="h-16 w-auto sm:h-20"
+              className="h-48 w-auto sm:h-60"
             />
           </Link>
         </div>

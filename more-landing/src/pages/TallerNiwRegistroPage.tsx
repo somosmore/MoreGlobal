@@ -58,7 +58,7 @@ export default function TallerNiwRegistroPage() {
           <img
             src="/logo_more_dark.png"
             alt="MORE"
-            className="mx-auto mb-8 h-20 w-auto"
+            className="mx-auto mb-8 h-48 w-auto sm:h-60"
           />
           <h1 className="mb-3 font-display text-2xl font-bold text-navy-deep">
             Evento no disponible
