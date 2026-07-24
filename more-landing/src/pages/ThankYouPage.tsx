@@ -12,6 +12,8 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { buildWhatsappUrl } from "@/lib/whatsapp"
 import { trackAppointmentBooked } from "@/lib/tracking"
 
+const SUPPORT_EMAIL = "soporte@moremigracion.com"
+
 export default function ThankYouPage() {
   const { t } = useTranslation()
   const { settings, loading } = useSiteSettings()
@@ -36,7 +38,7 @@ export default function ThankYouPage() {
   return (
     <div className="campaign-editorial min-h-screen bg-paper">
       <header className="relative z-10 border-b border-navy/10 bg-paper/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 max-w-4xl items-center justify-center px-4 sm:px-6">
+        <div className="mx-auto flex h-20 max-w-4xl items-center justify-center px-4 sm:h-24 sm:px-6">
           <Link
             to="/"
             className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 rounded-sm"
@@ -45,7 +47,7 @@ export default function ThankYouPage() {
             <img
               src="/logo_more_light.png"
               alt={t("thankYouPage.header.logoAlt")}
-              className="h-9 w-auto"
+              className="h-16 w-auto sm:h-20"
             />
           </Link>
         </div>
@@ -91,17 +93,15 @@ export default function ThankYouPage() {
           <img
             src="/logo_more_dark.png"
             alt={t("thankYouPage.header.logoAlt")}
-            className="h-8 w-auto opacity-90"
+            className="h-12 w-auto opacity-90 sm:h-14"
           />
           <p className="font-sans text-sm text-white/70">{t("thankYouPage.footer.tagline")}</p>
-          {settings.contact_email ? (
-            <a
-              href={`mailto:${settings.contact_email}`}
-              className="font-sans text-sm text-orange-light hover:text-orange transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep rounded-sm"
-            >
-              {settings.contact_email}
-            </a>
-          ) : null}
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="font-sans text-sm text-orange-light hover:text-orange transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep rounded-sm"
+          >
+            {SUPPORT_EMAIL}
+          </a>
           <p className="font-sans text-xs text-white/40">
             © {new Date().getFullYear()} MORE. {t("thankYouPage.footer.rights")}
           </p>

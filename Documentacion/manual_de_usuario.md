@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-23 (página Thank You post-agenda `/gracias`)
+> Última actualización: 2026-07-23 (Thank You `/gracias`: logo header + email soporte)
 
 ---
 
@@ -466,6 +466,7 @@ Página de **confirmación post-agendamiento** a la que debe redirigir el calend
 | Prueba social | 1 testimonio con rol + resultado cuantificable |
 | CTA primario | WhatsApp identity-driven («Sí, confirmo mi asistencia…») con `whatsapp_number` de settings |
 | CTA secundario | Link discreto «Volver al inicio» |
+| Contacto footer | `soporte@moremigracion.com` (fijo en la página) |
 
 **i18n:** claves en `more-landing/src/locales/{es,en}/thankYouPage.json` (fusionadas en `i18n.ts`).
 
