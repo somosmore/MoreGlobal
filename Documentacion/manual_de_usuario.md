@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-14 (BR-03: secciones internas del Home alineadas a marca editorial 2026)
+> Última actualización: 2026-07-23 (página Thank You post-agenda `/gracias`)
 
 ---
 
@@ -23,6 +23,7 @@
    - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
    - 1.16 [Landing Taller Red Flags (`/taller-niw`)](#116-landing-taller-red-flags-taller-niw)
+   - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -65,7 +66,7 @@ El sitio público soporta **Español** e **Inglés** de forma dinámica, sin rec
 2. Si es la primera visita, se detecta el idioma del navegador.
 3. Si el navegador no es inglés, el idioma por defecto es español.
 
-**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession (bloque en home), **página dedicada `/asesoria-vip`** (hero, pilares, prueba social, valor, Ivon, fit, precios, FAQ y CTAs; claves `vipPage` en locales), Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage, PrivacyPolicyPage (`/privacidad`).
+**Secciones traducidas:** Navbar, Hero, PainPoints, WhoWeHelp, Quiz (preguntas, opciones y respuestas), VipSession (bloque en home), **página dedicada `/asesoria-vip`** (hero, pilares, prueba social, valor, Ivon, fit, precios, FAQ y CTAs; claves `vipPage` en locales), Pricing (planes y mensajes de WhatsApp), Footer (FAQ completo), BlueprintPage, PrivacyPolicyPage (`/privacidad`), **página Thank You `/gracias`** (`thankYouPage.json`).
 
 **Panel de administración `/admin`:** no está traducido, permanece siempre en español.
 
@@ -448,6 +449,47 @@ Página de **confirmación** para quien ya se registró en el **formulario nativ
 https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio
 ```
 
+### 1.17 Thank You post-agenda (`/gracias`)
+
+**Ruta:** `/gracias`
+
+Página de **confirmación post-agendamiento** a la que debe redirigir el calendario (GHL, Calendly, Google Appointment Scheduling, etc.) cuando el usuario confirma la cita. Objetivo CRO: **show rate** (preparación + confirmación por WhatsApp), no volver a vender.
+
+**Sistema visual:** marca editorial 2026 (`bg-paper`, `Backdrop`, Playfair + Inter, navy/orange). Header mínimo solo con logo (sin Navbar ni menú). Footer mínimo con logo, tagline y `contact_email` de settings.
+
+| Bloque | Contenido |
+|--------|-----------|
+| Hero | Badge «Cita confirmada», H1 de evaluación estratégica reservada, subtítulo |
+| Correo | Recordatorio de revisar el email de confirmación (fecha, hora, enlace, reprogramar) |
+| Checklist | 4 pasos interactivos (checkboxes) alineados al email `confirmacion-agenda.html` |
+| Sesión | Timeline en 3 pasos: diagnóstico → rutas posibles → próximos pasos |
+| Prueba social | 1 testimonio con rol + resultado cuantificable |
+| CTA primario | WhatsApp identity-driven («Sí, confirmo mi asistencia…») con `whatsapp_number` de settings |
+| CTA secundario | Link discreto «Volver al inicio» |
+
+**i18n:** claves en `more-landing/src/locales/{es,en}/thankYouPage.json` (fusionadas en `i18n.ts`).
+
+**Tracking:** al cargar la página (cuando settings ya están listos) se dispara `trackAppointmentBooked`:
+
+| Canal | Evento |
+|-------|--------|
+| Meta (píxel directo) | `Schedule` con parámetros opacos (`appt_confirmed_a`) |
+| GTM / dataLayer | `appointment_booked` |
+| GA4 (sin GTM) | `schedule_appointment` |
+
+Se registra **una sola vez por sesión de navegador** (`sessionStorage`) para no duplicar en Strict Mode ni al refrescar. Distinto de `schedule_cta_click`, que mide el **clic** del CTA que abre el calendario.
+
+**Cómo configurar el redirect en el calendario:**
+
+1. En GHL / Calendly / Google Appointment, abrir la configuración de la cita.
+2. Poner como **Redirect URL** (o «thank you page») la URL pública:
+
+```
+https://moremigracion.com/gracias
+```
+
+3. Guardar y hacer una prueba de agendamiento para verificar que el usuario llega a `/gracias` y que el evento aparece en Meta Events Manager / GTM / GA4.
+
 ---
 
 ## 2. Panel de Administración (CRM)
@@ -670,6 +712,7 @@ Permite definir qué herramientas de analítica y publicidad cargan en el **siti
 - **Lead / lead_submitted:** tras guardar correctamente el lead del formulario del diagnóstico (quiz); parámetros hacia Meta neutros.
 - **Registro masterclass:** el `dataLayer` emite `masterclass_registration` (útil si usáis GTM; puede incluir `capi_event_id` para alinear con CAPI). Con **píxel Meta directo** (sin GTM) se envía **`CompleteRegistration`** con parámetros neutros y `eventID` igual al `capi_event_id` del servidor. La Edge Function `masterclass-register` envía el mismo evento por **Conversions API** cuando existen `META_ACCESS_TOKEN` y `meta_pixel_id` (contacto hasheado en servidor). Si configuraste **GA4** sin GTM, se registra `sign_up`.
 - **Schedule / schedule_cta_click:** al hacer clic en el CTA de Asesoría VIP que abre el calendario o enlace de pago externo.
+- **Schedule / appointment_booked:** al cargar `/gracias` tras confirmar una cita en el calendario (conversión real de agendamiento; una vez por sesión de navegador). GA4: `schedule_appointment`.
 
 En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y un aviso si GTM e ID de Meta están rellenos a la vez.
 
@@ -689,6 +732,8 @@ En la misma pantalla hay textos de ayuda (qué es el píxel de Meta, GTM, GA4) y
 4. Hacer clic en "Guardar cambios".
 
 A partir de ese momento, el botón CTA del Blueprint abrirá el calendario configurado en una pestaña nueva. Si no hay URL configurada, el botón redirige a la página de inicio.
+
+**Redirect post-cita:** en el proveedor del calendario (GHL / Calendly / Google), configurar la URL de agradecimiento a `https://moremigracion.com/gracias` (ver sección 1.17).
 
 #### Redes Sociales
 

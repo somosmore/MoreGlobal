@@ -1,0 +1,68 @@
+{
+  "thankYouPage": {
+    "pageTitle": "Appointment confirmed | MORE",
+    "header": {
+      "logoAlt": "MORE — Migration with Purpose",
+      "homeAria": "Go to home"
+    },
+    "hero": {
+      "badge": "Appointment confirmed",
+      "titleBefore": "Your strategic evaluation is already ",
+      "titleHighlight": "booked",
+      "subtitle": "Check your email: it has the date, the link, and how to prepare. What you do now defines how much value we get from the session."
+    },
+    "email": {
+      "eyebrow": "Next step",
+      "title": "Check your confirmation email",
+      "body": "You'll find the date, time (with time zone), the session link, and how to reschedule in advance. If you don't see it, check spam or promotions."
+    },
+    "checklist": {
+      "eyebrow": "Preparation",
+      "title": "Before you ",
+      "titleHighlight": "connect",
+      "description": "Check off each step. Showing up prepared multiplies the value of your 60 minutes.",
+      "items": [
+        "I join 5 minutes early to check audio and connection",
+        "I have my CV or achievement summary ready (with numbers: impact, savings, people led)",
+        "I write 3 concrete questions about my case (target visa, timeline, investment)",
+        "I reserve a quiet space with no interruptions"
+      ]
+    },
+    "session": {
+      "eyebrow": "What to expect",
+      "title": "What happens in your ",
+      "titleHighlight": "session",
+      "kicker": "Clarity before you invest in your visa",
+      "steps": [
+        {
+          "label": "Diagnosis",
+          "body": "We analyze your professional, academic, or business profile and the gap to your U.S. goal."
+        },
+        {
+          "label": "Possible paths",
+          "body": "We identify which visa fits (EB-2 NIW or others) and what evidence you need to strengthen."
+        },
+        {
+          "label": "Next steps",
+          "body": "You leave with a clear 90-day roadmap — no fluff, with priorities."
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "Real outcome",
+      "quote": "I went from not knowing where to start to a clear path for my EB-2 NIW. I left the session with concrete priorities, not a generic PDF.",
+      "role": "Software engineer · Latin America",
+      "result": "90-day roadmap · High-impact case"
+    },
+    "cta": {
+      "whatsapp": "Yes, I confirm my attendance on WhatsApp",
+      "whatsappMsg": "Hi, I just booked my MORE session and want to confirm my attendance.",
+      "whatsappHint": "A short message reduces no-shows and helps us prepare better for your case.",
+      "homeLink": "Back to home"
+    },
+    "footer": {
+      "tagline": "MORE — Migration with Purpose",
+      "rights": "All rights reserved."
+    }
+  }
+}

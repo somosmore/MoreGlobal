@@ -26,6 +26,7 @@ const TallerNiwRegistroPage = lazy(() => import("@/pages/TallerNiwRegistroPage")
 const UppPage = lazy(() => import("@/pages/UppPage"))
 const TurboPage = lazy(() => import("@/pages/TurboPage"))
 const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
+const ThankYouPage = lazy(() => import("@/pages/ThankYouPage"))
 import TurboPdfPage from "@/pages/TurboPdfPage"
 import UppPdfPage from "@/pages/UppPdfPage"
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/turbo" element={<TurboPage />} />
           <Route path="/turbo/pdf" element={<TurboPdfPage />} />
           <Route path="/wppequipo" element={<WppEquipoPage />} />
+          <Route path="/gracias" element={<ThankYouPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Protected admin area with shared layout */}

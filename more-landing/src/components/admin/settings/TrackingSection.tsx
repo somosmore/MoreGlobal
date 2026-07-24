@@ -77,6 +77,12 @@ const EVENT_ROWS: EventRow[] = [
     when: "Clic en el CTA VIP que abre calendario o pago.",
     destination: "Meta Schedule o dataLayer (GTM).",
   },
+  {
+    meta: "Schedule",
+    dataLayer: "appointment_booked",
+    when: "Al cargar /gracias tras confirmar la cita en el calendario (conversión real).",
+    destination: "Meta Schedule o dataLayer (GTM); GA4 schedule_appointment.",
+  },
 ]
 
 export default function TrackingSection({

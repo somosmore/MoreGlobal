@@ -33,6 +33,8 @@
  *   `masterclass-register` cuando el cliente envía `capi_event_id`). GA4: `sign_up`.
  * - Schedule / schedule_cta_click → al hacer clic en el CTA VIP que abre el
  *   calendario o el link de pago.
+ * - Schedule / appointment_booked → al cargar `/gracias` tras agendar (conversión
+ *   real de cita confirmada; una vez por sesión de navegador).
  *
  * Meta Business Tool Terms: no enviar Información de contacto en claro ni
  * datos de categorías prohibidas; no usar fbq("init", id, user_data) desde aquí.
@@ -60,6 +62,10 @@ const META_EVENT_PARAMS = {
   },
   masterclassFormOk: {
     content_name: "form_flow_c",
+    content_category: "content_view",
+  },
+  appointmentBooked: {
+    content_name: "appt_confirmed_a",
     content_category: "content_view",
   },
 } as const
@@ -531,5 +537,58 @@ export const trackScheduleCta = async (settings: SiteSettingsMap) => {
 
   if (settings.ga4_measurement_id.trim()) {
     window.gtag?.("event", "schedule_appointment_click")
+  }
+}
+
+const APPOINTMENT_BOOKED_STORAGE_KEY = "more_appointment_booked"
+
+/**
+ * Conversión real de cita agendada (página `/gracias` post-redirect del calendario).
+ *
+ * - GTM: empuja `appointment_booked` al `dataLayer`.
+ * - Sin GTM: `fbq("track", "Schedule")` con parámetros opacos y GA4
+ *   `schedule_appointment`.
+ * - Se dispara como máximo una vez por sesión de navegador (sessionStorage)
+ *   para evitar doble fire en Strict Mode o refrescos.
+ */
+export const trackAppointmentBooked = async (settings: SiteSettingsMap) => {
+  if (typeof window === "undefined") return
+  if (isAdminRoute(window.location.pathname)) return
+  if (!trackingActive(settings)) return
+
+  try {
+    if (sessionStorage.getItem(APPOINTMENT_BOOKED_STORAGE_KEY) === "1") return
+    sessionStorage.setItem(APPOINTMENT_BOOKED_STORAGE_KEY, "1")
+  } catch {
+    // sessionStorage puede fallar en modo privado; seguimos y disparamos igual
+  }
+
+  const gtm = settings.google_tag_manager_id.trim()
+  const meta = settings.meta_pixel_id.trim()
+  const ga4 = settings.ga4_measurement_id.trim()
+  if (!gtm && !meta && !ga4) return
+
+  await ensureTrackingScripts(settings)
+
+  const payload = {
+    event: "appointment_booked",
+    ...META_EVENT_PARAMS.appointmentBooked,
+    page_path: window.location.pathname,
+  }
+
+  if (gtm) {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push(payload)
+    return
+  }
+
+  if (settings.meta_pixel_id.trim()) {
+    window.fbq?.("track", "Schedule", {
+      ...META_EVENT_PARAMS.appointmentBooked,
+    })
+  }
+
+  if (settings.ga4_measurement_id.trim()) {
+    window.gtag?.("event", "schedule_appointment")
   }
 }

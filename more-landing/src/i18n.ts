@@ -6,13 +6,15 @@ import es from "./locales/es/translation.json"
 import esVipPage from "./locales/es/vipPage.json"
 import esUppPage from "./locales/es/uppPage.json"
 import esTurboPage from "./locales/es/turboPage.json"
+import esThankYouPage from "./locales/es/thankYouPage.json"
 import en from "./locales/en/translation.json"
 import enVipPage from "./locales/en/vipPage.json"
 import enUppPage from "./locales/en/uppPage.json"
 import enTurboPage from "./locales/en/turboPage.json"
+import enThankYouPage from "./locales/en/thankYouPage.json"
 
-const esMerged = { ...es, ...esVipPage, ...esUppPage, ...esTurboPage }
-const enMerged = { ...en, ...enVipPage, ...enUppPage, ...enTurboPage }
+const esMerged = { ...es, ...esVipPage, ...esUppPage, ...esTurboPage, ...esThankYouPage }
+const enMerged = { ...en, ...enVipPage, ...enUppPage, ...enTurboPage, ...enThankYouPage }
 
 i18n
   .use(LanguageDetector)

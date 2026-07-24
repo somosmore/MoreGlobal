@@ -1,0 +1,68 @@
+{
+  "thankYouPage": {
+    "pageTitle": "Cita confirmada | MORE",
+    "header": {
+      "logoAlt": "MORE — Migración con Propósito",
+      "homeAria": "Ir al inicio"
+    },
+    "hero": {
+      "badge": "Cita confirmada",
+      "titleBefore": "Tu evaluación estratégica ya está ",
+      "titleHighlight": "reservada",
+      "subtitle": "Revisa tu correo: ahí están la fecha, el enlace y cómo prepararte. Lo que hagas ahora define cuánto valor sacamos de la sesión."
+    },
+    "email": {
+      "eyebrow": "Siguiente paso",
+      "title": "Revisa tu correo de confirmación",
+      "body": "Ahí encontrarás la fecha, la hora (con zona horaria), el enlace de la sesión y cómo reprogramar con anticipación. Si no lo ves, revisa spam o promociones."
+    },
+    "checklist": {
+      "eyebrow": "Preparación",
+      "title": "Antes de ",
+      "titleHighlight": "conectarte",
+      "description": "Marca cada paso. Llegar preparado multiplica el valor de tus 60 minutos.",
+      "items": [
+        "Me conecto 5 minutos antes para verificar audio y conexión",
+        "Tengo a mano mi CV o resumen de logros (con números: impacto, ahorros, personas lideradas)",
+        "Escribo 3 preguntas concretas sobre mi caso (visa objetivo, timeline, inversión)",
+        "Reservo un espacio tranquilo, sin interrupciones"
+      ]
+    },
+    "session": {
+      "eyebrow": "Qué esperar",
+      "title": "Qué pasa en tu ",
+      "titleHighlight": "sesión",
+      "kicker": "Claridad antes de invertir en tu visa",
+      "steps": [
+        {
+          "label": "Diagnóstico",
+          "body": "Analizamos tu perfil profesional, académico o empresarial y el gap hacia tu objetivo en EE.UU."
+        },
+        {
+          "label": "Rutas posibles",
+          "body": "Identificamos qué visa encaja (EB-2 NIW u otras) y qué evidencia necesitas fortalecer."
+        },
+        {
+          "label": "Próximos pasos",
+          "body": "Te llevas una hoja de ruta clara para los próximos 90 días — sin humo, con prioridades."
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "Resultado real",
+      "quote": "Pasé de no saber por dónde empezar a una ruta clara para mi EB-2 NIW. En la sesión salí con prioridades concretas, no con un PDF genérico.",
+      "role": "Ingeniera de software · Latinoamérica",
+      "result": "Hoja de ruta 90 días · Caso de alto impacto"
+    },
+    "cta": {
+      "whatsapp": "Sí, confirmo mi asistencia por WhatsApp",
+      "whatsappMsg": "Hola, acabo de agendar mi sesión con MORE y quiero confirmar mi asistencia.",
+      "whatsappHint": "Un mensaje corto reduce no-shows y nos permite prepararnos mejor para tu caso.",
+      "homeLink": "Volver al inicio"
+    },
+    "footer": {
+      "tagline": "MORE — Migración con Propósito",
+      "rights": "Todos los derechos reservados."
+    }
+  }
+}
