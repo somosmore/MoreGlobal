@@ -5,19 +5,19 @@ import { Quote } from "lucide-react"
 const testimonials = [
   {
     quote:
-      "Estaba a punto de pagarle a un abogado que me prometía la residencia 'segura'. Después del taller me di cuenta de todas las señales que estaba ignorando.",
+      "Salí del taller entendiendo qué evidencia de mi carrera realmente pesa. Dejé de pensar en 'cumplir requisitos' y empecé a pensar en impacto.",
     name: "María G.",
     role: "Ingeniera · Colombia",
   },
   {
     quote:
-      "Me ahorré una fortuna. Aprendí qué preguntas hacer antes de firmar y descubrí que me estaban cobrando por servicios que no necesitaba.",
+      "Por fin vi con claridad si mi perfil podía encajar en una ruta de alto impacto. Me ahorró meses de avanzar sin dirección.",
     name: "Carlos R.",
     role: "Médico · México",
   },
   {
     quote:
-      "Ivon habla con una honestidad que no ves en la industria. Salí del taller sabiendo exactamente en qué fijarme.",
+      "Ivon explica con honestidad qué hace fuerte a un profesional ante un país. Salí con prioridades concretas, no con un PDF genérico.",
     name: "Daniela P.",
     role: "Diseñadora · Perú",
   },

@@ -2,11 +2,11 @@ import { motion } from "framer-motion"
 import { CheckCircle2, Sparkles } from "lucide-react"
 
 const benefits = [
-  "Las señales de alerta para detectar un mal abogado antes de pagarle",
-  "Las frases y promesas típicas que esconden una estafa",
-  "Cómo te cobran de más por servicios que no necesitas",
-  "Qué preguntas hacer (y qué exigir) antes de firmar un contrato",
-  "Cómo verificar si un abogado está realmente habilitado",
+  "Qué hace que un perfil profesional sea atractivo para un país",
+  "Cómo traducir tus logros en evidencia de alto impacto",
+  "La diferencia entre un CV genérico y un posicionamiento estratégico",
+  "Señales de que tu trayectoria puede encajar en rutas como EB-2 NIW",
+  "Errores que debilitan tu caso antes de empezar",
   "Sesión de preguntas en vivo con Ivon More",
 ]
 

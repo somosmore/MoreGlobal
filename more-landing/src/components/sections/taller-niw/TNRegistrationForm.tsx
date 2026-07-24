@@ -14,10 +14,10 @@ import "flag-icons/css/flag-icons.min.css"
 
 import TNWhatsappJoinCard from "@/components/sections/taller-niw/TNWhatsappJoinCard"
 /** Identificador del evento para distinguir estos leads en la base de datos / GHL. */
-const TALLER_SOURCE = "taller-redflags-2026"
-const TALLER_EVENT_LABEL = "Taller Red Flags Abogados"
+const TALLER_SOURCE = "taller-profesional-global-2026"
+const TALLER_EVENT_LABEL = "Taller Profesional Global"
 /** Etiqueta (tag) con la que se marcan los leads en GoHighLevel. */
-const TALLER_GHL_TAG = "Taller-julio-2026"
+const TALLER_GHL_TAG = "Taller-profesional-global-2026"
 
 const COUNTRY_CODES = [
   { code: "+57",  iso: "co", dial: "+57"  },
@@ -407,7 +407,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
               </p>
               <h2 className="font-display text-2xl font-bold leading-tight text-navy-deep sm:text-3xl">
                 {copy.formHeadlineBefore}{" "}
-                <span className="text-[#F37021]">{copy.formHeadlineHighlight}</span>, mira esto
+                <span className="text-[#F37021]">{copy.formHeadlineHighlight}</span>
               </h2>
               <p className="mt-2 text-sm text-ink-muted">
                 {copy.formSubcopy}
@@ -562,7 +562,7 @@ export default function TNRegistrationForm({ variant = "default" }: TNRegistrati
                     </>
                   ) : (
                     <>
-                      QUIERO MI LUGAR GRATIS
+                      Sí, quiero mi lugar en el taller
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>

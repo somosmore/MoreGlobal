@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-23 (Thank You `/gracias`: logo header + email soporte)
+> Última actualización: 2026-07-24 (Taller Profesional Global: 30 jul 19h CO + WA)
 
 ---
 
@@ -22,7 +22,7 @@
    - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
    - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
-   - 1.16 [Landing Taller Red Flags (`/taller-niw`)](#116-landing-taller-red-flags-taller-niw)
+   - 1.16 [Landing Taller Profesional Global (`/taller-niw`)](#116-landing-taller-profesional-global-taller-niw)
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
@@ -395,22 +395,24 @@ Página de utilidad para campañas, QR impresos y enlaces cortos que distribuyen
 
 **Gestión:** todo se configura desde `/admin/settings` → sección **WhatsApp Equipo** (ver [2.5](#25-módulo-de-configuración)).
 
-### 1.16 Landing Taller Red Flags (`/taller-niw`)
+### 1.16 Landing Taller Profesional Global (`/taller-niw`)
 
 **Ruta:** `/taller-niw`
 
-Landing del taller gratuito **"Red flags de los abogados de inmigración"** (Ivon More). Incluye hero con countdown, beneficios, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo.
+Landing del taller gratuito **"Cómo convertirte en el profesional que todo país desea"** (Ivon More). Incluye hero con countdown, beneficios, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo. (Campaña anterior: Red Flags — tags y archivos legacy se conservan.)
 
 | Dato | Valor |
 |------|-------|
-| Evento | Lunes **13 de julio de 2026**, 7:00 PM (Colombia) |
-| Registro cierra | 15 de julio de 2026 (configurado en frontend) |
-| Tag GHL | `taller-julio-2026` |
-| Source Supabase | `taller-redflags-2026` |
+| Evento | Jueves **30 de julio de 2026**, **7:00 PM** (Colombia) — `tn_event_date` |
+| Registro cierra | **31 de julio de 2026** — `tn_registration_closes_at` |
+| Tag GHL (nuevo) | `taller-profesional-global-2026` (`Taller-profesional-global-2026`) |
+| Source Supabase (nuevo) | `taller-profesional-global-2026` |
+| Event label | `Taller Profesional Global` |
+| Tags legacy (no borrar) | `taller-julio-2026`, `taller-redflags-2026`, `taller-junio-2026`, `meta-julio13` |
 | Zoom (inscripción) | Enlace de registro webinar en emails y plantillas GHL |
-| WhatsApp | Grupo exclusivo del taller (botón único post-registro) |
+| WhatsApp | [Grupo Profesional Global](https://chat.whatsapp.com/D1e1d993Wb54sHK8B7sx7k) |
 
-**Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión.
+**Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión. La Edge Function también acepta el source legacy `taller-redflags-2026` para compatibilidad.
 
 #### Pantalla tras registro exitoso
 
@@ -424,9 +426,9 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 Sin cuenta regresiva, sin agenda de calendario ni código QR.
 
-**Emails automáticos (GHL):** al recibir el tag `taller-julio-2026` se disparan workflows con **5 correos**: bienvenida inmediata; recordatorio 24 h (**12 jul 7 PM**); el día del evento (**13 jul 9 AM**, **6 PM** y **7 PM en vivo**). Plantillas en `public/emails/*taller-redflags*`. Guía: `Documentacion/taller-redflags-ghl-workflow.md`. Sync GHL: `node scripts/sync-ghl-taller-emails.mjs`.
+**Emails automáticos (GHL):** al recibir el tag **`taller-profesional-global-2026`** se deben disparar workflows con **5 correos**: bienvenida inmediata; recordatorio 24 h; el día del evento (mañana, 1 h antes y en vivo). Plantillas HTML siguen en `public/emails/*taller-redflags*` (nombres de archivo legacy). Guía: `Documentacion/taller-redflags-ghl-workflow.md`. Sync GHL: `node scripts/sync-ghl-taller-emails.mjs`.
 
-**Admin:** plantillas visibles en **Recursos → Emails → Taller Red Flags** (preview y copiar HTML).
+**Admin:** plantillas visibles en **Recursos → Emails → Taller Profesional Global** (preview y copiar HTML).
 
 #### 1.16.1 Página post-registro Meta Lead Ads (`/taller-niw/registro`)
 
@@ -446,7 +448,7 @@ Página de **confirmación** para quien ya se registró en el **formulario nativ
 **URL para configurar en Meta como destino post-lead:**
 
 ```
-https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-redflags-julio
+https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-profesional-global
 ```
 
 ### 1.17 Thank You post-agenda (`/gracias`)
@@ -1116,7 +1118,7 @@ Muestra plantillas HTML para copiar a GoHighLevel, agrupadas por campaña:
 | Grupo | Plantillas |
 |-------|------------|
 | Masterclass | Bienvenida, recordatorio 24 h, día del evento |
-| **Taller Red Flags** | Bienvenida, recordatorio 24 h (12 jul), día del evento (13 jul) |
+| **Taller Profesional Global** | Bienvenida, recordatorios (tag `taller-profesional-global-2026`) |
 | Agenda Ivon / Sandra | Confirmación y recordatorios de sesiones |
 
 Cada tarjeta permite **visualizar** el email en iframe y **copiar el HTML** al portapapeles.

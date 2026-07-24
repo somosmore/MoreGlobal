@@ -14,7 +14,8 @@ export default function TallerNiwPage() {
   const { status, isAccessible, reason } = useLandingStatus("/taller-niw")
 
   useEffect(() => {
-    document.title = "Taller Gratis: Red flags de los abogados de inmigración — MORE"
+    document.title =
+      "Taller Gratis: Cómo convertirte en el profesional que todo país desea — MORE"
 
     const metas: HTMLMetaElement[] = []
 
@@ -34,17 +35,17 @@ export default function TallerNiwPage() {
     setMeta(
       "name",
       "description",
-      "Taller gratuito con Ivon More. Las señales de alerta que debes detectar antes de pagarle a un abogado de inmigración. Lunes 13 de julio 2026, 7 PM Colombia."
+      "Taller gratuito con Ivon More. Cómo posicionar tu perfil profesional para que un país quiera atraerte. En vivo, con estrategia y claridad de ruta."
     )
     setMeta(
       "property",
       "og:title",
-      "Red flags de los abogados de inmigración — te lo confiesa una abogada"
+      "Cómo convertirte en el profesional que todo país desea"
     )
     setMeta(
       "property",
       "og:description",
-      "Un taller en vivo que te puede ahorrar miles de dólares. Aprende a detectar a un mal abogado antes de pagarle. Lunes 13 de julio 2026, 7 PM Colombia."
+      "Un taller en vivo para clarificar tu posicionamiento profesional y tu ruta migratoria de alto impacto."
     )
     setMeta("property", "og:type", "website")
 

@@ -1,5 +1,6 @@
 /**
- * Sube/actualiza plantillas HTML del Taller Red Flags en GoHighLevel.
+ * Sube/actualiza plantillas HTML del Taller Profesional Global (ex Red Flags) en GoHighLevel.
+ * Los nombres GHL `TALLER-REDFLAGS-*` se conservan para no duplicar plantillas en sync.
  *
  * Uso (desde more-landing/):
  *   node scripts/sync-ghl-taller-emails.mjs [--dry-run]
@@ -19,32 +20,32 @@ const TEMPLATES = [
   {
     name: "TALLER-REDFLAGS-Bienvenida",
     file: "bienvenida-taller-redflags.html",
-    subject: "¡Tu lugar está reservado! — Taller Red Flags",
-    previewText: "Confirma tu registro y reserva tu cupo en Zoom para el 13 de julio.",
+    subject: "¡Tu lugar está reservado! — Profesional Global",
+    previewText: "Confirma tu registro y reserva tu cupo en Zoom.",
   },
   {
     name: "TALLER-REDFLAGS-Recordatorio-24hs",
     file: "previo-taller-redflags.html",
-    subject: "¡Mañana es el taller! — Red flags de abogados",
+    subject: "¡Mañana es el taller! — Profesional Global",
     previewText: "Falta 1 día para el taller gratuito con Ivon More.",
   },
   {
     name: "TALLER-REDFLAGS-Hoy-Manana",
     file: "recordatorio-taller-redflags-manana.html",
-    subject: "¡Hoy es el taller! — Red flags de abogados",
+    subject: "¡Hoy es el taller! — Profesional Global",
     previewText: "Esta noche a las 7 PM (Colombia). Confirma tu cupo en Zoom.",
   },
   {
     name: "TALLER-REDFLAGS-Hoy-1h",
     file: "recordatorio-taller-redflags-1h.html",
-    subject: "¡En 1 hora empezamos! — Taller Red Flags",
+    subject: "¡En 1 hora empezamos! — Profesional Global",
     previewText: "El taller con Ivon More arranca a las 7 PM. Ten listo tu link de Zoom.",
   },
   {
     name: "TALLER-REDFLAGS-EnVivo",
     file: "recordatorio-taller-redflags.html",
     subject: "🔴 ¡ESTAMOS EN VIVO! — Entra al taller ahora",
-    previewText: "El taller Red Flags ya comenzó. Entra a Zoom ahora mismo.",
+    previewText: "El taller Profesional Global ya comenzó. Entra a Zoom ahora mismo.",
   },
 ]
 

@@ -6,7 +6,7 @@ import {
 } from "@/components/sections/taller-niw/tallerNiwCopy"
 
 export const TALLER_WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/HbCUqesJRA02HxVkyNNlFc"
+  "https://chat.whatsapp.com/D1e1d993Wb54sHK8B7sx7k"
 
 type TNWhatsappJoinCardProps = {
   variant?: TallerNiwFormVariant

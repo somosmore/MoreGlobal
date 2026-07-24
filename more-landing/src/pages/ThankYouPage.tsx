@@ -38,7 +38,7 @@ export default function ThankYouPage() {
   return (
     <div className="campaign-editorial min-h-screen bg-paper">
       <header className="relative z-10 border-b border-navy/10 bg-paper/90 backdrop-blur-sm">
-        <div className="mx-auto flex h-20 max-w-4xl items-center justify-center px-4 sm:h-24 sm:px-6">
+        <div className="mx-auto flex h-36 max-w-4xl items-center justify-center px-4 sm:h-44 sm:px-6">
           <Link
             to="/"
             className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 rounded-sm"
@@ -47,7 +47,7 @@ export default function ThankYouPage() {
             <img
               src="/logo_more_light.png"
               alt={t("thankYouPage.header.logoAlt")}
-              className="h-16 w-auto sm:h-20"
+              className="h-32 w-auto sm:h-40"
             />
           </Link>
         </div>

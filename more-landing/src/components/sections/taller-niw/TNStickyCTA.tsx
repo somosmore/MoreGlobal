@@ -31,7 +31,7 @@ export default function TNStickyCTA() {
           className="fixed bottom-0 left-0 right-0 z-50 border-t border-navy/15 bg-paper/95 p-4 shadow-sm backdrop-blur-md"
         >
           <CtaButton
-            label="RESERVAR MI LUGAR GRATIS"
+            label="Sí, quiero mi lugar en el taller"
             href="#registro"
             onClick={scrollToRegistro}
             icon={ArrowUp}

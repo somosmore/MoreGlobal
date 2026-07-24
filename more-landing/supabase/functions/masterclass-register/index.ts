@@ -24,7 +24,8 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 }
 
-const TALLER_SOURCE = "taller-redflags-2026"
+const TALLER_SOURCE = "taller-profesional-global-2026"
+const TALLER_SOURCE_LEGACY = "taller-redflags-2026"
 
 type GhlEventConfig = {
   pipelineId: string
@@ -32,9 +33,12 @@ type GhlEventConfig = {
   defaultTag: string
 }
 
+const isTallerSource = (leadSource: string): boolean =>
+  leadSource === TALLER_SOURCE || leadSource === TALLER_SOURCE_LEGACY
+
 /** Pipeline, stage y tag por tipo de evento (masterclass vs taller). */
 const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
-  const isTaller = leadSource === TALLER_SOURCE
+  const isTaller = isTallerSource(leadSource)
 
   const pipelineId = isTaller
     ? Deno.env.get("GHL_TALLER_PIPELINE_ID") ?? Deno.env.get("GHL_PIPELINE_ID")
@@ -43,7 +47,7 @@ const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
     ? Deno.env.get("GHL_TALLER_STAGE_ID") ?? Deno.env.get("GHL_STAGE_ID")
     : Deno.env.get("GHL_STAGE_ID")
   const defaultTag = isTaller
-    ? Deno.env.get("GHL_TALLER_TAG") ?? "Taller-julio-2026"
+    ? Deno.env.get("GHL_TALLER_TAG") ?? "Taller-profesional-global-2026"
     : Deno.env.get("GHL_TAG")
 
   if (!pipelineId || !stageId || !defaultTag) return null
@@ -121,7 +125,7 @@ Deno.serve(async (req) => {
       const missingGhlEnv: string[] = []
       if (!ghlLocationId) missingGhlEnv.push("GHL_LOCATION_ID")
       if (!ghlEventConfig) {
-        if (leadSource === TALLER_SOURCE) {
+        if (isTallerSource(leadSource)) {
           missingGhlEnv.push(
             "GHL_TALLER_PIPELINE_ID (o GHL_PIPELINE_ID)",
             "GHL_TALLER_STAGE_ID (o GHL_STAGE_ID)",

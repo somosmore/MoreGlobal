@@ -9,15 +9,15 @@ import {
 const faqs = [
   {
     q: "¿Para quién es este taller?",
-    a: "Para cualquier persona que esté pensando en contratar (o ya contrató) a un abogado de inmigración y quiera evitar estafas, cobros injustificados y errores que pueden costarle su caso.",
+    a: "Para profesionales, académicos o emprendedores que quieren entender cómo posicionar su perfil para rutas migratorias de alto impacto — y dejar de avanzar a ciegas.",
   },
   {
     q: "¿Necesito tener un caso de inmigración en curso?",
-    a: "No. El taller te sirve tanto si apenas estás evaluando empezar tu proceso como si ya estás trabajando con un abogado y quieres saber si lo está haciendo bien.",
+    a: "No. El taller te sirve si estás evaluando tu ruta, si apenas estás construyendo evidencia, o si ya empezaste y quieres clarificar si tu posicionamiento es sólido.",
   },
   {
     q: "¿El taller es realmente gratis?",
-    a: "Sí, 100% gratuito. Es una sesión en vivo donde compartimos información real y aplicable. No hay costos ocultos para asistir.",
+    a: "Sí, 100% gratuito. Es una sesión en vivo donde compartimos un marco claro y aplicable. No hay costos ocultos para asistir.",
   },
   {
     q: "¿Quedará grabado?",

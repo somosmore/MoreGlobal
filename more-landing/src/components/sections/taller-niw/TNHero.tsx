@@ -7,7 +7,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const details = [
-  { icon: Calendar, text: "Lunes 13 de julio 2026" },
+  { icon: Calendar, text: "Jueves 30 de julio 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
   { icon: MapPin, text: "En línea y en vivo" },
   { icon: Gift, text: "100% gratis" },
@@ -57,9 +57,8 @@ export default function TNHero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-navy-deep sm:text-4xl lg:text-5xl"
             >
-              <span className="text-[#F37021]">Red flags</span> de los abogados de
-              inmigración:{" "}
-              <span className="text-[#F37021]">te lo confiesa una abogada</span>
+              Cómo convertirte en el{" "}
+              <span className="text-[#F37021]">profesional que todo país desea</span>
             </motion.h1>
 
             <motion.p
@@ -68,11 +67,11 @@ export default function TNHero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg"
             >
-              Las señales de alerta que casi nadie te cuenta antes de pagarle a un
-              abogado de inmigración. Aprende a detectar promesas falsas, cobros
-              de más y errores que pueden costarte tu caso.{" "}
+              Descubre cómo posicionar tu trayectoria profesional para que tu perfil
+              sea reconocido como de alto impacto — el tipo de profesional que un
+              país quiere atraer y retener.{" "}
               <strong className="font-semibold text-navy-deep">
-                Un taller en vivo que te puede ahorrar miles de dólares.
+                Un taller en vivo para clarificar tu ruta migratoria con estrategia.
               </strong>
             </motion.p>
 
@@ -100,7 +99,7 @@ export default function TNHero() {
               className="mt-8"
             >
               <CtaButton
-                label="QUIERO MI LUGAR GRATIS"
+                label="Sí, quiero mi lugar en el taller"
                 href="#registro"
                 onClick={scrollToRegistro}
                 size="lg"

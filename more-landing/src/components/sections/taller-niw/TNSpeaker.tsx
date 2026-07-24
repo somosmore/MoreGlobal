@@ -22,10 +22,10 @@ export default function TNSpeaker() {
               Fundadora de MORE — Migración con Propósito
             </p>
             <p className="text-[#6B7A9A] text-sm mt-3 leading-relaxed">
-              Con años dentro de la industria de la inmigración, conoce de cerca
-              las malas prácticas que cuestan a las familias miles de dólares.
-              En este taller revela, sin filtros, las señales de alerta que
-              debes detectar antes de confiarle tu caso a cualquier abogado.
+              Con años acompañando a profesionales en su camino migratorio, Ivon
+              enseña cómo transformar experiencia y logros en un perfil que un país
+              quiere atraer. En este taller comparte el marco para posicionarte con
+              claridad — sin humo y con estrategia.
             </p>
           </div>
         </div>
