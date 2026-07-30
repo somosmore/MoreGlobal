@@ -5,6 +5,7 @@ import {
   Loader2,
   Mail,
   MessageCircle,
+  Phone,
   Save,
 } from "lucide-react"
 import { buildWhatsappUrl } from "@/lib/whatsapp"
@@ -15,6 +16,8 @@ type Props = Pick<
   | "loading"
   | "whatsappNumber"
   | "setWhatsappNumber"
+  | "contactPhone"
+  | "setContactPhone"
   | "contactEmail"
   | "setContactEmail"
   | "contactSaveState"
@@ -29,6 +32,8 @@ export default function ContactSection({
   loading,
   whatsappNumber,
   setWhatsappNumber,
+  contactPhone,
+  setContactPhone,
   contactEmail,
   setContactEmail,
   contactSaveState,
@@ -71,7 +76,8 @@ export default function ContactSection({
               </p>
               <p className="mt-2 text-xs text-blue-600">
                 No afecta los grupos de WhatsApp del taller y la masterclass, ni los números
-                de asesores de la sección "WhatsApp Equipo".
+                de asesores de la sección "WhatsApp Equipo". El teléfono visible en el footer
+                se edita por separado más abajo.
               </p>
             </div>
 
@@ -120,6 +126,33 @@ export default function ContactSection({
                   <span className="font-medium text-gray-500">{previewUrl}</span>
                 </p>
               )}
+            </div>
+
+            {/* Teléfono display (footer) */}
+            <div className="space-y-1.5">
+              <label htmlFor="contact-phone" className="block text-sm font-medium text-navy">
+                Teléfono visible en el footer
+              </label>
+              <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <Phone className="h-4 w-4" />
+                </div>
+                <input
+                  id="contact-phone"
+                  type="text"
+                  value={contactPhone}
+                  onChange={(e) => {
+                    setContactPhone(e.target.value)
+                    setContactSaveState("idle")
+                  }}
+                  placeholder="+1 (548) 312-2105"
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-4 text-sm outline-none transition-colors focus:border-orange focus:bg-white"
+                />
+              </div>
+              <p className="text-xs text-gray-400">
+                Texto de display (puede incluir espacios y paréntesis). No alimenta los botones
+                de WhatsApp del sitio.
+              </p>
             </div>
 
             {/* Email */}

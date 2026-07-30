@@ -110,6 +110,8 @@ export default function AdminSettings() {
               loading={data.loading}
               whatsappNumber={data.whatsappNumber}
               setWhatsappNumber={data.setWhatsappNumber}
+              contactPhone={data.contactPhone}
+              setContactPhone={data.setContactPhone}
               contactEmail={data.contactEmail}
               setContactEmail={data.setContactEmail}
               contactSaveState={data.contactSaveState}

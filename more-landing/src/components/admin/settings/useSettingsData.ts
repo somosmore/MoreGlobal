@@ -53,8 +53,9 @@ export function useSettingsData() {
   const [uppSaveState, setUppSaveState] = useState<SaveState>("idle")
   const [uppSaveError, setUppSaveError] = useState<string | null>(null)
 
-  // Contacto (WhatsApp + email)
+  // Contacto (WhatsApp + teléfono display + email)
   const [whatsappNumber, setWhatsappNumber] = useState("")
+  const [contactPhone, setContactPhone] = useState("")
   const [contactEmail, setContactEmail] = useState("")
   const [contactSaveState, setContactSaveState] = useState<SaveState>("idle")
   const [contactSaveError, setContactSaveError] = useState<string | null>(null)
@@ -90,6 +91,7 @@ export function useSettingsData() {
         setUppPrice(settings.upp_price)
         setUppCountdownDate(settings.upp_countdown_date)
         setWhatsappNumber(settings.whatsapp_number)
+        setContactPhone(settings.contact_phone)
         setContactEmail(settings.contact_email)
         setMcEventDate(toLocalInput(settings.mc_event_date))
         setMcRegistrationClosesAt(toLocalInput(settings.mc_registration_closes_at))
@@ -180,6 +182,7 @@ export function useSettingsData() {
     const { error } = await supabase.from("site_settings").upsert(
       [
         { key: "whatsapp_number", value: whatsappNumber.trim() },
+        { key: "contact_phone", value: contactPhone.trim() },
         { key: "contact_email", value: contactEmail.trim() },
       ],
       { onConflict: "key" }
@@ -366,6 +369,7 @@ export function useSettingsData() {
 
     // Contacto
     whatsappNumber, setWhatsappNumber,
+    contactPhone, setContactPhone,
     contactEmail, setContactEmail,
     contactSaveState, setContactSaveState,
     contactSaveError,

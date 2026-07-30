@@ -154,11 +154,11 @@ export default function Footer({ hideLandingFaq = false }: FooterProps) {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-white/40 text-sm">
                   <Mail className="w-4 h-4 text-[#F37021]" />
-                  soporte@justmore.net
+                  {settings.contact_email}
                 </li>
                 <li className="flex items-center gap-3 text-white/40 text-sm">
                   <MessageCircle className="w-4 h-4 text-[#F37021]" />
-                  +1 (548) 312-2105
+                  {settings.contact_phone}
                 </li>
                 <li className="flex items-start gap-3 text-white/40 text-sm">
                   <MapPin className="w-4 h-4 text-[#F37021] mt-0.5" />

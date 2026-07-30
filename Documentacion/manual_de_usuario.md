@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-24 (Taller Profesional Global: 30 jul 19h CO + WA)
+> Última actualización: 2026-07-30 (Teléfono del footer editable desde Admin Settings)
 
 ---
 
@@ -262,8 +262,9 @@ Secciones principales:
 ### 1.9 Footer
 
 - Bloque superior opcional: **Preguntas frecuentes** genéricas del sitio (EB-2 NIW, requisitos, etc.), con acordeón.
-- Bloque CTA oscuro con botón a WhatsApp.
+- Bloque CTA oscuro con botón a WhatsApp (`whatsapp_number` en settings).
 - Links de navegación secundarios, información de contacto y redes sociales.
+- **Contacto del pie:** email (`contact_email`) y teléfono visible (`contact_phone`) se leen desde `site_settings` y se editan en Admin → Configuración → Contacto. La dirección física sigue fija en el código.
 - En la franja inferior del pie, el enlace **Política de Privacidad** apunta a la ruta interna **`/privacidad`** (componente `PrivacyPolicyPage`), no a un ancla vacía. El enlace **Términos & Condiciones** puede seguir sin página dedicada según configuración actual.
 
 **Ruta `/asesoria-vip` (página dedicada `VipSessionPage`):** el `Footer` se renderiza con **`hideLandingFaq`**, de modo que **no aparece** el acordeón de FAQ genérico de la landing principal. Las preguntas propias de la oferta VIP siguen en la sección **`VipFaq`** dentro de la misma página. El **selector ES | EN del navbar** aplica a toda la página (incluido el título de la pestaña del navegador); las cadenas viven en `more-landing/src/locales/{es,en}/vipPage.json`, fusionadas en `i18n.ts`. El **navbar** en esta página enlaza a **`/#quiz`** y a **`/#metodologia`** (etc.) para no depender de anclas vacías en la URL actual. En **`HomePage`**, si la URL trae hash (ej. `/#quiz`), tras cargar se hace **scroll suave** a la sección con ese `id`.
@@ -695,7 +696,23 @@ Los testimonios con tipo `video` se muestran en la sección de videos del sitio 
 
 **Ruta:** `/admin/settings`
 
-Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Incluye: **medición y píxeles**, calendario de asesorías, asesoría VIP (enlace y precio), redes sociales y más.
+Página para gestionar parámetros globales del sitio web que se aplican en el frontend público. Incluye: **medición y píxeles**, **contacto** (WhatsApp, teléfono del footer, email), calendario de asesorías, asesoría VIP (enlace y precio), redes sociales y más.
+
+#### Contacto (WhatsApp, teléfono y email)
+
+**Ubicación:** `/admin/settings` → ancla **Contacto** (`#contacto`).
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `whatsapp_number` | texto | Número con código de país (sin espacios) que alimenta **todos los botones** `wa.me` del sitio público. |
+| `contact_phone` | texto | Teléfono **visible** en el footer (formato libre, ej. `+1 (548) 312-2105`). No alimenta los botones de WhatsApp. |
+| `contact_email` | email | Email mostrado en el footer y otras superficies que lean settings. |
+
+**Cómo configurar:**
+
+1. Ir a `/admin/settings` → **Contacto**.
+2. Completar los tres campos y pulsar **Guardar**.
+3. El footer del sitio público refleja los cambios tras recargar (el provider hace refetch).
 
 #### Medición y píxeles (Meta, GTM, GA4)
 
@@ -870,7 +887,8 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 | key | Descripción |
 |-----|-------------|
 | `calendar_url` | URL del calendario de asesorías (Google Calendar, Calendly, etc.) |
-| `whatsapp_number` | Número de WhatsApp de contacto |
+| `whatsapp_number` | Número de WhatsApp de contacto (botones wa.me del sitio) |
+| `contact_phone` | Teléfono visible en el footer (texto de display) |
 | `instagram_url` | URL del perfil de Instagram (aparece en el footer si está configurada) |
 | `linkedin_url` | URL de la página de LinkedIn (aparece en el footer si está configurada) |
 | `facebook_url` | URL de la página de Facebook (aparece en el footer si está configurada) |
