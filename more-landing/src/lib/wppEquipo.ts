@@ -11,6 +11,15 @@ export const isValidWhatsappUrl = (url: string) => {
   return WHATSAPP_URL_PATTERN.test(trimmed)
 }
 
+/** Quita "+" de wa.me / api.whatsapp.com (WhatsApp solo acepta dígitos). */
+export const sanitizeWhatsappUrl = (url: string) => {
+  const trimmed = url.trim()
+  if (!trimmed) return trimmed
+  return trimmed
+    .replace(/^(https?:\/\/wa\.me\/)\+/i, "$1")
+    .replace(/^(https?:\/\/api\.whatsapp\.com\/send\?phone=)\+/i, "$1")
+}
+
 export const buildWhatsappUrlFromPhone = (phone: string) => {
   if (!phone.replace(/\D/g, "")) return null
   return buildWhatsappUrl(phone)
@@ -18,7 +27,8 @@ export const buildWhatsappUrlFromPhone = (phone: string) => {
 
 export const pickRandomUrl = (urls: string[]) => {
   if (urls.length === 0) return null
-  return urls[Math.floor(Math.random() * urls.length)]
+  const picked = urls[Math.floor(Math.random() * urls.length)]
+  return sanitizeWhatsappUrl(picked)
 }
 
 export type CountryOption = {
@@ -28,8 +38,8 @@ export type CountryOption = {
 }
 
 export const COUNTRY_OPTIONS: CountryOption[] = [
-  { code: "593", name: "Ecuador", flag: "🇪🇨" },
   { code: "57", name: "Colombia", flag: "🇨🇴" },
+  { code: "593", name: "Ecuador", flag: "🇪🇨" },
   { code: "52", name: "México", flag: "🇲🇽" },
   { code: "54", name: "Argentina", flag: "🇦🇷" },
   { code: "51", name: "Perú", flag: "🇵🇪" },
@@ -50,7 +60,8 @@ export const COUNTRY_OPTIONS: CountryOption[] = [
   { code: "1", name: "USA / Canadá", flag: "🇺🇸" },
 ]
 
-export const DEFAULT_COUNTRY_CODE = "593"
+/** Colombia: mercado principal de MORE. Antes era 593 (Ecuador) y rompía imports. */
+export const DEFAULT_COUNTRY_CODE = "57"
 
 export type NormalizedPhone = {
   digits: string
@@ -59,55 +70,88 @@ export type NormalizedPhone = {
   valid: boolean
 }
 
+/** Longitud del tramo nacional (sin código de país) para no confundir móviles locales. */
+const COUNTRY_NATIONAL_LENGTH: Record<string, { min: number; max: number }> = {
+  "1": { min: 10, max: 10 },
+  "34": { min: 9, max: 9 },
+  "51": { min: 8, max: 9 },
+  "52": { min: 10, max: 11 },
+  "54": { min: 10, max: 11 },
+  "55": { min: 10, max: 11 },
+  "56": { min: 8, max: 9 },
+  "57": { min: 10, max: 10 },
+  "58": { min: 10, max: 10 },
+  "502": { min: 8, max: 8 },
+  "503": { min: 8, max: 8 },
+  "504": { min: 8, max: 8 },
+  "505": { min: 8, max: 8 },
+  "506": { min: 8, max: 8 },
+  "507": { min: 7, max: 8 },
+  "509": { min: 8, max: 8 },
+  "591": { min: 8, max: 8 },
+  "593": { min: 8, max: 9 },
+  "595": { min: 8, max: 9 },
+  "598": { min: 8, max: 8 },
+}
+
 const sortedCountryCodes = [...COUNTRY_OPTIONS]
   .map((c) => c.code)
   .sort((a, b) => b.length - a.length)
 
-const startsWithKnownCountryCode = (digits: string): string | null => {
+const matchesKnownCountryCode = (digits: string): string | null => {
   for (const code of sortedCountryCodes) {
-    if (digits.startsWith(code) && digits.length >= code.length + 7) return code
+    if (!digits.startsWith(code)) continue
+    const national = digits.slice(code.length)
+    const bounds = COUNTRY_NATIONAL_LENGTH[code]
+    if (!bounds) {
+      if (national.length >= 7 && digits.length <= 15) return code
+      continue
+    }
+    if (national.length >= bounds.min && national.length <= bounds.max) return code
   }
   return null
 }
+
+const toResult = (full: string): NormalizedPhone => ({
+  digits: full,
+  url: `https://wa.me/${full}`,
+  display: `+${full}`,
+  valid: full.length >= 10 && full.length <= 15,
+})
 
 export const normalizePhone = (
   rawPhone: string,
   defaultCountryCode: string,
 ): NormalizedPhone => {
-  const digits = rawPhone.replace(/\D/g, "")
+  const trimmed = rawPhone.trim()
+  if (!trimmed) return { digits: "", url: "", display: "", valid: false }
+
+  const explicitInternational =
+    trimmed.startsWith("+") || trimmed.startsWith("00")
+
+  let digits = trimmed.replace(/\D/g, "")
   if (!digits) return { digits: "", url: "", display: "", valid: false }
 
-  if (digits.startsWith(defaultCountryCode) && digits.length >= defaultCountryCode.length + 7) {
-    const full = digits
-    return {
-      digits: full,
-      url: `https://wa.me/${full}`,
-      display: `+${full}`,
-      valid: full.length >= 10 && full.length <= 15,
-    }
+  // 00XX… → tratar como internacional (mismo criterio que +)
+  if (trimmed.startsWith("00") && digits.startsWith("00")) {
+    digits = digits.slice(2)
   }
 
-  const matchedCode = startsWithKnownCountryCode(digits)
+  if (explicitInternational) {
+    return toResult(digits)
+  }
+
+  // Internacional sin "+" solo si el tramo nacional tiene el largo correcto
+  // (evita que un móvil local como 5512… se lea como Brasil, o 313… como otro país).
+  const matchedCode = matchesKnownCountryCode(digits)
   if (matchedCode && !digits.startsWith("0")) {
-    const full = digits
-    return {
-      digits: full,
-      url: `https://wa.me/${full}`,
-      display: `+${full}`,
-      valid: full.length >= 10 && full.length <= 15,
-    }
+    return toResult(digits)
   }
 
   const national = digits.replace(/^0+/, "")
   if (!national) return { digits: "", url: "", display: "", valid: false }
 
-  const full = defaultCountryCode + national
-  return {
-    digits: full,
-    url: `https://wa.me/${full}`,
-    display: `+${full}`,
-    valid: full.length >= 10 && full.length <= 15,
-  }
+  return toResult(defaultCountryCode + national)
 }
 
 export type ParsedBulkEntry = {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { supabase, type WppTeamNumber } from "@/lib/supabase"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { isValidWhatsappUrl } from "@/lib/wppEquipo"
+import { isValidWhatsappUrl, sanitizeWhatsappUrl } from "@/lib/wppEquipo"
 
 export type SaveState = "idle" | "saving" | "success" | "error"
 
@@ -89,7 +89,7 @@ export function useWppTeamData() {
     }
 
     const trimmedLabel = label.trim()
-    const trimmedUrl = url.trim()
+    const trimmedUrl = sanitizeWhatsappUrl(url)
 
     if (!trimmedLabel) {
       setActionError("El nombre es obligatorio.")
@@ -128,7 +128,7 @@ export function useWppTeamData() {
     }
 
     const trimmedLabel = label.trim()
-    const trimmedUrl = url.trim()
+    const trimmedUrl = sanitizeWhatsappUrl(url)
 
     if (!trimmedLabel) {
       setActionError("El nombre es obligatorio.")
@@ -187,7 +187,7 @@ export function useWppTeamData() {
     }
 
     const cleanItems = items
-      .map((i) => ({ label: i.label.trim(), url: i.url.trim() }))
+      .map((i) => ({ label: i.label.trim(), url: sanitizeWhatsappUrl(i.url) }))
       .filter((i) => i.label && isValidWhatsappUrl(i.url))
 
     if (cleanItems.length === 0) {

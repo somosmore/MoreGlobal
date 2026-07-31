@@ -4,6 +4,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import {
   buildWhatsappUrlFromPhone,
   pickRandomUrl,
+  sanitizeWhatsappUrl,
 } from "@/lib/wppEquipo"
 
 type PageState = "loading" | "redirecting" | "unavailable"
@@ -106,11 +107,13 @@ export default function WppEquipoPage() {
         return
       }
 
-      const urls = (data ?? []).map((row) => row.url as string).filter(Boolean)
+      const urls = (data ?? [])
+        .map((row) => sanitizeWhatsappUrl(String(row.url ?? "")))
+        .filter(Boolean)
       const target = pickRandomUrl(urls) ?? fallbackUrl
 
       if (target) {
-        handleRedirect(target)
+        handleRedirect(sanitizeWhatsappUrl(target))
         return
       }
 

@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-30 (Teléfono del footer editable desde Admin Settings)
+> Última actualización: 2026-07-30 (fix `/wppequipo`: país por defecto Colombia +57 y normalización de números)
 
 ---
 
@@ -810,7 +810,7 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
    - Los números cortos sueltos (1–3 dígitos) se ignoran (índices de la lista).
    - Las líneas con letras se toman como **nombre/etiqueta**.
    - Las líneas con 7+ dígitos se toman como **teléfono**.
-3. Seleccionar **País por defecto** (ej: Ecuador +593). Se usa solo para números sin prefijo internacional; los que ya traen código de país (ej: `50498549249` para Honduras) se respetan.
+3. Seleccionar **País por defecto** (por defecto: **Colombia +57**). Se usa solo para números sin prefijo internacional; los que ya traen código de país con largo válido (ej: `+593989812877` o `50498549249`) se respetan.
 4. Clic en **Procesar y previsualizar**. Se muestra una tabla con cada entrada:
    - Nombre, teléfono original, URL final `https://wa.me/...`.
    - Las entradas inválidas se marcan en rojo (con el motivo: falta nombre o número inválido).
@@ -818,8 +818,9 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 5. Clic en **Importar X números**. Solo se guardan las válidas, en una sola operación masiva.
 
 > Reglas de formateo:
-> - Los ceros iniciales del teléfono nacional se eliminan al anteponer el código de país (ej: `0989812877` con país Ecuador → `https://wa.me/593989812877`).
-> - Si el número ya viene con código de país conocido, no se modifica.
+> - Los ceros iniciales del teléfono nacional se eliminan al anteponer el código de país (ej: `3001234567` con país Colombia → `https://wa.me/573001234567`).
+> - Si el número ya viene con `+` o `00`, se trata como internacional y no se le antepone el país por defecto.
+> - Si el número ya trae código de país conocido **y** el largo nacional encaja, no se modifica.
 > - Cambiar el país por defecto después de procesar **vuelve a normalizar** los números que no traían prefijo internacional.
 
 **Cómo compartir:**
