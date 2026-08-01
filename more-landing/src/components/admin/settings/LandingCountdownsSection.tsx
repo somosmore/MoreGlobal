@@ -103,7 +103,7 @@ export default function LandingCountdownsSection({
           <>
             <div className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                Taller NIW (/taller-niw)
+                Taller Cambio de Estatus (/taller-niw)
               </p>
               <DateField
                 id="tn-event-date"

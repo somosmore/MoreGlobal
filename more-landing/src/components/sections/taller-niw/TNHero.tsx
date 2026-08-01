@@ -7,7 +7,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const details = [
-  { icon: Calendar, text: "Jueves 30 de julio 2026" },
+  { icon: Calendar, text: "Jueves 6 de agosto 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
   { icon: MapPin, text: "En línea y en vivo" },
   { icon: Gift, text: "100% gratis" },
@@ -15,9 +15,9 @@ const details = [
 ]
 
 /** Porcentaje de cupos ocupados que muestra la barra de urgencia. */
-const CUPOS_PCT = 82
+const CUPOS_PCT = 35
 // TODO: reemplazar por la cifra real de registrados antes de publicar.
-const REGISTRANTS_COUNT = 1200
+const REGISTRANTS_COUNT = 180
 
 export default function TNHero() {
   const { settings } = useSiteSettings()
@@ -28,7 +28,6 @@ export default function TNHero() {
       <Backdrop variant="hero" className="opacity-70" />
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pb-24">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-          {/* Left: Text content */}
           <div className="flex-1 text-center lg:text-left">
             <motion.img
               src="/logo_more_light.png"
@@ -57,21 +56,31 @@ export default function TNHero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-navy-deep sm:text-4xl lg:text-5xl"
             >
-              Cómo convertirte en el{" "}
-              <span className="text-[#F37021]">profesional que todo país desea</span>
+              Estrategias para{" "}
+              <span className="text-[#F37021]">cambio de estatus</span>
             </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28 }}
+              className="mt-4 text-lg font-semibold text-navy-deep sm:text-xl"
+            >
+              Prepárate antes de que te nieguen la residencia
+            </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg"
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mt-4 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg"
             >
-              Descubre cómo posicionar tu trayectoria profesional para que tu perfil
-              sea reconocido como de alto impacto — el tipo de profesional que un
-              país quiere atraer y retener.{" "}
+              Los cambios en el proceso migratorio no esperan. Si no preparás tu caso
+              con anticipación, el riesgo no es «retrasarte»: es que te nieguen la
+              residencia permanente.{" "}
               <strong className="font-semibold text-navy-deep">
-                Un taller en vivo para clarificar tu ruta migratoria con estrategia.
+                En este taller en vivo te damos la guía para prepararte — y las
+                estrategias concretas para tu cambio de estatus.
               </strong>
             </motion.p>
 
@@ -99,7 +108,7 @@ export default function TNHero() {
               className="mt-8"
             >
               <CtaButton
-                label="Sí, quiero mi lugar en el taller"
+                label="Sí, quiero prepararme para mi cambio de estatus"
                 href="#registro"
                 onClick={scrollToRegistro}
                 size="lg"
@@ -131,7 +140,6 @@ export default function TNHero() {
                 />
               </div>
 
-              {/* Prueba social */}
               <div className="mt-4 flex items-center justify-center lg:justify-start gap-3">
                 <div className="flex -space-x-2">
                   {[0, 1, 2, 3].map((i) => (
@@ -151,7 +159,6 @@ export default function TNHero() {
             </motion.div>
           </div>
 
-          {/* Right: Speaker image */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -179,7 +186,6 @@ export default function TNHero() {
           </motion.div>
         </div>
 
-        {/* Countdown — full width below the split */}
         <EventCountdown targetDate={settings.tn_event_date} tone="paper" />
       </div>
     </section>

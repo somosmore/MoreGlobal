@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-08-01] — Taller `/taller-niw`: Cambio de Estatus (6 ago 2026)
+
+- Agente: cursor
+- Archivos modificados: `src/components/sections/taller-niw/*`, `src/pages/TallerNiwPage.tsx`, `src/contexts/SiteSettingsContext.tsx`, `supabase/functions/masterclass-register/index.ts`, `supabase/migrations/033_taller_cambio_estatus_dates.sql`, `public/emails/*taller*`, `scripts/sync-ghl-taller-emails.mjs`, `EmailTemplatesSection.tsx`, `.env.example`, `Documentacion/manual_de_usuario.md`, `Documentacion/taller-redflags-ghl-workflow.md`
+- Qué se implementó: Rebrand completo a «Estrategias para cambio de estatus». Fechas 6 ago 2026 19:00 CO. Nuevo tag/source `Taller-cambio-estatus-2026` / `taller-cambio-estatus-2026`. Zoom y WhatsApp nuevos. 6 emails (incluye +30 min). Docs y migración 033.
+- Problemas encontrados: workflows GHL siguen siendo manuales (API no los crea).
+- Estado: ✅ completo
+
 <!-- Formato por entrada:
 ### [YYYY-MM-DD] — nombre del task
 - Agente: claude | cursor | kilo | humano

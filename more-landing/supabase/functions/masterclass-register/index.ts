@@ -24,8 +24,11 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 }
 
-const TALLER_SOURCE = "taller-profesional-global-2026"
-const TALLER_SOURCE_LEGACY = "taller-redflags-2026"
+const TALLER_SOURCE = "taller-cambio-estatus-2026"
+const TALLER_SOURCES_LEGACY = [
+  "taller-profesional-global-2026",
+  "taller-redflags-2026",
+] as const
 
 type GhlEventConfig = {
   pipelineId: string
@@ -34,7 +37,8 @@ type GhlEventConfig = {
 }
 
 const isTallerSource = (leadSource: string): boolean =>
-  leadSource === TALLER_SOURCE || leadSource === TALLER_SOURCE_LEGACY
+  leadSource === TALLER_SOURCE ||
+  (TALLER_SOURCES_LEGACY as readonly string[]).includes(leadSource)
 
 /** Pipeline, stage y tag por tipo de evento (masterclass vs taller). */
 const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
@@ -47,7 +51,7 @@ const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
     ? Deno.env.get("GHL_TALLER_STAGE_ID") ?? Deno.env.get("GHL_STAGE_ID")
     : Deno.env.get("GHL_STAGE_ID")
   const defaultTag = isTaller
-    ? Deno.env.get("GHL_TALLER_TAG") ?? "Taller-profesional-global-2026"
+    ? Deno.env.get("GHL_TALLER_TAG") ?? "Taller-cambio-estatus-2026"
     : Deno.env.get("GHL_TAG")
 
   if (!pipelineId || !stageId || !defaultTag) return null

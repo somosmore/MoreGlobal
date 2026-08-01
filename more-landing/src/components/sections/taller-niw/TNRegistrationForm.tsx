@@ -14,10 +14,10 @@ import "flag-icons/css/flag-icons.min.css"
 
 import TNWhatsappJoinCard from "@/components/sections/taller-niw/TNWhatsappJoinCard"
 /** Identificador del evento para distinguir estos leads en la base de datos / GHL. */
-const TALLER_SOURCE = "taller-profesional-global-2026"
-const TALLER_EVENT_LABEL = "Taller Profesional Global"
+const TALLER_SOURCE = "taller-cambio-estatus-2026"
+const TALLER_EVENT_LABEL = "Taller Cambio de Estatus"
 /** Etiqueta (tag) con la que se marcan los leads en GoHighLevel. */
-const TALLER_GHL_TAG = "Taller-profesional-global-2026"
+const TALLER_GHL_TAG = "Taller-cambio-estatus-2026"
 
 const COUNTRY_CODES = [
   { code: "+57",  iso: "co", dial: "+57"  },

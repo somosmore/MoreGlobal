@@ -8,7 +8,7 @@ import {
 import { CtaButton } from "@/components/brand/CtaButton"
 
 export const TALLER_WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/D1e1d993Wb54sHK8B7sx7k"
+  "https://chat.whatsapp.com/FHVIOP5xYnz5XklHqJeXCN"
 
 type TNWhatsappJoinCardProps = {
   variant?: TallerNiwFormVariant
