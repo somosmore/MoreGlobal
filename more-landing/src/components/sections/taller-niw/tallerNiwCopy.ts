@@ -23,7 +23,7 @@ export const TALLER_NIW_REGISTRO_PAGE_META = {
 } as const
 
 export const TALLER_NIW_REGISTRO_HEADER =
-  "Taller en vivo · Cómo convertirte en el profesional que todo país desea"
+  "Taller en vivo · Estrategias para cambio de estatus"
 
 const SUCCESS_COPY = {
   successTitle: "¡Listo, tu lugar está reservado!",
@@ -37,8 +37,8 @@ const SUCCESS_COPY = {
 const FORM_COPY: Record<TallerNiwFormVariant, TallerNiwFormCopy> = {
   default: {
     formEyebrow: "Taller gratuito en vivo",
-    formHeadlineBefore: "Quiero convertirme en el",
-    formHeadlineHighlight: "profesional que todo país desea",
+    formHeadlineBefore: "Quiero prepararme para mi",
+    formHeadlineHighlight: "cambio de estatus",
     formSubcopy: "Regístrate en 30 segundos y asegura tu lugar.",
     expiredBody:
       "Este taller ya fue realizado. Síguenos en redes para enterarte de los próximos eventos.",
@@ -46,8 +46,8 @@ const FORM_COPY: Record<TallerNiwFormVariant, TallerNiwFormCopy> = {
   },
   ads: {
     formEyebrow: "Taller gratuito en vivo",
-    formHeadlineBefore: "Quiero convertirme en el",
-    formHeadlineHighlight: "profesional que todo país desea",
+    formHeadlineBefore: "Quiero prepararme para mi",
+    formHeadlineHighlight: "cambio de estatus",
     formSubcopy: "Regístrate en 30 segundos y asegura tu lugar.",
     expiredBody:
       "Este taller ya fue realizado. Síguenos en redes para enterarte de los próximos eventos.",

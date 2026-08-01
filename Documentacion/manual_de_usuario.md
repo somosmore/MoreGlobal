@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-07-30 (fix `/wppequipo`: país por defecto Colombia +57 y normalización de números)
+> Última actualización: 2026-08-01 (taller `/taller-niw`: Cambio de Estatus — 6 ago 2026)
 
 ---
 
@@ -22,7 +22,7 @@
    - 1.13 [Landing Masterclass (`/masterclass`)](#113-landing-masterclass-masterclass)
    - 1.14 [Landing UPP (`/upp`)](#114-landing-upp-upp)
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
-   - 1.16 [Landing Taller Profesional Global (`/taller-niw`)](#116-landing-taller-profesional-global-taller-niw)
+   - 1.16 [Landing Taller Cambio de Estatus (`/taller-niw`)](#116-landing-taller-cambio-de-estatus-taller-niw)
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
@@ -396,24 +396,24 @@ Página de utilidad para campañas, QR impresos y enlaces cortos que distribuyen
 
 **Gestión:** todo se configura desde `/admin/settings` → sección **WhatsApp Equipo** (ver [2.5](#25-módulo-de-configuración)).
 
-### 1.16 Landing Taller Profesional Global (`/taller-niw`)
+### 1.16 Landing Taller Cambio de Estatus (`/taller-niw`)
 
 **Ruta:** `/taller-niw`
 
-Landing del taller gratuito **"Cómo convertirte en el profesional que todo país desea"** (Ivon More). Incluye hero con countdown, beneficios, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo. (Campaña anterior: Red Flags — tags y archivos legacy se conservan.)
+Landing del taller gratuito **"Estrategias para cambio de estatus"** (Ivon More). Incluye hero con countdown, beneficios, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo. (Campañas anteriores: Profesional Global / Red Flags — tags y archivos legacy se conservan.)
 
 | Dato | Valor |
 |------|-------|
-| Evento | Jueves **30 de julio de 2026**, **7:00 PM** (Colombia) — `tn_event_date` |
-| Registro cierra | **31 de julio de 2026** — `tn_registration_closes_at` |
-| Tag GHL (nuevo) | `taller-profesional-global-2026` (`Taller-profesional-global-2026`) |
-| Source Supabase (nuevo) | `taller-profesional-global-2026` |
-| Event label | `Taller Profesional Global` |
-| Tags legacy (no borrar) | `taller-julio-2026`, `taller-redflags-2026`, `taller-junio-2026`, `meta-julio13` |
-| Zoom (inscripción) | Enlace de registro webinar en emails y plantillas GHL |
-| WhatsApp | [Grupo Profesional Global](https://chat.whatsapp.com/D1e1d993Wb54sHK8B7sx7k) |
+| Evento | Jueves **6 de agosto de 2026**, **7:00 PM** (Colombia) — `tn_event_date` |
+| Registro cierra | **7 de agosto de 2026** — `tn_registration_closes_at` |
+| Tag GHL (nuevo) | `Taller-cambio-estatus-2026` |
+| Source Supabase (nuevo) | `taller-cambio-estatus-2026` |
+| Event label | `Taller Cambio de Estatus` |
+| Tags legacy (no borrar) | `Taller-profesional-global-2026`, `taller-julio-2026`, `taller-redflags-2026`, `taller-junio-2026`, `meta-julio13` |
+| Zoom (inscripción) | https://us02web.zoom.us/meeting/register/Ib5EeFo2SHKeglm0iIjDbg |
+| WhatsApp | [Grupo Cambio de Estatus](https://chat.whatsapp.com/FHVIOP5xYnz5XklHqJeXCN) |
 
-**Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión. La Edge Function también acepta el source legacy `taller-redflags-2026` para compatibilidad.
+**Registro:** igual que la masterclass, usa la Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país, profesión. La Edge Function también acepta sources legacy `taller-profesional-global-2026` y `taller-redflags-2026` para compatibilidad.
 
 #### Pantalla tras registro exitoso
 
@@ -427,9 +427,9 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 Sin cuenta regresiva, sin agenda de calendario ni código QR.
 
-**Emails automáticos (GHL):** al recibir el tag **`taller-profesional-global-2026`** se deben disparar workflows con **5 correos**: bienvenida inmediata; recordatorio 24 h; el día del evento (mañana, 1 h antes y en vivo). Plantillas HTML siguen en `public/emails/*taller-redflags*` (nombres de archivo legacy). Guía: `Documentacion/taller-redflags-ghl-workflow.md`. Sync GHL: `node scripts/sync-ghl-taller-emails.mjs`.
+**Emails automáticos (GHL):** al recibir el tag **`Taller-cambio-estatus-2026`** se deben disparar workflows con **6 correos**: bienvenida inmediata; recordatorio 24 h (5 ago 19:00); el día del evento a las 9:00 AM; 1 h antes (18:00); en vivo (19:00); y +30 min (19:30). Plantillas HTML en `public/emails/*taller*`. Guía: `Documentacion/taller-redflags-ghl-workflow.md`. Sync GHL: `node scripts/sync-ghl-taller-emails.mjs`.
 
-**Admin:** plantillas visibles en **Recursos → Emails → Taller Profesional Global** (preview y copiar HTML).
+**Admin:** plantillas visibles en **Recursos → Emails → Taller Cambio de Estatus** (preview y copiar HTML).
 
 #### 1.16.1 Página post-registro Meta Lead Ads (`/taller-niw/registro`)
 
@@ -449,7 +449,7 @@ Página de **confirmación** para quien ya se registró en el **formulario nativ
 **URL para configurar en Meta como destino post-lead:**
 
 ```
-https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-profesional-global
+https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-cambio-estatus
 ```
 
 ### 1.17 Thank You post-agenda (`/gracias`)

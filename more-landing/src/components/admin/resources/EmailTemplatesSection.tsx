@@ -34,37 +34,44 @@ const TEMPLATES: EmailTemplate[] = [
   },
   {
     id: "bienvenida-taller",
-    name: "Bienvenida Taller Profesional Global",
+    name: "Bienvenida Taller Cambio de Estatus",
     description: "Confirmación post-registro + link de inscripción Zoom + WhatsApp",
     file: "bienvenida-taller-redflags.html",
     group: "taller",
   },
   {
     id: "previo-taller",
-    name: "Recordatorio 24h Taller Profesional Global",
-    description: "Recordatorio un día antes (29 jul) con link Zoom",
+    name: "Recordatorio 24h Taller Cambio de Estatus",
+    description: "Recordatorio un día antes (5 ago) con link Zoom",
     file: "previo-taller-redflags.html",
     group: "taller",
   },
   {
     id: "hoy-manana-taller",
     name: "Día del evento — Mañana",
-    description: "30 jul 9:00 AM — recordatorio matutino del taller",
+    description: "6 ago 9:00 AM — recordatorio matutino del taller",
     file: "recordatorio-taller-redflags-manana.html",
     group: "taller",
   },
   {
     id: "hoy-1h-taller",
     name: "Día del evento — 1 hora antes",
-    description: "30 jul 6:00 PM — falta 1 hora para el taller",
+    description: "6 ago 6:00 PM — falta 1 hora para el taller",
     file: "recordatorio-taller-redflags-1h.html",
     group: "taller",
   },
   {
     id: "recordatorio-taller",
     name: "Día del evento — En vivo",
-    description: "30 jul 7:00 PM — estamos en vivo, entrar a Zoom",
+    description: "6 ago 7:00 PM — estamos en vivo, entrar a Zoom",
     file: "recordatorio-taller-redflags.html",
+    group: "taller",
+  },
+  {
+    id: "recordatorio-taller-30m",
+    name: "Día del evento — +30 min",
+    description: "6 ago 7:30 PM — llevamos 30 min, aún estás a tiempo",
+    file: "recordatorio-taller-cambio-estatus-30m.html",
     group: "taller",
   },
   {
@@ -113,7 +120,7 @@ const TEMPLATES: EmailTemplate[] = [
 
 const GROUPS = [
   { id: "masterclass" as const, label: "Masterclass", color: "bg-blue-500" },
-  { id: "taller" as const, label: "Taller Profesional Global", color: "bg-red-500" },
+  { id: "taller" as const, label: "Taller Cambio de Estatus", color: "bg-red-500" },
   { id: "ivon" as const, label: "Agenda Ivon", color: "bg-orange-500" },
   { id: "sandra" as const, label: "Agenda Sandra", color: "bg-purple-500" },
 ]

@@ -15,7 +15,7 @@ export default function TallerNiwPage() {
 
   useEffect(() => {
     document.title =
-      "Taller Gratis: Cómo convertirte en el profesional que todo país desea — MORE"
+      "Taller Gratis: Estrategias para cambio de estatus — MORE"
 
     const metas: HTMLMetaElement[] = []
 
@@ -35,17 +35,17 @@ export default function TallerNiwPage() {
     setMeta(
       "name",
       "description",
-      "Taller gratuito con Ivon More. Cómo posicionar tu perfil profesional para que un país quiera atraerte. En vivo, con estrategia y claridad de ruta."
+      "Taller gratuito con Ivon More. Prepárate para tu cambio de estatus antes de que te nieguen la residencia. Guía y estrategias en vivo."
     )
     setMeta(
       "property",
       "og:title",
-      "Cómo convertirte en el profesional que todo país desea"
+      "Estrategias para cambio de estatus"
     )
     setMeta(
       "property",
       "og:description",
-      "Un taller en vivo para clarificar tu posicionamiento profesional y tu ruta migratoria de alto impacto."
+      "Si no te preparás, te pueden negar la residencia permanente. Taller en vivo: guía y estrategias para tu cambio de estatus."
     )
     setMeta("property", "og:type", "website")
 

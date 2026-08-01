@@ -27,8 +27,8 @@ const DEFAULTS: SiteSettingsMap = {
   // Fechas de las landings de campaña (se editan en Admin → Settings).
   mc_event_date: "2026-05-25T19:00:00-05:00",
   mc_registration_closes_at: "2026-05-27T23:59:59-05:00",
-  tn_event_date: "2026-07-30T19:00:00-05:00",
-  tn_registration_closes_at: "2026-07-31T23:59:59-05:00",
+  tn_event_date: "2026-08-06T19:00:00-05:00",
+  tn_registration_closes_at: "2026-08-07T23:59:59-05:00",
 }
 
 type SiteSettingsContextValue = {

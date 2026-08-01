@@ -2,11 +2,11 @@ import { motion } from "framer-motion"
 import { CheckCircle2, Sparkles } from "lucide-react"
 
 const benefits = [
-  "Qué hace que un perfil profesional sea atractivo para un país",
-  "Cómo traducir tus logros en evidencia de alto impacto",
-  "La diferencia entre un CV genérico y un posicionamiento estratégico",
-  "Señales de que tu trayectoria puede encajar en rutas como EB-2 NIW",
-  "Errores que debilitan tu caso antes de empezar",
+  "Por qué no prepararte puede costarte la residencia permanente",
+  "Qué cambia en un cambio de estatus y cómo anticiparlo",
+  "Checklist de preparación para tu visa (antes de que sea tarde)",
+  "Errores que debilitan tu caso en el momento decisivo",
+  "Estrategias accionables para tu cambio de estatus",
   "Sesión de preguntas en vivo con Ivon More",
 ]
 
@@ -30,7 +30,6 @@ export default function TNBenefits() {
         variants={container}
         className="rounded-2xl bg-white shadow-2xl border border-gray-100 p-6 sm:p-8"
       >
-        {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-6">
           <Sparkles className="h-5 w-5 text-[#F37021]" />
           <h2 className="font-display text-2xl font-bold text-navy-deep sm:text-3xl">
@@ -39,7 +38,6 @@ export default function TNBenefits() {
           <Sparkles className="h-5 w-5 text-[#F37021]" />
         </div>
 
-        {/* Orange accent line */}
         <div className="h-1 w-20 mx-auto rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A] mb-6 opacity-80" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

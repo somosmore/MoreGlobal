@@ -1,17 +1,17 @@
-# Workflow GHL — Taller Profesional Global (ex Red Flags)
+# Workflow GHL — Taller Cambio de Estatus (ex Profesional Global / Red Flags)
 
-Configuración de emails automáticos cuando un contacto recibe el tag **`taller-profesional-global-2026`** (disparado al registrarse en `/taller-niw`).
+Configuración de emails automáticos cuando un contacto recibe el tag **`Taller-cambio-estatus-2026`** (disparado al registrarse en `/taller-niw`).
 
-**Título comercial:** Cómo convertirte en el profesional que todo país desea
+**Título comercial:** Estrategias para cambio de estatus
 
-**Legacy (no borrar):** tags `taller-julio-2026`, `taller-redflags-2026`, `taller-junio-2026`, `meta-julio13`. Los workflows históricos de Red Flags pueden seguir existiendo; los **nuevos** registros deben usar el tag nuevo.
+**Legacy (no borrar):** tags `Taller-profesional-global-2026`, `taller-julio-2026`, `taller-redflags-2026`, `taller-junio-2026`, `meta-julio13`. Los workflows históricos pueden seguir existiendo; los **nuevos** registros deben usar el tag nuevo.
 
 ## URL para Facebook Ads (Lead Ads)
 
 Tras el formulario nativo de Meta, redirigir al lead a la página de confirmación (solo WhatsApp, sin formulario):
 
 ```
-https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-profesional-global
+https://moremigracion.com/taller-niw/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-cambio-estatus
 ```
 
 El registro del contacto lo captura Meta/GHL; esta URL solo pide unirse al grupo de WhatsApp.
@@ -22,15 +22,15 @@ La landing completa `/taller-niw` sigue disponible para tráfico orgánico con f
 
 | Campo | Valor |
 |-------|-------|
-| Título | Cómo convertirte en el profesional que todo país desea |
-| Fecha | Jueves **30 de julio de 2026** |
+| Título | Estrategias para cambio de estatus |
+| Fecha | Jueves **6 de agosto de 2026** |
 | Hora | **7:00 PM** (Colombia / Perú / Ecuador) |
-| Tag GHL (nuevo) | `taller-profesional-global-2026` (`Taller-profesional-global-2026`) |
-| Source Supabase | `taller-profesional-global-2026` (legacy aceptado: `taller-redflags-2026`) |
-| Pipeline GHL | Mismo pipeline de taller (renombrar en GHL a “Profesional Global” si se desea) |
+| Tag GHL (nuevo) | `Taller-cambio-estatus-2026` |
+| Source Supabase | `taller-cambio-estatus-2026` (legacy aceptado: `taller-profesional-global-2026`, `taller-redflags-2026`) |
+| Pipeline GHL | Mismo pipeline de taller |
 | Stage inicial | `Nuevo Registro` |
-| Zoom (inscripción) | https://us02web.zoom.us/meeting/register/z1tEaTnxTEKctLPQ1rEEtg |
-| WhatsApp grupo | https://chat.whatsapp.com/D1e1d993Wb54sHK8B7sx7k |
+| Zoom (inscripción) | https://us02web.zoom.us/meeting/register/Ib5EeFo2SHKeglm0iIjDbg |
+| WhatsApp grupo | https://chat.whatsapp.com/FHVIOP5xYnz5XklHqJeXCN |
 
 ## Pipeline (IDs producción)
 
@@ -38,8 +38,8 @@ La landing completa `/taller-niw` sigue disponible para tráfico orgánico con f
 |-------|-------|
 | Pipeline ID | `zZnUEAmqh1zWMnZDZEQP` |
 | Stage "Nuevo Registro" | `239e4545-2d00-4ad6-80b7-6a12c77d42f0` |
-| Tag nuevo | `Taller-profesional-global-2026` |
-| Secret Supabase | `GHL_TALLER_TAG=Taller-profesional-global-2026` |
+| Tag nuevo | `Taller-cambio-estatus-2026` |
+| Secret Supabase | `GHL_TALLER_TAG=Taller-cambio-estatus-2026` |
 
 ## Plantillas en GHL
 
@@ -50,22 +50,23 @@ cd more-landing
 node scripts/sync-ghl-taller-emails.mjs
 ```
 
-| Plantilla GHL (nombre legacy) | Archivo local | Cuándo |
-|-------------------------------|---------------|--------|
+| Plantilla GHL | Archivo local | Cuándo |
+|---------------|---------------|--------|
 | `TALLER-REDFLAGS-Bienvenida` | `public/emails/bienvenida-taller-redflags.html` | Al registrarse |
-| `TALLER-REDFLAGS-Recordatorio-24hs` | `public/emails/previo-taller-redflags.html` | **29 jul 2026, 7:00 PM** |
-| `TALLER-REDFLAGS-Hoy-Manana` | `public/emails/recordatorio-taller-redflags-manana.html` | **30 jul 2026, 9:00 AM** |
-| `TALLER-REDFLAGS-Hoy-1h` | `public/emails/recordatorio-taller-redflags-1h.html` | **30 jul 2026, 6:00 PM** |
-| `TALLER-REDFLAGS-EnVivo` | `public/emails/recordatorio-taller-redflags.html` | **30 jul 2026, 7:00 PM** |
+| `TALLER-REDFLAGS-Recordatorio-24hs` | `public/emails/previo-taller-redflags.html` | **5 ago 2026, 7:00 PM** |
+| `TALLER-REDFLAGS-Hoy-Manana` | `public/emails/recordatorio-taller-redflags-manana.html` | **6 ago 2026, 9:00 AM** |
+| `TALLER-REDFLAGS-Hoy-1h` | `public/emails/recordatorio-taller-redflags-1h.html` | **6 ago 2026, 6:00 PM** |
+| `TALLER-REDFLAGS-EnVivo` | `public/emails/recordatorio-taller-redflags.html` | **6 ago 2026, 7:00 PM** |
+| `TALLER-CAMBIO-ESTATUS-30m` | `public/emails/recordatorio-taller-cambio-estatus-30m.html` | **6 ago 2026, 7:30 PM** |
 
-También visibles en **Admin → Recursos → Emails → Taller Profesional Global**.
+También visibles en **Admin → Recursos → Emails → Taller Cambio de Estatus**.
 
 ## Workflows en GHL
 
 > Panel CRM: **https://crm.moremigracion.com**  
 > La API de GHL **no permite crear/editar workflows** (solo listar e inscribir contactos).
 
-**Acción requerida:** clonar o ajustar workflows para el trigger **Tag added → `taller-profesional-global-2026`**. No borrar los workflows que escuchan `taller-julio-2026`.
+**Acción requerida:** clonar o ajustar workflows para el trigger **Tag added → `Taller-cambio-estatus-2026`**. No borrar los workflows de eventos anteriores.
 
 | Workflow histórico (referencia) | ID | Notas |
 |----------|-----|--------|
@@ -78,26 +79,28 @@ Enlaces útiles:
 
 Generar enlaces desde terminal: `node scripts/ghl-taller-workflow-links.mjs`
 
-### Workflow nuevo — Bienvenida (Profesional Global)
+### Workflow nuevo — Bienvenida (Cambio de Estatus)
 
-1. **Trigger:** Contact Tag → Tag added → `taller-profesional-global-2026`
-2. **Action:** Send Email → plantilla `TALLER-REDFLAGS-Bienvenida` (contenido ya rebranded)
+1. **Trigger:** Contact Tag → Tag added → `Taller-cambio-estatus-2026`
+2. **Action:** Send Email → plantilla `TALLER-REDFLAGS-Bienvenida`
 3. **Settings:** Allow re-entry → **OFF**
 4. **Publish**
 
-### Workflow nuevo — Recordatorios (Profesional Global)
+### Workflow nuevo — Recordatorios (Cambio de Estatus)
 
-1. **Trigger:** Contact Tag → Tag added → `taller-profesional-global-2026`
-2. **Wait** → **29 jul 2026, 7:00 PM** — `America/Bogota`
+1. **Trigger:** Contact Tag → Tag added → `Taller-cambio-estatus-2026`
+2. **Wait** → **5 ago 2026, 7:00 PM** — `America/Bogota`
 3. **Send Email** → `TALLER-REDFLAGS-Recordatorio-24hs`
-4. **Wait** → **30 jul 2026, 9:00 AM** — `America/Bogota`
+4. **Wait** → **6 ago 2026, 9:00 AM** — `America/Bogota`
 5. **Send Email** → `TALLER-REDFLAGS-Hoy-Manana`
-6. **Wait** → **30 jul 2026, 6:00 PM** — `America/Bogota`
+6. **Wait** → **6 ago 2026, 6:00 PM** — `America/Bogota`
 7. **Send Email** → `TALLER-REDFLAGS-Hoy-1h`
-8. **Wait** → **30 jul 2026, 7:00 PM** — `America/Bogota`
+8. **Wait** → **6 ago 2026, 7:00 PM** — `America/Bogota`
 9. **Send Email** → `TALLER-REDFLAGS-EnVivo`
-10. **Settings:** Allow re-entry → **OFF**
-11. **Publish**
+10. **Wait** → **6 ago 2026, 7:30 PM** — `America/Bogota`
+11. **Send Email** → `TALLER-CAMBIO-ESTATUS-30m`
+12. **Settings:** Allow re-entry → **OFF**
+13. **Publish**
 
 ### Opcional (recomendado)
 
@@ -121,12 +124,13 @@ node scripts/enroll-ghl-taller-workflow.mjs <contactId>
 
 ## Verificación end-to-end
 
-1. Crear tag `taller-profesional-global-2026` en GHL.
+1. Crear tag `Taller-cambio-estatus-2026` en GHL.
 2. Actualizar secret `GHL_TALLER_TAG` y redeploy `masterclass-register`.
-3. Publicar workflows con el tag **nuevo**.
-4. Registro en `/taller-niw` con email real de prueba.
-5. En GHL: contacto con tag `taller-profesional-global-2026` + oportunidad en pipeline taller.
-6. Email de bienvenida en &lt; 5 min.
+3. Ejecutar migración `033_taller_cambio_estatus_dates.sql` (o Admin → Landing countdowns).
+4. Publicar workflows con el tag **nuevo**.
+5. Registro en `/taller-niw` con email real de prueba.
+6. En GHL: contacto con tag `Taller-cambio-estatus-2026` + oportunidad en pipeline taller.
+7. Email de bienvenida en &lt; 5 min.
 
 ## Notas Zoom
 
@@ -134,4 +138,4 @@ El link de Zoom es de **inscripción** (webinar registration). Tras inscribirse,
 
 ---
 
-*Última actualización: 2026-07-24 — rebrand Profesional Global*
+*Última actualización: 2026-08-01 — rebrand Cambio de Estatus*
