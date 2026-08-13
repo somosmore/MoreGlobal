@@ -50,12 +50,12 @@ export const VISA_BUCKET_LABELS: Record<string, string> = {
 }
 
 export const STATUS_OPTIONS: { value: LeadStatus; label: string; color: string; dot: string }[] = [
-  { value: "nuevo",       label: "Nuevo",       color: "bg-blue-50 text-blue-700 border-blue-200",    dot: "bg-blue-500" },
-  { value: "contactado",  label: "Contactado",  color: "bg-yellow-50 text-yellow-700 border-yellow-200", dot: "bg-yellow-400" },
-  { value: "en_consulta", label: "En consulta", color: "bg-orange-50 text-orange-700 border-orange-200", dot: "bg-orange-500" },
-  { value: "calificado",  label: "Calificado",  color: "bg-green-50 text-green-700 border-green-200",   dot: "bg-green-500" },
-  { value: "cerrado",     label: "Cerrado",     color: "bg-gray-100 text-gray-500 border-gray-200",     dot: "bg-gray-400" },
-  { value: "perdido",     label: "Perdido",     color: "bg-red-50 text-red-600 border-red-200",         dot: "bg-red-500" },
+  { value: "nuevo",       label: "Nuevo",       color: "bg-blue-500/15 text-blue-400 border-blue-400/25",    dot: "bg-blue-400" },
+  { value: "contactado",  label: "Contactado",  color: "bg-amber-500/15 text-amber-400 border-amber-400/25", dot: "bg-amber-400" },
+  { value: "en_consulta", label: "En consulta", color: "bg-orange/15 text-orange border-orange/30",          dot: "bg-orange" },
+  { value: "calificado",  label: "Calificado",  color: "bg-emerald-500/15 text-emerald-400 border-emerald-400/25", dot: "bg-emerald-400" },
+  { value: "cerrado",     label: "Cerrado",     color: "bg-admin-subtle text-admin-faint border-admin-border",     dot: "bg-admin-faint" },
+  { value: "perdido",     label: "Perdido",     color: "bg-red-500/15 text-red-400 border-red-400/25",         dot: "bg-red-400" },
 ]
 
 export function statusMeta(value: string) {

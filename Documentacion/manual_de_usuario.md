@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-08-01 (taller `/taller-niw`: Cambio de Estatus — 6 ago 2026)
+> Última actualización: 2026-08-13 (rediseño visual Admin UI System 2026)
 
 ---
 
@@ -500,16 +500,25 @@ https://moremigracion.com/gracias
 
 Accesible en `/admin`. Requiere autenticación con email y contraseña de Supabase Auth. Solo usuarios con una cuenta activa en el proyecto Supabase pueden acceder.
 
+### Identidad visual (Admin UI System 2026)
+
+El CRM usa un tema **dark operativo** distinto al de las landings públicas (sistema editorial claro). Criterios:
+
+- Superficies oscuras (`admin` / `admin-elevated`), acento naranja MORE solo en CTAs y foco.
+- Bordes con radio mínimo (4–8 px); sin pastillas ni decoración editorial (olas, Playfair).
+- **Isotipo / favicon** (`/icon.png`) en sidebar y topbar; wordmark dark en login.
+- Referencia de diseño: `Manual de marca/admin-ui-system-2026.html`.
+
 El panel tiene un layout compartido con:
-- **Sidebar lateral** colapsable con navegación entre módulos.
-- **Topbar** con breadcrumbs automáticos y datos del usuario logueado.
+- **Sidebar lateral** colapsable con navegación entre módulos e isotipo MORE.
+- **Topbar** con breadcrumbs, isotipo y datos del usuario logueado.
 - El estado colapsado del sidebar persiste en `localStorage`.
 
 ### 2.1 Login de administrador
 
 **Ruta:** `/admin/login`
 
-- Formulario de email y contraseña.
+- Pantalla dark con isotipo + logo MORE (versión dark) y formulario de email/contraseña.
 - Utiliza Supabase Auth (`signInWithPassword`).
 - Al autenticarse correctamente, redirige al Dashboard.
 - Si el usuario no tiene Supabase configurado (sin variables de entorno), muestra un aviso.

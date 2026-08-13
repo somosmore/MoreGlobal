@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react"
 import { Link } from "react-router-dom"
 import { supabase, type Lead, type Testimonial } from "@/lib/supabase"
 import { Card, CardContent } from "@/components/ui/card"
+import { STATUS_OPTIONS } from "@/components/admin/leads/constants"
 import {
   Users,
   MessageSquare,
@@ -27,38 +28,9 @@ const RESULT_LABELS: Record<string, string> = {
 const STATUS_META: Record<
   string,
   { label: string; color: string; dot: string }
-> = {
-  nuevo: {
-    label: "Nuevo",
-    color: "bg-blue-50 text-blue-700",
-    dot: "bg-blue-500",
-  },
-  contactado: {
-    label: "Contactado",
-    color: "bg-yellow-50 text-yellow-700",
-    dot: "bg-yellow-400",
-  },
-  en_consulta: {
-    label: "En consulta",
-    color: "bg-orange-50 text-orange-700",
-    dot: "bg-orange-500",
-  },
-  calificado: {
-    label: "Calificado",
-    color: "bg-green-50 text-green-700",
-    dot: "bg-green-500",
-  },
-  cerrado: {
-    label: "Cerrado",
-    color: "bg-gray-100 text-gray-500",
-    dot: "bg-gray-400",
-  },
-  perdido: {
-    label: "Perdido",
-    color: "bg-red-50 text-red-600",
-    dot: "bg-red-500",
-  },
-}
+> = Object.fromEntries(
+  STATUS_OPTIONS.map((s) => [s.value, { label: s.label, color: s.color, dot: s.dot }])
+)
 
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime()
@@ -181,8 +153,8 @@ export default function AdminDashboard() {
       label: "Total leads",
       value: stats.totalLeads,
       icon: Users,
-      color: "text-navy",
-      bg: "bg-navy/8",
+      color: "text-admin-secondary",
+      bg: "bg-admin-subtle",
       href: "/admin/leads",
     },
     {
@@ -190,39 +162,39 @@ export default function AdminDashboard() {
       value: stats.altoImpacto,
       icon: Sparkles,
       color: "text-orange",
-      bg: "bg-orange/10",
+      bg: "bg-admin-accent-soft",
       href: "/admin/leads",
     },
     {
       label: "Unsung",
       value: stats.unsung,
       icon: Award,
-      color: "text-purple-600",
-      bg: "bg-purple-50",
+      color: "text-purple-400",
+      bg: "bg-admin-subtle",
       href: "/admin/leads",
     },
     {
       label: "Recibidos hoy",
       value: stats.hoy,
       icon: CalendarDays,
-      color: "text-blue-600",
-      bg: "bg-blue-50",
+      color: "text-blue-400",
+      bg: "bg-admin-subtle",
       href: "/admin/leads",
     },
     {
       label: "Calificados",
       value: stats.calificados,
       icon: TrendingUp,
-      color: "text-green-600",
-      bg: "bg-green-50",
+      color: "text-emerald-400",
+      bg: "bg-admin-subtle",
       href: "/admin/leads",
     },
     {
       label: "Testimonios",
       value: stats.totalTestimonials,
       icon: MessageSquare,
-      color: "text-indigo-600",
-      bg: "bg-indigo-50",
+      color: "text-indigo-400",
+      bg: "bg-admin-subtle",
       href: "/admin/testimonials",
     },
   ]
@@ -250,8 +222,8 @@ export default function AdminDashboard() {
     <div className="p-6 sm:p-8 space-y-8">
       {/* Page title */}
       <div>
-        <h1 className="text-2xl font-bold text-navy">Dashboard</h1>
-        <p className="text-sm text-gray-400 mt-0.5">
+        <h1 className="text-xl font-bold text-admin-text tracking-tight">Dashboard</h1>
+        <p className="text-sm text-admin-faint mt-0.5">
           Resumen general de actividad —{" "}
           {new Date().toLocaleDateString("es-CO", {
             weekday: "long",
@@ -263,20 +235,21 @@ export default function AdminDashboard() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {kpiCards.map(({ label, value, icon: Icon, color, bg, href }) => (
           <Link key={label} to={href}>
-            <Card className="border-0 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+            <Card className="border border-admin-border bg-admin-elevated shadow-none hover:border-admin-border-strong transition-colors cursor-pointer group rounded-admin relative overflow-hidden">
+              <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-orange/40" aria-hidden />
               <CardContent className="p-4">
                 <div
-                  className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center mb-3`}
+                  className={`w-8 h-8 rounded-admin-sm ${bg} flex items-center justify-center mb-3`}
                 >
-                  <Icon className={`w-4.5 h-4.5 ${color}`} />
+                  <Icon className={`w-4 h-4 ${color}`} />
                 </div>
-                <p className="text-2xl font-bold text-navy leading-none">
+                <p className="text-2xl font-bold text-admin-text leading-none tracking-tight">
                   {value}
                 </p>
-                <p className="text-xs text-gray-400 mt-1 leading-tight">
+                <p className="text-[10px] uppercase tracking-[0.08em] text-admin-faint mt-1.5 leading-tight font-medium">
                   {label}
                 </p>
               </CardContent>

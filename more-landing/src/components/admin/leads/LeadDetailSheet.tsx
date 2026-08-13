@@ -49,7 +49,7 @@ export default function LeadDetailSheet({
 }: Props) {
   return (
     <Sheet open={!!selectedLead} onOpenChange={(open) => { if (!open) setSelectedLead(null) }}>
-      <SheetContent side="right" className="w-full sm:max-w-[420px] flex flex-col p-0">
+      <SheetContent side="right" className="admin-portal w-full sm:max-w-[420px] flex flex-col p-0 bg-admin-elevated border-admin-border text-admin-text">
         {selectedLead && (
           <>
             <SheetHeader className="px-6 py-5 pr-14 bg-gradient-to-r from-navy to-navy-light">
@@ -150,7 +150,7 @@ export default function LeadDetailSheet({
                 <div className="flex flex-wrap gap-2">
                   {selectedLead.visa_buckets && selectedLead.visa_buckets.length > 0 ? (
                     selectedLead.visa_buckets.map((b) => (
-                      <span key={b} className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100">
+                      <span key={b} className="inline-flex items-center px-3 py-1.5 rounded-admin-sm bg-blue-500/15 text-blue-400 text-xs font-medium border border-blue-400/25">
                         {VISA_BUCKET_LABELS[b] ?? b}
                       </span>
                     ))
@@ -168,8 +168,8 @@ export default function LeadDetailSheet({
                 <div className="flex flex-wrap gap-2">
                   {selectedLead.achievements.length > 0
                     ? selectedLead.achievements.map((a) => (
-                        <span key={a} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-navy/5 text-navy text-xs font-medium border border-navy/10">
-                          <span className="w-1.5 h-1.5 rounded-full bg-orange" />
+                        <span key={a} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-admin-sm bg-admin-subtle text-admin-text text-xs font-medium border border-admin-border">
+                          <span className="w-1.5 h-1.5 rounded-admin-sm bg-orange" />
                           {ACHIEVEMENT_LABELS[a] ?? a}
                         </span>
                       ))
@@ -198,11 +198,11 @@ export default function LeadDetailSheet({
                 {selectedLead.followup_at && (() => {
                   const state = followupState(selectedLead.followup_at)
                   const stateMap = {
-                    overdue: { cls: "bg-red-50 text-red-700 border-red-200", label: "Vencido" },
-                    today:   { cls: "bg-yellow-50 text-yellow-700 border-yellow-200", label: "Hoy" },
-                    soon:    { cls: "bg-blue-50 text-blue-700 border-blue-200", label: "Próximo" },
+                    overdue: { cls: "bg-red-500/15 text-red-400 border-red-400/25", label: "Vencido" },
+                    today:   { cls: "bg-amber-500/15 text-amber-400 border-amber-400/25", label: "Hoy" },
+                    soon:    { cls: "bg-blue-500/15 text-blue-400 border-blue-400/25", label: "Próximo" },
                   }
-                  const meta = state ? stateMap[state] : { cls: "bg-gray-50 text-gray-600 border-gray-200", label: "Programado" }
+                  const meta = state ? stateMap[state] : { cls: "bg-admin-subtle text-admin-faint border-admin-border", label: "Programado" }
                   return (
                     <div className={`flex items-center justify-between px-3 py-2 rounded-xl border mb-3 ${meta.cls}`}>
                       <div className="flex items-center gap-2">

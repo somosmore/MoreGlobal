@@ -61,6 +61,13 @@ const TEMPLATES: EmailTemplate[] = [
     group: "taller",
   },
   {
+    id: "hoy-menos-1h-taller-corto",
+    name: "Día del evento — Menos de 1h (corto)",
+    description: "Copy corto I-94 + CTA Zoom — listo para blast GHL",
+    file: "recordatorio-taller-cambio-estatus-menos-1h.html",
+    group: "taller",
+  },
+  {
     id: "recordatorio-taller",
     name: "Día del evento — En vivo",
     description: "6 ago 7:00 PM — estamos en vivo, entrar a Zoom",
@@ -158,7 +165,7 @@ function EmailPreviewModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="w-full max-w-3xl h-[85vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="w-full max-w-3xl h-[85vh] bg-admin-elevated rounded-admin-lg border border-admin-border overflow-hidden flex flex-col admin-portal">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
           <div>
             <h2 className="text-sm font-semibold text-gray-900">

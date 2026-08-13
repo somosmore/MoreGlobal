@@ -34,13 +34,13 @@ function FollowupBadge({ followup_at }: { followup_at: string | null | undefined
   const state = followupState(followup_at)
   if (!state) return null
   const map = {
-    overdue: { cls: "text-red-500 bg-red-50", title: "Seguimiento vencido" },
-    today:   { cls: "text-yellow-600 bg-yellow-50", title: "Seguimiento hoy" },
-    soon:    { cls: "text-blue-500 bg-blue-50", title: "Seguimiento próximo" },
+    overdue: { cls: "text-red-400 bg-red-500/15", title: "Seguimiento vencido" },
+    today:   { cls: "text-amber-400 bg-amber-500/15", title: "Seguimiento hoy" },
+    soon:    { cls: "text-blue-400 bg-blue-500/15", title: "Seguimiento próximo" },
   }
   const { cls, title } = map[state]
   return (
-    <span className={`inline-flex items-center rounded-full p-1 ${cls}`} title={title}>
+    <span className={`inline-flex items-center rounded-admin-sm p-1 ${cls}`} title={title}>
       <Bell className="w-3 h-3" />
     </span>
   )
