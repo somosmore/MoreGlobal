@@ -13,6 +13,10 @@ type Props = Pick<
   | "setTnEventDate"
   | "tnRegistrationClosesAt"
   | "setTnRegistrationClosesAt"
+  | "weEventDate"
+  | "setWeEventDate"
+  | "weRegistrationClosesAt"
+  | "setWeRegistrationClosesAt"
   | "landingsSaveState"
   | "setLandingsSaveState"
   | "landingsSaveError"
@@ -67,6 +71,10 @@ export default function LandingCountdownsSection({
   setTnEventDate,
   tnRegistrationClosesAt,
   setTnRegistrationClosesAt,
+  weEventDate,
+  setWeEventDate,
+  weRegistrationClosesAt,
+  setWeRegistrationClosesAt,
   landingsSaveState,
   setLandingsSaveState,
   landingsSaveError,
@@ -88,7 +96,7 @@ export default function LandingCountdownsSection({
             Landings de campaña - Fechas y cierre
           </h2>
           <p className="text-xs text-gray-400">
-            Contador y cierre de inscripción del taller y la masterclass
+            Contador y cierre de inscripción de talleres, webinars y masterclass
           </p>
         </div>
       </div>
@@ -101,6 +109,26 @@ export default function LandingCountdownsSection({
           </div>
         ) : (
           <>
+            <div className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
+                Webinar Estatus (/webinar-estatus)
+              </p>
+              <DateField
+                id="we-event-date"
+                label="Fecha del webinar (contador)"
+                hint="El contador del hero cuenta hasta esta fecha. Vacío: no se muestra contador."
+                value={weEventDate}
+                onChange={onChange(setWeEventDate)}
+              />
+              <DateField
+                id="we-registration-closes"
+                label="Cierre de inscripciones"
+                hint="Después de esta fecha el formulario se reemplaza por el aviso de cierre."
+                value={weRegistrationClosesAt}
+                onChange={onChange(setWeRegistrationClosesAt)}
+              />
+            </div>
+
             <div className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
                 Taller Cambio de Estatus (/taller-niw)

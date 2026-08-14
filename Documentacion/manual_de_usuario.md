@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-08-13 (rediseño visual Admin UI System 2026)
+> Última actualización: 2026-08-13 (landing `/webinar-estatus`)
 
 ---
 
@@ -24,6 +24,7 @@
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
    - 1.16 [Landing Taller Cambio de Estatus (`/taller-niw`)](#116-landing-taller-cambio-de-estatus-taller-niw)
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
+   - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -493,6 +494,39 @@ https://moremigracion.com/gracias
 ```
 
 3. Guardar y hacer una prueba de agendamiento para verificar que el usuario llega a `/gracias` y que el evento aparece en Meta Events Manager / GTM / GA4.
+
+### 1.18 Landing Webinar Estatus (`/webinar-estatus`)
+
+**Ruta:** `/webinar-estatus`
+
+Landing del webinar gratuito **"¿Cuál es tu estatus, de verdad?"** (Ivon More / Instituto More). Promesa: claridad sobre la propia historia migratoria (I-94, D/S, visa vs estatus), no un catálogo de visas. Incluye hero con countdown, beneficios, bloque de tensión, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo.
+
+| Dato | Valor |
+|------|-------|
+| Evento | Jueves **20 de junio de 2026**, **7:00 PM** (Colombia) — `we_event_date` |
+| Registro cierra | **21 de junio de 2026** — `we_registration_closes_at` |
+| Tag GHL | `Webinar-estatus-2026` |
+| Source Supabase | `webinar-estatus-2026` |
+| Event label | `Webinar Estatus de Verdad` |
+| WhatsApp | Temporalmente el mismo grupo del taller; actualizar URL en `WEWhatsappJoinCard` cuando exista grupo propio |
+
+**Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país (derivado de lada), profesión opcional.
+
+Tras registro exitoso: tarjeta de confirmación + CTA verde al grupo de WhatsApp (mismo patrón que `/taller-niw`).
+
+#### 1.18.1 Página post-registro Meta Lead Ads (`/webinar-estatus/registro`)
+
+**Ruta:** `/webinar-estatus/registro`
+
+Confirmación para leads de Meta Lead Ads (sin formulario propio). Disponibilidad: `useLandingStatus("/webinar-estatus")`.
+
+**URL sugerida para Meta:**
+
+```
+https://moremigracion.com/webinar-estatus/registro?utm_source=facebook&utm_medium=paid&utm_campaign=webinar-estatus
+```
+
+**Admin:** fechas en `/admin/settings` → Landings de campaña → Webinar Estatus.
 
 ---
 

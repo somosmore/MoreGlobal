@@ -140,6 +140,8 @@ export type SiteSettingsMap = {
   mc_registration_closes_at: string
   tn_event_date: string
   tn_registration_closes_at: string
+  we_event_date: string
+  we_registration_closes_at: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
