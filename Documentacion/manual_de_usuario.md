@@ -508,7 +508,7 @@ Landing del webinar gratuito **"¿Cuál es tu estatus, de verdad?"** (Ivon More 
 | Tag GHL | `Webinar-estatus-2026` |
 | Source Supabase | `webinar-estatus-2026` |
 | Event label | `Webinar Estatus de Verdad` |
-| WhatsApp | Temporalmente el mismo grupo del taller; actualizar URL en `WEWhatsappJoinCard` cuando exista grupo propio |
+| WhatsApp | [Grupo Webinar Estatus](https://chat.whatsapp.com/KRTgi8xpnSLB2qACmQqSPJ) |
 
 **Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país (derivado de lada), profesión opcional.
 

@@ -7,9 +7,8 @@ import {
 } from "@/components/sections/webinar-estatus/webinarEstatusCopy"
 import { CtaButton } from "@/components/brand/CtaButton"
 
-/** TODO: reemplazar por el grupo de WhatsApp exclusivo de este webinar. */
 export const WEBINAR_ESTATUS_WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/FHVIOP5xYnz5XklHqJeXCN"
+  "https://chat.whatsapp.com/KRTgi8xpnSLB2qACmQqSPJ"
 
 type WEWhatsappJoinCardProps = {
   variant?: WebinarEstatusFormVariant
