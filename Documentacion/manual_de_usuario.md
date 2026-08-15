@@ -503,8 +503,8 @@ Landing del webinar gratuito **"¿Cuál es tu estatus, de verdad?"** (Ivon More 
 
 | Dato | Valor |
 |------|-------|
-| Evento | Jueves **20 de junio de 2026**, **7:00 PM** (Colombia) — `we_event_date` |
-| Registro cierra | **21 de junio de 2026** — `we_registration_closes_at` |
+| Evento | Jueves **20 de agosto de 2026**, **7:00 PM** (Colombia) — `we_event_date` |
+| Registro cierra | **21 de agosto de 2026** — `we_registration_closes_at` |
 | Tag GHL | `Webinar-estatus-2026` |
 | Source Supabase | `webinar-estatus-2026` |
 | Event label | `Webinar Estatus de Verdad` |

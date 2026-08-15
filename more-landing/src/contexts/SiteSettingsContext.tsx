@@ -29,8 +29,8 @@ const DEFAULTS: SiteSettingsMap = {
   mc_registration_closes_at: "2026-05-27T23:59:59-05:00",
   tn_event_date: "2026-08-06T19:00:00-05:00",
   tn_registration_closes_at: "2026-08-07T23:59:59-05:00",
-  we_event_date: "2026-06-20T19:00:00-05:00",
-  we_registration_closes_at: "2026-06-21T23:59:59-05:00",
+  we_event_date: "2026-08-20T19:00:00-05:00",
+  we_registration_closes_at: "2026-08-21T23:59:59-05:00",
 }
 
 type SiteSettingsContextValue = {

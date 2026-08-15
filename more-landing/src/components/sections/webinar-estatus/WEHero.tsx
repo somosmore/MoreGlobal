@@ -7,7 +7,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const details = [
-  { icon: Calendar, text: "Jueves 20 de junio 2026" },
+  { icon: Calendar, text: "Jueves 20 de agosto 2026" },
   { icon: Clock, text: "7:00 PM (hora Colombia)" },
   { icon: MapPin, text: "En línea y en vivo" },
   { icon: Gift, text: "100% gratis" },
