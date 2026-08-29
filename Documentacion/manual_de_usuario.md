@@ -542,7 +542,7 @@ Landing de la **Masterclass 1: "El nuevo panorama migratorio de Estados Unidos"*
 | Tag GHL | `Webinar-Sep-26` |
 | Source Supabase | `webinar-sep-26` |
 | Event label | `Masterclass 1 — El nuevo panorama migratorio de EE.UU.` |
-| WhatsApp | Pendiente de configurar |
+| WhatsApp | [Grupo Masterclass 1](https://chat.whatsapp.com/BxyDE4gWioL3kcecf1zexi) |
 
 **Ruta de aprendizaje que se muestra en la página:**
 

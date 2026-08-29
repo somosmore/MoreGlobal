@@ -7,9 +7,8 @@ import {
 } from "@/components/sections/webinar-sep-26/webinarSep26Copy"
 import { CtaButton } from "@/components/brand/CtaButton"
 
-// TODO: reemplazar por el enlace definitivo del grupo de WhatsApp de la Masterclass 1.
 export const WEBINAR_SEP26_WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/PENDIENTE"
+  "https://chat.whatsapp.com/BxyDE4gWioL3kcecf1zexi"
 
 type WSWhatsappJoinCardProps = {
   variant?: WebinarSep26FormVariant
