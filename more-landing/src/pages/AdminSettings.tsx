@@ -171,6 +171,10 @@ export default function AdminSettings() {
               setWeEventDate={data.setWeEventDate}
               weRegistrationClosesAt={data.weRegistrationClosesAt}
               setWeRegistrationClosesAt={data.setWeRegistrationClosesAt}
+              wsEventDate={data.wsEventDate}
+              setWsEventDate={data.setWsEventDate}
+              wsRegistrationClosesAt={data.wsRegistrationClosesAt}
+              setWsRegistrationClosesAt={data.setWsRegistrationClosesAt}
               landingsSaveState={data.landingsSaveState}
               setLandingsSaveState={data.setLandingsSaveState}
               landingsSaveError={data.landingsSaveError}

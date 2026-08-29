@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-08-13 (landing `/webinar-estatus`)
+> Última actualización: 2026-08-29 (landing `/webinar-sep-26`)
 
 ---
 
@@ -25,6 +25,7 @@
    - 1.16 [Landing Taller Cambio de Estatus (`/taller-niw`)](#116-landing-taller-cambio-de-estatus-taller-niw)
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
    - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
+   - 1.19 [Landing Masterclass 1 Instituto More (`/webinar-sep-26`)](#119-landing-masterclass-1-instituto-more-webinar-sep-26)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -527,6 +528,49 @@ https://moremigracion.com/webinar-estatus/registro?utm_source=facebook&utm_mediu
 ```
 
 **Admin:** fechas en `/admin/settings` → Landings de campaña → Webinar Estatus.
+
+### 1.19 Landing Masterclass 1 Instituto More (`/webinar-sep-26`)
+
+**Ruta:** `/webinar-sep-26`
+
+Landing de la **Masterclass 1: "El nuevo panorama migratorio de Estados Unidos"**, primer capítulo del **Instituto More de Educación Migratoria**. Además de las secciones habituales (hero con countdown, beneficios, bloque de tensión, testimonios, formulario, FAQ, speaker, footer y CTA fijo), incorpora una sección de **ruta de aprendizaje** con las 7 masterclasses del Instituto: la 1 aparece con inscripción abierta y las restantes como "Próximamente".
+
+| Dato | Valor |
+|------|-------|
+| Evento | Jueves **3 de septiembre de 2026**, **7:00 PM** (Colombia) — `ws_event_date` |
+| Registro cierra | **4 de septiembre de 2026** — `ws_registration_closes_at` |
+| Tag GHL | `Webinar-Sep-26` |
+| Source Supabase | `webinar-sep-26` |
+| Event label | `Masterclass 1 — El nuevo panorama migratorio de EE.UU.` |
+| WhatsApp | Pendiente de configurar |
+
+**Ruta de aprendizaje que se muestra en la página:**
+
+1. El nuevo panorama migratorio de Estados Unidos (3 de septiembre — abierta)
+2. Cómo entender tu estatus migratorio
+3. El mapa de las visas estadounidenses
+4. Cómo construir un proyecto profesional internacional
+5. Inteligencia documental: los documentos que todo inmigrante debe conocer
+6. Cómo leer una política de USCIS sin ser abogado
+7. Tendencias migratorias y planificación estratégica
+
+**Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país (derivado de lada), profesión opcional. Los leads quedan en `masterclass_leads` con `source = webinar-sep-26`.
+
+Tras registro exitoso: tarjeta de confirmación + CTA verde al grupo de WhatsApp.
+
+#### 1.19.1 Página post-registro Meta Lead Ads (`/webinar-sep-26/registro`)
+
+**Ruta:** `/webinar-sep-26/registro`
+
+Confirmación para leads de Meta Lead Ads (sin formulario propio). Disponibilidad: `useLandingStatus("/webinar-sep-26")`.
+
+**URL sugerida para Meta:**
+
+```
+https://moremigracion.com/webinar-sep-26/registro?utm_source=facebook&utm_medium=paid&utm_campaign=webinar-sep-26
+```
+
+**Admin:** fechas en `/admin/settings` → Landings de campaña → Masterclass 1 Instituto More.
 
 ---
 

@@ -67,6 +67,8 @@ export function useSettingsData() {
   const [tnRegistrationClosesAt, setTnRegistrationClosesAt] = useState("")
   const [weEventDate, setWeEventDate] = useState("")
   const [weRegistrationClosesAt, setWeRegistrationClosesAt] = useState("")
+  const [wsEventDate, setWsEventDate] = useState("")
+  const [wsRegistrationClosesAt, setWsRegistrationClosesAt] = useState("")
   const [landingsSaveState, setLandingsSaveState] = useState<SaveState>("idle")
   const [landingsSaveError, setLandingsSaveError] = useState<string | null>(null)
 
@@ -101,6 +103,8 @@ export function useSettingsData() {
         setTnRegistrationClosesAt(toLocalInput(settings.tn_registration_closes_at))
         setWeEventDate(toLocalInput(settings.we_event_date))
         setWeRegistrationClosesAt(toLocalInput(settings.we_registration_closes_at))
+        setWsEventDate(toLocalInput(settings.ws_event_date))
+        setWsRegistrationClosesAt(toLocalInput(settings.ws_registration_closes_at))
         setMetaPixelId(settings.meta_pixel_id)
         setGtmId(settings.google_tag_manager_id)
         setGa4Id(settings.ga4_measurement_id)
@@ -222,6 +226,8 @@ export function useSettingsData() {
         { key: "tn_registration_closes_at", value: toIso(tnRegistrationClosesAt) },
         { key: "we_event_date", value: toIso(weEventDate) },
         { key: "we_registration_closes_at", value: toIso(weRegistrationClosesAt) },
+        { key: "ws_event_date", value: toIso(wsEventDate) },
+        { key: "ws_registration_closes_at", value: toIso(wsRegistrationClosesAt) },
       ],
       { onConflict: "key" }
     )
@@ -390,6 +396,8 @@ export function useSettingsData() {
     tnRegistrationClosesAt, setTnRegistrationClosesAt,
     weEventDate, setWeEventDate,
     weRegistrationClosesAt, setWeRegistrationClosesAt,
+    wsEventDate, setWsEventDate,
+    wsRegistrationClosesAt, setWsRegistrationClosesAt,
     landingsSaveState, setLandingsSaveState,
     landingsSaveError,
     handleSaveLandings,
