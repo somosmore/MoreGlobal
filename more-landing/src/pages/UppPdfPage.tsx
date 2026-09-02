@@ -211,7 +211,7 @@ export default function UppPdfPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                   <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 20, fontWeight: 700, textDecoration: "line-through" }}>$9,100</span>
-                  <span style={{ color: "white", fontSize: 36, fontWeight: 900 }}>$2,500</span>
+                  <span style={{ color: "white", fontSize: 36, fontWeight: 900 }}>$3,500</span>
                   <span style={{ color: "#fca76a", fontSize: 18, fontWeight: 700 }}>USD</span>
                   <span style={{ background: "#F37021", color: "white", fontSize: 13, fontWeight: 800, padding: "4px 10px", borderRadius: 20 }}>
                     AHORRÁS $6,600+
@@ -407,7 +407,7 @@ export default function UppPdfPage() {
                 <div style={{ color: "rgba(255,255,255,0.55)", fontSize: 15, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>
                   Pago único
                 </div>
-                <div style={{ color: "white", fontSize: 40, fontWeight: 900, lineHeight: 1 }}>$2,500</div>
+                <div style={{ color: "white", fontSize: 40, fontWeight: 900, lineHeight: 1 }}>$3,500</div>
                 <div style={{ color: "#fca76a", fontSize: 18, fontWeight: 600, marginTop: 4 }}>USD · Un solo pago</div>
                 <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 16, marginTop: 4, textDecoration: "line-through" }}>Valor total $10,600</div>
                 <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 6 }}>
@@ -425,7 +425,7 @@ export default function UppPdfPage() {
                   Pago en 2 cuotas
                 </div>
                 <div style={{ color: "white", fontSize: 30, fontWeight: 900, lineHeight: 1 }}>2 × $1,250</div>
-                <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 18, fontWeight: 600, marginTop: 4 }}>USD · Total $2,500</div>
+                <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 18, fontWeight: 600, marginTop: 4 }}>USD · Total $3,500</div>
                 <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 15, marginTop: 4 }}>Sin intereses</div>
                 <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 6 }}>
                   {["Programa completo", "🔍 Bono 1 incluido"].map((i) => (

@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-08-29 (landing `/webinar-sep-26`)
+> Última actualización: 2026-09-02 (precios UPE $3,500 · Plan Turbo $10,000)
 
 ---
 
@@ -197,7 +197,7 @@ La pantalla de resultado muestra:
 Esta sección es un **tripwire offer** que llena el eslabón faltante de la Value Ladder:
 
 ```
-Quiz (gratis) → Asesoría VIP ($97) → UPP ($2,500) → Plan Plus ($8,000)
+Quiz (gratis) → Asesoría VIP ($97) → UPE ($3,500) → Plan Turbo / UPP ($10,000)
 ```
 
 Su objetivo es monetizar el interés de los visitantes que no están listos para comprometerse con los planes principales, y filtrar leads calificados mediante un primer pago simbólico.
@@ -255,7 +255,7 @@ Secciones principales:
 
 ### 1.8 Sección: Precios
 
-- Presenta los dos planes disponibles: **Unsung Professional Program (UPP)** y **Plan Plus**.
+- Presenta los dos planes disponibles: **Unsung Professional Expansion (UPE)** y **Plan Turbo / UPP**.
 - Encabezado seguido de una línea de "costo de no actuar" en itálica que recuerda al usuario el costo de la inacción.
 - Cada plan incluye un **badge de risk reversal** (icono de escudo verde) con el mensaje: *"Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."*
 - CTAs en primera persona: "Sí, quiero comenzar mi programa" y "Sí, quiero obtener mi Expediente".
@@ -358,7 +358,7 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 **Ruta:** `/upp`
 
-Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
+Landing dedicada al **Unsung Professional Expansion (UPE)**, también referido como UPP. Precio actual: **$3,500 USD** (`upp_price`). El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
 
 El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`. El microcopy de inversión, cupos limitados, garantía del CTA y bloque intermedio de conversión se traduce desde `locales/{es,en}/uppPage.json`.
 
@@ -377,7 +377,7 @@ Cierra con el valor del stack (~~$1.500 USD~~ → **GRATIS**) condicionado al pa
 
 | Modalidad | Precio | Bonos incluidos | CTA |
 |---|---|---|---|
-| **Pago único** (recomendada) | `upp_price` (ej. $2.500 USD) | Programa completo + los 4 bonos del stack | Botón de pago → `upp_payment_link` |
+| **Pago único** (recomendada) | `upp_price` (ej. $3,500 USD) | Programa completo + los 4 bonos del stack | Botón de pago → `upp_payment_link` |
 | **Pago en 2 cuotas** | 2 × $1.250 USD (sin intereses) | Programa completo + Bono 1 (Revisión Estratégica) | Botón → WhatsApp del asesor |
 
 Incluye una cita de cierre de Ivon More. Los textos son editables desde `locales/{es,en}/uppPage.json` bajo las claves `bonusStack` y `plans`.
@@ -990,8 +990,9 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 | `tracking_enabled` | `true` / `false`: activa o pausa scripts y eventos de medición |
 | `wppequipo_enabled` | `true` / `false`: activa la página `/wppequipo` con reparto aleatorio entre números del equipo |
 | `upp_payment_link` | URL de pago del programa UPP |
-| `upp_price` | Precio mostrado en landing UPP |
+| `upp_price` | Precio mostrado en landing UPP / UPE (ej. `$3,500`) |
 | `upp_countdown_date` | Fecha de cierre del countdown UPP (opcional) |
+| `turbo_price` | Precio mostrado en landing Plan Turbo / UPP (ej. `$10,000`) |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
 

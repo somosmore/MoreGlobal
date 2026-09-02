@@ -16,7 +16,7 @@ function calcSavings(price: string): string {
 
 export function UppValueStackSection({ price, loading }: UppValueStackSectionProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
   const items = t("uppPage.valueStack.items", { returnObjects: true }) as Array<{
     label: string
     value: string

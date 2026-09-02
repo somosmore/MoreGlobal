@@ -560,7 +560,7 @@ export default function AdminProjectWizard() {
                 >
                   <textarea
                     rows={5}
-                    placeholder="Ej:&#10;1. Unsung Professional Program ($2,500): Programa de 9 módulos + 4 sesiones coaching + comunidad privada.&#10;2. Plan Plus ($8,000): Acompañamiento premium completo, redactamos y diligenciamos todo tu expediente."
+                    placeholder="Ej:&#10;1. Unsung Professional Expansion — UPE ($3,500): Programa de 9 módulos + 4 sesiones coaching + comunidad privada.&#10;2. Plan Turbo / UPP ($10,000): Acompañamiento premium completo, redactamos y diligenciamos todo tu expediente."
                     value={p4.services ?? ""}
                     onChange={(e) => updateAnswers("part4", "services", e.target.value)}
                     className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange/30 focus:border-orange resize-none placeholder:text-gray-400"

@@ -18,10 +18,10 @@ const DEFAULTS: SiteSettingsMap = {
   ga4_measurement_id: "",
   tracking_enabled: "true",
   upp_payment_link: "",
-  upp_price: "$2,500",
+  upp_price: "$3,500",
   upp_countdown_date: "",
   turbo_payment_link: "",
-  turbo_price: "$8,000",
+  turbo_price: "$10,000",
   turbo_countdown_date: "",
   wppequipo_enabled: "true",
   // Fechas de las landings de campaña (se editan en Admin → Settings).

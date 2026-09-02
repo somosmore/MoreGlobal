@@ -126,7 +126,7 @@ export default function UppSection({
                     setUppPrice(e.target.value)
                     setUppSaveState("idle")
                   }}
-                  placeholder="$2,500 USD"
+                  placeholder="$3,500 USD"
                   className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm transition-colors outline-none focus:border-orange focus:bg-white"
                 />
               </div>
