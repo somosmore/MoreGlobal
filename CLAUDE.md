@@ -89,6 +89,16 @@ more-landing/
 
 ---
 
+## Landings de webinar / campaña
+
+Para **crear un webinar nuevo** (landing + formulario + migración SQL), seguir el playbook:
+
+→ **`Documentacion/webinar-playbook.md`**
+
+Plantilla de código: `more-landing/src/components/sections/webinar-sep-26/`
+
+---
+
 ## Modo de trabajo autónomo
 
 ### Flujo por task
