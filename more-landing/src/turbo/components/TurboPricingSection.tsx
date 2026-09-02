@@ -18,7 +18,7 @@ export function TurboPricingSection({
   loading,
 }: TurboPricingSectionProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$8,000"
+  const effectivePrice = price || "$10,000"
   const notIncluded = t("turboPage.pricing.notIncluded", { returnObjects: true }) as {
     title: string
     items: string[]

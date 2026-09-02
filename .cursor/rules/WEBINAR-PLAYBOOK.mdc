@@ -1,0 +1,17 @@
+---
+description: Al crear un webinar, masterclass o taller landing nuevo, leer y seguir Documentacion/webinar-playbook.md
+alwaysApply: false
+---
+
+# Webinar / landing de campaña
+
+Cuando el usuario pida **crear un webinar**, **masterclass**, **taller** o **landing de evento en vivo**:
+
+1. Leer **`Documentacion/webinar-playbook.md`** completo antes de escribir código.
+2. Clonar el patrón de **`more-landing/src/components/sections/webinar-sep-26/`** (referencia más reciente).
+3. Confirmar inputs: ruta, fecha/hora Colombia, título, copy, tag GHL, link WhatsApp (puede quedar pendiente).
+4. Seguir el checklist del playbook: componentes → páginas → `App.tsx` → `tracking.ts` → settings → migración SQL → manual de usuario → build.
+5. Crear migración en `more-landing/supabase/migrations/NNN_*.sql` (nunca SQL suelto para el usuario).
+6. Tres identificadores por evento en el form: `source`, `event_label`, `ghl_tag`.
+7. Dos rutas: `/webinar-xxx` y `/webinar-xxx/registro`.
+8. Éxito del form = tarjeta WhatsApp in-place, no redirect a `/gracias`.

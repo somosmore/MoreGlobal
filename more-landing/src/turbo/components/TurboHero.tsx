@@ -21,7 +21,7 @@ export function TurboHero({
   loading,
 }: TurboHeroProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$8,000"
+  const effectivePrice = price || "$10,000"
   const stats = t("turboPage.hero.stats", { returnObjects: true }) as Array<{
     value: string
     label: string

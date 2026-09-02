@@ -21,7 +21,7 @@ export function UppHero({
   loading,
 }: UppHeroProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
   const stats = t("uppPage.hero.stats", { returnObjects: true }) as Array<{
     value: string
     label: string

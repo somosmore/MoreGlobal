@@ -19,8 +19,6 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// ─── Nav config ───────────────────────────────────────────────────────────────
-
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/leads", icon: Users, label: "Leads" },
@@ -44,8 +42,6 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   resources: "Recursos",
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
 const getInitials = (email: string) => {
   const parts = email.split("@")[0].split(/[._-]/)
   return parts
@@ -58,14 +54,15 @@ const getDisplayName = (email: string) => {
   return email.split("@")[0].replace(/[._-]/g, " ")
 }
 
-// ─── Breadcrumbs ──────────────────────────────────────────────────────────────
-
 function Breadcrumbs() {
   const location = useLocation()
   const segments = location.pathname.split("/").filter(Boolean)
 
   return (
-    <nav aria-label="breadcrumb" className="flex items-center gap-1.5 text-sm">
+    <nav
+      aria-label="breadcrumb"
+      className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.08em]"
+    >
       {segments.map((seg, i) => {
         const href = "/" + segments.slice(0, i + 1).join("/")
         const label = BREADCRUMB_LABELS[seg] ?? seg
@@ -74,14 +71,14 @@ function Breadcrumbs() {
         return (
           <span key={href} className="flex items-center gap-1.5">
             {i > 0 && (
-              <ChevronRight className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+              <ChevronRight className="w-3 h-3 text-admin-faint shrink-0" />
             )}
             {isLast ? (
-              <span className="font-semibold text-navy">{label}</span>
+              <span className="font-semibold text-admin-text">{label}</span>
             ) : (
               <Link
                 to={href}
-                className="text-gray-400 hover:text-navy transition-colors"
+                className="text-admin-faint hover:text-admin-text transition-colors"
               >
                 {label}
               </Link>
@@ -92,8 +89,6 @@ function Breadcrumbs() {
     </nav>
   )
 }
-
-// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function AdminLayout() {
   const { user, signOut, role } = useAuth()
@@ -128,34 +123,37 @@ export default function AdminLayout() {
   const initials = getInitials(email)
   const displayName = getDisplayName(email)
 
-  // ── Sidebar content (shared between desktop and mobile) ─────────────────────
-
   const renderSidebarContent = ({ isMobile = false }: { isMobile?: boolean } = {}) => (
     <div className="flex flex-col h-full">
-      {/* Logo */}
       <div
         className={cn(
-          "flex items-center h-16 px-4 border-b border-white/10 shrink-0",
-          collapsed && !isMobile ? "justify-center" : "gap-3"
+          "flex items-center border-b border-admin-border shrink-0",
+          collapsed && !isMobile
+            ? "justify-center px-2 py-4"
+            : "gap-3 px-3.5 py-4"
         )}
       >
         <img
-          src="/logo_more_light.png"
+          src="/icon.png"
           alt="MORE"
           className={cn(
-            "object-contain transition-all duration-200",
-            collapsed && !isMobile ? "h-10 w-10" : "h-16 w-auto max-w-[200px]"
+            "object-contain shrink-0 rounded-admin-sm border border-admin-border-strong",
+            collapsed && !isMobile ? "h-10 w-10" : "h-12 w-12"
           )}
         />
         {(!collapsed || isMobile) && (
-          <span className="text-xs font-semibold text-white/50 uppercase tracking-widest whitespace-nowrap">
-            Admin
-          </span>
+          <div className="min-w-0">
+            <p className="text-xs font-bold text-white tracking-[0.12em] uppercase leading-none">
+              MORE
+            </p>
+            <p className="text-[9px] font-medium text-admin-faint tracking-[0.14em] uppercase mt-1.5">
+              Admin // OS
+            </p>
+          </div>
         )}
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 py-4 px-2 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
         {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
           const isActive =
             href === "/admin/dashboard"
@@ -170,45 +168,41 @@ export default function AdminLayout() {
               aria-label={label}
               title={collapsed && !isMobile ? label : undefined}
               className={cn(
-                "flex items-center rounded-xl transition-all duration-150 group",
+                "flex items-center transition-all duration-150 border border-transparent",
+                "rounded-admin-sm",
                 collapsed && !isMobile
                   ? "justify-center p-3"
                   : "gap-3 px-3 py-2.5",
                 isActive
-                  ? "bg-orange text-white shadow-md shadow-orange/30"
-                  : "text-white/60 hover:bg-white/10 hover:text-white"
+                  ? "bg-admin-subtle text-white border-admin-border shadow-[inset_2px_0_0_0_var(--color-orange)]"
+                  : "text-admin-secondary hover:bg-admin-sidebar hover:text-white"
               )}
             >
               <Icon
                 className={cn(
-                  "shrink-0 transition-transform",
-                  collapsed && !isMobile ? "w-5 h-5" : "w-4.5 h-4.5",
-                  isActive && "drop-shadow-sm"
+                  "shrink-0",
+                  collapsed && !isMobile ? "w-5 h-5" : "w-4 h-4",
+                  isActive && "text-orange"
                 )}
               />
               {(!collapsed || isMobile) && (
-                <span className="text-sm font-medium truncate">{label}</span>
-              )}
-              {(!collapsed || isMobile) && isActive && (
-                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-white/70" />
+                <span className="text-[13px] font-medium truncate">{label}</span>
               )}
             </Link>
           )
         })}
       </nav>
 
-      {/* User + Logout footer */}
-      <div className="shrink-0 border-t border-white/10 p-3 space-y-1">
-        {/* User info */}
+      <div className="shrink-0 border-t border-admin-border p-3 space-y-1">
         <div
           className={cn(
-            "flex items-center rounded-xl p-2",
+            "flex items-center rounded-admin-sm p-2",
             collapsed && !isMobile ? "justify-center" : "gap-3"
           )}
           title={collapsed && !isMobile ? email : undefined}
         >
-          <div className="w-8 h-8 rounded-lg bg-orange/20 border border-orange/30 flex items-center justify-center shrink-0">
-            <span className="text-xs font-bold text-orange">{initials}</span>
+          <div className="w-8 h-8 rounded-admin-sm bg-admin-accent-soft border border-admin-border flex items-center justify-center shrink-0">
+            <span className="text-[10px] font-bold text-orange">{initials}</span>
           </div>
           {(!collapsed || isMobile) && (
             <div className="min-w-0">
@@ -217,20 +211,24 @@ export default function AdminLayout() {
                   {displayName}
                 </p>
                 {role === "root" && (
-                  <ShieldCheck className="w-3 h-3 text-orange shrink-0" aria-label="Administrador root" />
+                  <ShieldCheck
+                    className="w-3 h-3 text-orange shrink-0"
+                    aria-label="Administrador root"
+                  />
                 )}
               </div>
-              <p className="text-[10px] text-white/40 truncate">{email}</p>
+              <p className="text-[10px] text-admin-faint truncate tracking-wide uppercase">
+                {role === "root" ? "ROOT" : "ADMIN"}
+              </p>
             </div>
           )}
         </div>
 
-        {/* Logout */}
         <button
           onClick={handleSignOut}
           title={collapsed && !isMobile ? "Cerrar sesión" : undefined}
           className={cn(
-            "w-full flex items-center rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-all duration-150",
+            "w-full flex items-center rounded-admin-sm text-admin-faint hover:text-white hover:bg-admin-subtle transition-all duration-150",
             collapsed && !isMobile
               ? "justify-center p-3"
               : "gap-3 px-3 py-2.5"
@@ -246,21 +244,19 @@ export default function AdminLayout() {
   )
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
-      {/* ── Desktop Sidebar ── */}
+    <div className="admin-shell flex h-screen bg-admin overflow-hidden">
       <aside
         className={cn(
-          "hidden lg:flex flex-col bg-navy fixed left-0 top-0 h-full z-30 transition-all duration-300 ease-in-out",
+          "hidden lg:flex flex-col bg-admin-sidebar fixed left-0 top-0 h-full z-30 transition-all duration-300 ease-in-out border-r border-admin-border",
           collapsed ? "w-[72px]" : "w-60"
         )}
       >
         {renderSidebarContent()}
 
-        {/* Collapse toggle */}
         <button
           onClick={handleCollapse}
           aria-label={collapsed ? "Expandir sidebar" : "Colapsar sidebar"}
-          className="absolute -right-3 top-20 w-6 h-6 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-500 hover:text-navy hover:border-navy transition-all z-10"
+          className="absolute -right-3 top-20 w-6 h-6 rounded-admin-sm bg-admin-elevated border border-admin-border-strong flex items-center justify-center text-admin-faint hover:text-orange hover:border-orange transition-all z-10"
         >
           {collapsed ? (
             <ChevronRight className="w-3 h-3" />
@@ -270,22 +266,21 @@ export default function AdminLayout() {
         </button>
       </aside>
 
-      {/* ── Mobile Sidebar Overlay ── */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
       <aside
         className={cn(
-          "fixed left-0 top-0 h-full w-72 bg-navy z-50 flex flex-col lg:hidden transition-transform duration-300 ease-in-out",
+          "fixed left-0 top-0 h-full w-72 bg-admin-sidebar z-50 flex flex-col lg:hidden transition-transform duration-300 ease-in-out border-r border-admin-border",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <button
           onClick={() => setMobileOpen(false)}
-          className="absolute top-4 right-4 p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+          className="absolute top-4 right-4 p-1.5 text-admin-faint hover:text-white hover:bg-admin-subtle rounded-admin-sm transition-colors"
           aria-label="Cerrar menú"
         >
           <X className="w-5 h-5" />
@@ -293,50 +288,51 @@ export default function AdminLayout() {
         {renderSidebarContent({ isMobile: true })}
       </aside>
 
-      {/* ── Main content area ── */}
       <div
         className={cn(
-          "flex flex-col flex-1 min-w-0 transition-all duration-300 ease-in-out",
+          "flex flex-col flex-1 min-w-0 transition-all duration-300 ease-in-out bg-admin-app",
           "lg:ml-60",
           collapsed && "lg:ml-[72px]"
         )}
       >
-        {/* Topbar */}
-        <header className="sticky top-0 z-20 h-16 bg-white border-b border-gray-200 flex items-center px-4 sm:px-6 gap-4 shrink-0">
-          {/* Mobile hamburger */}
+        <header className="sticky top-0 z-20 h-16 bg-admin-app/95 backdrop-blur-md border-b border-admin-border flex items-center px-4 sm:px-6 gap-3 shrink-0">
           <button
             onClick={() => setMobileOpen(true)}
-            className="lg:hidden p-2 text-gray-500 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 text-admin-faint hover:text-admin-text hover:bg-admin-subtle rounded-admin-sm transition-colors"
             aria-label="Abrir menú"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          {/* Breadcrumbs */}
+          <img
+            src="/icon.png"
+            alt=""
+            className="hidden sm:block h-8 w-8 rounded-admin-sm border border-admin-border opacity-90"
+          />
+
           <div className="flex-1 min-w-0">
             <Breadcrumbs />
           </div>
 
-          {/* Right actions */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* Notification bell (decorative for now) */}
             <button
-              className="relative p-2 text-gray-400 hover:text-navy hover:bg-gray-100 rounded-lg transition-colors"
+              className="relative p-2 text-admin-faint hover:text-admin-text hover:bg-admin-subtle rounded-admin-sm transition-colors"
               aria-label="Notificaciones"
             >
-              <Bell className="w-4.5 h-4.5" />
+              <Bell className="w-4 h-4" />
             </button>
 
-            {/* User avatar chip */}
-            <div className="hidden sm:flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-xl bg-gray-50 border border-gray-200">
-              <div className="w-7 h-7 rounded-lg bg-navy flex items-center justify-center">
-                <span className="text-xs font-bold text-white">{initials}</span>
+            <div className="hidden sm:flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-admin bg-admin-elevated border border-admin-border">
+              <div className="w-7 h-7 rounded-admin-sm bg-admin-subtle border border-admin-border flex items-center justify-center">
+                <span className="text-[10px] font-bold text-admin-text">
+                  {initials}
+                </span>
               </div>
               <div className="leading-tight">
-                <p className="text-xs font-semibold text-navy capitalize leading-none">
+                <p className="text-xs font-semibold text-admin-text capitalize leading-none">
                   {displayName}
                 </p>
-                <p className="text-[10px] text-gray-400 leading-none mt-0.5 max-w-[120px] truncate">
+                <p className="text-[10px] text-admin-faint leading-none mt-0.5 max-w-[120px] truncate">
                   {email}
                 </p>
               </div>
@@ -344,8 +340,7 @@ export default function AdminLayout() {
           </div>
         </header>
 
-        {/* Page content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-admin-app">
           <Outlet />
         </main>
       </div>

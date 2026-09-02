@@ -37,7 +37,7 @@ export default function ResourcePreviewModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-black/60 backdrop-blur-sm"
+      className="admin-portal fixed inset-0 z-50 flex flex-col bg-black/60 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       {/* Header bar */}

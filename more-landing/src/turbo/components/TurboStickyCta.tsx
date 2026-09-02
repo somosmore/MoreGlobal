@@ -15,7 +15,7 @@ export function TurboStickyCta({ paymentLink, price, loading }: TurboStickyCtaPr
   const { t } = useTranslation()
   const whatsappUrl = useWhatsappUrl()
   const [visible, setVisible] = useState(false)
-  const effectivePrice = price || "$8,000"
+  const effectivePrice = price || "$10,000"
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600)

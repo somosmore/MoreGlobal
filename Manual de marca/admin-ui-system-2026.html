@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MORE Admin UI System — 2026</title>
+<link rel="icon" type="image/png" href="../more-landing/public/icon.png" />
+<link rel="apple-touch-icon" href="../more-landing/public/icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Superficies — tech / operativo */
+    --bg: #0E1218;
+    --bg-app: #12171F;
+    --bg-elevated: #171D27;
+    --bg-subtle: #1C2430;
+    --bg-muted: #242D3B;
+    --bg-sidebar: #0B0F14;
+    --bg-sidebar-hover: #151B24;
+    --bg-sidebar-active: #1A2330;
+
+    --text: #E8ECF1;
+    --text-secondary: #9AA5B5;
+    --text-muted: #6B7687;
+    --text-inverse: #0E1218;
+    --text-sidebar: #8A96A8;
+    --text-sidebar-active: #F2F5F8;
+
+    --brand: #3D5570;
+    --brand-soft: rgba(90, 120, 150, 0.18);
+    --accent: #F37021;
+    --accent-hover: #FF8538;
+    --accent-soft: rgba(243, 112, 33, 0.14);
+    --accent-ring: rgba(243, 112, 33, 0.35);
+    --accent-line: rgba(243, 112, 33, 0.55);
+
+    --info: #4C9AFF;
+    --info-soft: rgba(76, 154, 255, 0.12);
+    --success: #2DD4A0;
+    --success-soft: rgba(45, 212, 160, 0.12);
+    --warning: #F5B942;
+    --warning-soft: rgba(245, 185, 66, 0.12);
+    --danger: #F07178;
+    --danger-soft: rgba(240, 113, 120, 0.12);
+    --neutral: #8B95A5;
+    --neutral-soft: rgba(139, 149, 165, 0.12);
+
+    --border: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --grid-line: rgba(255, 255, 255, 0.035);
+    --shadow-sm: none;
+    --shadow-md: 0 0 0 1px var(--border);
+
+    /* Angular con redondeo mínimo */
+    --radius: 6px;
+    --radius-lg: 8px;
+    --radius-sm: 4px;
+    --radius-pill: 6px;
+
+    --sidebar-w: 228px;
+    --topbar-h: 64px;
+    --font: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ═══════════ DOCUMENT SHELL ═══════════ */
+  .doc-nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; gap: 4px;
+    padding: 12px 24px;
+    background: rgba(11, 15, 20, 0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .doc-nav .brand-lockup {
+    display: flex; align-items: center; gap: 10px;
+    margin-right: 18px; white-space: nowrap; text-decoration: none;
+  }
+  .doc-nav .brand-lockup img.favicon {
+    width: 56px; height: 56px; display: block;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+  }
+  .doc-nav .brand-lockup .word {
+    font-weight: 700; color: #fff; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .doc-nav .brand-lockup .word span {
+    color: var(--accent); font-weight: 500; letter-spacing: 0.04em;
+    text-transform: none; font-size: 11px; margin-left: 6px;
+  }
+  .doc-nav a {
+    color: var(--text-muted); text-decoration: none; font-size: 11px; font-weight: 600;
+    padding: 7px 12px; border-radius: var(--radius-sm); white-space: nowrap;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color .15s, background .15s, border-color .15s;
+    border: 1px solid transparent;
+  }
+  .doc-nav a:hover, .doc-nav a.active {
+    color: #fff; background: var(--bg-subtle); border-color: var(--border);
+  }
+
+  .doc-hero {
+    max-width: 1120px; margin: 0 auto; padding: 48px 24px 36px;
+    position: relative;
+  }
+  .doc-hero::before {
+    content: "";
+    position: absolute; left: 24px; top: 48px; bottom: 36px;
+    width: 2px; background: linear-gradient(var(--accent), transparent);
+  }
+  .doc-hero .eyebrow {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px; padding-left: 18px;
+  }
+  .doc-hero h1 {
+    font-size: clamp(26px, 3.6vw, 38px); font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 14px;
+    padding-left: 18px; max-width: 720px;
+  }
+  .doc-hero h1 em { font-style: normal; color: var(--accent); }
+  .doc-hero p {
+    max-width: 600px; color: var(--text-secondary); font-size: 14px;
+    line-height: 1.65; padding-left: 18px;
+  }
+
+  .section {
+    max-width: 1120px; margin: 0 auto; padding: 28px 24px 44px;
+  }
+  .section-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .section h2 {
+    color: #fff; font-size: 20px; font-weight: 650; margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .section > .lead {
+    color: var(--text-muted); font-size: 13.5px; max-width: 640px; margin-bottom: 24px;
+  }
+
+  .card-dark {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+  }
+
+  /* Logos showcase */
+  .logo-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  @media (max-width: 720px) { .logo-grid { grid-template-columns: 1fr; } }
+  .logo-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+  .logo-card .stage {
+    height: 220px; display: grid; place-items: center; padding: 28px;
+  }
+  .logo-card .stage.light { background: #F6F7F9; }
+  .logo-card .stage.dark { background: #1B2B44; }
+  .logo-card .stage.icon-stage {
+    background: #2A3A4A;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .logo-card .stage img.wordmark { height: 88px; width: auto; display: block; }
+  .logo-card .stage img.favicon-lg {
+    width: 144px; height: 144px; display: block;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+  }
+  .logo-card .meta {
+    padding: 12px 14px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  }
+  .logo-card .meta strong {
+    font-size: 12px; font-weight: 650; color: #fff;
+  }
+  .logo-card .meta code {
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+  }
+
+  .token-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 10px;
+  }
+  .swatch {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .swatch .chip { height: 48px; }
+  .swatch .meta { padding: 9px 10px; background: var(--bg-elevated); }
+  .swatch .meta strong { display: block; color: #fff; font-size: 11px; font-weight: 600; }
+  .swatch .meta code { color: var(--text-muted); font-family: var(--mono); font-size: 10px; }
+
+  .principle-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+  }
+  .principle {
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px;
+    position: relative;
+  }
+  .principle::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--accent-line), transparent);
+    opacity: 0.5;
+  }
+  .principle.dont::before { background: linear-gradient(90deg, #F07178, transparent); }
+  .principle h3 { color: #fff; font-size: 13px; font-weight: 650; margin-bottom: 5px; }
+  .principle p { color: var(--text-muted); font-size: 12.5px; }
+  .principle .tag {
+    display: inline-block; font-family: var(--mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .principle.dont .tag { color: #F07178; }
+
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  @media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
+  .compare .col {
+    border-radius: var(--radius-lg); padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .compare .col.marketing { background: #FDF8F4; color: #1B2B44; }
+  .compare .col.admin { background: var(--bg-elevated); color: var(--text); }
+  .compare .col h3 {
+    font-size: 11px; font-weight: 700; margin-bottom: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .compare .col.marketing h3 { color: #F37021; font-family: Georgia, serif; letter-spacing: 0; text-transform: none; font-size: 14px; }
+  .compare .col.admin h3 { color: var(--accent); font-family: var(--mono); }
+  .compare ul { list-style: none; font-size: 12.5px; }
+  .compare li { padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .compare .col.admin li { border-color: var(--border); color: var(--text-secondary); }
+  .compare li:last-child { border: none; }
+
+  /* ═══════════ MOCK APP ═══════════ */
+  .mock-frame {
+    background: var(--bg-app);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+    min-height: 660px;
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    position: relative;
+  }
+  .mock-frame::after {
+    content: "";
+    pointer-events: none;
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(243,112,33,0.03), transparent 18%);
+  }
+  @media (max-width: 860px) {
+    .mock-frame { grid-template-columns: 56px 1fr; }
+    .sidebar .label, .sidebar .brand-text, .sidebar .user-meta { display: none; }
+  }
+
+  .sidebar {
+    background: var(--bg-sidebar);
+    color: var(--text-sidebar);
+    display: flex; flex-direction: column;
+    padding: 0;
+    border-right: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+  .sidebar .brand {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar .brand img.favicon {
+    width: 56px; height: 56px; display: block; flex-shrink: 0;
+    border-radius: var(--radius-sm);
+  }
+  .sidebar .brand-text {
+    color: #fff; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .sidebar .brand-text small {
+    display: block; font-weight: 500; font-size: 9px;
+    color: var(--text-muted); letter-spacing: 0.14em; margin-top: 2px;
+  }
+
+  .nav-group { padding: 14px 8px 4px; }
+  .nav-group .group-label {
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #4A5565;
+    padding: 0 10px 8px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: var(--radius-sm);
+    color: var(--text-sidebar); cursor: pointer;
+    font-size: 12.5px; font-weight: 500;
+    transition: background .12s, color .12s, border-color .12s;
+    border: 1px solid transparent; background: transparent; width: 100%; text-align: left;
+    font-family: inherit; margin-bottom: 2px;
+  }
+  .nav-item:hover { background: var(--bg-sidebar-hover); color: #fff; }
+  .nav-item.active {
+    background: var(--bg-sidebar-active); color: var(--text-sidebar-active);
+    border-color: var(--border);
+    box-shadow: inset 2px 0 0 var(--accent);
+  }
+  .nav-item.active .ico { color: var(--accent); }
+  .nav-item .ico {
+    width: 16px; height: 16px; flex-shrink: 0;
+    display: grid; place-items: center; opacity: 0.9;
+  }
+  .nav-item .badge {
+    margin-left: auto; background: var(--accent); color: #fff;
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+    padding: 2px 5px; border-radius: var(--radius-sm);
+  }
+
+  .sidebar .user {
+    margin-top: auto; padding: 12px 12px 14px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .avatar {
+    width: 28px; height: 28px; border-radius: var(--radius-sm);
+    background: var(--brand-soft); color: #C5D2E0;
+    display: grid; place-items: center; font-weight: 700; font-size: 10px;
+    border: 1px solid var(--border);
+  }
+  .user-meta strong { display: block; color: #fff; font-size: 12px; }
+  .user-meta span { font-size: 10px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+
+  .main { display: flex; flex-direction: column; min-width: 0; background: var(--bg-app); position: relative; z-index: 1; }
+  .topbar {
+    height: var(--topbar-h); flex-shrink: 0;
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 18px;
+    background: rgba(18, 23, 31, 0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+  .topbar .mark {
+    width: 36px; height: 36px; display: block; opacity: 0.9;
+    border-radius: var(--radius-sm);
+  }
+  .topbar h1 {
+    font-size: 13px; font-weight: 650; color: var(--text);
+    letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .topbar .crumb {
+    color: var(--text-muted); font-size: 11px; font-family: var(--mono);
+    letter-spacing: 0.06em;
+  }
+  .topbar .spacer { flex: 1; }
+  .search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg-subtle); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px 10px;
+    width: 220px; color: var(--text-muted); font-size: 12px;
+  }
+  .search kbd {
+    margin-left: auto; font-family: var(--mono); font-size: 9px;
+    background: var(--bg-muted); padding: 2px 5px; border-radius: var(--radius-sm);
+    color: var(--text-secondary); border: 1px solid var(--border);
+  }
+
+  .content { padding: 16px 18px 22px; flex: 1; overflow: auto; }
+
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn .18s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 32px; padding: 0 12px; border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    border: 1px solid transparent; cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background .12s, border-color .12s, color .12s, box-shadow .12s;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 0 0 1px rgba(243,112,33,0.3);
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    background: var(--bg-subtle); color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .btn-secondary:hover { background: var(--bg-muted); }
+  .btn-ghost { background: transparent; color: var(--text-secondary); }
+  .btn-ghost:hover { background: var(--bg-subtle); color: var(--text); }
+  .btn-sm { height: 26px; padding: 0 9px; font-size: 11px; }
+
+  .panel {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .panel-hd {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+  }
+  .panel-hd h3 {
+    font-size: 11px; font-weight: 650; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-secondary);
+  }
+  .panel-bd { padding: 14px; }
+
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 12px;
+  }
+  @media (max-width: 1100px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .kpi {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 13px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::after {
+    content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
+    background: var(--accent); opacity: 0.35;
+  }
+  .kpi .label {
+    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .kpi .value {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.03em;
+    color: #fff; font-variant-numeric: tabular-nums;
+  }
+  .kpi .delta { font-size: 10px; font-weight: 550; margin-top: 4px; font-family: var(--mono); }
+  .kpi .delta.up { color: var(--success); }
+  .kpi .delta.down { color: var(--danger); }
+  .kpi .delta.flat { color: var(--text-muted); }
+
+  .grid-2 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; }
+  @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .pipe-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 9px;
+  }
+  .pipe-row .name { width: 84px; font-size: 11px; color: var(--text-secondary); flex-shrink: 0; }
+  .pipe-track {
+    flex: 1; height: 4px; background: var(--bg-muted); border-radius: 0; overflow: hidden;
+  }
+  .pipe-fill { height: 100%; border-radius: 0; }
+  .pipe-row .n {
+    width: 28px; text-align: right; font-size: 11px; font-weight: 650;
+    font-family: var(--mono); font-variant-numeric: tabular-nums; color: #fff;
+  }
+
+  .table-wrap { overflow: auto; }
+  table.data { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.data th {
+    text-align: left; font-family: var(--mono); font-size: 9px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-muted); padding: 9px 12px;
+    border-bottom: 1px solid var(--border); background: var(--bg-subtle);
+  }
+  table.data td {
+    padding: 11px 12px; border-bottom: 1px solid var(--border);
+    color: var(--text); vertical-align: middle;
+  }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data tr:hover td { background: rgba(255,255,255,0.02); }
+  table.data .name { font-weight: 600; color: #fff; }
+  table.data .sub { font-size: 11px; color: var(--text-muted); }
+
+  .status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 650; padding: 3px 7px;
+    border-radius: var(--radius-sm); letter-spacing: 0.04em;
+    text-transform: uppercase; font-family: var(--mono);
+    border: 1px solid transparent;
+  }
+  .status::before {
+    content: ""; width: 5px; height: 5px; border-radius: 0; background: currentColor;
+  }
+  .st-nuevo { background: var(--info-soft); color: var(--info); border-color: rgba(76,154,255,0.25); }
+  .st-contactado { background: var(--warning-soft); color: var(--warning); border-color: rgba(245,185,66,0.25); }
+  .st-consulta { background: var(--accent-soft); color: var(--accent); border-color: rgba(243,112,33,0.3); }
+  .st-calificado { background: var(--success-soft); color: var(--success); border-color: rgba(45,212,160,0.25); }
+  .st-cerrado { background: var(--neutral-soft); color: var(--neutral); border-color: rgba(139,149,165,0.25); }
+  .st-perdido { background: var(--danger-soft); color: var(--danger); border-color: rgba(240,113,120,0.25); }
+
+  .toolbar {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .tabs {
+    display: flex; gap: 0; background: var(--bg-subtle);
+    padding: 0; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  }
+  .tab {
+    border: none; background: transparent; font-family: inherit;
+    font-size: 11px; font-weight: 600; color: var(--text-secondary);
+    padding: 6px 12px; border-radius: 0; cursor: pointer;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .tab.active {
+    background: var(--bg-muted); color: #fff;
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+
+  .chip-filter {
+    height: 28px; padding: 0 10px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: var(--bg-elevated);
+    font-size: 11px; font-weight: 550; color: var(--text-secondary);
+    display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+    font-family: inherit;
+  }
+  .chip-filter.active {
+    border-color: rgba(243,112,33,0.45); background: var(--accent-soft); color: var(--accent);
+  }
+
+  .kanban {
+    display: grid; grid-template-columns: repeat(4, minmax(170px, 1fr));
+    gap: 10px; overflow-x: auto;
+  }
+  .kanban-col {
+    background: var(--bg-subtle); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 8px; min-height: 320px;
+  }
+  .kanban-col .col-hd {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px; padding: 4px 4px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .kanban-col .col-hd strong {
+    font-size: 10px; font-weight: 650; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-secondary);
+  }
+  .kanban-col .count {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: var(--text-muted); background: var(--bg-muted);
+    padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  }
+  .card-lead {
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 11px; margin-bottom: 6px;
+    cursor: grab;
+  }
+  .card-lead:hover { border-color: var(--border-strong); }
+  .card-lead .title { font-size: 12.5px; font-weight: 650; margin-bottom: 2px; color: #fff; }
+  .card-lead .meta { font-size: 10px; color: var(--text-muted); font-family: var(--mono); }
+  .card-lead .foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--border);
+  }
+  .score {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: #C5D2E0; background: var(--brand-soft);
+    padding: 2px 6px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .form-grid { display: grid; grid-template-columns: 200px 1fr; gap: 20px; }
+  @media (max-width: 720px) { .form-grid { grid-template-columns: 1fr; } }
+  .settings-nav button {
+    display: block; width: 100%; text-align: left;
+    border: 1px solid transparent; background: transparent; font-family: inherit;
+    padding: 8px 10px; border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 550; color: var(--text-secondary); cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .settings-nav button.active, .settings-nav button:hover {
+    background: var(--accent-soft); color: var(--accent); border-color: rgba(243,112,33,0.25);
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; font-size: 10px; font-weight: 650;
+    color: var(--text-muted); margin-bottom: 5px;
+    letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--mono);
+  }
+  .field input, .field select, .field textarea {
+    width: 100%; height: 34px; padding: 0 10px;
+    border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+    background: var(--bg-subtle); font-family: inherit; font-size: 12.5px;
+    color: var(--text); outline: none;
+  }
+  .field textarea { height: 76px; padding: 8px 10px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-ring);
+  }
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+  }
+  .toggle-row:last-child { border: none; }
+  .toggle {
+    width: 34px; height: 18px; border-radius: var(--radius-sm); background: var(--bg-muted);
+    position: relative; cursor: pointer; border: 1px solid var(--border);
+  }
+  .toggle.on { background: var(--accent); border-color: var(--accent); }
+  .toggle::after {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 12px; height: 12px; border-radius: 0; background: #fff;
+    transition: transform .15s;
+  }
+  .toggle.on::after { transform: translateX(14px); }
+
+  .chart {
+    height: 170px; display: flex; align-items: flex-end; gap: 4px; padding-top: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chart .bar {
+    flex: 1; background: transparent; position: relative; min-width: 0; height: 100%;
+  }
+  .chart .bar .fill {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--brand); border-radius: 0;
+    opacity: 0.9;
+  }
+  .chart .bar:nth-child(odd) .fill { background: var(--accent); opacity: 0.75; }
+
+  .list-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .list-item:last-child { border: none; }
+  .list-item .time {
+    margin-left: auto; font-size: 10px; color: var(--text-muted);
+    white-space: nowrap; font-family: var(--mono);
+  }
+
+  .comp-row {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    padding: 14px; background: var(--bg-app); border-radius: var(--radius);
+    border: 1px solid var(--border); margin-bottom: 10px;
+  }
+
+  .footer-note {
+    max-width: 1120px; margin: 0 auto; padding: 20px 24px 48px;
+    color: var(--text-muted); font-size: 11px; text-align: center;
+    font-family: var(--mono);
+  }
+  .footer-note code {
+    font-family: var(--mono); background: var(--bg-elevated); color: var(--text-secondary);
+    padding: 2px 6px; border-radius: var(--radius-sm); font-size: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .view-tabs {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .view-tabs button {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    padding: 8px 12px; border-radius: var(--radius-sm); cursor: pointer;
+    border: 1px solid var(--border); background: transparent; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .view-tabs button.active {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .view-tabs button:hover:not(.active) {
+    background: var(--bg-subtle); color: #fff; border-color: var(--border-strong);
+  }
+
+  .usage-row {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-lg);
+    background: var(--bg-elevated); margin-top: 12px;
+  }
+  .usage-row .item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--text-secondary);
+  }
+  .usage-row .item img { display: block; }
+  .usage-row .sep {
+    width: 1px; height: 28px; background: var(--border); margin: 0 4px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <a class="brand-lockup" href="#mock">
+    <img class="favicon" src="../more-landing/public/icon.png" alt="MORE favicon" />
+    <div class="word">MORE<span>Admin UI</span></div>
+  </a>
+  <a href="#logos">Logos</a>
+  <a href="#principios">Principios</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#comparacion">Vs Marketing</a>
+  <a href="#componentes">Componentes</a>
+  <a href="#mock">Vistas</a>
+</nav>
+
+<header class="doc-hero">
+  <p class="eyebrow">SYS // ADMIN.UI.2026 · REV 02</p>
+  <h1>Panel de control <em>futurista</em>, angular y operable</h1>
+  <p>
+    ADN MORE sin estética de landing: dark surface, radio mínimo, acento naranja puntual,
+    tipografía técnica y logos reales (wordmark + favicon) en cada punto de identidad.
+  </p>
+</header>
+
+<!-- LOGOS -->
+<section class="section" id="logos">
+  <p class="section-label">00 — Identidad en admin</p>
+  <h2>Logos y favicon</h2>
+  <p class="lead">Usar assets oficiales. En admin el favicon es la marca primaria del chrome; el wordmark solo donde hay espacio.</p>
+
+  <div class="logo-grid">
+    <div class="logo-card">
+      <div class="stage light">
+        <img class="wordmark" src="../more-landing/public/logo_more_light.png" alt="MORE logo light" />
+      </div>
+      <div class="meta">
+        <strong>Wordmark · light</strong>
+        <code>logo_more_light.png</code>
+      </div>
+    </div>
+    <div class="logo-card">
+      <div class="stage dark">
+        <img class="wordmark" src="../more-landing/public/logo_more_dark.png" alt="MORE logo dark" />
+      </div>
+      <div class="meta">
+        <strong>Wordmark · dark</strong>
+        <code>logo_more_dark.png</code>
+      </div>
+    </div>
+    <div class="logo-card">
+      <div class="stage icon-stage">
+        <img class="favicon-lg" src="../more-landing/public/icon.png" alt="MORE favicon / isotipo" />
+      </div>
+      <div class="meta">
+        <strong>Favicon / isotipo</strong>
+        <code>icon.png</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="usage-row">
+    <div class="item">
+      <img src="../more-landing/public/icon.png" width="40" height="40" alt="" style="border-radius:4px;" />
+      Sidebar + tab browser
+    </div>
+    <div class="sep"></div>
+    <div class="item">
+      <img src="../more-landing/public/logo_more_dark.png" height="36" alt="" />
+      Login / empty states (fondo oscuro)
+    </div>
+    <div class="sep"></div>
+    <div class="item" style="background:#F6F7F9;padding:8px 12px;border:1px solid var(--border);border-radius:6px;">
+      <img src="../more-landing/public/logo_more_light.png" height="36" alt="" />
+      PDFs / exports (fondo claro)
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPIOS -->
+<section class="section" id="principios">
+  <p class="section-label">01 — Principios</p>
+  <h2>Qué se hereda y qué se cambia</h2>
+  <p class="lead">Más tech, menos editorial. Misma marca, distinto trabajo.</p>
+
+  <div class="principle-grid">
+    <div class="principle">
+      <span class="tag">Heredar</span>
+      <h3>Navy + naranja</h3>
+      <p>Navy como campo oscuro; naranja solo en acción, foco y acentos de 1–2 px.</p>
+    </div>
+    <div class="principle">
+      <span class="tag">Heredar</span>
+      <h3>Isotipo oficial</h3>
+      <p>Favicon `icon.png` en chrome. Nunca redibujar la M a mano.</p>
+    </div>
+    <div class="principle">
+      <span class="tag">Nuevo</span>
+      <h3>Radio mínimo</h3>
+      <p>4–8 px. Redondeo sutil, sin pills. Sigue leyendo angular / sistema.</p>
+    </div>
+    <div class="principle">
+      <span class="tag">Nuevo</span>
+      <h3>Dark operativo</h3>
+      <p>Canvas oscuro para reducir fatiga en dashboards densos; contraste AA en texto.</p>
+    </div>
+    <div class="principle dont">
+      <span class="tag">Evitar</span>
+      <h3>Playfair / olas</h3>
+      <p>Serif editorial y decoración de viaje quedan en landings públicas.</p>
+    </div>
+    <div class="principle dont">
+      <span class="tag">Evitar</span>
+      <h3>Glow excesivo</h3>
+      <p>Sin neón. Un hairline naranja o ring de foco basta para “futuro”.</p>
+    </div>
+    <div class="principle dont">
+      <span class="tag">Evitar</span>
+      <h3>Bordes redondos</h3>
+      <p>Nada de `rounded-2xl` / `rounded-full` en botones, badges o avatares.</p>
+    </div>
+    <div class="principle dont">
+      <span class="tag">Evitar</span>
+      <h3>Naranja de relleno</h3>
+      <p>No pintar KPIs enteros de naranja. El acento es línea o CTA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section class="section" id="tokens">
+  <p class="section-label">02 — Tokens</p>
+  <h2>Paleta Admin dark</h2>
+  <p class="lead">Familia cromática MORE, recalibrada a superficie oscura y densidades altas.</p>
+
+  <h3 style="color:#fff;font-size:12px;margin-bottom:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Superficies</h3>
+  <div class="token-grid" style="margin-bottom:20px;">
+    <div class="swatch"><div class="chip" style="background:#0E1218;"></div><div class="meta"><strong>bg</strong><code>#0E1218</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#12171F;"></div><div class="meta"><strong>app</strong><code>#12171F</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#171D27;"></div><div class="meta"><strong>elevated</strong><code>#171D27</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#0B0F14;"></div><div class="meta"><strong>sidebar</strong><code>#0B0F14</code></div></div>
+  </div>
+
+  <h3 style="color:#fff;font-size:12px;margin-bottom:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Marca</h3>
+  <div class="token-grid" style="margin-bottom:20px;">
+    <div class="swatch"><div class="chip" style="background:#F37021;"></div><div class="meta"><strong>accent</strong><code>#F37021</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#2A3A4A;"></div><div class="meta"><strong>navy marca</strong><code>#2A3A4A</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#1B2B44;"></div><div class="meta"><strong>navy deep</strong><code>#1B2B44</code></div></div>
+    <div class="swatch"><div class="chip" style="background:rgba(243,112,33,0.14);"></div><div class="meta"><strong>accent-soft</strong><code>14% tint</code></div></div>
+  </div>
+
+  <h3 style="color:#fff;font-size:12px;margin-bottom:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Estados</h3>
+  <div class="token-grid">
+    <div class="swatch"><div class="chip" style="background:#4C9AFF;"></div><div class="meta"><strong>info</strong><code>#4C9AFF</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#F5B942;"></div><div class="meta"><strong>warning</strong><code>#F5B942</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#2DD4A0;"></div><div class="meta"><strong>success</strong><code>#2DD4A0</code></div></div>
+    <div class="swatch"><div class="chip" style="background:#F07178;"></div><div class="meta"><strong>danger</strong><code>#F07178</code></div></div>
+  </div>
+
+  <div class="card-dark" style="margin-top:20px;">
+    <h3 style="color:#fff;font-size:12px;margin-bottom:10px;">Tipografía · Radio</h3>
+    <p style="color:var(--text-secondary);font-size:13px;margin-bottom:12px;">
+      <strong style="color:#fff;">IBM Plex Sans</strong> — UI.<br/>
+      <strong style="color:#fff;font-family:var(--mono);">JetBrains Mono</strong> — labels, scores, crumbs.<br/>
+      <span style="opacity:.7;">Radius: 4–8px. Sin pills.</span>
+    </p>
+  </div>
+</section>
+
+<!-- COMPARACIÓN -->
+<section class="section" id="comparacion">
+  <p class="section-label">03 — Comparación</p>
+  <h2>Marketing vs Admin</h2>
+  <p class="lead">Misma marca, dos sistemas de superficie.</p>
+  <div class="compare">
+    <div class="col marketing">
+      <h3>Landing / Manual 2026</h3>
+      <ul>
+        <li>Playfair Display + Inter</li>
+        <li>Paper warm claro</li>
+        <li>Olas, rutas, trama</li>
+        <li>CTA pastilla redonda</li>
+        <li>Iconos en círculos sólidos</li>
+        <li>Espaciado generoso</li>
+      </ul>
+    </div>
+    <div class="col admin">
+      <h3>Admin UI // futurista</h3>
+      <ul>
+        <li>IBM Plex Sans + JetBrains Mono</li>
+        <li>Dark canvas `#0E1218`</li>
+        <li>Grid técnico + hairlines</li>
+        <li>CTA angular 32px</li>
+        <li>Favicon + iconos lineales</li>
+        <li>Densidad media, tablas</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTES -->
+<section class="section" id="componentes">
+  <p class="section-label">04 — Componentes</p>
+  <h2>Piezas base</h2>
+  <p class="lead">Preview sobre superficie de app.</p>
+
+  <div class="panel" style="padding:16px;background:var(--bg-app);">
+    <div class="comp-row">
+      <button class="btn btn-primary">Crear lead</button>
+      <button class="btn btn-secondary">Exportar</button>
+      <button class="btn btn-ghost">Cancelar</button>
+      <button class="btn btn-primary btn-sm">Guardar</button>
+      <button class="btn btn-secondary btn-sm">Filtros</button>
+    </div>
+    <div class="comp-row">
+      <span class="status st-nuevo">Nuevo</span>
+      <span class="status st-contactado">Contactado</span>
+      <span class="status st-consulta">En consulta</span>
+      <span class="status st-calificado">Calificado</span>
+      <span class="status st-cerrado">Cerrado</span>
+      <span class="status st-perdido">Perdido</span>
+    </div>
+    <div class="comp-row">
+      <button class="chip-filter active">Todos</button>
+      <button class="chip-filter">Hoy</button>
+      <button class="chip-filter">Esta semana</button>
+      <span class="score">87</span>
+      <span class="score" style="background:var(--accent-soft);color:var(--accent);border-color:rgba(243,112,33,0.35);">42</span>
+      <img src="../more-landing/public/icon.png" width="44" height="44" alt="favicon" style="border:1px solid var(--border);border-radius:4px;" />
+    </div>
+  </div>
+</section>
+
+<!-- MOCK -->
+<section class="section" id="mock">
+  <p class="section-label">05 — Vistas</p>
+  <h2>Mock interactivo</h2>
+  <p class="lead">Sidebar con favicon oficial. Cambiá de vista con tabs o menú.</p>
+
+  <div class="view-tabs" id="viewTabs">
+    <button class="active" data-view="dashboard">Dashboard</button>
+    <button data-view="leads">Leads · tabla</button>
+    <button data-view="pipeline">Leads · pipeline</button>
+    <button data-view="resources">Recursos</button>
+    <button data-view="settings">Ajustes</button>
+  </div>
+
+  <div class="mock-frame">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="favicon" src="../more-landing/public/icon.png" alt="MORE" />
+        <div class="brand-text">MORE<small>Admin // OS</small></div>
+      </div>
+
+      <div class="nav-group">
+        <div class="group-label label">Principal</div>
+        <button class="nav-item active" data-view="dashboard">
+          <span class="ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+          <span class="label">Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="leads">
+          <span class="ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span class="label">Leads</span>
+          <span class="badge">12</span>
+        </button>
+        <button class="nav-item" data-view="pipeline">
+          <span class="ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg></span>
+          <span class="label">Pipeline</span>
+        </button>
+      </div>
+
+      <div class="nav-group">
+        <div class="group-label label">Sistema</div>
+        <button class="nav-item" data-view="resources">
+          <span class="ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+          <span class="label">Recursos</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <span class="ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span>
+          <span class="label">Ajustes</span>
+        </button>
+      </div>
+
+      <div class="user">
+        <div class="avatar">IV</div>
+        <div class="user-meta">
+          <strong>Ivon</strong>
+          <span>ROOT</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <img class="mark" src="../more-landing/public/icon.png" alt="" />
+        <span class="crumb" id="crumb">ADMIN</span>
+        <span style="color:var(--border-strong)">/</span>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="spacer"></div>
+        <div class="search">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Buscar…
+          <kbd>⌘K</kbd>
+        </div>
+        <button class="btn btn-primary btn-sm" id="primaryAction">+ Nuevo lead</button>
+      </header>
+
+      <div class="content">
+
+        <div class="view active" id="view-dashboard">
+          <div class="kpi-grid">
+            <div class="kpi"><div class="label">Nuevos</div><div class="value">48</div><div class="delta up">↑ 12%</div></div>
+            <div class="kpi"><div class="label">Contactados</div><div class="value">31</div><div class="delta flat">→ 0</div></div>
+            <div class="kpi"><div class="label">Consulta</div><div class="value">19</div><div class="delta up">↑ 4</div></div>
+            <div class="kpi"><div class="label">Calificados</div><div class="value">14</div><div class="delta up">↑ 2</div></div>
+            <div class="kpi"><div class="label">Cerrados</div><div class="value">7</div><div class="delta up">↑ 1</div></div>
+            <div class="kpi"><div class="label">Perdidos</div><div class="value">9</div><div class="delta down">↓ 3</div></div>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-hd">
+                <h3>Throughput · 14d</h3>
+                <button class="btn btn-ghost btn-sm">Export</button>
+              </div>
+              <div class="panel-bd">
+                <div class="chart" id="chart"></div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-hd"><h3>Embudo</h3></div>
+              <div class="panel-bd">
+                <div class="pipe-row"><span class="name">Nuevos</span><div class="pipe-track"><div class="pipe-fill" style="width:100%;background:var(--info)"></div></div><span class="n">48</span></div>
+                <div class="pipe-row"><span class="name">Contactados</span><div class="pipe-track"><div class="pipe-fill" style="width:65%;background:var(--warning)"></div></div><span class="n">31</span></div>
+                <div class="pipe-row"><span class="name">Consulta</span><div class="pipe-track"><div class="pipe-fill" style="width:40%;background:var(--accent)"></div></div><span class="n">19</span></div>
+                <div class="pipe-row"><span class="name">Calificados</span><div class="pipe-track"><div class="pipe-fill" style="width:29%;background:var(--success)"></div></div><span class="n">14</span></div>
+                <div class="pipe-row"><span class="name">Cerrados</span><div class="pipe-track"><div class="pipe-fill" style="width:15%;background:var(--neutral)"></div></div><span class="n">7</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:12px;">
+            <div class="panel-hd">
+              <h3>Feed</h3>
+              <button class="btn btn-ghost btn-sm" onclick="showView('leads')">Ver todos</button>
+            </div>
+            <div class="panel-bd" style="padding-top:2px;padding-bottom:2px;">
+              <div class="list-item">
+                <div class="avatar">MC</div>
+                <div><div style="font-weight:600;font-size:12.5px;color:#fff;">María Castillo</div><div style="font-size:11px;color:var(--text-muted);">Nuevo · Quiz EB-2 · score 82</div></div>
+                <span class="status st-nuevo">Nuevo</span>
+                <span class="time">12m</span>
+              </div>
+              <div class="list-item">
+                <div class="avatar">JR</div>
+                <div><div style="font-weight:600;font-size:12.5px;color:#fff;">Jorge Rivas</div><div style="font-size:11px;color:var(--text-muted);">→ En consulta</div></div>
+                <span class="status st-consulta">Consulta</span>
+                <span class="time">1h</span>
+              </div>
+              <div class="list-item">
+                <div class="avatar">AL</div>
+                <div><div style="font-weight:600;font-size:12.5px;color:#fff;">Ana López</div><div style="font-size:11px;color:var(--text-muted);">Nota · seguimiento mañana</div></div>
+                <span class="status st-calificado">Calificado</span>
+                <span class="time">3h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view" id="view-leads">
+          <div class="toolbar">
+            <div class="tabs">
+              <button class="tab active">Tabla</button>
+              <button class="tab" onclick="showView('pipeline')">Pipeline</button>
+            </div>
+            <button class="chip-filter active">Todos</button>
+            <button class="chip-filter">Nuevos</button>
+            <button class="chip-filter">Hoy</button>
+            <div style="flex:1"></div>
+            <button class="btn btn-secondary btn-sm">CSV</button>
+          </div>
+          <div class="panel">
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>Lead</th><th>Estado</th><th>Score</th><th>Fuente</th><th>Follow-up</th><th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="name">María Castillo</div><div class="sub">maria.c@email.com</div></td>
+                    <td><span class="status st-nuevo">Nuevo</span></td>
+                    <td><span class="score">82</span></td>
+                    <td class="sub">Quiz · Meta</td>
+                    <td class="sub">Hoy 16:00</td>
+                    <td><button class="btn btn-ghost btn-sm">Abrir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="name">Jorge Rivas</div><div class="sub">j.rivas@email.com</div></td>
+                    <td><span class="status st-consulta">Consulta</span></td>
+                    <td><span class="score">91</span></td>
+                    <td class="sub">VIP</td>
+                    <td class="sub">Mañana</td>
+                    <td><button class="btn btn-ghost btn-sm">Abrir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="name">Ana López</div><div class="sub">ana.lopez@email.com</div></td>
+                    <td><span class="status st-calificado">Calificado</span></td>
+                    <td><span class="score">76</span></td>
+                    <td class="sub">Masterclass</td>
+                    <td class="sub">Vie 11:00</td>
+                    <td><button class="btn btn-ghost btn-sm">Abrir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="name">Carlos Méndez</div><div class="sub">c.mendez@email.com</div></td>
+                    <td><span class="status st-contactado">Contactado</span></td>
+                    <td><span class="score">54</span></td>
+                    <td class="sub">Quiz</td>
+                    <td class="sub">—</td>
+                    <td><button class="btn btn-ghost btn-sm">Abrir</button></td>
+                  </tr>
+                  <tr>
+                    <td><div class="name">Sofía Vargas</div><div class="sub">sofia.v@email.com</div></td>
+                    <td><span class="status st-perdido">Perdido</span></td>
+                    <td><span class="score" style="background:var(--danger-soft);color:var(--danger);border-color:rgba(240,113,120,0.3);">28</span></td>
+                    <td class="sub">Meta</td>
+                    <td class="sub">—</td>
+                    <td><button class="btn btn-ghost btn-sm">Abrir</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="view" id="view-pipeline">
+          <div class="toolbar">
+            <div class="tabs">
+              <button class="tab" onclick="showView('leads')">Tabla</button>
+              <button class="tab active">Pipeline</button>
+            </div>
+            <div style="flex:1"></div>
+            <button class="btn btn-secondary btn-sm">7d</button>
+          </div>
+          <div class="kanban">
+            <div class="kanban-col">
+              <div class="col-hd"><strong>Nuevos</strong><span class="count">3</span></div>
+              <div class="card-lead"><div class="title">María Castillo</div><div class="meta">Quiz · Meta</div><div class="foot"><span class="score">82</span><span class="sub">hoy</span></div></div>
+              <div class="card-lead"><div class="title">Luis Ortega</div><div class="meta">VIP</div><div class="foot"><span class="score">71</span><span class="sub">ayer</span></div></div>
+              <div class="card-lead"><div class="title">Elena Díaz</div><div class="meta">Masterclass</div><div class="foot"><span class="score">66</span><span class="sub">ayer</span></div></div>
+            </div>
+            <div class="kanban-col">
+              <div class="col-hd"><strong>Contactados</strong><span class="count">2</span></div>
+              <div class="card-lead"><div class="title">Carlos Méndez</div><div class="meta">Quiz</div><div class="foot"><span class="score">54</span><span class="sub">WA</span></div></div>
+              <div class="card-lead"><div class="title">Paula Ruiz</div><div class="meta">Meta</div><div class="foot"><span class="score">61</span><span class="sub">call</span></div></div>
+            </div>
+            <div class="kanban-col">
+              <div class="col-hd"><strong>Consulta</strong><span class="count">2</span></div>
+              <div class="card-lead"><div class="title">Jorge Rivas</div><div class="meta">VIP · $97</div><div class="foot"><span class="score">91</span><span class="sub">OK</span></div></div>
+              <div class="card-lead"><div class="title">Diana Soto</div><div class="meta">Quiz</div><div class="foot"><span class="score">79</span><span class="sub">pend</span></div></div>
+            </div>
+            <div class="kanban-col">
+              <div class="col-hd"><strong>Calificados</strong><span class="count">1</span></div>
+              <div class="card-lead"><div class="title">Ana López</div><div class="meta">Masterclass</div><div class="foot"><span class="score">76</span><span class="sub">prop</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view" id="view-resources">
+          <div class="toolbar">
+            <button class="chip-filter active">Todos</button>
+            <button class="chip-filter">Marca</button>
+            <button class="chip-filter">Estrategia</button>
+            <div style="flex:1"></div>
+            <button class="btn btn-primary btn-sm">+ Upload</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;">
+            <div class="panel" style="padding:14px;">
+              <img src="../more-landing/public/icon.png" width="64" height="64" alt="" style="margin-bottom:12px;border:1px solid var(--border);border-radius:6px;" />
+              <div style="font-weight:650;font-size:12.5px;margin-bottom:4px;color:#fff;">Manual de Marca 2026</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:12px;font-family:var(--mono);">BRAND · PDF</div>
+              <button class="btn btn-secondary btn-sm">Abrir</button>
+            </div>
+            <div class="panel" style="padding:14px;">
+              <img src="../more-landing/public/logo_more_dark.png" height="44" alt="" style="margin-bottom:14px;" />
+              <div style="font-weight:650;font-size:12.5px;margin-bottom:4px;color:#fff;">Admin UI System</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:12px;font-family:var(--mono);">BRAND · HTML</div>
+              <button class="btn btn-secondary btn-sm">Abrir</button>
+            </div>
+            <div class="panel" style="padding:14px;">
+              <div style="width:32px;height:32px;border:1px solid var(--border);background:var(--info-soft);color:var(--info);display:grid;place-items:center;font-family:var(--mono);font-size:9px;font-weight:700;margin-bottom:12px;">MD</div>
+              <div style="font-weight:650;font-size:12.5px;margin-bottom:4px;color:#fff;">Marketing OS</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:12px;font-family:var(--mono);">STRATEGY</div>
+              <button class="btn btn-secondary btn-sm">Abrir</button>
+            </div>
+            <div class="panel" style="padding:14px;">
+              <div style="width:32px;height:32px;border:1px solid var(--border);background:var(--success-soft);color:var(--success);display:grid;place-items:center;font-family:var(--mono);font-size:9px;font-weight:700;margin-bottom:12px;">DOC</div>
+              <div style="font-weight:650;font-size:12.5px;margin-bottom:4px;color:#fff;">Playbook Quiz</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-bottom:12px;font-family:var(--mono);">PLAYBOOK</div>
+              <button class="btn btn-secondary btn-sm">Abrir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="view" id="view-settings">
+          <div class="panel">
+            <div class="panel-bd">
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+                <img src="../more-landing/public/logo_more_dark.png" height="56" alt="MORE" />
+                <div>
+                  <div style="font-size:12px;font-weight:650;color:#fff;">Identidad del sistema</div>
+                  <div style="font-size:10px;color:var(--text-muted);font-family:var(--mono);">WORDMARK + FAVICON OFICIALES</div>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="settings-nav">
+                  <button class="active">General</button>
+                  <button>VIP Session</button>
+                  <button>Tracking</button>
+                  <button>Equipo</button>
+                </div>
+                <div>
+                  <div class="field">
+                    <label>Nombre del sitio</label>
+                    <input type="text" value="MORE — Migración con propósito" />
+                  </div>
+                  <div class="field">
+                    <label>Email</label>
+                    <input type="email" value="hola@moreglobal.com" />
+                  </div>
+                  <div class="field">
+                    <label>Timezone</label>
+                    <select>
+                      <option>America/Bogota (UTC-5)</option>
+                      <option>America/Mexico_City (UTC-6)</option>
+                      <option>America/New_York</option>
+                    </select>
+                  </div>
+                  <div class="toggle-row">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff;">Mantenimiento</div>
+                      <div style="font-size:11px;color:var(--text-muted);">Oculta landings</div>
+                    </div>
+                    <button class="toggle" aria-label="toggle"></button>
+                  </div>
+                  <div class="toggle-row">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff;">Alertas WhatsApp</div>
+                      <div style="font-size:11px;color:var(--text-muted);">Leads nuevos</div>
+                    </div>
+                    <button class="toggle on" aria-label="toggle on"></button>
+                  </div>
+                  <div style="margin-top:18px;display:flex;gap:8px;">
+                    <button class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-ghost">Descartar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="footer-note">
+  REV 02 · futurista / angular / logos oficiales<br/>
+  <code>Manual de marca/admin-ui-system-2026.html</code>
+  · assets: <code>more-landing/public/icon.png</code>
+  · <code>logo_more_light.png</code>
+  · <code>logo_more_dark.png</code>
+</p>
+
+<script>
+  const titles = {
+    dashboard: ['Dashboard', '+ Nuevo lead'],
+    leads: ['Leads', '+ Nuevo lead'],
+    pipeline: ['Pipeline', '+ Nuevo lead'],
+    resources: ['Recursos', '+ Upload'],
+    settings: ['Ajustes', 'Guardar'],
+  }
+
+  const showView = (name) => {
+    document.querySelectorAll('.view').forEach((el) => el.classList.remove('active'))
+    const target = document.getElementById('view-' + name)
+    if (target) target.classList.add('active')
+
+    document.querySelectorAll('.nav-item').forEach((el) => {
+      el.classList.toggle('active', el.dataset.view === name)
+    })
+
+    document.querySelectorAll('#viewTabs button').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.view === name)
+    })
+
+    const meta = titles[name] || ['Admin', 'Acción']
+    document.getElementById('pageTitle').textContent = meta[0]
+    document.getElementById('primaryAction').textContent = meta[1]
+  }
+
+  document.querySelectorAll('.nav-item[data-view]').forEach((btn) => {
+    btn.addEventListener('click', () => showView(btn.dataset.view))
+  })
+  document.querySelectorAll('#viewTabs button').forEach((btn) => {
+    btn.addEventListener('click', () => showView(btn.dataset.view))
+  })
+
+  const heights = [40, 55, 35, 70, 48, 82, 60, 45, 90, 72, 58, 65, 78, 50]
+  const chart = document.getElementById('chart')
+  heights.forEach((h) => {
+    const bar = document.createElement('div')
+    bar.className = 'bar'
+    bar.innerHTML = `<div class="fill" style="height:${h}%"></div>`
+    chart.appendChild(bar)
+  })
+
+  document.querySelectorAll('.toggle').forEach((t) => {
+    t.addEventListener('click', () => t.classList.toggle('on'))
+  })
+
+  window.showView = showView
+</script>
+</body>
+</html>

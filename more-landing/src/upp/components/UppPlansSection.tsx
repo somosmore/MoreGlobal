@@ -17,7 +17,7 @@ export function UppPlansSection({
   loading,
 }: UppPlansSectionProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
   const singleIncludes = t("uppPage.plans.single.includes", { returnObjects: true }) as string[]
   const installmentsIncludes = t("uppPage.plans.installments.includes", {
     returnObjects: true,

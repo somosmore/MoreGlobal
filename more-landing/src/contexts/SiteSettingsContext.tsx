@@ -18,10 +18,10 @@ const DEFAULTS: SiteSettingsMap = {
   ga4_measurement_id: "",
   tracking_enabled: "true",
   upp_payment_link: "",
-  upp_price: "$2,500",
+  upp_price: "$3,500",
   upp_countdown_date: "",
   turbo_payment_link: "",
-  turbo_price: "$8,000",
+  turbo_price: "$10,000",
   turbo_countdown_date: "",
   wppequipo_enabled: "true",
   // Fechas de las landings de campaña (se editan en Admin → Settings).
@@ -29,6 +29,10 @@ const DEFAULTS: SiteSettingsMap = {
   mc_registration_closes_at: "2026-05-27T23:59:59-05:00",
   tn_event_date: "2026-08-06T19:00:00-05:00",
   tn_registration_closes_at: "2026-08-07T23:59:59-05:00",
+  we_event_date: "2026-08-20T19:00:00-05:00",
+  we_registration_closes_at: "2026-08-21T23:59:59-05:00",
+  ws_event_date: "2026-09-03T19:00:00-05:00",
+  ws_registration_closes_at: "2026-09-04T23:59:59-05:00",
 }
 
 type SiteSettingsContextValue = {

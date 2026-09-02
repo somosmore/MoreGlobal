@@ -20,7 +20,7 @@ export function UppPricingSection({
   loading,
 }: UppPricingSectionProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
 
   return (
     <div

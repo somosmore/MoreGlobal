@@ -12,7 +12,7 @@ type UppStickyCtaProps = {
 export function UppStickyCta({ paymentLink, price, loading }: UppStickyCtaProps) {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
 
   useEffect(() => {
     const handleScroll = () => {

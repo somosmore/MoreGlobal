@@ -79,7 +79,7 @@ function PreviewModal({ event, html, onClose }: { event: CalendarNotification; h
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="flex h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div className="flex h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-admin-lg bg-admin-elevated border border-admin-border admin-portal shadow-none">
         <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
           <div>
             <h2 className="text-sm font-semibold text-navy">{event.label}</h2>

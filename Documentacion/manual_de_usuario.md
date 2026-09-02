@@ -1,6 +1,6 @@
 # Manual de Usuario — MORE Immigration Consulting
 
-> Última actualización: 2026-08-01 (taller `/taller-niw`: Cambio de Estatus — 6 ago 2026)
+> Última actualización: 2026-09-02 (precios UPE $3,500 · Plan Turbo $10,000)
 
 ---
 
@@ -24,6 +24,8 @@
    - 1.15 [Redirección WhatsApp Equipo (`/wppequipo`)](#115-redirección-whatsapp-equipo-wppequipo)
    - 1.16 [Landing Taller Cambio de Estatus (`/taller-niw`)](#116-landing-taller-cambio-de-estatus-taller-niw)
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
+   - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
+   - 1.19 [Landing Masterclass 1 Instituto More (`/webinar-sep-26`)](#119-landing-masterclass-1-instituto-more-webinar-sep-26)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -195,7 +197,7 @@ La pantalla de resultado muestra:
 Esta sección es un **tripwire offer** que llena el eslabón faltante de la Value Ladder:
 
 ```
-Quiz (gratis) → Asesoría VIP ($97) → UPP ($2,500) → Plan Plus ($8,000)
+Quiz (gratis) → Asesoría VIP ($97) → UPE ($3,500) → Plan Turbo / UPP ($10,000)
 ```
 
 Su objetivo es monetizar el interés de los visitantes que no están listos para comprometerse con los planes principales, y filtrar leads calificados mediante un primer pago simbólico.
@@ -253,7 +255,7 @@ Secciones principales:
 
 ### 1.8 Sección: Precios
 
-- Presenta los dos planes disponibles: **Unsung Professional Program (UPP)** y **Plan Plus**.
+- Presenta los dos planes disponibles: **Unsung Professional Expansion (UPE)** y **Plan Turbo / UPP**.
 - Encabezado seguido de una línea de "costo de no actuar" en itálica que recuerda al usuario el costo de la inacción.
 - Cada plan incluye un **badge de risk reversal** (icono de escudo verde) con el mensaje: *"Sesión exploratoria sin compromiso. Te decimos desde el inicio si calificas."*
 - CTAs en primera persona: "Sí, quiero comenzar mi programa" y "Sí, quiero obtener mi Expediente".
@@ -356,7 +358,7 @@ Tras enviar el formulario correctamente se muestra una tarjeta de confirmación 
 
 **Ruta:** `/upp`
 
-Landing dedicada al **Unsung Professional Program (UPP)**. El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
+Landing dedicada al **Unsung Professional Expansion (UPE)**, también referido como UPP. Precio actual: **$3,500 USD** (`upp_price`). El hero usa una portada fotográfica full-width ubicada en `public/upp/portada-upp.png`, con la persona posicionada visualmente a la izquierda y el bloque de texto reubicado hacia la derecha en desktop. En móvil, el contenido baja hacia la zona inferior con degradado oscuro para mantener legibilidad sin cubrir el rostro.
 
 El hero conserva los elementos principales del programa: badge de autogestión, promesa de Green Card aprobada, estadísticas del programa, inversión única, CTAs de pago/WhatsApp y countdown cuando está configurado desde `site_settings`. El microcopy de inversión, cupos limitados, garantía del CTA y bloque intermedio de conversión se traduce desde `locales/{es,en}/uppPage.json`.
 
@@ -375,7 +377,7 @@ Cierra con el valor del stack (~~$1.500 USD~~ → **GRATIS**) condicionado al pa
 
 | Modalidad | Precio | Bonos incluidos | CTA |
 |---|---|---|---|
-| **Pago único** (recomendada) | `upp_price` (ej. $2.500 USD) | Programa completo + los 4 bonos del stack | Botón de pago → `upp_payment_link` |
+| **Pago único** (recomendada) | `upp_price` (ej. $3,500 USD) | Programa completo + los 4 bonos del stack | Botón de pago → `upp_payment_link` |
 | **Pago en 2 cuotas** | 2 × $1.250 USD (sin intereses) | Programa completo + Bono 1 (Revisión Estratégica) | Botón → WhatsApp del asesor |
 
 Incluye una cita de cierre de Ivon More. Los textos son editables desde `locales/{es,en}/uppPage.json` bajo las claves `bonusStack` y `plans`.
@@ -494,22 +496,107 @@ https://moremigracion.com/gracias
 
 3. Guardar y hacer una prueba de agendamiento para verificar que el usuario llega a `/gracias` y que el evento aparece en Meta Events Manager / GTM / GA4.
 
+### 1.18 Landing Webinar Estatus (`/webinar-estatus`)
+
+**Ruta:** `/webinar-estatus`
+
+Landing del webinar gratuito **"¿Cuál es tu estatus, de verdad?"** (Ivon More / Instituto More). Promesa: claridad sobre la propia historia migratoria (I-94, D/S, visa vs estatus), no un catálogo de visas. Incluye hero con countdown, beneficios, bloque de tensión, testimonios, formulario de registro, FAQ, speaker, footer y CTA fijo.
+
+| Dato | Valor |
+|------|-------|
+| Evento | Jueves **20 de agosto de 2026**, **7:00 PM** (Colombia) — `we_event_date` |
+| Registro cierra | **21 de agosto de 2026** — `we_registration_closes_at` |
+| Tag GHL | `Webinar-estatus-2026` |
+| Source Supabase | `webinar-estatus-2026` |
+| Event label | `Webinar Estatus de Verdad` |
+| WhatsApp | [Grupo Webinar Estatus](https://chat.whatsapp.com/KRTgi8xpnSLB2qACmQqSPJ) |
+
+**Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país (derivado de lada), profesión opcional.
+
+Tras registro exitoso: tarjeta de confirmación + CTA verde al grupo de WhatsApp (mismo patrón que `/taller-niw`).
+
+#### 1.18.1 Página post-registro Meta Lead Ads (`/webinar-estatus/registro`)
+
+**Ruta:** `/webinar-estatus/registro`
+
+Confirmación para leads de Meta Lead Ads (sin formulario propio). Disponibilidad: `useLandingStatus("/webinar-estatus")`.
+
+**URL sugerida para Meta:**
+
+```
+https://moremigracion.com/webinar-estatus/registro?utm_source=facebook&utm_medium=paid&utm_campaign=webinar-estatus
+```
+
+**Admin:** fechas en `/admin/settings` → Landings de campaña → Webinar Estatus.
+
+### 1.19 Landing Masterclass 1 Instituto More (`/webinar-sep-26`)
+
+**Ruta:** `/webinar-sep-26`
+
+Landing de la **Masterclass 1: "El nuevo panorama migratorio de Estados Unidos"**, primer capítulo del **Instituto More de Educación Migratoria**. Además de las secciones habituales (hero con countdown, beneficios, bloque de tensión, testimonios, formulario, FAQ, speaker, footer y CTA fijo), incorpora una sección de **ruta de aprendizaje** con las 7 masterclasses del Instituto: la 1 aparece con inscripción abierta y las restantes como "Próximamente".
+
+| Dato | Valor |
+|------|-------|
+| Evento | Jueves **3 de septiembre de 2026**, **7:00 PM** (Colombia) — `ws_event_date` |
+| Registro cierra | **4 de septiembre de 2026** — `ws_registration_closes_at` |
+| Tag GHL | `Webinar-Sep-26` |
+| Source Supabase | `webinar-sep-26` |
+| Event label | `Masterclass 1 — El nuevo panorama migratorio de EE.UU.` |
+| WhatsApp | [Grupo Masterclass 1](https://chat.whatsapp.com/BxyDE4gWioL3kcecf1zexi) |
+
+**Ruta de aprendizaje que se muestra en la página:**
+
+1. El nuevo panorama migratorio de Estados Unidos (3 de septiembre — abierta)
+2. Cómo entender tu estatus migratorio
+3. El mapa de las visas estadounidenses
+4. Cómo construir un proyecto profesional internacional
+5. Inteligencia documental: los documentos que todo inmigrante debe conocer
+6. Cómo leer una política de USCIS sin ser abogado
+7. Tendencias migratorias y planificación estratégica
+
+**Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email, teléfono, país (derivado de lada), profesión opcional. Los leads quedan en `masterclass_leads` con `source = webinar-sep-26`.
+
+Tras registro exitoso: tarjeta de confirmación + CTA verde al grupo de WhatsApp.
+
+#### 1.19.1 Página post-registro Meta Lead Ads (`/webinar-sep-26/registro`)
+
+**Ruta:** `/webinar-sep-26/registro`
+
+Confirmación para leads de Meta Lead Ads (sin formulario propio). Disponibilidad: `useLandingStatus("/webinar-sep-26")`.
+
+**URL sugerida para Meta:**
+
+```
+https://moremigracion.com/webinar-sep-26/registro?utm_source=facebook&utm_medium=paid&utm_campaign=webinar-sep-26
+```
+
+**Admin:** fechas en `/admin/settings` → Landings de campaña → Masterclass 1 Instituto More.
+
 ---
 
 ## 2. Panel de Administración (CRM)
 
 Accesible en `/admin`. Requiere autenticación con email y contraseña de Supabase Auth. Solo usuarios con una cuenta activa en el proyecto Supabase pueden acceder.
 
+### Identidad visual (Admin UI System 2026)
+
+El CRM usa un tema **dark operativo** distinto al de las landings públicas (sistema editorial claro). Criterios:
+
+- Superficies oscuras (`admin` / `admin-elevated`), acento naranja MORE solo en CTAs y foco.
+- Bordes con radio mínimo (4–8 px); sin pastillas ni decoración editorial (olas, Playfair).
+- **Isotipo / favicon** (`/icon.png`) en sidebar y topbar; wordmark dark en login.
+- Referencia de diseño: `Manual de marca/admin-ui-system-2026.html`.
+
 El panel tiene un layout compartido con:
-- **Sidebar lateral** colapsable con navegación entre módulos.
-- **Topbar** con breadcrumbs automáticos y datos del usuario logueado.
+- **Sidebar lateral** colapsable con navegación entre módulos e isotipo MORE.
+- **Topbar** con breadcrumbs, isotipo y datos del usuario logueado.
 - El estado colapsado del sidebar persiste en `localStorage`.
 
 ### 2.1 Login de administrador
 
 **Ruta:** `/admin/login`
 
-- Formulario de email y contraseña.
+- Pantalla dark con isotipo + logo MORE (versión dark) y formulario de email/contraseña.
 - Utiliza Supabase Auth (`signInWithPassword`).
 - Al autenticarse correctamente, redirige al Dashboard.
 - Si el usuario no tiene Supabase configurado (sin variables de entorno), muestra un aviso.
@@ -810,7 +897,7 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
    - Los números cortos sueltos (1–3 dígitos) se ignoran (índices de la lista).
    - Las líneas con letras se toman como **nombre/etiqueta**.
    - Las líneas con 7+ dígitos se toman como **teléfono**.
-3. Seleccionar **País por defecto** (ej: Ecuador +593). Se usa solo para números sin prefijo internacional; los que ya traen código de país (ej: `50498549249` para Honduras) se respetan.
+3. Seleccionar **País por defecto** (por defecto: **Colombia +57**). Se usa solo para números sin prefijo internacional; los que ya traen código de país con largo válido (ej: `+593989812877` o `50498549249`) se respetan.
 4. Clic en **Procesar y previsualizar**. Se muestra una tabla con cada entrada:
    - Nombre, teléfono original, URL final `https://wa.me/...`.
    - Las entradas inválidas se marcan en rojo (con el motivo: falta nombre o número inválido).
@@ -818,8 +905,9 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 5. Clic en **Importar X números**. Solo se guardan las válidas, en una sola operación masiva.
 
 > Reglas de formateo:
-> - Los ceros iniciales del teléfono nacional se eliminan al anteponer el código de país (ej: `0989812877` con país Ecuador → `https://wa.me/593989812877`).
-> - Si el número ya viene con código de país conocido, no se modifica.
+> - Los ceros iniciales del teléfono nacional se eliminan al anteponer el código de país (ej: `3001234567` con país Colombia → `https://wa.me/573001234567`).
+> - Si el número ya viene con `+` o `00`, se trata como internacional y no se le antepone el país por defecto.
+> - Si el número ya trae código de país conocido **y** el largo nacional encaja, no se modifica.
 > - Cambiar el país por defecto después de procesar **vuelve a normalizar** los números que no traían prefijo internacional.
 
 **Cómo compartir:**
@@ -902,8 +990,9 @@ Permite autogestionar la página pública `https://moremigracion.com/wppequipo` 
 | `tracking_enabled` | `true` / `false`: activa o pausa scripts y eventos de medición |
 | `wppequipo_enabled` | `true` / `false`: activa la página `/wppequipo` con reparto aleatorio entre números del equipo |
 | `upp_payment_link` | URL de pago del programa UPP |
-| `upp_price` | Precio mostrado en landing UPP |
+| `upp_price` | Precio mostrado en landing UPP / UPE (ej. `$3,500`) |
 | `upp_countdown_date` | Fecha de cierre del countdown UPP (opcional) |
+| `turbo_price` | Precio mostrado en landing Plan Turbo / UPP (ej. `$10,000`) |
 
 **RLS:** Lectura pública (anon). Escritura solo para usuarios `authenticated`.
 

@@ -75,7 +75,7 @@ export default function Pricing() {
           {plans.map((plan, index) => {
             const isPopular = index === 1
             const icons = featureIconsByPlan[index] ?? []
-            const prices = ["$2,500", "$8,000"]
+            const prices = ["$3,500", "$10,000"]
             return (
               <motion.div
                 key={plan.name}

@@ -27,6 +27,24 @@
   --color-ink-muted: #5B6B7C;
   --color-white: #FFFFFF;
 
+  /* Admin UI System 2026 — dark operativo (scoped .admin-shell) */
+  --color-admin: #0E1218;
+  --color-admin-app: #12171F;
+  --color-admin-elevated: #171D27;
+  --color-admin-subtle: #1C2430;
+  --color-admin-muted: #242D3B;
+  --color-admin-sidebar: #0B0F14;
+  --color-admin-text: #E8ECF1;
+  --color-admin-secondary: #9AA5B5;
+  --color-admin-faint: #6B7687;
+  --color-admin-border: rgba(255, 255, 255, 0.07);
+  --color-admin-border-strong: rgba(255, 255, 255, 0.14);
+  --color-admin-accent-soft: rgba(243, 112, 33, 0.14);
+
+  --radius-admin-sm: 4px;
+  --radius-admin: 6px;
+  --radius-admin-lg: 8px;
+
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Playfair Display", "Times New Roman", Georgia, serif;
 
@@ -171,6 +189,246 @@
     background-color: #ffffff;
     line-height: 1.6;
   }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Admin UI System 2026 — dark futurista, angular (radius 4–8px).
+   Scope: .admin-shell / .admin-portal (no afecta landings públicas).
+   Ref: Manual de marca/admin-ui-system-2026.html
+   ────────────────────────────────────────────────────────────── */
+.admin-shell,
+.admin-portal {
+  color: var(--color-admin-text);
+  background-color: var(--color-admin-app);
+  --admin-ring: 0 0 0 2px rgba(243, 112, 33, 0.35);
+}
+
+.admin-shell {
+  min-height: 100%;
+}
+
+/* Superficies claras → dark elevated */
+.admin-shell .bg-white,
+.admin-portal .bg-white,
+.admin-shell .bg-gray-50,
+.admin-portal .bg-gray-50,
+.admin-shell .bg-gray-100,
+.admin-portal .bg-gray-100 {
+  background-color: var(--color-admin-elevated) !important;
+}
+
+.admin-shell .bg-gray-50\/50,
+.admin-shell .hover\:bg-gray-50:hover,
+.admin-shell .hover\:bg-gray-100:hover,
+.admin-portal .hover\:bg-gray-50:hover,
+.admin-portal .hover\:bg-gray-100:hover {
+  background-color: var(--color-admin-subtle) !important;
+}
+
+.admin-shell .bg-gray-200,
+.admin-portal .bg-gray-200 {
+  background-color: var(--color-admin-muted) !important;
+}
+
+/* Texto */
+.admin-shell .text-navy,
+.admin-portal .text-navy,
+.admin-shell .text-gray-900,
+.admin-portal .text-gray-900,
+.admin-shell .text-gray-800,
+.admin-portal .text-gray-800,
+.admin-shell .text-gray-700,
+.admin-portal .text-gray-700 {
+  color: var(--color-admin-text) !important;
+}
+
+.admin-shell .text-gray-600,
+.admin-portal .text-gray-600,
+.admin-shell .text-gray-500,
+.admin-portal .text-gray-500,
+.admin-shell .text-gray-400,
+.admin-portal .text-gray-400 {
+  color: var(--color-admin-faint) !important;
+}
+
+.admin-shell .hover\:text-navy:hover,
+.admin-portal .hover\:text-navy:hover {
+  color: #fff !important;
+}
+
+/* Bordes */
+.admin-shell .border-gray-100,
+.admin-shell .border-gray-200,
+.admin-shell .border-gray-200\/50,
+.admin-shell .border-gray-300,
+.admin-portal .border-gray-100,
+.admin-portal .border-gray-200,
+.admin-portal .border-gray-200\/50,
+.admin-portal .border-gray-300 {
+  border-color: var(--color-admin-border) !important;
+}
+
+.admin-shell .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+.admin-shell .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--color-admin-border) !important;
+}
+
+/* Radios angulares (mínimo redondeo) */
+.admin-shell .rounded-2xl,
+.admin-portal .rounded-2xl {
+  border-radius: var(--radius-admin-lg) !important;
+}
+
+.admin-shell .rounded-xl,
+.admin-portal .rounded-xl {
+  border-radius: var(--radius-admin) !important;
+}
+
+.admin-shell .rounded-lg,
+.admin-portal .rounded-lg {
+  border-radius: var(--radius-admin-sm) !important;
+}
+
+/* Soft tint surfaces usados en KPIs/settings */
+.admin-shell .bg-blue-50,
+.admin-shell .bg-indigo-50,
+.admin-shell .bg-purple-50,
+.admin-shell .bg-green-50,
+.admin-shell .bg-yellow-50,
+.admin-shell .bg-orange\/10,
+.admin-shell .bg-navy\/8,
+.admin-shell .bg-red-50 {
+  background-color: var(--color-admin-subtle) !important;
+}
+
+.admin-shell .shadow-sm,
+.admin-shell .shadow-md,
+.admin-shell .shadow-lg,
+.admin-shell .shadow-xl,
+.admin-portal .shadow-sm,
+.admin-portal .shadow-md,
+.admin-portal .shadow-lg,
+.admin-portal .shadow-xl {
+  box-shadow: none !important;
+}
+
+/* Inputs / textareas / selects dentro del admin */
+.admin-shell input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.admin-shell textarea,
+.admin-shell select,
+.admin-portal input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.admin-portal textarea,
+.admin-portal select {
+  background-color: var(--color-admin-subtle) !important;
+  border-color: var(--color-admin-border-strong) !important;
+  color: var(--color-admin-text) !important;
+  border-radius: var(--radius-admin-sm) !important;
+}
+
+.admin-shell input::placeholder,
+.admin-shell textarea::placeholder,
+.admin-portal input::placeholder,
+.admin-portal textarea::placeholder {
+  color: var(--color-admin-faint) !important;
+}
+
+.admin-shell input:focus-visible,
+.admin-shell textarea:focus-visible,
+.admin-shell select:focus-visible,
+.admin-portal input:focus-visible,
+.admin-portal textarea:focus-visible,
+.admin-portal select:focus-visible {
+  border-color: var(--color-orange) !important;
+  box-shadow: var(--admin-ring) !important;
+  outline: none !important;
+}
+
+/* Botones shadcn default (navy) → accent en admin */
+.admin-shell button[class*="bg-[#2A3A4A]"],
+.admin-portal button[class*="bg-[#2A3A4A]"] {
+  background-color: var(--color-orange) !important;
+}
+
+.admin-shell button[class*="bg-[#2A3A4A]"]:hover,
+.admin-portal button[class*="bg-[#2A3A4A]"]:hover {
+  background-color: var(--color-orange-dark) !important;
+}
+
+.admin-shell button[class*="border-[#2A3A4A]"],
+.admin-portal button[class*="border-[#2A3A4A]"] {
+  border-color: var(--color-admin-border-strong) !important;
+  color: var(--color-admin-text) !important;
+}
+
+.admin-shell button[class*="text-[#2A3A4A]"],
+.admin-portal button[class*="text-[#2A3A4A]"] {
+  color: var(--color-admin-secondary) !important;
+}
+
+.admin-shell button.bg-white,
+.admin-portal button.bg-white {
+  background-color: var(--color-admin-subtle) !important;
+  color: var(--color-admin-text) !important;
+  border-color: var(--color-admin-border-strong) !important;
+}
+
+/* Tablas */
+.admin-shell table thead,
+.admin-portal table thead {
+  background-color: var(--color-admin-subtle);
+}
+
+.admin-shell table th,
+.admin-portal table th {
+  color: var(--color-admin-faint);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-shell table tr:hover td,
+.admin-portal table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.admin-shell .bg-white\/90,
+.admin-shell .bg-white\/95,
+.admin-portal .bg-white\/90,
+.admin-portal .bg-white\/95 {
+  background-color: rgba(23, 29, 39, 0.95) !important;
+}
+
+.admin-shell .focus\:bg-white:focus,
+.admin-portal .focus\:bg-white:focus {
+  background-color: var(--color-admin-subtle) !important;
+}
+
+.admin-shell .bg-yellow-50\/50,
+.admin-shell .bg-yellow-50,
+.admin-shell .bg-yellow-100 {
+  background-color: rgba(245, 185, 66, 0.1) !important;
+}
+
+.admin-shell .border-yellow-100,
+.admin-shell .border-yellow-200 {
+  border-color: rgba(245, 185, 66, 0.25) !important;
+}
+
+.admin-shell .text-yellow-800,
+.admin-shell .text-yellow-700,
+.admin-shell .text-yellow-600 {
+  color: #F5B942 !important;
+}
+
+.admin-shell .hover\:border-gray-300:hover,
+.admin-portal .hover\:border-gray-300:hover {
+  border-color: var(--color-admin-border-strong) !important;
+}
+
+/* Cards shadcn dentro del admin */
+.admin-shell [class*="rounded-2xl"][class*="border-gray-200"],
+.admin-shell [class*="rounded-2xl"][class*="bg-white"] {
+  background-color: var(--color-admin-elevated);
 }
 
 /* ──────────────────────────────────────────────────────────────

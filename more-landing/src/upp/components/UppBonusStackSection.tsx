@@ -16,7 +16,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function UppBonusStackSection({ price, loading }: UppBonusStackSectionProps) {
   const { t } = useTranslation()
-  const effectivePrice = price || "$2,500"
+  const effectivePrice = price || "$3,500"
   const bonuses = t("uppPage.bonusStack.bonuses", { returnObjects: true }) as Array<{
     icon: string
     tag: string

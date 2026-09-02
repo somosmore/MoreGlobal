@@ -261,7 +261,7 @@ export default function TurboPdfPage() {
           {/* Stats */}
           <div style={{ display: "flex", gap: 12, padding: "32px 40px 0" }}>
             {[
-              { value: "$8,000", label: "USD · Inversión única" },
+              { value: "$10,000", label: "USD · Inversión única" },
               { value: "16", label: "Semanas de proceso" },
               { value: "120-160", label: "Días hasta USCIS" },
               { value: "5+", label: "Años exp. requerida" },
@@ -395,7 +395,7 @@ export default function TurboPdfPage() {
                   <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>
                     Inversión total
                   </div>
-                  <div style={{ color: "white", fontSize: 64, fontWeight: 900, lineHeight: 1 }}>$8,000</div>
+                  <div style={{ color: "white", fontSize: 64, fontWeight: 900, lineHeight: 1 }}>$10,000</div>
                   <div style={{ color: "#fca76a", fontSize: 22, fontWeight: 600, marginTop: 6 }}>USD · Pago único</div>
                   <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 18, marginTop: 6 }}>
                     Más gastos de transferencia bancaria

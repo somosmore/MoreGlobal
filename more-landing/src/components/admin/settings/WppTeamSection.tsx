@@ -478,7 +478,7 @@ export default function WppTeamSection() {
           aria-modal="true"
           aria-labelledby="wpp-form-title"
         >
-          <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+          <div className="w-full max-w-md bg-admin-elevated rounded-admin-lg border border-admin-border overflow-hidden admin-portal">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
               <h3 id="wpp-form-title" className="text-sm font-semibold text-navy">
                 {form.mode === "create" ? "Agregar número" : "Editar número"}
@@ -568,7 +568,7 @@ export default function WppTeamSection() {
           aria-modal="true"
           aria-labelledby="wpp-bulk-title"
         >
-          <div className="w-full max-w-3xl max-h-[90vh] bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col">
+          <div className="w-full max-w-3xl max-h-[90vh] bg-admin-elevated rounded-admin-lg border border-admin-border overflow-hidden flex flex-col admin-portal">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-orange" />
