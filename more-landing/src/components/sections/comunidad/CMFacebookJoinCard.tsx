@@ -7,8 +7,8 @@ import {
 } from "@/components/sections/comunidad/comunidadCopy"
 import { CtaButton } from "@/components/brand/CtaButton"
 
-// TODO: reemplazar por la URL real del grupo de Facebook de MORE.
-export const COMUNIDAD_FACEBOOK_GROUP_URL = "PENDIENTE"
+export const COMUNIDAD_FACEBOOK_GROUP_URL =
+  "https://www.facebook.com/groups/1466363148722242"
 
 type CMFacebookJoinCardProps = {
   variant?: ComunidadFormVariant

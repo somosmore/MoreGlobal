@@ -586,11 +586,11 @@ Landing de captación cuyo objetivo es que el lead **se una al grupo de Facebook
 | Tag GHL | `Comunidad-Facebook` |
 | Source Supabase | `comunidad-facebook` |
 | Event label | `Comunidad MORE — Grupo de Facebook` |
-| Grupo de Facebook | `COMUNIDAD_FACEBOOK_GROUP_URL` en `src/components/sections/comunidad/CMFacebookJoinCard.tsx` |
+| Grupo de Facebook | [Comunidad MORE](https://www.facebook.com/groups/1466363148722242) — `COMUNIDAD_FACEBOOK_GROUP_URL` en `src/components/sections/comunidad/CMFacebookJoinCard.tsx` |
 
 **Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email y WhatsApp (país derivado de la lada). Los leads quedan en `masterclass_leads` con `source = comunidad-facebook`. Dispara `CompleteRegistration` en Meta.
 
-Tras registro exitoso: tarjeta de confirmación + CTA azul **"Entrar al grupo de Facebook"**. Mientras la URL del grupo sea `PENDIENTE`, el botón aparece deshabilitado con el texto "Enlace del grupo disponible pronto".
+Tras registro exitoso: tarjeta de confirmación + CTA azul **"Entrar al grupo de Facebook"** (abre el grupo en pestaña nueva). Si la constante no empieza con `http`, el botón aparece deshabilitado con el texto "Enlace del grupo disponible pronto".
 
 #### 1.20.1 Página post-registro Meta Lead Ads (`/comunidad/registro`)
 

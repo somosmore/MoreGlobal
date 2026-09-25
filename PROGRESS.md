@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-09-25] — `/comunidad`: configurar enlace del grupo de Facebook
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/comunidad/CMFacebookJoinCard.tsx`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: `COMUNIDAD_FACEBOOK_GROUP_URL` → `https://www.facebook.com/groups/1466363148722242`; el CTA post-registro queda habilitado. Migración 037 ya aplicada en producción.
+- Problemas encontrados: ninguno.
+- Estado: ✅ completo
+
 ### [2026-09-25] — Landing `/comunidad`: captación → grupo de Facebook
 
 - Agente: claude-code
