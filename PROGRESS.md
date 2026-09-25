@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-09-25] — Landing `/comunidad`: captación → grupo de Facebook
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/comunidad/*` (nuevo), `src/pages/ComunidadPage.tsx`, `src/pages/ComunidadRegistroPage.tsx`, `src/App.tsx`, `src/lib/tracking.ts`, `src/components/brand/CtaButton.tsx` (variante `facebook`), `supabase/migrations/037_comunidad_facebook.sql`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Landing inspirada en alvaroluque.com/luque-com-bog-sep-26, con formulario corto (nombre, email, WhatsApp) antes del grupo (opción B). Reutiliza `masterclass-register` con source `comunidad-facebook` y tag GHL `Comunidad-Facebook`. Éxito in-place con CTA al grupo de Facebook. Sin fechas en settings (no es evento).
+- Problemas encontrados: URL del grupo de Facebook pendiente (`COMUNIDAD_FACEBOOK_GROUP_URL`, botón deshabilitado hasta configurarla). Frase de Ivon en `CMProof` es propuesta, validar. Lint global tiene 11 errores preexistentes en archivos no tocados.
+- Estado: ⚠️ bloqueado parcialmente (falta URL del grupo)
+
 ### [2026-08-01] — Taller `/taller-niw`: Cambio de Estatus (6 ago 2026)
 
 - Agente: cursor

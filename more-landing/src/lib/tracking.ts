@@ -49,6 +49,8 @@ const MASTERCLASS_LANDING_PATHS = new Set([
   "/webinar-estatus/registro",
   "/webinar-sep-26",
   "/webinar-sep-26/registro",
+  "/comunidad",
+  "/comunidad/registro",
 ])
 
 const isMasterclassLandingPath = (pathname: string): boolean =>
