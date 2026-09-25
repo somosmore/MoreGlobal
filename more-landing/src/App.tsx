@@ -27,6 +27,8 @@ const WebinarEstatusPage = lazy(() => import("@/pages/WebinarEstatusPage"))
 const WebinarEstatusRegistroPage = lazy(() => import("@/pages/WebinarEstatusRegistroPage"))
 const WebinarSep26Page = lazy(() => import("@/pages/WebinarSep26Page"))
 const WebinarSep26RegistroPage = lazy(() => import("@/pages/WebinarSep26RegistroPage"))
+const ComunidadPage = lazy(() => import("@/pages/ComunidadPage"))
+const ComunidadRegistroPage = lazy(() => import("@/pages/ComunidadRegistroPage"))
 const UppPage = lazy(() => import("@/pages/UppPage"))
 const TurboPage = lazy(() => import("@/pages/TurboPage"))
 const WppEquipoPage = lazy(() => import("@/pages/WppEquipoPage"))
@@ -58,6 +60,8 @@ function App() {
           <Route path="/webinar-estatus/registro" element={<WebinarEstatusRegistroPage />} />
           <Route path="/webinar-sep-26" element={<WebinarSep26Page />} />
           <Route path="/webinar-sep-26/registro" element={<WebinarSep26RegistroPage />} />
+          <Route path="/comunidad" element={<ComunidadPage />} />
+          <Route path="/comunidad/registro" element={<ComunidadRegistroPage />} />
           <Route path="/upp" element={<UppPage />} />
           <Route path="/upp/pdf" element={<UppPdfPage />} />
           <Route path="/turbo" element={<TurboPage />} />

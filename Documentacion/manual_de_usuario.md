@@ -26,6 +26,7 @@
    - 1.17 [Thank You post-agenda (`/gracias`)](#117-thank-you-post-agenda-gracias)
    - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
    - 1.19 [Landing Masterclass 1 Instituto More (`/webinar-sep-26`)](#119-landing-masterclass-1-instituto-more-webinar-sep-26)
+   - 1.20 [Landing Comunidad MORE (`/comunidad`)](#120-landing-comunidad-more-comunidad)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -571,6 +572,35 @@ https://moremigracion.com/webinar-sep-26/registro?utm_source=facebook&utm_medium
 ```
 
 **Admin:** fechas en `/admin/settings` → Landings de campaña → Masterclass 1 Instituto More.
+
+### 1.20 Landing Comunidad MORE (`/comunidad`)
+
+**Ruta:** `/comunidad`
+
+Landing de captación cuyo objetivo es que el lead **se una al grupo de Facebook de MORE**. No es un evento: no tiene countdown, cupos ni fecha de cierre. Un único mensaje de CTA ("Quiero unirme a la comunidad") se repite en hero, cifras, bio y barra fija, y todos llevan al formulario.
+
+**Secciones:** hero (propuesta + foto de Ivon) → 4 beneficios (contenido de Ivon, prioridad en masterclasses, lives de preguntas, red de profesionales) → cifras (+200 Green Cards, 98% aprobación, EB-2 NIW) + frase de Ivon → testimonios → formulario → FAQ → bio de Ivon → footer → CTA fijo.
+
+| Dato | Valor |
+|------|-------|
+| Tag GHL | `Comunidad-Facebook` |
+| Source Supabase | `comunidad-facebook` |
+| Event label | `Comunidad MORE — Grupo de Facebook` |
+| Grupo de Facebook | [Comunidad MORE](https://www.facebook.com/groups/1466363148722242) — `COMUNIDAD_FACEBOOK_GROUP_URL` en `src/components/sections/comunidad/CMFacebookJoinCard.tsx` |
+
+**Registro:** Edge Function `masterclass-register` (Supabase + GHL). Campos: nombre, email y WhatsApp (país derivado de la lada). Los leads quedan en `masterclass_leads` con `source = comunidad-facebook`. Dispara `CompleteRegistration` en Meta.
+
+Tras registro exitoso: tarjeta de confirmación + CTA azul **"Entrar al grupo de Facebook"** (abre el grupo en pestaña nueva). Si la constante no empieza con `http`, el botón aparece deshabilitado con el texto "Enlace del grupo disponible pronto".
+
+#### 1.20.1 Página post-registro Meta Lead Ads (`/comunidad/registro`)
+
+Solo la tarjeta con el CTA al grupo de Facebook, para leads captados con formularios nativos de Meta. Disponibilidad: `useLandingStatus("/comunidad")`.
+
+```
+https://moremigracion.com/comunidad/registro?utm_source=facebook&utm_medium=paid&utm_campaign=comunidad
+```
+
+**Activación:** migración `037_comunidad_facebook.sql` (fila en `landing_projects`). Se puede desactivar desde el módulo de Recursos → disponibilidad de landings.
 
 ---
 

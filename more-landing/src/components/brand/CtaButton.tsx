@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { trackScheduleCta } from "@/lib/tracking"
 
-export type CtaVariant = "primary" | "secondary" | "whatsapp"
+export type CtaVariant = "primary" | "secondary" | "whatsapp" | "facebook"
 export type CtaSize = "md" | "lg"
 
 type CtaButtonProps = {
@@ -40,6 +40,8 @@ const VARIANTS: Record<CtaVariant, string> = {
     "border border-navy/20 bg-white text-navy shadow-sm hover:border-orange/50 hover:text-orange-dark focus-visible:ring-orange",
   whatsapp:
     "bg-[#25D366] text-white shadow-md shadow-[#25D366]/25 hover:bg-[#20BD5A] hover:shadow-lg focus-visible:ring-[#25D366]",
+  facebook:
+    "bg-[#1877F2] text-white shadow-md shadow-[#1877F2]/25 hover:bg-[#0F66D9] hover:shadow-lg focus-visible:ring-[#1877F2]",
 }
 
 const SIZES: Record<CtaSize, string> = {
