@@ -22,57 +22,46 @@ const testimonials = [
   },
 ]
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-}
-
 export default function WSTestimonials() {
   return (
-    <section className="bg-white py-10 sm:py-14">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+    <section className="bg-white py-14 sm:py-18">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 text-center"
+          transition={{ duration: 0.45 }}
+          className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="font-display text-2xl font-bold text-navy-deep sm:text-3xl">
-            Lo que dicen quienes ya lo vivieron
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-dark">
+            Experiencias reales
+          </p>
+          <h2 className="mt-3 font-display text-2xl font-bold text-navy-deep sm:text-3xl">
+            Información que ayuda a tomar mejores decisiones.
           </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-[#F37021] to-[#D4611A] opacity-80" />
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={container}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-3"
-        >
-          {testimonials.map((t) => (
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          {testimonials.map((testimonial, index) => (
             <motion.figure
-              key={t.name}
-              variants={item}
-              className="flex flex-col rounded-2xl border border-gray-100 bg-[#F4F6FB] p-5 shadow-sm sm:p-6"
+              key={testimonial.name}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.08 }}
+              className="flex flex-col border-t-2 border-orange bg-paper p-6"
             >
-              <Quote className="mb-3 h-6 w-6 shrink-0 text-[#F37021]" />
-              <blockquote className="flex-1 text-sm leading-relaxed text-navy-deep">
-                {t.quote}
+              <Quote className="h-5 w-5 text-orange-dark" aria-hidden />
+              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-navy-deep">
+                “{testimonial.quote}”
               </blockquote>
-              <figcaption className="mt-4 border-t border-gray-200 pt-4">
-                <p className="text-sm font-bold text-navy-deep">{t.name}</p>
-                <p className="text-xs font-medium text-[#F37021]">{t.role}</p>
+              <figcaption className="mt-5 text-sm">
+                <span className="font-bold text-navy-deep">{testimonial.name}</span>
+                <span className="text-ink-muted"> · {testimonial.role}</span>
               </figcaption>
             </motion.figure>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

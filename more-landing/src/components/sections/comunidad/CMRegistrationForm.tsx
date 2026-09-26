@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, CheckCircle2, Loader2, Users, ChevronDown, Globe } from "lucide-react"
+import { Shield, Loader2, ChevronDown, Globe } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import {
@@ -390,22 +389,9 @@ export default function CMRegistrationForm({ variant = "default" }: CMRegistrati
               exit={{ opacity: 0, scale: 0.95 }}
               className="rounded-2xl border border-navy/15 bg-white shadow-sm"
             >
-              <div className="h-1.5 w-full bg-gradient-to-r from-[#F37021] via-[#FFAA5E] to-[#F37021] rounded-t-2xl" />
+              <div className="h-1 w-full rounded-t-2xl bg-orange" />
 
               <div className="p-6 sm:p-8">
-                <div className="flex items-center justify-between mb-5">
-                  <Badge variant="orange" className="gap-1.5">
-                    <Users className="h-3 w-3" />
-                    COMUNIDAD PRIVADA
-                  </Badge>
-                  <div className="flex items-center gap-1.5 bg-[#10B981]/10 border border-[#10B981]/30 rounded-full px-3 py-1">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#10B981] shrink-0" />
-                    <span className="text-xs font-bold text-[#10B981] uppercase tracking-wide">
-                      100% Gratis
-                    </span>
-                  </div>
-                </div>
-
                 <div className="space-y-4">
                   <div>
                     <label
@@ -507,7 +493,7 @@ export default function CMRegistrationForm({ variant = "default" }: CMRegistrati
                   )}
                 </button>
 
-                <div className="flex items-center justify-center gap-2 mt-4 text-xs text-[#9BAAB8]">
+                <div className="mt-4 flex items-center justify-center gap-2 text-xs text-[#9BAAB8]">
                   <Shield className="h-3.5 w-3.5 shrink-0" />
                   <span>
                     Tu información está segura. No compartimos tus datos.
