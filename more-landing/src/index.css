@@ -28,17 +28,18 @@
   --color-white: #FFFFFF;
 
   /* Admin UI System 2026 — dark operativo (scoped .admin-shell) */
-  --color-admin: #0E1218;
-  --color-admin-app: #12171F;
-  --color-admin-elevated: #171D27;
-  --color-admin-subtle: #1C2430;
-  --color-admin-muted: #242D3B;
-  --color-admin-sidebar: #0B0F14;
-  --color-admin-text: #E8ECF1;
-  --color-admin-secondary: #9AA5B5;
-  --color-admin-faint: #6B7687;
-  --color-admin-border: rgba(255, 255, 255, 0.07);
-  --color-admin-border-strong: rgba(255, 255, 255, 0.14);
+  /* Contraste revisado 2026-10: texto secundario/tenue ≥ 4.5:1 (WCAG AA) sobre elevated. */
+  --color-admin: #121821;
+  --color-admin-app: #171E28;
+  --color-admin-elevated: #1E2632;
+  --color-admin-subtle: #252F3D;
+  --color-admin-muted: #2F3A4A;
+  --color-admin-sidebar: #10161E;
+  --color-admin-text: #F1F4F8;
+  --color-admin-secondary: #B6C0CD;
+  --color-admin-faint: #929EAF;
+  --color-admin-border: rgba(255, 255, 255, 0.11);
+  --color-admin-border-strong: rgba(255, 255, 255, 0.2);
   --color-admin-accent-soft: rgba(243, 112, 33, 0.14);
 
   --radius-admin-sm: 4px;
@@ -242,12 +243,32 @@
   color: var(--color-admin-text) !important;
 }
 
+/* Navy / hex oscuros pensados para fondo claro → texto legible en dark */
+.admin-shell .text-navy-mid,
+.admin-portal .text-navy-mid,
+.admin-shell .text-\[\#2A3A4A\],
+.admin-portal .text-\[\#2A3A4A\],
+.admin-shell .text-slate-600,
+.admin-portal .text-slate-600 {
+  color: var(--color-admin-text) !important;
+}
+
+/* Jerarquía secundaria: 600/500 → secondary; 400 → faint (ambos ≥ 4.5:1) */
 .admin-shell .text-gray-600,
 .admin-portal .text-gray-600,
 .admin-shell .text-gray-500,
 .admin-portal .text-gray-500,
+.admin-shell .text-navy\/70,
+.admin-portal .text-navy\/70,
+.admin-shell .text-\[\#2A3A4A\]\/60,
+.admin-portal .text-\[\#2A3A4A\]\/60 {
+  color: var(--color-admin-secondary) !important;
+}
+
 .admin-shell .text-gray-400,
-.admin-portal .text-gray-400 {
+.admin-portal .text-gray-400,
+.admin-shell .text-navy\/40,
+.admin-portal .text-navy\/40 {
   color: var(--color-admin-faint) !important;
 }
 
@@ -289,16 +310,139 @@
   border-radius: var(--radius-admin-sm) !important;
 }
 
-/* Soft tint surfaces usados en KPIs/settings */
-.admin-shell .bg-blue-50,
-.admin-shell .bg-indigo-50,
-.admin-shell .bg-purple-50,
-.admin-shell .bg-green-50,
-.admin-shell .bg-yellow-50,
+/* Superficies neutras de KPIs/settings */
 .admin-shell .bg-orange\/10,
 .admin-shell .bg-navy\/8,
-.admin-shell .bg-red-50 {
+.admin-shell .bg-\[\#2A3A4A\]\/10,
+.admin-portal .bg-\[\#2A3A4A\]\/10 {
   background-color: var(--color-admin-subtle) !important;
+}
+
+/* Superficies semánticas (alertas, badges, KPIs): tinte translúcido por color
+   para que error / éxito / info / aviso se distingan sobre dark. */
+.admin-shell .bg-red-50,
+.admin-portal .bg-red-50,
+.admin-shell .bg-red-100,
+.admin-portal .bg-red-100 {
+  background-color: rgba(248, 113, 113, 0.12) !important;
+}
+
+.admin-shell .bg-green-50,
+.admin-portal .bg-green-50,
+.admin-shell .bg-green-100,
+.admin-portal .bg-green-100,
+.admin-shell .bg-emerald-50,
+.admin-portal .bg-emerald-50 {
+  background-color: rgba(74, 222, 128, 0.12) !important;
+}
+
+.admin-shell .bg-blue-50,
+.admin-portal .bg-blue-50,
+.admin-shell .bg-blue-100,
+.admin-portal .bg-blue-100 {
+  background-color: rgba(96, 165, 250, 0.12) !important;
+}
+
+.admin-shell .bg-indigo-50,
+.admin-portal .bg-indigo-50,
+.admin-shell .bg-purple-50,
+.admin-portal .bg-purple-50 {
+  background-color: rgba(167, 139, 250, 0.12) !important;
+}
+
+.admin-shell .bg-amber-50,
+.admin-portal .bg-amber-50,
+.admin-shell .bg-amber-100,
+.admin-portal .bg-amber-100 {
+  background-color: rgba(245, 185, 66, 0.12) !important;
+}
+
+/* Texto de color (tonos 500–900 son para fondo claro) → tonos claros legibles */
+.admin-shell .text-red-500,
+.admin-shell .text-red-600,
+.admin-shell .text-red-700,
+.admin-shell .text-red-800,
+.admin-portal .text-red-500,
+.admin-portal .text-red-600,
+.admin-portal .text-red-700,
+.admin-portal .text-red-800 {
+  color: #FCA5A5 !important;
+}
+
+.admin-shell .text-green-600,
+.admin-shell .text-green-700,
+.admin-shell .text-green-800,
+.admin-shell .text-emerald-600,
+.admin-shell .text-emerald-700,
+.admin-portal .text-green-600,
+.admin-portal .text-green-700,
+.admin-portal .text-green-800,
+.admin-portal .text-emerald-600,
+.admin-portal .text-emerald-700 {
+  color: #86EFAC !important;
+}
+
+.admin-shell .text-blue-500,
+.admin-shell .text-blue-600,
+.admin-shell .text-blue-700,
+.admin-shell .text-blue-800,
+.admin-portal .text-blue-500,
+.admin-portal .text-blue-600,
+.admin-portal .text-blue-700,
+.admin-portal .text-blue-800 {
+  color: #93C5FD !important;
+}
+
+.admin-shell .text-purple-700,
+.admin-shell .text-violet-700,
+.admin-shell .text-indigo-600,
+.admin-shell .text-indigo-700,
+.admin-portal .text-purple-700,
+.admin-portal .text-violet-700,
+.admin-portal .text-indigo-600,
+.admin-portal .text-indigo-700 {
+  color: #C4B5FD !important;
+}
+
+.admin-shell .text-amber-700,
+.admin-shell .text-amber-800,
+.admin-portal .text-amber-700,
+.admin-portal .text-amber-800 {
+  color: #F5B942 !important;
+}
+
+.admin-shell .text-\[\#D4611A\],
+.admin-portal .text-\[\#D4611A\] {
+  color: #FB923C !important;
+}
+
+/* Bordes de color claros → tinte translúcido del mismo tono */
+.admin-shell .border-red-100,
+.admin-shell .border-red-200,
+.admin-shell .border-red-300,
+.admin-portal .border-red-100,
+.admin-portal .border-red-200,
+.admin-portal .border-red-300 {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+.admin-shell .border-green-200,
+.admin-shell .border-emerald-200,
+.admin-portal .border-green-200,
+.admin-portal .border-emerald-200 {
+  border-color: rgba(74, 222, 128, 0.35) !important;
+}
+
+.admin-shell .border-blue-100,
+.admin-shell .border-blue-200,
+.admin-portal .border-blue-100,
+.admin-portal .border-blue-200 {
+  border-color: rgba(96, 165, 250, 0.35) !important;
+}
+
+.admin-shell .border-amber-200,
+.admin-portal .border-amber-200 {
+  border-color: rgba(245, 185, 66, 0.35) !important;
 }
 
 .admin-shell .shadow-sm,
@@ -380,15 +524,16 @@
 
 .admin-shell table th,
 .admin-portal table th {
-  color: var(--color-admin-faint);
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  color: var(--color-admin-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .admin-shell table tr:hover td,
 .admin-portal table tr:hover td {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .admin-shell .bg-white\/90,
@@ -414,6 +559,7 @@
   border-color: rgba(245, 185, 66, 0.25) !important;
 }
 
+.admin-shell .text-yellow-900,
 .admin-shell .text-yellow-800,
 .admin-shell .text-yellow-700,
 .admin-shell .text-yellow-600 {

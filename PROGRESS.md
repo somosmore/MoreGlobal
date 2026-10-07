@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-10-07] — Admin: mejorar contraste y legibilidad del tema dark
+
+- Agente: claude-code
+- Archivos modificados: `src/index.css`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Tokens admin más claros (fondos, texto, bordes). `text-gray-500/600` → secundario (8.3:1), `text-gray-400` → tenue (5.6:1, antes 3.7:1). Tintes translúcidos por color para `bg-{red,green,blue,purple,amber}-50/100` + texto claro del mismo tono (antes 2.4–3.1:1, ahora 6.8–8.4:1). Cubiertos `text-[#2A3A4A]`, `text-navy/70`, `text-navy/40`, `text-navy-mid`. Encabezados de tabla más legibles (12px, secundario) y hover de filas visible.
+- Problemas encontrados: lint global mantiene 11 errores preexistentes (archivos no tocados). Sin verificación visual en navegador (requiere login admin).
+- Estado: ✅ completo
+
 ### [2026-09-25] — `/comunidad`: configurar enlace del grupo de Facebook
 
 - Agente: claude-code
