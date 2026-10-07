@@ -28,6 +28,14 @@
 - Problemas encontrados: lint global mantiene 11 errores preexistentes (archivos no tocados). Sin verificación visual en navegador (requiere login admin).
 - Estado: ✅ completo
 
+### [2026-10-07] — GHL: pipeline propio para la comunidad
+
+- Agente: claude-code
+- Archivos modificados: `supabase/functions/masterclass-register/index.ts`, `scripts/create-ghl-comunidad-pipeline.mjs` (nuevo), `.env.example`
+- Qué se implementó: Pipeline "Comunidad MORE — Facebook" creado en GHL (`6X6qL6kFdbO3qa2Is5RW`, stage "Nuevo Registro" `35fea687-358d-4a3e-a98b-54d76be3ea85`). La edge function envía `source = comunidad-facebook` a ese pipeline si existen los secrets `GHL_COMUNIDAD_PIPELINE_ID` + `GHL_COMUNIDAD_STAGE_ID`; si no, cae al de masterclass.
+- Problemas encontrados: las oportunidades de los registros previos siguen en el pipeline de masterclass.
+- Estado: 🔄 en progreso (falta setear secrets y desplegar la función)
+
 ### [2026-09-25] — `/comunidad`: configurar enlace del grupo de Facebook
 
 - Agente: claude-code
