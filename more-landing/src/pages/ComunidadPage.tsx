@@ -7,6 +7,7 @@ import CMProof from "@/components/sections/comunidad/CMProof"
 import CMRegistrationForm from "@/components/sections/comunidad/CMRegistrationForm"
 import CMFAQ from "@/components/sections/comunidad/CMFAQ"
 import CMSpeaker from "@/components/sections/comunidad/CMSpeaker"
+import CMFinalCTA from "@/components/sections/comunidad/CMFinalCTA"
 import CMStickyCTA from "@/components/sections/comunidad/CMStickyCTA"
 import { COMUNIDAD_PAGE_META } from "@/components/sections/comunidad/comunidadCopy"
 import WSTestimonials from "@/components/sections/webinar-sep-26/WSTestimonials"
@@ -67,12 +68,13 @@ export default function ComunidadPage() {
   return (
     <div className="campaign-editorial min-h-screen bg-paper">
       <CMHero />
-      <CMBenefits />
-      <CMProof />
       <WSTestimonials />
+      <CMProof />
+      <CMBenefits />
       <CMRegistrationForm />
       <CMFAQ />
       <CMSpeaker />
+      <CMFinalCTA />
       <WSFooter />
       <CMStickyCTA />
     </div>

@@ -20,6 +20,22 @@
 
 ## Bitácora
 
+### [2026-10-07] — Admin: mejorar contraste y legibilidad del tema dark
+
+- Agente: claude-code
+- Archivos modificados: `src/index.css`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Tokens admin más claros (fondos, texto, bordes). `text-gray-500/600` → secundario (8.3:1), `text-gray-400` → tenue (5.6:1, antes 3.7:1). Tintes translúcidos por color para `bg-{red,green,blue,purple,amber}-50/100` + texto claro del mismo tono (antes 2.4–3.1:1, ahora 6.8–8.4:1). Cubiertos `text-[#2A3A4A]`, `text-navy/70`, `text-navy/40`, `text-navy-mid`. Encabezados de tabla más legibles (12px, secundario) y hover de filas visible.
+- Problemas encontrados: lint global mantiene 11 errores preexistentes (archivos no tocados). Sin verificación visual en navegador (requiere login admin).
+- Estado: ✅ completo
+
+### [2026-10-07] — GHL: pipeline propio para la comunidad
+
+- Agente: claude-code
+- Archivos modificados: `supabase/functions/masterclass-register/index.ts`, `scripts/create-ghl-comunidad-pipeline.mjs` (nuevo), `.env.example`
+- Qué se implementó: Pipeline "Comunidad MORE — Facebook" creado en GHL (`6X6qL6kFdbO3qa2Is5RW`, stage "Nuevo Registro" `35fea687-358d-4a3e-a98b-54d76be3ea85`). La edge function envía `source = comunidad-facebook` a ese pipeline si existen los secrets `GHL_COMUNIDAD_PIPELINE_ID` + `GHL_COMUNIDAD_STAGE_ID`; si no, cae al de masterclass.
+- Problemas encontrados: las oportunidades de los registros previos siguen en el pipeline de masterclass. El deploy de la función lo ejecutó el usuario (bloqueado para el agente por permisos de producción).
+- Estado: ✅ completo (secrets `GHL_COMUNIDAD_*` cargados y `masterclass-register` desplegada el 2026-10-07)
+
 ### [2026-09-25] — `/comunidad`: configurar enlace del grupo de Facebook
 
 - Agente: claude-code

@@ -613,6 +613,7 @@ Accesible en `/admin`. Requiere autenticación con email y contraseña de Supaba
 El CRM usa un tema **dark operativo** distinto al de las landings públicas (sistema editorial claro). Criterios:
 
 - Superficies oscuras (`admin` / `admin-elevated`), acento naranja MORE solo en CTAs y foco.
+- **Contraste mínimo WCAG AA (≥ 4.5:1)** en todo el texto: `text-gray-500/600` → tono secundario, `text-gray-400` → tono tenue, colores de estado (rojo/verde/azul/violeta/ámbar) con tonos claros sobre tintes translúcidos del mismo color. Todo vive en `src/index.css` bajo `.admin-shell` / `.admin-portal`.
 - Bordes con radio mínimo (4–8 px); sin pastillas ni decoración editorial (olas, Playfair).
 - **Isotipo / favicon** (`/icon.png`) en sidebar y topbar; wordmark dark en login.
 - Referencia de diseño: `Manual de marca/admin-ui-system-2026.html`.

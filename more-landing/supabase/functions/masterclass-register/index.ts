@@ -36,12 +36,28 @@ type GhlEventConfig = {
   defaultTag: string
 }
 
+const COMUNIDAD_SOURCE = "comunidad-facebook"
+
 const isTallerSource = (leadSource: string): boolean =>
   leadSource === TALLER_SOURCE ||
   (TALLER_SOURCES_LEGACY as readonly string[]).includes(leadSource)
 
-/** Pipeline, stage y tag por tipo de evento (masterclass vs taller). */
+/** Pipeline, stage y tag por tipo de evento (masterclass vs taller vs comunidad). */
 const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
+  // Comunidad: pipeline propio solo si pipeline Y stage están configurados
+  // (evita mezclar un pipeline con un stage de otro); si no, cae al de masterclass.
+  if (leadSource === COMUNIDAD_SOURCE) {
+    const comunidadPipelineId = Deno.env.get("GHL_COMUNIDAD_PIPELINE_ID")
+    const comunidadStageId = Deno.env.get("GHL_COMUNIDAD_STAGE_ID")
+    if (comunidadPipelineId && comunidadStageId) {
+      return {
+        pipelineId: comunidadPipelineId,
+        stageId: comunidadStageId,
+        defaultTag: Deno.env.get("GHL_COMUNIDAD_TAG") ?? "Comunidad-Facebook",
+      }
+    }
+  }
+
   const isTaller = isTallerSource(leadSource)
 
   const pipelineId = isTaller
