@@ -57,7 +57,7 @@ export default function TCTestimonials() {
               className="flex flex-col border-t-2 border-orange bg-paper p-6"
             >
               <Quote className="h-5 w-5 text-orange-dark" aria-hidden />
-              <blockquote className="mt-4 line-clamp-6 flex-1 text-sm leading-relaxed text-navy-deep">
+              <blockquote className="mt-4 line-clamp-5 flex-1 text-sm leading-relaxed text-navy-deep">
                 “{t.quote}”
               </blockquote>
               <figcaption className="mt-5 text-sm">

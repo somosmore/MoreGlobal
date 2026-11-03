@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-11-03] — `/taller-nov-26`: rediseño "Ruta en vivo"
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/{TCHero,TCPains,TCModules,TCTickets,TCAudience,TCFinalCTA,TCStickyCTA,TCRegistrationForm,TCPaymentCard,TCTestimonials,tallerNov26Copy}.tsx/ts`, nuevos `TCDecor.tsx` (retícula de puntos + ruta punteada animada) y `painsStore.ts`; se elimina `TCManifesto.tsx` (integrado en dolores); `src/pages/TallerNov26Page.tsx`
+- Qué se implementó: Escenario navy con la ruta punteada del manual animada (avión en tránsito), info del evento como datos de vuelo, contador como tablero de salidas, diagnóstico interactivo "¿Qué te pasa hoy?" que conecta cada dolor con su módulo, módulos como paradas de una ruta que se dibuja con el scroll y resalta las paradas elegidas, entradas como pases de abordar (General claro / VIP navy), formulario "Check-in" y pago "Embarque". Barra fija corregida (antes quedaba corrida a la izquierda). Se quitó "Cupos limitados" (urgencia inventada, prohibida en el manual).
+- Problemas encontrados: no se pudo verificar la vista móvil en el navegador (la ventana no cambió de tamaño). Lint global: 11 errores preexistentes.
+- Estado: 🔄 en progreso (pendiente aprobación del usuario antes de publicar)
+
 ### [2026-11-02] — Landing `/taller-nov-26`: Taller Comunidad More (evento pago virtual, 23 nov)
 
 - Agente: claude-code

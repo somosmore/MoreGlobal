@@ -1,37 +1,20 @@
-import { motion } from "framer-motion"
-import { Compass, FileSearch, Lock, TrendingDown, Wallet } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ArrowDown, Check, MapPin } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { MODULES, PAINS } from "./tallerNov26Copy"
+import { togglePain, useSelectedPains } from "./painsStore"
 
-const pains = [
-  {
-    icon: Compass,
-    quote: "No sé por dónde empezar.",
-    text: "Demasiada información, consejos contradictorios y rumores de redes. Cada fuente dice algo distinto.",
-  },
-  {
-    icon: Lock,
-    quote: "Tengo todo, menos la visa.",
-    text: "Ofertas que piden residencia permanente, rechazos por necesitar sponsor, depender de un empleador para quedarte.",
-  },
-  {
-    icon: TrendingDown,
-    quote: "Llegué a un tope.",
-    text: "Techo profesional y económico en tu país, y miedo a llegar a EE.UU. a empezar de cero o como subcalificado.",
-  },
-  {
-    icon: FileSearch,
-    quote: "Mi experiencia es real, pero no tengo cómo probarla.",
-    text: "Empresas que cerraron, jefes que ya no están, certificados sin funciones, cartas que nadie quiere firmar.",
-  },
-  {
-    icon: Wallet,
-    quote: "¿Cuánto me va a costar realmente?",
-    text: "El total, los costos ocultos —tasas, traducciones, equivalencias— y el miedo a endeudarte por un proceso incierto.",
-  },
-]
-
+/**
+ * "¿Qué te pasa hoy?": el visitante marca sus dolores y ve en vivo en qué
+ * parada de la ruta se resuelve cada uno. Convierte la lectura en diagnóstico.
+ */
 export default function TCPains() {
+  const selected = useSelectedPains()
+  const matched = PAINS.filter((p) => selected.has(p.id))
+  const moduleIds = [...new Set(matched.map((p) => p.moduleId))].sort()
+
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="relative bg-paper py-16 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -40,46 +23,120 @@ export default function TCPains() {
           transition={{ duration: 0.45 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-dark">
-            ¿Te suena alguna de estas?
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-dark">
+            Diagnóstico rápido
           </p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy-deep sm:text-3xl">
-            Son las frases que más escuchamos de profesionales como tú.
+          <h2 className="mt-3 font-display text-3xl font-bold text-navy-deep sm:text-4xl">
+            ¿Qué te pasa <span className="text-orange">hoy</span>?
           </h2>
+          <p className="mt-3 text-base text-ink-muted">
+            Toca las frases que sientes como tuyas. Te mostramos dónde las resolvemos.
+          </p>
         </motion.div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {pains.map(({ icon: Icon, quote, text }, index) => (
-            <motion.div
-              key={quote}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.06 }}
-              className="flex flex-col border-t-2 border-orange bg-paper p-6"
-            >
-              <Icon className="h-5 w-5 text-orange-dark" aria-hidden />
-              <p className="mt-4 font-display text-lg font-bold leading-snug text-navy-deep">
-                “{quote}”
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{text}</p>
-            </motion.div>
-          ))}
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
+          {PAINS.map((pain, index) => {
+            const isOn = selected.has(pain.id)
+            return (
+              <motion.button
+                key={pain.id}
+                type="button"
+                aria-pressed={isOn}
+                onClick={() => togglePain(pain.id)}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                whileTap={{ scale: 0.98 }}
+                className={cn(
+                  "group flex items-start gap-4 rounded-2xl border-2 p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2",
+                  isOn
+                    ? "border-orange bg-white shadow-md"
+                    : "border-navy/10 bg-white hover:border-navy/25",
+                  index === PAINS.length - 1 && "sm:col-span-2 sm:mx-auto sm:w-1/2",
+                )}
+              >
+                <span
+                  className={cn(
+                    "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                    isOn ? "border-orange bg-orange text-white" : "border-navy/20 text-transparent group-hover:border-navy/40",
+                  )}
+                  aria-hidden
+                >
+                  <Check className="h-4 w-4" strokeWidth={3} />
+                </span>
+                <span>
+                  <span className="block font-display text-lg font-bold leading-snug text-navy-deep">
+                    “{pain.quote}”
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-ink-muted">{pain.text}</span>
+                </span>
+              </motion.button>
+            )
+          })}
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.35, delay: 0.3 }}
-            className="flex flex-col justify-center bg-navy-deep p-6 text-center sm:col-span-2 lg:col-span-1"
-          >
-            <p className="font-display text-xl font-bold leading-snug text-white">
-              Sin estrategia, <span className="text-[#F37021]">cada paso cuesta más.</span>
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-white/75">
-              En este taller ordenamos todo eso en una ruta clara para tu perfil.
-            </p>
-          </motion.div>
+        <div className="mt-8 min-h-[7rem]" aria-live="polite">
+          <AnimatePresence mode="wait">
+            {moduleIds.length > 0 ? (
+              <motion.div
+                key="result"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="rounded-2xl bg-navy-ink p-6 text-white sm:p-8"
+              >
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange">
+                  Tu ruta en el taller
+                </p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {moduleIds.map((id) => {
+                    const mod = MODULES.find((m) => m.id === id)!
+                    return (
+                      <li
+                        key={id}
+                        className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm"
+                      >
+                        <MapPin className="h-3.5 w-3.5 text-orange" aria-hidden />
+                        <span className="font-mono text-navy-soft">{String(id).padStart(2, "0")}</span>
+                        {mod.title}
+                      </li>
+                    )
+                  })}
+                </ul>
+                <p className="mt-4 text-sm text-navy-pale">
+                  {matched.length === PAINS.length
+                    ? "Te pasa todo lo que más escuchamos. El taller está hecho exactamente para ti."
+                    : `Lo trabajamos en ${moduleIds.length === 1 ? "esta parada" : "estas paradas"} de la ruta.`}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("ruta")?.scrollIntoView({ behavior: "smooth" })}
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-orange px-5 py-2.5 text-sm font-bold text-white hover:bg-orange-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-ink"
+                >
+                  Ver mi ruta
+                  <ArrowDown className="h-4 w-4" aria-hidden />
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="manifesto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="mx-auto max-w-2xl pt-4 text-center"
+              >
+                <p className="font-display text-2xl font-bold leading-snug text-navy-deep sm:text-3xl">
+                  Migrar no debería costarte una fortuna.{" "}
+                  <span className="text-orange">Y menos esperar a ciegas.</span>
+                </p>
+                <p className="mt-3 text-sm text-ink-muted">
+                  Sin estrategia, cada paso cuesta más. Este taller existe para que decidas con
+                  criterio, no con rumores ni con prisa.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ const no = [
 
 export default function TCAudience() {
   return (
-    <section className="bg-paper py-14 sm:py-20">
+    <section className="bg-paper-warm py-16 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -62,10 +62,15 @@ export default function TCAudience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: index * 0.08 }}
-              className="flex flex-col border border-navy/10 bg-white p-6"
+              className="flex flex-col rounded-2xl border border-navy/10 bg-white p-6"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-orange-wash">
-                <Icon className="h-5 w-5 text-orange-dark" aria-hidden />
+              {/* Iconografía duotono del manual: círculo sólido, alternando navy y naranja */}
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-full ${
+                  index % 2 === 0 ? "bg-navy-deep" : "bg-orange"
+                }`}
+              >
+                <Icon className="h-5 w-5 text-white" aria-hidden />
               </div>
               <h3 className="mt-4 text-lg font-bold text-navy-deep">{label}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{who}</p>
@@ -82,7 +87,7 @@ export default function TCAudience() {
         </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <div className="border border-navy/10 bg-white p-6">
+          <div className="rounded-2xl border border-navy/10 bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wider text-navy-deep">Sí es para ti si…</p>
             <ul className="mt-4 space-y-3">
               {yes.map((item) => (
@@ -93,7 +98,7 @@ export default function TCAudience() {
               ))}
             </ul>
           </div>
-          <div className="border border-navy/10 bg-white p-6">
+          <div className="rounded-2xl border border-navy/10 bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wider text-navy-deep">No es para ti si…</p>
             <ul className="mt-4 space-y-3">
               {no.map((item) => (

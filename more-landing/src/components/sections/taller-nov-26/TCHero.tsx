@@ -1,113 +1,222 @@
-import { motion } from "framer-motion"
-import { Calendar, Clock, Monitor, User } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ArrowRight, Plane } from "lucide-react"
 import { CtaButton } from "@/components/brand/CtaButton"
-import { EventCountdown } from "@/components/brand/EventCountdown"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { TALLER_CTA_LABEL, TALLER_DATE_LABEL, TALLER_TIME_LABEL } from "./tallerNov26Copy"
+import { useOfferWindow } from "@/hooks/useOfferWindow"
+import { TALLER_CTA_LABEL } from "./tallerNov26Copy"
 import { scrollToEntradas } from "./scrollToRegistro"
+import { DotGrid, FlightRoute } from "./TCDecor"
 
-const details = [
-  { icon: Calendar, text: TALLER_DATE_LABEL },
-  { icon: Clock, text: TALLER_TIME_LABEL },
-  { icon: Monitor, text: "Virtual y en vivo" },
-  { icon: User, text: "Con Ivon More" },
+const flightInfo = [
+  { label: "Fecha", value: "Lun 23 Nov" },
+  { label: "Hora", value: "19:00 COT" },
+  { label: "Modalidad", value: "Virtual en vivo" },
+  { label: "Guía", value: "Ivon More" },
 ]
+
+/** Un dígito del tablero: cambia con un desplazamiento vertical corto. */
+function BoardDigit({ char }: { char: string }) {
+  return (
+    <span className="relative flex h-12 w-9 items-center justify-center overflow-hidden rounded-md border border-white/10 bg-navy-deep sm:h-16 sm:w-12">
+      <span aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-navy-ink" />
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={char}
+          initial={{ y: "-60%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "60%", opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="font-mono text-2xl font-bold tabular-nums text-white sm:text-4xl"
+        >
+          {char}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
+
+function BoardUnit({ value, label }: { value: number; label: string }) {
+  const digits = String(value).padStart(2, "0").split("")
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex gap-1">
+        {digits.map((d, i) => (
+          <BoardDigit key={i} char={d} />
+        ))}
+      </div>
+      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-navy-soft">{label}</span>
+    </div>
+  )
+}
+
+/** Contador con estética de tablero de salidas de aeropuerto. */
+function DepartureBoard({ targetDate }: { targetDate: string }) {
+  const { timeLeft, expired } = useOfferWindow(targetDate)
+  if (!timeLeft && !expired) return null
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-navy-ink/80 p-4 backdrop-blur-sm sm:p-6">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-bold uppercase tracking-[0.18em]">
+        <span className="flex items-center gap-2 text-navy-soft">
+          <Plane className="h-3.5 w-3.5 text-orange" aria-hidden />
+          Salida · MORE 2311 · Destino: tu ruta en EE.UU.
+        </span>
+        <span className={expired ? "text-navy-soft" : "text-orange"}>
+          {expired ? "En curso" : "A tiempo"}
+        </span>
+      </div>
+      {timeLeft ? (
+        <div className="flex items-start justify-center gap-2 sm:gap-4">
+          <BoardUnit value={timeLeft.days} label="Días" />
+          <span className="pt-3 font-mono text-2xl text-navy-line sm:pt-4 sm:text-3xl">:</span>
+          <BoardUnit value={timeLeft.hours} label="Horas" />
+          <span className="pt-3 font-mono text-2xl text-navy-line sm:pt-4 sm:text-3xl">:</span>
+          <BoardUnit value={timeLeft.minutes} label="Min" />
+          <span className="pt-3 font-mono text-2xl text-navy-line sm:pt-4 sm:text-3xl">:</span>
+          <BoardUnit value={timeLeft.seconds} label="Seg" />
+        </div>
+      ) : (
+        <p className="text-center text-sm text-navy-pale">El taller ya despegó.</p>
+      )}
+    </div>
+  )
+}
 
 export default function TCHero() {
   const { settings } = useSiteSettings()
 
   return (
-    <section className="relative isolate overflow-hidden bg-paper">
-      <img
-        src="/ivon-comunidad-hero.png"
-        alt="Ivon More, fundadora de MORE"
-        className="absolute inset-0 -z-20 h-full w-full object-cover object-[68%_center] lg:object-center"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-paper via-paper/95 via-45% to-paper/10 to-80%" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-paper via-paper/20 to-paper/10" />
+    <section className="relative isolate overflow-hidden bg-navy-ink text-white">
+      <DotGrid />
+      <FlightRoute className="absolute inset-x-0 top-6 -z-0 opacity-80 sm:top-10" duration={11} />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-28">
-        <div className="max-w-xl text-center lg:text-left">
-          <motion.img
-            src="/logo_more_light.png"
-            alt="MORE"
-            className="mx-auto mb-8 h-24 sm:h-28 lg:mx-0 lg:h-32"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange/30 bg-orange-wash px-4 py-2"
-          >
-            <span className="h-2 w-2 animate-pulse rounded-full bg-[#F37021]" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-orange-dark">
-              Taller Comunidad More · En vivo
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-navy-deep sm:text-4xl lg:text-5xl"
-          >
-            Tu trayectoria vale en Estados Unidos.{" "}
-            <span className="text-[#F37021]">Diseña la ruta para demostrarlo.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="mt-5 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg"
-          >
-            Un taller práctico para saber dónde estás hoy, qué camino te conviene y
-            cuánto cuesta realmente,{" "}
-            <strong className="font-semibold text-navy-deep">
-              sin invertir de más ni decidir a ciegas.
-            </strong>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 lg:justify-start"
-          >
-            {details.map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2 text-sm text-ink-muted">
-                <Icon className="h-4 w-4 text-orange-dark" aria-hidden />
-                <span>{text}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-8"
-          >
-            <CtaButton
-              label={TALLER_CTA_LABEL}
-              href="#entradas"
-              onClick={scrollToEntradas}
-              size="lg"
-              icon={null}
-              className="w-auto font-bold"
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-32">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="text-center lg:text-left">
+            <motion.img
+              src="/logo_more_dark.png"
+              alt="MORE — Migración con propósito"
+              className="mx-auto -my-6 mb-2 h-28 w-auto sm:h-32 lg:mx-0 lg:-ml-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
             />
-            <p className="mt-3 text-xs text-ink-muted">
-              Cupos limitados · Entradas General y VIP
-            </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-2"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange" />
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+                En vivo · Taller Comunidad More
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+            >
+              Tu trayectoria vale en Estados Unidos.{" "}
+              <span className="text-orange">Diseña tu ruta.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.32 }}
+              className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-navy-pale sm:text-lg lg:mx-0"
+            >
+              Un taller en vivo para saber dónde estás hoy, qué camino te conviene y cuánto
+              cuesta realmente. <strong className="font-semibold text-white">Sin invertir de más ni decidir a ciegas.</strong>
+            </motion.p>
+
+            <motion.dl
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.42 }}
+              className="mx-auto mt-8 grid max-w-xl grid-cols-2 divide-white/10 overflow-hidden rounded-xl border border-white/10 sm:grid-cols-4 sm:divide-x lg:mx-0"
+            >
+              {flightInfo.map(({ label, value }) => (
+                <div key={label} className="px-4 py-3 text-left">
+                  <dt className="text-[10px] font-bold uppercase tracking-[0.18em] text-navy-soft">{label}</dt>
+                  <dd className="mt-1 text-sm font-semibold text-white">{value}</dd>
+                </div>
+              ))}
+            </motion.dl>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-8 flex flex-col items-center gap-4 sm:flex-row lg:items-center"
+            >
+              <CtaButton
+                label={TALLER_CTA_LABEL}
+                href="#entradas"
+                onClick={scrollToEntradas}
+                size="lg"
+                icon={ArrowRight}
+                className="w-auto flex-row-reverse font-bold"
+              />
+              <a
+                href="#ruta"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById("ruta")?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className="text-sm font-semibold text-navy-pale underline-offset-4 hover:text-white hover:underline"
+              >
+                Ver la ruta del taller
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative mx-auto w-full max-w-sm"
+          >
+            <div className="overflow-hidden rounded-3xl border border-white/10">
+              <img
+                src="/ivon.png"
+                alt="Ivon More, fundadora de MORE"
+                className="aspect-square w-full object-cover object-[50%_85%]"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-4 right-8 rounded-2xl border border-navy/10 bg-white p-4 text-navy-deep shadow-xl sm:-left-10">
+              <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.18em] text-ink-muted">
+                <span>Pase de abordar</span>
+                <span className="text-orange-dark">MORE 2311</span>
+              </div>
+              <div className="mt-2 flex items-center gap-3">
+                <div>
+                  <p className="font-display text-2xl font-bold leading-none">HOY</p>
+                  <p className="mt-1 text-[11px] text-ink-muted">Tu punto de partida</p>
+                </div>
+                <div className="flex flex-1 items-center gap-1 text-orange" aria-hidden>
+                  <span className="h-px flex-1 border-t-2 border-dotted border-navy-line" />
+                  <Plane className="h-4 w-4" />
+                  <span className="h-px flex-1 border-t-2 border-dotted border-navy-line" />
+                </div>
+                <div className="text-right">
+                  <p className="font-display text-2xl font-bold leading-none text-orange">EE.UU.</p>
+                  <p className="mt-1 text-[11px] text-ink-muted">Tu ruta clara</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 
-        <div className="mt-10">
-          <EventCountdown targetDate={settings.tc_event_date} tone="paper" />
+        <div className="mt-16 lg:mt-20">
+          <DepartureBoard targetDate={settings.tc_event_date} />
         </div>
       </div>
     </section>

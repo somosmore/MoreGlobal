@@ -3,7 +3,6 @@ import { useLandingStatus } from "@/hooks/useLandingStatus"
 import { CtaButton } from "@/components/brand/CtaButton"
 import TCHero from "@/components/sections/taller-nov-26/TCHero"
 import TCPains from "@/components/sections/taller-nov-26/TCPains"
-import TCManifesto from "@/components/sections/taller-nov-26/TCManifesto"
 import TCModules from "@/components/sections/taller-nov-26/TCModules"
 import TCAudience from "@/components/sections/taller-nov-26/TCAudience"
 import TCTestimonials from "@/components/sections/taller-nov-26/TCTestimonials"
@@ -70,7 +69,6 @@ export default function TallerNov26Page() {
     <div className="campaign-editorial min-h-screen bg-paper">
       <TCHero />
       <TCPains />
-      <TCManifesto />
       <TCModules />
       <TCAudience />
       <TCTestimonials />

@@ -11,6 +11,71 @@ export const TALLER_CTA_LABEL = "Elegir mi entrada"
 export const TALLER_DATE_LABEL = "Lunes 23 de noviembre"
 export const TALLER_TIME_LABEL = "7:00 PM (hora Colombia)"
 
+/** Módulos del taller: son las "paradas" de la ruta. */
+export const MODULES = [
+  {
+    id: 1,
+    title: "Dónde estás hoy",
+    text: "Tu punto de partida real: perfil, estatus y opciones. Para dejar de adivinar por dónde empezar.",
+  },
+  {
+    id: 2,
+    title: "Qué ruta te conviene",
+    text: "Los caminos más comunes —para profesionales, empresarios y quienes ya están en EE.UU.— y cuál encaja contigo.",
+  },
+  {
+    id: 3,
+    title: "Cómo demostrar tu experiencia",
+    text: "Qué hacer cuando la empresa ya cerró, el jefe no está o el certificado no dice tus funciones. El obstáculo número uno, resuelto con método.",
+  },
+  {
+    id: 4,
+    title: "El costo real, sin sorpresas",
+    text: "Dónde se va el dinero: tasas, traducciones, equivalencias. Y cómo evitar los errores que más cuestan.",
+  },
+  {
+    id: 5,
+    title: "Tu plan de acción",
+    text: "Pasos concretos para empezar la próxima semana, con estrategia y en el orden correcto.",
+  },
+] as const
+
+/** Los 5 dolores, cada uno conectado al módulo que lo resuelve. */
+export const PAINS = [
+  {
+    id: "empezar",
+    quote: "No sé por dónde empezar.",
+    text: "Demasiada información, consejos contradictorios y rumores de redes.",
+    moduleId: 1,
+  },
+  {
+    id: "visa",
+    quote: "Tengo todo, menos la visa.",
+    text: "Ofertas que piden residencia, rechazos por necesitar sponsor, depender de un empleador.",
+    moduleId: 2,
+  },
+  {
+    id: "tope",
+    quote: "Llegué a un tope.",
+    text: "Techo profesional en tu país y miedo a empezar de cero en EE.UU.",
+    moduleId: 2,
+  },
+  {
+    id: "experiencia",
+    quote: "Mi experiencia es real, pero no tengo cómo probarla.",
+    text: "Empresas que cerraron, jefes que no están, certificados sin funciones.",
+    moduleId: 3,
+  },
+  {
+    id: "costo",
+    quote: "¿Cuánto me va a costar realmente?",
+    text: "Tasas, traducciones, equivalencias y el miedo a endeudarte.",
+    moduleId: 4,
+  },
+] as const
+
+export type PainId = (typeof PAINS)[number]["id"]
+
 export type TicketType = "general" | "vip"
 
 type TicketDef = {
