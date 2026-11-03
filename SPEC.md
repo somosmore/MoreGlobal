@@ -17,6 +17,23 @@
 
 ## Features pendientes
 
+### P0 — Taller Comunidad 23 nov (`/taller-nov-26`, ya publicado y activo)
+
+Orden sugerido; los pasos marcados (usuario) requieren correrlos con `!` o hacerlos en el panel:
+
+- [ ] **Reactivar la subcuenta de GHL** (usuario) — la API responde 401 "Location is not active". Sin esto ninguna landing envía leads a GHL. Si cambió la location: actualizar `GHL_LOCATION_ID` / `GHL_API_KEY` en `more-landing/.env` y en secrets de Supabase.
+- [ ] **Crear pipeline del taller en GHL** — `node more-landing/scripts/create-ghl-taller-comunidad-pipeline.mjs` (requiere GHL activo) → `npx supabase secrets set GHL_TC_PIPELINE_ID=… GHL_TC_STAGE_ID=… GHL_TC_TAG=Taller-Comunidad-Nov-26 --project-ref pqextffbzzwadrlzgnvb`.
+- [ ] **Desplegar `masterclass-register`** (usuario) — `npx supabase functions deploy masterclass-register --project-ref pqextffbzzwadrlzgnvb --use-api`. Producción corre la versión anterior: no guarda `ticket_type` ni usa pipeline propio del taller. Criterio: un registro de prueba guarda `ticket_type` y llega a GHL con tag `Taller-Comunidad-Nov-26-General|VIP`.
+- [ ] **Aplicar migración 039** (usuario) — `supabase/migrations/039_partial_leads.sql` (tabla `partial_leads` + RPC `capture_partial_lead`). Sin ella la captura de correo/teléfono para remarketing falla en silencio. Criterio: completar solo el correo en el form crea una fila con `completed = false`.
+- [ ] **Cargar links de pago** (usuario) — `/admin/settings` → "Taller Comunidad" (`tc_general_payment_link`, `tc_vip_payment_link`; Stripe precarga el correo). Precios ya cargados ($67 / $127 USD).
+- [ ] **Revisar la landing en móvil** — no se pudo verificar en el navegador.
+- [ ] **Definir política de reembolso** — la FAQ dice "Escríbenos por WhatsApp… y revisamos tu caso" (TODO en `TCFAQ.tsx`).
+- [ ] **Operación**: el equipo debe cumplir lo prometido públicamente (revisión de perfil VIP, grabación en 24 h, fecha fija).
+- [ ] **Confirmación de pago**: hoy es manual (revisar Stripe y mover la oportunidad). Automatizar con webhook de Stripe es un paso posterior.
+- [ ] **Limpieza local** — quitar el junction `more-landing/node_modules` del worktree `ghl-pipeline-comunidad` antes de borrarlo (rama `admin-contraste` ya está en main); borrar carpeta vacía `.claude/worktrees/landing-comunidad`; correr `npm ci` en `more-landing/` del checkout principal (no tiene `node_modules`).
+
+Sugerencias comerciales (no son tareas técnicas, decisión del usuario): reactivar la base de ~3.300 registros de mayo para el taller, usar UTMs en toda la pauta, y registrar el avance de los leads (asistió → agendó → compró).
+
 ### P1 — Crítico / Deuda técnica
 
 - [x] **Refactor AdminLeads.tsx**
