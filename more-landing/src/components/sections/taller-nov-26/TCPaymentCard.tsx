@@ -49,7 +49,7 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
         </div>
 
         <p className="text-xs font-semibold uppercase tracking-widest text-orange-dark">
-          Paso 2 de 2 · Pago
+          Embarque · Paso 2 de 2
         </p>
         <h2 className="mt-2 font-display text-2xl font-bold leading-snug text-navy-deep">
           {ticket ? "¡Tus datos están registrados!" : "Completa tu entrada"}

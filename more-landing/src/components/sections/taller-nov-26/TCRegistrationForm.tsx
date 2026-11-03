@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, Loader2, ChevronDown, Globe, CalendarX } from "lucide-react"
+import { Shield, Loader2, ChevronDown, Globe, CalendarX, Plane } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useOfferWindow } from "@/hooks/useOfferWindow"
@@ -396,7 +396,7 @@ export default function TCRegistrationForm() {
               className="text-center mb-6"
             >
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-orange-dark">
-                Paso 1 de 2 · Tus datos
+                Check-in · Paso 1 de 2
               </p>
               <h2 className="font-display text-2xl font-bold leading-tight text-navy-deep sm:text-3xl">
                 Reserva tu lugar en el{" "}
@@ -423,9 +423,15 @@ export default function TCRegistrationForm() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="rounded-2xl border border-navy/15 bg-white shadow-sm"
+              className="overflow-hidden rounded-2xl border border-navy/15 bg-white shadow-sm"
             >
-              <div className="h-1 w-full rounded-t-2xl bg-orange" />
+              <div className="flex items-center justify-between bg-navy-ink px-6 py-3 text-[11px] font-bold uppercase tracking-[0.18em] sm:px-8">
+                <span className="flex items-center gap-2 text-white">
+                  <Plane className="h-3.5 w-3.5 text-orange" aria-hidden />
+                  Check-in
+                </span>
+                <span className="text-navy-soft">MORE 2311 · 23 NOV · 19:00 COT</span>
+              </div>
 
               <div className="p-6 sm:p-8">
                 <div className="space-y-4">
