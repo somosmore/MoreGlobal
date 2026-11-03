@@ -51,7 +51,7 @@ export const PAINS = [
   {
     id: "visa",
     quote: "Tengo todo, menos la visa.",
-    text: "Ofertas que piden residencia, rechazos por necesitar sponsor, depender de un empleador.",
+    text: "Ofertas que piden residencia, rechazos por necesitar patrocinador, depender de un empleador.",
     moduleId: 2,
   },
   {
@@ -81,7 +81,7 @@ export const PAINS = [
   {
     id: "quemado",
     quote: "Ya consulté varios abogados y sigo sin claridad.",
-    text: "Una negación, un RFE o meses haciéndolo solo. No es falta de capacidad: es falta de estrategia.",
+    text: "Una negación, un RFE (solicitud de más evidencia) o meses haciéndolo solo. No es falta de capacidad: es falta de estrategia.",
     moduleId: 1,
   },
 ] as const
@@ -134,7 +134,7 @@ export const TICKETS: TicketDef[] = [
 export const GUARANTEES = [
   { title: "Fecha fija", text: "Lunes 23 de noviembre, 7:00 PM (Colombia). No se pospone." },
   { title: "Grabación en 24 horas", text: "Los VIP la reciben al día siguiente, sin excusas." },
-  { title: "Un solo canal", text: "Acceso, material y avisos por email y WhatsApp. Nada perdido en Drive." },
+  { title: "Un solo canal", text: "Acceso, material y avisos por correo y WhatsApp. Nada perdido en Drive." },
   { title: "Todo por escrito", text: "Qué incluye cada entrada, antes de pagar. Sin letra pequeña." },
 ] as const
 

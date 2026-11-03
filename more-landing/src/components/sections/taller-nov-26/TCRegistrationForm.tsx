@@ -95,9 +95,9 @@ function validate(data: FormData): FormErrors {
   const errors: FormErrors = {}
   if (!data.nombre.trim()) errors.nombre = "Ingresa tu nombre completo"
   if (!data.email.trim()) {
-    errors.email = "Ingresa tu email"
+    errors.email = "Ingresa tu correo electrónico"
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    errors.email = "Ingresa un email válido"
+    errors.email = "Ingresa un correo electrónico válido"
   }
   if (!data.phone.trim()) {
     errors.phone = "Ingresa tu número de WhatsApp"
@@ -483,7 +483,7 @@ export default function TCRegistrationForm() {
                       htmlFor="tc-email"
                       className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
-                      Email
+                      Correo electrónico
                     </label>
                     <Input
                       id="tc-email"
@@ -492,7 +492,7 @@ export default function TCRegistrationForm() {
                       value={form.email}
                       onChange={handleChange}
                       onBlur={() => savePartial()}
-                      placeholder="tu@email.com"
+                      placeholder="tu@correo.com"
                     />
                     {errors.email && (
                       <p className="mt-1 text-xs text-red-500">{errors.email}</p>

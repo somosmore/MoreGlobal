@@ -31,7 +31,7 @@ const profiles = [
   {
     icon: RotateCcw,
     label: "Ya lo intentaste y te frenaste",
-    who: "Te negaron una visa, recibiste un RFE, tuviste un mal asesor o te estancaste haciéndolo solo.",
+    who: "Te negaron una visa, recibiste un RFE (solicitud de más evidencia), tuviste un mal asesor o te estancaste haciéndolo solo.",
     message: "Esta vez con estrategia, no con plantillas. No es falta de capacidad: es falta de método.",
   },
 ]

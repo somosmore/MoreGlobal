@@ -175,7 +175,7 @@ export default function TCTickets() {
             ))}
           </dl>
           <p className="mt-6 border-t border-navy/10 pt-4 text-xs text-ink-muted">
-            Pago seguro · Recibes el acceso por email y WhatsApp.
+            Pago seguro · Recibes el acceso por correo y WhatsApp.
           </p>
         </div>
       </div>

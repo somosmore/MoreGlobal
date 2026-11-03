@@ -30,7 +30,7 @@ export default function TCPains() {
             ¿Qué te pasa <span className="text-orange">hoy</span>?
           </h2>
           <p className="mt-3 text-base text-ink-muted">
-            Toca las frases que sientes como tuyas. Te mostramos dónde las resolvemos.
+            Marca las frases con las que te identificas. Te mostramos dónde las resolvemos.
           </p>
         </motion.div>
 

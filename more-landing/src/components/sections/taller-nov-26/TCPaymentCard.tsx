@@ -24,7 +24,7 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
   const waDigits = settings.whatsapp_number.replace(/\D/g, "")
   const waUrl = waDigits
     ? `https://wa.me/${waDigits}?text=${encodeURIComponent(
-        `Hola, me registré al Taller Comunidad More (entrada ${current.name}) y tengo una consulta.`,
+        `Hola, me registré en el Taller Comunidad More (entrada ${current.name}) y tengo una consulta.`,
       )}`
     : null
 
@@ -98,7 +98,7 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
             />
           ) : (
             <p className="rounded-xl border border-orange/30 bg-orange-wash px-4 py-3 text-sm text-navy-deep">
-              El pago en línea se habilita en breve. Te enviaremos el link de pago por
+              El pago en línea se habilita en breve. Te enviaremos el enlace de pago por
               WhatsApp para completar tu entrada.
             </p>
           )}

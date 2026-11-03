@@ -9,7 +9,7 @@ import {
 const faqs = [
   {
     q: "¿Es presencial o virtual?",
-    a: "Es 100% virtual y en vivo. Lo ves desde donde estés: Colombia, otro país o Estados Unidos. Te enviamos el acceso por email y WhatsApp antes del taller.",
+    a: "Es 100% virtual y en vivo. Lo ves desde donde estés: Colombia, otro país o Estados Unidos. Te enviamos el acceso por correo y WhatsApp antes del taller.",
   },
   {
     q: "¿Mi perfil alcanza para migrar o crecer en EE.UU.?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "¿Se puede posponer el taller?",
-    a: "No. La fecha es fija: lunes 23 de noviembre a las 7:00 PM (Colombia). Cualquier aviso te llega por email y WhatsApp.",
+    a: "No. La fecha es fija: lunes 23 de noviembre a las 7:00 PM (Colombia). Cualquier aviso te llega por correo y WhatsApp.",
   },
   {
     q: "¿Necesito tener una visa o un proceso iniciado?",
