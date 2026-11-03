@@ -27,7 +27,7 @@
    - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
    - 1.19 [Landing Masterclass 1 Instituto More (`/webinar-sep-26`)](#119-landing-masterclass-1-instituto-more-webinar-sep-26)
    - 1.20 [Landing Comunidad MORE (`/comunidad`)](#120-landing-comunidad-more-comunidad)
-   - 1.21 [Landing Taller Comunidad More (`/taller-nov-26`)](#121-landing-taller-comunidad-more-taller-nov-26)
+   - 1.21 [Landing Taller Comunidad More (`/taller-23nov`)](#121-landing-taller-comunidad-more-taller-23nov)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -603,9 +603,9 @@ https://moremigracion.com/comunidad/registro?utm_source=facebook&utm_medium=paid
 
 **Activación:** migración `037_comunidad_facebook.sql` (fila en `landing_projects`). Se puede desactivar desde el módulo de Recursos → disponibilidad de landings.
 
-### 1.21 Landing Taller Comunidad More (`/taller-nov-26`)
+### 1.21 Landing Taller Comunidad More (`/taller-23nov`)
 
-**Ruta:** `/taller-nov-26`
+**Ruta:** `/taller-23nov` (la ruta anterior `/taller-nov-26` redirige aquí conservando las UTMs)
 
 Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More, **lunes 23 de noviembre de 2026, 7:00 PM (Colombia)**, con dos entradas (General y VIP). Habla a 3 perfiles (profesional con techo, empresario que quiere expandirse, quien ya está en EE.UU. con estatus frágil) y a los 5 dolores principales.
 
@@ -626,12 +626,12 @@ Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More, **lu
 
 **Admin:** todo en `/admin/settings` → **Taller Comunidad** (fechas, precios y links).
 
-#### 1.21.1 Página de pago para Meta Lead Ads (`/taller-nov-26/registro`)
+#### 1.21.1 Página de pago para Meta Lead Ads (`/taller-23nov/registro`)
 
 El lead ya dejó sus datos en el formulario de Meta: aquí elige su entrada y paga.
 
 ```
-https://moremigracion.com/taller-nov-26/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-nov-26
+https://moremigracion.com/taller-23nov/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-23nov
 ```
 
 **Activación:** migración `038_taller_comunidad_nov_26.sql` la crea **inactiva**. Activarla desde Recursos → disponibilidad de landings cuando estén cargados precios y links.

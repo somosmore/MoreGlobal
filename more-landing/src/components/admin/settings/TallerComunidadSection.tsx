@@ -133,7 +133,7 @@ export default function TallerComunidadSection({
         </div>
         <div>
           <h2 className="text-sm font-semibold text-navy">
-            Taller Comunidad More (/taller-nov-26) - Fechas y entradas
+            Taller Comunidad More (/taller-23nov) - Fechas y entradas
           </h2>
           <p className="text-xs text-gray-400">
             Contador, cierre de inscripción y precios / links de pago de las entradas General y VIP
