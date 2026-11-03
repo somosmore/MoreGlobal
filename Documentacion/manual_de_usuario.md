@@ -27,6 +27,7 @@
    - 1.18 [Landing Webinar Estatus (`/webinar-estatus`)](#118-landing-webinar-estatus-webinar-estatus)
    - 1.19 [Landing Masterclass 1 Instituto More (`/webinar-sep-26`)](#119-landing-masterclass-1-instituto-more-webinar-sep-26)
    - 1.20 [Landing Comunidad MORE (`/comunidad`)](#120-landing-comunidad-more-comunidad)
+   - 1.21 [Landing Taller Comunidad More (`/taller-nov-26`)](#121-landing-taller-comunidad-more-taller-nov-26)
 2. [Panel de Administración (CRM)](#2-panel-de-administración-crm)
    - 2.1 [Login de administrador](#21-login-de-administrador)
    - 2.2 [Dashboard](#22-dashboard)
@@ -601,6 +602,39 @@ https://moremigracion.com/comunidad/registro?utm_source=facebook&utm_medium=paid
 ```
 
 **Activación:** migración `037_comunidad_facebook.sql` (fila en `landing_projects`). Se puede desactivar desde el módulo de Recursos → disponibilidad de landings.
+
+### 1.21 Landing Taller Comunidad More (`/taller-nov-26`)
+
+**Ruta:** `/taller-nov-26`
+
+Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More, **lunes 23 de noviembre de 2026, 7:00 PM (Colombia)**, con dos entradas (General y VIP). Habla a 3 perfiles (profesional con techo, empresario que quiere expandirse, quien ya está en EE.UU. con estatus frágil) y a los 5 dolores principales.
+
+**Secciones:** hero con contador → "¿Te suena alguna de estas?" (5 dolores) → mensaje a la comunidad → 5 módulos (incluye "Cómo demostrar tu experiencia") → para quién es (3 perfiles + sí/no es para ti) → testimonios reales (tabla `testimonials`, se oculta si no hay) → entradas → formulario → FAQ → Ivon More → CTA final → footer con disclaimer → CTA fijo.
+
+| Dato | Valor |
+|------|-------|
+| Evento | Lunes **23 nov 2026, 19:00** (Colombia) — `tc_event_date` |
+| Registro cierra | `tc_registration_closes_at` (por defecto a la hora de inicio) |
+| Precios / links de pago | `tc_general_price`, `tc_general_payment_link`, `tc_vip_price`, `tc_vip_payment_link` |
+| Tag GHL | `Taller-Comunidad-Nov-26` + `Taller-Comunidad-Nov-26-General` / `-VIP` |
+| Source Supabase | `taller-comunidad-nov-26` (columna `ticket_type`: `general` / `vip`) |
+| Pipeline GHL | "Taller Comunidad — Nov 2026" (secrets `GHL_TC_PIPELINE_ID`, `GHL_TC_STAGE_ID`, `GHL_TC_TAG`) |
+
+**Embudo:** formulario (nombre, email, WhatsApp, entrada) → Edge Function `masterclass-register` guarda el lead en `masterclass_leads` y GHL **antes** del pago → tarjeta "Paso 2 de 2" con botón al link de pago de la entrada elegida (en Stripe precarga el email y `client_reference_id = taller-comunidad-nov-26`). Si el link está vacío, la tarjeta indica que el link se envía por WhatsApp.
+
+**Confirmación de pago:** manual en esta versión (revisar Stripe y mover la oportunidad a "Pagó General" / "Pagó VIP").
+
+**Admin:** todo en `/admin/settings` → **Taller Comunidad** (fechas, precios y links).
+
+#### 1.21.1 Página de pago para Meta Lead Ads (`/taller-nov-26/registro`)
+
+El lead ya dejó sus datos en el formulario de Meta: aquí elige su entrada y paga.
+
+```
+https://moremigracion.com/taller-nov-26/registro?utm_source=facebook&utm_medium=paid&utm_campaign=taller-nov-26
+```
+
+**Activación:** migración `038_taller_comunidad_nov_26.sql` la crea **inactiva**. Activarla desde Recursos → disponibilidad de landings cuando estén cargados precios y links.
 
 ---
 

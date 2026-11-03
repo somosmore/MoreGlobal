@@ -72,6 +72,16 @@ export function useSettingsData() {
   const [landingsSaveState, setLandingsSaveState] = useState<SaveState>("idle")
   const [landingsSaveError, setLandingsSaveError] = useState<string | null>(null)
 
+  // Taller Comunidad More (/taller-nov-26): fechas + entradas pagas
+  const [tcEventDate, setTcEventDate] = useState("")
+  const [tcRegistrationClosesAt, setTcRegistrationClosesAt] = useState("")
+  const [tcGeneralPrice, setTcGeneralPrice] = useState("")
+  const [tcGeneralPaymentLink, setTcGeneralPaymentLink] = useState("")
+  const [tcVipPrice, setTcVipPrice] = useState("")
+  const [tcVipPaymentLink, setTcVipPaymentLink] = useState("")
+  const [tcSaveState, setTcSaveState] = useState<SaveState>("idle")
+  const [tcSaveError, setTcSaveError] = useState<string | null>(null)
+
   // Tracking
   const [metaPixelId, setMetaPixelId] = useState("")
   const [gtmId, setGtmId] = useState("")
@@ -105,6 +115,12 @@ export function useSettingsData() {
         setWeRegistrationClosesAt(toLocalInput(settings.we_registration_closes_at))
         setWsEventDate(toLocalInput(settings.ws_event_date))
         setWsRegistrationClosesAt(toLocalInput(settings.ws_registration_closes_at))
+        setTcEventDate(toLocalInput(settings.tc_event_date))
+        setTcRegistrationClosesAt(toLocalInput(settings.tc_registration_closes_at))
+        setTcGeneralPrice(settings.tc_general_price)
+        setTcGeneralPaymentLink(settings.tc_general_payment_link)
+        setTcVipPrice(settings.tc_vip_price)
+        setTcVipPaymentLink(settings.tc_vip_payment_link)
         setMetaPixelId(settings.meta_pixel_id)
         setGtmId(settings.google_tag_manager_id)
         setGa4Id(settings.ga4_measurement_id)
@@ -244,6 +260,40 @@ export function useSettingsData() {
     setTimeout(() => setLandingsSaveState("idle"), 3000)
   }
 
+  const handleSaveTallerComunidad = async () => {
+    if (!supabase) {
+      setTcSaveError("No hay conexión con la base de datos.")
+      setTcSaveState("error")
+      return
+    }
+
+    setTcSaveState("saving")
+    setTcSaveError(null)
+
+    const { error } = await supabase.from("site_settings").upsert(
+      [
+        { key: "tc_event_date", value: toIso(tcEventDate) },
+        { key: "tc_registration_closes_at", value: toIso(tcRegistrationClosesAt) },
+        { key: "tc_general_price", value: tcGeneralPrice.trim() },
+        { key: "tc_general_payment_link", value: tcGeneralPaymentLink.trim() },
+        { key: "tc_vip_price", value: tcVipPrice.trim() },
+        { key: "tc_vip_payment_link", value: tcVipPaymentLink.trim() },
+      ],
+      { onConflict: "key" }
+    )
+
+    if (error) {
+      setTcSaveError(error.message)
+      setTcSaveState("error")
+      return
+    }
+
+    setTcSaveState("success")
+    refetch()
+
+    setTimeout(() => setTcSaveState("idle"), 3000)
+  }
+
   const handleSaveSocial = async () => {
     if (!supabase) {
       setSocialSaveError("No hay conexión con la base de datos.")
@@ -329,6 +379,10 @@ export function useSettingsData() {
   const urlInvalid = calendarUrl.trim().length > 0 && !isValidUrl(calendarUrl)
   const vipPaymentLinkInvalid = vipPaymentLink.trim().length > 0 && !isValidUrl(vipPaymentLink)
   const uppPaymentLinkInvalid = uppPaymentLink.trim().length > 0 && !isValidUrl(uppPaymentLink)
+  const tcGeneralPaymentLinkInvalid =
+    tcGeneralPaymentLink.trim().length > 0 && !isValidUrl(tcGeneralPaymentLink)
+  const tcVipPaymentLinkInvalid =
+    tcVipPaymentLink.trim().length > 0 && !isValidUrl(tcVipPaymentLink)
 
   const socialUrlInvalid = [instagramUrl, linkedinUrl, facebookUrl, youtubeUrl].some(
     (v) => v.trim().length > 0 && !isValidUrl(v)
@@ -401,6 +455,19 @@ export function useSettingsData() {
     landingsSaveState, setLandingsSaveState,
     landingsSaveError,
     handleSaveLandings,
+
+    // Taller Comunidad More
+    tcEventDate, setTcEventDate,
+    tcRegistrationClosesAt, setTcRegistrationClosesAt,
+    tcGeneralPrice, setTcGeneralPrice,
+    tcGeneralPaymentLink, setTcGeneralPaymentLink,
+    tcVipPrice, setTcVipPrice,
+    tcVipPaymentLink, setTcVipPaymentLink,
+    tcSaveState, setTcSaveState,
+    tcSaveError,
+    handleSaveTallerComunidad,
+    tcGeneralPaymentLinkInvalid,
+    tcVipPaymentLinkInvalid,
 
     // Tracking
     metaPixelId, setMetaPixelId,

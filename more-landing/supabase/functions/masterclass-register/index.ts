@@ -36,24 +36,34 @@ type GhlEventConfig = {
   defaultTag: string
 }
 
-const COMUNIDAD_SOURCE = "comunidad-facebook"
+/**
+ * Sources con pipeline propio en GHL: `<envPrefix>_PIPELINE_ID`, `_STAGE_ID` y `_TAG`.
+ * Solo se usan si pipeline Y stage están configurados (evita mezclar un pipeline
+ * con un stage de otro); si no, el lead cae al pipeline de masterclass.
+ */
+const OWN_PIPELINE_SOURCES: Record<string, { envPrefix: string; defaultTag: string }> = {
+  "comunidad-facebook": { envPrefix: "GHL_COMUNIDAD", defaultTag: "Comunidad-Facebook" },
+  "taller-comunidad-nov-26": { envPrefix: "GHL_TC", defaultTag: "Taller-Comunidad-Nov-26" },
+}
+
+/** Tipos de entrada válidos para eventos pagos (ej. Taller Comunidad). */
+const TICKET_LABELS: Record<string, string> = { general: "General", vip: "VIP" }
 
 const isTallerSource = (leadSource: string): boolean =>
   leadSource === TALLER_SOURCE ||
   (TALLER_SOURCES_LEGACY as readonly string[]).includes(leadSource)
 
-/** Pipeline, stage y tag por tipo de evento (masterclass vs taller vs comunidad). */
+/** Pipeline, stage y tag por tipo de evento (masterclass vs taller vs pipelines propios). */
 const resolveGhlEventConfig = (leadSource: string): GhlEventConfig | null => {
-  // Comunidad: pipeline propio solo si pipeline Y stage están configurados
-  // (evita mezclar un pipeline con un stage de otro); si no, cae al de masterclass.
-  if (leadSource === COMUNIDAD_SOURCE) {
-    const comunidadPipelineId = Deno.env.get("GHL_COMUNIDAD_PIPELINE_ID")
-    const comunidadStageId = Deno.env.get("GHL_COMUNIDAD_STAGE_ID")
-    if (comunidadPipelineId && comunidadStageId) {
+  const own = OWN_PIPELINE_SOURCES[leadSource]
+  if (own) {
+    const ownPipelineId = Deno.env.get(`${own.envPrefix}_PIPELINE_ID`)
+    const ownStageId = Deno.env.get(`${own.envPrefix}_STAGE_ID`)
+    if (ownPipelineId && ownStageId) {
       return {
-        pipelineId: comunidadPipelineId,
-        stageId: comunidadStageId,
-        defaultTag: Deno.env.get("GHL_COMUNIDAD_TAG") ?? "Comunidad-Facebook",
+        pipelineId: ownPipelineId,
+        stageId: ownStageId,
+        defaultTag: Deno.env.get(`${own.envPrefix}_TAG`) ?? own.defaultTag,
       }
     }
   }
@@ -98,6 +108,7 @@ Deno.serve(async (req) => {
       source,
       event_label,
       ghl_tag,
+      ticket_type,
       utm_source,
       utm_medium,
       utm_campaign,
@@ -132,6 +143,11 @@ Deno.serve(async (req) => {
     // Tag de GHL específico del evento; si no llega, cae al GHL_TAG por defecto.
     const eventTag =
       typeof ghl_tag === "string" && ghl_tag.trim() ? ghl_tag.trim() : null
+    // Entrada elegida (solo eventos pagos). Valores fuera de la lista se ignoran.
+    const ticketType =
+      typeof ticket_type === "string" && TICKET_LABELS[ticket_type.trim().toLowerCase()]
+        ? ticket_type.trim().toLowerCase()
+        : null
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -185,6 +201,8 @@ Deno.serve(async (req) => {
       utm_content: utm_content || null,
       utm_term: utm_term || null,
       status: "new",
+      // Solo se envía si llega: las landings gratuitas no dependen de la columna.
+      ...(ticketType ? { ticket_type: ticketType } : {}),
     })
 
     let ghlPromise: Promise<unknown> = Promise.resolve()
@@ -192,6 +210,13 @@ Deno.serve(async (req) => {
     if (ghlApiKey && ghlEventConfig) {
       const { pipelineId: ghlPipelineId, stageId: ghlStageId, defaultTag: ghlTag } =
         ghlEventConfig
+
+      const baseTag = eventTag || ghlTag
+      const ticketLabel = ticketType ? TICKET_LABELS[ticketType] : null
+      const contactTags = ticketLabel ? [baseTag, `${baseTag}-${ticketLabel}`] : [baseTag]
+      const oppName = ticketLabel
+        ? `${nombre.trim()} — ${eventLabel} (${ticketLabel})`
+        : `${nombre.trim()} — ${eventLabel}`
 
       ghlPromise = (async () => {
         const ghlHeaders = {
@@ -208,7 +233,7 @@ Deno.serve(async (req) => {
           phone: phone,
           country: COUNTRY_ISO[pais] || "US",
           source: eventLabel,
-          tags: [eventTag || ghlTag],
+          tags: contactTags,
           customFields: [
             { id: "2p21GBEtEn6ZmpPzKouP", field_value: pais },
           ],
@@ -242,7 +267,7 @@ Deno.serve(async (req) => {
             pipelineStageId: ghlStageId,
             locationId: ghlLocationId,
             contactId,
-            name: `${nombre.trim()} — ${eventLabel}`,
+            name: oppName,
             status: "open",
             monetaryValue: 0,
           }

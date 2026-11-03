@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-11-02] — Landing `/taller-nov-26`: Taller Comunidad More (evento pago virtual, 23 nov)
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/*` (nuevo), `src/pages/TallerNov26Page.tsx`, `src/pages/TallerNov26RegistroPage.tsx`, `src/App.tsx`, `src/lib/tracking.ts`, `src/lib/supabase.ts` (6 claves `tc_*` en `SiteSettingsMap`), `src/contexts/SiteSettingsContext.tsx`, `src/components/admin/settings/{useSettingsData.ts,TallerComunidadSection.tsx,LandingCountdownsSection.tsx,index.ts}`, `src/pages/AdminSettings.tsx`, `supabase/functions/masterclass-register/index.ts`, `supabase/migrations/038_taller_comunidad_nov_26.sql`, `scripts/create-ghl-taller-comunidad-pipeline.mjs`, `Documentacion/manual_de_usuario.md`
+- Qué se implementó: Landing basada en `landing_taller_comunidad_more.html` + 5 dolores + 3 perfiles (mensaje propio por perfil). Formulario con elección de entrada → lead en Supabase/GHL antes de pagar → link de pago por entrada (Stripe con email precargado). Edge function: mapa de pipelines propios por source (comunidad + taller) y `ticket_type` opcional con tag por entrada. Admin: sección "Taller Comunidad" con fechas, precios y links.
+- Problemas encontrados: precios, links de pago, beneficios VIP y política de reembolso pendientes (marcados con TODO). `node_modules` del checkout principal no existía; se reinstaló con `npm ci` en el worktree. Lint global: 11 errores preexistentes. Sin preview visual (requiere fila activa en `landing_projects`).
+- Estado: 🔄 en progreso (falta migración 038, pipeline/secrets GHL, deploy de función y activar la landing)
+
 ### [2026-10-07] — Admin: mejorar contraste y legibilidad del tema dark
 
 - Agente: claude-code
