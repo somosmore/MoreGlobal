@@ -88,9 +88,9 @@ export default function TCHero() {
   return (
     <section className="relative isolate overflow-hidden bg-navy-ink text-white">
       <DotGrid />
-      <FlightRoute className="absolute inset-x-0 top-6 -z-0 opacity-80 sm:top-10" duration={11} />
+      <FlightRoute className="absolute inset-x-0 top-3 -z-0 sm:top-5" duration={8} />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-32">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-28 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20 lg:pt-40">
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="text-center lg:text-left">
             <motion.img
