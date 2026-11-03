@@ -20,6 +20,20 @@
 
 ## Bitácora
 
+### [2026-11-03] — HANDOFF: cierre de sesión (comunidad + taller-nov-26)
+
+- Agente: claude-code
+- Estado del repo: `main` = `ef7e6a1` = `origin/main`; `dev` = `b805ee3` (mismo contenido que main). Sin cambios sin commitear (solo `.claude/worktrees/` sin seguimiento).
+- Qué quedó en producción (Supabase `pqextffbzzwadrlzgnvb`): migraciones 037 y 038 aplicadas; `/comunidad` y `/taller-nov-26` activas; precios `tc_general_price = $67 USD`, `tc_vip_price = $127 USD`; pipeline GHL "Comunidad MORE — Facebook" + secrets `GHL_COMUNIDAD_*`; `masterclass-register` desplegada con el código del pipeline de comunidad (NO con el de `ticket_type` del taller).
+- Qué se verificó: tsc, lint (11 errores preexistentes, ninguno nuevo) y `npm run build` en cada commit; landing del taller recorrida en Chrome (desktop). NO verificado: vista móvil, deploy de Dokploy del último push, flujo de pago real.
+- Qué no funcionó / callejones:
+  - Capturas de Chrome con timeout: la ventana corre a ~1 fps incluso en páginas livianas (problema de la extensión, no de la landing). `resize_window` no cambió el viewport.
+  - El agente no puede: desplegar edge functions, aplicar algunas migraciones ni crear pipelines en GHL (bloqueo de permisos de producción). Scripts listos en `C:/Users/Sebastian/.claude/jobs/7edb984d/tmp/` para correr con `!`.
+  - GHL responde 401 "Location is not active" (desde fecha desconocida): ningún lead llega a GHL; Supabase sí guarda.
+  - API de logs de Supabase (`/analytics/endpoints/logs`) no devolvió datos de function_logs: no se pudo fechar la caída de GHL.
+- Diagnóstico comercial (para contexto): mayo trajo 3.338 registros con UTM; los 5 lanzamientos posteriores 24–47 cada uno y casi sin UTM; los ~3.800 `masterclass_leads` siguen en `status = new` (no hay seguimiento registrado). Análisis de clientes 2023–2026 resumido en la entrada de contenido del taller.
+- Estado: ⚠️ bloqueado parcialmente (ver SPEC.md → "P0 — Taller Comunidad 23 nov")
+
 ### [2026-11-03] — `/taller-nov-26`: contenido del análisis de clientes + tipografía sans
 
 - Agente: claude-code
