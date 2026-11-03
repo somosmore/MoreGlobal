@@ -36,7 +36,7 @@ type FieldProps = {
 }
 
 /** Un campo de fecha con su estado ("faltan X" / "ya pasó"), calculado en vivo. */
-function DateField({ id, label, hint, value, onChange }: FieldProps) {
+export function DateField({ id, label, hint, value, onChange }: FieldProps) {
   const { expired, timeLeft } = useOfferWindow(value)
 
   return (

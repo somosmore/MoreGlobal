@@ -7,6 +7,7 @@ import {
   Settings,
   Share2,
   Sparkles,
+  Ticket,
   Users,
 } from "lucide-react"
 import {
@@ -15,6 +16,7 @@ import {
   CalendarSection,
   VipSessionSection,
   LandingCountdownsSection,
+  TallerComunidadSection,
   ContactSection,
   SocialNetworksSection,
   UppSection,
@@ -27,6 +29,7 @@ const SECTION_LINKS = [
   { id: "calendario", label: "Calendario", Icon: Calendar },
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
   { id: "landings", label: "Landings", Icon: CalendarClock },
+  { id: "taller-comunidad", label: "Taller Comunidad", Icon: Ticket },
   { id: "upp", label: "Programa UPP", Icon: BookOpen },
   { id: "wppequipo", label: "WhatsApp Equipo", Icon: Users },
   { id: "redes", label: "Redes", Icon: Share2 },
@@ -179,6 +182,30 @@ export default function AdminSettings() {
               setLandingsSaveState={data.setLandingsSaveState}
               landingsSaveError={data.landingsSaveError}
               handleSaveLandings={data.handleSaveLandings}
+            />
+          </section>
+
+          <section id="taller-comunidad" className="scroll-mt-32">
+            <TallerComunidadSection
+              loading={data.loading}
+              tcEventDate={data.tcEventDate}
+              setTcEventDate={data.setTcEventDate}
+              tcRegistrationClosesAt={data.tcRegistrationClosesAt}
+              setTcRegistrationClosesAt={data.setTcRegistrationClosesAt}
+              tcGeneralPrice={data.tcGeneralPrice}
+              setTcGeneralPrice={data.setTcGeneralPrice}
+              tcGeneralPaymentLink={data.tcGeneralPaymentLink}
+              setTcGeneralPaymentLink={data.setTcGeneralPaymentLink}
+              tcVipPrice={data.tcVipPrice}
+              setTcVipPrice={data.setTcVipPrice}
+              tcVipPaymentLink={data.tcVipPaymentLink}
+              setTcVipPaymentLink={data.setTcVipPaymentLink}
+              tcSaveState={data.tcSaveState}
+              setTcSaveState={data.setTcSaveState}
+              tcSaveError={data.tcSaveError}
+              handleSaveTallerComunidad={data.handleSaveTallerComunidad}
+              tcGeneralPaymentLinkInvalid={data.tcGeneralPaymentLinkInvalid}
+              tcVipPaymentLinkInvalid={data.tcVipPaymentLinkInvalid}
             />
           </section>
 
