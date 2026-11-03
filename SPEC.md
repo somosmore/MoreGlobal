@@ -17,7 +17,7 @@
 
 ## Features pendientes
 
-### P0 — Taller Comunidad 23 nov (`/taller-nov-26`, ya publicado y activo)
+### P0 — Taller Comunidad 23 nov (`/taller-23nov`, ya publicado y activo; `/taller-nov-26` redirige)
 
 Orden sugerido; los pasos marcados (usuario) requieren correrlos con `!` o hacerlos en el panel:
 

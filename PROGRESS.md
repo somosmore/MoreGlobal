@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-11-03] — Taller: URL `/taller-23nov` (antes `/taller-nov-26`)
+
+- Agente: claude-code
+- Archivos modificados: `src/App.tsx` (rutas nuevas + redirección `RedirectKeepingQuery` desde las viejas), `src/lib/tracking.ts`, `src/pages/TallerNov26Page.tsx`, `src/pages/TallerNov26RegistroPage.tsx`, `index.html`, textos de admin/contexto, `supabase/migrations/040_taller_23nov_route.sql`, `Documentacion/manual_de_usuario.md`, `SPEC.md`
+- Qué se implementó: La URL anterior se leía como "26 de noviembre". Nueva ruta `/taller-23nov` (y `/registro`); las viejas redirigen conservando UTMs y hash. En `landing_projects` se agregó una fila nueva para `/taller-23nov` (ya aplicada en producción), sin tocar la vieja para no romper la página durante el deploy. Source y tag GHL internos sin cambios (`taller-comunidad-nov-26`).
+- Problemas encontrados: un `sed` rompió la regex de `index.html` (se corrigió a mano y se limitó a las rutas del taller para no pintar de navy `/taller-niw`).
+- Estado: ✅ completo (pendiente publicar)
+
 ### [2026-11-03] — HANDOFF: cierre de sesión (comunidad + taller-nov-26)
 
 - Agente: claude-code

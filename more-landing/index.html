@@ -9,7 +9,7 @@
     <title>MORE | Visa EB-2 NIW — Tu camino hacia la Green Card</title>
     <!-- Landings en navy: pinta el fondo antes de que cargue JS (evita el destello blanco). -->
     <script>
-      if (location.pathname.indexOf("/taller-nov-26") === 0) {
+      if (/^\/taller-(23nov|nov-26)(\/|$)/.test(location.pathname)) {
         document.documentElement.style.backgroundColor = "#16243D"
       }
     </script>

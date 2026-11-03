@@ -33,7 +33,7 @@ const DEFAULTS: SiteSettingsMap = {
   we_registration_closes_at: "2026-08-21T23:59:59-05:00",
   ws_event_date: "2026-09-03T19:00:00-05:00",
   ws_registration_closes_at: "2026-09-04T23:59:59-05:00",
-  // Taller Comunidad More (/taller-nov-26): evento pago virtual.
+  // Taller Comunidad More (/taller-23nov): evento pago virtual.
   tc_event_date: "2026-11-23T19:00:00-05:00",
   tc_registration_closes_at: "2026-11-23T19:00:00-05:00",
   tc_general_price: "",

@@ -18,7 +18,7 @@ import TCStickyCTA from "@/components/sections/taller-nov-26/TCStickyCTA"
 import { TALLER_PAGE_META } from "@/components/sections/taller-nov-26/tallerNov26Copy"
 
 export default function TallerNov26Page() {
-  const { status, isAccessible, reason } = useLandingStatus("/taller-nov-26")
+  const { status, isAccessible, reason } = useLandingStatus("/taller-23nov")
 
   useEffect(() => {
     document.title = TALLER_PAGE_META.title

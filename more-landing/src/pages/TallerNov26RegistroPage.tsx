@@ -9,7 +9,7 @@ import BrandLoader from "@/components/brand/BrandLoader"
 
 /** Post-registro para Meta Lead Ads: el lead ya dejó sus datos, aquí elige y paga su entrada. */
 export default function TallerNov26RegistroPage() {
-  const { status, isAccessible, reason } = useLandingStatus("/taller-nov-26")
+  const { status, isAccessible, reason } = useLandingStatus("/taller-23nov")
 
   useEffect(() => {
     document.title = TALLER_REGISTRO_PAGE_META.title
@@ -63,7 +63,7 @@ export default function TallerNov26RegistroPage() {
         <TCPaymentCard showLogo />
         <p className="relative z-10 mt-8 text-center font-sans text-xs text-ink-muted">
           <Link
-            to="/taller-nov-26"
+            to="/taller-23nov"
             className="rounded-sm underline-offset-4 transition-colors hover:text-navy hover:underline"
           >
             Ver el detalle del taller

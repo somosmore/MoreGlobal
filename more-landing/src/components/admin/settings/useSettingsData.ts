@@ -72,7 +72,7 @@ export function useSettingsData() {
   const [landingsSaveState, setLandingsSaveState] = useState<SaveState>("idle")
   const [landingsSaveError, setLandingsSaveError] = useState<string | null>(null)
 
-  // Taller Comunidad More (/taller-nov-26): fechas + entradas pagas
+  // Taller Comunidad More (/taller-23nov): fechas + entradas pagas
   const [tcEventDate, setTcEventDate] = useState("")
   const [tcRegistrationClosesAt, setTcRegistrationClosesAt] = useState("")
   const [tcGeneralPrice, setTcGeneralPrice] = useState("")

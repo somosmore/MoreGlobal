@@ -40,7 +40,13 @@ import TurboPdfPage from "@/pages/TurboPdfPage"
 import UppPdfPage from "@/pages/UppPdfPage"
 
 /** Rutas en navy: el loader global usa la versión oscura para no "parpadear" en blanco. */
-const DARK_LOADER_PATHS = ["/taller-nov-26"]
+const DARK_LOADER_PATHS = ["/taller-23nov", "/taller-nov-26"]
+
+/** Redirección que conserva query string (UTMs) y hash. */
+const RedirectKeepingQuery = ({ to }: { to: string }) => {
+  const { search, hash } = useLocation()
+  return <Navigate to={`${to}${search}${hash}`} replace />
+}
 
 const PageLoader = () => {
   const { pathname } = useLocation()
@@ -68,8 +74,11 @@ function App() {
           <Route path="/webinar-sep-26/registro" element={<WebinarSep26RegistroPage />} />
           <Route path="/comunidad" element={<ComunidadPage />} />
           <Route path="/comunidad/registro" element={<ComunidadRegistroPage />} />
-          <Route path="/taller-nov-26" element={<TallerNov26Page />} />
-          <Route path="/taller-nov-26/registro" element={<TallerNov26RegistroPage />} />
+          <Route path="/taller-23nov" element={<TallerNov26Page />} />
+          <Route path="/taller-23nov/registro" element={<TallerNov26RegistroPage />} />
+          {/* Ruta anterior (se leía como "26 de noviembre"): redirige conservando UTMs. */}
+          <Route path="/taller-nov-26" element={<RedirectKeepingQuery to="/taller-23nov" />} />
+          <Route path="/taller-nov-26/registro" element={<RedirectKeepingQuery to="/taller-23nov/registro" />} />
           <Route path="/upp" element={<UppPage />} />
           <Route path="/upp/pdf" element={<UppPdfPage />} />
           <Route path="/turbo" element={<TurboPage />} />
