@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Check, Plane, ShieldCheck } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { cn } from "@/lib/utils"
-import { TICKETS } from "./tallerNov26Copy"
+import { GUARANTEES, TICKETS } from "./tallerNov26Copy"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const passDetails = [
@@ -38,7 +38,7 @@ export default function TCTickets() {
           className="mx-auto max-w-2xl text-center"
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-dark">Tu entrada</p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-navy-deep sm:text-4xl">
+          <h2 className="mt-3 font-sans text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl">
             Elige tu <span className="text-orange">pase de abordar</span>
           </h2>
           <p className="mt-3 text-base text-ink-muted">
@@ -85,7 +85,7 @@ export default function TCTickets() {
 
                   <div className="mt-6 flex items-center gap-4">
                     <div>
-                      <p className="font-display text-4xl font-bold leading-none">HOY</p>
+                      <p className="font-sans text-4xl font-extrabold tracking-tight leading-none">HOY</p>
                       <p className={cn("mt-1 text-xs", dark ? "text-navy-soft" : "text-ink-muted")}>Tu punto de partida</p>
                     </div>
                     <div className="flex flex-1 items-center gap-2 text-orange" aria-hidden>
@@ -94,7 +94,7 @@ export default function TCTickets() {
                       <span className="flex-1 border-t-2 border-dotted border-navy-line" />
                     </div>
                     <div className="text-right">
-                      <p className="font-display text-4xl font-bold leading-none text-orange">EE.UU.</p>
+                      <p className="font-sans text-4xl font-extrabold tracking-tight leading-none text-orange">EE.UU.</p>
                       <p className={cn("mt-1 text-xs", dark ? "text-navy-soft" : "text-ink-muted")}>Tu ruta clara</p>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ export default function TCTickets() {
                     <p className={cn("text-[10px] font-bold uppercase tracking-[0.18em]", dark ? "text-navy-soft" : "text-ink-muted")}>
                       Precio
                     </p>
-                    <p className="mt-1 font-display text-3xl font-bold">
+                    <p className="mt-1 font-sans text-3xl font-extrabold tracking-tight">
                       {loading ? (
                         <span className="inline-block h-8 w-32 animate-pulse rounded bg-gray-300/40" />
                       ) : (
@@ -160,10 +160,24 @@ export default function TCTickets() {
           })}
         </div>
 
-        <p className="mt-8 flex items-center justify-center gap-2 text-xs text-ink-muted">
-          <ShieldCheck className="h-4 w-4 text-orange-dark" aria-hidden />
-          Pago seguro · Recibes el acceso por email y WhatsApp
-        </p>
+        {/* Compromisos operativos: responden a talleres pospuestos y grabaciones que no llegaban */}
+        <div className="mt-10 rounded-3xl border border-navy/10 bg-white p-6 sm:p-8">
+          <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-navy-deep">
+            <ShieldCheck className="h-4 w-4 text-orange" aria-hidden />
+            Nuestro compromiso contigo
+          </p>
+          <dl className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {GUARANTEES.map((g) => (
+              <div key={g.title}>
+                <dt className="text-sm font-bold text-navy-deep">{g.title}</dt>
+                <dd className="mt-1 text-sm leading-relaxed text-ink-muted">{g.text}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 border-t border-navy/10 pt-4 text-xs text-ink-muted">
+            Pago seguro · Recibes el acceso por correo y WhatsApp.
+          </p>
+        </div>
       </div>
     </section>
   )

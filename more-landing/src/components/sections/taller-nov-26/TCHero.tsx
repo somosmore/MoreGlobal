@@ -88,9 +88,9 @@ export default function TCHero() {
   return (
     <section className="relative isolate overflow-hidden bg-navy-ink text-white">
       <DotGrid />
-      <FlightRoute className="absolute inset-x-0 top-6 -z-0 opacity-80 sm:top-10" duration={11} />
+      <FlightRoute className="absolute inset-x-0 top-3 -z-0 sm:top-5" duration={8} />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-24 sm:px-6 lg:px-8 lg:pb-20 lg:pt-32">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-28 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20 lg:pt-40">
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="text-center lg:text-left">
             <motion.img
@@ -121,7 +121,7 @@ export default function TCHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+              className="mt-6 font-sans text-4xl font-extrabold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.4rem]"
             >
               Tu trayectoria vale en Estados Unidos.{" "}
               <span className="text-orange">Diseña tu ruta.</span>
@@ -198,7 +198,7 @@ export default function TCHero() {
               </div>
               <div className="mt-2 flex items-center gap-3">
                 <div>
-                  <p className="font-display text-2xl font-bold leading-none">HOY</p>
+                  <p className="font-sans text-2xl font-extrabold tracking-tight leading-none">HOY</p>
                   <p className="mt-1 text-[11px] text-ink-muted">Tu punto de partida</p>
                 </div>
                 <div className="flex flex-1 items-center gap-1 text-orange" aria-hidden>
@@ -207,7 +207,7 @@ export default function TCHero() {
                   <span className="h-px flex-1 border-t-2 border-dotted border-navy-line" />
                 </div>
                 <div className="text-right">
-                  <p className="font-display text-2xl font-bold leading-none text-orange">EE.UU.</p>
+                  <p className="font-sans text-2xl font-extrabold tracking-tight leading-none text-orange">EE.UU.</p>
                   <p className="mt-1 text-[11px] text-ink-muted">Tu ruta clara</p>
                 </div>
               </div>

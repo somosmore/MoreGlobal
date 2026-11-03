@@ -6,6 +6,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useOfferWindow } from "@/hooks/useOfferWindow"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import { cn } from "@/lib/utils"
+import { capturePartialLead } from "@/lib/partialLead"
 import {
   TALLER_EVENT_LABEL,
   TALLER_GHL_TAG,
@@ -94,9 +95,9 @@ function validate(data: FormData): FormErrors {
   const errors: FormErrors = {}
   if (!data.nombre.trim()) errors.nombre = "Ingresa tu nombre completo"
   if (!data.email.trim()) {
-    errors.email = "Ingresa tu email"
+    errors.email = "Ingresa tu correo electrónico"
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    errors.email = "Ingresa un email válido"
+    errors.email = "Ingresa un correo electrónico válido"
   }
   if (!data.phone.trim()) {
     errors.phone = "Ingresa tu número de WhatsApp"
@@ -307,6 +308,25 @@ export default function TCRegistrationForm() {
     []
   )
 
+  // Remarketing: guarda el email apenas es válido y suma teléfono/país/nombre/entrada
+  // a medida que se completan (tabla partial_leads). No bloquea ni muestra errores.
+  const savePartial = useCallback(
+    (overrides: { completed?: boolean; ticketType?: TicketType } = {}) => {
+      const digits = form.phone.replace(/\D/g, "")
+      const phoneOk = digits.length >= 6 && digits.length <= 15
+      void capturePartialLead(TALLER_SOURCE, {
+        email: form.email,
+        nombre: form.nombre,
+        phone: phoneOk ? `${form.countryCode}${digits}` : undefined,
+        pais: phoneOk ? DIAL_TO_COUNTRY[form.countryCode] ?? "Otro" : undefined,
+        ticketType: overrides.ticketType ?? ticket,
+        utm: utmParams,
+        completed: overrides.completed,
+      })
+    },
+    [form, ticket, utmParams]
+  )
+
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     const validationErrors = validate(form)
@@ -365,6 +385,7 @@ export default function TCRegistrationForm() {
       }
 
       void trackMasterclassRegistration(settings, { eventId: capiEventId })
+      savePartial({ completed: true })
       setSubmittedEmail(form.email.trim().toLowerCase())
       setSubmitted(true)
     } catch (err) {
@@ -374,7 +395,7 @@ export default function TCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams, settings, ticket])
+  }, [form, utmParams, settings, ticket, savePartial])
 
   // El cierre de inscripción se configura en Admin → Settings → Taller Comunidad.
   const { expired: isExpired } = useOfferWindow(settings.tc_registration_closes_at)
@@ -398,7 +419,7 @@ export default function TCRegistrationForm() {
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-orange-dark">
                 Check-in · Paso 1 de 2
               </p>
-              <h2 className="font-display text-2xl font-bold leading-tight text-navy-deep sm:text-3xl">
+              <h2 className="font-sans text-2xl font-extrabold tracking-tight leading-tight text-navy-deep sm:text-3xl">
                 Reserva tu lugar en el{" "}
                 <span className="text-[#F37021]">Taller Comunidad More</span>
               </h2>
@@ -449,6 +470,7 @@ export default function TCRegistrationForm() {
                       type="text"
                       value={form.nombre}
                       onChange={handleChange}
+                      onBlur={() => savePartial()}
                       placeholder="Ej: María García"
                     />
                     {errors.nombre && (
@@ -461,7 +483,7 @@ export default function TCRegistrationForm() {
                       htmlFor="tc-email"
                       className="mb-1 block text-xs font-semibold uppercase tracking-wide text-navy-deep"
                     >
-                      Email
+                      Correo electrónico
                     </label>
                     <Input
                       id="tc-email"
@@ -469,7 +491,8 @@ export default function TCRegistrationForm() {
                       type="email"
                       value={form.email}
                       onChange={handleChange}
-                      placeholder="tu@email.com"
+                      onBlur={() => savePartial()}
+                      placeholder="tu@correo.com"
                     />
                     {errors.email && (
                       <p className="mt-1 text-xs text-red-500">{errors.email}</p>
@@ -500,6 +523,7 @@ export default function TCRegistrationForm() {
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
+                        onBlur={() => savePartial()}
                         placeholder="300 123 4567"
                       />
                     </div>
@@ -531,7 +555,10 @@ export default function TCRegistrationForm() {
                               name="ticket"
                               value={t.id}
                               checked={selected}
-                              onChange={() => setTicket(t.id)}
+                              onChange={() => {
+                                setTicket(t.id)
+                                savePartial({ ticketType: t.id })
+                              }}
                               className="sr-only"
                             />
                             <span className="text-sm font-bold text-navy-deep">{t.name}</span>

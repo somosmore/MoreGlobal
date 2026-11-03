@@ -5,6 +5,7 @@ import TCPaymentCard from "@/components/sections/taller-nov-26/TCPaymentCard"
 import { TALLER_REGISTRO_PAGE_META } from "@/components/sections/taller-nov-26/tallerNov26Copy"
 import { Backdrop } from "@/components/brand/Backdrop"
 import { CtaButton } from "@/components/brand/CtaButton"
+import BrandLoader from "@/components/brand/BrandLoader"
 
 /** Post-registro para Meta Lead Ads: el lead ya dejó sus datos, aquí elige y paga su entrada. */
 export default function TallerNov26RegistroPage() {
@@ -38,11 +39,7 @@ export default function TallerNov26RegistroPage() {
   }, [])
 
   if (status === "loading") {
-    return (
-      <div className="flex min-h-[100dvh] items-center justify-center bg-paper">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange border-t-transparent" />
-      </div>
-    )
+    return <BrandLoader tone="dark" label="Preparando tu pase…" />
   }
 
   if (!isAccessible) {
@@ -51,7 +48,7 @@ export default function TallerNov26RegistroPage() {
         <Backdrop variant="hero" className="opacity-70" />
         <div className="relative z-10 max-w-md text-center">
           <img src="/logo_more_dark.png" alt="MORE" className="mx-auto mb-8 h-48 w-auto sm:h-60" />
-          <h1 className="mb-3 font-display text-2xl font-bold text-navy-deep">Evento no disponible</h1>
+          <h1 className="mb-3 font-sans text-2xl font-extrabold tracking-tight text-navy-deep">Evento no disponible</h1>
           <p className="mb-8 font-sans text-sm text-ink-muted">{reason}</p>
           <CtaButton label="Ir al inicio" to="/" icon={null} className="w-auto" />
         </div>

@@ -9,7 +9,7 @@ import {
 const faqs = [
   {
     q: "¿Es presencial o virtual?",
-    a: "Es 100% virtual y en vivo. Lo ves desde donde estés: Colombia, otro país o Estados Unidos. Te enviamos el acceso por email y WhatsApp antes del taller.",
+    a: "Es 100% virtual y en vivo. Lo ves desde donde estés: Colombia, otro país o Estados Unidos. Te enviamos el acceso por correo y WhatsApp antes del taller.",
   },
   {
     q: "¿Mi perfil alcanza para migrar o crecer en EE.UU.?",
@@ -17,7 +17,11 @@ const faqs = [
   },
   {
     q: "¿Qué diferencia hay entre General y VIP?",
-    a: "Las dos incluyen el taller completo y el material. VIP suma beneficios adicionales; revisa el detalle en cada entrada.",
+    a: "Las dos incluyen el taller completo, el material y la ronda de preguntas. La VIP suma una revisión de tu perfil por el equipo de MORE, la grabación en 24 horas y prioridad para tus preguntas en vivo.",
+  },
+  {
+    q: "¿Se puede posponer el taller?",
+    a: "No. La fecha es fija: lunes 23 de noviembre a las 7:00 PM (Colombia). Cualquier aviso te llega por correo y WhatsApp.",
   },
   {
     q: "¿Necesito tener una visa o un proceso iniciado?",
@@ -25,7 +29,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si no puedo asistir en vivo?",
-    a: "Te recomendamos conectarte en vivo para la ronda de preguntas. La entrada VIP incluye la grabación del taller.",
+    a: "Te recomendamos conectarte en vivo para la ronda de preguntas. La entrada VIP incluye la grabación, que recibes dentro de las 24 horas siguientes.",
   },
   {
     q: "¿Puedo pedir reembolso?",
@@ -51,7 +55,7 @@ export default function TCFAQ() {
         <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-orange-dark">
           Preguntas frecuentes
         </p>
-        <h2 className="mb-8 mt-3 text-center font-display text-2xl font-bold text-navy-deep sm:text-3xl">
+        <h2 className="mb-8 mt-3 text-center font-sans text-2xl font-extrabold tracking-tight text-navy-deep sm:text-3xl">
           Antes de reservar
         </h2>
         <Accordion type="single" collapsible className="w-full space-y-2">

@@ -51,7 +51,7 @@ export const PAINS = [
   {
     id: "visa",
     quote: "Tengo todo, menos la visa.",
-    text: "Ofertas que piden residencia, rechazos por necesitar sponsor, depender de un empleador.",
+    text: "Ofertas que piden residencia, rechazos por necesitar patrocinador, depender de un empleador.",
     moduleId: 2,
   },
   {
@@ -72,6 +72,18 @@ export const PAINS = [
     text: "Tasas, traducciones, equivalencias y el miedo a endeudarte.",
     moduleId: 4,
   },
+  {
+    id: "hijos",
+    quote: "¿Mi hijo pierde la opción de venir conmigo a los 21?",
+    text: "Los hijos entran como dependientes solo hasta los 21. Y el reloj ya está corriendo.",
+    moduleId: 2,
+  },
+  {
+    id: "quemado",
+    quote: "Ya consulté varios abogados y sigo sin claridad.",
+    text: "Una negación, un RFE (solicitud de más evidencia) o meses haciéndolo solo. No es falta de capacidad: es falta de estrategia.",
+    moduleId: 1,
+  },
 ] as const
 
 export type PainId = (typeof PAINS)[number]["id"]
@@ -88,7 +100,7 @@ type TicketDef = {
   highlighted?: boolean
 }
 
-// TODO(confirmar con el equipo): beneficios exactos de cada entrada.
+// Beneficios acordados con el usuario (2026-11-03). Ajustar aquí si cambian.
 export const TICKETS: TicketDef[] = [
   {
     id: "general",
@@ -105,17 +117,42 @@ export const TICKETS: TicketDef[] = [
   {
     id: "vip",
     name: "VIP",
-    tagline: "Más completo, con espacio para tu caso.",
+    tagline: "Sales sabiendo si tu perfil califica.",
     includes: [
       "Todo lo de la entrada General",
-      "Grabación del taller",
-      "Espacio prioritario para tus preguntas",
+      "Revisión de tu perfil por el equipo de MORE",
+      "Grabación del taller en 24 horas",
+      "Prioridad para tus preguntas en vivo",
     ],
     priceKey: "tc_vip_price",
     linkKey: "tc_vip_payment_link",
     highlighted: true,
   },
 ]
+
+/** Compromisos operativos explícitos (responden a las críticas de clientes en el análisis 2023–2026). */
+export const GUARANTEES = [
+  { title: "Fecha fija", text: "Lunes 23 de noviembre, 7:00 PM (Colombia). No se pospone." },
+  { title: "Grabación en 24 horas", text: "Los VIP la reciben al día siguiente, sin excusas." },
+  { title: "Un solo canal", text: "Acceso, material y avisos por correo y WhatsApp. Nada perdido en Drive." },
+  { title: "Todo por escrito", text: "Qué incluye cada entrada, antes de pagar. Sin letra pequeña." },
+] as const
+
+/** Los 3 miedos que más frenan la decisión (análisis de clientes 2023–2026). */
+export const FEARS = [
+  {
+    q: "“¿Una negación me cierra todas las puertas?”",
+    a: "Te explicamos qué afecta realmente una negación previa y qué no, para que decidas con información y no con miedo.",
+  },
+  {
+    q: "“Cambian las reglas cada semana.”",
+    a: "Separamos lo que cambió de verdad de lo que es rumor de redes, con fuentes oficiales.",
+  },
+  {
+    q: "“¿Mi perfil alcanza?”",
+    a: "Derribamos los mitos de quién califica: edad, maestría, áreas mezcladas. Muchos perfiles que creen que no califican, sí tienen ruta.",
+  },
+] as const
 
 export const getTicket = (id: TicketType): TicketDef =>
   TICKETS.find((t) => t.id === id) ?? TICKETS[0]

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import BrandLoader from "@/components/brand/BrandLoader"
 import { AuthProvider } from "@/contexts/AuthContext"
 import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext"
 import ProtectedAdmin from "@/components/ProtectedAdmin"
@@ -38,11 +39,14 @@ const ThankYouPage = lazy(() => import("@/pages/ThankYouPage"))
 import TurboPdfPage from "@/pages/TurboPdfPage"
 import UppPdfPage from "@/pages/UppPdfPage"
 
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <p className="text-gray-400 text-sm">Cargando…</p>
-  </div>
-)
+/** Rutas en navy: el loader global usa la versión oscura para no "parpadear" en blanco. */
+const DARK_LOADER_PATHS = ["/taller-nov-26"]
+
+const PageLoader = () => {
+  const { pathname } = useLocation()
+  const dark = DARK_LOADER_PATHS.some((p) => pathname.startsWith(p))
+  return dark ? <BrandLoader tone="dark" label="Preparando tu ruta…" /> : <BrandLoader />
+}
 
 function App() {
   return (
