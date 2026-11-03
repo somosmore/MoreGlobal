@@ -15,13 +15,20 @@ import TCSpeaker from "@/components/sections/taller-nov-26/TCSpeaker"
 import TCFinalCTA from "@/components/sections/taller-nov-26/TCFinalCTA"
 import TCFooter from "@/components/sections/taller-nov-26/TCFooter"
 import TCStickyCTA from "@/components/sections/taller-nov-26/TCStickyCTA"
-import { TALLER_PAGE_META } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { TALLER_PAGE_META, type PriceTier } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { PriceTierContext } from "@/components/sections/taller-nov-26/priceTier"
 
-export default function TallerNov26Page() {
+type TallerNov26PageProps = {
+  /** `comunidad` = /taller-23nov/comunidad: precio exclusivo, no indexable. */
+  tier?: PriceTier
+}
+
+export default function TallerNov26Page({ tier = "publico" }: TallerNov26PageProps) {
   const { status, isAccessible, reason } = useLandingStatus("/taller-23nov")
 
   useEffect(() => {
-    document.title = TALLER_PAGE_META.title
+    document.title =
+      tier === "comunidad" ? `Precio Comunidad More · ${TALLER_PAGE_META.title}` : TALLER_PAGE_META.title
 
     const metas: HTMLMetaElement[] = []
 
@@ -40,11 +47,13 @@ export default function TallerNov26Page() {
     setMeta("property", "og:title", TALLER_PAGE_META.ogTitle)
     setMeta("property", "og:description", TALLER_PAGE_META.ogDescription)
     setMeta("property", "og:type", "website")
+    // La versión con precio de comunidad no debe aparecer en buscadores.
+    if (tier === "comunidad") setMeta("name", "robots", "noindex, nofollow")
 
     return () => {
       metas.forEach((el) => el.remove())
     }
-  }, [])
+  }, [tier])
 
   if (status === "loading") {
     return <BrandLoader tone="dark" label="Preparando tu ruta…" />
@@ -64,20 +73,22 @@ export default function TallerNov26Page() {
   }
 
   return (
-    <div className="campaign-editorial min-h-screen bg-paper">
-      <TCHero />
-      <TCPains />
-      <TCModules />
-      <TCAudience />
-      <TCFears />
-      <TCTestimonials />
-      <TCTickets />
-      <TCRegistrationForm />
-      <TCFAQ />
-      <TCSpeaker />
-      <TCFinalCTA />
-      <TCFooter />
-      <TCStickyCTA />
-    </div>
+    <PriceTierContext.Provider value={tier}>
+      <div className="campaign-editorial min-h-screen bg-paper">
+        <TCHero />
+        <TCPains />
+        <TCModules />
+        <TCAudience />
+        <TCFears />
+        <TCTestimonials />
+        <TCTickets />
+        <TCRegistrationForm />
+        <TCFAQ />
+        <TCSpeaker />
+        <TCFinalCTA />
+        <TCFooter />
+        <TCStickyCTA />
+      </div>
+    </PriceTierContext.Provider>
   )
 }

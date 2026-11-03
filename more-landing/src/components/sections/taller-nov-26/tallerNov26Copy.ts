@@ -97,7 +97,42 @@ type TicketDef = {
   includes: string[]
   priceKey: keyof SiteSettingsMap
   linkKey: keyof SiteSettingsMap
+  /** Precio y link de la versión Comunidad More (/taller-23nov/comunidad). */
+  comunidadPriceKey: keyof SiteSettingsMap
+  comunidadLinkKey: keyof SiteSettingsMap
   highlighted?: boolean
+}
+
+/** Versión de la landing: pública o con precio exclusivo de la Comunidad More. */
+export type PriceTier = "publico" | "comunidad"
+
+/** Tag extra en GHL para medir los registros con precio de comunidad. */
+export const COMUNIDAD_PRICE_TAG = "Taller-Comunidad-Nov-26-Precio-Comunidad"
+
+export type TicketPricing = {
+  /** Precio vigente para esta versión (texto visible, vacío si no está cargado). */
+  price: string
+  /** Precio público tachado (solo en la versión comunidad). */
+  compareAt: string | null
+  /** Link de pago vigente para esta versión. */
+  link: string
+}
+
+export function getTicketPricing(
+  ticket: Pick<TicketDef, "priceKey" | "linkKey" | "comunidadPriceKey" | "comunidadLinkKey">,
+  settings: SiteSettingsMap,
+  tier: PriceTier,
+): TicketPricing {
+  const publicPrice = settings[ticket.priceKey].trim()
+  if (tier === "comunidad") {
+    const price = settings[ticket.comunidadPriceKey].trim()
+    return {
+      price,
+      compareAt: publicPrice && publicPrice !== price ? publicPrice : null,
+      link: settings[ticket.comunidadLinkKey],
+    }
+  }
+  return { price: publicPrice, compareAt: null, link: settings[ticket.linkKey] }
 }
 
 // Beneficios acordados con el usuario (2026-11-03). Ajustar aquí si cambian.
@@ -113,6 +148,8 @@ export const TICKETS: TicketDef[] = [
     ],
     priceKey: "tc_general_price",
     linkKey: "tc_general_payment_link",
+    comunidadPriceKey: "tc_comunidad_general_price",
+    comunidadLinkKey: "tc_comunidad_general_payment_link",
   },
   {
     id: "vip",
@@ -126,6 +163,8 @@ export const TICKETS: TicketDef[] = [
     ],
     priceKey: "tc_vip_price",
     linkKey: "tc_vip_payment_link",
+    comunidadPriceKey: "tc_comunidad_vip_price",
+    comunidadLinkKey: "tc_comunidad_vip_payment_link",
     highlighted: true,
   },
 ]

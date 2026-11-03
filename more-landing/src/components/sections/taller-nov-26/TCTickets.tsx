@@ -2,7 +2,8 @@ import { motion } from "framer-motion"
 import { Check, Plane, ShieldCheck } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { cn } from "@/lib/utils"
-import { GUARANTEES, TICKETS } from "./tallerNov26Copy"
+import { GUARANTEES, TICKETS, getTicketPricing } from "./tallerNov26Copy"
+import { usePriceTier } from "./priceTier"
 import { scrollToRegistro } from "./scrollToRegistro"
 
 const passDetails = [
@@ -26,6 +27,7 @@ function Barcode({ dark }: { dark: boolean }) {
 
 export default function TCTickets() {
   const { settings, loading } = useSiteSettings()
+  const tier = usePriceTier()
 
   return (
     <section id="entradas" className="scroll-mt-4 bg-paper py-16 sm:py-24">
@@ -42,13 +44,15 @@ export default function TCTickets() {
             Elige tu <span className="text-orange">pase de abordar</span>
           </h2>
           <p className="mt-3 text-base text-ink-muted">
-            Precio especial para la Comunidad More. Taller virtual: lo ves desde donde estés.
+            {tier === "comunidad"
+              ? "Precio exclusivo para la Comunidad More. Taller virtual: lo ves desde donde estés."
+              : "Taller virtual: lo ves desde donde estés."}
           </p>
         </motion.div>
 
         <div className="mt-12 space-y-8">
           {TICKETS.map((ticket, index) => {
-            const price = settings[ticket.priceKey].trim()
+            const { price, compareAt } = getTicketPricing(ticket, settings, tier)
             const dark = Boolean(ticket.highlighted)
             return (
               <motion.article
@@ -136,8 +140,13 @@ export default function TCTickets() {
                 <div className="flex flex-col justify-between gap-5 p-6 sm:p-8 md:w-72">
                   <div>
                     <p className={cn("text-[10px] font-bold uppercase tracking-[0.18em]", dark ? "text-navy-soft" : "text-ink-muted")}>
-                      Precio
+                      {compareAt ? "Precio Comunidad" : "Precio"}
                     </p>
+                    {compareAt && !loading && (
+                      <p className={cn("mt-1 text-base font-semibold line-through", dark ? "text-navy-soft" : "text-ink-muted")}>
+                        {compareAt}
+                      </p>
+                    )}
                     <p className="mt-1 font-sans text-3xl font-extrabold tracking-tight">
                       {loading ? (
                         <span className="inline-block h-8 w-32 animate-pulse rounded bg-gray-300/40" />

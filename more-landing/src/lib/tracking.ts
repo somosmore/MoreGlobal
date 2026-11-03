@@ -53,6 +53,8 @@ const MASTERCLASS_LANDING_PATHS = new Set([
   "/comunidad/registro",
   "/taller-23nov",
   "/taller-23nov/registro",
+  "/taller-23nov/comunidad",
+  "/taller-23nov/comunidad/registro",
 ])
 
 const isMasterclassLandingPath = (pathname: string): boolean =>

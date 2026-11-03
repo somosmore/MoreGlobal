@@ -8,12 +8,15 @@ import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/track
 import { cn } from "@/lib/utils"
 import { capturePartialLead } from "@/lib/partialLead"
 import {
+  COMUNIDAD_PRICE_TAG,
   TALLER_EVENT_LABEL,
   TALLER_GHL_TAG,
   TALLER_SOURCE,
   TICKETS,
+  getTicketPricing,
   type TicketType,
 } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { usePriceTier } from "@/components/sections/taller-nov-26/priceTier"
 import "flag-icons/css/flag-icons.min.css"
 
 import TCPaymentCard from "@/components/sections/taller-nov-26/TCPaymentCard"
@@ -244,6 +247,7 @@ function ExpiredCard() {
 
 export default function TCRegistrationForm() {
   const { settings } = useSiteSettings()
+  const tier = usePriceTier()
   const nombreInputRef = useRef<HTMLInputElement>(null)
   const [ticket, setTicket] = useState<TicketType>("general")
   const [submittedEmail, setSubmittedEmail] = useState("")
@@ -366,6 +370,8 @@ export default function TCRegistrationForm() {
           event_label: TALLER_EVENT_LABEL,
           ghl_tag: TALLER_GHL_TAG,
           ticket_type: ticket,
+          price_tier: tier,
+          ...(tier === "comunidad" ? { extra_tags: [COMUNIDAD_PRICE_TAG] } : {}),
           ...utmParams,
           capi_event_id: capiEventId,
           client_user_agent:
@@ -395,7 +401,7 @@ export default function TCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams, settings, ticket, savePartial])
+  }, [form, utmParams, settings, ticket, savePartial, tier])
 
   // El cierre de inscripción se configura en Admin → Settings → Taller Comunidad.
   const { expired: isExpired } = useOfferWindow(settings.tc_registration_closes_at)
@@ -426,6 +432,11 @@ export default function TCRegistrationForm() {
               <p className="mt-2 text-sm text-ink-muted">
                 Déjanos tus datos y en el siguiente paso completas el pago de tu entrada.
               </p>
+              {tier === "comunidad" && (
+                <p className="mx-auto mt-3 inline-flex rounded-full bg-orange-wash px-4 py-1.5 text-xs font-bold text-orange-dark">
+                  Estás reservando con precio exclusivo de la Comunidad More
+                </p>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -538,7 +549,7 @@ export default function TCRegistrationForm() {
                     </legend>
                     <div className="grid grid-cols-2 gap-2">
                       {TICKETS.map((t) => {
-                        const price = settings[t.priceKey].trim()
+                        const { price } = getTicketPricing(t, settings, tier)
                         const selected = ticket === t.id
                         return (
                           <label
