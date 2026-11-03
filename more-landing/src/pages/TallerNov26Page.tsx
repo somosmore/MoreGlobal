@@ -6,6 +6,7 @@ import TCHero from "@/components/sections/taller-nov-26/TCHero"
 import TCPains from "@/components/sections/taller-nov-26/TCPains"
 import TCModules from "@/components/sections/taller-nov-26/TCModules"
 import TCAudience from "@/components/sections/taller-nov-26/TCAudience"
+import TCFears from "@/components/sections/taller-nov-26/TCFears"
 import TCTestimonials from "@/components/sections/taller-nov-26/TCTestimonials"
 import TCTickets from "@/components/sections/taller-nov-26/TCTickets"
 import TCRegistrationForm from "@/components/sections/taller-nov-26/TCRegistrationForm"
@@ -68,6 +69,7 @@ export default function TallerNov26Page() {
       <TCPains />
       <TCModules />
       <TCAudience />
+      <TCFears />
       <TCTestimonials />
       <TCTickets />
       <TCRegistrationForm />

@@ -419,7 +419,7 @@ export default function TCRegistrationForm() {
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-orange-dark">
                 Check-in · Paso 1 de 2
               </p>
-              <h2 className="font-display text-2xl font-bold leading-tight text-navy-deep sm:text-3xl">
+              <h2 className="font-sans text-2xl font-extrabold tracking-tight leading-tight text-navy-deep sm:text-3xl">
                 Reserva tu lugar en el{" "}
                 <span className="text-[#F37021]">Taller Comunidad More</span>
               </h2>

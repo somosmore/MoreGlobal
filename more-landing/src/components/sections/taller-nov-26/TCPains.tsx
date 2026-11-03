@@ -26,7 +26,7 @@ export default function TCPains() {
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-dark">
             Diagnóstico rápido
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-navy-deep sm:text-4xl">
+          <h2 className="mt-3 font-sans text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl">
             ¿Qué te pasa <span className="text-orange">hoy</span>?
           </h2>
           <p className="mt-3 text-base text-ink-muted">
@@ -66,7 +66,7 @@ export default function TCPains() {
                   <Check className="h-4 w-4" strokeWidth={3} />
                 </span>
                 <span>
-                  <span className="block font-display text-lg font-bold leading-snug text-navy-deep">
+                  <span className="block font-sans text-lg font-extrabold tracking-tight leading-snug text-navy-deep">
                     “{pain.quote}”
                   </span>
                   <span className="mt-1 block text-sm leading-relaxed text-ink-muted">{pain.text}</span>
@@ -126,7 +126,7 @@ export default function TCPains() {
                 exit={{ opacity: 0 }}
                 className="mx-auto max-w-2xl pt-4 text-center"
               >
-                <p className="font-display text-2xl font-bold leading-snug text-navy-deep sm:text-3xl">
+                <p className="font-sans text-2xl font-extrabold tracking-tight leading-snug text-navy-deep sm:text-3xl">
                   Migrar no debería costarte una fortuna.{" "}
                   <span className="text-orange">Y menos esperar a ciegas.</span>
                 </p>

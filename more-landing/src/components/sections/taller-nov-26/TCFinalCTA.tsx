@@ -18,7 +18,7 @@ export default function TCFinalCTA() {
         className="relative mx-auto max-w-3xl px-4 text-center sm:px-6"
       >
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange">Última llamada a bordo</p>
-        <h2 className="mt-4 font-display text-4xl font-bold leading-tight sm:text-5xl">
+        <h2 className="mt-4 font-sans text-4xl font-extrabold tracking-tight leading-tight sm:text-5xl">
           Sin estrategia, <span className="text-orange">cada paso cuesta más.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base text-navy-pale sm:text-lg">

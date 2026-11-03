@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
-import { Briefcase, Building2, Check, Plane, X } from "lucide-react"
+import { ArrowRight, Briefcase, Building2, Check, Plane, RotateCcw, Users, X } from "lucide-react"
+import { scrollToEntradas } from "./scrollToRegistro"
 
 /** Un mensaje por perfil: lo que conmueve a uno no le habla al otro. */
 const profiles = [
@@ -20,6 +21,18 @@ const profiles = [
     label: "Ya estás en EE.UU.",
     who: "Vives allá con una visa temporal o de trabajo y estás cansado de depender de un empleador o de renovar.",
     message: "Deja de vivir de renovación en renovación. Conoce tus opciones para una residencia propia.",
+  },
+  {
+    icon: Users,
+    label: "Madre o padre con el reloj encima",
+    who: "Tus hijos tienen entre 15 y 20 años y quieres que tengan un futuro allá contigo.",
+    message: "Tus hijos pueden entrar contigo como dependientes solo hasta los 21. Empieza por saber qué ruta tienen.",
+  },
+  {
+    icon: RotateCcw,
+    label: "Ya lo intentaste y te frenaste",
+    who: "Te negaron una visa, recibiste un RFE, tuviste un mal asesor o te estancaste haciéndolo solo.",
+    message: "Esta vez con estrategia, no con plantillas. No es falta de capacidad: es falta de método.",
   },
 ]
 
@@ -49,12 +62,12 @@ export default function TCAudience() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-dark">
             Para quién es
           </p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy-deep sm:text-3xl">
+          <h2 className="mt-3 font-sans text-2xl font-extrabold tracking-tight text-navy-deep sm:text-3xl">
             ¿Este taller es para ti?
           </h2>
         </motion.div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {profiles.map(({ icon: Icon, label, who, message }, index) => (
             <motion.div
               key={label}
@@ -79,6 +92,25 @@ export default function TCAudience() {
               </p>
             </motion.div>
           ))}
+
+          {/* Sexta tarjeta: cierre de la grilla con llamado a la acción */}
+          <motion.button
+            type="button"
+            onClick={scrollToEntradas}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.35, delay: 0.4 }}
+            className="group flex flex-col justify-between rounded-2xl bg-navy-ink p-6 text-left text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+          >
+            <p className="text-xl font-extrabold leading-snug tracking-tight">
+              ¿Te viste en alguno? <span className="text-orange">Tu ruta empieza el 23.</span>
+            </p>
+            <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-orange">
+              Elegir mi entrada
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </span>
+          </motion.button>
         </div>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-xs leading-relaxed text-ink-muted">

@@ -41,7 +41,7 @@ export default function TCTestimonials() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-dark">
             Testimonios
           </p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy-deep sm:text-3xl">
+          <h2 className="mt-3 font-sans text-2xl font-extrabold tracking-tight text-navy-deep sm:text-3xl">
             Lo que dicen quienes ya trabajaron con MORE
           </h2>
         </motion.div>

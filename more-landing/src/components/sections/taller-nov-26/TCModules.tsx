@@ -29,7 +29,7 @@ export default function TCModules() {
           className="text-center"
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange">La ruta del taller</p>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-3 font-sans text-3xl font-extrabold tracking-tight sm:text-4xl">
             Sales con una ruta, <span className="text-orange">no con dudas.</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base text-navy-pale">

@@ -48,7 +48,7 @@ export default function TallerNov26RegistroPage() {
         <Backdrop variant="hero" className="opacity-70" />
         <div className="relative z-10 max-w-md text-center">
           <img src="/logo_more_dark.png" alt="MORE" className="mx-auto mb-8 h-48 w-auto sm:h-60" />
-          <h1 className="mb-3 font-display text-2xl font-bold text-navy-deep">Evento no disponible</h1>
+          <h1 className="mb-3 font-sans text-2xl font-extrabold tracking-tight text-navy-deep">Evento no disponible</h1>
           <p className="mb-8 font-sans text-sm text-ink-muted">{reason}</p>
           <CtaButton label="Ir al inicio" to="/" icon={null} className="w-auto" />
         </div>

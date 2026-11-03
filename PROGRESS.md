@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-11-03] — `/taller-nov-26`: contenido del análisis de clientes + tipografía sans
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/{tallerNov26Copy.ts,TCAudience,TCTickets,TCFAQ,TCHero,...}.tsx`, nuevo `TCFears.tsx`, `src/pages/TallerNov26Page.tsx`
+- Qué se implementó: Según "Dolores y deseos del cliente" (295 reuniones 2023–2026): perfiles P4 (padres con hijos 15–20, reloj de los 21) y P5 (rechazado/estancado) + tarjeta CTA; 2 dolores nuevos en el diagnóstico; bloque de los 3 miedos (negación, rumores de política, "¿mi perfil alcanza?"); compromisos operativos (fecha fija, grabación VIP en 24 h, un solo canal, todo por escrito); VIP = revisión de perfil + grabación 24 h + prioridad. Toda la landing en sans serif (Inter), sin Playfair, a pedido del usuario.
+- Problemas encontrados: ninguno técnico. Beneficios VIP y "grabación en 24 h" son compromisos operativos aceptados por el usuario: el equipo debe cumplirlos.
+- Estado: ✅ completo (pendiente publicar)
+
 ### [2026-11-03] — Leads parciales para remarketing + loader de marca
 
 - Agente: claude-code

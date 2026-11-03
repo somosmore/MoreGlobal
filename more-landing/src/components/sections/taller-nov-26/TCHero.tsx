@@ -121,7 +121,7 @@ export default function TCHero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+              className="mt-6 font-sans text-4xl font-extrabold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.4rem]"
             >
               Tu trayectoria vale en Estados Unidos.{" "}
               <span className="text-orange">Diseña tu ruta.</span>
@@ -198,7 +198,7 @@ export default function TCHero() {
               </div>
               <div className="mt-2 flex items-center gap-3">
                 <div>
-                  <p className="font-display text-2xl font-bold leading-none">HOY</p>
+                  <p className="font-sans text-2xl font-extrabold tracking-tight leading-none">HOY</p>
                   <p className="mt-1 text-[11px] text-ink-muted">Tu punto de partida</p>
                 </div>
                 <div className="flex flex-1 items-center gap-1 text-orange" aria-hidden>
@@ -207,7 +207,7 @@ export default function TCHero() {
                   <span className="h-px flex-1 border-t-2 border-dotted border-navy-line" />
                 </div>
                 <div className="text-right">
-                  <p className="font-display text-2xl font-bold leading-none text-orange">EE.UU.</p>
+                  <p className="font-sans text-2xl font-extrabold tracking-tight leading-none text-orange">EE.UU.</p>
                   <p className="mt-1 text-[11px] text-ink-muted">Tu ruta clara</p>
                 </div>
               </div>
