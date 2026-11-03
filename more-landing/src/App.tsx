@@ -76,6 +76,9 @@ function App() {
           <Route path="/comunidad/registro" element={<ComunidadRegistroPage />} />
           <Route path="/taller-23nov" element={<TallerNov26Page />} />
           <Route path="/taller-23nov/registro" element={<TallerNov26RegistroPage />} />
+          {/* Versión con precio exclusivo Comunidad More (noindex). */}
+          <Route path="/taller-23nov/comunidad" element={<TallerNov26Page tier="comunidad" />} />
+          <Route path="/taller-23nov/comunidad/registro" element={<TallerNov26RegistroPage tier="comunidad" />} />
           {/* Ruta anterior (se leía como "26 de noviembre"): redirige conservando UTMs. */}
           <Route path="/taller-nov-26" element={<RedirectKeepingQuery to="/taller-23nov" />} />
           <Route path="/taller-nov-26/registro" element={<RedirectKeepingQuery to="/taller-23nov/registro" />} />

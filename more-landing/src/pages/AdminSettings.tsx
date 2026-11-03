@@ -206,6 +206,16 @@ export default function AdminSettings() {
               handleSaveTallerComunidad={data.handleSaveTallerComunidad}
               tcGeneralPaymentLinkInvalid={data.tcGeneralPaymentLinkInvalid}
               tcVipPaymentLinkInvalid={data.tcVipPaymentLinkInvalid}
+              tcComunidadGeneralPrice={data.tcComunidadGeneralPrice}
+              setTcComunidadGeneralPrice={data.setTcComunidadGeneralPrice}
+              tcComunidadGeneralPaymentLink={data.tcComunidadGeneralPaymentLink}
+              setTcComunidadGeneralPaymentLink={data.setTcComunidadGeneralPaymentLink}
+              tcComunidadVipPrice={data.tcComunidadVipPrice}
+              setTcComunidadVipPrice={data.setTcComunidadVipPrice}
+              tcComunidadVipPaymentLink={data.tcComunidadVipPaymentLink}
+              setTcComunidadVipPaymentLink={data.setTcComunidadVipPaymentLink}
+              tcComunidadGeneralPaymentLinkInvalid={data.tcComunidadGeneralPaymentLinkInvalid}
+              tcComunidadVipPaymentLinkInvalid={data.tcComunidadVipPaymentLinkInvalid}
             />
           </section>
 

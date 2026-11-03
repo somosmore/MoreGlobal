@@ -626,6 +626,18 @@ Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More, **lu
 
 **Admin:** todo en `/admin/settings` → **Taller Comunidad** (fechas, precios y links).
 
+#### 1.21.0 Versión con precio Comunidad More (`/taller-23nov/comunidad`)
+
+Misma landing con precio exclusivo para la comunidad: **General $50 USD · VIP $97 USD** (público $67 / $127, que se muestra tachado). Etiqueta "Precio exclusivo · Comunidad More" en el hero, nota en el formulario, `noindex` (no aparece en buscadores) y links de pago propios.
+
+| Dato | Valor |
+|------|-------|
+| Precios / links | `tc_comunidad_general_price`, `tc_comunidad_general_payment_link`, `tc_comunidad_vip_price`, `tc_comunidad_vip_payment_link` (Admin → Settings → Taller Comunidad) |
+| Medición | `masterclass_leads.price_tier = 'comunidad'` + tag GHL `Taller-Comunidad-Nov-26-Precio-Comunidad` |
+| Meta Lead Ads | `/taller-23nov/comunidad/registro` |
+
+Compartir solo por canales de la comunidad (grupo de Facebook, WhatsApp, email a inscritos): quien tenga el link puede comprar con ese precio.
+
 #### 1.21.1 Página de pago para Meta Lead Ads (`/taller-23nov/registro`)
 
 El lead ya dejó sus datos en el formulario de Meta: aquí elige su entrada y paga.

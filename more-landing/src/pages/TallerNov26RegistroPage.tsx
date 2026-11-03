@@ -2,14 +2,16 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useLandingStatus } from "@/hooks/useLandingStatus"
 import TCPaymentCard from "@/components/sections/taller-nov-26/TCPaymentCard"
-import { TALLER_REGISTRO_PAGE_META } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { TALLER_REGISTRO_PAGE_META, type PriceTier } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { PriceTierContext } from "@/components/sections/taller-nov-26/priceTier"
 import { Backdrop } from "@/components/brand/Backdrop"
 import { CtaButton } from "@/components/brand/CtaButton"
 import BrandLoader from "@/components/brand/BrandLoader"
 
 /** Post-registro para Meta Lead Ads: el lead ya dejó sus datos, aquí elige y paga su entrada. */
-export default function TallerNov26RegistroPage() {
+export default function TallerNov26RegistroPage({ tier = "publico" }: { tier?: PriceTier }) {
   const { status, isAccessible, reason } = useLandingStatus("/taller-23nov")
+  const detailPath = tier === "comunidad" ? "/taller-23nov/comunidad" : "/taller-23nov"
 
   useEffect(() => {
     document.title = TALLER_REGISTRO_PAGE_META.title
@@ -31,12 +33,13 @@ export default function TallerNov26RegistroPage() {
     setMeta("property", "og:title", TALLER_REGISTRO_PAGE_META.ogTitle)
     setMeta("property", "og:description", TALLER_REGISTRO_PAGE_META.ogDescription)
     setMeta("property", "og:type", "website")
+    if (tier === "comunidad") setMeta("name", "robots", "noindex, nofollow")
 
     return () => {
       metas.forEach((el) => el.remove())
       document.title = "MORE | Visa EB-2 NIW — Tu camino hacia la Green Card"
     }
-  }, [])
+  }, [tier])
 
   if (status === "loading") {
     return <BrandLoader tone="dark" label="Preparando tu pase…" />
@@ -57,19 +60,21 @@ export default function TallerNov26RegistroPage() {
   }
 
   return (
-    <div className="campaign-editorial relative flex min-h-[100dvh] flex-col overflow-hidden bg-paper">
-      <Backdrop variant="hero" className="opacity-60" />
-      <main className="relative z-10 flex flex-1 flex-col justify-center px-4 py-10 sm:py-14">
-        <TCPaymentCard showLogo />
-        <p className="relative z-10 mt-8 text-center font-sans text-xs text-ink-muted">
-          <Link
-            to="/taller-23nov"
-            className="rounded-sm underline-offset-4 transition-colors hover:text-navy hover:underline"
-          >
-            Ver el detalle del taller
-          </Link>
-        </p>
-      </main>
-    </div>
+    <PriceTierContext.Provider value={tier}>
+      <div className="campaign-editorial relative flex min-h-[100dvh] flex-col overflow-hidden bg-paper">
+        <Backdrop variant="hero" className="opacity-60" />
+        <main className="relative z-10 flex flex-1 flex-col justify-center px-4 py-10 sm:py-14">
+          <TCPaymentCard showLogo />
+          <p className="relative z-10 mt-8 text-center font-sans text-xs text-ink-muted">
+            <Link
+              to={detailPath}
+              className="rounded-sm underline-offset-4 transition-colors hover:text-navy hover:underline"
+            >
+              Ver el detalle del taller
+            </Link>
+          </p>
+        </main>
+      </div>
+    </PriceTierContext.Provider>
   )
 }

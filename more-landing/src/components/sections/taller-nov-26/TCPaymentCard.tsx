@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { CheckCircle2, CreditCard, MessageCircle } from "lucide-react"
 import { CtaButton } from "@/components/brand/CtaButton"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { TICKETS, buildPaymentUrl, getTicket, type TicketType } from "./tallerNov26Copy"
+import { TICKETS, buildPaymentUrl, getTicket, getTicketPricing, type TicketType } from "./tallerNov26Copy"
+import { usePriceTier } from "./priceTier"
 
 type TCPaymentCardProps = {
   /** Entrada elegida en el formulario. En /registro (Meta Lead Ads) se elige aquí. */
@@ -15,16 +16,18 @@ type TCPaymentCardProps = {
 
 export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPaymentCardProps) {
   const { settings } = useSiteSettings()
+  const tier = usePriceTier()
   const [selected, setSelected] = useState<TicketType>(ticket ?? "general")
   const current = getTicket(selected)
   const other = TICKETS.find((t) => t.id !== selected)
-  const price = settings[current.priceKey].trim()
-  const paymentUrl = buildPaymentUrl(settings[current.linkKey], email)
+  const { price, compareAt, link } = getTicketPricing(current, settings, tier)
+  const paymentUrl = buildPaymentUrl(link, email)
 
   const waDigits = settings.whatsapp_number.replace(/\D/g, "")
+  const tierNote = tier === "comunidad" ? " con precio de Comunidad More" : ""
   const waUrl = waDigits
     ? `https://wa.me/${waDigits}?text=${encodeURIComponent(
-        `Hola, me registré en el Taller Comunidad More (entrada ${current.name}) y tengo una consulta.`,
+        `Hola, me registré en el Taller Comunidad More (entrada ${current.name}${tierNote}) y tengo una consulta.`,
       )}`
     : null
 
@@ -72,7 +75,7 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
               >
                 <span className="block text-sm font-bold text-navy-deep">{t.name}</span>
                 <span className="block text-xs text-ink-muted">
-                  {settings[t.priceKey].trim() || "Precio por confirmar"}
+                  {getTicketPricing(t, settings, tier).price || "Precio por confirmar"}
                 </span>
               </button>
             ))}
@@ -83,8 +86,16 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
           <p className="text-xs uppercase tracking-wider text-ink-muted">Entrada</p>
           <p className="mt-1 flex items-baseline justify-between gap-3">
             <span className="text-lg font-bold text-navy-deep">{current.name}</span>
-            <span className="text-base font-semibold text-navy-deep">{price || "Precio por confirmar"}</span>
+            <span className="text-right">
+              {compareAt && (
+                <span className="mr-2 text-sm text-ink-muted line-through">{compareAt}</span>
+              )}
+              <span className="text-base font-semibold text-navy-deep">{price || "Precio por confirmar"}</span>
+            </span>
           </p>
+          {compareAt && (
+            <p className="mt-2 text-xs font-semibold text-orange-dark">Precio exclusivo Comunidad More</p>
+          )}
         </div>
 
         <div className="mt-6">

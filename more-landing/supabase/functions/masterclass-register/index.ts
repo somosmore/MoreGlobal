@@ -109,6 +109,8 @@ Deno.serve(async (req) => {
       event_label,
       ghl_tag,
       ticket_type,
+      price_tier,
+      extra_tags,
       utm_source,
       utm_medium,
       utm_campaign,
@@ -148,6 +150,15 @@ Deno.serve(async (req) => {
       typeof ticket_type === "string" && TICKET_LABELS[ticket_type.trim().toLowerCase()]
         ? ticket_type.trim().toLowerCase()
         : null
+    // Versión de precio (landing pública vs. precio exclusivo de comunidad).
+    const priceTier =
+      price_tier === "publico" || price_tier === "comunidad" ? price_tier : null
+    // Tags extra de GHL (p. ej. precio de comunidad): máx. 3, texto corto y seguro.
+    const extraTags = Array.isArray(extra_tags)
+      ? extra_tags
+          .filter((t: unknown): t is string => typeof t === "string" && /^[\w-]{1,60}$/.test(t))
+          .slice(0, 3)
+      : []
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
@@ -203,6 +214,7 @@ Deno.serve(async (req) => {
       status: "new",
       // Solo se envía si llega: las landings gratuitas no dependen de la columna.
       ...(ticketType ? { ticket_type: ticketType } : {}),
+      ...(priceTier ? { price_tier: priceTier } : {}),
     })
 
     let ghlPromise: Promise<unknown> = Promise.resolve()
@@ -213,7 +225,11 @@ Deno.serve(async (req) => {
 
       const baseTag = eventTag || ghlTag
       const ticketLabel = ticketType ? TICKET_LABELS[ticketType] : null
-      const contactTags = ticketLabel ? [baseTag, `${baseTag}-${ticketLabel}`] : [baseTag]
+      const contactTags = [
+        baseTag,
+        ...(ticketLabel ? [`${baseTag}-${ticketLabel}`] : []),
+        ...extraTags,
+      ]
       const oppName = ticketLabel
         ? `${nombre.trim()} — ${eventLabel} (${ticketLabel})`
         : `${nombre.trim()} — ${eventLabel}`

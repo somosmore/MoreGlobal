@@ -150,6 +150,10 @@ export type SiteSettingsMap = {
   tc_general_payment_link: string
   tc_vip_price: string
   tc_vip_payment_link: string
+  tc_comunidad_general_price: string
+  tc_comunidad_general_payment_link: string
+  tc_comunidad_vip_price: string
+  tc_comunidad_vip_payment_link: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

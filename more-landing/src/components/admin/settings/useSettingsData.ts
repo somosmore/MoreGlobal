@@ -79,6 +79,10 @@ export function useSettingsData() {
   const [tcGeneralPaymentLink, setTcGeneralPaymentLink] = useState("")
   const [tcVipPrice, setTcVipPrice] = useState("")
   const [tcVipPaymentLink, setTcVipPaymentLink] = useState("")
+  const [tcComunidadGeneralPrice, setTcComunidadGeneralPrice] = useState("")
+  const [tcComunidadGeneralPaymentLink, setTcComunidadGeneralPaymentLink] = useState("")
+  const [tcComunidadVipPrice, setTcComunidadVipPrice] = useState("")
+  const [tcComunidadVipPaymentLink, setTcComunidadVipPaymentLink] = useState("")
   const [tcSaveState, setTcSaveState] = useState<SaveState>("idle")
   const [tcSaveError, setTcSaveError] = useState<string | null>(null)
 
@@ -121,6 +125,10 @@ export function useSettingsData() {
         setTcGeneralPaymentLink(settings.tc_general_payment_link)
         setTcVipPrice(settings.tc_vip_price)
         setTcVipPaymentLink(settings.tc_vip_payment_link)
+        setTcComunidadGeneralPrice(settings.tc_comunidad_general_price)
+        setTcComunidadGeneralPaymentLink(settings.tc_comunidad_general_payment_link)
+        setTcComunidadVipPrice(settings.tc_comunidad_vip_price)
+        setTcComunidadVipPaymentLink(settings.tc_comunidad_vip_payment_link)
         setMetaPixelId(settings.meta_pixel_id)
         setGtmId(settings.google_tag_manager_id)
         setGa4Id(settings.ga4_measurement_id)
@@ -278,6 +286,10 @@ export function useSettingsData() {
         { key: "tc_general_payment_link", value: tcGeneralPaymentLink.trim() },
         { key: "tc_vip_price", value: tcVipPrice.trim() },
         { key: "tc_vip_payment_link", value: tcVipPaymentLink.trim() },
+        { key: "tc_comunidad_general_price", value: tcComunidadGeneralPrice.trim() },
+        { key: "tc_comunidad_general_payment_link", value: tcComunidadGeneralPaymentLink.trim() },
+        { key: "tc_comunidad_vip_price", value: tcComunidadVipPrice.trim() },
+        { key: "tc_comunidad_vip_payment_link", value: tcComunidadVipPaymentLink.trim() },
       ],
       { onConflict: "key" }
     )
@@ -383,6 +395,10 @@ export function useSettingsData() {
     tcGeneralPaymentLink.trim().length > 0 && !isValidUrl(tcGeneralPaymentLink)
   const tcVipPaymentLinkInvalid =
     tcVipPaymentLink.trim().length > 0 && !isValidUrl(tcVipPaymentLink)
+  const tcComunidadGeneralPaymentLinkInvalid =
+    tcComunidadGeneralPaymentLink.trim().length > 0 && !isValidUrl(tcComunidadGeneralPaymentLink)
+  const tcComunidadVipPaymentLinkInvalid =
+    tcComunidadVipPaymentLink.trim().length > 0 && !isValidUrl(tcComunidadVipPaymentLink)
 
   const socialUrlInvalid = [instagramUrl, linkedinUrl, facebookUrl, youtubeUrl].some(
     (v) => v.trim().length > 0 && !isValidUrl(v)
@@ -463,6 +479,12 @@ export function useSettingsData() {
     tcGeneralPaymentLink, setTcGeneralPaymentLink,
     tcVipPrice, setTcVipPrice,
     tcVipPaymentLink, setTcVipPaymentLink,
+    tcComunidadGeneralPrice, setTcComunidadGeneralPrice,
+    tcComunidadGeneralPaymentLink, setTcComunidadGeneralPaymentLink,
+    tcComunidadVipPrice, setTcComunidadVipPrice,
+    tcComunidadVipPaymentLink, setTcComunidadVipPaymentLink,
+    tcComunidadGeneralPaymentLinkInvalid,
+    tcComunidadVipPaymentLinkInvalid,
     tcSaveState, setTcSaveState,
     tcSaveError,
     handleSaveTallerComunidad,

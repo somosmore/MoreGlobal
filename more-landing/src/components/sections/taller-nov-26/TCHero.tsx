@@ -5,6 +5,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useOfferWindow } from "@/hooks/useOfferWindow"
 import { TALLER_CTA_LABEL } from "./tallerNov26Copy"
 import { scrollToEntradas } from "./scrollToRegistro"
+import { usePriceTier } from "./priceTier"
 import { DotGrid, FlightRoute } from "./TCDecor"
 
 const flightInfo = [
@@ -84,6 +85,7 @@ function DepartureBoard({ targetDate }: { targetDate: string }) {
 
 export default function TCHero() {
   const { settings } = useSiteSettings()
+  const tier = usePriceTier()
 
   return (
     <section className="relative isolate overflow-hidden bg-navy-ink text-white">
@@ -116,6 +118,16 @@ export default function TCHero() {
                 En vivo · Taller Comunidad More
               </span>
             </motion.div>
+            {tier === "comunidad" && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="ml-2 mt-2 inline-flex items-center rounded-full bg-orange px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white sm:mt-0"
+              >
+                Precio exclusivo · Comunidad More
+              </motion.div>
+            )}
 
             <motion.h1
               initial={{ opacity: 0, y: 24 }}

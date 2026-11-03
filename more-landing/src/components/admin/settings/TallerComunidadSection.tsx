@@ -23,6 +23,16 @@ type Props = Pick<
   | "handleSaveTallerComunidad"
   | "tcGeneralPaymentLinkInvalid"
   | "tcVipPaymentLinkInvalid"
+  | "tcComunidadGeneralPrice"
+  | "setTcComunidadGeneralPrice"
+  | "tcComunidadGeneralPaymentLink"
+  | "setTcComunidadGeneralPaymentLink"
+  | "tcComunidadVipPrice"
+  | "setTcComunidadVipPrice"
+  | "tcComunidadVipPaymentLink"
+  | "setTcComunidadVipPaymentLink"
+  | "tcComunidadGeneralPaymentLinkInvalid"
+  | "tcComunidadVipPaymentLinkInvalid"
 >
 
 type TicketFieldsProps = {
@@ -119,6 +129,16 @@ export default function TallerComunidadSection({
   handleSaveTallerComunidad,
   tcGeneralPaymentLinkInvalid,
   tcVipPaymentLinkInvalid,
+  tcComunidadGeneralPrice,
+  setTcComunidadGeneralPrice,
+  tcComunidadGeneralPaymentLink,
+  setTcComunidadGeneralPaymentLink,
+  tcComunidadVipPrice,
+  setTcComunidadVipPrice,
+  tcComunidadVipPaymentLink,
+  setTcComunidadVipPaymentLink,
+  tcComunidadGeneralPaymentLinkInvalid,
+  tcComunidadVipPaymentLinkInvalid,
 }: Props) {
   const onChange = (setter: (v: string) => void) => (value: string) => {
     setter(value)
@@ -133,7 +153,7 @@ export default function TallerComunidadSection({
         </div>
         <div>
           <h2 className="text-sm font-semibold text-navy">
-            Taller Comunidad More (/taller-23nov) - Fechas y entradas
+            Taller Comunidad More (/taller-23nov) - Fechas, entradas y precio Comunidad
           </h2>
           <p className="text-xs text-gray-400">
             Contador, cierre de inscripción y precios / links de pago de las entradas General y VIP
@@ -187,11 +207,39 @@ export default function TallerComunidadSection({
               linkInvalid={tcVipPaymentLinkInvalid}
             />
 
+            <p className="pt-2 text-xs font-bold uppercase tracking-wider text-orange">
+              Precio exclusivo Comunidad More — /taller-23nov/comunidad
+            </p>
+
+            <TicketFields
+              prefix="tc-comunidad-general"
+              title="Entrada General · Comunidad More"
+              price={tcComunidadGeneralPrice}
+              onPrice={onChange(setTcComunidadGeneralPrice)}
+              link={tcComunidadGeneralPaymentLink}
+              onLink={onChange(setTcComunidadGeneralPaymentLink)}
+              linkInvalid={tcComunidadGeneralPaymentLinkInvalid}
+            />
+
+            <TicketFields
+              prefix="tc-comunidad-vip"
+              title="Entrada VIP · Comunidad More"
+              price={tcComunidadVipPrice}
+              onPrice={onChange(setTcComunidadVipPrice)}
+              link={tcComunidadVipPaymentLink}
+              onLink={onChange(setTcComunidadVipPaymentLink)}
+              linkInvalid={tcComunidadVipPaymentLinkInvalid}
+            />
+
             <button
               type="button"
               onClick={handleSaveTallerComunidad}
               disabled={
-                tcSaveState === "saving" || tcGeneralPaymentLinkInvalid || tcVipPaymentLinkInvalid
+                tcSaveState === "saving" ||
+                tcGeneralPaymentLinkInvalid ||
+                tcVipPaymentLinkInvalid ||
+                tcComunidadGeneralPaymentLinkInvalid ||
+                tcComunidadVipPaymentLinkInvalid
               }
               className="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-50"
             >

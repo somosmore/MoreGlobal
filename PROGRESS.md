@@ -20,6 +20,15 @@
 
 ## Bitácora
 
+### [2026-11-03] — Taller: versión con precio Comunidad More (`/taller-23nov/comunidad`)
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/{tallerNov26Copy.ts,priceTier.ts (nuevo),TCHero,TCTickets,TCRegistrationForm,TCPaymentCard}.tsx`, `src/pages/TallerNov26Page.tsx`, `src/pages/TallerNov26RegistroPage.tsx`, `src/App.tsx`, `src/lib/tracking.ts`, `src/lib/supabase.ts` (4 claves `tc_comunidad_*`), `src/contexts/SiteSettingsContext.tsx`, `src/components/admin/settings/{useSettingsData.ts,TallerComunidadSection.tsx}`, `src/pages/AdminSettings.tsx`, `supabase/functions/masterclass-register/index.ts` (`price_tier`, `extra_tags`), `supabase/migrations/041_taller_precio_comunidad.sql`, docs
+- Qué se implementó: Misma landing con `PriceTierContext` ("publico" | "comunidad"). Comunidad: $50/$97 con precio público tachado, etiqueta en hero, nota en form, `noindex`, links de pago propios, `price_tier` y tag GHL extra para medir. La pública ya no dice "precio especial para la comunidad". Defaults de precio público $67/$127 en el contexto.
+- Qué se verificó: tsc, lint (11 preexistentes) y build. En local: `/taller-23nov/comunidad` muestra $67→$50 y $127→$97 tachados, badge, nota del form, `noindex`; `/taller-23nov` sigue en $67/$127 sin tachados ni `noindex`.
+- Problemas encontrados: la migración 041 quedó bloqueada para el agente (permisos de producción). Orden obligatorio: 041 antes de desplegar la función.
+- Estado: ⚠️ bloqueado parcialmente (falta 041, deploy de función y links de pago de comunidad)
+
 ### [2026-11-03] — Taller: URL `/taller-23nov` (antes `/taller-nov-26`)
 
 - Agente: claude-code
