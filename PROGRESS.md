@@ -20,6 +20,14 @@
 
 ## Bitácora
 
+### [2026-11-03] — Leads parciales para remarketing + loader de marca
+
+- Agente: claude-code
+- Archivos modificados: `supabase/migrations/039_partial_leads.sql` (nuevo), `src/lib/partialLead.ts` (nuevo), `src/components/sections/taller-nov-26/TCRegistrationForm.tsx`, `src/components/brand/BrandLoader.tsx` (nuevo), `src/App.tsx`, `src/pages/TallerNov26*.tsx`, `src/index.css`, `index.html`
+- Qué se implementó: El form del taller guarda el lead al salir del email (si es válido) y lo actualiza con teléfono/país/nombre/entrada; al enviar marca `completed = true`. Tabla `partial_leads` con RLS (sin acceso anon) y escritura solo vía `capture_partial_lead` (SECURITY DEFINER). Remarketing: `SELECT * FROM partial_leads WHERE completed = false`. Loader de marca (navy en el taller, claro en el resto) y fondo navy desde el primer paint en `/taller-nov-26`.
+- Problemas encontrados: la migración 039 la debe ejecutar el usuario (bloqueada para el agente por permisos de producción). Sin ella la captura falla en silencio y el form funciona igual.
+- Estado: ⚠️ bloqueado parcialmente (falta aplicar la migración 039)
+
 ### [2026-11-03] — `/taller-nov-26`: rediseño "Ruta en vivo"
 
 - Agente: claude-code

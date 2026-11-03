@@ -6,6 +6,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useOfferWindow } from "@/hooks/useOfferWindow"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import { cn } from "@/lib/utils"
+import { capturePartialLead } from "@/lib/partialLead"
 import {
   TALLER_EVENT_LABEL,
   TALLER_GHL_TAG,
@@ -307,6 +308,25 @@ export default function TCRegistrationForm() {
     []
   )
 
+  // Remarketing: guarda el email apenas es válido y suma teléfono/país/nombre/entrada
+  // a medida que se completan (tabla partial_leads). No bloquea ni muestra errores.
+  const savePartial = useCallback(
+    (overrides: { completed?: boolean; ticketType?: TicketType } = {}) => {
+      const digits = form.phone.replace(/\D/g, "")
+      const phoneOk = digits.length >= 6 && digits.length <= 15
+      void capturePartialLead(TALLER_SOURCE, {
+        email: form.email,
+        nombre: form.nombre,
+        phone: phoneOk ? `${form.countryCode}${digits}` : undefined,
+        pais: phoneOk ? DIAL_TO_COUNTRY[form.countryCode] ?? "Otro" : undefined,
+        ticketType: overrides.ticketType ?? ticket,
+        utm: utmParams,
+        completed: overrides.completed,
+      })
+    },
+    [form, ticket, utmParams]
+  )
+
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     const validationErrors = validate(form)
@@ -365,6 +385,7 @@ export default function TCRegistrationForm() {
       }
 
       void trackMasterclassRegistration(settings, { eventId: capiEventId })
+      savePartial({ completed: true })
       setSubmittedEmail(form.email.trim().toLowerCase())
       setSubmitted(true)
     } catch (err) {
@@ -374,7 +395,7 @@ export default function TCRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams, settings, ticket])
+  }, [form, utmParams, settings, ticket, savePartial])
 
   // El cierre de inscripción se configura en Admin → Settings → Taller Comunidad.
   const { expired: isExpired } = useOfferWindow(settings.tc_registration_closes_at)
@@ -449,6 +470,7 @@ export default function TCRegistrationForm() {
                       type="text"
                       value={form.nombre}
                       onChange={handleChange}
+                      onBlur={() => savePartial()}
                       placeholder="Ej: María García"
                     />
                     {errors.nombre && (
@@ -469,6 +491,7 @@ export default function TCRegistrationForm() {
                       type="email"
                       value={form.email}
                       onChange={handleChange}
+                      onBlur={() => savePartial()}
                       placeholder="tu@email.com"
                     />
                     {errors.email && (
@@ -500,6 +523,7 @@ export default function TCRegistrationForm() {
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
+                        onBlur={() => savePartial()}
                         placeholder="300 123 4567"
                       />
                     </div>
@@ -531,7 +555,10 @@ export default function TCRegistrationForm() {
                               name="ticket"
                               value={t.id}
                               checked={selected}
-                              onChange={() => setTicket(t.id)}
+                              onChange={() => {
+                                setTicket(t.id)
+                                savePartial({ ticketType: t.id })
+                              }}
                               className="sr-only"
                             />
                             <span className="text-sm font-bold text-navy-deep">{t.name}</span>
