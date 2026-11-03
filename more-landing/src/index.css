@@ -640,3 +640,70 @@
     display: block !important;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   BrandLoader — mini ruta con avión (ver components/brand/BrandLoader.tsx)
+   ────────────────────────────────────────────────────────────── */
+.brand-loader-route {
+  position: relative;
+  width: 200px;
+  height: 24px;
+}
+
+.brand-loader-track {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  border-top-width: 2px;
+  border-top-style: dotted;
+}
+
+.brand-loader-trail {
+  position: absolute;
+  left: 6px;
+  top: calc(50% - 1px);
+  height: 2px;
+  width: 0;
+  border-radius: 9999px;
+  background-color: var(--color-orange);
+  animation: brand-loader-trail 1.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.brand-loader-dot {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 9999px;
+}
+
+.brand-loader-plane {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -10px;
+  animation: brand-loader-fly 1.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes brand-loader-fly {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: calc(100% - 20px); opacity: 0; }
+}
+
+@keyframes brand-loader-trail {
+  0% { width: 0; opacity: 1; }
+  90% { opacity: 1; }
+  100% { width: calc(100% - 12px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-loader-plane,
+  .brand-loader-trail {
+    animation: none;
+  }
+  .brand-loader-plane { left: calc(50% - 10px); }
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useLandingStatus } from "@/hooks/useLandingStatus"
 import { CtaButton } from "@/components/brand/CtaButton"
+import BrandLoader from "@/components/brand/BrandLoader"
 import TCHero from "@/components/sections/taller-nov-26/TCHero"
 import TCPains from "@/components/sections/taller-nov-26/TCPains"
 import TCModules from "@/components/sections/taller-nov-26/TCModules"
@@ -45,11 +46,7 @@ export default function TallerNov26Page() {
   }, [])
 
   if (status === "loading") {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-paper">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange border-t-transparent" />
-      </div>
-    )
+    return <BrandLoader tone="dark" label="Preparando tu ruta…" />
   }
 
   if (!isAccessible) {

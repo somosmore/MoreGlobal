@@ -5,6 +5,7 @@ import TCPaymentCard from "@/components/sections/taller-nov-26/TCPaymentCard"
 import { TALLER_REGISTRO_PAGE_META } from "@/components/sections/taller-nov-26/tallerNov26Copy"
 import { Backdrop } from "@/components/brand/Backdrop"
 import { CtaButton } from "@/components/brand/CtaButton"
+import BrandLoader from "@/components/brand/BrandLoader"
 
 /** Post-registro para Meta Lead Ads: el lead ya dejó sus datos, aquí elige y paga su entrada. */
 export default function TallerNov26RegistroPage() {
@@ -38,11 +39,7 @@ export default function TallerNov26RegistroPage() {
   }, [])
 
   if (status === "loading") {
-    return (
-      <div className="flex min-h-[100dvh] items-center justify-center bg-paper">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-orange border-t-transparent" />
-      </div>
-    )
+    return <BrandLoader tone="dark" label="Preparando tu pase…" />
   }
 
   if (!isAccessible) {
