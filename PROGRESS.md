@@ -20,6 +20,15 @@
 
 ## Bitácora
 
+### [2026-11-03] — Admin: pantalla "Inscritos al taller" (`/admin/taller`)
+
+- Agente: claude-code
+- Archivos modificados: `src/pages/AdminTaller.tsx` (nuevo), `src/components/admin/taller/useTallerInscritos.ts` (nuevo), `src/components/admin/AdminLayout.tsx` (menú "Taller 23 nov" + breadcrumb), `src/App.tsx`, `src/lib/supabase.ts` (tipo `MasterclassLead`), `supabase/migrations/042_taller_inscritos_pagos.sql`
+- Qué se implementó: Lista de inscritos de `source = taller-comunidad-nov-26` con entrada y versión editables, monto según precios de Configuración, estado Por cobrar/Pagado (con fecha), marca de prueba, botón de WhatsApp con mensaje de cobro y link de pago (Stripe con correo precargado), filtros, búsqueda, KPIs (inscritos, pagados, por cobrar con monto, recaudado) y exportación CSV. Migración 042: `payment_status`, `paid_at`, `payment_note`, `is_test`; el rol `authenticated` solo puede actualizar esas columnas + `ticket_type`/`price_tier` (GRANT por columna).
+- Datos: migraciones 041 y 042 aplicadas en producción. El único registro existente (prueba del usuario) quedó con `is_test = true`.
+- Qué se verificó: tsc, lint, build. NO verificado en el navegador (requiere login admin).
+- Estado: ✅ completo (pendiente publicar)
+
 ### [2026-11-03] — Taller: versión con precio Comunidad More (`/taller-23nov/comunidad`)
 
 - Agente: claude-code

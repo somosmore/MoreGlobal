@@ -16,12 +16,14 @@ import {
   Contact,
   ShieldCheck,
   Library,
+  Ticket,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/leads", icon: Users, label: "Leads" },
+  { href: "/admin/taller", icon: Ticket, label: "Taller 23 nov" },
   { href: "/admin/testimonials", icon: MessageSquare, label: "Testimonios" },
   { href: "/admin/projects", icon: LayoutTemplate, label: "Proyectos" },
   { href: "/admin/clients", icon: Contact, label: "Clientes" },
@@ -40,6 +42,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   edit: "Editar",
   clients: "Clientes",
   resources: "Recursos",
+  taller: "Inscritos al taller",
 }
 
 const getInitials = (email: string) => {

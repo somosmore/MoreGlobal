@@ -18,6 +18,7 @@ const AdminProjectWizard = lazy(() => import("@/pages/AdminProjectWizard"))
 const AdminProjectResult = lazy(() => import("@/pages/AdminProjectResult"))
 const AdminClients = lazy(() => import("@/pages/AdminClients"))
 const AdminResources = lazy(() => import("@/pages/AdminResources"))
+const AdminTaller = lazy(() => import("@/pages/AdminTaller"))
 const BlueprintPage = lazy(() => import("@/pages/BlueprintPage"))
 const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
@@ -110,6 +111,7 @@ function App() {
             <Route path="projects/:id/edit" element={<AdminProjectWizard />} />
             <Route path="clients" element={<AdminClients />} />
             <Route path="resources" element={<AdminResources />} />
+            <Route path="taller" element={<AdminTaller />} />
           </Route>
 
           <Route path="/blueprint" element={<BlueprintPage />} />

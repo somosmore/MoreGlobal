@@ -43,6 +43,30 @@ export type TestimonialInsert = Omit<
 
 export type TestimonialUpdate = Partial<TestimonialInsert>;
 
+/** Registro de webinars/talleres (tabla `masterclass_leads`). Campos de cobro: migración 042. */
+export type MasterclassLead = {
+  id: string;
+  nombre: string;
+  email: string;
+  whatsapp: string | null;
+  country: string | null;
+  profesion: string | null;
+  source: string;
+  status: string | null;
+  ticket_type: "general" | "vip" | null;
+  price_tier: "publico" | "comunidad" | null;
+  payment_status: "pending" | "paid";
+  paid_at: string | null;
+  payment_note: string | null;
+  is_test: boolean;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_content: string | null;
+  utm_term: string | null;
+  created_at: string;
+};
+
 export type LeadStatus =
   | "nuevo"
   | "contactado"
