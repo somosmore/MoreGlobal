@@ -20,6 +20,16 @@
 
 ## Bitácora
 
+### [2026-11-03] — Taller: segundo día (martes 24) "Destraba tu proceso"
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/{tallerNov26Copy.ts,TCHero,TCPains,TCModules,TCTickets,TCRegistrationForm,TCPaymentCard,TCFAQ,TCStickyCTA,TCFinalCTA}.tsx`, `src/lib/supabase.ts` (5 claves `tc_event2_date`/`tc_*dia2*`, `ticket_type` con `dia2`), `src/contexts/SiteSettingsContext.tsx`, `src/components/admin/settings/{useSettingsData.ts,TallerComunidadSection.tsx}`, `src/pages/AdminSettings.tsx`, `src/pages/AdminTaller.tsx`, `supabase/functions/masterclass-register/index.ts` (etiquetas Dia1/Dia2/PaseCompleto), `supabase/migrations/039_partial_leads.sql` (acepta dia2; aún no aplicada), `supabase/migrations/043_taller_dia2.sql` (nueva)
+- Qué se implementó: Entradas Día 1 (`general`), Día 2 (`dia2`, nueva) y Pase completo VIP (`vip`). Ruta de módulos en dos tramos (Día 1 · Diseña tu ruta / Día 2 · Destraba tu proceso con 5 paradas: diagnóstico de bloqueos, probar experiencia, cartas, RFE/negaciones, casos en vivo). Dolores mapeados a día+parada y recomendación de entrada en el diagnóstico. Selector "¿En qué punto estás?" que marca el pase recomendado. FAQ, garantías, hero, cierre y admin (precios/links del Día 2, fecha del Día 2, selector de 3 entradas en inscritos) actualizados.
+- Supuestos (confirmar con el usuario): precio Día 2 = Día 1 ($67 / comunidad $50); Día 2 a las 19:00 COT; acceso gratis de clientes actuales al Día 2 no implementado (decisión comercial).
+- Qué se verificó: tsc, lint (11 preexistentes), build. En local `/taller-23nov/comunidad`: 3 pases con fechas y precios tachados, selector de etapa recomienda Día 2, ruta con los dos tramos.
+- Problemas encontrados: migración 043 bloqueada para el agente (permisos de producción). Orden: 043 → deploy de la función.
+- Estado: ⚠️ bloqueado parcialmente (falta 043, deploy de función y links de pago)
+
 ### [2026-11-03] — Admin: pantalla "Inscritos al taller" (`/admin/taller`)
 
 - Agente: claude-code

@@ -74,7 +74,7 @@ BEGIN
     nullif(left(trim(coalesce(p_nombre, '')), 160), ''),
     nullif(left(regexp_replace(coalesce(p_phone, ''), '[^0-9+]', '', 'g'), 20), ''),
     nullif(left(trim(coalesce(p_pais, '')), 60), ''),
-    CASE WHEN p_ticket_type IN ('general', 'vip') THEN p_ticket_type END,
+    CASE WHEN p_ticket_type IN ('general', 'dia2', 'vip') THEN p_ticket_type END,
     nullif(left(coalesce(p_utm_source, ''), 120), ''),
     nullif(left(coalesce(p_utm_medium, ''), 120), ''),
     nullif(left(coalesce(p_utm_campaign, ''), 160), ''),

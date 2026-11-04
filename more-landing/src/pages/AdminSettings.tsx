@@ -216,6 +216,18 @@ export default function AdminSettings() {
               setTcComunidadVipPaymentLink={data.setTcComunidadVipPaymentLink}
               tcComunidadGeneralPaymentLinkInvalid={data.tcComunidadGeneralPaymentLinkInvalid}
               tcComunidadVipPaymentLinkInvalid={data.tcComunidadVipPaymentLinkInvalid}
+              tcEvent2Date={data.tcEvent2Date}
+              setTcEvent2Date={data.setTcEvent2Date}
+              tcDia2Price={data.tcDia2Price}
+              setTcDia2Price={data.setTcDia2Price}
+              tcDia2PaymentLink={data.tcDia2PaymentLink}
+              setTcDia2PaymentLink={data.setTcDia2PaymentLink}
+              tcComunidadDia2Price={data.tcComunidadDia2Price}
+              setTcComunidadDia2Price={data.setTcComunidadDia2Price}
+              tcComunidadDia2PaymentLink={data.tcComunidadDia2PaymentLink}
+              setTcComunidadDia2PaymentLink={data.setTcComunidadDia2PaymentLink}
+              tcDia2PaymentLinkInvalid={data.tcDia2PaymentLinkInvalid}
+              tcComunidadDia2PaymentLinkInvalid={data.tcComunidadDia2PaymentLinkInvalid}
             />
           </section>
 

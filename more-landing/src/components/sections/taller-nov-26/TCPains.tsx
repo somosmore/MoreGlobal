@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowDown, Check, MapPin } from "lucide-react"
+import { ArrowDown, ArrowRight, Check, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { MODULES, PAINS } from "./tallerNov26Copy"
+import { MODULES, MODULES_DAY2, PAINS, getTicket, type TicketType } from "./tallerNov26Copy"
 import { togglePain, useSelectedPains } from "./painsStore"
+import { scrollToRegistro } from "./scrollToRegistro"
 
 /**
  * "¿Qué te pasa hoy?": el visitante marca sus dolores y ve en vivo en qué
@@ -11,7 +12,18 @@ import { togglePain, useSelectedPains } from "./painsStore"
 export default function TCPains() {
   const selected = useSelectedPains()
   const matched = PAINS.filter((p) => selected.has(p.id))
-  const moduleIds = [...new Set(matched.map((p) => p.moduleId))].sort()
+  // Paradas únicas (día + módulo), en orden de la ruta.
+  const stops = [...new Set(matched.map((p) => `${p.day}-${p.moduleId}`))]
+    .map((key) => {
+      const [day, id] = key.split("-").map(Number)
+      const mod = (day === 1 ? MODULES : MODULES_DAY2).find((m) => m.id === id)!
+      return { key, day, id, title: mod.title }
+    })
+    .sort((a, b) => a.day - b.day || a.id - b.id)
+  const days = new Set(stops.map((s) => s.day))
+  // Entrada recomendada según los días que necesita.
+  const recommended: TicketType = days.has(1) && days.has(2) ? "vip" : days.has(2) ? "dia2" : "general"
+  const recommendedName = getTicket(recommended).name
 
   return (
     <section className="relative bg-paper py-16 sm:py-24">
@@ -78,7 +90,7 @@ export default function TCPains() {
 
         <div className="mt-8 min-h-[7rem]" aria-live="polite">
           <AnimatePresence mode="wait">
-            {moduleIds.length > 0 ? (
+            {stops.length > 0 ? (
               <motion.div
                 key="result"
                 initial={{ opacity: 0, y: 10 }}
@@ -90,33 +102,42 @@ export default function TCPains() {
                   Tu ruta en el taller
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-2">
-                  {moduleIds.map((id) => {
-                    const mod = MODULES.find((m) => m.id === id)!
-                    return (
-                      <li
-                        key={id}
-                        className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm"
-                      >
-                        <MapPin className="h-3.5 w-3.5 text-orange" aria-hidden />
-                        <span className="font-mono text-navy-soft">{String(id).padStart(2, "0")}</span>
-                        {mod.title}
-                      </li>
-                    )
-                  })}
+                  {stops.map((stop) => (
+                    <li
+                      key={stop.key}
+                      className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm"
+                    >
+                      <MapPin className="h-3.5 w-3.5 text-orange" aria-hidden />
+                      <span className="font-mono text-navy-soft">D{stop.day}·{String(stop.id).padStart(2, "0")}</span>
+                      {stop.title}
+                    </li>
+                  ))}
                 </ul>
                 <p className="mt-4 text-sm text-navy-pale">
                   {matched.length === PAINS.length
                     ? "Te pasa todo lo que más escuchamos. El taller está hecho exactamente para ti."
-                    : `Lo trabajamos en ${moduleIds.length === 1 ? "esta parada" : "estas paradas"} de la ruta.`}
+                    : `Lo trabajamos en ${stops.length === 1 ? "esta parada" : "estas paradas"} de la ruta.`}{" "}
+                  Te recomendamos la entrada{" "}
+                  <strong className="font-semibold text-white">{recommendedName}</strong>.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => document.getElementById("ruta")?.scrollIntoView({ behavior: "smooth" })}
-                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-orange px-5 py-2.5 text-sm font-bold text-white hover:bg-orange-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-ink"
-                >
-                  Ver mi ruta
-                  <ArrowDown className="h-4 w-4" aria-hidden />
-                </button>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={(e) => scrollToRegistro(e, recommended)}
+                    className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-2.5 text-sm font-bold text-white hover:bg-orange-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-ink"
+                  >
+                    Reservar {recommendedName}
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("ruta")?.scrollIntoView({ behavior: "smooth" })}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/40"
+                  >
+                    Ver mi ruta
+                    <ArrowDown className="h-4 w-4" aria-hidden />
+                  </button>
+                </div>
               </motion.div>
             ) : (
               <motion.div

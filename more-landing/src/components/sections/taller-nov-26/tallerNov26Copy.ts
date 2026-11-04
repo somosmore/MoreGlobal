@@ -2,14 +2,20 @@ import type { SiteSettingsMap } from "@/lib/supabase"
 
 /** Identificadores del evento en Supabase (`masterclass_leads.source`) y GHL. */
 export const TALLER_SOURCE = "taller-comunidad-nov-26"
-export const TALLER_EVENT_LABEL = "Taller Comunidad More — Diseña tu ruta (23 nov 2026)"
+export const TALLER_EVENT_LABEL = "Taller Comunidad More — 23 y 24 nov 2026"
 export const TALLER_GHL_TAG = "Taller-Comunidad-Nov-26"
 
 /** Texto único de los CTAs que llevan a las entradas / formulario. */
 export const TALLER_CTA_LABEL = "Elegir mi entrada"
 
-export const TALLER_DATE_LABEL = "Lunes 23 de noviembre"
+export const TALLER_DATE_LABEL = "Lunes 23 y martes 24 de noviembre"
 export const TALLER_TIME_LABEL = "7:00 PM (hora Colombia)"
+
+/** Los dos días del taller. El contador del hero cuenta hasta el día 1. */
+export const TALLER_DAYS = [
+  { id: 1, date: "Lunes 23 de noviembre", short: "Lun 23 Nov", title: "Diseña tu ruta", forWho: "Para quien empieza de cero" },
+  { id: 2, date: "Martes 24 de noviembre", short: "Mar 24 Nov", title: "Destraba tu proceso", forWho: "Para quien ya inició o lo hace solo" },
+] as const
 
 /** Módulos del taller: son las "paradas" de la ruta. */
 export const MODULES = [
@@ -40,59 +46,107 @@ export const MODULES = [
   },
 ] as const
 
-/** Los 5 dolores, cada uno conectado al módulo que lo resuelve. */
+/** Día 2 — "Destraba tu proceso": para quien ya inició o lo hace solo. */
+export const MODULES_DAY2 = [
+  {
+    id: 1,
+    title: "Dónde se traba tu caso",
+    text: "Un diagnóstico que aplicas en vivo a tu proceso para encontrar los bloqueos reales, no los que imaginas.",
+  },
+  {
+    id: 2,
+    title: "Probar experiencia sin empresa, sin jefe, sin certificado",
+    text: "El bloqueo número uno durante el proceso: qué evidencia sí sirve cuando la empresa cerró o nadie firma.",
+  },
+  {
+    id: 3,
+    title: "Cartas que nadie quiere firmar",
+    text: "Alternativas y cómo pedirlas para que sí lleguen, sin depender de una sola persona.",
+  },
+  {
+    id: 4,
+    title: "RFE y negaciones: qué piden de verdad",
+    text: "Cómo leer una solicitud de más evidencia y qué significa una negación para tu caso, sin promesas.",
+  },
+  {
+    id: 5,
+    title: "Casos en vivo y qué cambió este mes",
+    text: "Ivon ordena casos reales de asistentes en pantalla y repasa los cambios que afectan a los procesos en curso.",
+  },
+] as const
+
+/** "¿En qué punto estás?": recomienda el día según la etapa del visitante. */
+export const STAGES = [
+  { id: "cero", label: "Empiezo de cero", hint: "Todavía no sé qué ruta me conviene.", ticket: "general" },
+  { id: "proceso", label: "Ya inicié o lo hago solo", hint: "Estoy en proceso y algo se trabó.", ticket: "dia2" },
+  { id: "todo", label: "Quiero los dos días", hint: "Ruta clara y proceso destrabado.", ticket: "vip" },
+] as const
+
+export type StageId = (typeof STAGES)[number]["id"]
+
+/** Los dolores, cada uno conectado al día y la parada que lo resuelve. */
 export const PAINS = [
   {
     id: "empezar",
     quote: "No sé por dónde empezar.",
     text: "Demasiada información, consejos contradictorios y rumores de redes.",
+    day: 1,
     moduleId: 1,
   },
   {
     id: "visa",
     quote: "Tengo todo, menos la visa.",
     text: "Ofertas que piden residencia, rechazos por necesitar patrocinador, depender de un empleador.",
+    day: 1,
     moduleId: 2,
   },
   {
     id: "tope",
     quote: "Llegué a un tope.",
     text: "Techo profesional en tu país y miedo a empezar de cero en EE.UU.",
+    day: 1,
     moduleId: 2,
   },
   {
     id: "experiencia",
     quote: "Mi experiencia es real, pero no tengo cómo probarla.",
     text: "Empresas que cerraron, jefes que no están, certificados sin funciones.",
-    moduleId: 3,
+    day: 2,
+    moduleId: 2,
   },
   {
     id: "costo",
     quote: "¿Cuánto me va a costar realmente?",
     text: "Tasas, traducciones, equivalencias y el miedo a endeudarte.",
+    day: 1,
     moduleId: 4,
   },
   {
     id: "hijos",
     quote: "¿Mi hijo pierde la opción de venir conmigo a los 21?",
     text: "Los hijos entran como dependientes solo hasta los 21. Y el reloj ya está corriendo.",
+    day: 1,
     moduleId: 2,
   },
   {
     id: "quemado",
     quote: "Ya consulté varios abogados y sigo sin claridad.",
     text: "Una negación, un RFE (solicitud de más evidencia) o meses haciéndolo solo. No es falta de capacidad: es falta de estrategia.",
+    day: 2,
     moduleId: 1,
   },
 ] as const
 
 export type PainId = (typeof PAINS)[number]["id"]
 
-export type TicketType = "general" | "vip"
+/** `general` = Día 1 y `vip` = Pase completo (ids históricos, ya guardados en la base). */
+export type TicketType = "general" | "dia2" | "vip"
 
 type TicketDef = {
   id: TicketType
   name: string
+  /** Fecha que se muestra en el pase de abordar. */
+  dateLabel: string
   tagline: string
   includes: string[]
   priceKey: keyof SiteSettingsMap
@@ -135,14 +189,15 @@ export function getTicketPricing(
   return { price: publicPrice, compareAt: null, link: settings[ticket.linkKey] }
 }
 
-// Beneficios acordados con el usuario (2026-11-03). Ajustar aquí si cambian.
+// Entradas acordadas con el usuario (2026-11-03): Día 1, Día 2 y Pase completo VIP.
 export const TICKETS: TicketDef[] = [
   {
     id: "general",
-    name: "General",
-    tagline: "Todo lo que necesitas para salir con tu ruta.",
+    name: "Día 1",
+    dateLabel: "23 NOV",
+    tagline: "Diseña tu ruta. Para quien empieza de cero.",
     includes: [
-      "Acceso completo al taller en vivo",
+      "Taller en vivo del lunes 23 de noviembre",
       "Material de trabajo digital",
       "Ronda de preguntas al cierre",
     ],
@@ -152,13 +207,29 @@ export const TICKETS: TicketDef[] = [
     comunidadLinkKey: "tc_comunidad_general_payment_link",
   },
   {
-    id: "vip",
-    name: "VIP",
-    tagline: "Sales sabiendo si tu perfil califica.",
+    id: "dia2",
+    name: "Día 2",
+    dateLabel: "24 NOV",
+    tagline: "Destraba tu proceso. Para quien ya inició o lo hace solo.",
     includes: [
-      "Todo lo de la entrada General",
-      "Revisión de tu perfil por el equipo de MORE",
-      "Grabación del taller en 24 horas",
+      "Taller en vivo del martes 24 de noviembre",
+      "Diagnóstico de bloqueos de tu caso",
+      "Ronda de preguntas al cierre",
+    ],
+    priceKey: "tc_dia2_price",
+    linkKey: "tc_dia2_payment_link",
+    comunidadPriceKey: "tc_comunidad_dia2_price",
+    comunidadLinkKey: "tc_comunidad_dia2_payment_link",
+  },
+  {
+    id: "vip",
+    name: "Pase completo VIP",
+    dateLabel: "23–24 NOV",
+    tagline: "Los dos días y revisión de tu caso.",
+    includes: [
+      "Día 1 y Día 2 en vivo",
+      "Revisión de tu perfil o expediente por el equipo de MORE",
+      "Grabación de los dos días en 24 horas",
       "Prioridad para tus preguntas en vivo",
     ],
     priceKey: "tc_vip_price",
@@ -171,8 +242,8 @@ export const TICKETS: TicketDef[] = [
 
 /** Compromisos operativos explícitos (responden a las críticas de clientes en el análisis 2023–2026). */
 export const GUARANTEES = [
-  { title: "Fecha fija", text: "Lunes 23 de noviembre, 7:00 PM (Colombia). No se pospone." },
-  { title: "Grabación en 24 horas", text: "Los VIP la reciben al día siguiente, sin excusas." },
+  { title: "Fechas fijas", text: "Lunes 23 y martes 24 de noviembre, 7:00 PM (Colombia). No se posponen." },
+  { title: "Grabación en 24 horas", text: "Con el Pase completo la recibes al día siguiente, sin excusas." },
   { title: "Un solo canal", text: "Acceso, material y avisos por correo y WhatsApp. Nada perdido en Drive." },
   { title: "Todo por escrito", text: "Qué incluye cada entrada, antes de pagar. Sin letra pequeña." },
 ] as const
@@ -216,17 +287,17 @@ export function buildPaymentUrl(rawLink: string, email?: string): string | null 
 }
 
 export const TALLER_PAGE_META = {
-  title: "Taller Comunidad More — Diseña tu ruta migratoria a EE.UU. | 23 de noviembre",
+  title: "Taller Comunidad More — Diseña tu ruta y destraba tu proceso | 23 y 24 de noviembre",
   description:
-    "Taller virtual en vivo con Ivon More. Lunes 23 de noviembre, 7:00 PM Colombia. Descubre qué ruta migratoria te conviene, cómo demostrar tu experiencia y cuánto cuesta realmente, sin invertir de más.",
+    "Taller virtual en vivo con Ivon More. Lunes 23 (diseña tu ruta) y martes 24 de noviembre (destraba tu proceso), 7:00 PM Colombia. Para quien empieza de cero y para quien ya inició.",
   ogTitle: "Taller Comunidad More — Diseña tu ruta migratoria a EE.UU.",
   ogDescription:
-    "En vivo y virtual, 23 de noviembre a las 7:00 PM (Colombia). Sales con una ruta, no con dudas.",
+    "En vivo y virtual, 23 y 24 de noviembre a las 7:00 PM (Colombia). Sales con una ruta, no con dudas.",
 } as const
 
 export const TALLER_REGISTRO_PAGE_META = {
   title: "Completa tu entrada — Taller Comunidad More",
-  description: "Elige tu entrada y completa el pago para asegurar tu lugar en el taller del 23 de noviembre.",
+  description: "Elige tu entrada y completa el pago para asegurar tu lugar en el taller del 23 y 24 de noviembre.",
   ogTitle: "Completa tu entrada — Taller Comunidad More",
-  ogDescription: "Elige tu entrada y completa el pago para asegurar tu lugar en el taller del 23 de noviembre.",
+  ogDescription: "Elige tu entrada y completa el pago para asegurar tu lugar en el taller del 23 y 24 de noviembre.",
 } as const
