@@ -83,6 +83,11 @@ export function useSettingsData() {
   const [tcComunidadGeneralPaymentLink, setTcComunidadGeneralPaymentLink] = useState("")
   const [tcComunidadVipPrice, setTcComunidadVipPrice] = useState("")
   const [tcComunidadVipPaymentLink, setTcComunidadVipPaymentLink] = useState("")
+  const [tcEvent2Date, setTcEvent2Date] = useState("")
+  const [tcDia2Price, setTcDia2Price] = useState("")
+  const [tcDia2PaymentLink, setTcDia2PaymentLink] = useState("")
+  const [tcComunidadDia2Price, setTcComunidadDia2Price] = useState("")
+  const [tcComunidadDia2PaymentLink, setTcComunidadDia2PaymentLink] = useState("")
   const [tcSaveState, setTcSaveState] = useState<SaveState>("idle")
   const [tcSaveError, setTcSaveError] = useState<string | null>(null)
 
@@ -129,6 +134,11 @@ export function useSettingsData() {
         setTcComunidadGeneralPaymentLink(settings.tc_comunidad_general_payment_link)
         setTcComunidadVipPrice(settings.tc_comunidad_vip_price)
         setTcComunidadVipPaymentLink(settings.tc_comunidad_vip_payment_link)
+        setTcEvent2Date(toLocalInput(settings.tc_event2_date))
+        setTcDia2Price(settings.tc_dia2_price)
+        setTcDia2PaymentLink(settings.tc_dia2_payment_link)
+        setTcComunidadDia2Price(settings.tc_comunidad_dia2_price)
+        setTcComunidadDia2PaymentLink(settings.tc_comunidad_dia2_payment_link)
         setMetaPixelId(settings.meta_pixel_id)
         setGtmId(settings.google_tag_manager_id)
         setGa4Id(settings.ga4_measurement_id)
@@ -290,6 +300,11 @@ export function useSettingsData() {
         { key: "tc_comunidad_general_payment_link", value: tcComunidadGeneralPaymentLink.trim() },
         { key: "tc_comunidad_vip_price", value: tcComunidadVipPrice.trim() },
         { key: "tc_comunidad_vip_payment_link", value: tcComunidadVipPaymentLink.trim() },
+        { key: "tc_event2_date", value: toIso(tcEvent2Date) },
+        { key: "tc_dia2_price", value: tcDia2Price.trim() },
+        { key: "tc_dia2_payment_link", value: tcDia2PaymentLink.trim() },
+        { key: "tc_comunidad_dia2_price", value: tcComunidadDia2Price.trim() },
+        { key: "tc_comunidad_dia2_payment_link", value: tcComunidadDia2PaymentLink.trim() },
       ],
       { onConflict: "key" }
     )
@@ -399,6 +414,10 @@ export function useSettingsData() {
     tcComunidadGeneralPaymentLink.trim().length > 0 && !isValidUrl(tcComunidadGeneralPaymentLink)
   const tcComunidadVipPaymentLinkInvalid =
     tcComunidadVipPaymentLink.trim().length > 0 && !isValidUrl(tcComunidadVipPaymentLink)
+  const tcDia2PaymentLinkInvalid =
+    tcDia2PaymentLink.trim().length > 0 && !isValidUrl(tcDia2PaymentLink)
+  const tcComunidadDia2PaymentLinkInvalid =
+    tcComunidadDia2PaymentLink.trim().length > 0 && !isValidUrl(tcComunidadDia2PaymentLink)
 
   const socialUrlInvalid = [instagramUrl, linkedinUrl, facebookUrl, youtubeUrl].some(
     (v) => v.trim().length > 0 && !isValidUrl(v)
@@ -485,6 +504,13 @@ export function useSettingsData() {
     tcComunidadVipPaymentLink, setTcComunidadVipPaymentLink,
     tcComunidadGeneralPaymentLinkInvalid,
     tcComunidadVipPaymentLinkInvalid,
+    tcEvent2Date, setTcEvent2Date,
+    tcDia2Price, setTcDia2Price,
+    tcDia2PaymentLink, setTcDia2PaymentLink,
+    tcComunidadDia2Price, setTcComunidadDia2Price,
+    tcComunidadDia2PaymentLink, setTcComunidadDia2PaymentLink,
+    tcDia2PaymentLinkInvalid,
+    tcComunidadDia2PaymentLinkInvalid,
     tcSaveState, setTcSaveState,
     tcSaveError,
     handleSaveTallerComunidad,

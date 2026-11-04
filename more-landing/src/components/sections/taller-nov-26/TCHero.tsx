@@ -9,7 +9,7 @@ import { usePriceTier } from "./priceTier"
 import { DotGrid, FlightRoute } from "./TCDecor"
 
 const flightInfo = [
-  { label: "Fecha", value: "Lun 23 Nov" },
+  { label: "Fechas", value: "23 y 24 Nov" },
   { label: "Hora", value: "19:00 COT" },
   { label: "Modalidad", value: "Virtual en vivo" },
   { label: "Guía", value: "Ivon More" },
@@ -145,8 +145,9 @@ export default function TCHero() {
               transition={{ duration: 0.6, delay: 0.32 }}
               className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-navy-pale sm:text-lg lg:mx-0"
             >
-              Un taller en vivo para saber dónde estás hoy, qué camino te conviene y cuánto
-              cuesta realmente. <strong className="font-semibold text-white">Sin invertir de más ni decidir a ciegas.</strong>
+              Dos noches en vivo. El <strong className="font-semibold text-white">lunes 23</strong> diseñas tu ruta si
+              empiezas de cero; el <strong className="font-semibold text-white">martes 24</strong> destrabas tu proceso si
+              ya iniciaste o lo haces solo. Sin invertir de más ni decidir a ciegas.
             </motion.p>
 
             <motion.dl

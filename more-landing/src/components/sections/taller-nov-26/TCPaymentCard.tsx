@@ -19,7 +19,8 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
   const tier = usePriceTier()
   const [selected, setSelected] = useState<TicketType>(ticket ?? "general")
   const current = getTicket(selected)
-  const other = TICKETS.find((t) => t.id !== selected)
+  // Con entrada elegida en el form, el selector queda oculto hasta pedir "Cambiar de entrada".
+  const [showPicker, setShowPicker] = useState(!ticket)
   const { price, compareAt, link } = getTicketPricing(current, settings, tier)
   const paymentUrl = buildPaymentUrl(link, email)
 
@@ -58,12 +59,12 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
           {ticket ? "¡Tus datos están registrados!" : "Completa tu entrada"}
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-          Para asegurar tu lugar en el taller del 23 de noviembre, completa el pago de tu
-          entrada.
+          Para asegurar tu lugar en el taller del 23 y 24 de noviembre, completa el pago de
+          tu entrada.
         </p>
 
-        {!ticket && (
-          <div className="mt-6 grid grid-cols-2 gap-2">
+        {showPicker && (
+          <div className="mt-6 grid gap-2 sm:grid-cols-3">
             {TICKETS.map((t) => (
               <button
                 key={t.id}
@@ -115,15 +116,13 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
           )}
         </div>
 
-        {ticket && other && (
+        {!showPicker && (
           <button
             type="button"
-            onClick={() => setSelected(selected === ticket ? other.id : ticket)}
+            onClick={() => setShowPicker(true)}
             className="mt-4 text-xs font-medium text-ink-muted underline-offset-4 hover:text-navy-deep hover:underline"
           >
-            {selected === ticket
-              ? `¿Prefieres la entrada ${other.name}?`
-              : `Volver a la entrada ${getTicket(ticket).name}`}
+            Cambiar de entrada
           </button>
         )}
 

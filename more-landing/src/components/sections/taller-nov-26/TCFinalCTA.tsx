@@ -22,7 +22,7 @@ export default function TCFinalCTA() {
           Sin estrategia, <span className="text-orange">cada paso cuesta más.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base text-navy-pale sm:text-lg">
-          Lunes 23 de noviembre · 7:00 PM (Colombia) · Virtual y en vivo con Ivon More.
+          Lunes 23 y martes 24 de noviembre · 7:00 PM (Colombia) · Virtual y en vivo con Ivon More.
         </p>
         <div className="mt-10 flex justify-center">
           <CtaButton

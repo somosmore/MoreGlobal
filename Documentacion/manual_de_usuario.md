@@ -607,7 +607,7 @@ https://moremigracion.com/comunidad/registro?utm_source=facebook&utm_medium=paid
 
 **Ruta:** `/taller-23nov` (la ruta anterior `/taller-nov-26` redirige aquí conservando las UTMs)
 
-Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More, **lunes 23 de noviembre de 2026, 7:00 PM (Colombia)**, con dos entradas (General y VIP). Habla a 3 perfiles (profesional con techo, empresario que quiere expandirse, quien ya está en EE.UU. con estatus frágil) y a los 5 dolores principales.
+Primer evento **pago** del sitio: taller **virtual** en vivo con Ivon More en **dos días, 7:00 PM (Colombia)**: **lunes 23 de noviembre** "Diseña tu ruta" (para quien empieza de cero) y **martes 24 de noviembre** "Destraba tu proceso" (para quien ya inició o lo hace solo). Tres entradas: **Día 1** (`general`), **Día 2** (`dia2`) y **Pase completo VIP** (`vip`, los dos días + revisión de perfil/expediente + grabación en 24 h). Un selector "¿En qué punto estás?" recomienda la entrada. Habla a 3 perfiles (profesional con techo, empresario que quiere expandirse, quien ya está en EE.UU. con estatus frágil) y a los 5 dolores principales.
 
 **Secciones:** hero con contador → "¿Te suena alguna de estas?" (5 dolores) → mensaje a la comunidad → 5 módulos (incluye "Cómo demostrar tu experiencia") → para quién es (3 perfiles + sí/no es para ti) → testimonios reales (tabla `testimonials`, se oculta si no hay) → entradas → formulario → FAQ → Ivon More → CTA final → footer con disclaimer → CTA fijo.
 

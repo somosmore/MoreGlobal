@@ -1,7 +1,7 @@
 import { CheckCircle2, Circle, Download, FlaskConical, Loader2, MessageCircle, RefreshCw, Search, Ticket } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { MasterclassLead } from "@/lib/supabase"
-import { buildPaymentUrl, type PriceTier, type TicketType } from "@/components/sections/taller-nov-26/tallerNov26Copy"
+import { buildPaymentUrl, getTicket, type PriceTier, type TicketType } from "@/components/sections/taller-nov-26/tallerNov26Copy"
 import {
   chargeFor,
   useTallerInscritos,
@@ -32,13 +32,13 @@ function whatsappChargeUrl(lead: MasterclassLead, price: string, link: string): 
   const digits = (lead.whatsapp ?? "").replace(/\D/g, "")
   if (!digits) return null
   const firstName = lead.nombre.trim().split(/\s+/)[0]
-  const entrada = lead.ticket_type === "vip" ? "VIP" : "General"
+  const entrada = lead.ticket_type ? getTicket(lead.ticket_type).name : ""
   const paymentUrl = buildPaymentUrl(link, lead.email)
   const body = lead.ticket_type
     ? paymentUrl
-      ? `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More del lunes 23 de noviembre (7:00 PM, hora Colombia). Para asegurar tu lugar en la entrada ${entrada} (${price}), completa tu pago aquí: ${paymentUrl}`
-      : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More del lunes 23 de noviembre (7:00 PM, hora Colombia). Tu entrada es ${entrada} (${price}). En breve te compartimos el enlace de pago.`
-    : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More del lunes 23 de noviembre (7:00 PM, hora Colombia). ¿Qué entrada prefieres: General o VIP?`
+      ? `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). Para asegurar tu lugar en la entrada ${entrada} (${price}), completa tu pago aquí: ${paymentUrl}`
+      : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). Tu entrada es ${entrada} (${price}). En breve te compartimos el enlace de pago.`
+    : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). ¿Qué entrada prefieres: Día 1 (diseña tu ruta), Día 2 (destraba tu proceso) o el Pase completo VIP?`
   return `https://wa.me/${digits}?text=${encodeURIComponent(body)}`
 }
 
@@ -87,7 +87,7 @@ export default function AdminTaller() {
             <div>
               <h1 className="text-xl font-bold tracking-tight text-admin-text">Inscritos al taller</h1>
               <p className="text-sm text-admin-faint">
-                Taller Comunidad More · Lunes 23 nov, 7:00 PM (Colombia) · público y comunidad
+                Taller Comunidad More · 23 y 24 nov, 7:00 PM (Colombia) · público y comunidad
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function AdminTaller() {
 
         {stats.sinEntrada > 0 && (
           <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
-            {stats.sinEntrada} inscrito(s) sin entrada definida: elige General o VIP en la tabla para calcular el monto.
+            {stats.sinEntrada} inscrito(s) sin entrada definida: elige Día 1, Día 2 o Pase completo en la tabla para calcular el monto.
           </p>
         )}
         {error && (
@@ -203,8 +203,9 @@ export default function AdminTaller() {
                             className="rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-sm"
                           >
                             <option value="">Sin definir</option>
-                            <option value="general">General</option>
-                            <option value="vip">VIP</option>
+                            <option value="general">Día 1</option>
+                            <option value="dia2">Día 2</option>
+                            <option value="vip">Pase completo VIP</option>
                           </select>
                         </td>
                         <td className="px-4 py-3">

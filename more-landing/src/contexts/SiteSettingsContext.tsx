@@ -35,7 +35,7 @@ const DEFAULTS: SiteSettingsMap = {
   ws_registration_closes_at: "2026-09-04T23:59:59-05:00",
   // Taller Comunidad More (/taller-23nov): evento pago virtual.
   tc_event_date: "2026-11-23T19:00:00-05:00",
-  tc_registration_closes_at: "2026-11-23T19:00:00-05:00",
+  tc_registration_closes_at: "2026-11-24T19:00:00-05:00",
   tc_general_price: "$67 USD",
   tc_general_payment_link: "",
   tc_vip_price: "$127 USD",
@@ -45,6 +45,12 @@ const DEFAULTS: SiteSettingsMap = {
   tc_comunidad_general_payment_link: "",
   tc_comunidad_vip_price: "$97 USD",
   tc_comunidad_vip_payment_link: "",
+  // Día 2 del taller (martes 24): fecha y entrada "Día 2".
+  tc_event2_date: "2026-11-24T19:00:00-05:00",
+  tc_dia2_price: "$67 USD",
+  tc_dia2_payment_link: "",
+  tc_comunidad_dia2_price: "$50 USD",
+  tc_comunidad_dia2_payment_link: "",
 }
 
 type SiteSettingsContextValue = {

@@ -38,7 +38,7 @@ export default function TCStickyCTA() {
               <Plane className="h-4 w-4 text-orange" aria-hidden />
               <div className="leading-tight">
                 <p className="text-sm font-semibold">Taller Comunidad More</p>
-                <p className="text-xs text-navy-soft">Lun 23 Nov · 19:00 COT · En vivo</p>
+                <p className="text-xs text-navy-soft">23 y 24 Nov · 19:00 COT · En vivo</p>
               </div>
             </div>
             <button

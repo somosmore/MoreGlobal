@@ -47,7 +47,8 @@ const OWN_PIPELINE_SOURCES: Record<string, { envPrefix: string; defaultTag: stri
 }
 
 /** Tipos de entrada válidos para eventos pagos (ej. Taller Comunidad). */
-const TICKET_LABELS: Record<string, string> = { general: "General", vip: "VIP" }
+// general = Día 1 · dia2 = Día 2 · vip = Pase completo (Día 1 + Día 2).
+const TICKET_LABELS: Record<string, string> = { general: "Dia1", dia2: "Dia2", vip: "PaseCompleto" }
 
 const isTallerSource = (leadSource: string): boolean =>
   leadSource === TALLER_SOURCE ||
