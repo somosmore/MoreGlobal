@@ -38,7 +38,7 @@ function whatsappChargeUrl(lead: MasterclassLead, price: string, link: string): 
     ? paymentUrl
       ? `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). Para asegurar tu lugar en la entrada ${entrada} (${price}), completa tu pago aquí: ${paymentUrl}`
       : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). Tu entrada es ${entrada} (${price}). En breve te compartimos el enlace de pago.`
-    : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). ¿Qué entrada prefieres: Día 1 (diseña tu ruta), Día 2 (destraba tu proceso) o el Pase completo VIP?`
+    : `Hola ${firstName}, gracias por inscribirte al Taller Comunidad More (23 y 24 de noviembre, 7:00 PM hora Colombia). ¿Qué entrada prefieres: General o VIP? Las dos incluyen los dos días.`
   return `https://wa.me/${digits}?text=${encodeURIComponent(body)}`
 }
 
@@ -121,7 +121,7 @@ export default function AdminTaller() {
 
         {stats.sinEntrada > 0 && (
           <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
-            {stats.sinEntrada} inscrito(s) sin entrada definida: elige Día 1, Día 2 o Pase completo en la tabla para calcular el monto.
+            {stats.sinEntrada} inscrito(s) sin entrada definida: elige General o VIP en la tabla para calcular el monto.
           </p>
         )}
         {error && (
@@ -203,9 +203,8 @@ export default function AdminTaller() {
                             className="rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 text-sm"
                           >
                             <option value="">Sin definir</option>
-                            <option value="general">Día 1</option>
-                            <option value="dia2">Día 2</option>
-                            <option value="vip">Pase completo VIP</option>
+                            <option value="general">General</option>
+                            <option value="vip">VIP</option>
                           </select>
                         </td>
                         <td className="px-4 py-3">

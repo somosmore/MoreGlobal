@@ -53,7 +53,7 @@ export type MasterclassLead = {
   profesion: string | null;
   source: string;
   status: string | null;
-  ticket_type: "general" | "dia2" | "vip" | null;
+  ticket_type: "general" | "vip" | null;
   price_tier: "publico" | "comunidad" | null;
   payment_status: "pending" | "paid";
   paid_at: string | null;
@@ -179,10 +179,6 @@ export type SiteSettingsMap = {
   tc_comunidad_vip_price: string
   tc_comunidad_vip_payment_link: string
   tc_event2_date: string
-  tc_dia2_price: string
-  tc_dia2_payment_link: string
-  tc_comunidad_dia2_price: string
-  tc_comunidad_dia2_payment_link: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {

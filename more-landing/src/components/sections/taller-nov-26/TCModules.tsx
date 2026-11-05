@@ -46,7 +46,7 @@ export default function TCModules() {
             Sales con una ruta, <span className="text-orange">no con dudas.</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-base text-navy-pale">
-            Dos tramos: el lunes diseñas tu ruta, el martes destrabas tu proceso. Puedes tomar uno o los dos.
+            Dos tramos con una sola entrada: el lunes diseñas tu ruta, el martes destrabas tu proceso.
           </p>
         </motion.div>
 

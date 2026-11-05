@@ -16,12 +16,12 @@ const faqs = [
     a: "Justamente para eso es el taller: en el primer módulo identificas tu punto de partida real y qué rutas tienen sentido para tu perfil. Muchos profesionales que creen que no califican sí tienen opciones.",
   },
   {
-    q: "¿Qué diferencia hay entre las entradas?",
-    a: "Día 1 (lunes 23) es para diseñar tu ruta si empiezas de cero. Día 2 (martes 24) es para destrabar tu proceso si ya iniciaste o lo haces solo. El Pase completo VIP incluye los dos días, la revisión de tu perfil o expediente por el equipo de MORE, la grabación en 24 horas y prioridad para tus preguntas.",
+    q: "¿La entrada incluye los dos días?",
+    a: "Sí. Con un solo pago accedes al Día 1 (lunes 23, diseña tu ruta) y al Día 2 (martes 24, destraba tu proceso).",
   },
   {
-    q: "¿Puedo ir solo al Día 2?",
-    a: "Sí. Si ya iniciaste tu proceso (solo, con un abogado o a medias), el Día 2 está pensado para ti. Si todavía no sabes qué ruta te conviene, te recomendamos empezar por el Día 1 o tomar el Pase completo.",
+    q: "¿Qué diferencia hay entre General y VIP?",
+    a: "Las dos incluyen los dos días en vivo, el material y la ronda de preguntas. La VIP suma la revisión de tu perfil o expediente por el equipo de MORE, la grabación de los dos días en 24 horas y prioridad para tus preguntas.",
   },
   {
     q: "¿Se pueden posponer las fechas?",
@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "¿Qué pasa si no puedo asistir en vivo?",
-    a: "Te recomendamos conectarte en vivo para la ronda de preguntas. El Pase completo VIP incluye la grabación de los dos días, que recibes dentro de las 24 horas siguientes.",
+    a: "Te recomendamos conectarte en vivo para la ronda de preguntas. La entrada VIP incluye la grabación de los dos días, que recibes dentro de las 24 horas siguientes.",
   },
   {
     q: "¿Puedo pedir reembolso?",
