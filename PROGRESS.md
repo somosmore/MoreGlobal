@@ -20,6 +20,15 @@
 
 ## Bitácora
 
+### [2026-11-05] — Taller: un solo pago por los dos días (General / VIP)
+
+- Agente: claude-code
+- Archivos modificados: `src/components/sections/taller-nov-26/{tallerNov26Copy.ts,TCTickets,TCPains,TCRegistrationForm,TCPaymentCard,TCFAQ,TCHero,TCModules}.tsx`, `src/pages/AdminTaller.tsx`, `src/pages/AdminSettings.tsx`, `src/components/admin/settings/{TallerComunidadSection.tsx,useSettingsData.ts}`, `src/lib/supabase.ts`, `src/contexts/SiteSettingsContext.tsx`, `supabase/functions/masterclass-register/index.ts`
+- Qué se implementó: Corrección de la estructura de entradas. El usuario aclaró que se paga una vez por las dos clases, así que se vuelve a **General ($67 / comunidad $50)** y **VIP ($127 / comunidad $97)**, ambas con Día 1 y Día 2. Se quitan la entrada "Día 2", el selector "¿En qué punto estás?", la recomendación de entrada del diagnóstico y los campos de precio/link del Día 2 en admin. Se mantienen la ruta en dos tramos y la fecha del Día 2. Tags GHL por entrada vuelven a `General` / `VIP`.
+- Problemas encontrados: la estructura de 3 entradas había sido un supuesto del agente a partir de un "perfecto" ambiguo. No había inscritos con `dia2` (verificado), así que no hubo datos que migrar. Las claves `tc_*dia2*` quedan en `site_settings` sin uso.
+- Qué se verificó: tsc, lint (11 preexistentes), build; en local `/taller-23nov/comunidad` muestra 2 pases con $67→$50 y $127→$97, sin selector de etapa.
+- Estado: ✅ completo
+
 ### [2026-11-03] — Taller: segundo día (martes 24) "Destraba tu proceso"
 
 - Agente: claude-code

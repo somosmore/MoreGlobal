@@ -45,12 +45,8 @@ const DEFAULTS: SiteSettingsMap = {
   tc_comunidad_general_payment_link: "",
   tc_comunidad_vip_price: "$97 USD",
   tc_comunidad_vip_payment_link: "",
-  // Día 2 del taller (martes 24): fecha y entrada "Día 2".
+  // Día 2 del taller (martes 24): fecha (la entrada cubre los dos días).
   tc_event2_date: "2026-11-24T19:00:00-05:00",
-  tc_dia2_price: "$67 USD",
-  tc_dia2_payment_link: "",
-  tc_comunidad_dia2_price: "$50 USD",
-  tc_comunidad_dia2_payment_link: "",
 }
 
 type SiteSettingsContextValue = {

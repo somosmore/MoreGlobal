@@ -145,9 +145,9 @@ export default function TCHero() {
               transition={{ duration: 0.6, delay: 0.32 }}
               className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-navy-pale sm:text-lg lg:mx-0"
             >
-              Dos noches en vivo. El <strong className="font-semibold text-white">lunes 23</strong> diseñas tu ruta si
-              empiezas de cero; el <strong className="font-semibold text-white">martes 24</strong> destrabas tu proceso si
-              ya iniciaste o lo haces solo. Sin invertir de más ni decidir a ciegas.
+              Dos noches en vivo, una sola entrada. El <strong className="font-semibold text-white">lunes 23</strong> diseñas
+              tu ruta y el <strong className="font-semibold text-white">martes 24</strong> destrabas tu proceso si ya
+              iniciaste o lo haces solo. Sin invertir de más ni decidir a ciegas.
             </motion.p>
 
             <motion.dl

@@ -282,7 +282,7 @@ export default function TCRegistrationForm() {
     }
     const onSelectTicket = (e: Event) => {
       const detail = (e as CustomEvent<TicketType>).detail
-      if (detail === "general" || detail === "dia2" || detail === "vip") setTicket(detail)
+      if (detail === "general" || detail === "vip") setTicket(detail)
     }
     window.addEventListener("focus-registro", focusFirstField)
     window.addEventListener("select-ticket", onSelectTicket)
@@ -547,7 +547,7 @@ export default function TCRegistrationForm() {
                     <legend className="mb-2 block text-xs font-semibold uppercase tracking-wide text-navy-deep">
                       Tu entrada
                     </legend>
-                    <div className="grid gap-2 sm:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-2">
                       {TICKETS.map((t) => {
                         const { price } = getTicketPricing(t, settings, tier)
                         const selected = ticket === t.id

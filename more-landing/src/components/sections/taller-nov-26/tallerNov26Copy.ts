@@ -75,15 +75,6 @@ export const MODULES_DAY2 = [
   },
 ] as const
 
-/** "¿En qué punto estás?": recomienda el día según la etapa del visitante. */
-export const STAGES = [
-  { id: "cero", label: "Empiezo de cero", hint: "Todavía no sé qué ruta me conviene.", ticket: "general" },
-  { id: "proceso", label: "Ya inicié o lo hago solo", hint: "Estoy en proceso y algo se trabó.", ticket: "dia2" },
-  { id: "todo", label: "Quiero los dos días", hint: "Ruta clara y proceso destrabado.", ticket: "vip" },
-] as const
-
-export type StageId = (typeof STAGES)[number]["id"]
-
 /** Los dolores, cada uno conectado al día y la parada que lo resuelve. */
 export const PAINS = [
   {
@@ -139,8 +130,8 @@ export const PAINS = [
 
 export type PainId = (typeof PAINS)[number]["id"]
 
-/** `general` = Día 1 y `vip` = Pase completo (ids históricos, ya guardados en la base). */
-export type TicketType = "general" | "dia2" | "vip"
+/** Una sola entrada cubre los dos días: `general` (General) o `vip` (VIP). */
+export type TicketType = "general" | "vip"
 
 type TicketDef = {
   id: TicketType
@@ -189,17 +180,17 @@ export function getTicketPricing(
   return { price: publicPrice, compareAt: null, link: settings[ticket.linkKey] }
 }
 
-// Entradas acordadas con el usuario (2026-11-03): Día 1, Día 2 y Pase completo VIP.
+// Entradas acordadas con el usuario (2026-11-05): un solo pago cubre los dos días.
 export const TICKETS: TicketDef[] = [
   {
     id: "general",
-    name: "Día 1",
-    dateLabel: "23 NOV",
-    tagline: "Diseña tu ruta. Para quien empieza de cero.",
+    name: "General",
+    dateLabel: "23–24 NOV",
+    tagline: "Los dos días en vivo: diseña tu ruta y destraba tu proceso.",
     includes: [
-      "Taller en vivo del lunes 23 de noviembre",
+      "Día 1 (lunes 23) y Día 2 (martes 24) en vivo",
       "Material de trabajo digital",
-      "Ronda de preguntas al cierre",
+      "Ronda de preguntas al cierre de cada día",
     ],
     priceKey: "tc_general_price",
     linkKey: "tc_general_payment_link",
@@ -207,27 +198,12 @@ export const TICKETS: TicketDef[] = [
     comunidadLinkKey: "tc_comunidad_general_payment_link",
   },
   {
-    id: "dia2",
-    name: "Día 2",
-    dateLabel: "24 NOV",
-    tagline: "Destraba tu proceso. Para quien ya inició o lo hace solo.",
-    includes: [
-      "Taller en vivo del martes 24 de noviembre",
-      "Diagnóstico de bloqueos de tu caso",
-      "Ronda de preguntas al cierre",
-    ],
-    priceKey: "tc_dia2_price",
-    linkKey: "tc_dia2_payment_link",
-    comunidadPriceKey: "tc_comunidad_dia2_price",
-    comunidadLinkKey: "tc_comunidad_dia2_payment_link",
-  },
-  {
     id: "vip",
-    name: "Pase completo VIP",
+    name: "VIP",
     dateLabel: "23–24 NOV",
     tagline: "Los dos días y revisión de tu caso.",
     includes: [
-      "Día 1 y Día 2 en vivo",
+      "Todo lo de la entrada General",
       "Revisión de tu perfil o expediente por el equipo de MORE",
       "Grabación de los dos días en 24 horas",
       "Prioridad para tus preguntas en vivo",
@@ -243,7 +219,7 @@ export const TICKETS: TicketDef[] = [
 /** Compromisos operativos explícitos (responden a las críticas de clientes en el análisis 2023–2026). */
 export const GUARANTEES = [
   { title: "Fechas fijas", text: "Lunes 23 y martes 24 de noviembre, 7:00 PM (Colombia). No se posponen." },
-  { title: "Grabación en 24 horas", text: "Con el Pase completo la recibes al día siguiente, sin excusas." },
+  { title: "Grabación en 24 horas", text: "Con la entrada VIP la recibes al día siguiente, sin excusas." },
   { title: "Un solo canal", text: "Acceso, material y avisos por correo y WhatsApp. Nada perdido en Drive." },
   { title: "Todo por escrito", text: "Qué incluye cada entrada, antes de pagar. Sin letra pequeña." },
 ] as const

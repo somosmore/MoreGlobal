@@ -1,9 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowDown, ArrowRight, Check, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { MODULES, MODULES_DAY2, PAINS, getTicket, type TicketType } from "./tallerNov26Copy"
+import { MODULES, MODULES_DAY2, PAINS } from "./tallerNov26Copy"
 import { togglePain, useSelectedPains } from "./painsStore"
-import { scrollToRegistro } from "./scrollToRegistro"
+import { scrollToEntradas } from "./scrollToRegistro"
 
 /**
  * "¿Qué te pasa hoy?": el visitante marca sus dolores y ve en vivo en qué
@@ -20,10 +20,6 @@ export default function TCPains() {
       return { key, day, id, title: mod.title }
     })
     .sort((a, b) => a.day - b.day || a.id - b.id)
-  const days = new Set(stops.map((s) => s.day))
-  // Entrada recomendada según los días que necesita.
-  const recommended: TicketType = days.has(1) && days.has(2) ? "vip" : days.has(2) ? "dia2" : "general"
-  const recommendedName = getTicket(recommended).name
 
   return (
     <section className="relative bg-paper py-16 sm:py-24">
@@ -117,16 +113,15 @@ export default function TCPains() {
                   {matched.length === PAINS.length
                     ? "Te pasa todo lo que más escuchamos. El taller está hecho exactamente para ti."
                     : `Lo trabajamos en ${stops.length === 1 ? "esta parada" : "estas paradas"} de la ruta.`}{" "}
-                  Te recomendamos la entrada{" "}
-                  <strong className="font-semibold text-white">{recommendedName}</strong>.
+                  Tu entrada incluye los dos días.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <button
                     type="button"
-                    onClick={(e) => scrollToRegistro(e, recommended)}
+                    onClick={scrollToEntradas}
                     className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-2.5 text-sm font-bold text-white hover:bg-orange-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-ink"
                   >
-                    Reservar {recommendedName}
+                    Elegir mi entrada
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </button>
                   <button

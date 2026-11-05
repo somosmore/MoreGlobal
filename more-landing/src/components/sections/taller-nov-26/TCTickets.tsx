@@ -1,9 +1,8 @@
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { Check, Plane, ShieldCheck } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { cn } from "@/lib/utils"
-import { GUARANTEES, STAGES, TICKETS, getTicketPricing, type StageId } from "./tallerNov26Copy"
+import { GUARANTEES, TICKETS, getTicketPricing } from "./tallerNov26Copy"
 import { usePriceTier } from "./priceTier"
 import { scrollToRegistro } from "./scrollToRegistro"
 
@@ -29,9 +28,6 @@ function Barcode({ dark }: { dark: boolean }) {
 export default function TCTickets() {
   const { settings, loading } = useSiteSettings()
   const tier = usePriceTier()
-  // "¿En qué punto estás?": marca el pase recomendado para esa etapa.
-  const [stage, setStage] = useState<StageId | null>(null)
-  const recommended = STAGES.find((s) => s.id === stage)?.ticket ?? null
 
   return (
     <section id="entradas" className="scroll-mt-4 bg-paper py-16 sm:py-24">
@@ -49,37 +45,15 @@ export default function TCTickets() {
           </h2>
           <p className="mt-3 text-base text-ink-muted">
             {tier === "comunidad"
-              ? "Precio exclusivo para la Comunidad More. Taller virtual: lo ves desde donde estés."
-              : "Taller virtual: lo ves desde donde estés."}
+              ? "Precio exclusivo para la Comunidad More. Una sola entrada para los dos días, virtual y en vivo."
+              : "Una sola entrada para los dos días, virtual y en vivo."}
           </p>
         </motion.div>
 
-        <div className="mx-auto mt-10 max-w-3xl">
-          <p className="text-center text-sm font-bold text-navy-deep">¿En qué punto estás?</p>
-          <div className="mt-3 grid gap-2 sm:grid-cols-3">
-            {STAGES.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                aria-pressed={stage === s.id}
-                onClick={() => setStage(s.id)}
-                className={cn(
-                  "rounded-2xl border-2 px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange",
-                  stage === s.id ? "border-orange bg-orange-wash" : "border-navy/10 bg-white hover:border-navy/25",
-                )}
-              >
-                <span className="block text-sm font-bold text-navy-deep">{s.label}</span>
-                <span className="mt-0.5 block text-xs text-ink-muted">{s.hint}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-10 space-y-8">
+        <div className="mt-12 space-y-8">
           {TICKETS.map((ticket, index) => {
             const { price, compareAt } = getTicketPricing(ticket, settings, tier)
             const dark = Boolean(ticket.highlighted)
-            const isRecommended = recommended === ticket.id
             return (
               <motion.article
                 key={ticket.id}
@@ -90,14 +64,8 @@ export default function TCTickets() {
                 className={cn(
                   "relative flex flex-col overflow-hidden rounded-3xl md:flex-row",
                   dark ? "bg-navy-ink text-white shadow-xl" : "border border-navy/15 bg-white text-navy-deep shadow-sm",
-                  isRecommended && "ring-4 ring-orange ring-offset-4 ring-offset-paper",
                 )}
               >
-                {isRecommended && (
-                  <span className="absolute right-6 top-0 z-10 rounded-b-lg bg-orange px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-                    Recomendado para ti
-                  </span>
-                )}
                 {/* Cuerpo del pase */}
                 <div className="flex-1 p-6 sm:p-8">
                   <div className="flex flex-wrap items-center justify-between gap-2">

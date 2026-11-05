@@ -64,7 +64,7 @@ export default function TCPaymentCard({ ticket, email, showLogo = false }: TCPay
         </p>
 
         {showPicker && (
-          <div className="mt-6 grid gap-2 sm:grid-cols-3">
+          <div className="mt-6 grid grid-cols-2 gap-2">
             {TICKETS.map((t) => (
               <button
                 key={t.id}

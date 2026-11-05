@@ -35,16 +35,6 @@ type Props = Pick<
   | "tcComunidadVipPaymentLinkInvalid"
   | "tcEvent2Date"
   | "setTcEvent2Date"
-  | "tcDia2Price"
-  | "setTcDia2Price"
-  | "tcDia2PaymentLink"
-  | "setTcDia2PaymentLink"
-  | "tcComunidadDia2Price"
-  | "setTcComunidadDia2Price"
-  | "tcComunidadDia2PaymentLink"
-  | "setTcComunidadDia2PaymentLink"
-  | "tcDia2PaymentLinkInvalid"
-  | "tcComunidadDia2PaymentLinkInvalid"
 >
 
 type TicketFieldsProps = {
@@ -153,16 +143,6 @@ export default function TallerComunidadSection({
   tcComunidadVipPaymentLinkInvalid,
   tcEvent2Date,
   setTcEvent2Date,
-  tcDia2Price,
-  setTcDia2Price,
-  tcDia2PaymentLink,
-  setTcDia2PaymentLink,
-  tcComunidadDia2Price,
-  setTcComunidadDia2Price,
-  tcComunidadDia2PaymentLink,
-  setTcComunidadDia2PaymentLink,
-  tcDia2PaymentLinkInvalid,
-  tcComunidadDia2PaymentLinkInvalid,
 }: Props) {
   const onChange = (setter: (v: string) => void) => (value: string) => {
     setter(value)
@@ -220,7 +200,7 @@ export default function TallerComunidadSection({
 
             <TicketFields
               prefix="tc-general"
-              title="Día 1"
+              title="Entrada General (Día 1 + Día 2)"
               price={tcGeneralPrice}
               onPrice={onChange(setTcGeneralPrice)}
               link={tcGeneralPaymentLink}
@@ -228,19 +208,10 @@ export default function TallerComunidadSection({
               linkInvalid={tcGeneralPaymentLinkInvalid}
             />
 
-            <TicketFields
-              prefix="tc-dia2"
-              title="Día 2"
-              price={tcDia2Price}
-              onPrice={onChange(setTcDia2Price)}
-              link={tcDia2PaymentLink}
-              onLink={onChange(setTcDia2PaymentLink)}
-              linkInvalid={tcDia2PaymentLinkInvalid}
-            />
 
             <TicketFields
               prefix="tc-vip"
-              title="Pase completo VIP (Día 1 + Día 2)"
+              title="Entrada VIP (Día 1 + Día 2)"
               price={tcVipPrice}
               onPrice={onChange(setTcVipPrice)}
               link={tcVipPaymentLink}
@@ -254,7 +225,7 @@ export default function TallerComunidadSection({
 
             <TicketFields
               prefix="tc-comunidad-general"
-              title="Día 1 · Comunidad More"
+              title="General · Comunidad More"
               price={tcComunidadGeneralPrice}
               onPrice={onChange(setTcComunidadGeneralPrice)}
               link={tcComunidadGeneralPaymentLink}
@@ -262,19 +233,10 @@ export default function TallerComunidadSection({
               linkInvalid={tcComunidadGeneralPaymentLinkInvalid}
             />
 
-            <TicketFields
-              prefix="tc-comunidad-dia2"
-              title="Día 2 · Comunidad More"
-              price={tcComunidadDia2Price}
-              onPrice={onChange(setTcComunidadDia2Price)}
-              link={tcComunidadDia2PaymentLink}
-              onLink={onChange(setTcComunidadDia2PaymentLink)}
-              linkInvalid={tcComunidadDia2PaymentLinkInvalid}
-            />
 
             <TicketFields
               prefix="tc-comunidad-vip"
-              title="Pase completo VIP · Comunidad More"
+              title="VIP · Comunidad More"
               price={tcComunidadVipPrice}
               onPrice={onChange(setTcComunidadVipPrice)}
               link={tcComunidadVipPaymentLink}
@@ -290,9 +252,7 @@ export default function TallerComunidadSection({
                 tcGeneralPaymentLinkInvalid ||
                 tcVipPaymentLinkInvalid ||
                 tcComunidadGeneralPaymentLinkInvalid ||
-                tcComunidadVipPaymentLinkInvalid ||
-                tcDia2PaymentLinkInvalid ||
-                tcComunidadDia2PaymentLinkInvalid
+                tcComunidadVipPaymentLinkInvalid
               }
               className="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-50"
             >
