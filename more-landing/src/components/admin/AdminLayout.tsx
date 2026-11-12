@@ -17,12 +17,14 @@ import {
   ShieldCheck,
   Library,
   Ticket,
+  Briefcase,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/leads", icon: Users, label: "Leads" },
+  { href: "/admin/evento", icon: Briefcase, label: "Kit del evento" },
   { href: "/admin/taller", icon: Ticket, label: "Taller 23 nov" },
   { href: "/admin/testimonials", icon: MessageSquare, label: "Testimonios" },
   { href: "/admin/projects", icon: LayoutTemplate, label: "Proyectos" },
@@ -43,6 +45,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   clients: "Clientes",
   resources: "Recursos",
   taller: "Inscritos al taller",
+  evento: "Kit del evento",
 }
 
 const getInitials = (email: string) => {

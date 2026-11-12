@@ -19,6 +19,8 @@ const AdminProjectResult = lazy(() => import("@/pages/AdminProjectResult"))
 const AdminClients = lazy(() => import("@/pages/AdminClients"))
 const AdminResources = lazy(() => import("@/pages/AdminResources"))
 const AdminTaller = lazy(() => import("@/pages/AdminTaller"))
+const AdminEventoKit = lazy(() => import("@/pages/AdminEventoKit"))
+const AdminSala = lazy(() => import("@/pages/AdminSala"))
 const BlueprintPage = lazy(() => import("@/pages/BlueprintPage"))
 const VipSessionPage = lazy(() => import("@/pages/VipSessionPage"))
 const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"))
@@ -92,6 +94,15 @@ function App() {
           <Route path="/wppequipo" element={<WppEquipoPage />} />
           <Route path="/gracias" element={<ThankYouPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          {/* Sala de espera: protegida pero sin el layout del admin (se proyecta en Zoom). */}
+          <Route
+            path="/admin/sala"
+            element={
+              <ProtectedAdmin>
+                <AdminSala />
+              </ProtectedAdmin>
+            }
+          />
 
           {/* Protected admin area with shared layout */}
           <Route
@@ -114,6 +125,7 @@ function App() {
             <Route path="clients" element={<AdminClients />} />
             <Route path="resources" element={<AdminResources />} />
             <Route path="taller" element={<AdminTaller />} />
+            <Route path="evento" element={<AdminEventoKit />} />
           </Route>
 
           <Route path="/blueprint" element={<BlueprintPage />} />

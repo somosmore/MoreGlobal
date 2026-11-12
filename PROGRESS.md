@@ -20,6 +20,16 @@
 
 ## Bitácora
 
+### [2026-11-11] — Kit del evento y sala de espera en el admin
+
+- Agente: claude-code
+- Archivos modificados: `src/lib/eventKit.ts`, `src/pages/AdminEventoKit.tsx`, `src/pages/AdminSala.tsx`, `src/components/admin/sala/{useLaunchTimer.ts,ClockRing.tsx,ChatBubbles.tsx,salaMessages.ts}` (nuevos); `src/App.tsx`, `src/components/admin/AdminLayout.tsx`
+- Qué se implementó: `/admin/evento` (Kit del evento): páginas del evento, 4 links de pago con precio (de `site_settings`), URLs de redirección post-pago para GHL, sala de espera, WhatsApp y grupo de Facebook, generador de UTMs; todo con Copiar/Abrir. `/admin/sala`: cuenta regresiva a pantalla completa para proyectar en Zoom (protegida, sin layout), portada de MORE-WEBINAR-EB2-NIW/countdown.html y de la sala React de landing-webinar, con burbujas de mensajes reales de públicos de MORE. Estructura del evento activo en `lib/eventKit.ts` (para un webinar nuevo: agregar entrada y cambiar `ACTIVE_EVENT_ID`).
+- También: los 4 links de pago (GHL `api.moremigracion.com/payment-link/…`) cargados en `site_settings` (MORE.WEB `pqextffbzzwadrlzgnvb`), verificados uno por uno.
+- Qué se verificó: tsc, lint (11 preexistentes), build; en local con rutas temporales sin login: kit con los 4 links desde la base, sala con conteo, burbujas y pantalla final.
+- Problemas encontrados: el worktree no tiene `.env` (en local la app usa DEFAULTS); se probó pasando las `VITE_SUPABASE_*` como variables de entorno. La animación de salida de dígitos se acumulaba con la pestaña en segundo plano → solo animación de entrada.
+- Estado: ✅ completo
+
 ### [2026-11-11] — Taller: página de gracias post-pago (`/taller-23nov/gracias`)
 
 - Agente: claude-code
