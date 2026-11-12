@@ -638,6 +638,16 @@ Misma landing con precio exclusivo para la comunidad: **General $50 USD · VIP $
 
 Compartir solo por canales de la comunidad (grupo de Facebook, WhatsApp, email a inscritos): quien tenga el link puede comprar con ese precio.
 
+#### 1.21.2 Página de gracias post-pago (`/taller-23nov/gracias`)
+
+Stripe redirige aquí después del pago. URL por link:
+
+```
+https://moremigracion.com/taller-23nov/gracias?entrada=general|vip&version=publico|comunidad&session_id={CHECKOUT_SESSION_ID}
+```
+
+Muestra la confirmación, botones para agregar los dos días al calendario (Google / .ics), los pasos siguientes (revisión de perfil si es VIP), el acceso a la Comunidad y WhatsApp. Dispara la conversión **Purchase** (Meta) con el monto, una sola vez por pago. No marca el pago en el admin: eso sigue siendo manual en `/admin/taller`.
+
 #### 1.21.1 Página de pago para Meta Lead Ads (`/taller-23nov/registro`)
 
 El lead ya dejó sus datos en el formulario de Meta: aquí elige su entrada y paga.

@@ -20,6 +20,15 @@
 
 ## Bitácora
 
+### [2026-11-11] — Taller: página de gracias post-pago (`/taller-23nov/gracias`)
+
+- Agente: claude-code
+- Archivos modificados: `src/pages/TallerNov26GraciasPage.tsx` (nuevo), `src/components/sections/taller-nov-26/tallerCalendar.ts` (nuevo), `src/components/sections/taller-nov-26/tallerNov26Copy.ts` (`parsePriceAmount`), `src/lib/tracking.ts` (`trackWorkshopPurchase` + ruta), `src/App.tsx`
+- Qué se implementó: Página a la que redirige Stripe (`?entrada=general|vip&version=publico|comunidad&session_id={CHECKOUT_SESSION_ID}`): confirmación tipo pase de abordar, Google Calendar por día + .ics con los dos días (19:00 COT, 2 h estimadas), pasos siguientes (paso extra de revisión de perfil si es VIP), botón a la Comunidad y WhatsApp. Dispara Purchase (Meta) / purchase (GA4) con el monto en USD una sola vez por `session_id` (eventID para futura CAPI). `noindex`.
+- Qué se verificó: tsc, lint (11 preexistentes), build; en local con `entrada=vip&version=comunidad`: textos, paso VIP, fechas de calendario correctas, `noindex`.
+- Problemas encontrados: ninguno. El pago todavía no se valida contra Stripe (solo se usa el session_id para tracking); marcar "Pagado" sigue siendo manual.
+- Estado: ✅ completo
+
 ### [2026-11-05] — Taller: un solo pago por los dos días (General / VIP)
 
 - Agente: claude-code

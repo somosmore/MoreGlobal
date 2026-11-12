@@ -240,6 +240,12 @@ export const FEARS = [
   },
 ] as const
 
+/** "$67 USD" → 67. Devuelve null si el texto no tiene un número. */
+export function parsePriceAmount(price: string): number | null {
+  const match = price.replace(/,/g, "").match(/\d+(\.\d+)?/)
+  return match ? Number(match[0]) : null
+}
+
 export const getTicket = (id: TicketType): TicketDef =>
   TICKETS.find((t) => t.id === id) ?? TICKETS[0]
 
