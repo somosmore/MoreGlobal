@@ -20,6 +20,15 @@
 
 ## Bitácora
 
+### [2026-11-12] — Normalizar teléfono de contacto de MORE a +57 302 241 9122
+
+- Agente: claude-code
+- Archivos modificados: `src/lib/whatsapp.ts` (fallback + `formatPhoneDisplay`), `src/contexts/SiteSettingsContext.tsx` (defaults), `src/components/admin/settings/ContactSection.tsx` (placeholders), `src/pages/TurboPdfPage.tsx` (número hardcodeado → settings), 14 plantillas en `emails/` y `public/emails/`, `public/blueprint.html`, `Documentacion/Blue print 2026.html`, manual; migración `044_normalize_contact_phone.sql`.
+- Qué se implementó: reemplazo de +57 313 221 9798, +1 (548) 312-2105 y +1 (832) 941-6026 por el único número válido. Migración 044: `whatsapp_number` = +573022419122, `contact_phone` = +57 302 241 9122, Equipo MORE 1 → wa.me/573022419122, Equipo MORE 2 (wa.link/a1z0jm) desactivado.
+- Qué se verificó: tsc, lint (11 preexistentes), build; búsqueda sin restos de números viejos (salvo CSV de Zoom y auditoría histórica, que son datos/historia).
+- Problemas encontrados: ninguno. Migración 044 aplicada en MORE.WEB (pqextffbzzwadrlzgnvb) el 2026-11-12 y verificada.
+- Estado: ✅ completo
+
 ### [2026-11-11] — Kit del evento y sala de espera en el admin
 
 - Agente: claude-code

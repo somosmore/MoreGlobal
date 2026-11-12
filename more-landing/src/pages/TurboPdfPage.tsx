@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { formatWhatsappDisplay } from "@/lib/whatsapp"
+import { formatPhoneDisplay, formatWhatsappDisplay } from "@/lib/whatsapp"
 
 const includes = [
   "Estrategia del caso personalizada",
@@ -419,7 +419,7 @@ export default function TurboPdfPage() {
                   </p>
                   <div style={{ marginBottom: 20 }}>
                     <div style={{ color: "rgba(255,255,255,0.65)", fontSize: 18, marginBottom: 6 }}>WhatsApp:</div>
-                    <div style={{ color: "white", fontSize: 26, fontWeight: 800 }}>+57 313 221 9798</div>
+                    <div style={{ color: "white", fontSize: 26, fontWeight: 800 }}>{formatPhoneDisplay(settings.whatsapp_number)}</div>
                   </div>
                   <div style={{ padding: "16px 20px", background: "#F37021", borderRadius: 12, textAlign: "center" }}>
                     <p style={{ color: "white", fontSize: 20, fontWeight: 800 }}>Reservar mi lugar →</p>

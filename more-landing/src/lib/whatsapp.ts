@@ -11,7 +11,7 @@
  */
 
 /** Último recurso si todavía no cargaron los settings. */
-export const WHATSAPP_FALLBACK = "+573132219798"
+export const WHATSAPP_FALLBACK = "+573022419122"
 
 /** Deja solo los dígitos: wa.me no acepta "+", espacios ni guiones. */
 export function toWhatsappDigits(phone?: string | null): string {
@@ -24,6 +24,13 @@ export function buildWhatsappUrl(phone?: string | null, message?: string): strin
   const base = `https://wa.me/${toWhatsappDigits(phone)}`
   const trimmed = message?.trim()
   return trimmed ? `${base}?text=${encodeURIComponent(trimmed)}` : base
+}
+
+/** "+573022419122" → "+57 302 241 9122" (móviles de Colombia); otros quedan como vienen. */
+export function formatPhoneDisplay(phone?: string | null): string {
+  const digits = toWhatsappDigits(phone)
+  const co = digits.match(/^57(3\d{2})(\d{3})(\d{4})$/)
+  return co ? `+57 ${co[1]} ${co[2]} ${co[3]}` : `+${digits}`
 }
 
 /** El número tal como se muestra en pantalla (p. ej. en los PDF). */

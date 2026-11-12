@@ -95,7 +95,7 @@ export default function ContactSection({
                     setWhatsappNumber(e.target.value)
                     setContactSaveState("idle")
                   }}
-                  placeholder="+573132219798"
+                  placeholder="+573022419122"
                   className={`w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors
                     ${
                       whatsappNumberInvalid
@@ -145,7 +145,7 @@ export default function ContactSection({
                     setContactPhone(e.target.value)
                     setContactSaveState("idle")
                   }}
-                  placeholder="+1 (548) 312-2105"
+                  placeholder="+57 302 241 9122"
                   className="w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-4 text-sm outline-none transition-colors focus:border-orange focus:bg-white"
                 />
               </div>
