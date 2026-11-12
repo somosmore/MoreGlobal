@@ -1,0 +1,30 @@
+export type ChatMessage = { name: string; text: string }
+
+/** Mensajes positivos de públicos pasados (de la sala de MORE-WEBINAR-EB2-NIW). */
+export const SALA_MESSAGES: ChatMessage[] = [
+  { name: "Cristiam Salas", text: "Ya envié mi hoja de vida, quedo atento si hay que corregirle algo" },
+  { name: "Ana Johana Rodríguez", text: "Yooo visual 100%" },
+  { name: "Hugo Gutierrez", text: "Visual 300%" },
+  { name: "Lorelba Tejada", text: "Siii, visual" },
+  { name: "Estefani Andrade", text: "Son los mejores! Tienen un super equipo, yo estoy por terminar mi proyecto y los recomiendo 100% 🫶" },
+  { name: "Juanita · MORE", text: "Muchas gracias!" },
+  { name: "Maria Ananí Alegría", text: "Linda... muchas gracias" },
+  { name: "Fernando Sarmiento", text: "Está muy bien" },
+  { name: "Victor Hugo Fernández", text: "Paso a pasito" },
+  { name: "Luisa Fernanda Márquez", text: "Sí, yo gané ayer una bendición" },
+  { name: "Ivan Ramo", text: "Felicidades" },
+  { name: "Vladimir Ardila", text: "Que bien Hugo" },
+  { name: "Cristiam Salas", text: "🥹 gracias por toda la hermosa y noble información" },
+  { name: "Hugo Gutierrez", text: "Eres una excelente profesional Ivon junto con todo tu equipo. Nos vemos mañana. Agradecido con toda la información." },
+  { name: "Lorelba Tejada", text: "Muchísimas gracias! 👏🏼✨" },
+  { name: "Lorelba Tejada", text: "Bendiciones" },
+  { name: "Nataly Bogotá", text: "Feliz noche" },
+  { name: "Alejandro Forero", text: "Gracias, buena noche" },
+  { name: "Pablo Montaño", text: "Gracias" },
+  { name: "Carlos Torres", text: "GRACIAS" },
+  { name: "Luisa Fernanda Márquez", text: "Gracias, linda noche" },
+  { name: "Cristiam Salas", text: "Gracias por todo, les seguiré en el nombre de Dios" },
+  { name: "Vivian Aranda", text: "Gracias Ivon! ☺️" },
+  { name: "Sandra Mireya Bustos", text: "Ok 👍🏻" },
+  { name: "Vivian Aranda", text: "👍" },
+]

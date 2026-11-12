@@ -638,6 +638,12 @@ Misma landing con precio exclusivo para la comunidad: **General $50 USD · VIP $
 
 Compartir solo por canales de la comunidad (grupo de Facebook, WhatsApp, email a inscritos): quien tenga el link puede comprar con ese precio.
 
+#### 1.21.3 Kit del evento (`/admin/evento`) y sala de espera (`/admin/sala`)
+
+- **Kit del evento:** en el menú del admin. Reúne los links del evento activo con botones Copiar/Abrir: landings (pública, comunidad, registro Lead Ads, gracias), los 4 links de pago con su precio, las URLs de redirección post-pago para GHL, la sala de espera, el WhatsApp de MORE, el grupo de Facebook y un generador de UTMs por canal. Precios y links salen de Configuración.
+- **Sala de espera:** cuenta regresiva a pantalla completa para compartir en Zoom antes de empezar. Elegir minutos (o 1/5/10/15/30), **Espacio** inicia, **R** reinicia. Muestra mensajes reales de públicos anteriores como burbujas de chat. Requiere sesión del admin.
+- **Nuevo webinar:** agregar su entrada en `src/lib/eventKit.ts` y apuntar `ACTIVE_EVENT_ID`.
+
 #### 1.21.2 Página de gracias post-pago (`/taller-23nov/gracias`)
 
 Stripe redirige aquí después del pago. URL por link:
