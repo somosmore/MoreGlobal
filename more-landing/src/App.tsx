@@ -29,6 +29,7 @@ const WebinarEstatusPage = lazy(() => import("@/pages/WebinarEstatusPage"))
 const WebinarEstatusRegistroPage = lazy(() => import("@/pages/WebinarEstatusRegistroPage"))
 const WebinarSep26Page = lazy(() => import("@/pages/WebinarSep26Page"))
 const WebinarSep26RegistroPage = lazy(() => import("@/pages/WebinarSep26RegistroPage"))
+const TallerNov26GraciasPage = lazy(() => import("@/pages/TallerNov26GraciasPage"))
 const ComunidadPage = lazy(() => import("@/pages/ComunidadPage"))
 const ComunidadRegistroPage = lazy(() => import("@/pages/ComunidadRegistroPage"))
 const TallerNov26Page = lazy(() => import("@/pages/TallerNov26Page"))
@@ -77,6 +78,7 @@ function App() {
           <Route path="/comunidad/registro" element={<ComunidadRegistroPage />} />
           <Route path="/taller-23nov" element={<TallerNov26Page />} />
           <Route path="/taller-23nov/registro" element={<TallerNov26RegistroPage />} />
+          <Route path="/taller-23nov/gracias" element={<TallerNov26GraciasPage />} />
           {/* Versión con precio exclusivo Comunidad More (noindex). */}
           <Route path="/taller-23nov/comunidad" element={<TallerNov26Page tier="comunidad" />} />
           <Route path="/taller-23nov/comunidad/registro" element={<TallerNov26RegistroPage tier="comunidad" />} />

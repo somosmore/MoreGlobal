@@ -55,6 +55,7 @@ const MASTERCLASS_LANDING_PATHS = new Set([
   "/taller-23nov/registro",
   "/taller-23nov/comunidad",
   "/taller-23nov/comunidad/registro",
+  "/taller-23nov/gracias",
 ])
 
 const isMasterclassLandingPath = (pathname: string): boolean =>
@@ -547,6 +548,67 @@ export const trackScheduleCta = async (settings: SiteSettingsMap) => {
 
   if (settings.ga4_measurement_id.trim()) {
     window.gtag?.("event", "schedule_appointment_click")
+  }
+}
+
+/**
+ * Compra de entrada al taller (página `/taller-23nov/gracias`, a la que redirige
+ * Stripe después del pago).
+ *
+ * - GTM: empuja `workshop_purchase` al `dataLayer`.
+ * - Sin GTM: `fbq("track", "Purchase", { value, currency })` con parámetros
+ *   opacos y GA4 `purchase`.
+ * - `eventId` = id de la sesión de Stripe: sirve para deduplicar con un futuro
+ *   evento de Conversions API y para no disparar dos veces el mismo pago
+ *   (se recuerda en localStorage).
+ */
+export const trackWorkshopPurchase = async (
+  settings: SiteSettingsMap,
+  purchase: { value: number; currency: string; eventId: string }
+) => {
+  if (typeof window === "undefined") return
+  if (isAdminRoute(window.location.pathname)) return
+  if (!trackingActive(settings)) return
+
+  const storageKey = `more_ws_purchase_${purchase.eventId}`
+  try {
+    if (window.localStorage.getItem(storageKey)) return
+  } catch {
+    // Sin storage disponible: se dispara igual.
+  }
+
+  const gtm = settings.google_tag_manager_id.trim()
+  const meta = settings.meta_pixel_id.trim()
+  const ga4 = settings.ga4_measurement_id.trim()
+  if (!gtm && !meta && !ga4) return
+
+  await ensureTrackingScripts(settings)
+
+  const params = {
+    value: purchase.value,
+    currency: purchase.currency,
+    content_name: "svc_ws_ticket",
+    content_category: "content_purchase",
+  }
+
+  if (gtm) {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: "workshop_purchase", ...params, transaction_id: purchase.eventId })
+  } else {
+    if (meta) window.fbq?.("track", "Purchase", params, { eventID: purchase.eventId })
+    if (ga4) {
+      window.gtag?.("event", "purchase", {
+        transaction_id: purchase.eventId,
+        value: purchase.value,
+        currency: purchase.currency,
+      })
+    }
+  }
+
+  try {
+    window.localStorage.setItem(storageKey, "1")
+  } catch {
+    // Ignorar: solo evita duplicados en recargas.
   }
 }
 
