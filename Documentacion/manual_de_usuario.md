@@ -885,7 +885,7 @@ Página para gestionar parámetros globales del sitio web que se aplican en el f
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
 | `whatsapp_number` | texto | Número con código de país (sin espacios) que alimenta **todos los botones** `wa.me` del sitio público. |
-| `contact_phone` | texto | Teléfono **visible** en el footer (formato libre, ej. `+1 (548) 312-2105`). No alimenta los botones de WhatsApp. |
+| `contact_phone` | texto | Teléfono **visible** en el footer (formato libre, ej. `+57 302 241 9122`). No alimenta los botones de WhatsApp. |
 | `contact_email` | email | Email mostrado en el footer y otras superficies que lean settings. |
 
 **Cómo configurar:**
