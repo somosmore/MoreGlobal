@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
-import { CheckCircle2, FileCheck2 } from "lucide-react"
-import { WV_BLOCKS, WV_INCLUDES } from "./webinarVipRfeCopy"
+import { CheckCircle2 } from "lucide-react"
+import { WV_BLOCKS } from "./webinarVipRfeCopy"
 
-/** Los cuatro bloques como una línea de tiempo de tu proceso, y qué incluye la entrada. */
+/** Los cuatro bloques como una línea de tiempo de tu proceso. */
 export default function WVAgenda() {
   return (
     <section className="bg-paper py-14 sm:py-20">
@@ -44,20 +44,6 @@ export default function WVAgenda() {
             </motion.li>
           ))}
         </ol>
-
-        <div className="mt-10 rounded-2xl bg-navy-ink p-6 text-white sm:p-8">
-          <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-orange">
-            <FileCheck2 className="h-4 w-4" aria-hidden />
-            Tu entrada incluye
-          </p>
-          <ul className="mt-4 grid gap-2 sm:grid-cols-3">
-            {WV_INCLUDES.map((x) => (
-              <li key={x} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm leading-snug">
-                {x}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   )

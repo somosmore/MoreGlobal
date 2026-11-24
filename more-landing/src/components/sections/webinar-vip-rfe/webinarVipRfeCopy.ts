@@ -1,4 +1,6 @@
-/** Webinar VIP "RFE, aprobación y espera" (25 nov 2026): solo para miembros VIP, entrada paga. */
+import type { SiteSettingsMap } from "@/lib/supabase"
+
+/** Webinar "RFE, aprobación y espera" (25 nov 2026, 8:00 PM Colombia): Comunidad More, entradas General y VIP. */
 
 /** Identificadores en Supabase (`masterclass_leads.source`) y GHL. */
 export const WV_SOURCE = "webinar-vip-rfe-nov-26"
@@ -53,16 +55,59 @@ export const WV_BLOCKS = [
   },
 ] as const
 
-export const WV_INCLUDES = [
-  "Webinar en vivo con Ivon More",
-  "Checklist del plan de evidencias para prepararte ante un RFE",
-  "Ronda de preguntas en vivo al cierre",
-] as const
+/** Las dos entradas. Precio y link salen de Admin → Configuración → Webinar VIP. */
+export type WvTicketId = "general" | "vip"
+
+export type WvTicket = {
+  id: WvTicketId
+  name: string
+  tagline: string
+  includes: string[]
+  priceKey: keyof SiteSettingsMap
+  linkKey: keyof SiteSettingsMap
+  highlighted?: boolean
+}
+
+export const WV_TICKETS: WvTicket[] = [
+  {
+    id: "general",
+    name: "General",
+    tagline: "El webinar en vivo con todo el contenido.",
+    includes: [
+      "Webinar en vivo con Ivon More",
+      "Checklist del plan de evidencias para prepararte ante un RFE",
+      "Ronda de preguntas al cierre",
+    ],
+    priceKey: "wv_general_price",
+    linkKey: "wv_general_payment_link",
+  },
+  {
+    id: "vip",
+    name: "VIP",
+    tagline: "El webinar y una mirada a tu caso.",
+    // TODO(confirmar con el equipo): beneficios de la entrada VIP del webinar.
+    includes: [
+      "Todo lo de la entrada General",
+      "Revisión de tu caso (RFE o plan de evidencias) por el equipo de MORE",
+      "Grabación en 24 horas",
+      "Prioridad para tus preguntas en vivo",
+    ],
+    priceKey: "wv_vip_price",
+    linkKey: "wv_vip_payment_link",
+    highlighted: true,
+  },
+]
+
+export const getWvTicket = (id: WvTicketId): WvTicket => WV_TICKETS.find((t) => t.id === id) ?? WV_TICKETS[0]
 
 export const WV_FAQ = [
   {
     q: "¿Quién puede entrar?",
-    a: "Solo miembros VIP de MORE. Si te registras sin serlo, te escribimos para contarte cómo acceder.",
+    a: "Es un webinar para la Comunidad More, con precio de comunidad. Si tienes dudas sobre tu acceso, escríbenos por WhatsApp.",
+  },
+  {
+    q: "¿Qué diferencia hay entre General y VIP?",
+    a: "Las dos incluyen el webinar en vivo, el checklist y la ronda de preguntas. La VIP suma la revisión de tu caso por el equipo de MORE, la grabación en 24 horas y prioridad para tus preguntas.",
   },
   {
     q: "¿Es en vivo?",
@@ -83,9 +128,9 @@ export const WV_FAQ = [
 ] as const
 
 export const WV_PAGE_META = {
-  title: `Webinar VIP — ${WV_TITLE} | MORE`,
+  title: `Webinar — ${WV_TITLE} | MORE`,
   description:
-    "Webinar en vivo para miembros VIP de MORE: qué piden hoy los RFE, el plan de evidencias, costos, qué hacer con la I-140 aprobada y tu proyecto mientras esperas la visa.",
+    "Webinar en vivo para la Comunidad More: qué piden hoy los RFE, el plan de evidencias, costos, qué hacer con la I-140 aprobada y tu proyecto mientras esperas la visa.",
 } as const
 
 const DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"]

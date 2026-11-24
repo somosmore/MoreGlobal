@@ -1,20 +1,26 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { CheckCircle2, CreditCard, MessageCircle } from "lucide-react"
 import { CtaButton } from "@/components/brand/CtaButton"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
-import { eventDateParts } from "./webinarVipRfeCopy"
+import { cn } from "@/lib/utils"
+import { WV_TICKETS, eventDateParts, getWvTicket, type WvTicketId } from "./webinarVipRfeCopy"
 
-/** Paso 2 de 2: pagar la entrada (precio y link desde Admin → Configuración → Webinar VIP). */
-export default function WVPaymentCard({ email }: { email?: string }) {
+/** Paso 2 de 2: pagar la entrada elegida (precio y link desde Admin → Configuración → Webinar VIP). */
+export default function WVPaymentCard({ ticket, email }: { ticket: WvTicketId; email?: string }) {
   const { settings } = useSiteSettings()
-  const link = settings.wv_payment_link.trim()
+  const [selected, setSelected] = useState<WvTicketId>(ticket)
+  const [showPicker, setShowPicker] = useState(false)
+  const current = getWvTicket(selected)
+  const price = settings[current.priceKey]
+  const link = settings[current.linkKey].trim()
   const paymentUrl = /^https?:\/\//i.test(link) ? link : null
   const fecha = eventDateParts(settings.wv_event_date)
 
   const waDigits = settings.whatsapp_number.replace(/\D/g, "")
   const waUrl = waDigits
     ? `https://wa.me/${waDigits}?text=${encodeURIComponent(
-        `Hola, me registré en el Webinar VIP${email ? ` (${email})` : ""} y tengo una consulta.`,
+        `Hola, me registré en el webinar "Del RFE a la visa" (entrada ${current.name}${email ? `, ${email}` : ""}) y tengo una consulta.`,
       )}`
     : null
 
@@ -38,23 +44,52 @@ export default function WVPaymentCard({ email }: { email?: string }) {
           de tu entrada. El enlace de acceso te llega por correo y WhatsApp.
         </p>
 
+        {showPicker && (
+          <div className="mt-6 grid grid-cols-2 gap-2">
+            {WV_TICKETS.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setSelected(t.id)}
+                className={cn(
+                  "rounded-lg border px-4 py-3 text-left transition-colors",
+                  selected === t.id ? "border-orange bg-orange-wash" : "border-gray-300 hover:border-orange/50",
+                )}
+              >
+                <span className="block text-sm font-bold text-navy-deep">{t.name}</span>
+                <span className="block text-xs text-ink-muted">{settings[t.priceKey] || "Precio por confirmar"}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="mt-6 flex items-baseline justify-between gap-3 rounded-xl bg-paper p-4 text-left">
           <span>
             <span className="block text-xs uppercase tracking-wider text-ink-muted">Entrada</span>
-            <span className="mt-1 block text-lg font-bold text-navy-deep">Webinar VIP</span>
+            <span className="mt-1 block text-lg font-bold text-navy-deep">{current.name}</span>
           </span>
-          <span className="text-base font-semibold text-navy-deep">{settings.wv_price || "Precio por confirmar"}</span>
+          <span className="text-base font-semibold text-navy-deep">{price || "Precio por confirmar"}</span>
         </div>
 
         <div className="mt-6">
           {paymentUrl ? (
-            <CtaButton label="Pagar mi entrada" href={paymentUrl} size="lg" icon={CreditCard} className="font-bold" />
+            <CtaButton label={`Pagar entrada ${current.name}`} href={paymentUrl} size="lg" icon={CreditCard} className="font-bold" />
           ) : (
             <p className="rounded-xl border border-orange/30 bg-orange-wash px-4 py-3 text-sm text-navy-deep">
               El pago en línea se habilita en breve. Te enviaremos el enlace de pago por WhatsApp.
             </p>
           )}
         </div>
+
+        {!showPicker && (
+          <button
+            type="button"
+            onClick={() => setShowPicker(true)}
+            className="mt-4 text-xs font-medium text-ink-muted underline-offset-4 hover:text-navy-deep hover:underline"
+          >
+            Cambiar de entrada
+          </button>
+        )}
 
         {waUrl && (
           <a

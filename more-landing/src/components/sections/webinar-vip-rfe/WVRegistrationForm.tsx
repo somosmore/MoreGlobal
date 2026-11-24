@@ -6,7 +6,8 @@ import { useSiteSettings } from "@/hooks/useSiteSettings"
 import { useOfferWindow } from "@/hooks/useOfferWindow"
 import { getFbpFbcFromDocument, trackMasterclassRegistration } from "@/lib/tracking"
 import { capturePartialLead } from "@/lib/partialLead"
-import { WV_EVENT_LABEL, WV_GHL_TAG, WV_SOURCE, eventShortLabel } from "./webinarVipRfeCopy"
+import { cn } from "@/lib/utils"
+import { WV_EVENT_LABEL, WV_GHL_TAG, WV_SOURCE, WV_TICKETS, eventShortLabel, type WvTicketId } from "./webinarVipRfeCopy"
 import "flag-icons/css/flag-icons.min.css"
 
 import WVPaymentCard from "./WVPaymentCard"
@@ -222,8 +223,7 @@ function ExpiredCard() {
       </div>
       <h2 className="mb-3 text-2xl font-bold text-navy-deep">Las inscripciones cerraron</h2>
       <p className="text-ink-muted">
-        El webinar ya comenzó. Si eres miembro VIP y quieres la grabación, escríbenos por
-        WhatsApp.
+        El webinar ya comenzó. Si quieres la grabación, escríbenos por WhatsApp.
       </p>
     </motion.div>
   )
@@ -232,6 +232,7 @@ function ExpiredCard() {
 export default function WVRegistrationForm() {
   const { settings } = useSiteSettings()
   const nombreInputRef = useRef<HTMLInputElement>(null)
+  const [ticket, setTicket] = useState<WvTicketId>("general")
   const [submittedEmail, setSubmittedEmail] = useState("")
   const [form, setForm] = useState<FormData>({
     nombre: "",
@@ -256,15 +257,22 @@ export default function WVRegistrationForm() {
   }, [])
 
   // Enfoca el primer campo cuando el usuario llega al form vía un CTA
-  // (evento `focus-registro`) o si la página carga con #registro.
+  // (evento `focus-registro`) o si la página carga con #registro, y preselecciona
+  // la entrada elegida en la sección de entradas (`select-ticket`).
   useEffect(() => {
     const focusFirstField = () => {
       window.setTimeout(() => nombreInputRef.current?.focus(), 500)
     }
+    const onSelectTicket = (e: Event) => {
+      const detail = (e as CustomEvent<WvTicketId>).detail
+      if (detail === "general" || detail === "vip") setTicket(detail)
+    }
     window.addEventListener("focus-registro", focusFirstField)
+    window.addEventListener("select-ticket", onSelectTicket)
     if (window.location.hash === "#registro") focusFirstField()
     return () => {
       window.removeEventListener("focus-registro", focusFirstField)
+      window.removeEventListener("select-ticket", onSelectTicket)
     }
   }, [])
 
@@ -290,7 +298,7 @@ export default function WVRegistrationForm() {
   // Remarketing: guarda el email apenas es válido y suma teléfono/país/nombre
   // a medida que se completan (tabla partial_leads). No bloquea ni muestra errores.
   const savePartial = useCallback(
-    (overrides: { completed?: boolean } = {}) => {
+    (overrides: { completed?: boolean; ticketType?: WvTicketId } = {}) => {
       const digits = form.phone.replace(/\D/g, "")
       const phoneOk = digits.length >= 6 && digits.length <= 15
       void capturePartialLead(WV_SOURCE, {
@@ -298,11 +306,12 @@ export default function WVRegistrationForm() {
         nombre: form.nombre,
         phone: phoneOk ? `${form.countryCode}${digits}` : undefined,
         pais: phoneOk ? DIAL_TO_COUNTRY[form.countryCode] ?? "Otro" : undefined,
+        ticketType: overrides.ticketType ?? ticket,
         utm: utmParams,
         completed: overrides.completed,
       })
     },
-    [form, utmParams]
+    [form, ticket, utmParams]
   )
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
@@ -343,6 +352,8 @@ export default function WVRegistrationForm() {
           source: WV_SOURCE,
           event_label: WV_EVENT_LABEL,
           ghl_tag: WV_GHL_TAG,
+          ticket_type: ticket,
+          price_tier: "comunidad",
           ...utmParams,
           capi_event_id: capiEventId,
           client_user_agent:
@@ -372,7 +383,7 @@ export default function WVRegistrationForm() {
     } finally {
       setSubmitting(false)
     }
-  }, [form, utmParams, settings, savePartial])
+  }, [form, utmParams, settings, ticket, savePartial])
 
   // El cierre de inscripción se configura en Admin → Configuración → Webinar VIP.
   const { expired: isExpired } = useOfferWindow(settings.wv_registration_closes_at)
@@ -394,15 +405,14 @@ export default function WVRegistrationForm() {
               className="text-center mb-6"
             >
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-orange-dark">
-                Paso 1 de 2 · Solo miembros VIP
+                Paso 1 de 2 · Comunidad More
               </p>
               <h2 className="font-sans text-2xl font-extrabold tracking-tight leading-tight text-navy-deep sm:text-3xl">
                 Reserva tu lugar en el{" "}
-                <span className="text-[#F37021]">Webinar VIP</span>
+                <span className="text-[#F37021]">webinar</span>
               </h2>
               <p className="mt-2 text-sm text-ink-muted">
-                Déjanos tus datos y en el siguiente paso pagas tu entrada
-                {settings.wv_price ? ` de ${settings.wv_price}` : ""}.
+                Déjanos tus datos, elige tu entrada y en el siguiente paso completas el pago.
               </p>
             </motion.div>
           )}
@@ -412,7 +422,7 @@ export default function WVRegistrationForm() {
           {isExpired ? (
             <ExpiredCard key="expired" />
           ) : submitted ? (
-            <WVPaymentCard key="success" email={submittedEmail} />
+            <WVPaymentCard key="success" ticket={ticket} email={submittedEmail} />
           ) : (
             <motion.form
               key="form"
@@ -427,7 +437,7 @@ export default function WVRegistrationForm() {
               <div className="flex items-center justify-between bg-navy-ink px-6 py-3 text-[11px] font-bold uppercase tracking-[0.18em] sm:px-8">
                 <span className="flex items-center gap-2 text-white">
                   <Plane className="h-3.5 w-3.5 text-orange" aria-hidden />
-                  Webinar VIP
+                  Comunidad More
                 </span>
                 <span className="text-navy-soft">{eventShortLabel(settings.wv_event_date)}</span>
               </div>
@@ -510,6 +520,39 @@ export default function WVRegistrationForm() {
                     )}
                   </div>
 
+                  <fieldset>
+                    <legend className="mb-2 block text-xs font-semibold uppercase tracking-wide text-navy-deep">
+                      Tu entrada
+                    </legend>
+                    <div className="grid grid-cols-2 gap-2">
+                      {WV_TICKETS.map((t) => {
+                        const selected = ticket === t.id
+                        return (
+                          <label
+                            key={t.id}
+                            className={cn(
+                              "flex cursor-pointer flex-col rounded-lg border px-4 py-3 transition-colors",
+                              selected ? "border-orange bg-orange-wash" : "border-gray-300 bg-white hover:border-orange/50",
+                            )}
+                          >
+                            <input
+                              type="radio"
+                              name="ticket"
+                              value={t.id}
+                              checked={selected}
+                              onChange={() => {
+                                setTicket(t.id)
+                                savePartial({ ticketType: t.id })
+                              }}
+                              className="sr-only"
+                            />
+                            <span className="text-sm font-bold text-navy-deep">{t.name}</span>
+                            <span className="text-xs text-ink-muted">{settings[t.priceKey] || "Precio por confirmar"}</span>
+                          </label>
+                        )
+                      })}
+                    </div>
+                  </fieldset>
                 </div>
 
                 {submitError && (

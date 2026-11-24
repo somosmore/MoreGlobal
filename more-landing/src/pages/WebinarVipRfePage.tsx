@@ -4,11 +4,12 @@ import { CtaButton } from "@/components/brand/CtaButton"
 import BrandLoader from "@/components/brand/BrandLoader"
 import WVHero from "@/components/sections/webinar-vip-rfe/WVHero"
 import WVAgenda from "@/components/sections/webinar-vip-rfe/WVAgenda"
+import WVTickets from "@/components/sections/webinar-vip-rfe/WVTickets"
 import WVRegistrationForm from "@/components/sections/webinar-vip-rfe/WVRegistrationForm"
 import { WVFAQ, WVFooter, WVSpeaker } from "@/components/sections/webinar-vip-rfe/WVClosing"
 import { WV_PAGE_META, WV_ROUTE } from "@/components/sections/webinar-vip-rfe/webinarVipRfeCopy"
 
-/** Webinar VIP (solo miembros VIP, entrada paga). No se indexa: se comparte por correo y WhatsApp. */
+/** Webinar para la Comunidad More (entradas General y VIP). No se indexa: se comparte por correo y WhatsApp. */
 export default function WebinarVipRfePage() {
   const { status, isAccessible, reason } = useLandingStatus(WV_ROUTE)
 
@@ -51,6 +52,7 @@ export default function WebinarVipRfePage() {
     <div className="campaign-editorial min-h-screen bg-paper">
       <WVHero />
       <WVAgenda />
+      <WVTickets />
       <WVRegistrationForm />
       <WVFAQ />
       <WVSpeaker />

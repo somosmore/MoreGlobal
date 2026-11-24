@@ -39,16 +39,63 @@ export default function WebinarVipSection() {
   )
 }
 
+type TicketFieldsProps = {
+  prefix: string
+  title: string
+  price: string
+  onPrice: (v: string) => void
+  link: string
+  onLink: (v: string) => void
+}
+
+function TicketFields({ prefix, title, price, onPrice, link, onLink }: TicketFieldsProps) {
+  const invalid = link.trim().length > 0 && !isUrl(link)
+  return (
+    <div className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
+      <p className="text-xs font-bold uppercase tracking-wider text-gray-500">{title}</p>
+      <div className="space-y-1.5">
+        <label htmlFor={`${prefix}-price`} className="block text-sm font-medium text-navy">
+          Precio (texto visible)
+        </label>
+        <input id={`${prefix}-price`} value={price} onChange={(e) => onPrice(e.target.value)} placeholder="$50 USD" className={inputClass} />
+      </div>
+      <div className="space-y-1.5">
+        <label htmlFor={`${prefix}-link`} className="block text-sm font-medium text-navy">
+          Link de pago (GHL o Stripe)
+        </label>
+        <input
+          id={`${prefix}-link`}
+          value={link}
+          onChange={(e) => onLink(e.target.value)}
+          placeholder="https://api.moremigracion.com/payment-link/…"
+          className={inputClass}
+        />
+        {invalid ? (
+          <p className="text-xs text-red-600">Tiene que empezar con https://</p>
+        ) : link.trim() ? (
+          <a href={link.trim()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-orange hover:underline">
+            Probar el link <ExternalLink className="h-3 w-3" />
+          </a>
+        ) : (
+          <p className="text-xs text-gray-400">Vacío: después del registro se avisa que el link llega por WhatsApp.</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 /** Se monta con la configuración ya cargada: arranca con esos valores, sin efecto. */
 function WebinarVipFields({ settings, refetch }: { settings: SiteSettingsMap; refetch: () => void }) {
   const [eventDate, setEventDate] = useState(() => toLocalInput(settings.wv_event_date))
   const [closesAt, setClosesAt] = useState(() => toLocalInput(settings.wv_registration_closes_at))
-  const [price, setPrice] = useState(settings.wv_price)
-  const [link, setLink] = useState(settings.wv_payment_link)
+  const [generalPrice, setGeneralPrice] = useState(settings.wv_general_price)
+  const [generalLink, setGeneralLink] = useState(settings.wv_general_payment_link)
+  const [vipPrice, setVipPrice] = useState(settings.wv_vip_price)
+  const [vipLink, setVipLink] = useState(settings.wv_vip_payment_link)
   const [state, setState] = useState<SaveState>("idle")
   const [error, setError] = useState<string | null>(null)
 
-  const linkInvalid = link.trim().length > 0 && !isUrl(link)
+  const linkInvalid = [generalLink, vipLink].some((l) => l.trim().length > 0 && !isUrl(l))
   const edit = (setter: (v: string) => void) => (v: string) => {
     setter(v)
     setState("idle")
@@ -66,8 +113,10 @@ function WebinarVipFields({ settings, refetch }: { settings: SiteSettingsMap; re
       [
         { key: "wv_event_date", value: toIso(eventDate) },
         { key: "wv_registration_closes_at", value: toIso(closesAt) },
-        { key: "wv_price", value: price.trim() },
-        { key: "wv_payment_link", value: link.trim() },
+        { key: "wv_general_price", value: generalPrice.trim() },
+        { key: "wv_general_payment_link", value: generalLink.trim() },
+        { key: "wv_vip_price", value: vipPrice.trim() },
+        { key: "wv_vip_payment_link", value: vipLink.trim() },
       ],
       { onConflict: "key" },
     )
@@ -101,36 +150,22 @@ function WebinarVipFields({ settings, refetch }: { settings: SiteSettingsMap; re
         />
       </div>
 
-      <div className="space-y-4 rounded-xl border border-gray-200 bg-gray-50/60 p-4">
-        <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Entrada</p>
-        <div className="space-y-1.5">
-          <label htmlFor="wv-price" className="block text-sm font-medium text-navy">
-            Precio (texto visible)
-          </label>
-          <input id="wv-price" value={price} onChange={(e) => edit(setPrice)(e.target.value)} placeholder="$50 USD" className={inputClass} />
-        </div>
-        <div className="space-y-1.5">
-          <label htmlFor="wv-link" className="block text-sm font-medium text-navy">
-            Link de pago (GHL o Stripe)
-          </label>
-          <input
-            id="wv-link"
-            value={link}
-            onChange={(e) => edit(setLink)(e.target.value)}
-            placeholder="https://api.moremigracion.com/payment-link/…"
-            className={inputClass}
-          />
-          {linkInvalid ? (
-            <p className="text-xs text-red-600">Tiene que empezar con https://</p>
-          ) : link.trim() ? (
-            <a href={link.trim()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-orange hover:underline">
-              Probar el link <ExternalLink className="h-3 w-3" />
-            </a>
-          ) : (
-            <p className="text-xs text-gray-400">Vacío: después del registro se avisa que el link llega por WhatsApp.</p>
-          )}
-        </div>
-      </div>
+      <TicketFields
+        prefix="wv-general"
+        title="Entrada General"
+        price={generalPrice}
+        onPrice={edit(setGeneralPrice)}
+        link={generalLink}
+        onLink={edit(setGeneralLink)}
+      />
+      <TicketFields
+        prefix="wv-vip"
+        title="Entrada VIP"
+        price={vipPrice}
+        onPrice={edit(setVipPrice)}
+        link={vipLink}
+        onLink={edit(setVipLink)}
+      />
 
       <button
         type="button"

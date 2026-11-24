@@ -32,7 +32,7 @@ export default function WVHero() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <span className="inline-flex items-center gap-2 rounded-full border border-orange/40 bg-orange/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange">
             <Crown className="h-3.5 w-3.5" aria-hidden />
-            Exclusivo miembros VIP · En vivo
+            Exclusivo Comunidad More · En vivo
           </span>
           <h1 className="mx-auto mt-6 max-w-3xl font-sans text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
             {WV_TITLE}
@@ -61,9 +61,9 @@ export default function WVHero() {
 
         <div className="mx-auto mt-8 flex max-w-sm flex-col items-center gap-3">
           <CtaButton label={WV_CTA_LABEL} onClick={(e) => scrollToRegistro(e)} size="lg" icon={null} className="font-bold" />
-          {settings.wv_price && (
+          {settings.wv_general_price && (
             <p className="text-sm text-navy-pale">
-              Entrada única: <span className="font-bold text-white">{settings.wv_price}</span>
+              Entradas General y VIP desde <span className="font-bold text-white">{settings.wv_general_price}</span>
             </p>
           )}
         </div>

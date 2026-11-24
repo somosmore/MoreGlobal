@@ -666,12 +666,13 @@ https://moremigracion.com/taller-23nov/registro?utm_source=facebook&utm_medium=p
 
 ### 1.22 Webinar VIP "Del RFE a la visa" (`/webinar-vip-rfe`)
 
-Webinar en vivo **solo para miembros VIP**, entrada paga ($50 USD). No aparece en buscadores: el enlace se comparte por correo y WhatsApp.
+Webinar en vivo para la **Comunidad More**, miércoles 25/11/2026 a las **8:00 PM Colombia**, con dos entradas: **General $50** y **VIP $97** (los precios y links de comunidad del taller). No aparece en buscadores: el enlace se comparte por correo y WhatsApp.
 
-- **Contenido:** 4 bloques (qué piden los RFE y el plan de evidencias; costos y trámites de un RFE; qué hacer con la I-140 aprobada; el proyecto mientras no hay visas), checklist anti-RFE y preguntas en vivo.
-- **Flujo:** formulario (nombre, correo, WhatsApp) → lead en `masterclass_leads` con source `webinar-vip-rfe-nov-26` y contacto en GHL con tag `Webinar-VIP-RFE-Nov-26` → tarjeta de pago.
-- **Configuración:** Admin → Configuración → **Webinar VIP**: fecha y hora (contador), cierre de inscripción, precio y link de pago. Sin link, la tarjeta avisa que el link llega por WhatsApp.
-- **Activación:** migración `045_webinar_vip_rfe.sql` (crea la ruta activa y las claves `wv_*`).
+- **Contenido:** 4 bloques (qué piden los RFE y el plan de evidencias; costos y trámites de un RFE; qué hacer con la I-140 aprobada; el proyecto mientras no hay visas). General: en vivo, checklist anti-RFE y preguntas. VIP: además revisión del caso, grabación en 24 h y prioridad en preguntas (a confirmar con el equipo).
+- **Flujo:** formulario (nombre, correo, WhatsApp, entrada) → lead en `masterclass_leads` con source `webinar-vip-rfe-nov-26` y contacto en GHL con tag `Webinar-VIP-RFE-Nov-26` (+ `-General` / `-VIP`) → tarjeta de pago de la entrada elegida.
+- **Configuración:** Admin → Configuración → **Webinar VIP**: fecha y hora (contador), cierre de inscripción, y precio y link de pago de cada entrada. Sin link, la tarjeta avisa que el link llega por WhatsApp.
+- **Activación:** migración `045_webinar_vip_rfe.sql` (crea la ruta activa y las claves `wv_*`, con los links de `tc_comunidad_*`).
+- **Ojo:** el checkout de esos links de GHL dice "Taller MORE · Entrada … · Precio Comunidad MORE"; conviene renombrar el producto en GHL o crear links propios.
 
 ```
 https://moremigracion.com/webinar-vip-rfe?utm_source=ghl&utm_medium=email&utm_campaign=webinar-vip-rfe

@@ -182,8 +182,10 @@ export type SiteSettingsMap = {
   /** Webinar VIP (/webinar-vip-rfe) */
   wv_event_date: string
   wv_registration_closes_at: string
-  wv_price: string
-  wv_payment_link: string
+  wv_general_price: string
+  wv_general_payment_link: string
+  wv_vip_price: string
+  wv_vip_payment_link: string
 }
 
 export const CATEGORY_LABELS: Record<Testimonial["category"], string> = {
