@@ -664,6 +664,19 @@ https://moremigracion.com/taller-23nov/registro?utm_source=facebook&utm_medium=p
 
 **Activación:** migración `038_taller_comunidad_nov_26.sql` la crea **inactiva**. Activarla desde Recursos → disponibilidad de landings cuando estén cargados precios y links.
 
+### 1.22 Webinar VIP "Del RFE a la visa" (`/webinar-vip-rfe`)
+
+Webinar en vivo **solo para miembros VIP**, entrada paga ($50 USD). No aparece en buscadores: el enlace se comparte por correo y WhatsApp.
+
+- **Contenido:** 4 bloques (qué piden los RFE y el plan de evidencias; costos y trámites de un RFE; qué hacer con la I-140 aprobada; el proyecto mientras no hay visas), checklist anti-RFE y preguntas en vivo.
+- **Flujo:** formulario (nombre, correo, WhatsApp) → lead en `masterclass_leads` con source `webinar-vip-rfe-nov-26` y contacto en GHL con tag `Webinar-VIP-RFE-Nov-26` → tarjeta de pago.
+- **Configuración:** Admin → Configuración → **Webinar VIP**: fecha y hora (contador), cierre de inscripción, precio y link de pago. Sin link, la tarjeta avisa que el link llega por WhatsApp.
+- **Activación:** migración `045_webinar_vip_rfe.sql` (crea la ruta activa y las claves `wv_*`).
+
+```
+https://moremigracion.com/webinar-vip-rfe?utm_source=ghl&utm_medium=email&utm_campaign=webinar-vip-rfe
+```
+
 ---
 
 ## 2. Panel de Administración (CRM)
