@@ -8,7 +8,7 @@ export type SaveState = "idle" | "saving" | "success" | "error"
  * Las fechas de campaña se guardan en ISO absoluto (con zona), pero
  * <input type="datetime-local"> solo entiende "YYYY-MM-DDTHH:mm" en hora local.
  */
-function toLocalInput(iso: string): string {
+export function toLocalInput(iso: string): string {
   const trimmed = iso.trim()
   if (!trimmed) return ""
   const date = new Date(trimmed)
@@ -20,7 +20,7 @@ function toLocalInput(iso: string): string {
   )
 }
 
-function toIso(localValue: string): string {
+export function toIso(localValue: string): string {
   const trimmed = localValue.trim()
   if (!trimmed) return ""
   const date = new Date(trimmed)

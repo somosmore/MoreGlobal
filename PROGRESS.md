@@ -20,6 +20,13 @@
 
 ## Bitácora
 
+### [2026-11-24] — Landing Webinar VIP "Del RFE a la visa" (`/webinar-vip-rfe`)
+- Archivos modificados: `src/components/sections/webinar-vip-rfe/*` (copy, hero, agenda, formulario, pago, FAQ/ponente/pie), `src/pages/WebinarVipRfePage.tsx`, `src/components/admin/settings/WebinarVipSection.tsx` (+ index, `useSettingsData` exporta `toLocalInput`/`toIso`), `AdminSettings.tsx`, `App.tsx`, `lib/supabase.ts` y `SiteSettingsContext.tsx` (claves `wv_*`), `lib/tracking.ts`, migración `045_webinar_vip_rfe.sql`, manual 1.22
+- Qué se implementó: landing del webinar en vivo para miembros VIP ($50): 4 bloques (RFE y plan de evidencias, costos del RFE, I-140 aprobada, proyecto mientras no hay visas), formulario (masterclass-register, source `webinar-vip-rfe-nov-26`, tag GHL `Webinar-VIP-RFE-Nov-26`) y tarjeta de pago. Fecha, cierre, precio y link editables en Configuración → Webinar VIP. noindex.
+- Cambio (mismo día): 8:00 PM Colombia, entradas General ($50) y VIP ($97) con los links de pago de comunidad del taller (claves `wv_general_*` / `wv_vip_*`), sección de entradas y selector en el formulario; audiencia Comunidad More.
+- Problemas encontrados: el checkout de los links de comunidad dice "Taller MORE · …"; beneficios de la VIP a confirmar; falta el link de Zoom. Migración 045 sin aplicar.
+- Estado: 🔄 landing lista y probada en local; falta migración, deploy y los datos
+
 ### [2026-11-12] — Normalizar teléfono de contacto de MORE a +57 302 241 9122
 
 - Agente: claude-code

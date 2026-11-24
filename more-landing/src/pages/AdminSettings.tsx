@@ -2,6 +2,7 @@ import {
   BookOpen,
   Calendar,
   CalendarClock,
+  Crown,
   LineChart,
   MessageCircle,
   Settings,
@@ -17,6 +18,7 @@ import {
   VipSessionSection,
   LandingCountdownsSection,
   TallerComunidadSection,
+  WebinarVipSection,
   ContactSection,
   SocialNetworksSection,
   UppSection,
@@ -30,6 +32,7 @@ const SECTION_LINKS = [
   { id: "vip", label: "Sesión VIP", Icon: Sparkles },
   { id: "landings", label: "Landings", Icon: CalendarClock },
   { id: "taller-comunidad", label: "Taller Comunidad", Icon: Ticket },
+  { id: "webinar-vip", label: "Webinar VIP", Icon: Crown },
   { id: "upp", label: "Programa UPP", Icon: BookOpen },
   { id: "wppequipo", label: "WhatsApp Equipo", Icon: Users },
   { id: "redes", label: "Redes", Icon: Share2 },
@@ -219,6 +222,10 @@ export default function AdminSettings() {
               tcEvent2Date={data.tcEvent2Date}
               setTcEvent2Date={data.setTcEvent2Date}
             />
+          </section>
+
+          <section id="webinar-vip" className="scroll-mt-32">
+            <WebinarVipSection />
           </section>
 
           <section id="upp" className="scroll-mt-32">

@@ -47,6 +47,12 @@ const DEFAULTS: SiteSettingsMap = {
   tc_comunidad_vip_payment_link: "",
   // Día 2 del taller (martes 24): fecha (la entrada cubre los dos días).
   tc_event2_date: "2026-11-24T19:00:00-05:00",
+  wv_event_date: "2026-11-25T20:00:00-05:00",
+  wv_registration_closes_at: "2026-11-25T20:30:00-05:00",
+  wv_general_price: "$50 USD",
+  wv_general_payment_link: "",
+  wv_vip_price: "$97 USD",
+  wv_vip_payment_link: "",
 }
 
 type SiteSettingsContextValue = {
